@@ -460,6 +460,13 @@ def run_experiment(config):
             "metric_scope": "generation",
             "dataset_ids_artifact": split_artifacts.get("train_case_ids_csv"),
             "evolution_history_artifact": None,
+            "final_population_best_prompt": None,
+            "final_population_best_score": None,
+            "final_population_best_candidate_id": None,
+            "global_best_prompt": None,
+            "global_best_score": None,
+            "global_best_generation": None,
+            "global_best_candidate_id": None,
             "generations": [],
         }
         if optimization_enabled:
@@ -486,7 +493,9 @@ def run_experiment(config):
             evoluter.set_initial_population(init_population_records)
             evoluter.evolute()
 
-            best_str_raw = evoluter.population[0]
+            best_str_raw = getattr(evoluter, "best_so_far_prompt", None)
+            if not isinstance(best_str_raw, str) or not best_str_raw.strip():
+                best_str_raw = evoluter.population[0] if getattr(evoluter, "population", None) else ""
             best_str = clean_evoprompt_response(best_str_raw)
             best_str = validate_and_repair_genotype(best_str, fixed_modifiers, base_genotype, config)
             genotype = parse_str_to_genotype(best_str, fixed_modifiers, config, template_genotype=base_genotype)
@@ -494,6 +503,13 @@ def run_experiment(config):
 
             cluster_dir = results_dir / f"cluster_{cluster}"
             cluster_dir.mkdir(parents=True, exist_ok=True)
+            final_population_best_prompt = getattr(evoluter, "final_population_best_prompt", None)
+            final_population_best_score = getattr(evoluter, "final_population_best_score", None)
+            final_population_best_candidate_id = getattr(evoluter, "final_population_best_candidate_id", None)
+            global_best_prompt = getattr(evoluter, "best_so_far_prompt", None)
+            global_best_score = getattr(evoluter, "best_so_far_score", None)
+            global_best_generation = getattr(evoluter, "best_so_far_generation", None)
+            global_best_candidate_id = getattr(evoluter, "best_so_far_candidate_id", None)
             evolution_history_payload = {
                 "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
                 "experiment_id": experiment_id,
@@ -502,6 +518,13 @@ def run_experiment(config):
                 "dataset_split": "train",
                 "metric_scope": "generation",
                 "dataset_ids_artifact": split_artifacts.get("train_case_ids_csv"),
+                "final_population_best_prompt": final_population_best_prompt,
+                "final_population_best_score": final_population_best_score,
+                "final_population_best_candidate_id": final_population_best_candidate_id,
+                "global_best_prompt": global_best_prompt,
+                "global_best_score": global_best_score,
+                "global_best_generation": global_best_generation,
+                "global_best_candidate_id": global_best_candidate_id,
                 "generations": getattr(evoluter, "generation_logs", []),
                 "final_population": getattr(evoluter, "population_records", []),
             }
@@ -509,6 +532,13 @@ def run_experiment(config):
             optimization_generations_stage["evolution_history_artifact"] = str(
                 Path(f"cluster_{cluster}") / "evolution_history.json"
             ).replace("\\", "/")
+            optimization_generations_stage["final_population_best_prompt"] = final_population_best_prompt
+            optimization_generations_stage["final_population_best_score"] = final_population_best_score
+            optimization_generations_stage["final_population_best_candidate_id"] = final_population_best_candidate_id
+            optimization_generations_stage["global_best_prompt"] = global_best_prompt
+            optimization_generations_stage["global_best_score"] = global_best_score
+            optimization_generations_stage["global_best_generation"] = global_best_generation
+            optimization_generations_stage["global_best_candidate_id"] = global_best_candidate_id
 
             for gen_data in getattr(evoluter, "generation_logs", []):
                 stage = gen_data.get("best_stage_summary") or {}
@@ -524,12 +554,19 @@ def run_experiment(config):
                         "unparsable_candidates_count": gen_data.get("unparsable_candidates_count"),
                         "best_candidate_id": gen_data.get("best_candidate_id"),
                         "best_score": gen_data.get("best_score"),
+                        "best_prompt": gen_data.get("best_prompt"),
+                        "best_of_generation_candidate_id": gen_data.get("best_of_generation_candidate_id"),
+                        "best_of_generation_score": gen_data.get("best_of_generation_score"),
+                        "best_of_generation_prompt": gen_data.get("best_of_generation_prompt"),
+                        "best_so_far_candidate_id": gen_data.get("best_so_far_candidate_id"),
+                        "best_so_far_score": gen_data.get("best_so_far_score"),
+                        "best_so_far_prompt": gen_data.get("best_so_far_prompt"),
+                        "best_so_far_generation": gen_data.get("best_so_far_generation"),
                         "mean_score": gen_data.get("mean_score"),
                         "median_score": gen_data.get("median_score"),
                         "min_score": gen_data.get("min_score"),
                         "max_score": gen_data.get("max_score"),
                         "std_score": gen_data.get("std_score"),
-                        "best_prompt": gen_data.get("best_prompt"),
                         "status_breakdown": gen_data.get("status_breakdown", {}),
                         "population_metric_summary": gen_data.get("population_metric_summary", {}),
                         "summary": stage.get("summary", {}),

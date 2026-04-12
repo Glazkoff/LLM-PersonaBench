@@ -67,6 +67,29 @@ class GAEvoluter(Evoluter):
         self.population_records: list[dict] = []
         self._candidate_seq = 0
         self._operation_seq = {"mutation": 0, "crossover": 0}
+        self.best_tie_break_policy = "keep_earlier_candidate_on_equal_score"
+        self.best_so_far_prompt: str | None = None
+        self.best_so_far_score: float | None = None
+        self.best_so_far_generation: int | None = None
+        self.best_so_far_candidate_id: str | None = None
+        self.best_so_far_parent_ids: list[str] = []
+        self.best_so_far_operation: str | None = None
+        self.best_so_far_summary: dict = {}
+        self.final_population_best_prompt: str | None = None
+        self.final_population_best_score: float | None = None
+        self.final_population_best_candidate_id: str | None = None
+
+    def _reset_best_tracking(self):
+        self.best_so_far_prompt = None
+        self.best_so_far_score = None
+        self.best_so_far_generation = None
+        self.best_so_far_candidate_id = None
+        self.best_so_far_parent_ids = []
+        self.best_so_far_operation = None
+        self.best_so_far_summary = {}
+        self.final_population_best_prompt = None
+        self.final_population_best_score = None
+        self.final_population_best_candidate_id = None
 
     def _next_candidate_id(self, generation: int) -> str:
         cid = f"g{generation}_c{self._candidate_seq:04d}"
@@ -80,6 +103,7 @@ class GAEvoluter(Evoluter):
     def set_initial_population(self, population: list[str]):
         self.population = list(population)
         self.population_records = []
+        self._reset_best_tracking()
         for prompt in self.population:
             self.population_records.append(
                 {
@@ -111,6 +135,48 @@ class GAEvoluter(Evoluter):
                     "source_prompt_id": None,
                 }
             )
+
+    def _should_update_best_so_far(self, score: float | None) -> bool:
+        if not _is_valid_number(score):
+            return False
+        if not _is_valid_number(self.best_so_far_score):
+            return True
+        # Tie-break rule: keep the earlier found best for deterministic behavior.
+        return float(score) > float(self.best_so_far_score)
+
+    def _update_best_so_far(self, generation: int):
+        if not self.population_records or not self.scores:
+            return
+        best_record = self.population_records[0]
+        best_score = self.scores[0]
+        if not self._should_update_best_so_far(best_score):
+            return
+
+        detailed = self.detailed_scores_per_prompt[0] if self.detailed_scores_per_prompt else {}
+        stage_metrics = detailed.get("stage_metrics") if isinstance(detailed, dict) else {}
+        if not isinstance(stage_metrics, dict):
+            stage_metrics = {}
+        summary = stage_metrics.get("summary") if isinstance(stage_metrics, dict) else {}
+        if not isinstance(summary, dict):
+            summary = {}
+
+        self.best_so_far_prompt = best_record.get("prompt", "")
+        self.best_so_far_score = float(best_score) if _is_valid_number(best_score) else None
+        self.best_so_far_generation = generation
+        self.best_so_far_candidate_id = best_record.get("candidate_id")
+        self.best_so_far_parent_ids = list(best_record.get("parent_ids") or [])
+        self.best_so_far_operation = best_record.get("operation")
+        self.best_so_far_summary = dict(summary)
+
+    def _capture_final_population_best(self):
+        if not self.population_records:
+            self.final_population_best_prompt = None
+            self.final_population_best_score = None
+            self.final_population_best_candidate_id = None
+            return
+        self.final_population_best_prompt = self.population_records[0].get("prompt", "")
+        self.final_population_best_score = self.scores[0] if self.scores else None
+        self.final_population_best_candidate_id = self.population_records[0].get("candidate_id")
 
     def evaluate_population(self, generation: int):
         """
@@ -281,7 +347,9 @@ class GAEvoluter(Evoluter):
 
         pop_summary = self._build_population_summary(candidates)
         best_detailed = self.detailed_scores_per_prompt[0] if self.detailed_scores_per_prompt else {}
-        best_prompt = candidates[0].get("prompt") if candidates else ""
+        best_of_generation_prompt = candidates[0].get("prompt") if candidates else ""
+        best_of_generation_score = pop_summary.get("best_score")
+        best_of_generation_candidate_id = pop_summary.get("best_candidate_id")
 
         self.generation_logs.append(
             {
@@ -292,14 +360,25 @@ class GAEvoluter(Evoluter):
                 "population_size": pop_summary.get("population_size"),
                 "valid_candidates_count": pop_summary.get("valid_candidates_count"),
                 "unparsable_candidates_count": pop_summary.get("unparsable_candidates_count"),
-                "best_score": pop_summary.get("best_score"),
                 "mean_score": pop_summary.get("mean_score"),
                 "median_score": pop_summary.get("median_score"),
                 "min_score": pop_summary.get("min_score"),
                 "max_score": pop_summary.get("max_score"),
                 "std_score": pop_summary.get("std_score"),
-                "best_candidate_id": pop_summary.get("best_candidate_id"),
-                "best_prompt": best_prompt,
+                "best_candidate_id": best_of_generation_candidate_id,
+                "best_prompt": best_of_generation_prompt,
+                "best_score": best_of_generation_score,
+                "best_of_generation_candidate_id": best_of_generation_candidate_id,
+                "best_of_generation_prompt": best_of_generation_prompt,
+                "best_of_generation_score": best_of_generation_score,
+                "best_so_far_candidate_id": self.best_so_far_candidate_id,
+                "best_so_far_prompt": self.best_so_far_prompt,
+                "best_so_far_score": self.best_so_far_score,
+                "best_so_far_generation": self.best_so_far_generation,
+                "best_so_far_parent_ids": list(self.best_so_far_parent_ids or []),
+                "best_so_far_operation": self.best_so_far_operation,
+                "best_so_far_summary": dict(self.best_so_far_summary or {}),
+                "best_tie_break_policy": self.best_tie_break_policy,
                 "best_stage_summary": best_detailed.get("stage_metrics") or {},
                 "population_metric_summary": pop_summary.get("population_metric_summary", {}),
                 "status_breakdown": pop_summary.get("status_breakdown", {}),
@@ -379,6 +458,7 @@ class GAEvoluter(Evoluter):
         time_estimator.start_item()
 
         self.evaluate_population(generation=0)
+        self._update_best_so_far(generation=0)
         time_estimator.finish_item()
         self._append_generation_log(generation=0)
 
@@ -478,6 +558,7 @@ class GAEvoluter(Evoluter):
             self.population = [r.get("prompt", "") for r in self.population_records]
 
             self.evaluate_population(generation=gen)
+            self._update_best_so_far(generation=gen)
             time_estimator.finish_item()
             self._append_generation_log(generation=gen)
 
@@ -486,8 +567,14 @@ class GAEvoluter(Evoluter):
             gen_mean = _safe_mean([float(s) for s in self.scores if _is_valid_number(s)])
             print(f"Gen {gen}: best = {_format_score(gen_best)}, mean = {_format_score(gen_mean)} | {progress_info}")
 
+        self._capture_final_population_best()
         total_evolution_time = time_estimator.get_elapsed()
-        final_best = self.scores[0] if self.scores else None
+        final_best = self.final_population_best_score
+        global_best = self.best_so_far_score
+        global_best_generation = self.best_so_far_generation
         print(
-            f"🧬 Эволюция завершена. Финальный best_score: {_format_score(final_best)} | Общее время: {format_time(total_evolution_time)}"
+            "🧬 Эволюция завершена. "
+            f"best_last_generation={_format_score(final_best)}, "
+            f"best_so_far={_format_score(global_best)} (generation={global_best_generation}) | "
+            f"Общее время: {format_time(total_evolution_time)}"
         )
