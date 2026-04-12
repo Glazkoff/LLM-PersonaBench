@@ -31,6 +31,21 @@ _TRAIT_BLOCK_KEY = {
     "neuroticism": "neuroticism_items_24",
 }
 
+RESPONSE_STATUS_SUCCESS = "success"
+RESPONSE_STATUS_UNPARSABLE = "unparsable"
+RESPONSE_STATUS_NO_RESPONSE = "no_response"
+RESPONSE_STATUS_INVALID = "invalid_response"
+RESPONSE_STATUS_PARTIAL = "partial_response"
+RESPONSE_STATUS_UNKNOWN = "unknown"
+
+KNOWN_RESPONSE_STATUSES = {
+    RESPONSE_STATUS_SUCCESS,
+    RESPONSE_STATUS_UNPARSABLE,
+    RESPONSE_STATUS_NO_RESPONSE,
+    RESPONSE_STATUS_INVALID,
+    RESPONSE_STATUS_PARTIAL,
+}
+
 
 def build_trait_question_blocks(total_questions: int = 120) -> dict[str, list[int]]:
     grouped: dict[str, list[int]] = {trait: [] for trait in TRAIT_NAMES}
@@ -54,15 +69,70 @@ def _is_valid_number(v) -> bool:
     return isinstance(v, (int, float)) and not (v != v or np.isnan(v))  # noqa: E711
 
 
-def _safe_mean(arr: list[float]) -> float:
+def _safe_mean(arr: list[float]) -> float | None:
     if not arr:
-        return 0.0
+        return None
     x = float(np.nanmean(arr))
-    return 0.0 if (x != x or np.isnan(x)) else x  # noqa: E711
+    return None if (x != x or np.isnan(x)) else x  # noqa: E711
 
 
 def _to_optional_float(v) -> float | None:
     return float(v) if _is_valid_number(v) else None
+
+
+def _status_to_parse_status(response_status: str) -> str:
+    if response_status == RESPONSE_STATUS_SUCCESS:
+        return "parsed"
+    if response_status == RESPONSE_STATUS_NO_RESPONSE:
+        return "request_error"
+    if response_status == RESPONSE_STATUS_INVALID:
+        return "parse_error"
+    if response_status == RESPONSE_STATUS_PARTIAL:
+        return RESPONSE_STATUS_PARTIAL
+    if response_status == RESPONSE_STATUS_UNPARSABLE:
+        return RESPONSE_STATUS_UNPARSABLE
+    return response_status or RESPONSE_STATUS_UNKNOWN
+
+
+def _normalize_response_status(
+    response_status: str | None,
+    parse_status: str | None,
+    model_answers_count: int,
+    is_unparsable: bool,
+) -> str:
+    status = (response_status or "").strip().lower()
+    if status == "parsed":
+        status = RESPONSE_STATUS_SUCCESS
+    elif status == "request_error":
+        status = RESPONSE_STATUS_NO_RESPONSE
+    elif status == "parse_error":
+        status = RESPONSE_STATUS_INVALID
+
+    if not status:
+        parse = (parse_status or "").strip().lower()
+        if parse == "parsed":
+            status = RESPONSE_STATUS_SUCCESS
+        elif parse == "request_error":
+            status = RESPONSE_STATUS_NO_RESPONSE
+        elif parse == "parse_error":
+            status = RESPONSE_STATUS_INVALID
+        elif parse == RESPONSE_STATUS_UNPARSABLE:
+            status = RESPONSE_STATUS_UNPARSABLE
+        elif parse == RESPONSE_STATUS_PARTIAL:
+            status = RESPONSE_STATUS_PARTIAL
+
+    if status not in KNOWN_RESPONSE_STATUSES:
+        if is_unparsable:
+            status = RESPONSE_STATUS_UNPARSABLE
+        elif model_answers_count <= 0:
+            status = RESPONSE_STATUS_NO_RESPONSE
+        else:
+            status = RESPONSE_STATUS_SUCCESS
+
+    if status == RESPONSE_STATUS_SUCCESS and model_answers_count < 120:
+        status = RESPONSE_STATUS_PARTIAL
+
+    return status
 
 
 def _value_to_category(x: float) -> str:
@@ -78,31 +148,25 @@ def compute_five_factor_metrics(
     real_flat: dict[str, float],
     simulated_flat: dict[str, float],
     keys: list[str] | None = None,
-) -> dict[str, float]:
+) -> dict[str, float | dict[str, float] | None]:
     """
     Сравнение реальных и смоделированных OCEAN+30.
 
-    Вход:
-        real_flat, simulated_flat: словари с ключами из OCEAN_AND_FACET_ORDER.
-        keys: по каким ключам считать (если None — все общие).
-
-    Выход:
-        mae_35, mae_per_dim, similarity_35, pearson_35, kappa_35,
-        mean_similarity_facets, mean_similarity_traits,
-        similarity_per_dim (dict по keys).
+    При отсутствии валидных данных возвращаются None-поля, чтобы
+    не смешивать "нет данных" и "нулевое качество".
     """
     if keys is None:
         keys = [k for k in OCEAN_AND_FACET_ORDER if k in real_flat and k in simulated_flat]
     if not keys:
         return {
-            "mae_35": 0.0,
-            "mae_per_dim": {},
-            "similarity_35": 0.0,
-            "pearson_35": 0.0,
-            "kappa_35": 0.0,
-            "mean_similarity_facets": 0.0,
-            "mean_similarity_traits": 0.0,
-            "similarity_per_dim": {},
+            "mae_35": None,
+            "mae_per_dim": None,
+            "similarity_35": None,
+            "pearson_35": None,
+            "kappa_35": None,
+            "mean_similarity_facets": None,
+            "mean_similarity_traits": None,
+            "similarity_per_dim": None,
         }
     r_vec = np.array([real_flat[k] for k in keys])
     s_vec = np.array([simulated_flat[k] for k in keys])
@@ -112,25 +176,32 @@ def compute_five_factor_metrics(
     # similarity по каждому измерению: 1 - |r-s|/100, затем среднее
     sim_per_dim = {k: 1.0 - abs(real_flat[k] - simulated_flat[k]) / 100.0 for k in keys}
     similarity_35 = float(np.mean(list(sim_per_dim.values())))
+
     # Pearson по 35 (или по keys)
+    pearson_35 = None
     try:
         p = sps.pearsonr(r_vec, s_vec)[0]
-        pearson_35 = 0.0 if (p != p or np.isnan(p)) else float(p)  # noqa: E711
+        if _is_valid_number(p):
+            pearson_35 = float(p)
     except Exception:
-        pearson_35 = 0.0
+        pearson_35 = None
+
     # Cohen's kappa: категории low / average / high
     real_cat = [_value_to_category(real_flat[k]) for k in keys]
     sim_cat = [_value_to_category(simulated_flat[k]) for k in keys]
+    kappa_35 = None
     try:
         k = cohen_kappa_score(real_cat, sim_cat)
-        kappa_35 = 0.0 if (k != k or np.isnan(k)) else float(k)  # noqa: E711
+        if _is_valid_number(k):
+            kappa_35 = float(k)
     except Exception:
-        kappa_35 = 0.0
+        kappa_35 = None
+
     # средняя similarity по 30 фасетам и по 5 чертам
     k_facets = [k for k in keys if k in FACET_NAMES]
     k_traits = [k for k in keys if k in TRAIT_NAMES]
-    mean_similarity_facets = float(np.mean([sim_per_dim[k] for k in k_facets])) if k_facets else 0.0
-    mean_similarity_traits = float(np.mean([sim_per_dim[k] for k in k_traits])) if k_traits else 0.0
+    mean_similarity_facets = float(np.mean([sim_per_dim[k] for k in k_facets])) if k_facets else None
+    mean_similarity_traits = float(np.mean([sim_per_dim[k] for k in k_traits])) if k_traits else None
     return {
         "mae_35": mae_35,
         "mae_per_dim": mae_per_dim,
@@ -147,12 +218,19 @@ def _empty_answer_block_similarity() -> dict[str, float | None]:
     return {k: None for k in TRAIT_QUESTION_BLOCKS}
 
 
-def _build_unparsable_fitness(parse_status: str = "unparsable", error_message: str | None = None) -> dict:
+def _build_unparsable_fitness(
+    parse_status: str = RESPONSE_STATUS_UNPARSABLE,
+    response_status: str | None = None,
+    error_message: str | None = None,
+) -> dict:
+    status = response_status or parse_status
     payload = {
         "similarity": None,
         "avg_diff": None,
         "pearson_corr": None,
         "model_answers": None,
+        "model_answers_count": 0,
+        "valid_answer_pairs_count": 0,
         "simulated_ocean": None,
         "mae_35": None,
         "mae_per_dim": None,
@@ -164,7 +242,8 @@ def _build_unparsable_fitness(parse_status: str = "unparsable", error_message: s
         "similarity_per_dim": None,
         "answer_block_similarity": _empty_answer_block_similarity(),
         "is_unparsable": True,
-        "parse_status": parse_status,
+        "response_status": status,
+        "parse_status": _status_to_parse_status(status),
     }
     if error_message:
         payload["error_message"] = error_message
@@ -217,36 +296,58 @@ def normalize_participant_score(score: dict) -> dict:
     if isinstance(pearson, tuple):
         pearson = pearson[0]
 
+    model_answers = score.get("model_answers")
+    model_answers_count = score.get("model_answers_count")
+    if not isinstance(model_answers_count, int):
+        model_answers_count = len(model_answers) if isinstance(model_answers, dict) else 0
+
     is_unparsable = bool(score.get("is_unparsable", False))
     if "is_unparsable" not in score:
-        is_unparsable = score.get("model_answers") is None
+        is_unparsable = model_answers is None
 
     parse_status = score.get("parse_status")
-    if not isinstance(parse_status, str):
-        parse_status = "unparsable" if is_unparsable else "parsed"
+    response_status = _normalize_response_status(
+        response_status=score.get("response_status"),
+        parse_status=parse_status,
+        model_answers_count=model_answers_count,
+        is_unparsable=is_unparsable,
+    )
+
+    if response_status in (RESPONSE_STATUS_NO_RESPONSE, RESPONSE_STATUS_UNPARSABLE, RESPONSE_STATUS_INVALID):
+        is_unparsable = True
+
+    parse_status_norm = _status_to_parse_status(response_status)
+
+    valid_answer_pairs_count = score.get("valid_answer_pairs_count")
+    if not isinstance(valid_answer_pairs_count, int):
+        valid_answer_pairs_count = 0
 
     return {
         "similarity": _to_optional_float(score.get("similarity")),
         "avg_diff": _to_optional_float(score.get("avg_diff")),
         "pearson_corr": _to_optional_float(pearson),
-        "mae_35": score.get("mae_35"),
+        "mae_35": _to_optional_float(score.get("mae_35")),
         "mae_per_dim": score.get("mae_per_dim"),
-        "similarity_35": score.get("similarity_35"),
-        "pearson_35": score.get("pearson_35"),
-        "kappa_35": score.get("kappa_35"),
-        "mean_similarity_facets": score.get("mean_similarity_facets"),
-        "mean_similarity_traits": score.get("mean_similarity_traits"),
+        "similarity_35": _to_optional_float(score.get("similarity_35")),
+        "pearson_35": _to_optional_float(score.get("pearson_35")),
+        "kappa_35": _to_optional_float(score.get("kappa_35")),
+        "mean_similarity_facets": _to_optional_float(score.get("mean_similarity_facets")),
+        "mean_similarity_traits": _to_optional_float(score.get("mean_similarity_traits")),
         "similarity_per_dim": score.get("similarity_per_dim"),
         "answer_block_similarity": score.get("answer_block_similarity"),
         "is_unparsable": is_unparsable,
-        "parse_status": parse_status,
+        "response_status": response_status,
+        "parse_status": parse_status_norm,
+        "model_answers_count": model_answers_count,
+        "valid_answer_pairs_count": valid_answer_pairs_count,
+        "error_message": score.get("error_message"),
     }
 
 
-def aggregate_cluster_five_factor_metrics(participants_scores: list[dict]) -> dict[str, float]:
+def aggregate_cluster_five_factor_metrics(participants_scores: list[dict]) -> dict[str, float | dict[str, float | None] | None]:
     """
     Усреднение five-factor метрик по тестовой выборке кластера.
-    Учитываются только записи, где соответствующие поля не None.
+    Учитываются только записи, где соответствующие поля валидны.
     """
     agg: dict[str, list[float]] = {
         "mae_35": [],
@@ -262,7 +363,9 @@ def aggregate_cluster_five_factor_metrics(participants_scores: list[dict]) -> di
             if _is_valid_number(v):
                 agg[k].append(float(v))
 
-    out = {f"mean_{k}": _safe_mean(agg[k]) for k in ("mae_35", "similarity_35", "pearson_35", "kappa_35")}
+    out: dict[str, float | dict[str, float | None] | None] = {
+        f"mean_{k}": _safe_mean(agg[k]) for k in ("mae_35", "similarity_35", "pearson_35", "kappa_35")
+    }
     out["mean_similarity_facets"] = _safe_mean(agg["mean_similarity_facets"])
     out["mean_similarity_traits"] = _safe_mean(agg["mean_similarity_traits"])
 
@@ -286,51 +389,106 @@ def aggregate_stage_metrics(
     """
     Сводные метрики по участникам.
 
-    Для similarity-метрик значения считаются только по валидным числам.
-    Невалидные/unparsable ответы исключаются из средних, а в summary
-    добавляются счётчики и доли исключений.
+    Важная семантика:
+    - если метрику не на чем считать, возвращается None, а не 0.0;
+    - средние считаются только по валидным значениям;
+    - добавляются счётчики valid/excluded и статусы parseability.
     """
     selected_facets = list(selected_facets or [])
     participants_total = len(participants_scores)
+
+    status_keys = [
+        RESPONSE_STATUS_SUCCESS,
+        RESPONSE_STATUS_UNPARSABLE,
+        RESPONSE_STATUS_NO_RESPONSE,
+        RESPONSE_STATUS_INVALID,
+        RESPONSE_STATUS_PARTIAL,
+        RESPONSE_STATUS_UNKNOWN,
+    ]
+    status_counts: dict[str, int] = {k: 0 for k in status_keys}
+    for s in participants_scores:
+        st = s.get("response_status")
+        if st not in status_counts:
+            st = RESPONSE_STATUS_UNKNOWN
+        status_counts[st] += 1
+
     unparsable_count = sum(1 for s in participants_scores if bool(s.get("is_unparsable")))
     parsed_count = participants_total - unparsable_count
 
-    def _metric_exclusion(metric_key: str, summary_key: str) -> dict[str, int | float]:
+    def _metric_exclusion(metric_key: str, summary_key: str, aliases: list[str] | None = None) -> dict[str, int | float]:
         valid_count = sum(1 for s in participants_scores if _is_valid_number(s.get(metric_key)))
         excluded_count = participants_total - valid_count
         excluded_share = (excluded_count / participants_total) if participants_total else 0.0
-        return {
+        out = {
             f"{summary_key}_valid_count": valid_count,
             f"{summary_key}_excluded_count": excluded_count,
             f"{summary_key}_excluded_share": excluded_share,
         }
+        for alias in aliases or []:
+            out[f"{alias}_valid_count"] = valid_count
+            out[f"{alias}_excluded_count"] = excluded_count
+            out[f"{alias}_excluded_share"] = excluded_share
+        return out
 
-    summary = {
-        "mean_similarity": _safe_mean([float(s.get("similarity")) for s in participants_scores if _is_valid_number(s.get("similarity"))]),
-        "mean_avg_diff": _safe_mean([float(s.get("avg_diff")) for s in participants_scores if _is_valid_number(s.get("avg_diff"))]),
-        "mean_pearson_corr": _safe_mean([float(s.get("pearson_corr")) for s in participants_scores if _is_valid_number(s.get("pearson_corr"))]),
+    def _metric_values(metric_key: str) -> list[float]:
+        return [float(s.get(metric_key)) for s in participants_scores if _is_valid_number(s.get(metric_key))]
+
+    summary: dict[str, int | float | None] = {
+        "mean_similarity": _safe_mean(_metric_values("similarity")),
+        "mean_avg_diff": _safe_mean(_metric_values("avg_diff")),
+        "mean_pearson_corr": _safe_mean(_metric_values("pearson_corr")),
         "participants_total": participants_total,
         "participants_parsed_count": parsed_count,
         "participants_unparsable_count": unparsable_count,
         "participants_unparsable_share": (unparsable_count / participants_total) if participants_total else 0.0,
+        "participants_success_count": status_counts[RESPONSE_STATUS_SUCCESS],
+        "participants_partial_response_count": status_counts[RESPONSE_STATUS_PARTIAL],
+        "participants_no_response_count": status_counts[RESPONSE_STATUS_NO_RESPONSE],
+        "participants_invalid_response_count": status_counts[RESPONSE_STATUS_INVALID],
+        "participants_unparsable_status_count": status_counts[RESPONSE_STATUS_UNPARSABLE],
+        "participants_unknown_status_count": status_counts[RESPONSE_STATUS_UNKNOWN],
+        "participants_with_model_answers_count": sum(
+            1 for s in participants_scores if isinstance(s.get("model_answers_count"), int) and s.get("model_answers_count") > 0
+        ),
+        "participants_without_model_answers_count": sum(
+            1 for s in participants_scores if not isinstance(s.get("model_answers_count"), int) or s.get("model_answers_count") <= 0
+        ),
+        "mean_model_answers_count": _safe_mean(
+            [float(s.get("model_answers_count")) for s in participants_scores if isinstance(s.get("model_answers_count"), int)]
+        ),
+        "mean_valid_answer_pairs_count": _safe_mean(
+            [float(s.get("valid_answer_pairs_count")) for s in participants_scores if isinstance(s.get("valid_answer_pairs_count"), int)]
+        ),
     }
-    summary.update(_metric_exclusion("similarity", "similarity"))
-    summary.update(_metric_exclusion("similarity_35", "similarity_35"))
-    summary.update(_metric_exclusion("mean_similarity_facets", "similarity_facets"))
-    summary.update(_metric_exclusion("mean_similarity_traits", "similarity_traits"))
+
+    for metric_key in (
+        "similarity",
+        "avg_diff",
+        "pearson_corr",
+        "mae_35",
+        "similarity_35",
+        "pearson_35",
+        "kappa_35",
+    ):
+        summary.update(_metric_exclusion(metric_key, metric_key))
+    summary.update(_metric_exclusion("mean_similarity_facets", "mean_similarity_facets", aliases=["similarity_facets"]))
+    summary.update(_metric_exclusion("mean_similarity_traits", "mean_similarity_traits", aliases=["similarity_traits"]))
 
     ff = aggregate_cluster_five_factor_metrics(participants_scores)
     summary.update(
         {
-            "mean_mae_35": ff.get("mean_mae_35", 0.0),
-            "mean_similarity_35": ff.get("mean_similarity_35", 0.0),
-            "mean_pearson_35": ff.get("mean_pearson_35", 0.0),
-            "mean_similarity_facets": ff.get("mean_similarity_facets", 0.0),
-            "mean_similarity_traits": ff.get("mean_similarity_traits", 0.0),
+            "mean_mae_35": ff.get("mean_mae_35"),
+            "mean_similarity_35": ff.get("mean_similarity_35"),
+            "mean_pearson_35": ff.get("mean_pearson_35"),
+            "mean_kappa_35": ff.get("mean_kappa_35"),
+            "mean_similarity_facets": ff.get("mean_similarity_facets"),
+            "mean_similarity_traits": ff.get("mean_similarity_traits"),
+            "mean_mae_per_dim": ff.get("mean_mae_per_dim"),
         }
     )
 
-    trait_similarity: dict[str, float] = {}
+    trait_similarity: dict[str, float | None] = {}
+    trait_similarity_valid_counts: dict[str, int] = {}
     for trait in TRAIT_NAMES:
         vals = []
         for s in participants_scores:
@@ -338,8 +496,10 @@ def aggregate_stage_metrics(
             if isinstance(per_dim, dict) and _is_valid_number(per_dim.get(trait)):
                 vals.append(float(per_dim[trait]))
         trait_similarity[trait] = _safe_mean(vals)
+        trait_similarity_valid_counts[trait] = len(vals)
 
-    facet_similarity: dict[str, float] = {}
+    facet_similarity: dict[str, float | None] = {}
+    facet_similarity_valid_counts: dict[str, int] = {}
     for facet in selected_facets:
         vals = []
         for s in participants_scores:
@@ -347,8 +507,10 @@ def aggregate_stage_metrics(
             if isinstance(per_dim, dict) and _is_valid_number(per_dim.get(facet)):
                 vals.append(float(per_dim[facet]))
         facet_similarity[facet] = _safe_mean(vals)
+        facet_similarity_valid_counts[facet] = len(vals)
 
-    answer_block_similarity: dict[str, float] = {}
+    answer_block_similarity: dict[str, float | None] = {}
+    answer_block_valid_counts: dict[str, int] = {}
     for block_key in TRAIT_QUESTION_BLOCKS:
         vals = []
         for s in participants_scores:
@@ -356,12 +518,16 @@ def aggregate_stage_metrics(
             if isinstance(blocks, dict) and _is_valid_number(blocks.get(block_key)):
                 vals.append(float(blocks[block_key]))
         answer_block_similarity[block_key] = _safe_mean(vals)
+        answer_block_valid_counts[block_key] = len(vals)
 
     return {
         "summary": summary,
         "trait_similarity": trait_similarity,
+        "trait_similarity_valid_counts": trait_similarity_valid_counts,
         "facet_similarity": facet_similarity,
+        "facet_similarity_valid_counts": facet_similarity_valid_counts,
         "answer_block_similarity": answer_block_similarity,
+        "answer_block_valid_counts": answer_block_valid_counts,
         "selected_facets": selected_facets,
         "trait_question_blocks": get_trait_question_blocks(),
     }
@@ -409,7 +575,11 @@ def evaluate_participants_batch(participants_df, genotype, task, model, batch_si
             except Exception as e:  # noqa: BLE001
                 err = f"{type(e).__name__}: {e}"
                 print(f"[warn] Ошибка при обработке участника: {err}")
-                results[pos] = _build_unparsable_fitness(parse_status="request_error", error_message=err)
+                results[pos] = _build_unparsable_fitness(
+                    parse_status=RESPONSE_STATUS_NO_RESPONSE,
+                    response_status=RESPONSE_STATUS_NO_RESPONSE,
+                    error_message=err,
+                )
             done += 1
             if done % progress_step == 0 or done == n:
                 elapsed = time.perf_counter() - t0
@@ -425,15 +595,10 @@ def fitness_function(participant, genotype, task, model):
     """
     Вычисляет соответствие модели реальному участнику по метрикам схожести ответов.
 
-    Вход:
-        participant (pd.Series): данные участника с ответами на вопросы IPIP-NEO
-        genotype (dict): конфигурация персонажа для генерации промпта
-        task (dict): описание задачи с вопросами и форматом ответа
-        model: объект модели для генерации ответов
-    Выход:
-        dict с метриками. Если ответ модели не удалось распарсить,
-        similarity-поля возвращаются как None и помечаются:
-        is_unparsable=True, parse_status="unparsable".
+    Важное поведение:
+    - "нет данных" возвращается как None;
+    - "нулевая метрика" не подменяет недоступность;
+    - response_status фиксирует причину (success/unparsable/no_response/invalid_response/partial_response).
     """
     prompt = build_full_prompt(genotype, task, participant)
     prompt_template = ChatPromptTemplate.from_messages([
@@ -446,23 +611,52 @@ def fitness_function(participant, genotype, task, model):
     except Exception as e:  # noqa: BLE001
         err = f"{type(e).__name__}: {e}"
         print(f"[warn] Ошибка запроса к модели: {err}")
-        return _build_unparsable_fitness(parse_status="request_error", error_message=err)
+        return _build_unparsable_fitness(
+            parse_status=RESPONSE_STATUS_NO_RESPONSE,
+            response_status=RESPONSE_STATUS_NO_RESPONSE,
+            error_message=err,
+        )
+
+    if not isinstance(response_text, str) or not response_text.strip():
+        return _build_unparsable_fitness(
+            parse_status=RESPONSE_STATUS_NO_RESPONSE,
+            response_status=RESPONSE_STATUS_NO_RESPONSE,
+            error_message="Empty model response",
+        )
 
     try:
         model_answers = parse_response(response_text)
     except Exception as e:  # noqa: BLE001
         err = f"{type(e).__name__}: {e}"
         print(f"[warn] Ошибка парсинга ответа модели: {err}")
-        return _build_unparsable_fitness(parse_status="parse_error", error_message=err)
+        return _build_unparsable_fitness(
+            parse_status=RESPONSE_STATUS_INVALID,
+            response_status=RESPONSE_STATUS_INVALID,
+            error_message=err,
+        )
 
     if model_answers is None:
-        return _build_unparsable_fitness(parse_status="unparsable")
+        return _build_unparsable_fitness(
+            parse_status=RESPONSE_STATUS_UNPARSABLE,
+            response_status=RESPONSE_STATUS_UNPARSABLE,
+        )
+
+    if not isinstance(model_answers, dict) or not model_answers:
+        return _build_unparsable_fitness(
+            parse_status=RESPONSE_STATUS_INVALID,
+            response_status=RESPONSE_STATUS_INVALID,
+            error_message="Parsed answer is empty or invalid",
+        )
+
+    response_status = RESPONSE_STATUS_SUCCESS if len(model_answers) >= 120 else RESPONSE_STATUS_PARTIAL
 
     fitness = {
-        "similarity": 0.0,
-        "avg_diff": 0.0,
-        "pearson_corr": 0.0,
+        "similarity": None,
+        "avg_diff": None,
+        "pearson_corr": None,
         "model_answers": model_answers,
+        "model_answers_count": len(model_answers),
+        "valid_answer_pairs_count": 0,
         "simulated_ocean": None,
         "mae_35": None,
         "mae_per_dim": None,
@@ -474,11 +668,14 @@ def fitness_function(participant, genotype, task, model):
         "similarity_per_dim": None,
         "answer_block_similarity": compute_answer_block_similarity(model_answers, participant),
         "is_unparsable": False,
-        "parse_status": "parsed",
+        "response_status": response_status,
+        "parse_status": _status_to_parse_status(response_status),
     }
 
     list_model_ans = []
     list_human_ans = []
+    similarity_sum = 0.0
+    avg_diff_sum = 0.0
     valid_count = 0
     for q_id, model_ans in model_answers.items():
         human_ans = participant.get("i" + str(q_id))
@@ -486,17 +683,20 @@ def fitness_function(participant, genotype, task, model):
             continue
         list_model_ans.append(model_ans)
         list_human_ans.append(human_ans)
-        fitness["similarity"] += 1.0 - abs(model_ans - human_ans) / 4.0
-        fitness["avg_diff"] += abs(model_ans - human_ans)
+        similarity_sum += 1.0 - abs(model_ans - human_ans) / 4.0
+        avg_diff_sum += abs(model_ans - human_ans)
         valid_count += 1
 
+    fitness["valid_answer_pairs_count"] = valid_count
     if valid_count > 0:
-        fitness["similarity"] /= valid_count
-        fitness["avg_diff"] /= valid_count
+        fitness["similarity"] = similarity_sum / valid_count
+        fitness["avg_diff"] = avg_diff_sum / valid_count
 
     if len(list_model_ans) >= 2 and len(list_human_ans) >= 2:
         try:
-            fitness["pearson_corr"] = float(sps.pearsonr(list_model_ans, list_human_ans)[0])
+            p = sps.pearsonr(list_model_ans, list_human_ans)[0]
+            if _is_valid_number(p):
+                fitness["pearson_corr"] = float(p)
         except Exception:
             fitness["pearson_corr"] = None
 

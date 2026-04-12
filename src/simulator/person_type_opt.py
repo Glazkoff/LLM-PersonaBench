@@ -20,8 +20,93 @@ from src.utils.personality_match import (
     get_trait_question_blocks,
     normalize_participant_score,
 )
-from src.utils.save_result import save_log
+from src.utils.save_result import save_jsonl, save_log
 from src.utils.time import TimeEstimator, format_time
+
+ARTIFACT_SCHEMA_VERSION = "2.0.0"
+
+
+def _format_metric(value, default_text: str = "n/a") -> str:
+    if isinstance(value, (int, float)):
+        return f"{value:.4f}"
+    return default_text
+
+
+def _to_json_safe(value):
+    if value is None:
+        return None
+    if isinstance(value, (int, float, str, bool)):
+        if isinstance(value, float) and (pd.isna(value) or value != value):
+            return None
+        return value
+    return str(value)
+
+
+def _extract_case_ids(df: pd.DataFrame) -> list:
+    rows = []
+    for idx, row in df.iterrows():
+        case_val = row.get("case", idx)
+        if pd.isna(case_val):
+            case_val = idx
+        rows.append(_to_json_safe(case_val))
+    return rows
+
+
+def _save_dataset_split_artifacts(results_dir: Path, cluster: int, train_participants: pd.DataFrame, test_participants: pd.DataFrame) -> dict:
+    cluster_dir = results_dir / f"cluster_{cluster}"
+    cluster_dir.mkdir(parents=True, exist_ok=True)
+
+    train_case_ids = _extract_case_ids(train_participants)
+    test_case_ids = _extract_case_ids(test_participants)
+
+    split_payload = {
+        "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
+        "cluster_id": cluster,
+        "splits": {
+            "train": train_case_ids,
+            "test": test_case_ids,
+        },
+        "counts": {
+            "train": len(train_case_ids),
+            "test": len(test_case_ids),
+        },
+    }
+    save_log(split_payload, cluster_dir, "dataset_split_ids.json")
+
+    pd.DataFrame({"case": train_case_ids}).to_csv(cluster_dir / "train_case_ids.csv", index=False)
+    pd.DataFrame({"case": test_case_ids}).to_csv(cluster_dir / "test_case_ids.csv", index=False)
+
+    return {
+        "dataset_split_ids_json": str(Path(f"cluster_{cluster}") / "dataset_split_ids.json").replace("\\", "/"),
+        "train_case_ids_csv": str(Path(f"cluster_{cluster}") / "train_case_ids.csv").replace("\\", "/"),
+        "test_case_ids_csv": str(Path(f"cluster_{cluster}") / "test_case_ids.csv").replace("\\", "/"),
+    }
+
+
+def _build_participant_metrics_row(case_id, score: dict, normalized_score: dict) -> dict:
+    return {
+        "case": _to_json_safe(case_id),
+        "response_status": normalized_score.get("response_status"),
+        "parse_status": normalized_score.get("parse_status"),
+        "is_unparsable": bool(normalized_score.get("is_unparsable")),
+        "model_answers_count": normalized_score.get("model_answers_count"),
+        "valid_answer_pairs_count": normalized_score.get("valid_answer_pairs_count"),
+        "similarity": normalized_score.get("similarity"),
+        "avg_diff": normalized_score.get("avg_diff"),
+        "pearson_corr": normalized_score.get("pearson_corr"),
+        "mae_35": normalized_score.get("mae_35"),
+        "similarity_35": normalized_score.get("similarity_35"),
+        "pearson_35": normalized_score.get("pearson_35"),
+        "kappa_35": normalized_score.get("kappa_35"),
+        "mean_similarity_facets": normalized_score.get("mean_similarity_facets"),
+        "mean_similarity_traits": normalized_score.get("mean_similarity_traits"),
+        "mae_per_dim": normalized_score.get("mae_per_dim"),
+        "similarity_per_dim": normalized_score.get("similarity_per_dim"),
+        "answer_block_similarity": normalized_score.get("answer_block_similarity"),
+        "model_answers": score.get("model_answers"),
+        "simulated_ocean": score.get("simulated_ocean"),
+        "error_message": normalized_score.get("error_message"),
+    }
 
 
 def _get_project_root():
@@ -136,6 +221,7 @@ def _evaluate_participants_on_test(
     cluster,
     selected_facets,
     csv_filename,
+    participant_metrics_filename,
 ):
     scores = evaluate_participants_batch(
         test_participants,
@@ -147,15 +233,19 @@ def _evaluate_participants_on_test(
 
     participant_scores = []
     rows_answers = []
+    participant_metrics_rows = []
 
     for (index, participant), score in zip(list(test_participants.iterrows()), scores):
-        participant_scores.append(normalize_participant_score(score))
+        normalized_score = normalize_participant_score(score)
+        participant_scores.append(normalized_score)
 
         model_answers = score.get("model_answers") or {}
-        row = {"case": participant.get("case", index)}
+        case_id = participant.get("case", index)
+        row = {"case": case_id}
         for i in range(1, 121):
             row[f"i{i}"] = model_answers.get(i)
         rows_answers.append(row)
+        participant_metrics_rows.append(_build_participant_metrics_row(case_id, score, normalized_score))
 
     cluster_dir = results_dir / f"cluster_{cluster}"
     cluster_dir.mkdir(parents=True, exist_ok=True)
@@ -168,26 +258,49 @@ def _evaluate_participants_on_test(
     csv_path = cluster_dir / csv_filename
     answers_df.to_csv(csv_path, index=False)
 
+    save_jsonl(participant_metrics_rows, cluster_dir, participant_metrics_filename)
+
     stage_metrics = aggregate_stage_metrics(participant_scores, selected_facets)
     return {
         "participant_scores": participant_scores,
         "stage_metrics": stage_metrics,
         "answers_csv": str(Path(f"cluster_{cluster}") / csv_filename).replace("\\", "/"),
+        "participant_metrics_jsonl": str(Path(f"cluster_{cluster}") / participant_metrics_filename).replace("\\", "/"),
     }
 
 
-def _build_stage_payload(stage_metrics: dict, prompt, answers_csv: str | None = None) -> dict:
+def _build_stage_payload(
+    stage_metrics: dict,
+    prompt,
+    *,
+    evaluation_scope: str,
+    dataset_split: str,
+    metric_scope: str,
+    dataset_ids_artifact: str | None = None,
+    answers_csv: str | None = None,
+    participant_metrics_jsonl: str | None = None,
+) -> dict:
     payload = {
+        "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
+        "evaluation_scope": evaluation_scope,
+        "dataset_split": dataset_split,
+        "metric_scope": metric_scope,
+        "dataset_ids_artifact": dataset_ids_artifact,
         "summary": stage_metrics.get("summary", {}),
         "trait_similarity": stage_metrics.get("trait_similarity", {}),
+        "trait_similarity_valid_counts": stage_metrics.get("trait_similarity_valid_counts", {}),
         "facet_similarity": stage_metrics.get("facet_similarity", {}),
+        "facet_similarity_valid_counts": stage_metrics.get("facet_similarity_valid_counts", {}),
         "answer_block_similarity": stage_metrics.get("answer_block_similarity", {}),
+        "answer_block_valid_counts": stage_metrics.get("answer_block_valid_counts", {}),
         "selected_facets": stage_metrics.get("selected_facets", []),
         "trait_question_blocks": stage_metrics.get("trait_question_blocks", get_trait_question_blocks()),
         "prompt": prompt,
     }
     if answers_csv is not None:
         payload["answers_csv"] = answers_csv
+    if participant_metrics_jsonl is not None:
+        payload["participant_metrics_jsonl"] = participant_metrics_jsonl
     return payload
 
 
@@ -206,6 +319,7 @@ def run_experiment(config):
     experiment_id = config["experiment_id"]
 
     experiment_log = {
+        "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
         "experiment_id": experiment_id,
         "status": "started",
         "config": config,
@@ -214,6 +328,7 @@ def run_experiment(config):
     save_log(experiment_log, results_dir, "experiment_log.json")
 
     result_log = {
+        "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
         "experiment_id": experiment_id,
         "clusters": {},
     }
@@ -299,6 +414,7 @@ def run_experiment(config):
         test_size = n_participants - train_size
         train_participants = total_participants.iloc[:train_size]
         test_participants = total_participants.iloc[train_size:]
+        split_artifacts = _save_dataset_split_artifacts(results_dir, cluster, train_participants, test_participants)
         print(f"👥 Отобрано участников для кластера {cluster}: {len(total_participants)}")
         print(f"👥 Train: {train_size},  Test: {test_size}")
 
@@ -319,19 +435,33 @@ def run_experiment(config):
             cluster,
             selected_facets,
             csv_filename="before_optimization_test_answers.csv",
+            participant_metrics_filename="before_optimization_test_participants.jsonl",
         )
         before_stage = _build_stage_payload(
             stage_metrics=non_opt_results["stage_metrics"],
             prompt=base_genotype,
+            evaluation_scope="before_optimization_test",
+            dataset_split="test",
+            metric_scope="stage",
+            dataset_ids_artifact=split_artifacts.get("test_case_ids_csv"),
             answers_csv=non_opt_results["answers_csv"],
+            participant_metrics_jsonl=non_opt_results["participant_metrics_jsonl"],
         )
         print("✅ Прогон без оптимизации завершён")
-        print(f"  - Средняя схожесть: {before_stage['summary'].get('mean_similarity', 0):.4f}")
-        print(f"  - Средняя разница: {before_stage['summary'].get('mean_avg_diff', 0):.4f}")
-        print(f"  - Средняя корреляция Пирсона: {before_stage['summary'].get('mean_pearson_corr', 0):.4f}\n")
+        print(f"  - Средняя схожесть: {_format_metric(before_stage['summary'].get('mean_similarity'))}")
+        print(f"  - Средняя разница: {_format_metric(before_stage['summary'].get('mean_avg_diff'))}")
+        print(f"  - Средняя корреляция Пирсона: {_format_metric(before_stage['summary'].get('mean_pearson_corr'))}\n")
 
         optimization_enabled = "evolution" in config and config["evolution"].get("algorithm")
-        optimization_generations_stage = {"generations": []}
+        optimization_generations_stage = {
+            "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
+            "evaluation_scope": "generation",
+            "dataset_split": "train",
+            "metric_scope": "generation",
+            "dataset_ids_artifact": split_artifacts.get("train_case_ids_csv"),
+            "evolution_history_artifact": None,
+            "generations": [],
+        }
         if optimization_enabled:
             cluster_progress = experiment_time_estimator.get_progress_info(completed_items=cluster_idx)
             print(f"🧬 Запуск эволюционной оптимизации для кластера {cluster} | {cluster_progress}")
@@ -352,7 +482,8 @@ def run_experiment(config):
 
             model_for_evolution = evolution_model if evolution_model is not None else model
             evoluter = GAEvoluter(evo_args, evaluator, evolution_model=model_for_evolution, config=config)
-            evoluter.population = init_population(base_genotype, config, evo_args.popsize, model_for_evolution)
+            init_population_records = init_population(base_genotype, config, evo_args.popsize, model_for_evolution)
+            evoluter.set_initial_population(init_population_records)
             evoluter.evolute()
 
             best_str_raw = evoluter.population[0]
@@ -361,18 +492,53 @@ def run_experiment(config):
             genotype = parse_str_to_genotype(best_str, fixed_modifiers, config, template_genotype=base_genotype)
             print("✅ Эволюция завершена. Лучший генотип сохранён.")
 
+            cluster_dir = results_dir / f"cluster_{cluster}"
+            cluster_dir.mkdir(parents=True, exist_ok=True)
+            evolution_history_payload = {
+                "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
+                "experiment_id": experiment_id,
+                "cluster_id": cluster,
+                "evaluation_scope": "generation",
+                "dataset_split": "train",
+                "metric_scope": "generation",
+                "dataset_ids_artifact": split_artifacts.get("train_case_ids_csv"),
+                "generations": getattr(evoluter, "generation_logs", []),
+                "final_population": getattr(evoluter, "population_records", []),
+            }
+            save_log(evolution_history_payload, cluster_dir, "evolution_history.json")
+            optimization_generations_stage["evolution_history_artifact"] = str(
+                Path(f"cluster_{cluster}") / "evolution_history.json"
+            ).replace("\\", "/")
+
             for gen_data in getattr(evoluter, "generation_logs", []):
                 stage = gen_data.get("best_stage_summary") or {}
                 optimization_generations_stage["generations"].append(
                     {
                         "generation": gen_data.get("generation"),
-                        "best_score": gen_data.get("best_score", 0.0),
-                        "mean_score": gen_data.get("mean_score", 0.0),
+                        "evaluation_scope": gen_data.get("evaluation_scope", "generation"),
+                        "dataset_split": gen_data.get("dataset_split", "train"),
+                        "metric_scope": gen_data.get("metric_scope", "generation"),
+                        "dataset_ids_artifact": split_artifacts.get("train_case_ids_csv"),
+                        "population_size": gen_data.get("population_size"),
+                        "valid_candidates_count": gen_data.get("valid_candidates_count"),
+                        "unparsable_candidates_count": gen_data.get("unparsable_candidates_count"),
+                        "best_candidate_id": gen_data.get("best_candidate_id"),
+                        "best_score": gen_data.get("best_score"),
+                        "mean_score": gen_data.get("mean_score"),
+                        "median_score": gen_data.get("median_score"),
+                        "min_score": gen_data.get("min_score"),
+                        "max_score": gen_data.get("max_score"),
+                        "std_score": gen_data.get("std_score"),
                         "best_prompt": gen_data.get("best_prompt"),
+                        "status_breakdown": gen_data.get("status_breakdown", {}),
+                        "population_metric_summary": gen_data.get("population_metric_summary", {}),
                         "summary": stage.get("summary", {}),
                         "trait_similarity": stage.get("trait_similarity", {}),
+                        "trait_similarity_valid_counts": stage.get("trait_similarity_valid_counts", {}),
                         "facet_similarity": stage.get("facet_similarity", {}),
+                        "facet_similarity_valid_counts": stage.get("facet_similarity_valid_counts", {}),
                         "answer_block_similarity": stage.get("answer_block_similarity", {}),
+                        "answer_block_valid_counts": stage.get("answer_block_valid_counts", {}),
                         "selected_facets": stage.get("selected_facets", selected_facets),
                         "trait_question_blocks": stage.get("trait_question_blocks", get_trait_question_blocks()),
                     }
@@ -393,11 +559,17 @@ def run_experiment(config):
                 cluster,
                 selected_facets,
                 csv_filename="after_optimization_test_answers.csv",
+                participant_metrics_filename="after_optimization_test_participants.jsonl",
             )
             after_stage = _build_stage_payload(
                 stage_metrics=opt_results["stage_metrics"],
                 prompt=genotype,
+                evaluation_scope="after_optimization_test",
+                dataset_split="test",
+                metric_scope="stage",
+                dataset_ids_artifact=split_artifacts.get("test_case_ids_csv"),
                 answers_csv=opt_results["answers_csv"],
+                participant_metrics_jsonl=opt_results["participant_metrics_jsonl"],
             )
         else:
             print("⏭️  Повторный этап after_optimization_test пропущен (режим без оптимизации).")
@@ -411,15 +583,15 @@ def run_experiment(config):
         print(f"\n{'=' * 70}")
         print(f"📈 ИТОГОВЫЕ СРЕДНИЕ ПОКАЗАТЕЛИ КЛАСТЕРА {cluster}")
         print(f"{'=' * 70}")
-        print(f"- Средняя схожесть (similarity): {final_stage['summary'].get('mean_similarity', 0):.4f}")
-        print(f"- Средняя разница (avg_diff): {final_stage['summary'].get('mean_avg_diff', 0):.4f}")
-        print(f"- Средняя корреляция Пирсона (pearson_corr): {final_stage['summary'].get('mean_pearson_corr', 0):.4f}")
+        print(f"- Средняя схожесть (similarity): {_format_metric(final_stage['summary'].get('mean_similarity'))}")
+        print(f"- Средняя разница (avg_diff): {_format_metric(final_stage['summary'].get('mean_avg_diff'))}")
+        print(f"- Средняя корреляция Пирсона (pearson_corr): {_format_metric(final_stage['summary'].get('mean_pearson_corr'))}")
         print("  Five-factor (OCEAN+30):")
-        print(f"  - MAE (mean |real−sim|): {final_stage['summary'].get('mean_mae_35', 0):.4f}")
-        print(f"  - Similarity по 35: {final_stage['summary'].get('mean_similarity_35', 0):.4f}")
-        print(f"  - Similarity по 30 фасетам: {final_stage['summary'].get('mean_similarity_facets', 0):.4f}")
-        print(f"  - Similarity по 5 чертам: {final_stage['summary'].get('mean_similarity_traits', 0):.4f}")
-        print(f"  - Pearson по 35: {final_stage['summary'].get('mean_pearson_35', 0):.4f}")
+        print(f"  - MAE (mean |real−sim|): {_format_metric(final_stage['summary'].get('mean_mae_35'))}")
+        print(f"  - Similarity по 35: {_format_metric(final_stage['summary'].get('mean_similarity_35'))}")
+        print(f"  - Similarity по 30 фасетам: {_format_metric(final_stage['summary'].get('mean_similarity_facets'))}")
+        print(f"  - Similarity по 5 чертам: {_format_metric(final_stage['summary'].get('mean_similarity_traits'))}")
+        print(f"  - Pearson по 35: {_format_metric(final_stage['summary'].get('mean_pearson_35'))}")
         print(f"{'=' * 70}")
         print("⏱️  Статистика времени кластера:")
         print(f"- Общее время: {format_time(cluster_total_time)}")
@@ -429,6 +601,7 @@ def run_experiment(config):
         print(f"✅ Обработка кластера {cluster} завершена\n")
 
         cluster_log = {
+            "artifact_schema_version": ARTIFACT_SCHEMA_VERSION,
             "cluster_id": cluster,
             "start_time": cluster_start_time,
             "end_time": time.time(),
@@ -436,6 +609,7 @@ def run_experiment(config):
             "participants_total": len(total_participants),
             "participants_train": len(train_participants),
             "participants_test": len(test_participants),
+            "dataset_artifacts": split_artifacts,
             "stages": {
                 "before_optimization_test": before_stage,
                 "after_optimization_test": after_stage,

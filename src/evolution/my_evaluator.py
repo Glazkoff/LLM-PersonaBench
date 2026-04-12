@@ -73,5 +73,13 @@ class MyEvaluator(Evaluator):
         self.last_detailed_scores = {
             "prompt": canonical_prompt,
             "stage_metrics": stage_metrics,
+            "evaluation_scope": "generation",
+            "dataset_split": "train",
+            "metric_scope": "generation",
+            "participants_total": len(participant_scores),
         }
-        return float(stage_metrics.get("summary", {}).get("mean_similarity", 0.0))
+        score = stage_metrics.get("summary", {}).get("mean_similarity")
+        if isinstance(score, (int, float)):
+            return float(score)
+        # Для GA отсутствующие метрики должны быть явно худшими, но не "маскироваться нулём".
+        return -1.0
