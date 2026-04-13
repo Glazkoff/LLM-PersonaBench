@@ -1,6 +1,6 @@
 # Метаинформация
-name: "gpt-4.1-mini_mean_cluster_ga_evolution_c0"
-description: "Genetic evolution of mean-based cluster prompts for cluster 0 using openai/gpt-4.1-mini as both evaluator and evolution model."
+name: "grok-4.1-fast_mean_cluster_ga_evolution_c_0_1_2_3"
+description: "Genetic evolution of mean-based cluster prompts for cluster 0, 1, 2, 3 using x-ai/grok-4.1-fast as both evaluator and evolution model."
 
 # Пути к промптам
 prompt:
@@ -11,13 +11,13 @@ prompt:
 # Настройки данных
 data:
   file_path: "data/raw/df_ipipneo_120_clusters"
-  clusters: [0]
+  clusters: [0, 1, 2, 3]
   num_participants: 100 # train(60%): 60 / test(40%): 40 
   save_every_n: 2
 
 # Настройки модели
 model:
-  model_name: "openai/gpt-4.1-mini"
+  model_name: "x-ai/grok-4.1-fast"
   provider: "openrouter"
   temperature: 0
   timeout: 180
@@ -36,7 +36,7 @@ evolution:
   max_retries: 4
 
   # LLM для эволюции
-  llm_for_evolution: "openai/gpt-4.1-mini" 
+  llm_for_evolution: "x-ai/grok-4.1-fast" 
   provider: "openrouter"
   temperature: 0.5
   
