@@ -1,0 +1,56 @@
+# Метаинформация
+name: "gpt-4.1-nano_mean_cluster_ga_evolution_c1_2"
+description: "Genetic evolution of mean-based cluster prompts for cluster 1, 2 using openai/gpt-4.1-nano as both evaluator and evolution model."
+
+# Пути к промптам
+prompt:
+  traits_path: "src/prompt/mean_value_cluster/traits.json"
+  facets_path: "src/prompt/mean_value_cluster/facets.json"
+  system_path: "src/prompt/system.json" 
+
+# Настройки данных
+data:
+  file_path: "data/raw/df_ipipneo_120_clusters"
+  clusters: [1, 2]
+  num_participants: 100 # train(60%): 60 / test(40%): 40 
+  save_every_n: 2
+
+# Настройки модели
+model:
+  model_name: "openai/gpt-4.1-nano"
+  provider: "openrouter"
+  temperature: 0
+  timeout: 180
+  max_retries: 4
+
+# Настройки EvoPrompt
+evolution:
+  algorithm: "GA"  # GA или DE
+  population_size: 4 # размер популяции - кол-во промптов (особей) в одном поколении
+  num_generations: 5 # количество поколений - кол-во итераций эволюционного алгоритма
+  mutation_rate: 0.15
+  crossover_rate: 0.8
+  selection_method: "tournament" # tournament, roulette
+  participant_batch_size: 15   # пачка участников в модель (5/10/20); 1 — по одному
+  timeout: 180
+  max_retries: 4
+
+  # LLM для эволюции
+  llm_for_evolution: "openai/gpt-4.1-nano" 
+  provider: "openrouter"
+  temperature: 0.5
+  
+  # Что оптимизируем
+  genotype_params:
+    role_definition: true
+    trait_formulations: true
+    facet_formulations: true
+    intensity_modifiers: false 
+    critic_formulations: true 
+    template_structure: false
+
+
+# Настройки эксперимента
+experiment:
+  seed: 2026
+  save_every_generation: true

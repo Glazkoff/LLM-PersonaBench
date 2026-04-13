@@ -1,0 +1,52 @@
+{
+  "name": "gpt-4.1-nano_mean_cluster_ga_evolution_c0",
+  "description": "Genetic evolution of mean-based cluster prompts for cluster 0 using openai/gpt-4.1-nano as both evaluator and evolution model.",
+  "prompt": {
+    "traits_path": "src/prompt/mean_value_cluster/traits.json",
+    "facets_path": "src/prompt/mean_value_cluster/facets.json",
+    "system_path": "src/prompt/system.json"
+  },
+  "data": {
+    "file_path": "data/raw/df_ipipneo_120_clusters",
+    "clusters": [
+      0
+    ],
+    "num_participants": 100,
+    "save_every_n": 2
+  },
+  "model": {
+    "model_name": "openai/gpt-4.1-nano",
+    "provider": "openrouter",
+    "temperature": 0,
+    "timeout": 180,
+    "max_retries": 4
+  },
+  "evolution": {
+    "algorithm": "GA",
+    "population_size": 4,
+    "num_generations": 5,
+    "mutation_rate": 0.15,
+    "crossover_rate": 0.8,
+    "selection_method": "tournament",
+    "participant_batch_size": 15,
+    "timeout": 180,
+    "max_retries": 4,
+    "llm_for_evolution": "openai/gpt-4.1-nano",
+    "provider": "openrouter",
+    "temperature": 0.5,
+    "genotype_params": {
+      "role_definition": true,
+      "trait_formulations": true,
+      "facet_formulations": true,
+      "intensity_modifiers": false,
+      "critic_formulations": true,
+      "template_structure": false
+    }
+  },
+  "experiment": {
+    "seed": 2026,
+    "save_every_generation": true
+  },
+  "config_file": "configs\\experiments\\evoprompt_iter2\\gpt4_nano\\gpt4_nano_cluster_0.yaml",
+  "experiment_id": "gpt4_nano_cluster_0_20260412_234902"
+}
