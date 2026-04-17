@@ -1,0 +1,55 @@
+{
+  "name": "qwen3_mean_cluster_ga_evolution_c0_1_2_3",
+  "description": "Genetic evolution of mean-based cluster prompts for cluster 0, 1, 2, 3 using Qwen3-235B-A22B-Instruct-2507 as both evaluator and evolution model.",
+  "prompt": {
+    "traits_path": "src/prompt/mean_value_cluster/traits.json",
+    "facets_path": "src/prompt/mean_value_cluster/facets.json",
+    "system_path": "src/prompt/system.json"
+  },
+  "data": {
+    "file_path": "data/raw/df_ipipneo_120_clusters",
+    "clusters": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "num_participants": 100,
+    "save_every_n": 2
+  },
+  "model": {
+    "model_name": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+    "provider": "cloud",
+    "temperature": 0,
+    "timeout": 600,
+    "max_retries": 1
+  },
+  "evolution": {
+    "algorithm": "GA",
+    "population_size": 4,
+    "num_generations": 5,
+    "mutation_rate": 0.15,
+    "crossover_rate": 0.8,
+    "selection_method": "tournament",
+    "participant_batch_size": 20,
+    "timeout": 600,
+    "max_retries": 1,
+    "llm_for_evolution": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+    "provider": "cloud",
+    "temperature": 0.5,
+    "genotype_params": {
+      "role_definition": true,
+      "trait_formulations": true,
+      "facet_formulations": true,
+      "intensity_modifiers": false,
+      "critic_formulations": true,
+      "template_structure": false
+    }
+  },
+  "experiment": {
+    "seed": 2026,
+    "save_every_generation": true
+  },
+  "config_file": "configs\\experiments\\evoprompt_iter2\\qwen3\\qwen3_cluster_0_1_2_3.yaml",
+  "experiment_id": "qwen3_cluster_0_1_2_3_20260416_145315"
+}
