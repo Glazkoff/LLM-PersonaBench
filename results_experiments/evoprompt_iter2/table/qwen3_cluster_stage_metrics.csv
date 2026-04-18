@@ -1,0 +1,9 @@
+﻿cluster_id,stage,stage_key,mean_similarity,mean_mae_35,mean_similarity_facets,mean_similarity_traits,validate_str,validate_share,success_str,success_share
+0,before,before_optimization_test,0.636771,25.160849,0.744711,0.770477,40/40,1.0,40/40,1.0
+0,after,after_optimization_test,0.634323,25.480655,0.741893,0.764998,40/40,1.0,40/40,1.0
+1,before,before_optimization_test,0.595677,24.224504,0.753375,0.784033,40/40,1.0,40/40,1.0
+1,after,after_optimization_test,0.615052,23.742013,0.758737,0.78564,40/40,1.0,40/40,1.0
+2,before,before_optimization_test,0.678125,27.190426,0.722446,0.761994,40/40,1.0,40/40,1.0
+2,after,after_optimization_test,0.676615,28.91546,0.706873,0.734682,40/40,1.0,40/40,1.0
+3,before,before_optimization_test,0.642552,30.83076,0.690351,0.699743,40/40,1.0,40/40,1.0
+3,after,after_optimization_test,0.642083,31.239484,0.685673,0.699196,40/40,1.0,40/40,1.0

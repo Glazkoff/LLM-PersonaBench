@@ -1,0 +1,5 @@
+﻿cluster_id,stage,stage_key,mean_similarity,mean_mae_35,mean_similarity_facets,mean_similarity_traits,validate_str,validate_share,success_str,success_share
+1,before,before_optimization_test,0.673438,19.354141,0.799848,0.846124,40/40,1.0,40/40,1.0
+1,after,after_optimization_test,0.678281,19.135822,0.800895,0.855121,40/40,1.0,40/40,1.0
+2,before,before_optimization_test,0.696042,25.546939,0.741687,0.761592,40/40,1.0,40/40,1.0
+2,after,after_optimization_test,0.697031,25.355291,0.74193,0.77355,40/40,1.0,40/40,1.0
