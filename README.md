@@ -88,7 +88,7 @@ The `cloud` provider uses the OpenAI-compatible endpoint
 The main participant table is not versioned in the repository and must be downloaded manually.
 
 Download the processed dataset from:
-https://drive.google.com/file/d/1M1bJou1-8xnW8tiAb9hcFFWWbUWB06F3/view?usp=sharing
+https://osf.io/dsx56/overview?view_only=f236a415ffa94a6095c249070877aeac
 
 After downloading, place the file at:
 
