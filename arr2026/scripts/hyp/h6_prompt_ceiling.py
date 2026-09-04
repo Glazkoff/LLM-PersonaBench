@@ -99,16 +99,19 @@ def main():
             _, counts = np.unique(code, return_counts=True)
             coll = float(((counts * (counts - 1)).sum()) / (len(code) * (len(code) - 1)))
 
-            # oracle: best map code -> answers, fitted on half, scored on the other
+            # Oracle: the best map from the code to the answers, fitted on half and
+            # scored on the other. Exact-code lookup is useless here -- with 35 symbols
+            # over a 5-letter alphabet the codes are essentially unique, so a lookup
+            # table never hits at test time and degenerates to the constant. Use a
+            # smooth estimator over the ordinal code vector instead.
+            from sklearn.linear_model import RidgeCV
             idx = rng.permutation(len(sub))
             tr, te = idx[: len(idx) // 2], idx[len(idx) // 2:]
             Y = sub[ITEMS].to_numpy(float)
-            tab = {}
-            for i in tr:
-                tab.setdefault(code[i], []).append(Y[i])
+            X = np.array([[int(ch) if ch != "?" else 2 for ch in c] for c in code], float)
             fallback = np.round(Y[tr].mean(axis=0))
-            pred = np.array([np.round(np.mean(tab[code[i]], axis=0))
-                             if code[i] in tab else fallback for i in te])
+            reg = RidgeCV(alphas=np.logspace(-2, 4, 13)).fit(X[tr], Y[tr])
+            pred = np.clip(np.round(reg.predict(X[te])), 1, 5)
             oracle = float(np.mean([sim(pred[k], Y[te[k]]) for k in range(len(te))]))
             const = float(np.mean([sim(fallback, Y[te[k]]) for k in range(len(te))]))
             # a real human of the same cluster, as the ceiling

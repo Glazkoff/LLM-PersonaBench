@@ -93,13 +93,21 @@ class LocalVLLMModel(BaseLLM):
         import math
 
         options = options or LIKERT_TOKENS
+        # Qwen3 and friends are hybrid-thinking models: left to themselves the first
+        # generated token is <think>, not an answer, and the readout sees no mass on
+        # the scale at all. Turn thinking off and prefill the assistant turn so the
+        # very next token has to be the digit.
         resp = self._raw.chat.completions.create(
             model=self.model_name,
             messages=[{"role": "system", "content": system_prompt},
-                      {"role": "user", "content": question}],
+                      {"role": "user", "content": question},
+                      {"role": "assistant", "content": "My answer is "}],
             max_tokens=1, temperature=0.0, logprobs=True, top_logprobs=20,
+            extra_body={"chat_template_kwargs": {"enable_thinking": False},
+                        "add_generation_prompt": False, "continue_final_message": True},
         )
         top = resp.choices[0].logprobs.content[0].top_logprobs
+        self.last_top_tokens = [(t.token, round(math.exp(t.logprob), 4)) for t in top[:8]]
         raw = {}
         total = 0.0
         for t in top:
