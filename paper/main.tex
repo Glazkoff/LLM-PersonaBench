@@ -616,35 +616,46 @@ persona means.
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{lcccc}
 \toprule
-Model & VR$_\text{with}$ & VR$_\text{betw}$ & VR$_\text{tot}$ & entr.\\
+Model & Params & VR$_\text{with}$ & VR$_\text{betw}$ & VR$_\text{tot}$\\
 \midrule
-Qwen2.5-7B-Instruct & 0.367 & \textbf{0.193} & 0.430 & 0.415\\
-Mistral-Small-24B & 0.538 & \textbf{0.177} & 0.579 & 0.729\\
+Qwen2.5-7B-Instruct & 7B & 0.367 & \textbf{0.193} & 0.430\\
+Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
+Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
 \midrule
-\textit{human} & --- & --- & 1.000 & ---\\
+\textit{human} & --- & --- & --- & 1.000\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-All probability mass lands on the five valid answer tokens ($1.00$ and $0.97$),
-so neither model has difficulty \emph{emitting} a number; both hold narrow
-beliefs, at entropies far below the maximum $\ln 5 = 1.609$.
+Essentially all probability mass lands on the five valid answer tokens
+($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number; entropies
+of $0.42$--$0.73$ nats sit far below the maximum $\ln 5 = 1.609$. The largest
+model is the one the audited system itself used, so this is a measurement on
+that system, not on a proxy for it.
 
-\paragraph{Individuation is small, and roughly model-invariant.} The
-decomposition says something the total does not. The two models differ by $50\%$
-in total dispersion, yet their \emph{between}-persona components --- the part
-carrying individuation --- are nearly identical, $0.193$ and $0.177$ of the
-human value. The gap lives almost entirely in the \emph{within}-persona term
-($0.367$ vs $0.538$), which is per-item uncertainty, not personalisation.
+\paragraph{Dispersion scales; individuation barely does.} The decomposition says
+something the total does not. Across a $30\times$ range in parameters and two
+model generations, total dispersion rises substantially, $0.430 \to 0.579 \to
+0.758$. But that rise is carried almost entirely by the \emph{within}-persona
+term --- per-item uncertainty --- which nearly doubles, $0.367 \to 0.695$. The
+\emph{between}-persona term, the part that actually individuates, stays in a
+narrow band: $0.193$, $0.177$, $0.258$, never above about a quarter of the human
+value, and not monotone in scale.
 
-A simulator can therefore look markedly more dispersed simply by being less
-confident, while individuating no better. Hence a reporting consequence:
-$\mathrm{VR}_\text{total}$ confounds the two, and $\mathrm{VR}_\text{between}$
-is the quantity a persona claim should be judged on.
+A simulator therefore looks markedly more dispersed largely by being less
+confident, not by personalising better. This has a direct reporting consequence:
+$\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
+$\mathrm{VR}_\text{between}$ is the quantity a persona claim should be judged on.
 
-Three consequences follow. First, the dispersion is not discarded at the decoding
-step; it was never present, so no temperature, top-$p$, or sampling-side remedy
-can recover it. Second, because all probability mass lands on valid answer
+We state the limit of this plainly. At $\mathrm{VR}_\text{total}=0.758$ the
+largest model is no longer far from the human marginal, so for it the strong
+form of the claim below --- that no sampling-side remedy could help --- is not
+supported; what remains unsupported at every scale we measured is
+\emph{individuation}.
+
+Three consequences follow. First, for the smaller models the dispersion is not
+discarded at the decoding step; it was never present, so no temperature,
+top-$p$, or sampling-side remedy could recover it. Second, because all probability mass lands on valid answer
 tokens, accounts attributing mode collapse to difficulty \emph{emitting} numeric
 scores are not supported here --- the model is not failing to express a broad
 belief, it holds a narrow one. Third, this closes the loop with the answer-level
@@ -731,9 +742,10 @@ per-cell results are released.
 
 Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
-\S\ref{sec:mechanism} currently rests on one open-weight model, since it
-requires logprob access the API models in the audit do not provide, and larger
-models must be added before the mechanism is treated as general; the proposition is general to the
+\S\ref{sec:mechanism} covers three open-weight models spanning 7B--235B
+and two generations, since it requires logprob access the API models in the
+audit do not provide; the scaling statement rests on three points and should be
+read as a direction, not a fitted law; the proposition is general to the
 absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
 specific to this setting. The model answers we re-score were produced by prior
 runs we did not control, at temperatures we did not set, and one released run was

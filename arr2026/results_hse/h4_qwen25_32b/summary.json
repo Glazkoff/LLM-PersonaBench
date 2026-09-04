@@ -1,0 +1,10 @@
+{
+  "model": "Qwen/Qwen2.5-32B-Instruct",
+  "VR_belief_within_mean": 0.2069,
+  "VR_readout_mean": 0.3278,
+  "belief_entropy_mean": 0.2427,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 1.0,
+  "coverage": 1.0,
+  "verdict": "REPRESENTATIONAL LOSS: the belief distribution is itself collapsed."
+}

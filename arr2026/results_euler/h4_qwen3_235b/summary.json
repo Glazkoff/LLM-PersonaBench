@@ -1,0 +1,12 @@
+{
+  "model": "Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+  "VR_belief_mixture_mean": 0.7579,
+  "share_within_mean": 0.8437,
+  "share_between_mean": 0.1563,
+  "VR_within_only_NOT_COMPARABLE_mean": 0.6874,
+  "VR_readout_mean": 0.7099,
+  "belief_entropy_mean": 0.7139,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.999,
+  "verdict": "PARTIAL: the belief carries some but not all of the missing spread."
+}

@@ -1,0 +1,10 @@
+{
+  "model": "Qwen/QwQ-32B-Preview",
+  "VR_belief_within_mean": 0.7254,
+  "VR_readout_mean": 0.7322,
+  "belief_entropy_mean": 0.9682,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.9997,
+  "coverage": 1.0,
+  "verdict": "PARTIAL"
+}
