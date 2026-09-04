@@ -1,0 +1,30 @@
+{
+  "n_rows": 80,
+  "metrics": {
+    "S": {
+      "diagonal_mean": 0.6522,
+      "offdiagonal_mean": 0.6314,
+      "advantage": 0.0208,
+      "perm_p": 0.032
+    },
+    "DF": {
+      "diagonal_mean": 0.6976,
+      "offdiagonal_mean": 0.6716,
+      "advantage": 0.026,
+      "perm_p": 0.026
+    },
+    "C2ST": {
+      "diagonal_mean": 0.9816,
+      "offdiagonal_mean": 0.981,
+      "advantage": -0.0006,
+      "perm_p": 0.5127
+    },
+    "VR": {
+      "diagonal_mean": 0.4314,
+      "offdiagonal_mean": 0.4363,
+      "advantage": -0.0048,
+      "perm_p": 0.5537
+    }
+  },
+  "interpretation": "A diagonal advantage that survives permutation is the first evidence that cluster conditioning carries signal at all. A null makes the wrong-persona control a mandatory baseline, exactly as the constant floor is."
+}
