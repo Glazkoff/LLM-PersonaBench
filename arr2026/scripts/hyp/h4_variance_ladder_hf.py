@@ -96,10 +96,14 @@ def main():
     questions = json.loads((ROOT / "data/IPIP-NEO/120/questions.json").read_text(
         encoding="utf-8"))["questions"]
 
-    print(f"loading {args.model} ...", flush=True)
+    # V100 (Volta, capability 7.x) has no native bf16 -- asking for it there costs
+    # roughly an order of magnitude in throughput. Pick fp16 on pre-Ampere cards.
+    cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (0, 0)
+    dtype = torch.bfloat16 if cap[0] >= 8 else torch.float16
+    print(f"loading {args.model} ... (sm_{cap[0]}{cap[1]}, dtype={dtype})", flush=True)
     tok = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(
-        args.model, torch_dtype=torch.bfloat16, device_map="auto",
+        args.model, torch_dtype=dtype, device_map="auto",
         trust_remote_code=True)
     model.eval()
     if tok.pad_token is None:
