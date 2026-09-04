@@ -140,6 +140,7 @@ def main():
                 prompts.append(text + "My answer is ")
 
         beliefs = np.full((len(sub), 120), np.nan)
+        probs_all = np.full((len(sub), 120, 5), np.nan)   # full belief simplex
         ents = np.full((len(sub), 120), np.nan)
         onscale = np.full((len(sub), 120), np.nan)
         samples = np.full((len(sub), 120), np.nan)
@@ -163,6 +164,7 @@ def main():
                     p = raw / tot
                     mu = float((p * vals).sum())
                     beliefs[pi, qi] = float(np.sqrt((p * (vals - mu) ** 2).sum()))
+                    probs_all[pi, qi, :] = p
                     ents[pi, qi] = float(-(p[p > 0] * np.log(p[p > 0])).sum())
                     onscale[pi, qi] = float(tot)
                     samples[pi, qi] = int(rng.choice(vals, p=p))
@@ -170,21 +172,41 @@ def main():
                     print(f"    {s}/{len(prompts)}", flush=True)
 
         ok = human_sd > 0
-        within = np.nanmean(beliefs, axis=0)
-        readout_sd = np.nanstd(samples, axis=0)
+        vals_f = vals.astype(float)
+
+        # The quantity that is comparable to a human ACROSS-respondent SD is the SD
+        # of the persona-MIXTURE distribution, not the average within-persona SD.
+        # Law of total variance:  Var(X_j) = E_i[Var(X_j|i)] + Var_i(E[X_j|i]).
+        # Computed exactly from the retained probability vectors -- no sampling noise.
+        mu_ij = np.nansum(probs_all * vals_f[None, None, :], axis=2)          # E[X|i,j]
+        ex2_ij = np.nansum(probs_all * (vals_f ** 2)[None, None, :], axis=2)  # E[X^2|i,j]
+        var_ij = np.clip(ex2_ij - mu_ij ** 2, 0, None)                        # Var(X|i,j)
+        within_var = np.nanmean(var_ij, axis=0)          # E_i[Var(X_j|i)]
+        between_var = np.nanvar(mu_ij, axis=0)           # Var_i(E[X_j|i])
+        mixture_sd = np.sqrt(within_var + between_var)   # exact marginal SD
+        within_sd_mean = np.nanmean(beliefs, axis=0)     # the old (incomparable) stat
+        readout_sd = np.nanstd(samples, axis=0)          # 1-draw MC estimate of mixture
+
         rows.append({
             "model": args.model, "cluster": cl,
             "coverage": float(np.isfinite(beliefs).mean()),
             "human_sd_mean": float(np.nanmean(human_sd[ok])),
-            "VR_belief_within": float(np.nanmean(within[ok] / human_sd[ok])),
+            # primary, comparable statistic
+            "VR_belief_mixture": float(np.nanmean(mixture_sd[ok] / human_sd[ok])),
+            "share_within": float(np.nansum(within_var[ok])
+                                  / max(np.nansum(within_var[ok] + between_var[ok]), 1e-12)),
+            "share_between": float(np.nansum(between_var[ok])
+                                   / max(np.nansum(within_var[ok] + between_var[ok]), 1e-12)),
+            # retained for transparency; NOT comparable to a human across-respondent SD
+            "VR_within_only_NOT_COMPARABLE": float(np.nanmean(within_sd_mean[ok] / human_sd[ok])),
             "VR_readout": float(np.nanmean(readout_sd[ok] / human_sd[ok])),
             "belief_entropy_mean": float(np.nanmean(ents)),
             "mass_on_scale_mean": float(np.nanmean(onscale)),
         })
-        print(f"  cluster {cl}: VR_belief={rows[-1]['VR_belief_within']:.3f} "
+        print(f"  cluster {cl}: VR_mixture={rows[-1]['VR_belief_mixture']:.3f} "
+              f"(within {rows[-1]['share_within']:.0%} / between {rows[-1]['share_between']:.0%}) "
               f"VR_readout={rows[-1]['VR_readout']:.3f} "
-              f"entropy={rows[-1]['belief_entropy_mean']:.3f} "
-              f"mass={rows[-1]['mass_on_scale_mean']:.3f}", flush=True)
+              f"entropy={rows[-1]['belief_entropy_mean']:.3f}", flush=True)
 
         d = out / f"readout_cluster_{cl}"
         d.mkdir(parents=True, exist_ok=True)
@@ -194,22 +216,31 @@ def main():
         for name in ("test_case_ids.csv", "train_case_ids.csv"):
             pd.DataFrame({"case": sub["case"].to_numpy()}).to_csv(d / name, index=False)
         np.save(d / "belief_sd.npy", beliefs)
+        np.save(d / "belief_probs.npy", probs_all)
 
     t = pd.DataFrame(rows)
     t.to_csv(out / "variance_ladder.csv", index=False)
-    v = float(t.VR_belief_within.mean())
+    v = float(t.VR_belief_mixture.mean())
     summary = {
         "model": args.model,
-        "VR_belief_within_mean": round(v, 4),
+        "VR_belief_mixture_mean": round(v, 4),
+        "share_within_mean": round(float(t.share_within.mean()), 4),
+        "share_between_mean": round(float(t.share_between.mean()), 4),
+        "VR_within_only_NOT_COMPARABLE_mean": round(
+            float(t.VR_within_only_NOT_COMPARABLE.mean()), 4),
         "VR_readout_mean": round(float(t.VR_readout.mean()), 4),
         "belief_entropy_mean": round(float(t.belief_entropy_mean.mean()), 4),
         "max_entropy_ln5": 1.6094,
         "mass_on_scale_mean": round(float(t.mass_on_scale_mean.mean()), 4),
         "coverage": round(float(t.coverage.mean()), 4),
-        "verdict": ("DECODING LOSS: belief carries near-human spread; sampling discards it."
-                    if v >= 0.8 else
-                    "REPRESENTATIONAL LOSS: the belief distribution is itself collapsed."
+        "verdict": ("DECODING LOSS: the persona-mixture belief carries near-human spread; "
+                    "sampling discards it." if v >= 0.8 else
+                    "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed."
                     if v <= 0.55 else "PARTIAL"),
+        "note": ("VR_belief_mixture is the SD of the persona-mixture distribution "
+                 "(law of total variance), which is the quantity comparable to a human "
+                 "across-respondent SD. VR_within_only is retained only to show the "
+                 "earlier, non-comparable statistic."),
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print("\n=== H4-HF SUMMARY ===")
