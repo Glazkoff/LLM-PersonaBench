@@ -622,6 +622,7 @@ Qwen2.5-7B-Instruct & 7B & 0.367 & \textbf{0.193} & 0.430\\
 Qwen2.5-32B-Instruct & 32B & 0.242 & \textbf{0.220} & 0.343\\
 Qwen2.5-72B-Instruct & 72B & 0.367 & \textbf{0.295} & 0.488\\
 Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
+QwQ-32B (reasoning) & 32B & 0.729 & \textbf{0.154} & 0.753\\
 Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
 \midrule
 \textit{human} & --- & --- & --- & 1.000\\
@@ -636,12 +637,18 @@ model is the one the audited system itself used, so this is a measurement on
 that system, not on a proxy for it.
 
 \paragraph{Total dispersion and individuation are decoupled.} The decomposition
-says something the total does not, and the four models make the point by
-inverting. Mistral-Small-24B has the second-\emph{highest} total dispersion
-($0.579$) and the \emph{lowest} individuation ($0.177$); Qwen2.5-72B has the
-second-\emph{lowest} total ($0.488$) and the \emph{highest} individuation
-($0.295$). Ranking simulators by $\mathrm{VR}_\text{total}$ would order them
-almost backwards on the quantity a persona claim is about.
+says something the total does not. Over the six models the rank correlation
+between $\mathrm{VR}_\text{total}$ and $\mathrm{VR}_\text{between}$ is
+$\rho=-0.14$: knowing how dispersed a simulator's answers are tells you nothing
+about how much of that dispersion individuates.
+
+The reasoning model makes the point most sharply. QwQ-32B reaches
+$\mathrm{VR}_\text{total}=0.753$, statistically tied with the $235$B model's
+$0.758$ and the second-highest in the set --- yet its individuating component is
+the \emph{lowest} of all six at $0.154$, barely half the $235$B's. Its
+dispersion is almost entirely per-item uncertainty ($0.729$ of $0.753$). A
+simulator can look nearly human-like in spread while differentiating personas
+less than any other model measured.
 
 The Qwen2.5 family isolates this with the family held fixed and only scale
 varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
@@ -649,11 +656,11 @@ varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
 0.343 \to 0.488$. Scale buys individuation; it does not buy, and is not tracked
 by, the total.
 
-One bound survives across the whole set --- a $34\times$ parameter range, two
-families and two generations: no model exceeds
-$\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between a fifth and
-under a third of the human value throughout, and the largest model is not the
-best at it.
+One bound survives across the whole set --- a $34\times$ parameter range, three
+families, two generations, and both standard and reasoning-tuned models: no
+model exceeds $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits
+between a seventh and under a third of the human value throughout, and neither
+the largest model nor the most dispersed one is the best at it.
 
 A simulator can therefore look markedly more dispersed simply by being less
 confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
@@ -755,10 +762,10 @@ per-cell results are released.
 
 Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
-\S\ref{sec:mechanism} covers five open-weight models spanning 7B--235B,
-two families and two generations, since it requires logprob access the API
+\S\ref{sec:mechanism} covers six open-weight models spanning 7B--235B,
+three families and two generations, since it requires logprob access the API
 models in the audit do not provide; the within-family trend rests on three
-points and the cross-family comparison on five, so both are directional rather
+points and the cross-family comparison on six, so both are directional rather
 than fitted laws, and several 2026 reasoning-first models could not
 be measured at all because they place almost no probability mass on the answer
 tokens under this elicitation, which is a limitation of the readout rather than

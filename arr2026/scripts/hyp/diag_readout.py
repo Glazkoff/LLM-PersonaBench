@@ -46,3 +46,15 @@ try:
     print("   ", lg.top_logprobs[0] if lg and lg.top_logprobs else "(none)")
 except Exception as e:
     print("   FAILED:", repr(e)[:200])
+
+print("E) prefill variants (no trailing space):")
+for pre in ["My answer is", "Answer:", "My rating (1-5):"]:
+    try:
+        t = top([{"role":"system","content":SYS},{"role":"user","content":Q},
+                 {"role":"assistant","content":pre}],
+                extra_body={"chat_template_kwargs":{"enable_thinking":False},
+                            "add_generation_prompt":False,"continue_final_message":True})
+        mass = sum(p for tok,p in t if tok.strip() in {"1","2","3","4","5"})
+        print(f"   {pre!r:22} mass_on_scale={mass:.4f}  top={t[:5]}")
+    except Exception as e:
+        print(f"   {pre!r:22} FAILED: {repr(e)[:100]}")
