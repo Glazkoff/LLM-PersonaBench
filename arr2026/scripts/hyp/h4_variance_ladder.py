@@ -48,6 +48,7 @@ from src.models.providers.local_vllm import LocalVLLMModel  # noqa: E402
 from src.utils.prompt import build_full_prompt  # noqa: E402
 
 ITEMS = [f"i{i}" for i in range(1, 121)]
+MIN_MASS_ON_SCALE = 0.1  # below this the renormalised distribution is noise
 ANSWER_INSTR = ("Answer with a single digit from 1 to 5, where 1 = Very Inaccurate, "
                 "2 = Moderately Inaccurate, 3 = Neither Accurate Nor Inaccurate, "
                 "4 = Moderately Accurate, 5 = Very Accurate. Reply with the digit only.")
@@ -141,7 +142,7 @@ def main():
         jobs = [(pi, qi) for pi in range(len(sub)) for qi in range(120)]
         with ThreadPoolExecutor(max_workers=args.workers) as ex:
             for pi, qi, d in ex.map(one, jobs):
-                if d.get("probs"):
+                if d.get("probs") and (d.get("mass_on_scale") or 0.0) >= MIN_MASS_ON_SCALE:
                     p = np.array([d["probs"][str(k)] for k in range(1, 6)])
                     vals = np.arange(1, 6)
                     mu = float((p * vals).sum())
@@ -171,6 +172,7 @@ def main():
 
         rows.append({
             "cluster": cl, "model": args.model,
+            "coverage": float(np.isfinite(beliefs).mean()),
             "human_sd_mean": float(np.nanmean(human_sd[ok])),
             "VR_belief_mixture": float(np.nanmean(mixture_sd[ok] / human_sd[ok])),
             "share_within": float(np.nansum(within_var[ok])
@@ -213,6 +215,22 @@ def main():
         "verdict": None,
     }
     v = summary["VR_belief_mixture_mean"]
+    # A run where the readout never landed on the answer tokens carries no
+    # information. Without this guard an all-NaN run reports VR=0.0 and is
+    # rendered as the strongest possible finding.
+    cov = float(np.nanmean(t["coverage"])) if "coverage" in t else float("nan")
+    mass = float(np.nanmean(t["mass_on_scale_mean"])) if "mass_on_scale_mean" in t else float("nan")
+    if (not np.isfinite(cov) or cov < 0.5 or not np.isfinite(v) or v <= 0.0
+            or not np.isfinite(mass) or mass < 0.5):
+        summary["verdict"] = (
+            f"INVALID: belief readout failed (coverage={cov:.3f}, mass={mass:.4f}). No conclusion "
+            f"can be drawn; do NOT report these numbers.")
+        summary["valid"] = False
+        (out / "summary.json").write_text(json.dumps(summary, indent=2))
+        print("\n=== H4 SUMMARY (INVALID) ===")
+        print(json.dumps(summary, indent=2))
+        raise SystemExit(2)
+    summary["valid"] = True
     summary["verdict"] = (
         "DECODING LOSS: the persona-mixture belief carries near-human spread; "
         "decoding discards it." if v >= 0.8 else

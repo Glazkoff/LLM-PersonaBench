@@ -37,6 +37,7 @@ ANSWER_INSTR = ("Answer with a single digit from 1 to 5, where 1 = Very Inaccura
                 "2 = Moderately Inaccurate, 3 = Neither Accurate Nor Inaccurate, "
                 "4 = Moderately Accurate, 5 = Very Accurate. Reply with the digit only.")
 DIGITS = ["1", "2", "3", "4", "5"]
+MIN_MASS_ON_SCALE = 0.1  # below this the renormalised distribution is noise
 
 
 def load_genotype(cluster: int):
@@ -159,7 +160,10 @@ def main():
                     pi, qi = idx // 120, idx % 120
                     raw = np.array([probs[b, dids[d]].sum() for d in DIGITS])
                     tot = raw.sum()
-                    if tot <= 0:
+                    # Renormalising a near-zero mass turns numerical noise into a
+                    # confident-looking belief. If the model put almost nothing on
+                    # the answer tokens it did not answer on the scale; drop it.
+                    if tot < MIN_MASS_ON_SCALE:
                         continue
                     p = raw / tot
                     mu = float((p * vals).sum())
@@ -221,6 +225,22 @@ def main():
     t = pd.DataFrame(rows)
     t.to_csv(out / "variance_ladder.csv", index=False)
     v = float(t.VR_belief_mixture.mean())
+    # A run whose readout never landed on the answer tokens carries no
+    # information. Without this guard an all-NaN run reports VR=0.0 and is
+    # rendered as the strongest possible finding.
+    cov = float(np.nanmean(t["coverage"])) if "coverage" in t else float("nan")
+    mass = float(np.nanmean(t["mass_on_scale_mean"])) if "mass_on_scale_mean" in t else float("nan")
+    if (not np.isfinite(cov) or cov < 0.5 or not np.isfinite(v) or v <= 0.0
+            or not np.isfinite(mass) or mass < 0.5):
+        bad = {"model": args.model, "coverage": None if not np.isfinite(cov) else round(cov, 4),
+               "mass_on_scale": None if not np.isfinite(mass) else round(mass, 4),
+               "valid": False,
+               "verdict": "INVALID: belief readout failed. No conclusion can be "
+                          "drawn; do NOT report these numbers."}
+        (out / "summary.json").write_text(json.dumps(bad, indent=2))
+        print("\n=== H4-HF SUMMARY (INVALID) ===")
+        print(json.dumps(bad, indent=2))
+        raise SystemExit(2)
     summary = {
         "model": args.model,
         "VR_belief_mixture_mean": round(v, 4),
@@ -233,6 +253,7 @@ def main():
         "max_entropy_ln5": 1.6094,
         "mass_on_scale_mean": round(float(t.mass_on_scale_mean.mean()), 4),
         "coverage": round(float(t.coverage.mean()), 4),
+        "valid": True,
         "verdict": ("DECODING LOSS: the persona-mixture belief carries near-human spread; "
                     "sampling discards it." if v >= 0.8 else
                     "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed."
