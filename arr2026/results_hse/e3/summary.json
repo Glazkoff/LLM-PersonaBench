@@ -1,0 +1,28 @@
+{
+  "n_cells": 20,
+  "C2ST_AUC (0.5=indistinguishable, lower is better)": {
+    "model_mean": 0.9828,
+    "human_ceiling_mean": 0.5639,
+    "constant_floor_mean": 0.9259
+  },
+  "DF distributional fidelity (higher better)": {
+    "model_mean": 0.7028,
+    "human_ceiling_mean": 0.9389,
+    "constant_floor_mean": 0.7955
+  },
+  "VR variance ratio (1.0 ideal)": {
+    "model_mean": 0.4306,
+    "human_ceiling_mean": 1.0175,
+    "constant_floor_mean": 0.0
+  },
+  "S_answer (old metric; note constant floor EXCEEDS human ceiling)": {
+    "model_mean": 0.6545,
+    "human_ceiling_mean": 0.7212,
+    "constant_floor_mean": 0.7961
+  },
+  "separation_check": {
+    "old_metric_ranks_constant_above_human": true,
+    "C2ST_ranks_human_above_constant": true,
+    "DF_ranks_human_above_constant": true
+  }
+}

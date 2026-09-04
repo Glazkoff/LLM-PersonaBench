@@ -1,0 +1,53 @@
+{
+  "proposition_holds_on_every_item": true,
+  "mean_score_constant": 0.7996,
+  "mean_score_faithful_simulator": 0.7221,
+  "mean_gap_pp": 7.748,
+  "interpretation": "A simulator that reproduces the cluster response distribution exactly is penalised by this many percentage points relative to a constant. Any reported improvement smaller than this gap is consistent with the model merely drifting toward the cluster mean.",
+  "per_cluster": [
+    {
+      "cluster": 0,
+      "n": 107174,
+      "MAD_mean": 0.8039067311101573,
+      "GMD_mean": 1.1072638016678809,
+      "score_constant": 0.7990233172224607,
+      "score_faithful": 0.7231840495830297,
+      "gap_pp": 7.583926763943088,
+      "items_with_GMD_ge_MAD": 120,
+      "items_total": 120
+    },
+    {
+      "cluster": 1,
+      "n": 108880,
+      "MAD_mean": 0.7231306637276512,
+      "GMD_mean": 1.007808208818378,
+      "score_constant": 0.8192173340680872,
+      "score_faithful": 0.7480479477954055,
+      "gap_pp": 7.116938627268168,
+      "items_with_GMD_ge_MAD": 120,
+      "items_total": 120
+    },
+    {
+      "cluster": 2,
+      "n": 108867,
+      "MAD_mean": 0.8089117914519551,
+      "GMD_mean": 1.1277723548206227,
+      "score_constant": 0.7977720521370112,
+      "score_faithful": 0.7180569112948443,
+      "gap_pp": 7.971514084216688,
+      "items_with_GMD_ge_MAD": 120,
+      "items_total": 120
+    },
+    {
+      "cluster": 3,
+      "n": 85247,
+      "MAD_mean": 0.8711199025576657,
+      "GMD_mean": 1.203866084848614,
+      "score_constant": 0.7822200243605836,
+      "score_faithful": 0.6990334787878465,
+      "gap_pp": 8.318654557273709,
+      "items_with_GMD_ge_MAD": 120,
+      "items_total": 120
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-8B",
+  "VR_belief_within_mean": 0.2227,
+  "VR_readout_mean": 0.3661,
+  "VR_published_greedy": 0.431,
+  "belief_entropy_mean": 0.2548,
+  "mass_on_scale_mean": 1.0,
+  "verdict": "REPRESENTATIONAL LOSS: the belief distribution is itself collapsed; no sampling-side fix can recover human dispersion."
+}

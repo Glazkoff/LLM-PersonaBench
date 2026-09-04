@@ -1,0 +1,13 @@
+{
+  "n_dims_in_code": 35,
+  "alphabet_size": 5,
+  "collision_rate_mean": 0.0,
+  "S_oracle_ceiling_mean": 0.8015,
+  "S_constant_mean": 0.7924,
+  "S_real_human_mean": 0.7185,
+  "VR_oracle_ridge_shrunk_mean": 0.3585,
+  "VR_oracle_faithful_mean": 0.9875,
+  "S_oracle_faithful_mean": 0.73,
+  "VR_published_model": 0.431,
+  "interpretation": "VR_oracle_faithful is the dispersion ceiling: a reader of the code that reproduces the conditional distribution rather than only its mean. The ridge figure is reported only to show how far a squared-error fit under-disperses, which is the same pathology the audited metric rewards."
+}

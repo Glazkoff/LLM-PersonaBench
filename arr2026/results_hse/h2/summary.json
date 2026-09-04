@@ -1,0 +1,37 @@
+{
+  "by_variant": {
+    "A_full_items": {
+      "c2st_model": 0.9828,
+      "c2st_human_ceiling": 0.5639,
+      "c2st_constant_floor": 0.9259
+    },
+    "B_style_only": {
+      "c2st_model": 0.9502,
+      "c2st_human_ceiling": 0.5661,
+      "c2st_constant_floor": 0.9938
+    },
+    "C_ipsatised": {
+      "c2st_model": 0.9745,
+      "c2st_human_ceiling": 0.5662,
+      "c2st_constant_floor": 0.9862
+    },
+    "D_facets_only": {
+      "c2st_model": 0.9866,
+      "c2st_human_ceiling": 0.5807,
+      "c2st_constant_floor": 0.9444
+    },
+    "E_forward_only": {
+      "c2st_model": 0.9903,
+      "c2st_human_ceiling": 0.5676,
+      "c2st_constant_floor": 0.81
+    },
+    "E_reverse_only": {
+      "c2st_model": 0.9838,
+      "c2st_human_ceiling": 0.5831,
+      "c2st_constant_floor": 0.8434
+    }
+  },
+  "style_recovers_fraction_of_full_AUC_above_chance": 0.932,
+  "verdict": "STYLE-DRIVEN: a handful of content-free scalars reproduce most of the separability; C2ST must be reported with this caveat.",
+  "n_cells": 20
+}

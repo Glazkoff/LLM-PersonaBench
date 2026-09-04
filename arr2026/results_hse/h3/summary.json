@@ -1,0 +1,12 @@
+{
+  "n_cells": 20,
+  "n_negatively_keyed_items": 55,
+  "S_model_asis": 0.6604,
+  "S_model_reoriented": 0.7386,
+  "S_constant": 0.7961,
+  "cells_model_beats_constant_asis": 0,
+  "cells_model_beats_constant_reoriented": 0,
+  "VR_invariant_as_predicted": true,
+  "corr_itemmeans_asis": 0.0923,
+  "corr_itemmeans_reoriented": 0.6329
+}
