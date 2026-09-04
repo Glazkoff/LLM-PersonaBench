@@ -121,6 +121,7 @@ def main():
 
         # ---- STAGE 1: belief distributions, one call per (persona, item) ----
         beliefs = np.full((len(sub), 120), np.nan)
+        probs_all = np.full((len(sub), 120, 5), np.nan)   # full belief simplex
         ents = np.full((len(sub), 120), np.nan)
         onscale = np.full((len(sub), 120), np.nan)
         samples = np.full((len(sub), 120), np.nan)
@@ -145,6 +146,7 @@ def main():
                     vals = np.arange(1, 6)
                     mu = float((p * vals).sum())
                     beliefs[pi, qi] = np.sqrt(float((p * (vals - mu) ** 2).sum()))
+                    probs_all[pi, qi, :] = p
                     ents[pi, qi] = d["entropy"]
                     onscale[pi, qi] = d["mass_on_scale"]
                     # readout simulator: sample from the belief itself
@@ -152,24 +154,37 @@ def main():
         print(f"  stage1 done: belief coverage {np.isfinite(beliefs).mean():.2%}", flush=True)
 
         ok = human_sd > 0
-        # belief-implied WITHIN-persona sd, averaged over personas, vs human sd
-        within_belief = np.nanmean(beliefs, axis=0)
-        # between-persona sd of the belief means is captured by the readout sim
+        vals_f = np.arange(1, 6, dtype=float)
+
+        # The quantity comparable to a human ACROSS-respondent SD is the SD of the
+        # persona-MIXTURE distribution, not the average within-persona SD.
+        # Var(X_j) = E_i[Var(X_j|i)] + Var_i(E[X_j|i]) -- exact from the retained
+        # probability vectors, no sampling noise.
+        mu_ij = np.nansum(probs_all * vals_f[None, None, :], axis=2)
+        ex2_ij = np.nansum(probs_all * (vals_f ** 2)[None, None, :], axis=2)
+        var_ij = np.clip(ex2_ij - mu_ij ** 2, 0, None)
+        within_var = np.nanmean(var_ij, axis=0)
+        between_var = np.nanvar(mu_ij, axis=0)
+        mixture_sd = np.sqrt(within_var + between_var)
+        within_belief = np.nanmean(beliefs, axis=0)   # old, NOT comparable
         readout_sd = np.nanstd(samples, axis=0)
 
         rows.append({
             "cluster": cl, "model": args.model,
             "human_sd_mean": float(np.nanmean(human_sd[ok])),
-            "belief_within_sd_mean": float(np.nanmean(within_belief[ok])),
-            "VR_belief_within": float(np.nanmean(within_belief[ok] / human_sd[ok])),
-            "readout_sd_mean": float(np.nanmean(readout_sd[ok])),
+            "VR_belief_mixture": float(np.nanmean(mixture_sd[ok] / human_sd[ok])),
+            "share_within": float(np.nansum(within_var[ok])
+                                  / max(np.nansum(within_var[ok] + between_var[ok]), 1e-12)),
+            "share_between": float(np.nansum(between_var[ok])
+                                   / max(np.nansum(within_var[ok] + between_var[ok]), 1e-12)),
+            "VR_within_only_NOT_COMPARABLE": float(np.nanmean(within_belief[ok] / human_sd[ok])),
             "VR_readout": float(np.nanmean(readout_sd[ok] / human_sd[ok])),
             "belief_entropy_mean": float(np.nanmean(ents)),
             "mass_on_scale_mean": float(np.nanmean(onscale)),
         })
-        print(f"  VR_belief_within={rows[-1]['VR_belief_within']:.3f} "
-              f"VR_readout={rows[-1]['VR_readout']:.3f} "
-              f"(human=1.0)", flush=True)
+        print(f"  VR_mixture={rows[-1]['VR_belief_mixture']:.3f} "
+              f"(within {rows[-1]['share_within']:.0%} / between {rows[-1]['share_between']:.0%}) "
+              f"VR_readout={rows[-1]['VR_readout']:.3f}", flush=True)
 
         # persist the readout simulator's answers in the repo's CSV schema
         rd = pd.DataFrame(samples, columns=ITEMS)
@@ -180,26 +195,30 @@ def main():
         pd.DataFrame({"case": sub["case"].to_numpy()}).to_csv(d / "test_case_ids.csv", index=False)
         pd.DataFrame({"case": sub["case"].to_numpy()}).to_csv(d / "train_case_ids.csv", index=False)
         np.save(d / "belief_sd.npy", beliefs)
+        np.save(d / "belief_probs.npy", probs_all)
 
     t = pd.DataFrame(rows)
     t.to_csv(out / "variance_ladder.csv", index=False)
     summary = {
         "model": args.model,
-        "VR_belief_within_mean": round(float(t.VR_belief_within.mean()), 4),
+        "VR_belief_mixture_mean": round(float(t.VR_belief_mixture.mean()), 4),
+        "share_within_mean": round(float(t.share_within.mean()), 4),
+        "share_between_mean": round(float(t.share_between.mean()), 4),
+        "VR_within_only_NOT_COMPARABLE_mean": round(
+            float(t.VR_within_only_NOT_COMPARABLE.mean()), 4),
         "VR_readout_mean": round(float(t.VR_readout.mean()), 4),
-        "VR_published_greedy": 0.431,
         "belief_entropy_mean": round(float(t.belief_entropy_mean.mean()), 4),
+        "max_entropy_ln5": 1.6094,
         "mass_on_scale_mean": round(float(t.mass_on_scale_mean.mean()), 4),
         "verdict": None,
     }
-    v = summary["VR_belief_within_mean"]
+    v = summary["VR_belief_mixture_mean"]
     summary["verdict"] = (
-        "DECODING LOSS: the model's own belief distribution carries near-human spread; "
-        "greedy decoding discards it. A belief-sampling readout fixes it for free."
-        if v >= 0.8 else
-        "REPRESENTATIONAL LOSS: the belief distribution is itself collapsed; no "
-        "sampling-side fix can recover human dispersion." if v <= 0.55 else
-        "PARTIAL: belief carries some but not all of the missing spread.")
+        "DECODING LOSS: the persona-mixture belief carries near-human spread; "
+        "decoding discards it." if v >= 0.8 else
+        "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed."
+        if v <= 0.55 else
+        "PARTIAL: the belief carries some but not all of the missing spread.")
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print("\n=== H4 SUMMARY ===")
     print(json.dumps(summary, indent=2))
