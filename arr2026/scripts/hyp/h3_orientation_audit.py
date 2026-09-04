@@ -37,6 +37,9 @@ OUT = ROOT / "arr2026/results/h3"
 
 
 def neg_mask():
+    csvp = ROOT / "data/IPIP-NEO/120/item_key.csv"
+    if csvp.exists():
+        return pd.read_csv(csvp).sort_values("item")["reverse"].to_numpy(bool)
     k = pd.read_excel(ROOT / "data/PAlign/IPIP-NEO-ItemKey.xls")
     k = k[k["Short#"].notna()].copy()
     k["Short#"] = k["Short#"].astype(int)

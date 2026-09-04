@@ -41,7 +41,13 @@ SEED, N_REF, N_REP = 2026, 40, 10
 
 def load_keys():
     """Return (reverse_mask over 120 items, facet_id per item) from the IPIP key."""
+    csvp = ROOT / "data/IPIP-NEO/120/item_key.csv"
     try:
+        if csvp.exists():
+            k = pd.read_csv(csvp).sort_values("item")
+            rev = k["reverse"].to_numpy(bool)
+            facet = k["facet_key"].astype(str).to_numpy(dtype=object)
+            return rev, facet
         k = pd.read_excel(ROOT / "data/PAlign/IPIP-NEO-ItemKey.xls")
         k = k[k["Short#"].notna()].copy()
         k["Short#"] = k["Short#"].astype(int)
