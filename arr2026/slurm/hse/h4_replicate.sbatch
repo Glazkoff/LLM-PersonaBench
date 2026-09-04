@@ -3,8 +3,8 @@
 #SBATCH --partition=rocky
 #SBATCH --account=proj_1759
 #SBATCH --qos=normal
+# NOTE: no --mem on cHARISMa; memory is not a schedulable TRES here.
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=200G
 #SBATCH --time=20:00:00
 #SBATCH --constraint="type_a|type_b|type_c"
 #SBATCH --output=/home/lsavchenko/personality-arr/logs/h4hse_%A_%a.out
