@@ -1,0 +1,17 @@
+{
+  "skill": "auto-review-loop",
+  "run_id": "2026-09-04_run01",
+  "started_at": "2026-09-04T13:14:08Z",
+  "executor": "claude-code",
+  "executor_model": "claude-opus-5",
+  "executor_model_source": "caller-declared",
+  "executor_family": "anthropic",
+  "reviewer_model_source": "requested",
+  "reviewer_family": "openai",
+  "reviewer_backend": "codex",
+  "native_evidence_id": null,
+  "native_evidence_path": null,
+  "family_relation": "different",
+  "independence_verified": "unverified",
+  "project_dir": "/Users/glazkov/Development/personality-twins-arr/LLM-PersonaBench"
+}

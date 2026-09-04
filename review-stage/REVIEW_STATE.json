@@ -1,0 +1,22 @@
+{
+  "run_id": "run_20260904_fba73a92",
+  "round": 1,
+  "threadId": null,
+  "reviewer_backend": "unavailable",
+  "executor_model": "claude-opus-5",
+  "executor_model_source": "host-declared",
+  "executor_family": "anthropic",
+  "requested_reviewer_model": "gpt-5.6-sol",
+  "reported_reviewer_model": null,
+  "reviewer_family": null,
+  "family_relation": null,
+  "identity_assurance": "none",
+  "independence_verified": false,
+  "requires_external_acquittal": false,
+  "status": "review_unavailable",
+  "difficulty": "medium",
+  "last_score": null,
+  "last_verdict": null,
+  "pending_experiments": ["hse:4303494_2 qwen25_32b", "hse:4303495_5 qwq_32b", "hse:4303497_3 qwen25_72b", "hse:4303576_4 mistral_24b"],
+  "timestamp": "2026-09-04T13:13:32Z"
+}
