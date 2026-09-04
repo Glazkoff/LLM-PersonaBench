@@ -27,9 +27,19 @@ case $SLURM_ARRAY_TASK_ID in
   5) MODEL="Qwen/QwQ-32B-Preview";                      TAG=qwq_32b;     BS=8  ;;
 esac
 
-echo "=== $MODEL on $(hostname) ==="
+# Mistral-Small-2501 ships only a fast tokenizer in a format the module's
+# tokenizers (bundled with transformers 4.44) cannot parse -- it dies with
+# "data did not match any variant of untagged enum ModelWrapper". hfenv layers
+# transformers 4.49 / tokenizers 0.21 over the module's torch for that case.
+PYBIN=python3
+if [ -n "${USE_HFENV:-}" ] && [ -x /home/lsavchenko/personality-arr/hfenv/bin/python ]; then
+  PYBIN=/home/lsavchenko/personality-arr/hfenv/bin/python
+fi
+
+echo "=== $MODEL on $(hostname) (python: $PYBIN) ==="
 nvidia-smi --query-gpu=index,name,memory.total --format=csv,noheader
-python3 arr2026/scripts/hyp/h4_variance_ladder_hf.py \
+$PYBIN -c "import transformers,tokenizers;print('transformers',transformers.__version__,'tokenizers',tokenizers.__version__)"
+$PYBIN arr2026/scripts/hyp/h4_variance_ladder_hf.py \
   --model "$MODEL" --clusters 0 1 2 3 --n-personas 40 \
   --batch-size "$BS" --out "arr2026/results/h4_$TAG"
 echo "H4-HF DONE rc=$?"
