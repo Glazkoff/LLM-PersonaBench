@@ -4,7 +4,7 @@
 #SBATCH --account=proj_1759
 #SBATCH --qos=normal
 # NOTE: no --mem on cHARISMa; memory is not a schedulable TRES here.
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=4
 #SBATCH --time=20:00:00
 #SBATCH --output=/home/lsavchenko/personality-arr/logs/h4hf_%A_%a.out
 #SBATCH --error=/home/lsavchenko/personality-arr/logs/h4hf_%A_%a.err
