@@ -86,13 +86,21 @@ def main():
         beta, *_ = np.linalg.lstsq(X, y, rcond=None)
         return float(beta[0])
 
-    ns = np.array(g.index, float)
+    # Below n~40 the classifier cannot fit at all: it returns 0.5 for the CONSTANT
+    # too, which is degenerate rather than informative. Including those points
+    # flattens the fit and inflates the extrapolated ceiling, so restrict the fit
+    # to the regime where the floor is actually separable.
+    usable = g[g.c2st_constant > 0.6]
+    ns = np.array(usable.index, float)
+    g_fit = usable
     summary = {
         "by_n": g.round(4).to_dict("index"),
         "c2st_human_ceiling_at_n40": round(float(g.loc[40, "c2st_human"]), 4),
-        "c2st_human_ceiling_extrapolated": round(extrapolate(g.c2st_human.to_numpy(), ns), 4),
+        "c2st_human_ceiling_extrapolated": round(extrapolate(g_fit.c2st_human.to_numpy(), ns), 4),
         "DF_human_ceiling_at_n40": round(float(g.loc[40, "DF_human"]), 4),
-        "DF_human_ceiling_extrapolated": round(extrapolate(g.DF_human.to_numpy(), ns), 4),
+        "DF_human_ceiling_extrapolated": round(extrapolate(g_fit.DF_human.to_numpy(), ns), 4),
+        "n_used_for_fit": [int(x) for x in ns],
+        "degenerate_n_excluded": [int(x) for x in g.index if x not in set(ns)],
         "interpretation": (
             "If the extrapolated C2ST human ceiling approaches 0.5, the 0.564 reported at "
             "n=40 is finite-sample bias and the anchor should be quoted bias-corrected."),
