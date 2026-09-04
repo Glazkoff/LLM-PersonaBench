@@ -1,0 +1,769 @@
+\documentclass[11pt]{article}
+\usepackage[]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}
+
+\title{A Constant Vector Beats Your Digital Twin:\\
+On the Evaluation of Cluster-Level LLM Personality Simulation}
+
+\author{Anonymous ARR submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Large language models are increasingly prompted to act as ``digital twins'' of
+human personality groups, and such systems are routinely evaluated by how closely
+the model's questionnaire answers match those of real respondents. We show that
+this evaluation is broken. For the answer-similarity metric used throughout this
+literature, we prove that a simulator which reproduces the target population's
+response distribution \emph{exactly} is strictly dominated by a constant vector,
+and that the gap is governed by the difference between the Gini mean difference
+and the mean absolute deviation about the median. On $410{,}168$ IPIP-NEO-120
+respondents this structural penalty is $7.75$ points. Empirically, across five
+LLMs and four personality clusters, a per-item cluster mean scores $0.796$ while
+the best evolutionary-optimised persona reaches $0.739$, losing in $20$ of $20$
+cells; a \emph{real human drawn from the target cluster} scores $0.721$ and also
+loses to the constant in $20$ of $20$ cells. We further find that the released
+benchmark scores raw model self-reports against reverse-recoded human answers on
+$55$ of $120$ items; we correct this and report every result under both
+orientations. A metric that ranks a constant above
+a genuine group member cannot be measuring personality simulation. We propose a
+replacement suite --- a classifier two-sample test, per-item distributional
+fidelity, and a variance ratio --- each reported against an explicit human ceiling
+and constant floor, and show it inverts the ranking correctly. Under it, current
+personas are near-perfectly separable from humans (C2ST-AUC $0.983$ vs.\ a human
+ceiling of $0.564$) and produce $43\%$ of human response variance. We release code
+and per-cell results.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Simulating human respondents with large language models has become a common
+instrument in computational social science and in LLM-based user
+research. A widely used recipe conditions a model on a natural-language
+personality description and validates it by administering a psychometric
+inventory: the model answers the same Likert items a human answered, and the
+system is scored by the agreement between the two answer vectors.
+
+This paper argues that the scoring step invalidates the conclusion. Our starting
+point is a concrete artefact. In a cluster-level digital-twin system built on
+IPIP-NEO-120 \citep{johnson2014ipip}, evolutionary prompt optimisation raises
+answer-level agreement while simultaneously \emph{degrading} the recovered Big
+Five profile --- mean absolute error, trait similarity and facet similarity all
+move the wrong way. That pattern is usually reported as an open puzzle. We show
+it is a predictable consequence of the metric.
+
+Our contributions are:
+
+\begin{enumerate}\itemsep2pt
+\item \textbf{A proposition} (\S\ref{sec:theory}): under answer-similarity, a
+simulator that faithfully samples the target population's response distribution
+is \emph{dominated} by the best constant predictor --- strictly so on every
+IPIP-NEO item we measure. The penalty is the excess of the Gini mean difference
+over the mean absolute deviation about the median, divided by the scale range.
+\item \textbf{An empirical audit} (\S\ref{sec:audit}): across five LLMs $\times$
+four clusters, on the original system's own train/test splits, trivial constant
+baselines beat every model in every cell, and so does the global mean, which
+ignores the personality clusters entirely.
+\item \textbf{A diagnosis of the human ceiling} (\S\ref{sec:ceiling}): a real
+respondent from the target cluster --- the ideal a cluster-level twin can aspire
+to --- also loses to the constant in every cell.
+\item \textbf{A replacement suite} (\S\ref{sec:suite}): C2ST-AUC, distributional
+fidelity and variance ratio, each anchored by a human ceiling and a constant
+floor. It ranks humans above constants, as any valid measure must.
+\item \textbf{A cluster-validity audit} (\S\ref{sec:clusters}): the $k{=}4$
+partition these systems condition on is not supported by any internal criterion.
+\end{enumerate}
+
+\section{Setting}
+\label{sec:setting}
+
+\paragraph{Task.} A population of respondents is partitioned into $K$ personality
+clusters by $k$-means over the 30 IPIP-NEO facet scores. For each cluster a
+natural-language description of the centroid is used to condition an LLM, which
+then answers the 120 IPIP-NEO items on a 1--5 Likert scale. Prompt wording is
+optimised by an evolutionary search whose fitness is answer agreement with
+held-out human members of the cluster.
+
+\paragraph{The metric.} A simulated answer vector $x$ is scored against a human
+answer vector $y$ by
+\begin{equation}
+S(x,y) \;=\; \frac{1}{J}\sum_{j=1}^{J}\Big(1 - \tfrac{|x_j - y_j|}{4}\Big),
+\label{eq:metric}
+\end{equation}
+with $J{=}120$ and the divisor $4$ the scale range. Cell scores average
+$S$ over the held-out respondents. Equation~\eqref{eq:metric}, or a monotone
+transform of it, is the objective the search optimises and the number reported.
+
+\section{A constant is optimal under $S$}
+\label{sec:theory}
+
+Fix a cluster and an item $j$, and let $P_j$ be the cluster's response
+distribution over $\{1,\dots,5\}$. Write $Y\sim P_j$ for a randomly drawn human
+respondent.
+
+\begin{proposition}
+\label{prop:main}
+Let $m_j$ be a median of $P_j$, let
+$\mathrm{MAD}_j = \mathbb{E}_Y|m_j - Y|$ and let
+$\mathrm{GMD}_j = \mathbb{E}_{X,Y}|X-Y|$ for $X \sim P_j$ independent of $Y$
+(the Gini mean difference). Then
+\begin{enumerate}\itemsep0pt
+\item[(a)] the best constant predictor attains expected score
+$1 - \mathrm{MAD}_j/4$;
+\item[(b)] a \emph{faithful} simulator, i.e.\ one whose output is distributed as
+$P_j$, attains expected score $1 - \mathrm{GMD}_j/4$;
+\item[(c)] $\mathrm{GMD}_j \ge \mathrm{MAD}_j$, with equality iff $X$ lies
+almost surely in the median set of $P_j$.
+\end{enumerate}
+Hence the constant is at least as good as the faithful simulator, and strictly
+better unless $P_j$ places all its mass on medians.
+\end{proposition}
+
+\begin{proof}
+(a) and (b) are immediate from \eqref{eq:metric}. For (c),
+\begin{align*}
+\mathrm{GMD}_j &= \mathbb{E}_X\big[\mathbb{E}_Y|X-Y|\big]\\
+&\ge \mathbb{E}_X\big[\textstyle\min_{c}\mathbb{E}_Y|c-Y|\big]\\
+&= \mathbb{E}_Y|m_j-Y| \;=\; \mathrm{MAD}_j,
+\end{align*}
+since the median minimises expected absolute deviation. Equality requires $X$
+to attain that minimum almost surely, i.e.\ to lie in the median set of $P_j$.
+This is weaker than degeneracy: a balanced two-point law
+$P(Y{=}1)=P(Y{=}5)=\tfrac12$ has $\mathrm{GMD}=\mathrm{MAD}=2$, so the bound is
+tight there despite large variance. On the IPIP items it is strict throughout
+(Table~\ref{tab:proposition}).
+\end{proof}
+
+The consequence is not a technicality. Under $S$, the ideal behaviour we actually
+want --- reproducing the population's response distribution --- is penalised
+relative to emitting one fixed vector. Optimising $S$ therefore pushes a
+simulator toward degenerate central-tendency responding, destroying exactly the
+answer variance that carries a personality profile. This is the mechanism behind
+the ``answer similarity up, profile fidelity down'' pattern reported as a puzzle
+in prior work.
+
+\subsection{The metric is CRPS with its dispersion term deleted}
+\label{sec:crps}
+
+Proposition~\ref{prop:main} is not an accident of Likert data. The continuous
+ranked probability score for a predictive distribution $F$ and outcome $y$ is
+\[
+\mathrm{CRPS}(F,y)=\mathbb{E}_F|X-y|-\tfrac{1}{2}\,\mathbb{E}_F|X-X'| ,
+\]
+and it is \emph{strictly proper}: uniquely optimised by $F=P$. Equation
+\eqref{eq:metric} is its first term alone. Deleting the second is exactly what
+makes a constant optimal.
+
+This yields the natural repair. Define
+\begin{equation}
+S_\lambda \;=\; 1-\big[\,\mathbb{E}|X-y|-\lambda\,\mathbb{E}|X-X'|\,\big]/4 .
+\label{eq:slambda}
+\end{equation}
+$\lambda{=}0$ is the audited metric --- improper, constant-optimal. $\lambda{=}1/2$
+is CRPS --- strictly proper, truth-optimal. $\lambda{>}1/2$ is improper in the
+opposite direction. Crucially $\lambda{=}1/2$ is \textbf{not} a tunable
+hyperparameter but the unique proper choice, so the repair cannot be dismissed as
+a metric tuned to produce a preferred conclusion.
+
+Sweeping $\lambda$ over the same 20 cells (Table~\ref{tab:lambda}) shows the
+repair works and what it costs the simulator. At $\lambda{=}1/2$ the human
+ceiling ($0.859$) rises decisively above the constant floor ($0.796$): the
+ordering that \S\ref{sec:ceiling} shows is inverted under the audited metric is
+\emph{correct} under the proper one. Humans overtake the constant at
+$\lambda^\star{=}0.30$, comfortably below the proper coefficient. The model needs
+$\lambda^\star{=}0.75$ --- a rule that over-rewards dispersion --- and in $17$ of
+$20$ cells never overtakes the constant at any $\lambda$. So the simulator's
+failure is not an artefact of a bad metric: it survives the correct one.
+
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+$\lambda$ & Model & Constant & Human\\
+\midrule
+$0$ \;(audited) & 0.660 & \textbf{0.796} & 0.721\\
+$0.25$ & 0.678 & \textbf{0.796} & 0.775\\
+$0.5$ \;(CRPS, proper) & 0.697 & 0.796 & \textbf{0.859}\\
+$0.75$ & 0.720 & 0.796 & \textbf{0.929}\\
+$1.0$ & 0.744 & 0.796 & \textbf{0.998}\\
+\bottomrule
+\end{tabular}
+\caption{The $S_\lambda$ family of \eqref{eq:slambda}, averaged over 20 cells.
+The audited metric sits at $\lambda{=}0$, where a constant wins. At the unique
+proper coefficient $\lambda{=}1/2$ a real cluster member wins, as it must. The
+simulator loses under both.}
+\label{tab:lambda}
+\end{table}
+
+Table~\ref{tab:proposition} evaluates the bound on the real data: the structural
+penalty against a faithful simulator averages \textbf{7.75 points}, and
+$\mathrm{GMD}_j \ge \mathrm{MAD}_j$ holds on $120/120$ items in all four clusters.
+
+\begin{table}[t]\centering\footnotesize
+\input{table_proposition}
+\caption{Proposition~\ref{prop:main} on $410{,}168$ IPIP-NEO-120 respondents.
+$S$(const) is the best constant predictor; $S$(faithful) is a simulator that
+reproduces the cluster response distribution exactly. The faithful simulator is
+worse in every cluster.}
+\label{tab:proposition}
+\end{table}
+
+\section{Empirical audit}
+\label{sec:audit}
+
+\paragraph{Setup.} We re-score a published cluster-level digital-twin system on
+its own artefacts: the same $410{,}168$-respondent IPIP-NEO-120 corpus, the same
+$k{=}4$ clusters, and the exact train/test respondent IDs it recorded, for five
+LLMs (GigaChat3-10B, GPT-4.1-mini, GPT-4.1-nano, Grok-4.1-fast, Qwen3-235B)
+$\times$ four clusters. We add no LLM calls: model answers are read from the
+released run artefacts. Baselines are fitted on the recorded train IDs and scored
+on the recorded test IDs.
+
+\paragraph{Baselines.} \textit{Cluster mean}: the per-item rounded mean of the
+cluster's training respondents, one constant vector. \textit{Cluster majority}:
+the per-item mode. \textit{Global mean}: the per-item grand mean over all
+respondents, ignoring clusters. \textit{Empirical sample}: sample each item
+independently from the cluster's training response distribution. \textit{Real
+human}: copy the answer vector of a randomly chosen training respondent from the
+same cluster.
+
+\paragraph{Result.} Table~\ref{tab:headtohead} reports $S$. The evolutionary
+persona averages $0.660$ as released and $0.739$ after the orientation
+correction of \S\ref{sec:orientation}; the constant cluster mean averages
+$0.796$. The LLM loses in $20$ of $20$ cells under either orientation, by $13.6$
+and $5.8$ points respectively. The best single cell in
+the entire system ($0.737$) is below the \emph{worst} cluster-mean baseline
+($0.779$). The global mean --- which never looks at the cluster --- scores
+$0.720$ and also beats every model cell.
+
+\begin{table*}[t]\centering\small
+\input{table_headtohead}
+\caption{Answer similarity $S$ on the original system's own test IDs. The
+constant cluster mean (bold) beats every LLM in every cell. A real human from the
+same cluster scores below the constant.}
+\label{tab:headtohead}
+\end{table*}
+
+\paragraph{The effect is below the protocol's noise floor.} Re-drawing which 100
+respondents are sampled, holding the 60/40 split ratio fixed, moves the
+\emph{parameter-free} cluster-mean baseline by $1.3$--$2.5$ points across 20
+random draws. The improvement claimed for evolutionary optimisation in prior work
+is $+0.72$ points. With 40 test respondents per cell and a single fixed split,
+the reported effect is not separable from which rows landed in the test set.
+
+\section{What is a persona worth, in respondents?}
+\label{sec:equivalents}
+
+``It loses to a constant'' invites the reply that the constant is a strawman. So
+we restate the finding in a unit that is harder to dismiss: how many real
+respondents you would have to sample before a plug-in estimate of the cluster's
+response distribution matches what the persona gives you.
+
+Drawing $m$ real respondents, forming the per-item empirical distribution, and
+sampling a synthetic population from it yields distributional fidelity $0.723$ at
+$m{=}1$, $0.802$ at $m{=}2$, $0.933$ at $m{=}21$ and $0.945$ at $m{=}34$.
+Reading the audited systems off that curve:
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+System & DF & Resp.-equiv.\\
+\midrule
+Evolutionary LLM persona & 0.703 & \textbf{1}\\
+Constant cluster mean & 0.796 & 2\\
+Human ceiling & 0.939 & 34\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+An evolutionary-optimised persona is worth about \textbf{one} real respondent:
+sampling a single human from the cluster gives a better estimate of that
+cluster's response distribution than the simulator does. This is the same result
+as \S\ref{sec:audit} in different units, and it is the version we would put to a
+practitioner weighing synthetic respondents against a small pilot survey.
+
+\section{Does conditioning on the right cluster matter?}
+\label{sec:permutation}
+
+No persona study we know of reports the wrong-persona control, so no reported
+persona effect is currently attributable to the persona. We score every simulator
+against every cluster's humans --- 80 cells --- and test diagonal dominance by
+permutation.
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lcccc}
+\toprule
+Metric & Matched & Mismatched & $\Delta$ & $p$\\
+\midrule
+$S$ & 0.652 & 0.631 & $+0.021$ & 0.032\\
+DF & 0.698 & 0.672 & $+0.026$ & 0.026\\
+C2ST & 0.982 & 0.981 & $-0.001$ & 0.51\\
+VR & 0.431 & 0.436 & $-0.005$ & 0.55\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Conditioning on the correct cluster helps, slightly, on the two location-sensitive
+measures. It does nothing at all for distinguishability or dispersion: a persona
+scored against the \emph{wrong} cluster's humans is as hard to tell from them as
+one scored against the right cluster's. This is the behavioural counterpart of
+\S\ref{sec:suite} --- the persona moves which items get endorsed, and not who is
+endorsing them --- and it makes the wrong-persona control as necessary a baseline
+as the constant floor.
+
+\section{An orientation defect, and what survives it}
+\label{sec:orientation}
+
+Before comparing anything, the two sides must be on the same scale. They are not.
+
+The released corpus stores human answers \emph{reverse-recoded} so that a higher
+number always means more of the trait, while the simulator is shown the literal
+item text --- ``Cheat to get ahead'' --- and asked how accurately it describes
+it, i.e.\ it answers \emph{raw}. On the $55$ negatively-keyed items of the
+IPIP-NEO-120 the two scales run in opposite directions, and every published
+model-vs-human comparison is computed across that flip.
+
+Two signatures make this unambiguous. Negatively-keyed items average $3.373$
+against $3.425$ for positively-keyed ones --- level, whereas raw self-reports on
+undesirable content sit far lower. And ``Cheat to get ahead'' carries a human
+mean of $4.15$ out of $5$.
+
+The effect is large and it runs \emph{against} the simulator. Correcting the
+orientation raises the correlation between the model's and the humans' per-item
+mean profiles from $+0.09$ --- indistinguishable from no relationship at all ---
+to $+0.63$, and raises $S$ from $0.660$ to $0.739$.
+
+What matters is which conclusions survive. Three do, and the invariances are
+stated before the numbers rather than after:
+
+\begin{itemize}\itemsep1pt
+\item \textbf{Proposition~\ref{prop:main} is invariant.} $\mathrm{MAD}$ and
+$\mathrm{GMD}$ are computed on the human distribution alone, and both are
+reflection-invariant.
+\item \textbf{The variance ratio is exactly invariant}, since
+$\mathrm{sd}(6-x)=\mathrm{sd}(x)$. The under-dispersion finding of
+\S\ref{sec:suite} is untouched.
+\item \textbf{The constant still wins every cell.} Reorientation closes the gap
+from $13.6$ to $5.8$ points, but the constant cluster mean beats the corrected
+model in $20$ of $20$ cells.
+\end{itemize}
+
+Correcting the defect in fact \emph{sharpens} the paper's claim. The corrected
+model scores $0.739$, \emph{above} the $0.721$ of a real member of the target
+cluster --- while a classifier separates that same model from real members at AUC
+$0.983$ (\S\ref{sec:suite}). A metric that ranks a near-perfectly detectable
+simulator above the humans it fails to imitate is not measuring human-likeness
+under any reading.
+
+We recommend an orientation check as a standing first step for benchmarks of this
+kind: correlate the simulator's per-item mean profile against the population's,
+and treat a near-zero correlation as a scale defect until shown otherwise.
+
+\section{The human ceiling sits below the constant floor}
+\label{sec:ceiling}
+
+The decisive check is what a \emph{real} member of the target cluster scores. A
+cluster-level digital twin cannot do better than being an actual member of the
+cluster; that is the definition of success.
+
+A randomly drawn same-cluster respondent scores $0.721$ --- and is beaten by the
+constant cluster mean in $20$ of $20$ cells (Table~\ref{tab:headtohead},
+Figure~\ref{fig:inversion}, left). This is exactly Proposition~\ref{prop:main}
+realised: a real human \emph{is} a draw from $P_j$, so their expected score is
+$1-\mathrm{GMD}/4$, which the constant's $1-\mathrm{MAD}/4$ must exceed. The
+predicted values ($0.7996$ constant, $0.7221$ faithful) match the measured ones
+($0.796$, $0.721$) to within $0.4$ points.
+
+A measure that ranks a fixed vector above a genuine group member is not measuring
+group membership. Any ranking it induces over simulators --- including the
+ranking prior work uses to select prompts --- is therefore uninterpretable as
+evidence about personality fidelity.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figures/inversion.pdf}
+\caption{Left: under the old metric the constant outscores a real human. Right:
+under the proposed C2ST-AUC the human sits near chance ($0.5$, ideal) and the
+constant is near-perfectly separable. Only the right panel orders the three
+correctly.}
+\label{fig:inversion}
+\end{figure}
+
+\section{A replacement suite}
+\label{sec:suite}
+
+A usable metric must (i) be maximised by distributional fidelity rather than
+central tendency, and (ii) be reported against an explicit \emph{human ceiling}
+and \emph{constant floor}, so a number can be read as progress toward a real
+target rather than in the abstract. We propose three, computed from a set of
+simulated respondents rather than from paired individuals.
+
+\paragraph{C2ST-AUC (primary).} A classifier two-sample test: train a classifier
+to separate $n$ simulated answer vectors from $n$ held-out human vectors of the
+same cluster, and report cross-validated AUC. $0.5$ means indistinguishable ---
+the ideal twin. A constant is trivially separable. This directly operationalises
+the twin claim, and unlike $S$ it cannot be gamed by collapsing onto the mean.
+
+\paragraph{Distributional fidelity.} $1 - \frac{1}{J}\sum_j
+W_1(\hat P_j^{\text{model}}, \hat P_j^{\text{human}})/4$, with $W_1$ the per-item
+Wasserstein-1 distance. Rewards matching the full response distribution.
+
+\paragraph{Variance ratio.} $\frac{1}{J}\sum_j \mathrm{sd}(\text{model}_j) /
+\mathrm{sd}(\text{human}_j)$; $1.0$ is ideal, a constant gives $0$. A diagnostic,
+not an optimisation target.
+
+\paragraph{Results.} Table~\ref{tab:suite} applies the suite to the same 20
+cells. All three order human $>$ constant, as required; the old metric does the
+reverse. Two substantive findings follow. First, current personas are
+\emph{near-perfectly separable} from real humans (C2ST-AUC $0.983$ against a human
+ceiling of $0.564$) --- and are in fact \emph{more} distinguishable than a
+constant vector ($0.926$), because they miss both the location and the spread of
+the human distribution. Second, they are systematically under-dispersed: VR
+$=0.43$, i.e.\ LLM personas produce fewer than half the response variance of the
+humans they simulate (Figure~\ref{fig:variance}). Evolutionary optimisation moves
+none of these appreciably.
+
+\paragraph{Under-dispersion is the wrong summary.} A single variance ratio hides
+which variance is missing. Decomposing each answer matrix as
+$Y_{pj}=\mu+a_p+b_j+(ab)_{pj}+e$ --- respondent main effect, item main effect,
+and the person-by-item interaction that carries individuation --- tells a sharper
+story. The simulator emits essentially the \emph{right total} variance (ratio
+$1.005$ over the 20 cells), but places it in the wrong component: the item main
+effect takes $81.7\%$ of its variance against $29.8\%$ for humans, while the
+interaction takes $16.5\%$ against $67.0\%$. The interaction variance ratio is
+$0.458$, and it is $0$ for a constant by construction.
+
+So the simulator is not emitting too little. It is emitting a confident
+cluster-level \emph{answer key} --- which items are endorsable --- and almost
+none of which \emph{person} endorses which item. We recommend reporting the
+interaction ratio rather than the plain variance ratio, since the two rank
+systems differently and only the former measures the quantity a personality
+simulator exists to reproduce.
+
+\begin{table}[t]\centering\footnotesize
+\input{table_metricsuite}
+\caption{The suite over 20 cluster $\times$ model cells, each metric against its
+human ceiling and constant floor. $\dagger$: under the old metric the constant
+floor \emph{exceeds} the human ceiling --- the failure this paper documents.}
+\label{tab:suite}
+\end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.85\linewidth]{figures/variance.pdf}
+\caption{Response variance relative to the humans being simulated. Every model is
+substantially under-dispersed.}
+\label{fig:variance}
+\end{figure}
+
+\subsection{What is C2ST actually reading?}
+\label{sec:c2st-audit}
+
+A metric that separates simulators from humans at AUC $0.983$ invites an obvious
+objection: perhaps the classifier is detecting formatting rather than anything
+about personality. We test our own metric against it with a feature ladder, each
+rung scored identically and against the same anchors.
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Features & LLM & Human & Const.\\
+\midrule
+Full 120 items & 0.983 & 0.564 & 0.926\\
+5 style scalars only & 0.950 & 0.566 & 0.994\\
+Items, ipsatised & 0.975 & 0.566 & 0.986\\
+30 facet scores only & 0.987 & 0.581 & 0.944\\
+Forward-keyed only & 0.990 & 0.568 & 0.810\\
+Reverse-keyed only & 0.984 & 0.583 & 0.843\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Five content-free scalars --- per-respondent mean and standard deviation, extreme
+-response rate, longest identical run, and forward-versus-reverse consistency ---
+recover $93\%$ of the full separability above chance. So the objection has real
+force, and we state it plainly: \textbf{most of what C2ST detects is response
+style.}
+
+It is not only style. Ipsatising each respondent (removing their own mean and
+standard deviation, i.e.\ the two largest style features) still leaves AUC
+$0.975$, and facet scores alone give $0.987$. Style and content are redundant
+routes to the same conclusion rather than one masking the other. The human
+ceiling is also stable at $0.56$--$0.58$ across every rung, so the anchor does
+not move with the feature set.
+
+We therefore recommend reporting C2ST with its style-only rung alongside it, so
+readers can see how much of any separability is carried by response style. A
+simulator that closed only the style gap would look far better on the headline
+number while remaining just as distinguishable on content.
+
+\subsection{How much of the anchors is finite-sample bias?}
+\label{sec:samplesize}
+
+Both anchors are estimated from $n{=}40$ per side, which for a classifier over
+120 features is a small-sample regime. We sweep $n$ on human-only data, where the
+true answers are known: two disjoint samples from the same cluster must be
+indistinguishable, so the honest C2ST value is exactly $0.5$ and any excess is
+estimator bias.
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccccc}
+\toprule
+$n$ & 20 & 40 & 80 & 160 & 320 & 640\\
+\midrule
+C2ST human & --- & 0.574 & 0.542 & 0.536 & 0.527 & 0.517\\
+DF human & 0.915 & 0.939 & 0.957 & 0.969 & 0.978 & 0.985\\
+C2ST const. & --- & 0.914 & 1.000 & 1.000 & 1.000 & 1.000\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two corrections follow, in opposite directions, and both land on their
+theoretical values. Fitting $y = y_\infty + c\,n^{-1/2}$ over the non-degenerate
+range gives an extrapolated C2ST human ceiling of $\mathbf{0.500}$ and an
+extrapolated DF human ceiling of $\mathbf{1.000}$ --- exactly what two samples
+from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40$
+is \emph{entirely} finite-sample classifier bias and should be read with its $n$
+attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
+bias and is pessimistic. Correcting the latter widens the gap to the simulator's
+$0.703$ rather than narrowing it.
+
+Below $n\approx40$ the suite is unusable: the classifier fails to separate even
+the constant from real humans (the dashed entries above are the degenerate
+$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
+$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
+it was measured at.
+
+\section{Is the prompt encoding the constraint?}
+\label{sec:encoding}
+
+A natural defence of the simulator is that the persona prompt simply cannot carry
+enough information. In this pipeline an individual reaches the model as a
+quantised code: each of $5$ traits and $30$ facets contributes one adverb drawn
+from a five-level scale, attached to text that is otherwise constant within a
+cluster. The whole individual is $35$ symbols over a five-letter alphabet.
+
+We test the defence by asking what an \emph{oracle} reader of that code could do.
+Fitting on half of each cluster and scoring on the other half, two oracles differ
+only in what they predict: a \textbf{mean} oracle (ridge on the ordinal code),
+which predicts the conditional mean; and a \textbf{faithful} oracle, the same fit
+plus a resampled residual, which reproduces the conditional \emph{distribution}.
+
+The faithful oracle attains a variance ratio of $0.988$ --- essentially human. So
+the encoding is not the binding constraint: $35$ symbols suffice for human-level
+dispersion, and the shortfall in \S\ref{sec:mechanism} belongs to the model, not
+to the prompt. Codes are also effectively unique (collision rate $0$), so
+quantisation is not merging individuals either.
+
+The two oracles also reproduce Proposition~\ref{prop:main} inside a single
+experiment. The mean oracle scores $S=0.802$; the faithful one, which is strictly
+closer to the truth, scores $S=0.730$ --- worse by $7.2$ points, against the
+$7.75$ the $\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Predicting the distribution
+correctly is penalised, and by the predicted amount.
+
+One further number bounds what conditioning buys at all: the mean oracle beats the
+constant ($0.792$) by $0.9$ points. A perfect reader of the persona gains under a
+point over ignoring it.
+
+\section{Where the variance is lost}
+\label{sec:mechanism}
+
+Knowing the simulator is mis-dispersed does not say \emph{where} the dispersion
+goes. We read the model's own belief before any sampling occurs, on open-weight
+models served locally.
+
+\paragraph{Stage 1, belief.} For each persona and item we take the model's
+next-token distribution over the answer tokens $\{1,\dots,5\}$ directly from the
+logprobs. Two implementation details matter. Hybrid reasoning models emit a
+\texttt{<think>} token first --- with probability $\approx 1$ --- so a naive
+readout sees no mass on the scale at all; we disable thinking and prefill the
+assistant turn.
+
+\paragraph{Stage 2, decode.} We then sample each item from its own belief
+distribution and score the resulting population.
+
+\paragraph{Result.} The belief distribution is already collapsed.
+
+The statistic must be chosen carefully. The quantity comparable to a human
+\emph{across-respondent} SD is not the average within-persona conditional SD, but
+the SD of the persona-\emph{mixture} distribution, obtained from the law of total
+variance,
+\[
+\mathrm{Var}(X_j)=\mathbb{E}_i\!\left[\mathrm{Var}(X_j\mid i)\right]
++\mathrm{Var}_i\!\left(\mathbb{E}[X_j\mid i]\right),
+\]
+computed exactly from the retained probability vectors. Reporting the
+within-persona term alone would understate a faithful simulator, which can hold
+sharp per-persona beliefs and still match human variance through differing
+persona means.
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccc}
+\toprule
+Model & VR$_\text{with}$ & VR$_\text{betw}$ & VR$_\text{tot}$ & entr.\\
+\midrule
+Qwen2.5-7B-Instruct & 0.367 & \textbf{0.193} & 0.430 & 0.415\\
+Mistral-Small-24B & 0.538 & \textbf{0.177} & 0.579 & 0.729\\
+\midrule
+\textit{human} & --- & --- & 1.000 & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All probability mass lands on the five valid answer tokens ($1.00$ and $0.97$),
+so neither model has difficulty \emph{emitting} a number; both hold narrow
+beliefs, at entropies far below the maximum $\ln 5 = 1.609$.
+
+\paragraph{Individuation is small, and roughly model-invariant.} The
+decomposition says something the total does not. The two models differ by $50\%$
+in total dispersion, yet their \emph{between}-persona components --- the part
+carrying individuation --- are nearly identical, $0.193$ and $0.177$ of the
+human value. The gap lives almost entirely in the \emph{within}-persona term
+($0.367$ vs $0.538$), which is per-item uncertainty, not personalisation.
+
+A simulator can therefore look markedly more dispersed simply by being less
+confident, while individuating no better. Hence a reporting consequence:
+$\mathrm{VR}_\text{total}$ confounds the two, and $\mathrm{VR}_\text{between}$
+is the quantity a persona claim should be judged on.
+
+Three consequences follow. First, the dispersion is not discarded at the decoding
+step; it was never present, so no temperature, top-$p$, or sampling-side remedy
+can recover it. Second, because all probability mass lands on valid answer
+tokens, accounts attributing mode collapse to difficulty \emph{emitting} numeric
+scores are not supported here --- the model is not failing to express a broad
+belief, it holds a narrow one. Third, this closes the loop with the answer-level
+results: the item main effect dominates realised variance
+(\S\ref{sec:suite}), conditioning on the correct cluster does nothing for
+dispersion or distinguishability (\S\ref{sec:permutation}), and the belief-level
+individuating component is $\sim\!0.18$ of human in both models. Three
+independent measurements agree that persona conditioning moves \emph{which
+items} get endorsed, not \emph{who} is endorsing them.
+
+\section{Is $k{=}4$ a partition at all?}
+\label{sec:clusters}
+
+The systems we audit condition on a $k{=}4$ $k$-means partition of the 30 facet
+scores. We re-derive it and test $k \in \{2,\dots,15\}$ under three
+preprocessings. Our $k{=}4$ solution reproduces the published labels
+(ARI $=0.946$), confirming the pipeline.
+
+No \emph{separation} criterion supports $k{=}4$. Silhouette falls monotonically
+from $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$;
+Davies--Bouldin is also minimised at $k{=}2$; the gap statistic increases
+monotonically and selects no interior $k$. A silhouette below $0.1$ indicates
+essentially no separated structure.
+
+\emph{Stability} tells a different and fairer story, and we report it because it
+partly vindicates the choice. Bootstrap adjusted Rand index over 40 resamples is
+$0.977$, $0.952$, $0.932$ and $0.903$ at $k{=}2,3,4,5$, then falls away sharply
+($0.797$ at $k{=}6$, $0.581$ at $k{=}7$, and below $0.7$ everywhere after). So
+$k{=}4$ is close to the largest $k$ that $k$-means recovers reproducibly, even
+though it never separates. The clusters are also not demographic artefacts:
+Cram\'er's $V$ against sex, age band and country is $0.055$--$0.057$, detectable
+at $n{=}410{,}168$ but negligible in size.
+
+The resolution is that stability and separation measure different things. A
+reproducible partition of a continuum is still a partition of a continuum, and
+that is what bounds how much cluster-conditional signal any persona can exploit
+--- as \S\ref{sec:permutation} then confirms behaviourally.
+
+\section{Related work}
+\label{sec:related}
+
+Personality conditioning of LLMs is commonly validated by administering
+psychometric inventories to the conditioned
+model~\citep{serapio2023personality,jiang2024evaluating}, and prompt sensitivity
+of the resulting traits is well
+documented~\citep{dong2025temperature,gupta2024personas}. Individual-level
+simulation from interview transcripts achieves high behavioural
+fidelity~\citep{park2024generative} at a per-person cost that motivates the
+cluster-level shortcut we study. Evolutionary and search-based prompt
+optimisation~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
+optimiser. Our contribution is orthogonal to all of these: we show the objective
+they are scored against is maximised by a degenerate solution.
+
+Classifier two-sample tests are standard for comparing
+distributions~\citep{lopezpaz2017revisiting}, and the failure mode we identify
+--- an absolute-error objective minimised by a conditional central tendency --- is
+the familiar reason such losses produce blurred, low-variance predictions in
+generative modelling.
+
+\section{Conclusion}
+
+Cluster-level LLM personality simulation is evaluated with a metric that a
+constant vector wins and a real human loses. We proved why, measured the
+structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
+cells across five models, and proposed a suite that orders humans above
+constants. Reported gains in this literature that are smaller than the
+constant-vs-faithful gap should not be read as evidence of personality fidelity.
+The repair is equally narrow: score with $S_{1/2}$, the proper member of the
+family in \eqref{eq:slambda}, and report the constant floor and the human ceiling
+next to every number.
+
+\section*{Reproducibility}
+
+Every analysis in this paper is deterministic given the released corpus and the
+committed run artefacts, and requires no LLM calls except the belief-level
+measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
+independently on two clusters with different operating systems, Python versions
+and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
+figure --- the $\lambda^\star$ values, the orientation deltas, the variance
+components, and the oracle ceilings --- agreed to all printed digits. Code and
+per-cell results are released.
+
+\section*{Limitations}
+
+Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
+optimisation family, and five models; the belief-level measurement of
+\S\ref{sec:mechanism} currently rests on one open-weight model, since it
+requires logprob access the API models in the audit do not provide, and larger
+models must be added before the mechanism is treated as general; the proposition is general to the
+absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
+specific to this setting. The model answers we re-score were produced by prior
+runs we did not control, at temperatures we did not set, and one released run was
+committed with entirely missing answers and is excluded. Our human ceiling is a
+single same-cluster respondent, which underestimates what a well-specified
+individual-level twin could achieve; we make no claim about individual-level
+methods. C2ST-AUC depends on classifier capacity and on $n{=}40$ per side, so its
+absolute value should be read as a lower bound on separability, and
+\S\ref{sec:c2st-audit} shows most of what it reads is response style; and DF treats
+items independently and so ignores within-respondent answer dependence. The
+corpus is self-reported, skewed toward respondents aged 18--25 and toward the
+USA, UK and Canada, so neither the clusters nor the ceilings should be read as
+representative of any broader population. Finally, we show current personas fail
+this evaluation; we do not show that any method can pass it.
+
+\section*{Ethics statement}
+
+We use a public, de-identified corpus of self-reported personality questionnaire
+responses and add no new human-subjects data collection. Our results are
+cautionary: they indicate that current cluster-level personality simulations are
+readily distinguishable from real respondents and under-represent human response
+variance, and so should not be used as substitutes for human participants in
+research, product, or policy decisions. Reporting an evaluation number without
+its constant floor risks overstating the fidelity of synthetic respondents, which
+is the specific harm this paper aims to reduce. Simulating demographic or
+personality groups also risks reinforcing stereotypes when cluster descriptions
+are treated as characterisations of real people rather than as statistical
+summaries.
+
+\bibliographystyle{acl_natbib}
+\bibliography{refs}
+
+\end{document}
