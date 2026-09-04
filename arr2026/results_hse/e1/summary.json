@@ -1,0 +1,30 @@
+{
+  "n_rows": 410168,
+  "k_by_silhouette_zscore": 2,
+  "k_by_davies_bouldin_zscore": 2,
+  "silhouette_at_k4": 0.08228268611302635,
+  "silhouette_best": 0.13375237814041477,
+  "k4_is_optimal_by_silhouette": false,
+  "stability_ari_at_k4_zscore": 0.9318877895857114,
+  "demographics": [
+    {
+      "factor": "sex",
+      "cramers_v": 0.05519581850498176,
+      "perm_p": 0.004975124378109453,
+      "n_perm": 200
+    },
+    {
+      "factor": "age_band",
+      "cramers_v": 0.05481733302336746,
+      "perm_p": 0.004975124378109453,
+      "n_perm": 200
+    },
+    {
+      "factor": "country_top",
+      "cramers_v": 0.05664548185591574,
+      "perm_p": 0.004975124378109453,
+      "n_perm": 200
+    }
+  ],
+  "runtime_sec": 1727.6
+}
