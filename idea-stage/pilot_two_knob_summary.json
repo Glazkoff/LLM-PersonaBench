@@ -1,0 +1,8 @@
+{
+  "n_models": 6,
+  "mean_delta_VR_between": 0.5297,
+  "mean_delta_CRPS": -0.14116,
+  "mean_cal_VR_between": 0.7051,
+  "human_reference": 1.0,
+  "verdict": "RECOVERABLE: individuation rises without degrading the proper score"
+}

@@ -1,0 +1,78 @@
+{
+  "run_id": "strengthen-arr-20260905",
+  "executor_model": "claude-opus-5",
+  "executor_family": "anthropic",
+  "policy": {
+    "provisional_advances": false
+  },
+  "created": "2026-09-04T21:32:29Z",
+  "updated": "2026-09-04T21:57:20Z",
+  "gates": {},
+  "phases": [
+    {
+      "phase": "research-lit",
+      "status": "done",
+      "artifact": "idea-stage/IDEA_REPORT.md#literature-landscape",
+      "verdict_id": null,
+      "reviewer": null,
+      "reviewer_family": null,
+      "review_independence": null,
+      "acceptance_status": null,
+      "executor_model": "claude-opus-5",
+      "executor_family": "anthropic",
+      "updated": "2026-09-04T21:34:38Z"
+    },
+    {
+      "phase": "idea-creator",
+      "status": "done",
+      "artifact": "idea-stage/IDEA_REPORT.md#ranked-ideas",
+      "verdict_id": null,
+      "reviewer": null,
+      "reviewer_family": null,
+      "review_independence": null,
+      "acceptance_status": null,
+      "executor_model": "claude-opus-5",
+      "executor_family": "anthropic",
+      "updated": "2026-09-04T21:57:20Z"
+    },
+    {
+      "phase": "novelty-check",
+      "status": "pending",
+      "artifact": null,
+      "verdict_id": null,
+      "reviewer": null,
+      "reviewer_family": null,
+      "review_independence": null,
+      "acceptance_status": null,
+      "executor_model": "claude-opus-5",
+      "executor_family": "anthropic",
+      "updated": "2026-09-04T21:32:29Z"
+    },
+    {
+      "phase": "research-review",
+      "status": "pending",
+      "artifact": null,
+      "verdict_id": null,
+      "reviewer": null,
+      "reviewer_family": null,
+      "review_independence": null,
+      "acceptance_status": null,
+      "executor_model": "claude-opus-5",
+      "executor_family": "anthropic",
+      "updated": "2026-09-04T21:32:29Z"
+    },
+    {
+      "phase": "research-refine-pipeline",
+      "status": "pending",
+      "artifact": null,
+      "verdict_id": null,
+      "reviewer": null,
+      "reviewer_family": null,
+      "review_independence": null,
+      "acceptance_status": null,
+      "executor_model": "claude-opus-5",
+      "executor_family": "anthropic",
+      "updated": "2026-09-04T21:32:29Z"
+    }
+  ]
+}

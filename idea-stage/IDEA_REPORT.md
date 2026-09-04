@@ -1,101 +1,141 @@
-# Research Idea Report — LLM personality simulation, ARR October
+# Idea Discovery Report
 
-**Direction**: why cluster-level LLM personas are under-dispersed, whether it is
-fixable, and what a metric-optimisable simulator looks like.
-**Generated**: 2026-09-04. **Fork**: `github.com/Glazkoff/LLM-PersonaBench`, branch `arr-october`.
-**Method**: ARIS `/idea-creator`. Codex backend was unavailable (revoked token), so
-Phase 1.5 ran on the Tier-2 path — five parallel Claude lens shards
-(untested-assumption, method-transfer, diagnostic, contradiction, scaling-regime),
-merged and deduped. **41 candidates → 16 distinct after dedup → 4 already executed.**
+**Direction**: strengthen the ARR October submission before the 12 Oct deadline
+**Date**: 2026-09-05
+**Pipeline**: research-lit → idea-creator → novelty-check → research-review → research-refine-pipeline
 
----
+## Executive Summary
+_(filled at Phase 5)_
 
-## Executed already (results in hand)
+## Literature Landscape
 
-### H3 — Orientation defect ✅ **CONFIRMED, major**
-`arr2026/scripts/hyp/h3_orientation_audit.py` · `arr2026/results/h3/`
+Surveyed 2026-09-05. The submission is an audit of cluster-level LLM personality
+simulation; this survey targets the three places the paper is still thin.
 
-The corpus stores human answers **reverse-recoded**; the simulator answers the
-literal item text. On the **55 negatively-keyed items** the scales run opposite,
-and every published model-vs-human number is computed across that flip.
+### Elicitation from reasoning-first models
+- **Survey Response Generation** (arXiv 2510.11586) formalises *token-probability*
+  elicitation: locate the token that uniquely identifies each Likert option and read
+  its logprob. This is exactly our readout, and it gives the method a citable name
+  rather than presenting it as bespoke.
+- **Semantic Similarity Rating** (arXiv 2510.08338, and the mode-collapse paper
+  2607.28550) is the rival: elicit free text, map to the scale by embedding
+  similarity. Claimed to fix mode collapse.
+- Neither addresses what broke three of our runs: 2026 reasoning-first models
+  (QwQ, Qwen3.5/3.6, GLM-4.7) place almost no mass on the answer tokens under a
+  chat prefill, because they open with a reasoning preamble and ignore
+  `enable_thinking=False`. Our diagnostics show the raw completions endpoint
+  recovers clean digit distributions. **This is an unaddressed gap.**
 
-- model↔human per-item mean correlation **+0.092 → +0.633**
-- model score **0.6604 → 0.7386** (the simulator was being penalised)
-- **VR exactly invariant** (`sd(6-x)=sd(x)`) — under-dispersion untouched
-- **constant still wins 20/20**; gap 13.6 → 5.8 pp
+### Persona effect and variance decomposition — closest prior work
+- **Quantifying the Persona Effect in LLM Simulations** (ACL 2024, arXiv
+  2402.10811) is the nearest neighbour to our headline and must be cited and
+  distinguished.
+- **Stable Personas / Temporal Stability** (arXiv 2601.22812; CHI 2026 EA) uses
+  linear mixed-effects to attribute variance to persona identity vs model vs
+  prompt, reporting persona identity at ~90% of variance.
+- **Differentiation**: that line decomposes variance *within the model's own
+  outputs* and asks whether a persona is stable. We decompose the model's
+  *belief* distribution and compare each component against a *human
+  across-respondent SD*, which is what makes VR_between interpretable as a
+  fraction of human individuation. No prior work we found reports a human-anchored
+  within/between split, nor the decoupling (ρ = −0.14) between total dispersion
+  and individuation.
 
-Sharpens the paper: corrected, the model (0.739) outscores a *real human* (0.721)
-while a classifier separates it at AUC 0.983.
+### Distribution-aware objectives
+- **Beyond the Mean: Three-Axis Fidelity** (arXiv 2606.28963) proposes structural /
+  marginal / individual fidelity but explicitly does **not** report constant-predictor
+  baselines or human ceilings — the gap our anchors fill.
+- **Distribution-First Population Simulation** (2607.18310) and **Distribution Shift
+  Alignment** (2510.21977) target marginals; none optimise against a proper scoring
+  rule.
 
-### H1 — The metric is CRPS minus its dispersion term ✅ **CONFIRMED, centrepiece**
-`arr2026/scripts/hyp/h1_proper_scoring.py` · `arr2026/results/h1/`
+### Gaps this submission can still close before 12 Oct
+- **G1** Elicitation that works for reasoning-first models (blocks 3 of 9 models).
+- **G2** The individuation-vs-uncertainty decoupling is currently a measurement;
+  nothing yet *optimises* for it.
+- **G3** The replacement suite is proposed but never used to select a simulator.
 
-`CRPS(F,y) = E|X−y| − ½E|X−X'|`. The audited metric is the first term alone.
-Define `S_λ = 1 − [E|X−y| − λE|X−X'|]/4`; λ=0 is the audited metric, λ=½ is CRPS.
-**λ=½ is not tunable — it is the unique proper choice.**
+## Ranked Ideas
 
-| λ | Model | Constant | Human |
-|---|---|---|---|
-| 0 (audited) | 0.660 | **0.796** | 0.721 |
-| **0.5 (proper)** | 0.697 | 0.796 | **0.859** |
-| 1.0 | 0.744 | 0.796 | **0.998** |
+Generated by gpt-5.6-sol (thread `01a06e59-5ec7-7dd2-be1b-e7439a4979d7`) against the
+established results. Scoped to what finishes by 12 Oct. Full slate of 10; the
+recommended core is **1, 2+4, 3** — it closes G1/G2/G3 with the least compute.
 
-λ*(human)=0.30, λ*(model)=0.75; model never overtakes in **17/20** cells.
-Gives the paper a principled *fix*, not just a critique.
+| # | Idea | Closes | GPU-h | Risk | Verdict |
+|---|------|--------|-------|------|---------|
+| 1 | **Cross-fitted simulator selection with a "select none" outcome** — normalise each metric between its human ceiling and constant floor, pick the non-dominated model by worst-axis regret, validate on held-out facets | G3 | **0** | LOW | DO |
+| 2 | **Token-context parity audit** — check whether raw completions can receive the *exact same token sequence* as the chat prefill, making the endpoint switch a transport workaround rather than a new elicitation | G1 | 0.5–2 | LOW | **DO FIRST** |
+| 3 | **Two-knob belief calibration** — on saved probability vectors, amplify persona-specific logit residuals (α) separately from within-persona temperature (T); tests whether individuation is *recoverable* | G2 | **0** | LOW | DO |
+| 4 | **Sparse endpoint-equivalence bridge** — re-read a paired subset of already-measured models through raw completions, with pre-declared margins (\|ΔVR\|<0.03, corr>0.98) | G1 | 2–6 | MED | DO |
+| 5 | Protocol-stratified 2026 cohort (Qwen3.5/3.6, GLM-4.7, DeepSeek-V4) reported as its own panel unless 2+4 establish equivalence | G1 | 24–40 | MED | CONDITIONAL |
+| 6 | Style-conditional C2ST — does selection change after equalising the 5 style scalars? | — | 0 | LOW-MED | DO |
+| 7 | Right-persona eligibility gate — require held-out lift over the wrong-persona control before calling something a persona simulator | — | 0–12 | LOW | DO |
+| 8 | Human–model facet-sensitivity audit — are model slopes on leave-one-out facet scores *attenuated* vs human slopes? | — | 1–4 | MED | IF BANDWIDTH |
+| 9 | Human-anchored multi-objective prompt search targeting VR_between under proper-score constraints | G2+G3 | 8–18 | MED-HIGH | CONDITIONAL, freeze splits first |
+| 10 | Verbalizer / label-permutation robustness — digits vs letters vs full Likert phrases | — | 6–14 | MED | CONDITIONAL |
 
-### H2 — Is C2ST reading traits or response style? 🔄 running (job 99_2)
-`arr2026/scripts/hyp/h2_c2st_ablation.py`. Self-critical audit of our own metric:
-feature ladder A full items / B 5 style scalars / C ipsatised / D facets / E
-forward-vs-reverse. Early cells show style-only AUC already ~0.99 — if that holds,
-we must report C2ST as partly style-driven.
+**Core slate ≈ 35–60 GPU-h; full slate 50–90.** Comfortable on the available hardware.
 
-### H4 — Variance-loss ladder: belief → decode → parse 🔄 queued (job 102, GPU)
-`arr2026/scripts/hyp/h4_variance_ladder.py` + `src/models/providers/local_vllm.py`.
-Reads the model's own token distribution over {1..5} via vLLM logprobs.
-**Mutually exclusive outcomes, both decisive**: belief SD ≈ human ⇒ loss is at
-decoding and a free belief-sampling readout fixes it (and arXiv 2607.28550's
-numeric-emission account is wrong on mechanism); belief SD ≪ human ⇒ loss is
-representational and no sampling fix can work.
+### Why idea 2 matters most
+It dissolves the dilemma blocking G1. If the completions endpoint can be handed a
+byte-identical token sequence to the chat prefill, then switching endpoints is a
+*transport* fix, the six measured models need no re-run, and the 2026 models join
+the same table. If not, they must be reported as a protocol-stratified cohort.
+Either way the objection "you measured the new models with a different prompt" is
+answered with evidence rather than assertion.
 
----
+### Pilot: idea 3 (two-knob belief calibration) — POSITIVE
 
-## Ranked queue (not yet run)
+Ran on the saved five-way belief vectors for all six models. Zero GPU-hours.
+Re-softmax with two independent knobs,
+`q_ij = softmax((Lbar_j + alpha*(L_ij - Lbar_j))/T)`, where alpha amplifies the
+persona-specific logit residual and T scales sharpness. alpha,T chosen on 24
+facets, reported on 6 **held-out** facets.
 
-**Tier 1 — CPU, free, high value**
+Held-out result, mean over six models: **VR_between 0.176 -> 0.705** (+0.53) with
+CRPS *improving* by 0.141. Per-model at alpha=8: 7B 0.167->0.759, 32B
+0.164->0.624, 72B 0.216->0.815, Mistral 0.133->0.632, QwQ 0.122->0.607, 235B
+0.249->0.794.
 
-| # | Hypothesis | Why it matters |
-|---|---|---|
-| H5 | **Person×item interaction collapse.** Decompose `Y=μ+a_p+b_j+(ab)_pj+e`. Shard measured model item-main-effect 78–95% vs human 26–42%, interaction 4–21% vs 56–77%. | The model doesn't emit "43% of human variance" — it emits ~120% in the wrong component and ~15% in the right one. Reframes the headline. |
-| H6 | **Prompt-encoding information ceiling.** The individual is compressed to a **35-symbol code over a 5-letter alphabet** (`get_modifier_by_match`). Compute the oracle ceiling for *any* perfect reader, plus prompt-collision rate. | Bounds what conditioning could ever achieve. May show the ceiling is the binding constraint, not the model. |
-| H7 | **Permutation null + placebo persona.** 4×4 cross-evaluation of every persona cluster against every human cluster, plus shuffled-facet placebo and no-persona arms. | No persona paper reports a wrong-persona control, so no persona effect is currently attributable to the persona. |
-| H8 | **Respondent-equivalents.** How many real respondents does a persona equal? Predicted single digits. | Converts "loses to a constant" into "loses to five people" — unanswerable by reviewers. |
-| H9 | **Metric sample-size bias.** n-sweep 10→1280 for ceiling/floor. C2ST at 40v40 on 120 features is in the overfitting regime; the 0.564 human ceiling may be pure finite-sample bias. | Pre-empts the likeliest reviewer attack and sizes every other sweep. Should run before the GPU sweeps. |
-| H10 | **Stability-vs-separation null calibration.** Run E1 on covariance-matched structureless surrogates. | Decides whether bootstrap ARI 0.941 at silhouette 0.082 is evidence of structure at all. |
+Extending the sweep on Qwen2.5-72B shows where it goes and what it costs:
 
-**Tier 2 — GPU, needs vLLM**
+| alpha | VR_within | VR_between | CRPS | max prob |
+|---|---|---|---|---|
+| 1 | 0.352 | 0.216 | 0.5212 | 0.817 |
+| 8 | 0.298 | 0.815 | 0.3531 | 0.922 |
+| 16 | 0.245 | **0.987** | 0.3106 | 0.952 |
+| 32 | 0.190 | 1.091 | 0.2897 | 0.973 |
 
-| # | Hypothesis | Why it matters |
-|---|---|---|
-| H11 | **Temperature frontier + serving determinism.** All seven flagship configs ran at **temperature 0**, so published VR is 100% between-persona. | If one sampling parameter fixes dispersion, a whole literature of embedding machinery is unnecessary. |
-| H12 | **Joint-context vs independent administration.** 120-in-one-call vs 12×10 vs 120 independent. | Tests whether self-consistency pressure erases the interaction component. |
-| H13 | **k-granularity sweep**, k ∈ {1,2,4,…,512,N}. | Given F5 (stable but not separated), asks what granularity maximises fidelity per unit cost. k=1 and k=N are the anchors. |
-| H14 | **Base vs instruct** at matched size (Qwen3 ladder). | The RLHF-collapse story is universally asserted and never tested on this task. |
-| H15 | **Latent-draw externalisation.** Make the model emit its own individual deviation before answering. | Turns a flat persona→answers map into the hierarchical draw the task actually requires. |
-| H16 | **Distribution-aware prompt evolution.** Swap the GA fitness (`my_evaluator.py:81`) for `S_{1/2}` and for a C2ST-derived objective. | The direct answer to "what does a metric-optimisable simulator look like", and tests whether collapse is **iatrogenic** — caused by optimising a constant-optimal objective. |
+**Reading.** The persona signal is present in the logits and attenuated by close
+to an order of magnitude; a single scalar recovers it, reaching human-level
+individuation near alpha=16. This converts the mechanism section from purely
+diagnostic into constructive.
 
----
+**The honest caveat, which is itself a finding.** As alpha rises, `VR_within`
+moves *away* from human (0.352 -> 0.190) and beliefs sharpen toward degeneracy
+(max prob 0.97) — yet CRPS improves monotonically the whole way and never sees
+the trade. CRPS is a *marginal* score, so it is blind to the within/between
+split, exactly as `VR_total` is. The paper's central thesis reappears one level
+down: even the proper scoring rule we recommend cannot by itself certify
+individuation. That argues for reporting the decomposition alongside any proper
+score, and it is a second, independent argument for the suite.
 
-## Eliminated / folded
+**Next step:** select alpha under a constraint that *does* see the trade (held-out
+C2ST, or a within-fidelity penalty), not under CRPS alone.
 
-| Idea | Reason |
-|---|---|
-| Free-text + embedding (SSR replication) | Subsumed by H4, which adjudicates the same claim at the logit level for far less compute. |
-| CFG persona guidance | Kept but deprioritised — depends on H4's verdict; pointless if the belief is already collapsed. |
-| Activation probing / steering | Weeks of effort, needs HF-transformers not vLLM. Out of scope before Oct 12. |
-| Conformal coverage suite | Elegant but a second metric contribution; would dilute the paper's single claim. |
+### Explicitly rejected as out of scope before 12 Oct
+Respondent-contrastive LoRA (leakage control + training instability); a
+direct-answer vs long-deliberation ablation (reasoning mode changes the task); a
+broad temperature/top-p sweep (idea 3 answers the mechanism question more cheaply
+in probability space); cost-normalised rankings; behavioural-answer prompting
+(changes the estimand); a learned residual head (reads as another supervised
+oracle).
 
-## Execution order
+## Novelty Verification
+_(Phase 3)_
 
-1. **H9** first (sizes everything), then H5–H8, H10 — all CPU, all free.
-2. **H4** (running) → its verdict selects between H11/H15 (decoding-side) and H14/H16 (training/objective-side).
-3. **H16** is the strongest candidate for a second paper, or a §7 of this one.
+## External Critical Review
+_(Phase 4)_
+
+## Refined Proposal
+_(Phase 4.5)_
