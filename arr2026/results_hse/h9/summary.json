@@ -44,8 +44,19 @@
     }
   },
   "c2st_human_ceiling_at_n40": 0.5738,
-  "c2st_human_ceiling_extrapolated": 0.5426,
+  "c2st_human_ceiling_extrapolated": 0.4999,
   "DF_human_ceiling_at_n40": 0.9386,
-  "DF_human_ceiling_extrapolated": 0.9985,
+  "DF_human_ceiling_extrapolated": 1.0,
+  "n_used_for_fit": [
+    40,
+    80,
+    160,
+    320,
+    640
+  ],
+  "degenerate_n_excluded": [
+    10,
+    20
+  ],
   "interpretation": "If the extrapolated C2ST human ceiling approaches 0.5, the 0.564 reported at n=40 is finite-sample bias and the anchor should be quoted bias-corrected."
 }
