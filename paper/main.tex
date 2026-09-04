@@ -619,8 +619,9 @@ persona means.
 Model & Params & VR$_\text{with}$ & VR$_\text{betw}$ & VR$_\text{tot}$\\
 \midrule
 Qwen2.5-7B-Instruct & 7B & 0.367 & \textbf{0.193} & 0.430\\
-Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
+Qwen2.5-32B-Instruct & 32B & 0.242 & \textbf{0.220} & 0.343\\
 Qwen2.5-72B-Instruct & 72B & 0.367 & \textbf{0.295} & 0.488\\
+Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
 Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
 \midrule
 \textit{human} & --- & --- & --- & 1.000\\
@@ -642,12 +643,17 @@ second-\emph{lowest} total ($0.488$) and the \emph{highest} individuation
 ($0.295$). Ranking simulators by $\mathrm{VR}_\text{total}$ would order them
 almost backwards on the quantity a persona claim is about.
 
-Two regularities survive across a $34\times$ parameter range, two families and
-two generations. First, no model exceeds $\mathrm{VR}_\text{between}\approx0.30$:
-individuation sits between a fifth and under a third of the human value
-throughout. Second, within a fixed family, scale buys individuation and not
-confidence --- Qwen2.5 from 7B to 72B raises the between term $0.193\to0.295$
-while its within term is unchanged at $0.367$.
+The Qwen2.5 family isolates this with the family held fixed and only scale
+varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
+\to 0.295$ at 7B, 32B, 72B --- while total dispersion does not, moving $0.430 \to
+0.343 \to 0.488$. Scale buys individuation; it does not buy, and is not tracked
+by, the total.
+
+One bound survives across the whole set --- a $34\times$ parameter range, two
+families and two generations: no model exceeds
+$\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between a fifth and
+under a third of the human value throughout, and the largest model is not the
+best at it.
 
 A simulator can therefore look markedly more dispersed simply by being less
 confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
@@ -749,10 +755,11 @@ per-cell results are released.
 
 Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
-\S\ref{sec:mechanism} covers four open-weight models spanning 7B--235B,
+\S\ref{sec:mechanism} covers five open-weight models spanning 7B--235B,
 two families and two generations, since it requires logprob access the API
-models in the audit do not provide; with four points the scaling statements are
-directional, not fitted laws, and several 2026 reasoning-first models could not
+models in the audit do not provide; the within-family trend rests on three
+points and the cross-family comparison on five, so both are directional rather
+than fitted laws, and several 2026 reasoning-first models could not
 be measured at all because they place almost no probability mass on the answer
 tokens under this elicitation, which is a limitation of the readout rather than
 evidence about those models; the proposition is general to the

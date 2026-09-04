@@ -1,10 +1,14 @@
 {
   "model": "Qwen/Qwen2.5-32B-Instruct",
-  "VR_belief_within_mean": 0.2069,
+  "VR_belief_mixture_mean": 0.3434,
+  "share_within_mean": 0.515,
+  "share_between_mean": 0.485,
+  "VR_within_only_NOT_COMPARABLE_mean": 0.2069,
   "VR_readout_mean": 0.3278,
   "belief_entropy_mean": 0.2427,
   "max_entropy_ln5": 1.6094,
   "mass_on_scale_mean": 1.0,
   "coverage": 1.0,
-  "verdict": "REPRESENTATIONAL LOSS: the belief distribution is itself collapsed."
+  "verdict": "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed.",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic."
 }
