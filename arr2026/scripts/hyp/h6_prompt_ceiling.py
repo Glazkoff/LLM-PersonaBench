@@ -112,24 +112,38 @@ def main():
             fallback = np.round(Y[tr].mean(axis=0))
             reg = RidgeCV(alphas=np.logspace(-2, 4, 13)).fit(X[tr], Y[tr])
             pred = np.clip(np.round(reg.predict(X[te])), 1, 5)
+            # Ridge minimises squared error, so it shrinks toward the conditional mean
+            # and under-disperses BY CONSTRUCTION. Its dispersion is therefore not a
+            # ceiling. For the dispersion ceiling use a FAITHFUL oracle: the ridge mean
+            # plus a residual resampled from the training residuals, which reproduces
+            # the conditional distribution rather than only its centre.
+            resid = Y[tr] - reg.predict(X[tr])
+            draw = rng.integers(0, len(resid), size=len(te))
+            pred_faithful = np.clip(np.round(reg.predict(X[te]) + resid[draw]), 1, 5)
             oracle = float(np.mean([sim(pred[k], Y[te[k]]) for k in range(len(te))]))
             const = float(np.mean([sim(fallback, Y[te[k]]) for k in range(len(te))]))
             # a real human of the same cluster, as the ceiling
             hum = float(np.mean([sim(Y[tr[rng.integers(len(tr))]], Y[te[k]])
                                  for k in range(min(len(te), 2000))]))
             # oracle dispersion vs human dispersion
-            vr_oracle = float(np.nanmean(np.nanstd(pred, 0)[np.nanstd(Y[te], 0) > 0]
-                                         / np.nanstd(Y[te], 0)[np.nanstd(Y[te], 0) > 0]))
+            ok = np.nanstd(Y[te], 0) > 0
+            vr_oracle = float(np.nanmean(np.nanstd(pred, 0)[ok] / np.nanstd(Y[te], 0)[ok]))
+            vr_faithful = float(np.nanmean(np.nanstd(pred_faithful, 0)[ok]
+                                           / np.nanstd(Y[te], 0)[ok]))
+            s_faithful = float(np.mean([sim(pred_faithful[k], Y[te[k]])
+                                        for k in range(len(te))]))
 
             rows.append({"cluster": int(cl), "encoding": label, "n": int(len(sub)),
                          "distinct_codes": uniq,
                          "codes_per_1000_people": round(1000 * uniq / len(sub), 1),
                          "collision_rate": coll,
                          "S_oracle_ceiling": oracle, "S_constant": const,
-                         "S_real_human": hum, "VR_oracle_ceiling": vr_oracle})
+                         "S_real_human": hum, "VR_oracle_ridge_shrunk": vr_oracle,
+                         "VR_oracle_faithful": vr_faithful, "S_oracle_faithful": s_faithful})
             print(f"  cluster {cl} [{label}]: {uniq} distinct codes for {len(sub)} people, "
                   f"collision={coll:.4f} | S oracle={oracle:.4f} const={const:.4f} "
-                  f"human={hum:.4f} | VR_oracle={vr_oracle:.3f}", flush=True)
+                  f"human={hum:.4f} | VR ridge={vr_oracle:.3f} faithful={vr_faithful:.3f}",
+                  flush=True)
 
     t = pd.DataFrame(rows)
     t.to_csv(OUT / "prompt_ceiling.csv", index=False)
@@ -141,12 +155,15 @@ def main():
         "S_oracle_ceiling_mean": round(float(m.S_oracle_ceiling.mean()), 4),
         "S_constant_mean": round(float(m.S_constant.mean()), 4),
         "S_real_human_mean": round(float(m.S_real_human.mean()), 4),
-        "VR_oracle_ceiling_mean": round(float(m.VR_oracle_ceiling.mean()), 4),
+        "VR_oracle_ridge_shrunk_mean": round(float(m.VR_oracle_ridge_shrunk.mean()), 4),
+        "VR_oracle_faithful_mean": round(float(m.VR_oracle_faithful.mean()), 4),
+        "S_oracle_faithful_mean": round(float(m.S_oracle_faithful.mean()), 4),
         "VR_published_model": 0.431,
         "interpretation": (
-            "VR_oracle_ceiling is the dispersion any perfect reader of this prompt could "
-            "achieve. If it is close to the model's measured 0.431, the prompt encoding -- "
-            "not the model -- is the binding constraint on individuation."),
+            "VR_oracle_faithful is the dispersion ceiling: a reader of the code that "
+            "reproduces the conditional distribution rather than only its mean. The ridge "
+            "figure is reported only to show how far a squared-error fit under-disperses, "
+            "which is the same pathology the audited metric rewards."),
     }
     (OUT / "summary.json").write_text(json.dumps(summary, indent=2))
     print("\n=== H6 SUMMARY ===")

@@ -1,0 +1,11 @@
+{
+  "n_cells": 20,
+  "total_variance_ratio_mean": 1.0047,
+  "share_item_model_mean": 0.817,
+  "share_item_human_mean": 0.298,
+  "share_interaction_model_mean": 0.1645,
+  "share_interaction_human_mean": 0.67,
+  "IVR_model_mean": 0.4577,
+  "IVR_constant_mean": 0.0,
+  "interpretation": "If total_variance_ratio is near or above 1 while IVR is far below 1, the simulator emits roughly the right amount of variance in the wrong component: a cluster-level answer key rather than individuating behaviour."
+}
