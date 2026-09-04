@@ -1,0 +1,51 @@
+{
+  "by_n": {
+    "10": {
+      "c2st_human": 0.5,
+      "DF_human": 0.882,
+      "c2st_constant": 0.5,
+      "DF_constant": 0.7948
+    },
+    "20": {
+      "c2st_human": 0.5,
+      "DF_human": 0.9151,
+      "c2st_constant": 0.5,
+      "DF_constant": 0.7962
+    },
+    "40": {
+      "c2st_human": 0.5738,
+      "DF_human": 0.9386,
+      "c2st_constant": 0.9141,
+      "DF_constant": 0.7946
+    },
+    "80": {
+      "c2st_human": 0.5417,
+      "DF_human": 0.9565,
+      "c2st_constant": 1.0,
+      "DF_constant": 0.7952
+    },
+    "160": {
+      "c2st_human": 0.5364,
+      "DF_human": 0.9693,
+      "c2st_constant": 1.0,
+      "DF_constant": 0.7957
+    },
+    "320": {
+      "c2st_human": 0.5272,
+      "DF_human": 0.9782,
+      "c2st_constant": 1.0,
+      "DF_constant": 0.7957
+    },
+    "640": {
+      "c2st_human": 0.5173,
+      "DF_human": 0.9847,
+      "c2st_constant": 1.0,
+      "DF_constant": 0.7955
+    }
+  },
+  "c2st_human_ceiling_at_n40": 0.5738,
+  "c2st_human_ceiling_extrapolated": 0.5426,
+  "DF_human_ceiling_at_n40": 0.9386,
+  "DF_human_ceiling_extrapolated": 0.9985,
+  "interpretation": "If the extrapolated C2ST human ceiling approaches 0.5, the 0.564 reported at n=40 is finite-sample bias and the anchor should be quoted bias-corrected."
+}
