@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=arr-cpu
 #SBATCH --partition=rocky
+#SBATCH --account=proj_1759
 #SBATCH --qos=normal
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
