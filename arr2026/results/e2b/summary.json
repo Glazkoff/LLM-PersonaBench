@@ -1,0 +1,41 @@
+{
+  "n_cells": 20,
+  "n_cells_llm_beats_best_baseline": 0,
+  "mean_llm_after": 0.6604,
+  "mean_best_baseline": 0.7961,
+  "mean_gap_baseline_minus_llm": 0.1357,
+  "mean_cluster_mean_baseline": 0.7961,
+  "mean_global_mean_baseline": 0.72,
+  "per_model": {
+    "gigchat3": {
+      "llm_after": 0.7029,
+      "best_baseline": 0.7961,
+      "cells_llm_wins": 0,
+      "cells": 4
+    },
+    "gpt4_mini": {
+      "llm_after": 0.6644,
+      "best_baseline": 0.7961,
+      "cells_llm_wins": 0,
+      "cells": 4
+    },
+    "gpt4_nano": {
+      "llm_after": 0.6794,
+      "best_baseline": 0.7961,
+      "cells_llm_wins": 0,
+      "cells": 4
+    },
+    "grok4.1_fast": {
+      "llm_after": 0.6134,
+      "best_baseline": 0.7961,
+      "cells_llm_wins": 0,
+      "cells": 4
+    },
+    "qwen3": {
+      "llm_after": 0.642,
+      "best_baseline": 0.7961,
+      "cells_llm_wins": 0,
+      "cells": 4
+    }
+  }
+}

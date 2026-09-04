@@ -1,0 +1,61 @@
+{
+  "paper_protocol": {
+    "cluster_mean": 0.7961,
+    "cluster_majority": 0.7781,
+    "train_user_copy": 0.7207,
+    "centroid_determin": 0.72,
+    "global_mean": 0.72,
+    "empirical_sample": 0.718
+  },
+  "paper_protocol_by_cluster": {
+    "0": {
+      "global_mean": 0.7265,
+      "cluster_majority": 0.781,
+      "cluster_mean": 0.7936,
+      "centroid_determin": 0.7265,
+      "empirical_sample": 0.7182,
+      "train_user_copy": 0.7216
+    },
+    "1": {
+      "global_mean": 0.7042,
+      "cluster_majority": 0.7961,
+      "cluster_mean": 0.827,
+      "centroid_determin": 0.7042,
+      "empirical_sample": 0.7515,
+      "train_user_copy": 0.7464
+    },
+    "2": {
+      "global_mean": 0.7227,
+      "cluster_majority": 0.7704,
+      "cluster_mean": 0.7847,
+      "centroid_determin": 0.7227,
+      "empirical_sample": 0.708,
+      "train_user_copy": 0.7111
+    },
+    "3": {
+      "global_mean": 0.7265,
+      "cluster_majority": 0.7649,
+      "cluster_mean": 0.7791,
+      "centroid_determin": 0.7265,
+      "empirical_sample": 0.6944,
+      "train_user_copy": 0.7039
+    }
+  },
+  "random_splits_mean": {
+    "centroid_determin": 0.7226,
+    "cluster_majority": 0.7805,
+    "cluster_mean": 0.7942,
+    "empirical_sample": 0.7225,
+    "global_mean": 0.7226,
+    "train_user_copy": 0.723
+  },
+  "random_splits_std_across_splits": {
+    "centroid_determin": 0.0253,
+    "cluster_majority": 0.0172,
+    "cluster_mean": 0.0133,
+    "empirical_sample": 0.0178,
+    "global_mean": 0.0253,
+    "train_user_copy": 0.0193
+  },
+  "note": "Compare `cluster_majority` against the paper's reported LLM answer-similarity. If it is competitive, the evolutionary prompt result needs reframing."
+}
