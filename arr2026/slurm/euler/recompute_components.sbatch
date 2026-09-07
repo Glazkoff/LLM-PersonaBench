@@ -12,5 +12,5 @@ cd /home/glazkov/personality-twins-arr/LLM-PersonaBench
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 [ -x "$PY" ] || { echo "FATAL: $PY missing"; exit 1; }
 "$PY" arr2026/scripts/hyp/h4_recompute_components.py \
-  --results arr2026/results_euler --runs h4_qwen3_235b
+  --results arr2026/results_euler --runs ${RUNS:-h4_qwen3_235b}
 echo "DONE rc=$?"
