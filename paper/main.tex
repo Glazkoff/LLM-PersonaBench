@@ -571,26 +571,24 @@ Knowing the simulator is mis-dispersed does not say \emph{where} the dispersion
 goes. We read the model's own belief before any sampling occurs, on open-weight
 models served locally.
 
-\paragraph{Stage 1, belief.} For each persona and item we take the model's
+\paragraph{Two stages.} For each persona and item we take the model's
 next-token distribution over the answer tokens $\{1,\dots,5\}$ directly from the
-logprobs. Two implementation details matter. Hybrid reasoning models emit a
+logprobs, then sample each item from its own belief and score the resulting
+population. One implementation detail matters: hybrid reasoning models emit a
 \texttt{<think>} token first --- with probability $\approx 1$ --- so a naive
 readout sees no mass on the scale at all; we disable thinking and prefill the
 assistant turn.
 
-\paragraph{Stage 2, decode.} We then sample each item from its own belief
-distribution and score the resulting population.
-
-\paragraph{Result.} The belief distribution is already collapsed.
+\paragraph{Result.} What is collapsed is the \emph{individuating} part of the
+belief, not the belief's total spread. In the 2024--25 models both are small;
+in the 2026 reasoning-first models the total spread reaches or exceeds the
+human marginal while individuation stays as low as ever.
 
 The statistic must be chosen carefully. The quantity comparable to a human
-\emph{across-respondent} SD is not the average within-persona conditional SD, but
+\emph{across-respondent} SD is not the average within-persona conditional SD but
 the SD of the persona-\emph{mixture} distribution, obtained from the law of total
-variance,
-\[
-\mathrm{Var}(X_j)=\mathbb{E}_i\!\left[\mathrm{Var}(X_j\mid i)\right]
-+\mathrm{Var}_i\!\left(\mathbb{E}[X_j\mid i]\right),
-\]
+variance, $\mathrm{Var}(X_j)=\mathbb{E}_i[\mathrm{Var}(X_j\mid i)]
++\mathrm{Var}_i(\mathbb{E}[X_j\mid i])$, and
 computed exactly from the retained probability vectors. Reporting the
 within-persona term alone would understate a faithful simulator, which can hold
 sharp per-persona beliefs and still match human variance through differing
@@ -609,32 +607,34 @@ Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
 QwQ-32B (reasoning) & 32B & 0.729 & \textbf{0.154} & 0.753\\
 Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
 \midrule
+\multicolumn{5}{l}{\textit{2026 reasoning-first}}\\
+Qwen3.5-9B & 9B & 1.058 & \textbf{0.167} & 1.078\\
+GLM-4.7-Flash (MoE) & 16B & 1.209 & \textbf{0.265} & 1.242\\
+\midrule
 \textit{human} & --- & --- & --- & 1.000\\
 \bottomrule
 \end{tabular}
 \end{center}
 
 Essentially all probability mass lands on the five valid answer tokens
-($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number; entropies
-of $0.42$--$0.73$ nats sit far below the maximum $\ln 5 = 1.609$. The largest
-model is the one the audited system itself used, so this is a measurement on
-that system, not on a proxy for it.
+($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number. Belief
+entropy, however, splits by generation: $0.42$--$0.73$ nats for the 2024--25
+models against $1.08$--$1.24$ for the 2026 ones, the latter approaching but not
+reaching the maximum $\ln 5 = 1.609$. The 235B model is the one the audited
+system itself used, so this is a measurement on that system, not on a proxy for
+it.
 
 \paragraph{Total dispersion and individuation are decoupled.} The decomposition
 says something the total does not, and the evidence for this is existential
-rather than correlational: the two paragraphs below exhibit models whose
-ordering on $\mathrm{VR}_\text{total}$ reverses on
-$\mathrm{VR}_\text{between}$. The rank correlation over the six models is
-$\rho=-0.14$, but at $n=6$ its bootstrap 95\% interval is $[-1.00,0.80]$, so we
-rest nothing on it.
+rather than correlational. Qwen3.5-9B and Qwen2.5-72B invert cleanly: the former
+has more than twice the total dispersion of the latter ($1.078$ vs $0.488$) and
+\emph{less} individuation ($0.167$ vs $0.295$). The rank correlation over the
+eight models is $\rho=-0.05$, but at $n=8$ its bootstrap 95\% interval is
+$[-0.90,0.77]$, so we rest nothing on it.
 
-The reasoning model makes the point most sharply. QwQ-32B reaches
-$\mathrm{VR}_\text{total}=0.753$, statistically tied with the $235$B model's
-$0.758$ and the second-highest in the set --- yet its individuating component is
-the \emph{lowest} of all six at $0.154$, barely half the $235$B's. Its
-dispersion is almost entirely per-item uncertainty ($0.729$ of $0.753$). A
-simulator can look nearly human-like in spread while differentiating personas
-less than any other model measured.
+QwQ-32B sharpens the same point: its individuating component is the
+\emph{lowest} of all eight ($0.154$, barely half the $235$B's), and its
+dispersion is almost entirely per-item uncertainty ($0.729$ of $0.753$).
 
 The Qwen2.5 family isolates this with the family held fixed and only scale
 varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
@@ -642,9 +642,10 @@ varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
 0.343 \to 0.488$. Scale buys individuation; it does not buy, and is not tracked
 by, the total.
 
-One bound survives across the whole set --- a $34\times$ parameter range, three
-families, two generations, and both standard and reasoning-tuned models: no
-model exceeds $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits
+One bound survives across the whole set --- a $34\times$ parameter range, four
+families, three generations, dense and mixture-of-experts, and both standard and
+reasoning-tuned models: no model exceeds
+$\mathrm{VR}_\text{between}\approx0.30$. Individuation sits
 between a seventh and under a third of the human value throughout, and neither
 the largest model nor the most dispersed one is the best at it.
 
@@ -653,10 +654,12 @@ confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
 confounds uncertainty with individuation, and $\mathrm{VR}_\text{between}$ is
 the quantity a persona claim should be judged on.
 
-One limit, plainly: at $\mathrm{VR}_\text{total}=0.758$ the largest model is not
-far from the human marginal, so for it the strong form of the claim below --- that
-no sampling-side remedy could help --- is unsupported. What remains unsupported at
-every scale is \emph{individuation}.
+One limit, plainly: the strong form of the claim below --- that no sampling-side
+remedy could help --- requires total belief dispersion to be well under the human
+marginal, and that is false for the largest 2024--25 model ($0.758$) and plainly
+false for the 2026 models, which \emph{exceed} it ($1.078$, $1.242$). For those,
+spread is present at the belief level and is lost or misallocated afterwards. What
+no model supplies at any scale is \emph{individuation}.
 
 Three consequences follow. First, for the smaller models the dispersion is not
 discarded at the decoding step; it was never present, so no temperature,
@@ -758,16 +761,22 @@ per-cell results are released.
 
 Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
-\S\ref{sec:mechanism} covers six open-weight models spanning 7B--235B,
-three families and two generations, and the cross-instrument replication of
+\S\ref{sec:mechanism} covers eight open-weight models spanning 7B--235B,
+four families and three generations, and the cross-instrument replication of
 \S\ref{sec:crossinstrument} covers only the two structural findings, since SD3
 carries no simulator runs; since it requires logprob access the API
 models in the audit do not provide; the within-family trend rests on three
-points and the cross-family comparison on six, so both are directional rather
-than fitted laws, and several 2026 reasoning-first models could not
-be measured at all because they place almost no probability mass on the answer
-tokens under this elicitation, which is a limitation of the readout rather than
-evidence about those models; the proposition is general to the
+points and the cross-family comparison on eight, so both are directional rather
+than fitted laws; the 2026 reasoning-first models are read with thinking disabled
+and the assistant turn prefilled, a regime in which they are markedly less
+confident than the older models (belief entropy $1.08$--$1.24$ nats against
+$0.42$--$0.73$), so their above-human total dispersion should not be read as
+calibrated uncertainty, though it cannot inflate
+$\mathrm{VR}_\text{between}$, which is computed from persona means; an earlier
+attempt to read these same models through a chat-completions server returned
+almost no mass on the answer tokens, which we now attribute to that transport
+and not to the models, since the forward-pass readout used here recovers
+$0.99$--$1.00$ of the mass; the proposition is general to the
 absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
 specific to this setting. The model answers we re-score were produced by prior
 runs we did not control, at temperatures we did not set, and one released run was
