@@ -103,9 +103,13 @@ def main():
     dtype = torch.bfloat16 if cap[0] >= 8 else torch.float16
     print(f"loading {args.model} ... (sm_{cap[0]}{cap[1]}, dtype={dtype})", flush=True)
     tok = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model, torch_dtype=dtype, device_map="auto",
-        trust_remote_code=True)
+    # transformers 5.x renamed torch_dtype -> dtype; keep both paths so the same
+    # script runs on HSE (5.2) and Euler (5.16) and still on any 4.x env.
+    _kw = dict(device_map="auto", trust_remote_code=True)
+    try:
+        model = AutoModelForCausalLM.from_pretrained(args.model, dtype=dtype, **_kw)
+    except TypeError:
+        model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=dtype, **_kw)
     model.eval()
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
