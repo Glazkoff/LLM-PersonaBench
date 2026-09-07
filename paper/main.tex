@@ -621,10 +621,12 @@ model is the one the audited system itself used, so this is a measurement on
 that system, not on a proxy for it.
 
 \paragraph{Total dispersion and individuation are decoupled.} The decomposition
-says something the total does not. Over the six models the rank correlation
-between $\mathrm{VR}_\text{total}$ and $\mathrm{VR}_\text{between}$ is
-$\rho=-0.14$: knowing how dispersed a simulator's answers are tells you nothing
-about how much of that dispersion individuates.
+says something the total does not, and the evidence for this is existential
+rather than correlational: the two paragraphs below exhibit models whose
+ordering on $\mathrm{VR}_\text{total}$ reverses on
+$\mathrm{VR}_\text{between}$. The rank correlation over the six models is
+$\rho=-0.14$, but at $n=6$ its bootstrap 95\% interval is $[-1.00,0.80]$, so we
+rest nothing on it.
 
 The reasoning model makes the point most sharply. QwQ-32B reaches
 $\mathrm{VR}_\text{total}=0.753$, statistically tied with the $235$B model's
@@ -748,7 +750,8 @@ measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
 independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure --- the $\lambda^\star$ values, the orientation deltas, the variance
-components, and the oracle ceilings --- agreed to all printed digits. Code and
+components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
+ceilings --- agreed to all printed digits. Code and
 per-cell results are released.
 
 \section*{Limitations}

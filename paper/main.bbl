@@ -1,0 +1,73 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Dong et~al.(2025)}]{dong2025temperature}
+Yifan Dong and 1 others. 2025.
+\newblock Can large language model agents reliably express personality?
+\newblock \emph{arXiv preprint}.
+
+\bibitem[{Guo et~al.(2024)Guo, Wang, Guo, Li, Song, Tan, Liu, Bian, and
+  Yang}]{guo2024connecting}
+Qingyan Guo, Rui Wang, Junliang Guo, Bei Li, Kaitao Song, Xu~Tan, Guoqing Liu,
+  Jiang Bian, and Yujiu Yang. 2024.
+\newblock Connecting large language models with evolutionary algorithms yields
+  powerful prompt optimizers.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Gupta et~al.(2024)Gupta, Shrivastava, Deshpande, Kalyan, Clark,
+  Sabharwal, and Khot}]{gupta2024personas}
+Shashank Gupta, Vaishnavi Shrivastava, Ameet Deshpande, Ashwin Kalyan, Peter
+  Clark, Ashish Sabharwal, and Tushar Khot. 2024.
+\newblock Bias runs deep: Implicit reasoning biases in persona-assigned
+  language models.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Jiang et~al.(2024)Jiang, Xu, Zhu, Han, Zhang, and
+  Zhu}]{jiang2024evaluating}
+Guangyuan Jiang, Manjie Xu, Song-Chun Zhu, Wenjuan Han, Chi Zhang, and Yixin
+  Zhu. 2024.
+\newblock Evaluating and inducing personality in pre-trained language models.
+\newblock In \emph{Advances in Neural Information Processing Systems}.
+
+\bibitem[{Johnson(2014)}]{johnson2014ipip}
+John~A. Johnson. 2014.
+\newblock Measuring thirty facets of the five factor model with a 120-item
+  public domain inventory: Development of the ipip-neo-120.
+\newblock \emph{Journal of Research in Personality}, 51:78--89.
+
+\bibitem[{Lopez-Paz and Oquab(2017)}]{lopezpaz2017revisiting}
+David Lopez-Paz and Maxime Oquab. 2017.
+\newblock Revisiting classifier two-sample tests.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Park et~al.(2024)Park, Zou, Shaw, Hill, Cai, Morris, Willer, Liang,
+  and Bernstein}]{park2024generative}
+Joon~Sung Park, Carolyn~Q. Zou, Aaron Shaw, Benjamin~Mako Hill, Carrie Cai,
+  Meredith~Ringel Morris, Robb Willer, Percy Liang, and Michael~S. Bernstein.
+  2024.
+\newblock Generative agent simulations of 1,000 people.
+\newblock In \emph{arXiv preprint arXiv:2411.10109}.
+
+\bibitem[{Prasad et~al.(2023)Prasad, Hase, Zhou, and Bansal}]{prasad2023grips}
+Archiki Prasad, Peter Hase, Xiang Zhou, and Mohit Bansal. 2023.
+\newblock {GrIPS}: Gradient-free, edit-based instruction search for prompting
+  large language models.
+\newblock In \emph{Proceedings of the 17th Conference of the European Chapter
+  of the ACL}.
+
+\bibitem[{Serapio-Garc{\'\i}a et~al.(2023)Serapio-Garc{\'\i}a, Safdari, Crepy,
+  Sun, Fitz, Romero, Abdulhai, Faust, and Matari{\'c}}]{serapio2023personality}
+Greg Serapio-Garc{\'\i}a, Mustafa Safdari, Cl{\'e}ment Crepy, Luning Sun,
+  Stephen Fitz, Peter Romero, Marwa Abdulhai, Aleksandra Faust, and Maja
+  Matari{\'c}. 2023.
+\newblock Personality traits in large language models.
+\newblock \emph{arXiv preprint arXiv:2307.00184}.
+
+\bibitem[{Zhou et~al.(2022)Zhou, Muresanu, Han, Paster, Pitis, Chan, and
+  Ba}]{zhou2022large}
+Yongchao Zhou, Andrei~Ioan Muresanu, Ziwen Han, Keiran Paster, Silviu Pitis,
+  Harris Chan, and Jimmy Ba. 2022.
+\newblock Large language models are human-level prompt engineers.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\end{thebibliography}
