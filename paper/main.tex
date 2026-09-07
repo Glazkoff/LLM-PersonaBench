@@ -511,43 +511,11 @@ readers can see how much of any separability is carried by response style. A
 simulator that closed only the style gap would look far better on the headline
 number while remaining just as distinguishable on content.
 
-\subsection{How much of the anchors is finite-sample bias?}
-\label{sec:samplesize}
-
-Both anchors are estimated from $n{=}40$ per side, which for a classifier over
-120 features is a small-sample regime. We sweep $n$ on human-only data, where the
-true answers are known: two disjoint samples from the same cluster must be
-indistinguishable, so the honest C2ST value is exactly $0.5$ and any excess is
-estimator bias.
-
-\begin{center}\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lcccccc}
-\toprule
-$n$ & 20 & 40 & 80 & 160 & 320 & 640\\
-\midrule
-C2ST human & --- & 0.574 & 0.542 & 0.536 & 0.527 & 0.517\\
-DF human & 0.915 & 0.939 & 0.957 & 0.969 & 0.978 & 0.985\\
-C2ST const. & --- & 0.914 & 1.000 & 1.000 & 1.000 & 1.000\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Two corrections follow, in opposite directions, and both land on their
-theoretical values. Fitting $y = y_\infty + c\,n^{-1/2}$ over the non-degenerate
-range gives an extrapolated C2ST human ceiling of $\mathbf{0.500}$ and an
-extrapolated DF human ceiling of $\mathbf{1.000}$ --- exactly what two samples
-from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40$
-is \emph{entirely} finite-sample classifier bias and should be read with its $n$
-attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
-bias and is pessimistic. Correcting the latter widens the gap to the simulator's
-$0.703$ rather than narrowing it.
-
-Below $n\approx40$ the suite is unusable: the classifier fails to separate even
-the constant from real humans (the dashed entries above are the degenerate
-$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
-$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
-it was measured at.
+The anchors are estimated at $n{=}40$ per side. Appendix~\ref{app:samplesize}
+sweeps $n$ and shows the C2ST human ceiling is entirely finite-sample classifier
+bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
+(extrapolating to $1.000$, i.e.\ pessimistic), and recommends $n\ge40$ per side
+as a floor.
 
 \section{Is the prompt encoding the constraint?}
 \label{sec:encoding}
@@ -579,6 +547,22 @@ correctly is penalised, and by the predicted amount.
 One further number bounds what conditioning buys at all: the mean oracle beats the
 constant ($0.792$) by $0.9$ points. A perfect reader of the persona gains under a
 point over ignoring it.
+
+\section{Does this generalise beyond one questionnaire?}
+\label{sec:crossinstrument}
+
+Every result so far comes from IPIP-NEO-120, so the objection is that the audit
+describes that questionnaire rather than the task. We re-test the two
+\emph{structural} findings --- the ones needing no LLM --- on an independent
+instrument, construct and population: the Short Dark Triad (SD3), $17{,}740$
+respondents on $27$ items.
+
+Both replicate. $\mathrm{GMD}\ge\mathrm{MAD}$ holds on $27/27$ items, with a
+structural penalty of $8.67$ points against IPIP's $7.75$; and the per-item
+constant again outscores a real respondent from the same population ($0.744$ vs
+$0.664$) in $200$ of $200$ bootstraps, matching the inversion of
+\S\ref{sec:ceiling}. The defect belongs to the metric applied to ordinal
+questionnaire data, not to the Big Five or to one corpus.
 
 \section{Where the variance is lost}
 \label{sec:mechanism}
@@ -667,11 +651,10 @@ confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
 confounds uncertainty with individuation, and $\mathrm{VR}_\text{between}$ is
 the quantity a persona claim should be judged on.
 
-We state the limit of this plainly. At $\mathrm{VR}_\text{total}=0.758$ the
-largest model is no longer far from the human marginal, so for it the strong
-form of the claim below --- that no sampling-side remedy could help --- is not
-supported; what remains unsupported at every scale we measured is
-\emph{individuation}.
+One limit, plainly: at $\mathrm{VR}_\text{total}=0.758$ the largest model is not
+far from the human marginal, so for it the strong form of the claim below --- that
+no sampling-side remedy could help --- is unsupported. What remains unsupported at
+every scale is \emph{individuation}.
 
 Three consequences follow. First, for the smaller models the dispersion is not
 discarded at the decoding step; it was never present, so no temperature,
@@ -773,7 +756,9 @@ per-cell results are released.
 Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
 \S\ref{sec:mechanism} covers six open-weight models spanning 7B--235B,
-three families and two generations, since it requires logprob access the API
+three families and two generations, and the cross-instrument replication of
+\S\ref{sec:crossinstrument} covers only the two structural findings, since SD3
+carries no simulator runs; since it requires logprob access the API
 models in the audit do not provide; the within-family trend rests on three
 points and the cross-family comparison on six, so both are directional rather
 than fitted laws, and several 2026 reasoning-first models could not
@@ -808,6 +793,48 @@ is the specific harm this paper aims to reduce. Simulating demographic or
 personality groups also risks reinforcing stereotypes when cluster descriptions
 are treated as characterisations of real people rather than as statistical
 summaries.
+
+
+\appendix
+
+\section{Finite-sample behaviour of the anchors}
+\label{app:samplesize}
+
+Both anchors are estimated from $n{=}40$ per side, which for a classifier over
+120 features is a small-sample regime. We sweep $n$ on human-only data, where the
+true answers are known: two disjoint samples from the same cluster must be
+indistinguishable, so the honest C2ST value is exactly $0.5$ and any excess is
+estimator bias.
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccccc}
+\toprule
+$n$ & 20 & 40 & 80 & 160 & 320 & 640\\
+\midrule
+C2ST human & --- & 0.574 & 0.542 & 0.536 & 0.527 & 0.517\\
+DF human & 0.915 & 0.939 & 0.957 & 0.969 & 0.978 & 0.985\\
+C2ST const. & --- & 0.914 & 1.000 & 1.000 & 1.000 & 1.000\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two corrections follow, in opposite directions, and both land on their
+theoretical values. Fitting $y = y_\infty + c\,n^{-1/2}$ over the non-degenerate
+range gives an extrapolated C2ST human ceiling of $\mathbf{0.500}$ and an
+extrapolated DF human ceiling of $\mathbf{1.000}$ --- exactly what two samples
+from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40$
+is \emph{entirely} finite-sample classifier bias and should be read with its $n$
+attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
+bias and is pessimistic. Correcting the latter widens the gap to the simulator's
+$0.703$ rather than narrowing it.
+
+Below $n\approx40$ the suite is unusable: the classifier fails to separate even
+the constant from real humans (the dashed entries above are the degenerate
+$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
+$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
+it was measured at.
+
 
 \bibliographystyle{acl_natbib}
 \bibliography{refs}

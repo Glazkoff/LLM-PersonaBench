@@ -1,0 +1,21 @@
+{
+  "instrument": "Dark Triad (SD3)",
+  "n_respondents": 17740,
+  "n_items": 27,
+  "scale_span": 4.0,
+  "P1_proposition_holds_items": 27,
+  "P1_items_total": 27,
+  "P1_S_constant": 0.7505,
+  "P1_S_faithful": 0.6638,
+  "P1_gap_pp": 8.668,
+  "P2_constant_score": 0.7443,
+  "P2_human_score": 0.6638,
+  "P2_constant_wins": 200,
+  "P2_n_bootstraps": 200,
+  "IPIP_reference": {
+    "gap_pp": 7.75,
+    "constant": 0.7961,
+    "human": 0.7213
+  },
+  "verdict": "GENERALISES: both structural findings replicate on an independent instrument and construct"
+}
