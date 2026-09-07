@@ -6,7 +6,7 @@
     "provisional_advances": false
   },
   "created": "2026-09-04T21:32:29Z",
-  "updated": "2026-09-04T21:57:20Z",
+  "updated": "2026-09-07T11:49:29Z",
   "gates": {},
   "phases": [
     {
@@ -37,8 +37,8 @@
     },
     {
       "phase": "novelty-check",
-      "status": "pending",
-      "artifact": null,
+      "status": "done",
+      "artifact": "idea-stage/IDEA_REPORT.md#novelty-verification",
       "verdict_id": null,
       "reviewer": null,
       "reviewer_family": null,
@@ -46,7 +46,7 @@
       "acceptance_status": null,
       "executor_model": "claude-opus-5",
       "executor_family": "anthropic",
-      "updated": "2026-09-04T21:32:29Z"
+      "updated": "2026-09-07T11:49:29Z"
     },
     {
       "phase": "research-review",

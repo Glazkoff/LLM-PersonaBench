@@ -1,0 +1,10 @@
+{
+  "n_models": 6,
+  "mean_alpha_star": 3.8333333333333335,
+  "mean_c2st_base": 0.9925,
+  "mean_c2st_calibrated": 0.9842,
+  "mean_c2st_human_ceiling": 0.625,
+  "mean_VR_between_at_star": 0.412,
+  "note": "alpha selected on DEV facets by C2ST; all numbers on HELD-OUT facets.",
+  "verdict": "C2ST FLAT/WORSE: amplification does not survive a joint-structure criterion"
+}

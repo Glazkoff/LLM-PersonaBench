@@ -18,4 +18,4 @@ P=$!; trap 'kill $P 2>/dev/null||true' EXIT
 for i in $(seq 1 180); do curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 && break
   kill -0 $P 2>/dev/null || { echo FATAL; grep -iE "error|ValueError" $LOG/vllm_diag_$SLURM_JOB_ID.log|tail -10; exit 1; }; sleep 10; done
 export LOCAL_LLM_BASE_URL="http://127.0.0.1:$PORT/v1"
-$VENV/python arr2026/scripts/hyp/diag_readout.py "$MODEL"
+$VENV/python arr2026/scripts/hyp/diag_token_parity.py "$MODEL"

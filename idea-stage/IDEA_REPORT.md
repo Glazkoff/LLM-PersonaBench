@@ -123,6 +123,45 @@ score, and it is a second, independent argument for the suite.
 **Next step:** select alpha under a constraint that *does* see the trade (held-out
 C2ST, or a within-fidelity penalty), not under CRPS alone.
 
+### Follow-up experiment: alpha selected under held-out C2ST — NEGATIVE
+
+The pilot's own caveat demanded this: CRPS cannot see the within/between trade,
+so alpha must not be selected on it. Re-selecting alpha on **held-out C2ST**
+(dev facets for selection, held-out facets for reporting) reverses the reading.
+
+| | base | calibrated | human ceiling |
+|---|---|---|---|
+| mean C2ST | 0.9925 | 0.9842 | **0.625** |
+
+alpha* drops to 2-8 (not 16), VR_between reaches only 0.412, and the calibrated
+simulators remain at 0.984 against a human ceiling of 0.625. Amplification moves
+the marginal statistics that CRPS and VR_between can see, and moves essentially
+nothing a classifier reading joint respondent structure can see.
+
+**Conclusion:** the "individuation is recoverable" reading does not survive a
+criterion we did not design around. Combined with the novelty finding that alpha
+is published contrastive decoding, there is no defensible method claim here. The
+mechanism section stays a bounded negative — which is the honest and, given the
+circularity risk, the stronger outcome.
+
+### H10: is bootstrap stability evidence of structure? — NEGATIVE, and it corrects us
+
+Ran on Euler (job 763). Structureless surrogates matched to the real facet
+covariance reach the SAME bootstrap ARI as the real data:
+
+| data at k=4 | silhouette | bootstrap ARI |
+|---|---|---|
+| real | 0.082 | 0.910 |
+| Gaussian, matched covariance | 0.075 | 0.911 |
+| copula, matched marginals + covariance | 0.078 | 0.921 |
+| separated 4-component control | 0.672 | 1.000 |
+
+The paper previously framed the high ARI as "partly vindicating" k=4. That
+framing was wrong and has been removed. At n=410,168 any smooth unimodal cloud
+with this covariance is partitioned reproducibly, so ARI ~0.91 measures estimator
+variance, not multimodality. The positive control shows the test has power. Both
+criteria now agree that k=4 has no support.
+
 ### Explicitly rejected as out of scope before 12 Oct
 Respondent-contrastive LoRA (leakage control + training instability); a
 direct-answer vs long-deliberation ablation (reasoning mode changes the task); a
@@ -132,7 +171,51 @@ in probability space); cost-normalised rankings; behavioural-answer prompting
 oracle).
 
 ## Novelty Verification
-_(Phase 3)_
+
+Checked 2026-09-05, focused on the pilot-positive idea 3 (alpha-amplification of
+persona logit residuals).
+
+**Verdict: PROCEED WITH CAUTION — the mechanism is not novel; the measurement is.**
+
+The alpha knob is, mechanically, contrastive decoding applied to the system
+prompt. Established prior art:
+
+- **Steer Model beyond Assistant: Controlling System Prompt Strength via
+  Contrastive Decoding** (arXiv 2601.06403) — closest work. Controls how strongly
+  the system prompt influences generation by contrasting conditioned and
+  unconditioned logits. Our `Lbar_j + alpha*(L_ij - Lbar_j)` is the same operation
+  with the per-item mean over personas as the unconditioned reference.
+- **PromptCD** (arXiv 2602.20696) — isolates and amplifies signals aligned with a
+  target behaviour by contrasting outputs under opposing cues.
+- **Positional Contrastive Decoding** (arXiv 2506.08371) — amplifies token salience
+  via contrastive logits.
+- Contrastive **steering-vector** work reports saturation behaviour analogous to
+  our alpha sweep.
+
+**What this rules out.** We cannot claim to have invented persona amplification,
+and we should not present alpha as a new method. Any framing of the form "our
+method achieves human-level individuation" would be correctly attacked as
+renaming contrastive decoding.
+
+**What survives, and is where the contribution sits.**
+1. The *quantity*: how much individuation a persona-conditioned LLM carries,
+   measured as a fraction of a **human across-respondent SD**. No prior work
+   anchors to a human ceiling this way (cf. Persona Effect, ACL 2024, and the
+   temporal-stability line, which decompose variance within model outputs only).
+2. The *finding*: the persona signal is present but attenuated by roughly an
+   order of magnitude, and a known technique recovers it — which reframes the
+   audit's negative result as an attenuation result.
+3. The *caveat*: CRPS improves monotonically across the whole alpha sweep while
+   VR_within moves away from human. A proper scoring rule on the marginal cannot
+   certify individuation. This is novel as far as the survey found, and it is an
+   independent argument for reporting the decomposition.
+
+**Consequence for the "SOTA" framing.** There is no external leaderboard for this
+task, and the metric that alpha optimises is one we introduced. Claiming SOTA on
+our own metric with a known technique is circular. The defensible claim is
+measurement, plus a demonstration that the gap is closable — and it must be
+validated against something we did not design (held-out C2ST, or the human
+ceiling on an untouched facet split).
 
 ## External Critical Review
 _(Phase 4)_
