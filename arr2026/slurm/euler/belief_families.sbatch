@@ -17,6 +17,9 @@ case $SLURM_ARRAY_TASK_ID in
   1) MODEL="openai/gpt-oss-20b";                       TAG=gptoss_20b;  BS=4 ;;
   2) MODEL="deepseek-ai/DeepSeek-V4-Flash";            TAG=dsv4_flash;  BS=4 ;;
   3) MODEL="nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16";    TAG=nemotron_4b; BS=8 ;;
+  # 3 needs mamba-ssm (hybrid Mamba); replaced by two plain-transformer families.
+  4) MODEL="ibm-granite/granite-4.1-8b";               TAG=granite_8b;  BS=8 ;;
+  5) MODEL="swiss-ai/Apertus-8B-Instruct-2509";        TAG=apertus_8b;  BS=8 ;;
 esac
 
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python

@@ -117,6 +117,16 @@ def main():
     dids = digit_token_ids(tok)
     print("digit token ids:", dids, flush=True)
 
+    # Harmony-format models (gpt-oss) expect the assistant turn to open a
+    # channel before any content; prefilling bare text after <|start|>assistant
+    # leaves them off-format and scatters mass onto channel tokens rather than
+    # the scale. Steering them to their answer surface is the same category of
+    # intervention as disabling <think>, and is disclosed alongside it.
+    _tmpl = getattr(tok, "chat_template", "") or ""
+    prefill = ("<|channel|>final<|message|>My answer is "
+               if "<|channel|>" in _tmpl else "My answer is ")
+    print(f"prefill: {prefill!r}", flush=True)
+
     rows = []
     for cl in args.clusters:
         geno, system = load_genotype(cl)
@@ -142,7 +152,7 @@ def main():
                 except TypeError:
                     text = tok.apply_chat_template(
                         msgs, tokenize=False, add_generation_prompt=True)
-                prompts.append(text + "My answer is ")
+                prompts.append(text + prefill)
 
         beliefs = np.full((len(sub), 120), np.nan)
         probs_all = np.full((len(sub), 120, 5), np.nan)   # full belief simplex
