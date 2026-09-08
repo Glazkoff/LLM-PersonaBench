@@ -37,7 +37,7 @@ cells; a \emph{real human drawn from the target cluster} scores $0.721$ and also
 loses to the constant in $20$ of $20$ cells. We further find that the released
 benchmark scores raw model self-reports against reverse-recoded human answers on
 $55$ of $120$ items; we correct this and report every result under both
-orientations. A metric that ranks a constant above
+orientations, the replacement suite included. A metric that ranks a constant above
 a genuine group member cannot be measuring personality simulation. We propose a
 replacement suite --- a classifier two-sample test, per-item distributional
 fidelity, and a variance ratio --- each reported against an explicit human ceiling
@@ -283,16 +283,17 @@ Reading the audited systems off that curve:
 \toprule
 System & DF & Resp.-equiv.\\
 \midrule
-Evolutionary LLM persona & 0.703 & \textbf{1}\\
+Evolutionary LLM persona & 0.783 & \textbf{1--2}\\
 Constant cluster mean & 0.796 & 2\\
 Human ceiling & 0.939 & 34\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-An evolutionary-optimised persona is worth about \textbf{one} real respondent:
-sampling a single human from the cluster gives a better estimate of that
-cluster's response distribution than the simulator does. This is the same result
+An evolutionary-optimised persona is worth between \textbf{one and two} real
+respondents: it improves on a single-respondent plug-in ($0.783$ against
+$0.723$) but not on a two-respondent one ($0.796$), which is also where the
+constant sits. This is the same result
 as \S\ref{sec:audit} in different units, and it is the version we would put to a
 practitioner weighing synthetic respondents against a small pilot survey.
 
@@ -920,16 +921,16 @@ rather than a recommendation.
 \paragraph{The alignment does not depend on the oracle.} Because $r$ is measured
 against a fitted target, an oracle missing structure the models track would
 understate it. It does not. Boosted trees on the same code change $r$ by at most
-$0.005$; a ridge on the continuous scores, or an oracle given all thirty-five,
-moves it by at most $0.05$ and leaves the ordering of models unchanged, the
-richer oracle giving \emph{lower} $r$ as it should, since models only ever see
-the ten-score code. Two independent computations also agree where theory demands
-it: the ceiling as a standard-deviation ratio is $0.482$ and the oracle's
+$0.012$ and a ridge on the continuous scores by at most $0.034$; an oracle given
+all thirty-five scores lowers $r$ substantially, by up to $0.168$, which is the
+expected direction since models only ever see the ten-score code. The ordering of
+models is unchanged throughout. Two independent computations agree where theory
+demands it: the ceiling as a standard-deviation ratio is $0.482$ and the oracle's
 correlation with actual respondents is $0.491$, which coincide for a conditional
-mean. The check that assumes no oracle at all is sharpest --- correlating each
-model's persona means directly against the forty respondents' own answers gives
-$0.055$--$0.151$, where the oracle reaches $0.491$ on that same target. Models
-recover between a ninth and a third of the attainable person-level alignment.
+mean. The check that assumes no oracle at all --- correlating each model's persona
+means directly against the forty respondents' own answers --- gives
+$0.076$--$0.248$ against the oracle's $0.491$, so models recover between a sixth
+and a half of the attainable person-level alignment.
 
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
