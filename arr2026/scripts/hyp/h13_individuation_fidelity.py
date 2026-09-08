@@ -26,6 +26,31 @@ BOUNDS = [0, 20, 40, 60, 80, 100]
 N_LEVELS = 5
 
 
+def reverse_keyed_mask():
+    """Items stored reverse-recoded in the corpus.
+
+    The corpus recodes 55 of the 120 items; models answer the literal item. VR
+    is invariant to a per-item sign flip, so the belief-variance results are
+    unaffected, but a CORRELATION is not: leaving this out flips the sign on 55
+    of 120 items and drags any alignment estimate toward zero. h3 already maps
+    models into the human orientation; these analyses must do the same.
+    """
+    import csv
+    key = list(csv.DictReader(open(ROOT / "data/IPIP-NEO/120/item_key.csv")))
+    neg = np.zeros(120, dtype=bool)
+    for r in key:
+        if str(r["reverse"]).strip().lower() == "true":
+            neg[int(r["item"]) - 1] = True
+    return neg
+
+
+def to_human_orientation(mu, neg):
+    """Map model item means onto the corpus's recoded scale."""
+    out = mu.copy()
+    out[:, neg] = 6.0 - out[:, neg]
+    return out
+
+
 def channel_scores(cluster: int):
     base = ROOT / "src/prompt/mean_value_cluster"
     tr = json.loads((base / "traits.json").read_text(encoding="utf-8"))
@@ -52,12 +77,13 @@ def main() -> None:
     ap.add_argument("--n-personas", type=int, default=40)
     a = ap.parse_args()
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
+    NEG = reverse_keyed_mask()
 
     for run in a.runs:
         rd = ROOT / a.results / run
         if not (rd / "summary.json").exists():
             print(f"{run:22s} MISSING"); continue
-        rs, vrs = [], []
+        rs, vrs, aligned = [], [], []
         for d in sorted(rd.glob("readout_cluster_*")):
             cl = int(d.name.rsplit("_", 1)[1])
             probs = np.load(d / "belief_probs.npy")
@@ -68,7 +94,8 @@ def main() -> None:
             ok = human_sd > 0
 
             vals = np.arange(1, 6, dtype=float)
-            mu = np.nansum(probs * vals[None, None, :], axis=2)     # (personas, items)
+            mu = np.nansum(probs * vals[None, None, :], axis=2)
+            mu = to_human_orientation(mu, NEG)     # (personas, items)
 
             chan = [c for c in channel_scores(cl) if c in df.columns]
             qf = np.column_stack([quantise(fit_rows[c].to_numpy(float)) for c in chan])
@@ -80,16 +107,23 @@ def main() -> None:
                 oh_p[np.arange(len(qp)), k * N_LEVELS + qp[:, k]] = 1.0
             oracle = ridge(oh_f, fit_rows[ITEMS].to_numpy(float), oh_p)  # (personas, items)
 
+            model_sd = np.sqrt(np.nanvar(mu, axis=0))
             for j in np.where(ok)[0]:
                 x, y = mu[:, j], oracle[:, j]
                 if np.nanstd(x) < 1e-9 or np.nanstd(y) < 1e-9:
                     continue
-                rs.append(float(np.corrcoef(x, y)[0, 1]))
-            vrs.append(float(np.nanmean(np.sqrt(np.nanvar(mu, axis=0))[ok] / human_sd[ok])))
+                rj = float(np.corrcoef(x, y)[0, 1])
+                rs.append(rj)
+                # Aligned amplitude is an ITEMWISE product, not a product of two
+                # separately averaged means: A = mean_j r_j * sd(M_j)/sd(H_j).
+                aligned.append(rj * float(model_sd[j] / human_sd[j]))
+            vrs.append(float(np.nanmean(model_sd[ok] / human_sd[ok])))
 
         r = float(np.nanmean(rs)); vr = float(np.nanmean(vrs))
-        print(f"{run:22s} r={r:+.3f}  VR_betw={vr:.3f}  aligned={r*vr:+.3f} "
-              f"(items={len(rs)})", flush=True)
+        A = float(np.nanmean(aligned))
+        # persona-level uncertainty is not estimated here; A is a point estimate
+        print(f"{run:22s} r={r:+.3f}  VR_betw={vr:.3f}  A_itemwise={A:+.3f} "
+              f"(naive r*VR={r*vr:+.3f}, items={len(rs)})", flush=True)
 
 
 if __name__ == "__main__":

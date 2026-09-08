@@ -33,6 +33,31 @@ BOUNDS = [0, 20, 40, 60, 80, 100]
 N_LEVELS = 5
 
 
+def reverse_keyed_mask():
+    """Items stored reverse-recoded in the corpus.
+
+    The corpus recodes 55 of the 120 items; models answer the literal item. VR
+    is invariant to a per-item sign flip, so the belief-variance results are
+    unaffected, but a CORRELATION is not: leaving this out flips the sign on 55
+    of 120 items and drags any alignment estimate toward zero. h3 already maps
+    models into the human orientation; these analyses must do the same.
+    """
+    import csv
+    key = list(csv.DictReader(open(ROOT / "data/IPIP-NEO/120/item_key.csv")))
+    neg = np.zeros(120, dtype=bool)
+    for r in key:
+        if str(r["reverse"]).strip().lower() == "true":
+            neg[int(r["item"]) - 1] = True
+    return neg
+
+
+def to_human_orientation(mu, neg):
+    """Map model item means onto the corpus's recoded scale."""
+    out = mu.copy()
+    out[:, neg] = 6.0 - out[:, neg]
+    return out
+
+
 def channel_scores(cluster: int):
     base = ROOT / "src/prompt/mean_value_cluster"
     tr = json.loads((base / "traits.json").read_text(encoding="utf-8"))
@@ -80,6 +105,7 @@ def main() -> None:
     a = ap.parse_args()
 
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
+    NEG = reverse_keyed_mask()
     all_scores = TRAITS + [c for c in df.columns if c.startswith("facet_")]
 
     oracles, oks, actuals = {}, {}, {}
@@ -141,6 +167,7 @@ def main() -> None:
             cl = int(d.name.rsplit("_", 1)[1])
             probs = np.load(d / "belief_probs.npy")
             mu = np.nansum(probs * np.arange(1, 6, dtype=float)[None, None, :], axis=2)
+            mu = to_human_orientation(mu, NEG)
             for k, pred in oracles[cl].items():
                 acc[k] += colwise_r(mu, pred, oks[cl])
             acc["actual"] += colwise_r(mu, actuals[cl], oks[cl])

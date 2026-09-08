@@ -1,0 +1,550 @@
+diff --git a/paper/main.tex b/paper/main.tex
+index f01bdce..44eeeb3 100644
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -511,43 +511,11 @@ readers can see how much of any separability is carried by response style. A
+ simulator that closed only the style gap would look far better on the headline
+ number while remaining just as distinguishable on content.
+ 
+-\subsection{How much of the anchors is finite-sample bias?}
+-\label{sec:samplesize}
+-
+-Both anchors are estimated from $n{=}40$ per side, which for a classifier over
+-120 features is a small-sample regime. We sweep $n$ on human-only data, where the
+-true answers are known: two disjoint samples from the same cluster must be
+-indistinguishable, so the honest C2ST value is exactly $0.5$ and any excess is
+-estimator bias.
+-
+-\begin{center}\scriptsize
+-\setlength{\tabcolsep}{3pt}
+-\begin{tabular}{lcccccc}
+-\toprule
+-$n$ & 20 & 40 & 80 & 160 & 320 & 640\\
+-\midrule
+-C2ST human & --- & 0.574 & 0.542 & 0.536 & 0.527 & 0.517\\
+-DF human & 0.915 & 0.939 & 0.957 & 0.969 & 0.978 & 0.985\\
+-C2ST const. & --- & 0.914 & 1.000 & 1.000 & 1.000 & 1.000\\
+-\bottomrule
+-\end{tabular}
+-\end{center}
+-
+-Two corrections follow, in opposite directions, and both land on their
+-theoretical values. Fitting $y = y_\infty + c\,n^{-1/2}$ over the non-degenerate
+-range gives an extrapolated C2ST human ceiling of $\mathbf{0.500}$ and an
+-extrapolated DF human ceiling of $\mathbf{1.000}$ --- exactly what two samples
+-from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40$
+-is \emph{entirely} finite-sample classifier bias and should be read with its $n$
+-attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
+-bias and is pessimistic. Correcting the latter widens the gap to the simulator's
+-$0.703$ rather than narrowing it.
+-
+-Below $n\approx40$ the suite is unusable: the classifier fails to separate even
+-the constant from real humans (the dashed entries above are the degenerate
+-$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
+-$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
+-it was measured at.
++The anchors are estimated at $n{=}40$ per side. Appendix~\ref{app:samplesize}
++sweeps $n$ and shows the C2ST human ceiling is entirely finite-sample classifier
++bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
++(extrapolating to $1.000$, i.e.\ pessimistic), and recommends $n\ge40$ per side
++as a floor.
+ 
+ \section{Is the prompt encoding the constraint?}
+ \label{sec:encoding}
+@@ -580,40 +548,54 @@ One further number bounds what conditioning buys at all: the mean oracle beats t
+ constant ($0.792$) by $0.9$ points. A perfect reader of the persona gains under a
+ point over ignoring it.
+ 
++\section{Does this generalise beyond one questionnaire?}
++\label{sec:crossinstrument}
++
++Every result so far comes from IPIP-NEO-120, so the objection is that the audit
++describes that questionnaire rather than the task. We re-test the two
++\emph{structural} findings --- the ones needing no LLM --- on an independent
++instrument, construct and population: the Short Dark Triad (SD3), $17{,}740$
++respondents on $27$ items.
++
++Both replicate. $\mathrm{GMD}\ge\mathrm{MAD}$ holds on $27/27$ items, with a
++structural penalty of $8.67$ points against IPIP's $7.75$; and the per-item
++constant again outscores a real respondent from the same population ($0.744$ vs
++$0.664$) in $200$ of $200$ bootstraps, matching the inversion of
++\S\ref{sec:ceiling}. The defect belongs to the metric applied to ordinal
++questionnaire data, not to the Big Five or to one corpus.
++
+ \section{Where the variance is lost}
+ \label{sec:mechanism}
+ 
+ Knowing the simulator is mis-dispersed does not say \emph{where} the dispersion
+ goes. We read the model's own belief before any sampling occurs, on open-weight
+-models served locally.
++models served locally.%
+ 
+-\paragraph{Stage 1, belief.} For each persona and item we take the model's
++
++\paragraph{Two stages.} For each persona and item we take the model's
+ next-token distribution over the answer tokens $\{1,\dots,5\}$ directly from the
+-logprobs. Two implementation details matter. Hybrid reasoning models emit a
++logprobs, then sample each item from its own belief and score the resulting
++population. One implementation detail matters: hybrid reasoning models emit a
+ \texttt{<think>} token first --- with probability $\approx 1$ --- so a naive
+ readout sees no mass on the scale at all; we disable thinking and prefill the
+ assistant turn.
+ 
+-\paragraph{Stage 2, decode.} We then sample each item from its own belief
+-distribution and score the resulting population.
++\paragraph{Result.} What is collapsed is the \emph{individuating} part of the
++belief, not the belief's total spread. In the 2024--25 models both are small;
++in the 2026 reasoning-first models the total spread reaches or exceeds the
++human marginal while individuation stays as low as ever.
+ 
+-\paragraph{Result.} The belief distribution is already collapsed.
++The statistic matters. The quantity comparable to a human
++\emph{across-respondent} SD is not the average within-persona conditional SD but
++the SD of the persona-\emph{mixture} distribution, from the law of total
++variance $\mathrm{Var}(X_j)=\mathbb{E}_i[\mathrm{Var}(X_j\mid i)]
+++\mathrm{Var}_i(\mathbb{E}[X_j\mid i])$, computed exactly from the retained
++probability vectors. The within-persona term alone would understate a faithful
++simulator, which can hold sharp per-persona beliefs and still match human
++variance through differing persona means.
+ 
+-The statistic must be chosen carefully. The quantity comparable to a human
+-\emph{across-respondent} SD is not the average within-persona conditional SD, but
+-the SD of the persona-\emph{mixture} distribution, obtained from the law of total
+-variance,
+-\[
+-\mathrm{Var}(X_j)=\mathbb{E}_i\!\left[\mathrm{Var}(X_j\mid i)\right]
+-+\mathrm{Var}_i\!\left(\mathbb{E}[X_j\mid i]\right),
+-\]
+-computed exactly from the retained probability vectors. Reporting the
+-within-persona term alone would understate a faithful simulator, which can hold
+-sharp per-persona beliefs and still match human variance through differing
+-persona means.
+-
+-\begin{center}\footnotesize
+-\setlength{\tabcolsep}{3pt}
++\begin{center}\scriptsize
++\setlength{\tabcolsep}{2.5pt}
+ \begin{tabular}{lcccc}
+ \toprule
+ Model & Params & VR$_\text{with}$ & VR$_\text{betw}$ & VR$_\text{tot}$\\
+@@ -624,6 +606,11 @@ Qwen2.5-72B-Instruct & 72B & 0.367 & \textbf{0.295} & 0.488\\
+ Mistral-Small-24B & 24B & 0.538 & \textbf{0.177} & 0.579\\
+ QwQ-32B (reasoning) & 32B & 0.729 & \textbf{0.154} & 0.753\\
+ Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
++Qwen3.5-9B & 9B & 1.058 & \textbf{0.167} & 1.078\\
++GLM-4.7-Flash (MoE) & 29B & 1.209 & \textbf{0.265} & 1.242\\
++gpt-oss-20b (MoE) & 21B & 1.121 & \textbf{0.126} & 1.131\\
++Granite-4.1-8B & 8B & 0.386 & \textbf{0.207} & 0.457\\
++Apertus-8B-Instruct & 8B & 0.927 & \textbf{0.130} & 0.939\\
+ \midrule
+ \textit{human} & --- & --- & --- & 1.000\\
+ \bottomrule
+@@ -631,60 +618,69 @@ Qwen3-235B-A22B-2507 & 235B & 0.695 & \textbf{0.258} & 0.758\\
+ \end{center}
+ 
+ Essentially all probability mass lands on the five valid answer tokens
+-($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number; entropies
+-of $0.42$--$0.73$ nats sit far below the maximum $\ln 5 = 1.609$. The largest
+-model is the one the audited system itself used, so this is a measurement on
+-that system, not on a proxy for it.
++($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number. Belief
++entropy nonetheless spans $0.42$--$1.38$ nats (maximum $\ln 5 = 1.609$), and we
++can offer no clean account of it: it tracks neither release date (Granite-4.1,
++$0.49$) nor reasoning-tuning (QwQ $0.63$; the standard-instruct Apertus $1.24$).
++The 235B model is the one the audited system used, so this measures that system,
++not a proxy.
+ 
+ \paragraph{Total dispersion and individuation are decoupled.} The decomposition
+-says something the total does not. Over the six models the rank correlation
+-between $\mathrm{VR}_\text{total}$ and $\mathrm{VR}_\text{between}$ is
+-$\rho=-0.14$: knowing how dispersed a simulator's answers are tells you nothing
+-about how much of that dispersion individuates.
+-
+-The reasoning model makes the point most sharply. QwQ-32B reaches
+-$\mathrm{VR}_\text{total}=0.753$, statistically tied with the $235$B model's
+-$0.758$ and the second-highest in the set --- yet its individuating component is
+-the \emph{lowest} of all six at $0.154$, barely half the $235$B's. Its
+-dispersion is almost entirely per-item uncertainty ($0.729$ of $0.753$). A
+-simulator can look nearly human-like in spread while differentiating personas
+-less than any other model measured.
+-
+-The Qwen2.5 family isolates this with the family held fixed and only scale
+-varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
+-\to 0.295$ at 7B, 32B, 72B --- while total dispersion does not, moving $0.430 \to
+-0.343 \to 0.488$. Scale buys individuation; it does not buy, and is not tracked
+-by, the total.
+-
+-One bound survives across the whole set --- a $34\times$ parameter range, three
+-families, two generations, and both standard and reasoning-tuned models: no
+-model exceeds $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits
+-between a seventh and under a third of the human value throughout, and neither
+-the largest model nor the most dispersed one is the best at it.
+-
+-A simulator can therefore look markedly more dispersed simply by being less
+-confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
+-confounds uncertainty with individuation, and $\mathrm{VR}_\text{between}$ is
+-the quantity a persona claim should be judged on.
+-
+-We state the limit of this plainly. At $\mathrm{VR}_\text{total}=0.758$ the
+-largest model is no longer far from the human marginal, so for it the strong
+-form of the claim below --- that no sampling-side remedy could help --- is not
+-supported; what remains unsupported at every scale we measured is
+-\emph{individuation}.
+-
+-Three consequences follow. First, for the smaller models the dispersion is not
+-discarded at the decoding step; it was never present, so no temperature,
+-top-$p$, or sampling-side remedy could recover it. Second, because all probability mass lands on valid answer
+-tokens, accounts attributing mode collapse to difficulty \emph{emitting} numeric
+-scores are not supported here --- the model is not failing to express a broad
+-belief, it holds a narrow one. Third, this closes the loop with the answer-level
+-results: the item main effect dominates realised variance
+-(\S\ref{sec:suite}), conditioning on the correct cluster does nothing for
+-dispersion or distinguishability (\S\ref{sec:permutation}), and the belief-level
+-individuating component is $\sim\!0.18$ of human in both models. Three
+-independent measurements agree that persona conditioning moves \emph{which
+-items} get endorsed, not \emph{who} is endorsing them.
++says something the total does not, and the evidence for this is existential
++rather than correlational. gpt-oss-20b and Qwen2.5-72B invert cleanly: the
++former has $2.3\times$ the total dispersion of the latter ($1.131$ vs $0.488$)
++and \emph{less than half} its individuation ($0.126$ vs $0.295$). The rank
++correlation over the eleven models is $\rho=-0.30$, but its bootstrap 95\%
++interval is $[-0.92,0.42]$, so we rest nothing on it.
++
++QwQ-32B sharpens it: its dispersion is almost all per-item uncertainty ($0.729$
++of $0.753$), and it individuates less ($0.154$) than far smaller models.
++
++The Qwen2.5 family isolates this at fixed family and varying scale:
++individuation rises monotonically, $0.193 \to 0.220 \to 0.295$ at 7B, 32B, 72B,
++while the total does not, moving $0.430 \to 0.343 \to 0.488$.
++
++One bound survives across the whole set --- a $34\times$ parameter range, six
++families, three generations, dense and mixture-of-experts, and both standard and
++reasoning-tuned models: no model exceeds
++$\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between an eighth
++and under a third of the human value throughout, and neither the largest model
++nor the most dispersed one is the best at it.
++
++\paragraph{The prompt is not what caps individuation.} A persona is individuated
++only through a five-word quantisation of ten numbers, but that channel is not the
++limit: the best predictor of an item from that code, fitted on held-out
++respondents, reaches $0.482$ on these same personas, and no two personas share a
++code (App.~\ref{app:ceiling}). The best model delivers $0.295$.
++
++\paragraph{And most of what there is points nowhere.} $\mathrm{VR}_\text{between}$
++measures how far apart a simulator places its persona means, not whether that
++spread identifies the right respondent. Correlating each model's persona means
++against the oracle's over the forty personas gives $r=0.11$--$0.28$, so the
++aligned component $r\cdot\mathrm{VR}_\text{between}$ is $0.019$--$0.046$: under
++five per cent of the human value in every model. This is also why amplifying the
++persona signal does not help --- scaling a misdirected vector only makes it
++louder.
++
++A simulator can therefore look more dispersed simply by being less confident:
++$\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
++$\mathrm{VR}_\text{between}$ is what a persona claim should be judged on.
++
++One limit, plainly: the strong form of the claim below --- that no sampling-side
++remedy could help --- needs total dispersion well under the human marginal, which
++is false for the largest 2024--25 model ($0.758$) and for the three that
++\emph{exceed} it ($1.078$, $1.131$, $1.242$); there, spread is present and is
++lost afterwards. What no model supplies at any scale is \emph{individuation}.
++
++Three consequences follow. For the low-dispersion models the spread is not
++discarded at decoding; it was never present, so no temperature or top-$p$ remedy
++recovers it. Since all mass lands on valid answer tokens, accounts blaming mode
++collapse on difficulty \emph{emitting} numbers are unsupported here. And it
++closes the loop with the answer-level results: the item main effect dominates
++realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
++does nothing for dispersion or distinguishability (\S\ref{sec:permutation}) ---
++three measurements agreeing that persona conditioning moves \emph{which items}
++get endorsed, not \emph{who} endorses them.
+ 
+ \section{Is $k{=}4$ a partition at all?}
+ \label{sec:clusters}
+@@ -694,25 +690,19 @@ scores. We re-derive it and test $k \in \{2,\dots,15\}$ under three
+ preprocessings. Our $k{=}4$ solution reproduces the published labels
+ (ARI $=0.946$), confirming the pipeline.
+ 
+-No \emph{separation} criterion supports $k{=}4$. Silhouette falls monotonically
+-from $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$;
+-Davies--Bouldin is also minimised at $k{=}2$; the gap statistic increases
+-monotonically and selects no interior $k$. A silhouette below $0.1$ indicates
+-essentially no separated structure.
+-
+-\emph{Stability} tells a different and fairer story, and we report it because it
+-partly vindicates the choice. Bootstrap adjusted Rand index over 40 resamples is
+-$0.977$, $0.952$, $0.932$ and $0.903$ at $k{=}2,3,4,5$, then falls away sharply
+-($0.797$ at $k{=}6$, $0.581$ at $k{=}7$, and below $0.7$ everywhere after). So
+-$k{=}4$ is close to the largest $k$ that $k$-means recovers reproducibly, even
+-though it never separates. The clusters are also not demographic artefacts:
+-Cram\'er's $V$ against sex, age band and country is $0.055$--$0.057$, detectable
+-at $n{=}410{,}168$ but negligible in size.
+-
+-The resolution is that stability and separation measure different things. A
+-reproducible partition of a continuum is still a partition of a continuum, and
+-that is what bounds how much cluster-conditional signal any persona can exploit
+---- as \S\ref{sec:permutation} then confirms behaviourally.
++No criterion supports $k{=}4$. Silhouette falls monotonically from $0.134$ at
++$k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$, and Davies--Bouldin and
++the gap statistic select no interior $k$. Bootstrap stability looks at first like
++a defence (ARI $0.903$--$0.977$ for $k\le5$), but structureless surrogates matched
++to the facet covariance reproduce it exactly --- ARI $0.911$ and $0.921$ against the
++real data's $0.910$ --- while a separated control confirms the test has power
++(ARI $1.000$). At $n{=}410{,}168$ bootstrap agreement measures estimator variance,
++not multimodality. The clusters are not demographic artefacts either (Cram\'er's
++$V$ of $0.055$--$0.057$); they are a reproducible discretisation of a continuum,
++which bounds the cluster-conditional signal any persona can exploit
++(App.~\ref{app:clusters}). Since stability-based selection is common, the general
++point is worth stating: at large $n$, bootstrap agreement must be read against a
++covariance-matched null or it certifies nothing.
+ 
+ \section{Related work}
+ \label{sec:related}
+@@ -730,22 +720,21 @@ optimiser. Our contribution is orthogonal to all of these: we show the objective
+ they are scored against is maximised by a degenerate solution.
+ 
+ Classifier two-sample tests are standard for comparing
+-distributions~\citep{lopezpaz2017revisiting}, and the failure mode we identify
+---- an absolute-error objective minimised by a conditional central tendency --- is
+-the familiar reason such losses produce blurred, low-variance predictions in
+-generative modelling.
++distributions~\citep{lopezpaz2017revisiting}, and the failure mode we identify ---
++an absolute-error objective minimised by a conditional central tendency --- is why
++such losses blur predictions in generative modelling.
+ 
+ \section{Conclusion}
+ 
+ Cluster-level LLM personality simulation is evaluated with a metric that a
+ constant vector wins and a real human loses. We proved why, measured the
+ structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
+-cells across five models, and proposed a suite that orders humans above
+-constants. Reported gains in this literature that are smaller than the
+-constant-vs-faithful gap should not be read as evidence of personality fidelity.
+-The repair is equally narrow: score with $S_{1/2}$, the proper member of the
+-family in \eqref{eq:slambda}, and report the constant floor and the human ceiling
+-next to every number.
++cells, and proposed a suite that orders humans above constants. Beneath the
++metric the simulation is thinner still: across eleven models the individuation
++that actually points at the right respondent is under five per cent of the human
++value, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
++member of \eqref{eq:slambda}, and report the constant floor and human ceiling
++beside every number.
+ 
+ \section*{Reproducibility}
+ 
+@@ -755,21 +744,35 @@ measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
+ independently on two clusters with different operating systems, Python versions
+ and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
+ figure --- the $\lambda^\star$ values, the orientation deltas, the variance
+-components, and the oracle ceilings --- agreed to all printed digits. Code and
++components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
++ceilings --- agreed to all printed digits. Code and
+ per-cell results are released.
+ 
+ \section*{Limitations}
+ 
+ Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
+ optimisation family, and five models; the belief-level measurement of
+-\S\ref{sec:mechanism} covers six open-weight models spanning 7B--235B,
+-three families and two generations, since it requires logprob access the API
++\S\ref{sec:mechanism} covers eleven open-weight models spanning 7B--235B,
++six families and three generations, and the cross-instrument replication of
++\S\ref{sec:crossinstrument} covers only the two structural findings, since SD3
++carries no simulator runs; since it requires logprob access the API
+ models in the audit do not provide; the within-family trend rests on three
+-points and the cross-family comparison on six, so both are directional rather
+-than fitted laws, and several 2026 reasoning-first models could not
+-be measured at all because they place almost no probability mass on the answer
+-tokens under this elicitation, which is a limitation of the readout rather than
+-evidence about those models; the proposition is general to the
++points and the cross-family comparison on eleven, so both are directional rather
++than fitted laws; all models are read with thinking disabled and the assistant
++turn prefilled, and the four least confident of them (belief entropy above $1$
++nat) should not have their above-human total dispersion read as calibrated
++uncertainty, though low confidence cannot inflate
++$\mathrm{VR}_\text{between}$, which is computed from persona means; two
++elicitation details proved to matter more than we expected --- reading these
++models through a chat-completions server returned almost no mass on the answer
++tokens where the forward pass recovers $0.99$--$1.00$, and harmony-format models
++require the assistant turn to open a channel before the prefill, without which
++mass on the scale falls to $0.39$ --- so a null result in this literature may
++report a readout rather than a model; every model we report is unquantised at
++inference, one FP8 checkpoint having resisted measurement through both available
++routes (its serving path returns no mass on the scale, and the forward-pass path
++hits a quantiser bug), so we make no claim about how quantisation affects
++individuation; the proposition is general to the
+ absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
+ specific to this setting. The model answers we re-score were produced by prior
+ runs we did not control, at temperatures we did not set, and one released run was
+@@ -799,6 +802,171 @@ personality groups also risks reinforcing stereotypes when cluster descriptions
+ are treated as characterisations of real people rather than as statistical
+ summaries.
+ 
++
++\appendix
++
++\section{Cluster validity in full}
++\label{app:clusters}
++
++No \emph{separation} criterion supports $k{=}4$. Silhouette falls monotonically
++from $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$;
++Davies--Bouldin is also minimised at $k{=}2$; the gap statistic increases
++monotonically and selects no interior $k$. A silhouette below $0.1$ indicates
++essentially no separated structure.
++
++\emph{Stability} looks at first like a defence: bootstrap ARI over 40 resamples
++is $0.977$, $0.952$, $0.932$, $0.903$ at $k{=}2,3,4,5$ and falls away after
++($0.797$, $0.581$), so $k{=}4$ looks close to the largest reproducible $k$.
++
++That reading does not survive a null calibration. Rebuilding the pipeline on
++structureless surrogates --- a Gaussian matched to the real $30\times30$ facet
++covariance, and a copula matched to the covariance and every per-facet marginal
++--- reproduces the stability number exactly: ARI $0.911$ and $0.921$ at
++silhouette $0.075$ and $0.078$, against the real data's $0.910$ at $0.082$. A
++separated 4-component control confirms the test has power (silhouette $0.672$,
++ARI $1.000$).
++
++At $n{=}410{,}168$ any smooth unimodal cloud with this covariance is partitioned
++reproducibly, so ARI $\approx0.91$ measures estimator variance, not multimodality,
++and neither criterion supports $k{=}4$. The clusters are not demographic
++artefacts either (Cram\'er's $V$ of $0.055$--$0.057$ against sex, age band and
++country); they are a reproducible discretisation of a continuum, which bounds the
++cluster-conditional signal any persona can exploit. Since stability-based model
++selection is common, the general point is worth stating: at large $n$, bootstrap
++agreement must be read against a covariance-matched null or it certifies
++nothing.
++
++
++\section{The individuation ceiling of the prompt}
++\label{app:ceiling}
++
++A persona reaches the model only through \texttt{get\_modifier\_bisect}, which
++writes each score as one of five words on width-20 bins; each cluster's genotype
++names five traits and five of the thirty facets, and every other sentence of the
++system prompt is shared. Ten words therefore carry the respondent's identity, and
++two respondents sharing those ten bins would receive byte-identical prompts and
++so must receive identical beliefs.
++
++We estimate what that channel permits. Within each cluster we fit
++$\mathbb{E}[X_j \mid \text{code}]$ on respondents \emph{excluding} the forty
++personas, then evaluate on those forty, so the quantity is directly comparable to
++$\mathrm{VR}_\text{between}$ and is never fitted on its own evaluation set.
++
++\begin{center}\footnotesize
++\begin{tabular}{lc}
++\toprule
++Conditioning available to the model & Ceiling\\
++\midrule
++Ten scores, five words each \emph{(the audited system)} & 0.482\\
++\quad same, with boosted trees & 0.483\\
++Ten scores, written as numbers & 0.512\\
++All 35 scores, five words each & 0.707\\
++All 35 scores, written as numbers & 0.726\\
++\midrule
++\textit{best model observed} & \textit{0.295}\\
++\bottomrule
++\end{tabular}
++\end{center}
++
++Three things follow. The quantisation is not the binding constraint: writing
++numbers instead of words buys $0.03$. The channel is not degenerate: all forty
++personas in all four clusters receive distinct codes, so no model is forced to
++answer two personas identically. And interactions add nothing ($0.483$ against
++$0.482$), so the additive fit is essentially the conditional mean rather than a
++loose lower bound.
++
++The oracle is fitted on this population and so knows its code-to-response
++mapping, which a zero-shot model does not; we therefore do not claim that a model
++\emph{ought} to reach $0.482$. The comparison rules out one explanation only ---
++that the conditioning carries too little information to individuate --- and that is
++the explanation the flatness of $\mathrm{VR}_\text{between}$ across eleven
++models most invites.
++
++\paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
++items have their own facet stated and one hundred are covered only at trait
++level. The named items carry $1.51\times$ more predictable-from-code variance
++(ceiling $0.671$ against $0.444$), and every model does individuate them more in
++absolute terms. Relative to what is available, however, models do \emph{worse}
++exactly where the prompt is most specific: mean efficiency
++$\mathrm{VR}_\text{between}/\text{ceiling}$ is $0.353$ on the named items
++against $0.433$ on the rest, and the gap runs the same way in $10$ of $11$ models
++(sign test $p=0.006$, Wilcoxon $p=0.002$). Stating a facet explicitly therefore
++buys less than it should, which is the same conclusion the ceiling reaches from
++the other direction: the binding constraint is the use of the conditioning, not
++its richness. One caveat cuts against reading the gap as purely a model failure.
++A facet score is computed from its own four items, so
++$\mathbb{E}[X_j\mid\text{facet}]$ is close to an arithmetic identity and is not
++recoverable by a model that does not know the scoring key; traits have the same
++structure diluted over twenty-four items. The named-item ceiling is therefore
++inflated by more than the trait-level one, and some of the $0.353$ against
++$0.433$ is that asymmetry rather than differential use.
++
++\paragraph{Widening the channel does not fix it.} The obvious remedy is to send
++more: we re-ran three models with every other word of the prompt held fixed and
++the ten modifier phrases replaced by the numbers themselves. The effect is
++inconsistent in magnitude --- $\mathrm{VR}_\text{between}$ rises for Granite-4.1
++($0.207\!\to\!0.246$) and gpt-oss ($0.126\!\to\!0.146$) but falls for Apertus
++($0.130\!\to\!0.096$) --- and inconsistent in direction once alignment is
++accounted for, the aligned component moving $0.036\!\to\!0.033$,
++$0.022\!\to\!0.030$ and $0.037\!\to\!0.026$. Granite is the cautionary case:
++its $\mathrm{VR}_\text{between}$ rose $19\%$ while its correlation with the
++oracle fell from $0.173$ to $0.135$, so the apparent gain was spread pointing
++nowhere. On this evidence a richer encoding is not a reliable remedy, and
++$\mathrm{VR}_\text{between}$ alone would have scored it as one.
++
++\paragraph{The alignment does not depend on the oracle.} Because $r$ is measured
++against a fitted target, an oracle missing structure the models track would
++understate it. It does not. Boosted trees on the same code change $r$ by at most
++$0.005$; a ridge on the continuous scores, or an oracle given all thirty-five,
++moves it by at most $0.05$ and leaves the ordering of models unchanged, the
++richer oracle giving \emph{lower} $r$ as it should, since models only ever see
++the ten-score code. Two independent computations also agree where theory demands
++it: the ceiling as a standard-deviation ratio is $0.482$ and the oracle's
++correlation with actual respondents is $0.491$, which coincide for a conditional
++mean. The check that assumes no oracle at all is sharpest --- correlating each
++model's persona means directly against the forty respondents' own answers gives
++$0.055$--$0.151$, where the oracle reaches $0.491$ on that same target. Models
++recover between a ninth and a third of the attainable person-level alignment.
++
++\section{Finite-sample behaviour of the anchors}
++\label{app:samplesize}
++
++Both anchors are estimated from $n{=}40$ per side, which for a classifier over
++120 features is a small-sample regime. We sweep $n$ on human-only data, where the
++true answers are known: two disjoint samples from the same cluster must be
++indistinguishable, so the honest C2ST value is exactly $0.5$ and any excess is
++estimator bias.
++
++\begin{center}\scriptsize
++\setlength{\tabcolsep}{3pt}
++\begin{tabular}{lcccccc}
++\toprule
++$n$ & 20 & 40 & 80 & 160 & 320 & 640\\
++\midrule
++C2ST human & --- & 0.574 & 0.542 & 0.536 & 0.527 & 0.517\\
++DF human & 0.915 & 0.939 & 0.957 & 0.969 & 0.978 & 0.985\\
++C2ST const. & --- & 0.914 & 1.000 & 1.000 & 1.000 & 1.000\\
++\bottomrule
++\end{tabular}
++\end{center}
++
++Two corrections follow, in opposite directions, and both land on their
++theoretical values. Fitting $y = y_\infty + c\,n^{-1/2}$ over the non-degenerate
++range gives an extrapolated C2ST human ceiling of $\mathbf{0.500}$ and an
++extrapolated DF human ceiling of $\mathbf{1.000}$ --- exactly what two samples
++from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40$
++is \emph{entirely} finite-sample classifier bias and should be read with its $n$
++attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
++bias and is pessimistic. Correcting the latter widens the gap to the simulator's
++$0.703$ rather than narrowing it.
++
++Below $n\approx40$ the suite is unusable: the classifier fails to separate even
++the constant from real humans (the dashed entries above are the degenerate
++$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
++$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
++it was measured at.
++
++
+ \bibliographystyle{acl_natbib}
+ \bibliography{refs}
+ 

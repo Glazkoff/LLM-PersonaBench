@@ -621,7 +621,7 @@ Essentially all probability mass lands on the five valid answer tokens
 ($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number. Belief
 entropy nonetheless spans $0.42$--$1.38$ nats (maximum $\ln 5 = 1.609$), and we
 can offer no clean account of it: it tracks neither release date (Granite-4.1,
-$0.49$) nor reasoning-tuning (QwQ $0.63$; the standard-instruct Apertus $1.24$).
+$0.49$) nor reasoning-tuning (QwQ $0.97$; the standard-instruct Apertus $1.24$).
 The 235B model is the one the audited system used, so this measures that system,
 not a proxy.
 
@@ -653,14 +653,16 @@ limit: the best predictor of an item from that code, fitted on held-out
 respondents, reaches $0.482$ on these same personas, and no two personas share a
 code (App.~\ref{app:ceiling}). The best model delivers $0.295$.
 
-\paragraph{And most of what there is points nowhere.} $\mathrm{VR}_\text{between}$
+\paragraph{How much of it points the right way.} $\mathrm{VR}_\text{between}$
 measures how far apart a simulator places its persona means, not whether that
 spread identifies the right respondent. Correlating each model's persona means
-against the oracle's over the forty personas gives $r=0.11$--$0.28$, so the
-aligned component $r\cdot\mathrm{VR}_\text{between}$ is $0.019$--$0.046$: under
-five per cent of the human value in every model. This is also why amplifying the
-persona signal does not help --- scaling a misdirected vector only makes it
-louder.
+against the oracle's over the forty personas --- both on the corpus's recoded
+scale --- gives $r=0.16$--$0.52$. The aligned amplitude
+$A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$ is $0.033$--$0.183$,
+so a quarter to two-thirds of the spread a model produces is directed at the
+right person and the remainder is not. $A$ separates models that
+$\mathrm{VR}_\text{between}$ alone does not: GLM-4.7 and Qwen3-235B differ by
+$0.007$ in spread but by $0.017$ in aligned amplitude.
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -731,7 +733,7 @@ constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 cells, and proposed a suite that orders humans above constants. Beneath the
 metric the simulation is thinner still: across eleven models the individuation
-that actually points at the right respondent is under five per cent of the human
+that actually points at the right respondent is $0.03$--$0.18$ of the human
 value, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
 member of \eqref{eq:slambda}, and report the constant floor and human ceiling
 beside every number.
@@ -906,13 +908,14 @@ more: we re-ran three models with every other word of the prompt held fixed and
 the ten modifier phrases replaced by the numbers themselves. The effect is
 inconsistent in magnitude --- $\mathrm{VR}_\text{between}$ rises for Granite-4.1
 ($0.207\!\to\!0.246$) and gpt-oss ($0.126\!\to\!0.146$) but falls for Apertus
-($0.130\!\to\!0.096$) --- and inconsistent in direction once alignment is
-accounted for, the aligned component moving $0.036\!\to\!0.033$,
-$0.022\!\to\!0.030$ and $0.037\!\to\!0.026$. Granite is the cautionary case:
-its $\mathrm{VR}_\text{between}$ rose $19\%$ while its correlation with the
-oracle fell from $0.173$ to $0.135$, so the apparent gain was spread pointing
-nowhere. On this evidence a richer encoding is not a reliable remedy, and
-$\mathrm{VR}_\text{between}$ alone would have scored it as one.
+($0.130\!\to\!0.096$) --- and also inconsistent in direction, the aligned
+amplitude moving $0.081\!\to\!0.134$ for Granite-4.1 and
+$0.039\!\to\!0.047$ for gpt-oss but $0.033\!\to\!0.020$ for Apertus. Granite
+gains on both counts --- its correlation with the oracle rises from $0.285$ to
+$0.453$ --- so for that model the richer encoding is a real improvement, while
+Apertus loses spread and direction together. On three models a richer encoding
+is therefore a plausible but unreliable remedy, and we report it as a pilot
+rather than a recommendation.
 
 \paragraph{The alignment does not depend on the oracle.} Because $r$ is measured
 against a fitted target, an oracle missing structure the models track would
