@@ -185,8 +185,10 @@ ceiling ($0.859$) rises decisively above the constant floor ($0.796$): the
 ordering that \S\ref{sec:ceiling} shows is inverted under the audited metric is
 \emph{correct} under the proper one. Humans overtake the constant at
 $\lambda^\star{=}0.30$, comfortably below the proper coefficient. The model needs
-$\lambda^\star{=}0.75$ --- a rule that over-rewards dispersion --- and in $17$ of
-$20$ cells never overtakes the constant at any $\lambda$. So the simulator's
+$\lambda^\star{=}0.75$ --- a rule that over-rewards dispersion --- and beats the
+constant in only $2$ of $20$ cells at the proper $\lambda{=}1/2$, though it does
+overtake in most cells once $\lambda$ reaches $1$, where the reward for
+dispersion is twice proper. So the simulator's
 failure is not an artefact of a bad metric: it survives the correct one.
 
 \begin{table}[t]\centering\footnotesize
@@ -195,17 +197,18 @@ failure is not an artefact of a bad metric: it survives the correct one.
 \toprule
 $\lambda$ & Model & Constant & Human\\
 \midrule
-$0$ \;(audited) & 0.660 & \textbf{0.796} & 0.721\\
-$0.25$ & 0.678 & \textbf{0.796} & 0.775\\
-$0.5$ \;(CRPS, proper) & 0.697 & 0.796 & \textbf{0.859}\\
-$0.75$ & 0.720 & 0.796 & \textbf{0.929}\\
-$1.0$ & 0.744 & 0.796 & \textbf{0.998}\\
+$0$ \;(audited) & 0.726 & \textbf{0.796} & 0.720\\
+$0.25$ & 0.749 & \textbf{0.796} & 0.789\\
+$0.5$ \;(CRPS, proper) & 0.772 & 0.796 & \textbf{0.859}\\
+$0.75$ & 0.796 & 0.796 & \textbf{0.929}\\
+$1.0$ & 0.819 & 0.796 & \textbf{0.998}\\
 \bottomrule
 \end{tabular}
-\caption{The $S_\lambda$ family of \eqref{eq:slambda}, averaged over 20 cells.
-The audited metric sits at $\lambda{=}0$, where a constant wins. At the unique
-proper coefficient $\lambda{=}1/2$ a real cluster member wins, as it must. The
-simulator loses under both.}
+\caption{The $S_\lambda$ family of \eqref{eq:slambda}, averaged over 20 cells, all
+values on the corrected orientation. A constant wins at the audited
+$\lambda{=}0$; at the proper $\lambda{=}1/2$ a real cluster member wins, as it
+must. All-pairs scores, slightly below the paired ones of \S\ref{sec:audit};
+the ordering is the same under either.}
 \label{tab:lambda}
 \end{table}
 
@@ -312,18 +315,19 @@ permutation.
 \toprule
 Metric & Matched & Mismatched & $\Delta$ & $p$\\
 \midrule
-$S$ & 0.652 & 0.631 & $+0.021$ & 0.032\\
-DF & 0.698 & 0.672 & $+0.026$ & 0.026\\
-C2ST & 0.982 & 0.981 & $-0.001$ & 0.51\\
+$S$ & 0.728 & 0.663 & $+0.065$ & 0.0005\\
+DF & 0.782 & 0.705 & $+0.077$ & 0.0005\\
+C2ST & 0.996 & 0.985 & $-0.010$ & 0.997\\
 VR & 0.431 & 0.436 & $-0.005$ & 0.55\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Conditioning on the correct cluster helps, slightly, on the two location-sensitive
-measures. It does nothing at all for distinguishability or dispersion: a persona
-scored against the \emph{wrong} cluster's humans is as hard to tell from them as
-one scored against the right cluster's. This is the behavioural counterpart of
+Conditioning on the correct cluster helps clearly on the two location-sensitive
+measures, both surviving permutation at $p=0.0005$, so the persona does carry
+cluster-level signal. It does nothing for distinguishability or dispersion: a
+persona scored against the \emph{wrong} cluster's humans is as hard to tell from
+them as one scored against the right cluster's. This is the behavioural counterpart of
 \S\ref{sec:suite} --- the persona moves which items get endorsed, and not who is
 endorsing them --- and it makes the wrong-persona control as necessary a baseline
 as the constant floor.
@@ -444,11 +448,11 @@ none of these appreciably.
 which variance is missing. Decomposing each answer matrix as
 $Y_{pj}=\mu+a_p+b_j+(ab)_{pj}+e$ --- respondent main effect, item main effect,
 and the person-by-item interaction that carries individuation --- tells a sharper
-story. The simulator emits essentially the \emph{right total} variance (ratio
-$1.005$ over the 20 cells), but places it in the wrong component: the item main
-effect takes $81.7\%$ of its variance against $29.8\%$ for humans, while the
-interaction takes $16.5\%$ against $67.0\%$. The interaction variance ratio is
-$0.458$, and it is $0$ for a constant by construction.
+story. The simulator emits nearly the \emph{right total} variance (ratio $0.942$ over
+the 20 cells), but places it in the wrong component: the item main effect takes
+$81.2\%$ of its variance against $29.8\%$ for humans, while the interaction takes
+$17.7\%$ against $67.0\%$. The interaction variance ratio is $0.466$, and it is
+$0$ for a constant by construction.
 
 So the simulator is not emitting too little. It is emitting a confident
 cluster-level \emph{answer key} --- which items are endorsable --- and almost
