@@ -83,12 +83,16 @@ def main() -> None:
     for cl in a.clusters:
         sub_all = df[df.clusters == cl]
         personas = sub_all.iloc[: a.n_personas]
-        Y = sub_all[ITEMS].to_numpy(float)
-        human_sd = np.nanstd(Y, axis=0)
+        # Hold the personas out of every fit: they are the evaluation set, and a
+        # ceiling that a model is being measured against must not be fitted on them.
+        fit_rows = sub_all.iloc[a.n_personas:]
+        Y = fit_rows[ITEMS].to_numpy(float)
+        Y_eval_sd = np.nanstd(sub_all[ITEMS].to_numpy(float), axis=0)
+        human_sd = Y_eval_sd          # human SD over the whole cluster, as the runs used
         ok = human_sd > 0
 
         chan = [c for c in channel_scores(cl) if c in df.columns]
-        raw_all = sub_all[chan].to_numpy(float)
+        raw_all = fit_rows[chan].to_numpy(float)
         raw_p = personas[chan].to_numpy(float)
         q_all = np.column_stack([quantise(raw_all[:, k]) for k in range(raw_all.shape[1])])
         q_p = np.column_stack([quantise(raw_p[:, k]) for k in range(raw_p.shape[1])])
@@ -121,7 +125,7 @@ def main() -> None:
                 preds[:, j] = m.predict(q_p)
             vr_qb = float(np.nanmean(np.nanstd(preds, axis=0)[ok] / human_sd[ok]))
 
-        raw35_all = sub_all[scores].to_numpy(float)
+        raw35_all = fit_rows[scores].to_numpy(float)
         raw35_p = personas[scores].to_numpy(float)
         q35_all = np.column_stack([quantise(raw35_all[:, k]) for k in range(raw35_all.shape[1])])
         q35_p = np.column_stack([quantise(raw35_p[:, k]) for k in range(raw35_p.shape[1])])
@@ -139,7 +143,7 @@ def main() -> None:
         codes = [tuple(r) for r in q_p]
         collided = len(codes) - len(set(codes))
 
-        rows.append({"cluster": cl, "n_respondents": int(len(sub_all)),
+        rows.append({"cluster": cl, "n_fit": int(len(fit_rows)),
                      "channel_scores": len(chan),
                      "identical_prompt_personas": collided,
                      "ceiling_all35_bins": vr_35, "ceiling_all35_raw": vr_35r,
