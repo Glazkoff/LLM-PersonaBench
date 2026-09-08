@@ -901,6 +901,19 @@ structure diluted over twenty-four items. The named-item ceiling is therefore
 inflated by more than the trait-level one, and some of the $0.353$ against
 $0.433$ is that asymmetry rather than differential use.
 
+\paragraph{Widening the channel does not fix it.} The obvious remedy is to send
+more: we re-ran three models with every other word of the prompt held fixed and
+the ten modifier phrases replaced by the numbers themselves. The effect is
+inconsistent in magnitude --- $\mathrm{VR}_\text{between}$ rises for Granite-4.1
+($0.207\!\to\!0.246$) and gpt-oss ($0.126\!\to\!0.146$) but falls for Apertus
+($0.130\!\to\!0.096$) --- and inconsistent in direction once alignment is
+accounted for, the aligned component moving $0.036\!\to\!0.033$,
+$0.022\!\to\!0.030$ and $0.037\!\to\!0.026$. Granite is the cautionary case:
+its $\mathrm{VR}_\text{between}$ rose $19\%$ while its correlation with the
+oracle fell from $0.173$ to $0.135$, so the apparent gain was spread pointing
+nowhere. On this evidence a richer encoding is not a reliable remedy, and
+$\mathrm{VR}_\text{between}$ alone would have scored it as one.
+
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
 

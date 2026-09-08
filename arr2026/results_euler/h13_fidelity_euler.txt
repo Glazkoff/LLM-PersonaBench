@@ -1,9 +1,8 @@
-h13 state=COMPLETED
 h4_gptoss_20b          r=+0.173  VR_betw=0.126  aligned=+0.022 (items=480)
 h4_granite_8b          r=+0.173  VR_betw=0.207  aligned=+0.036 (items=480)
 h4_apertus_8b          r=+0.283  VR_betw=0.130  aligned=+0.037 (items=480)
 h4_qwen3_235b          r=+0.163  VR_betw=0.258  aligned=+0.042 (items=480)
 h4_granite_8b_raw      r=+0.135  VR_betw=0.246  aligned=+0.033 (items=480)
 h4_apertus_8b_raw      r=+0.266  VR_betw=0.096  aligned=+0.026 (items=480)
-
-[exited with code 0]
+h4_gptoss_20b_raw      r=+0.208  VR_betw=0.146  aligned=+0.030 (items=480)
+DONE rc=0
