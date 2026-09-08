@@ -1,0 +1,5 @@
+h4_gptoss_20b        named: VR=0.154 ceil=0.671 eff=0.23 | other: VR=0.121 ceil=0.444 eff=0.27
+h4_granite_8b        named: VR=0.294 ceil=0.671 eff=0.44 | other: VR=0.190 ceil=0.444 eff=0.43
+h4_apertus_8b        named: VR=0.168 ceil=0.671 eff=0.25 | other: VR=0.122 ceil=0.444 eff=0.28
+h4_qwen3_235b        named: VR=0.224 ceil=0.671 eff=0.33 | other: VR=0.264 ceil=0.444 eff=0.60
+DONE rc=0
