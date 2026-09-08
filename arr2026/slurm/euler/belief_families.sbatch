@@ -20,10 +20,16 @@ case $SLURM_ARRAY_TASK_ID in
   # 3 needs mamba-ssm (hybrid Mamba); replaced by two plain-transformer families.
   4) MODEL="ibm-granite/granite-4.1-8b";               TAG=granite_8b;  BS=8 ;;
   5) MODEL="swiss-ai/Apertus-8B-Instruct-2509";        TAG=apertus_8b;  BS=8 ;;
+  # FP8 gave coverage 0.0 (all-NaN logits) on HSE under torch 2.5.1; retry here,
+  # where the H200s support FP8 natively and torch is 2.13.
+  6) MODEL="Qwen/Qwen3.6-27B-FP8";                     TAG=qwen36_27b;  BS=4 ;;
 esac
 
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 [ -x "$PY" ] || { echo "FATAL: $PY missing"; exit 1; }
+# FP8 checkpoints need compressed-tensors; add it inside the allocation if absent.
+"$PY" -c "import compressed_tensors" 2>/dev/null \
+  || /home/glazkov/.local/bin/uv pip install --python "$PY" --quiet compressed-tensors
 "$PY" -c "import torch,transformers,pandas,accelerate; \
   print('torch',torch.__version__,'tf',transformers.__version__)"
 
