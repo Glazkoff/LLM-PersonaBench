@@ -1,0 +1,14 @@
+{
+  "ceiling_quant_additive_mean": 0.4815,
+  "ceiling_quant_boosted_mean": 0.4831,
+  "ceiling_raw_additive_mean": 0.5122,
+  "ceiling_all35_bins_mean": 0.7065,
+  "ceiling_all35_raw_mean": 0.7256,
+  "channel_scores": 10,
+  "identical_prompt_personas_total": 0,
+  "distinct_cells_mean": 40.0,
+  "n_personas": 40,
+  "observed_max_VR_between": 0.295,
+  "observed_min_VR_between": 0.126,
+  "note": "Ceilings are estimated on the same personas the belief runs used, so they are directly comparable to VR_between. The additive figure is a lower bound on the channel; the boosted figure adds interactions."
+}

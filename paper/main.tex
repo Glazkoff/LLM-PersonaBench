@@ -619,12 +619,11 @@ Apertus-8B-Instruct & 8B & 0.927 & \textbf{0.130} & 0.939\\
 
 Essentially all probability mass lands on the five valid answer tokens
 ($0.97$--$1.00$), so no model has difficulty \emph{emitting} a number. Belief
-entropy nonetheless ranges widely, from $0.42$ to $1.38$ nats against a maximum
-of $\ln 5 = 1.609$, and we can offer no clean account of the split: it does not
-track release date (Granite-4.1 sits at $0.49$) nor reasoning-tuning (QwQ sits
-at $0.63$ while the standard-instruct Apertus reaches $1.24$). The 235B model is
-the one the audited system itself used, so this is a measurement on that system,
-not on a proxy for it.
+entropy nonetheless spans $0.42$--$1.38$ nats (maximum $\ln 5 = 1.609$), and we
+can offer no clean account of it: it tracks neither release date (Granite-4.1,
+$0.49$) nor reasoning-tuning (QwQ $0.63$; the standard-instruct Apertus $1.24$).
+The 235B model is the one the audited system used, so this measures that system,
+not a proxy.
 
 \paragraph{Total dispersion and individuation are decoupled.} The decomposition
 says something the total does not, and the evidence for this is existential
@@ -634,15 +633,12 @@ and \emph{less than half} its individuation ($0.126$ vs $0.295$). The rank
 correlation over the eleven models is $\rho=-0.30$, but its bootstrap 95\%
 interval is $[-0.92,0.42]$, so we rest nothing on it.
 
-QwQ-32B sharpens the same point: its dispersion is almost entirely per-item
-uncertainty ($0.729$ of $0.753$), and it individuates less ($0.154$) than models
-a fraction of its size.
+QwQ-32B sharpens it: its dispersion is almost entirely per-item uncertainty
+($0.729$ of $0.753$), and it individuates less ($0.154$) than far smaller models.
 
-The Qwen2.5 family isolates this with the family held fixed and only scale
-varying. Individuation rises monotonically with parameters --- $0.193 \to 0.220
-\to 0.295$ at 7B, 32B, 72B --- while total dispersion does not, moving $0.430 \to
-0.343 \to 0.488$. Scale buys individuation; it does not buy, and is not tracked
-by, the total.
+The Qwen2.5 family isolates this at fixed family and varying scale:
+individuation rises monotonically, $0.193 \to 0.220 \to 0.295$ at 7B, 32B, 72B,
+while the total does not, moving $0.430 \to 0.343 \to 0.488$.
 
 One bound survives across the whole set --- a $34\times$ parameter range, six
 families, three generations, dense and mixture-of-experts, and both standard and
@@ -651,31 +647,32 @@ $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between an eighth
 and under a third of the human value throughout, and neither the largest model
 nor the most dispersed one is the best at it.
 
-A simulator can therefore look markedly more dispersed simply by being less
-confident. Hence a direct reporting consequence: $\mathrm{VR}_\text{total}$
-confounds uncertainty with individuation, and $\mathrm{VR}_\text{between}$ is
-the quantity a persona claim should be judged on.
+\paragraph{The prompt is not what caps individuation.} A persona is individuated
+only through a five-word quantisation of ten numbers, but that channel is not the
+limit: the best predictor of an item from that code, fitted on held-out
+respondents, reaches $0.482$ on these same personas, and no two personas share a
+code (App.~\ref{app:ceiling}). The best model delivers $0.295$.
+
+A simulator can therefore look more dispersed simply by being less confident:
+$\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
+$\mathrm{VR}_\text{between}$ is what a persona claim should be judged on.
 
 One limit, plainly: the strong form of the claim below --- that no sampling-side
-remedy could help --- requires total belief dispersion to be well under the human
-marginal, and that is false for the largest 2024--25 model ($0.758$) and plainly
-false for three of the models, which \emph{exceed} it ($1.078$, $1.131$,
-$1.242$). For those,
-spread is present at the belief level and is lost or misallocated afterwards. What
-no model supplies at any scale is \emph{individuation}.
+remedy could help --- needs total dispersion well under the human marginal, which
+is false for the largest 2024--25 model ($0.758$) and for the three that
+\emph{exceed} it ($1.078$, $1.131$, $1.242$); there, spread is present and is
+lost afterwards. What no model supplies at any scale is \emph{individuation}.
 
-Three consequences follow. First, for the low-dispersion models the spread is
-not discarded at decoding; it was never present, so no temperature or top-$p$
-remedy could recover it. Second, since all mass lands on valid answer tokens,
-accounts attributing mode collapse to difficulty \emph{emitting} numeric scores
-are unsupported here: the model holds a narrow belief rather than failing to
-express a broad one. Third, this closes the loop with the answer-level results
---- the item main effect dominates realised variance (\S\ref{sec:suite}),
-conditioning on the correct cluster does nothing for dispersion or
-distinguishability (\S\ref{sec:permutation}), and the individuating component
-averages $0.20$ of human across eleven models. Three independent measurements
-agree that persona conditioning moves \emph{which items} get endorsed, not
-\emph{who} is endorsing them.
+Three consequences follow. For the low-dispersion models the spread is not
+discarded at decoding; it was never present, so no temperature or top-$p$ remedy
+recovers it. Since all mass lands on valid answer tokens, accounts blaming mode
+collapse on difficulty \emph{emitting} numbers are unsupported here. And this
+closes the loop with the answer-level results --- the item main effect dominates
+realised variance (\S\ref{sec:suite}), conditioning on the correct cluster does
+nothing for dispersion or distinguishability (\S\ref{sec:permutation}), and the
+individuating component averages $0.20$ of human across eleven models --- three
+measurements agreeing that persona conditioning moves \emph{which items} get
+endorsed, not \emph{who} endorses them.
 
 \section{Is $k{=}4$ a partition at all?}
 \label{sec:clusters}
@@ -815,6 +812,51 @@ summaries.
 
 
 \appendix
+
+\section{The individuation ceiling of the prompt}
+\label{app:ceiling}
+
+A persona reaches the model only through \texttt{get\_modifier\_bisect}, which
+writes each score as one of five words on width-20 bins; each cluster's genotype
+names five traits and five of the thirty facets, and every other sentence of the
+system prompt is shared. Ten words therefore carry the respondent's identity, and
+two respondents sharing those ten bins would receive byte-identical prompts and
+so must receive identical beliefs.
+
+We estimate what that channel permits. Within each cluster we fit
+$\mathbb{E}[X_j \mid \text{code}]$ on respondents \emph{excluding} the forty
+personas, then evaluate on those forty, so the quantity is directly comparable to
+$\mathrm{VR}_\text{between}$ and is never fitted on its own evaluation set.
+
+\begin{center}\footnotesize
+\begin{tabular}{lc}
+\toprule
+Conditioning available to the model & Ceiling\\
+\midrule
+Ten scores, five words each \emph{(the audited system)} & 0.482\\
+\quad same, with boosted trees & 0.483\\
+Ten scores, written as numbers & 0.512\\
+All 35 scores, five words each & 0.707\\
+All 35 scores, written as numbers & 0.726\\
+\midrule
+\textit{best model observed} & \textit{0.295}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three things follow. The quantisation is not the binding constraint: writing
+numbers instead of words buys $0.03$. The channel is not degenerate: all forty
+personas in all four clusters receive distinct codes, so no model is forced to
+answer two personas identically. And interactions add nothing ($0.483$ against
+$0.482$), so the additive fit is essentially the conditional mean rather than a
+loose lower bound.
+
+The oracle is fitted on this population and so knows its code-to-response
+mapping, which a zero-shot model does not; we therefore do not claim that a model
+\emph{ought} to reach $0.482$. The comparison rules out one explanation only ---
+that the conditioning carries too little information to individuate --- and that is
+the explanation the flatness of $\mathrm{VR}_\text{between}$ across eleven
+models most invites.
 
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
