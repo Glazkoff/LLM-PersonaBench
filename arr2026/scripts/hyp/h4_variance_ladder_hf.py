@@ -26,7 +26,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
@@ -106,6 +106,16 @@ def main():
     # transformers 5.x renamed torch_dtype -> dtype; keep both paths so the same
     # script runs on HSE (5.2) and Euler (5.16) and still on any 4.x env.
     _kw = dict(device_map="auto", trust_remote_code=True)
+    # A pre-quantised checkpoint must keep its own dtype: forcing bf16 makes
+    # transformers dequantise the whole model, which is slow enough to burn a
+    # walltime and, on older torch, yields NaN logits. Let the config decide.
+    # NB gpt-oss-20b's published row predates this and came from the forced-bf16
+    # path; its MXFP4 weights are dequantised either way on a stack without the
+    # `kernels` package, so the two paths should agree, but that is untested.
+    _cfg = AutoConfig.from_pretrained(args.model, trust_remote_code=True)
+    if getattr(_cfg, "quantization_config", None):
+        dtype = "auto"
+        print(f"  quantised checkpoint -> dtype=auto", flush=True)
     try:
         model = AutoModelForCausalLM.from_pretrained(args.model, dtype=dtype, **_kw)
     except TypeError:

@@ -3,7 +3,7 @@
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=04:00:00
+#SBATCH --time=06:00:00
 #SBATCH --output=/home/glazkov/personality-twins-arr/logs/fam_%A_%a.out
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/fam_%A_%a.err
 # Belief measurement for families not yet in the table. Everything -- including
