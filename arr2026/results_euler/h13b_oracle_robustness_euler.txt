@@ -1,0 +1,19 @@
+state=COMPLETED
+oracle vs actual respondents (the scale a simulator could reach):
+  onehot   r=+0.491
+  raw      r=+0.519
+  all35    r=+0.704
+  boost    r=+0.494
+
+model alignment under each oracle:
+run                      onehot      raw    all35    boost   actual
+h4_gptoss_20b            +0.173   +0.163   +0.130   +0.168   +0.080
+h4_granite_8b            +0.173   +0.162   +0.134   +0.170   +0.085
+h4_apertus_8b            +0.283   +0.279   +0.218   +0.279   +0.151
+h4_qwen3_235b            +0.163   +0.152   +0.117   +0.158   +0.078
+h4_granite_8b_raw        +0.135   +0.144   +0.109   +0.133   +0.077
+h4_apertus_8b_raw        +0.266   +0.272   +0.213   +0.261   +0.152
+h4_gptoss_20b_raw        +0.208   +0.208   +0.166   +0.203   +0.116
+DONE rc=0
+
+[exited with code 0]

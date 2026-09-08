@@ -916,14 +916,17 @@ $\mathrm{VR}_\text{between}$ alone would have scored it as one.
 
 \paragraph{The alignment does not depend on the oracle.} Because $r$ is measured
 against a fitted target, an oracle missing structure the models track would
-understate it. Replacing the additive one-hot oracle with a ridge on the
-continuous scores, or with one given all thirty-five scores, moves $r$ by at most
-$0.04$ and leaves the ordering of models unchanged; the richer oracle gives
-\emph{lower} $r$, as it should, since the models only ever see the ten-score
-code. The check that assumes no oracle at all is the sharpest: correlating each
+understate it. It does not. Boosted trees on the same code change $r$ by at most
+$0.005$; a ridge on the continuous scores, or an oracle given all thirty-five,
+moves it by at most $0.05$ and leaves the ordering of models unchanged, the
+richer oracle giving \emph{lower} $r$ as it should, since models only ever see
+the ten-score code. Two independent computations also agree where theory demands
+it: the ceiling as a standard-deviation ratio is $0.482$ and the oracle's
+correlation with actual respondents is $0.491$, which coincide for a conditional
+mean. The check that assumes no oracle at all is sharpest --- correlating each
 model's persona means directly against the forty respondents' own answers gives
-$0.055$--$0.082$, where the oracle reaches $0.491$ on that same target. Models
-recover about a seventh of the attainable person-level alignment.
+$0.055$--$0.151$, where the oracle reaches $0.491$ on that same target. Models
+recover between a ninth and a third of the attainable person-level alignment.
 
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
