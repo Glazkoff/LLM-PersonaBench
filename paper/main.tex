@@ -779,7 +779,11 @@ models through a chat-completions server returned almost no mass on the answer
 tokens where the forward pass recovers $0.99$--$1.00$, and harmony-format models
 require the assistant turn to open a channel before the prefill, without which
 mass on the scale falls to $0.39$ --- so a null result in this literature may
-report a readout rather than a model; the proposition is general to the
+report a readout rather than a model; every model we report is unquantised at
+inference, one FP8 checkpoint having resisted measurement through both available
+routes (its serving path returns no mass on the scale, and the forward-pass path
+hits a quantiser bug), so we make no claim about how quantisation affects
+individuation; the proposition is general to the
 absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
 specific to this setting. The model answers we re-score were produced by prior
 runs we did not control, at temperatures we did not set, and one released run was
