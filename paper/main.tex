@@ -42,7 +42,7 @@ a genuine group member cannot be measuring personality simulation. We propose a
 replacement suite --- a classifier two-sample test, per-item distributional
 fidelity, and a variance ratio --- each reported against an explicit human ceiling
 and constant floor, and show it inverts the ranking correctly. Under it, current
-personas are near-perfectly separable from humans (C2ST-AUC $0.983$ vs.\ a human
+personas are near-perfectly separable from humans (C2ST-AUC $0.994$ vs.\ a human
 ceiling of $0.564$) and produce $43\%$ of human response variance. We release code
 and per-cell results.
 \end{abstract}
@@ -292,8 +292,8 @@ Human ceiling & 0.939 & 34\\
 
 An evolutionary-optimised persona is worth between \textbf{one and two} real
 respondents: it improves on a single-respondent plug-in ($0.783$ against
-$0.723$) but not on a two-respondent one ($0.796$), which is also where the
-constant sits. This is the same result
+$0.723$) but not on a two-respondent one ($0.802$), and it remains below the
+constant ($0.796$). This is the same result
 as \S\ref{sec:audit} in different units, and it is the version we would put to a
 practitioner weighing synthetic respondents against a small pilot survey.
 
@@ -659,11 +659,12 @@ measures how far apart a simulator places its persona means, not whether that
 spread identifies the right respondent. Correlating each model's persona means
 against the oracle's over the forty personas --- both on the corpus's recoded
 scale --- gives $r=0.16$--$0.52$. The aligned amplitude
-$A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$ is $0.033$--$0.183$,
-so a quarter to two-thirds of the spread a model produces is directed at the
-right person and the remainder is not. $A$ separates models that
-$\mathrm{VR}_\text{between}$ alone does not: GLM-4.7 and Qwen3-235B differ by
-$0.007$ in spread but by $0.017$ in aligned amplitude.
+$A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
+item SD, is $0.033$--$0.183$. That scale needs its own references: the same
+statistic applied to real respondents is $0.498$ and to the oracle $0.482$, so
+the best model reaches $37\%$ of the human reference and the weakest $7\%$. $A$
+also separates models that $\mathrm{VR}_\text{between}$ alone does not: GLM-4.7
+and Qwen3-235B differ by $0.007$ in spread but by $0.017$ in aligned amplitude.
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -676,8 +677,10 @@ is false for the largest 2024--25 model ($0.758$) and for the three that
 lost afterwards. What no model supplies at any scale is \emph{individuation}.
 
 Three consequences follow. For the low-dispersion models the spread is not
-discarded at decoding; it was never present, so no temperature or top-$p$ remedy
-recovers it. Since all mass lands on valid answer tokens, accounts blaming mode
+discarded at decoding; it was never present, so recovering it there means
+\emph{adding} dispersion rather than revealing it. Temperature reweighting
+$p^{1/T}$ does raise the marginal ratio --- Qwen2.5-7B from $0.43$ to $1.02$ at
+$T{=}5$ --- while supplying none of the alignment $A$ measures. Since all mass lands on valid answer tokens, accounts blaming mode
 collapse on difficulty \emph{emitting} numbers are unsupported here. And it
 closes the loop with the answer-level results: the item main effect dominates
 realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
@@ -734,22 +737,10 @@ constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 cells, and proposed a suite that orders humans above constants. Beneath the
 metric the simulation is thinner still: across eleven models the individuation
-that actually points at the right respondent is $0.03$--$0.18$ of the human
-value, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
+that points at the right respondent reaches at best $37\%$ of the same statistic
+measured on real respondents, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
 member of \eqref{eq:slambda}, and report the constant floor and human ceiling
 beside every number.
-
-\section*{Reproducibility}
-
-Every analysis in this paper is deterministic given the released corpus and the
-committed run artefacts, and requires no LLM calls except the belief-level
-measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
-independently on two clusters with different operating systems, Python versions
-and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
-figure --- the $\lambda^\star$ values, the orientation deltas, the variance
-components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
-ceilings --- agreed to all printed digits. Code and
-per-cell results are released.
 
 \section*{Limitations}
 
@@ -807,6 +798,18 @@ summaries.
 
 
 \appendix
+
+\section{Reproducibility}
+
+Every analysis in this paper is deterministic given the released corpus and the
+committed run artefacts, and requires no LLM calls except the belief-level
+measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
+independently on two clusters with different operating systems, Python versions
+and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
+figure --- the $\lambda^\star$ values, the orientation deltas, the variance
+components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
+ceilings --- agreed to all printed digits. Code and
+per-cell results are released.
 
 \section{Cluster validity in full}
 \label{app:clusters}

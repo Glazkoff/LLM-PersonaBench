@@ -1,0 +1,10 @@
+=== ORIENTATION-CORRECTED (HSE) ===
+h4_qwen25_7b           r=+0.223  VR_betw=0.193  A_itemwise=+0.067 (naive r*VR=+0.043, items=480)
+h4_qwen25_32b          r=+0.409  VR_betw=0.220  A_itemwise=+0.116 (naive r*VR=+0.090, items=480)
+h4_qwen25_72b          r=+0.523  VR_betw=0.295  A_itemwise=+0.183 (naive r*VR=+0.154, items=480)
+h4_mistral_24b         r=+0.463  VR_betw=0.177  A_itemwise=+0.105 (naive r*VR=+0.082, items=480)
+h4_qwq_32b             r=+0.314  VR_betw=0.154  A_itemwise=+0.058 (naive r*VR=+0.048, items=480)
+h4_qwen35_9b           r=+0.431  VR_betw=0.167  A_itemwise=+0.088 (naive r*VR=+0.072, items=480)
+h4_glm47_flash         r=+0.339  VR_betw=0.265  A_itemwise=+0.106 (naive r*VR=+0.090, items=480)
+
+[exited with code 0]

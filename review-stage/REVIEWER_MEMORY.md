@@ -36,3 +36,45 @@ variance for committed tensors; VR invariance to reverse scoring; C2ST conclusio
 the raw intervention's VR directions match its summaries (only the alignment reading is invalid).
 
 ---
+
+## Round 2 — Score: 5/10 — Verdict: not ready
+Backend: codex · reviewer model: gpt-6-astra · executor: claude-opus-5 · effort xhigh · difficulty hard
+Thread: 01a08143-c37e-74f2-bf77-a983b9ae5394 (fresh thread; model changed at user request, memory carried by this file)
+
+### Independently reproduced by the reviewer (confirms round 1's fixes were genuine)
+corrected r/A for all six reconstructable models; oracle SD reference .481538; oracle-actual r .490891;
+QwQ entropy .968245; corrected E3 DF .783479 and C2ST .994288; paired S .738618 vs constant .796107, 20/20.
+
+### Memory Update (reviewer's own words, verbatim)
+- Round 2: 5/10; not ready. Local Codex review; same-family; acceptance status provisional.
+- New central issue: H1/H2/H5/H7 retain orientation defects. Corrected H1 CRPS .772218; models beat constant
+  in 2/20 cells at lambda=.5 and 17/20 at lambda=1. Corrected H7 gaps: S .064752, DF .076701.
+  Corrected H5 total variance ratio .942187.
+- A is human-SD-normalized amplitude, not human-baseline-normalized fidelity: actual-human A=.497805.
+  Qwen72 A=.183071, conditional persona-bootstrap CI [.1677,.1927], B=2000, seed=260908.
+- Oracle "ceiling", 35-versus-10 channel mismatch, target-containing H12 denominators, and causal efficiency
+  claims remain unresolved.
+- Five model tensor sets plus three intervention tensor sets remain absent.
+- C2ST folding biases the null; n=20 failure disappears when minimum leaf size changes from 20 to 5.
+  H7 permutations ignore shared structure; H8 calibration uses mismatched sample sizes.
+- Temperature can restore marginal spread; do not infer that it restores fidelity. Correct SD/variance terminology.
+- Conclusion still spills onto page 9. Preserve the valid proposition and surviving empirical audit; require
+  complete numerical propagation before another readiness verdict.
+
+### Fixed in response to round 2 (this round)
+- table_metricsuite.tex was stale (DF .703 / C2ST .983) after the prose was corrected -> now .783 / .994;
+  abstract C2ST updated to .994.
+- A normalization: verified A_human = .4978 and A_oracle = .4815 independently; body and conclusion now
+  report A against those references (best model 37% of the human reference, weakest 7%).
+- Temperature impossibility claim was FALSE; verified p^(1/T) raises Qwen2.5-7B from .43 to 1.02 at T=5.
+  Restated as adding dispersion without adding alignment.
+- m=2 plug-in (.802) had been conflated with the constant (.796) in my own round-1 correction. Separated.
+- Reproducibility moved to the appendix; content now ends p8.
+
+### Still outstanding (NOT fixed)
+H1/H2/H5/H7 orientation propagation and all dependent tables; joint persona bootstrap CIs on A;
+renaming the .482 reference and the 35-vs-10 channel mismatch in the main text; H12 causal reading;
+missing probability tensors for 5 models and 3 interventions; C2ST folding/leaf-size calibration;
+H7 permutation structure; H8 sample-size mismatch; SD-vs-variance terminology.
+
+---

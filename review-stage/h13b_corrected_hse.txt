@@ -1,0 +1,14 @@
+oracle vs actual respondents (the scale a simulator could reach):
+  onehot   r=+0.491
+  raw      r=+0.519
+  all35    r=+0.704
+
+model alignment under each oracle:
+run                      onehot      raw    all35   actual
+h4_qwen25_7b             +0.223   +0.202   +0.150   +0.102
+h4_qwen25_32b            +0.409   +0.382   +0.283   +0.208
+h4_qwen25_72b            +0.523   +0.489   +0.355   +0.248
+h4_mistral_24b           +0.463   +0.431   +0.315   +0.226
+h4_qwq_32b               +0.314   +0.291   +0.224   +0.157
+h4_qwen35_9b             +0.431   +0.406   +0.296   +0.213
+h4_glm47_flash           +0.339   +0.321   +0.239   +0.172

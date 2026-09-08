@@ -1,0 +1,7 @@
+h4_gptoss_20b          r=+0.242  VR_betw=0.126  A_itemwise=+0.039 (naive r*VR=+0.031, items=480)
+h4_granite_8b          r=+0.285  VR_betw=0.207  A_itemwise=+0.081 (naive r*VR=+0.059, items=480)
+h4_apertus_8b          r=+0.158  VR_betw=0.130  A_itemwise=+0.033 (naive r*VR=+0.020, items=480)
+h4_qwen3_235b          r=+0.403  VR_betw=0.258  A_itemwise=+0.123 (naive r*VR=+0.104, items=480)
+h4_granite_8b_raw      r=+0.453  VR_betw=0.246  A_itemwise=+0.134 (naive r*VR=+0.111, items=480)
+h4_apertus_8b_raw      r=+0.151  VR_betw=0.096  A_itemwise=+0.020 (naive r*VR=+0.015, items=480)
+h4_gptoss_20b_raw      r=+0.236  VR_betw=0.146  A_itemwise=+0.047 (naive r*VR=+0.034, items=480)
