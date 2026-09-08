@@ -23,6 +23,9 @@ case $SLURM_ARRAY_TASK_ID in
   # FP8 gave coverage 0.0 (all-NaN logits) on HSE under torch 2.5.1; retry here,
   # where the H200s support FP8 natively and torch is 2.13.
   6) MODEL="Qwen/Qwen3.6-27B-FP8";                     TAG=qwen36_27b;  BS=4 ;;
+  # 2 (DeepSeek-V4-Flash) is 291B / ~290GB and stalled out its walltime in the
+  # download; this Lite checkpoint represents the same family at 15.7B.
+  7) MODEL="deepseek-ai/DeepSeek-V2-Lite-Chat";        TAG=dsv2_lite;   BS=8 ;;
 esac
 
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
