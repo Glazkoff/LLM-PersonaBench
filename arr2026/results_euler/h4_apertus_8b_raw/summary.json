@@ -1,0 +1,15 @@
+{
+  "model": "swiss-ai/Apertus-8B-Instruct-2509",
+  "VR_belief_mixture_mean": 0.939,
+  "share_within_mean": 0.9881,
+  "share_between_mean": 0.0119,
+  "VR_within_only_NOT_COMPARABLE_mean": 0.9314,
+  "VR_readout_mean": 0.92,
+  "belief_entropy_mean": 1.2285,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.9941,
+  "coverage": 1.0,
+  "valid": true,
+  "verdict": "DECODING LOSS: the persona-mixture belief carries near-human spread; sampling discards it.",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic."
+}
