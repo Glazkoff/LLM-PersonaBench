@@ -1,0 +1,9 @@
+h4_qwen25_7b           r=+0.120  VR_betw=0.193  aligned=+0.023 (items=480)
+h4_qwen25_32b          r=+0.109  VR_betw=0.220  aligned=+0.024 (items=480)
+h4_qwen25_72b          r=+0.157  VR_betw=0.295  aligned=+0.046 (items=480)
+h4_mistral_24b         r=+0.166  VR_betw=0.177  aligned=+0.029 (items=480)
+h4_qwq_32b             r=+0.122  VR_betw=0.154  aligned=+0.019 (items=480)
+h4_qwen35_9b           r=+0.150  VR_betw=0.167  aligned=+0.025 (items=480)
+h4_glm47_flash         r=+0.137  VR_betw=0.265  aligned=+0.036 (items=480)
+
+[exited with code 0]

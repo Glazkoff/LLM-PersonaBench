@@ -633,8 +633,8 @@ and \emph{less than half} its individuation ($0.126$ vs $0.295$). The rank
 correlation over the eleven models is $\rho=-0.30$, but its bootstrap 95\%
 interval is $[-0.92,0.42]$, so we rest nothing on it.
 
-QwQ-32B sharpens it: its dispersion is almost entirely per-item uncertainty
-($0.729$ of $0.753$), and it individuates less ($0.154$) than far smaller models.
+QwQ-32B sharpens it: its dispersion is almost all per-item uncertainty ($0.729$
+of $0.753$), and it individuates less ($0.154$) than far smaller models.
 
 The Qwen2.5 family isolates this at fixed family and varying scale:
 individuation rises monotonically, $0.193 \to 0.220 \to 0.295$ at 7B, 32B, 72B,
@@ -653,6 +653,15 @@ limit: the best predictor of an item from that code, fitted on held-out
 respondents, reaches $0.482$ on these same personas, and no two personas share a
 code (App.~\ref{app:ceiling}). The best model delivers $0.295$.
 
+\paragraph{And most of what there is points nowhere.} $\mathrm{VR}_\text{between}$
+measures how far apart a simulator places its persona means, not whether that
+spread identifies the right respondent. Correlating each model's persona means
+against the oracle's over the forty personas gives $r=0.11$--$0.28$, so the
+aligned component $r\cdot\mathrm{VR}_\text{between}$ is $0.019$--$0.046$: under
+five per cent of the human value in every model. This is also why amplifying the
+persona signal does not help --- scaling a misdirected vector only makes it
+louder.
+
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
 $\mathrm{VR}_\text{between}$ is what a persona claim should be judged on.
@@ -666,13 +675,12 @@ lost afterwards. What no model supplies at any scale is \emph{individuation}.
 Three consequences follow. For the low-dispersion models the spread is not
 discarded at decoding; it was never present, so no temperature or top-$p$ remedy
 recovers it. Since all mass lands on valid answer tokens, accounts blaming mode
-collapse on difficulty \emph{emitting} numbers are unsupported here. And this
-closes the loop with the answer-level results --- the item main effect dominates
-realised variance (\S\ref{sec:suite}), conditioning on the correct cluster does
-nothing for dispersion or distinguishability (\S\ref{sec:permutation}), and the
-individuating component averages $0.20$ of human across eleven models --- three
-measurements agreeing that persona conditioning moves \emph{which items} get
-endorsed, not \emph{who} endorses them.
+collapse on difficulty \emph{emitting} numbers are unsupported here. And it
+closes the loop with the answer-level results: the item main effect dominates
+realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
+does nothing for dispersion or distinguishability (\S\ref{sec:permutation}) ---
+three measurements agreeing that persona conditioning moves \emph{which items}
+get endorsed, not \emph{who} endorses them.
 
 \section{Is $k{=}4$ a partition at all?}
 \label{sec:clusters}
@@ -682,35 +690,19 @@ scores. We re-derive it and test $k \in \{2,\dots,15\}$ under three
 preprocessings. Our $k{=}4$ solution reproduces the published labels
 (ARI $=0.946$), confirming the pipeline.
 
-No \emph{separation} criterion supports $k{=}4$. Silhouette falls monotonically
-from $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$;
-Davies--Bouldin is also minimised at $k{=}2$; the gap statistic increases
-monotonically and selects no interior $k$. A silhouette below $0.1$ indicates
-essentially no separated structure.
-
-\emph{Stability} looks at first like a defence. Bootstrap adjusted Rand index
-over 40 resamples is $0.977$, $0.952$, $0.932$ and $0.903$ at $k{=}2,3,4,5$,
-falling away sharply after ($0.797$ at $k{=}6$, $0.581$ at $k{=}7$). Read alone,
-$k{=}4$ looks close to the largest $k$ that $k$-means recovers reproducibly.
-
-That reading does not survive a null calibration. Rebuilding the pipeline on
-structureless surrogates --- a Gaussian matched to the real $30\times30$ facet
-covariance, and a copula matched to the covariance and every per-facet marginal
---- reproduces the stability number exactly: ARI $0.911$ and $0.921$ at
-silhouette $0.075$ and $0.078$, against the real data's $0.910$ at $0.082$. A
-separated 4-component control confirms the test has power (silhouette $0.672$,
-ARI $1.000$).
-
-At $n{=}410{,}168$ any smooth unimodal cloud with this covariance is partitioned
-reproducibly, so ARI $\approx0.91$ measures estimator variance at large $n$, not
-multimodality. Both criteria agree after all, and neither supports $k{=}4$. The
-clusters are also not demographic artefacts (Cram\'er's $V$ of $0.055$--$0.057$
-against sex, age band and country); they are a reproducible discretisation of a
-continuum, which bounds the cluster-conditional signal any persona can exploit,
-as \S\ref{sec:permutation} confirms behaviourally. Since stability-based model
-selection is common, we note the general point: at large $n$, bootstrap
-agreement must be read against a covariance-matched null or it certifies
-nothing.
+No criterion supports $k{=}4$. Silhouette falls monotonically from $0.134$ at
+$k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$, and Davies--Bouldin and
+the gap statistic select no interior $k$. Bootstrap stability looks at first like
+a defence (ARI $0.903$--$0.977$ for $k\le5$), but structureless surrogates matched
+to the facet covariance reproduce it exactly --- ARI $0.911$ and $0.921$ against the
+real data's $0.910$ --- while a separated control confirms the test has power
+(ARI $1.000$). At $n{=}410{,}168$ bootstrap agreement measures estimator variance,
+not multimodality. The clusters are not demographic artefacts either (Cram\'er's
+$V$ of $0.055$--$0.057$); they are a reproducible discretisation of a continuum,
+which bounds the cluster-conditional signal any persona can exploit
+(App.~\ref{app:clusters}). Since stability-based selection is common, the general
+point is worth stating: at large $n$, bootstrap agreement must be read against a
+covariance-matched null or it certifies nothing.
 
 \section{Related work}
 \label{sec:related}
@@ -737,12 +729,12 @@ such losses blur predictions in generative modelling.
 Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
-cells across five models, and proposed a suite that orders humans above
-constants. Reported gains in this literature that are smaller than the
-constant-vs-faithful gap should not be read as evidence of personality fidelity.
-The repair is equally narrow: score with $S_{1/2}$, the proper member of the
-family in \eqref{eq:slambda}, and report the constant floor and the human ceiling
-next to every number.
+cells, and proposed a suite that orders humans above constants. Beneath the
+metric the simulation is thinner still: across eleven models the individuation
+that actually points at the right respondent is under five per cent of the human
+value, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
+member of \eqref{eq:slambda}, and report the constant floor and human ceiling
+beside every number.
 
 \section*{Reproducibility}
 
@@ -812,6 +804,38 @@ summaries.
 
 
 \appendix
+
+\section{Cluster validity in full}
+\label{app:clusters}
+
+No \emph{separation} criterion supports $k{=}4$. Silhouette falls monotonically
+from $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, taking $0.082$ at $k{=}4$;
+Davies--Bouldin is also minimised at $k{=}2$; the gap statistic increases
+monotonically and selects no interior $k$. A silhouette below $0.1$ indicates
+essentially no separated structure.
+
+\emph{Stability} looks at first like a defence: bootstrap ARI over 40 resamples
+is $0.977$, $0.952$, $0.932$, $0.903$ at $k{=}2,3,4,5$ and falls away after
+($0.797$, $0.581$), so $k{=}4$ looks close to the largest reproducible $k$.
+
+That reading does not survive a null calibration. Rebuilding the pipeline on
+structureless surrogates --- a Gaussian matched to the real $30\times30$ facet
+covariance, and a copula matched to the covariance and every per-facet marginal
+--- reproduces the stability number exactly: ARI $0.911$ and $0.921$ at
+silhouette $0.075$ and $0.078$, against the real data's $0.910$ at $0.082$. A
+separated 4-component control confirms the test has power (silhouette $0.672$,
+ARI $1.000$).
+
+At $n{=}410{,}168$ any smooth unimodal cloud with this covariance is partitioned
+reproducibly, so ARI $\approx0.91$ measures estimator variance, not multimodality,
+and neither criterion supports $k{=}4$. The clusters are not demographic
+artefacts either (Cram\'er's $V$ of $0.055$--$0.057$ against sex, age band and
+country); they are a reproducible discretisation of a continuum, which bounds the
+cluster-conditional signal any persona can exploit. Since stability-based model
+selection is common, the general point is worth stating: at large $n$, bootstrap
+agreement must be read against a covariance-matched null or it certifies
+nothing.
+
 
 \section{The individuation ceiling of the prompt}
 \label{app:ceiling}
