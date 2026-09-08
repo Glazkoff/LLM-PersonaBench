@@ -1,0 +1,10 @@
+h4_qwen25_7b         named: VR=0.241 ceil=0.671 eff=0.36 | other: VR=0.183 ceil=0.444 eff=0.41
+h4_qwen25_32b        named: VR=0.289 ceil=0.671 eff=0.43 | other: VR=0.207 ceil=0.444 eff=0.47
+h4_qwen25_72b        named: VR=0.322 ceil=0.671 eff=0.48 | other: VR=0.290 ceil=0.444 eff=0.65
+h4_mistral_24b       named: VR=0.224 ceil=0.671 eff=0.33 | other: VR=0.168 ceil=0.444 eff=0.38
+h4_qwq_32b           named: VR=0.207 ceil=0.671 eff=0.31 | other: VR=0.143 ceil=0.444 eff=0.32
+h4_qwen35_9b         named: VR=0.208 ceil=0.671 eff=0.31 | other: VR=0.158 ceil=0.444 eff=0.36
+h4_glm47_flash       named: VR=0.276 ceil=0.671 eff=0.41 | other: VR=0.262 ceil=0.444 eff=0.59
+--- errors ---
+
+[exited with code 0]
