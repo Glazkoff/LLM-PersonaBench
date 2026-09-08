@@ -66,6 +66,50 @@ def load_genotype(cluster: int):
     }, system
 
 
+BIN_WORDS5 = ["very little", "slightly", "moderately", "quite strongly", "very strongly"]
+BIN_WORDS10 = ["not at all", "very little", "a little", "slightly", "somewhat",
+               "moderately", "fairly", "quite strongly", "strongly", "very strongly"]
+
+
+def _describe(value: float, encoding: str) -> str:
+    """The persona's score, written the way `encoding` says to write it.
+
+    bins5 is the audited system: a 5-level, width-20 quantisation of a 0-100
+    score. Everything a model can know about which respondent it is arrives
+    through these 35 words, so the encoding sets a ceiling on individuation that
+    no amount of model capability can lift.
+    """
+    v = float(value)
+    if encoding == "raw":
+        return f"at {v:.0f} out of 100"
+    words = BIN_WORDS10 if encoding == "bins10" else BIN_WORDS5
+    idx = min(int(v / (100.0 / len(words))), len(words) - 1)
+    return words[idx]
+
+
+def reencode_system(system_text: str, geno: dict, part, encoding: str) -> str:
+    """Rewrite the per-facet/per-trait modifier phrases under a wider encoding.
+
+    Only the modifier phrase changes; the facet descriptions, ordering and the
+    rest of the system prompt are left byte-identical, so the comparison isolates
+    the channel width.
+    """
+    out = system_text
+    for kind, key in (("trait", "trait_formulations"), ("facet", "facet_formulations")):
+        for name, desc in geno[key].items():
+            value = part.get(name, part.get(str(name).lower()))
+            if value is None:
+                continue
+            new_phrase = _describe(value, encoding)
+            for word in sorted(set(BIN_WORDS5), key=len, reverse=True):
+                stale = f"- This {kind} ({name}) describes you {word}: {desc}"
+                if stale in out:
+                    out = out.replace(
+                        stale, f"- This {kind} ({name}) describes you {new_phrase}: {desc}")
+                    break
+    return out
+
+
 def digit_token_ids(tok):
     """Token ids for the bare digits and for their space-prefixed variants."""
     ids = {}
@@ -85,6 +129,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
     ap.add_argument("--clusters", type=int, nargs="+", default=[0, 1, 2, 3])
+    ap.add_argument("--encoding", choices=["bins5", "bins10", "raw"], default="bins5",
+                    help="how the persona's 35 scores are written into the prompt. "
+                         "bins5 reproduces the audited system; the others widen the "
+                         "channel to test whether it, not the model, is the binding "
+                         "constraint on individuation.")
     ap.add_argument("--n-personas", type=int, default=40)
     ap.add_argument("--batch-size", type=int, default=16)
     ap.add_argument("--out", default="arr2026/results/h4_hf")
@@ -151,6 +200,9 @@ def main():
             pr = build_full_prompt(geno, {"task": system.get("task", ""),
                                           "ipip_neo": questions[:1],
                                           "response_format": ANSWER_INSTR}, part)
+            if args.encoding != "bins5":
+                pr = dict(pr, system=reencode_system(pr["system"], geno, part,
+                                                     args.encoding))
             for qi in range(120):
                 msgs = [{"role": "system", "content": pr["system"]},
                         {"role": "user",
