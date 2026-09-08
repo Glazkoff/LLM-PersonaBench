@@ -914,6 +914,17 @@ oracle fell from $0.173$ to $0.135$, so the apparent gain was spread pointing
 nowhere. On this evidence a richer encoding is not a reliable remedy, and
 $\mathrm{VR}_\text{between}$ alone would have scored it as one.
 
+\paragraph{The alignment does not depend on the oracle.} Because $r$ is measured
+against a fitted target, an oracle missing structure the models track would
+understate it. Replacing the additive one-hot oracle with a ridge on the
+continuous scores, or with one given all thirty-five scores, moves $r$ by at most
+$0.04$ and leaves the ordering of models unchanged; the richer oracle gives
+\emph{lower} $r$, as it should, since the models only ever see the ten-score
+code. The check that assumes no oracle at all is the sharpest: correlating each
+model's persona means directly against the forty respondents' own answers gives
+$0.055$--$0.082$, where the oracle reaches $0.491$ on that same target. Models
+recover about a seventh of the attainable person-level alignment.
+
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
 
