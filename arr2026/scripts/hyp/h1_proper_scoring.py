@@ -34,6 +34,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import sys as _sys
+_sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _orientation import to_human_orientation  # noqa: E402
+
 ITEMS = [f"i{i}" for i in range(1, 121)]
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "arr2026/results/h1"
@@ -106,7 +110,7 @@ def main():
         tr_f, te_f = cdir / "train_case_ids.csv", cdir / "test_case_ids.csv"
         if not (f.exists() and tr_f.exists() and te_f.exists()):
             continue
-        m = pd.read_csv(f)[ITEMS].to_numpy(float)
+        m = to_human_orientation(pd.read_csv(f)[ITEMS].to_numpy(float))
         if np.isnan(m).mean() > 0.5 or len(np.unique(m[~np.isnan(m)])) < 2:
             print(f"  SKIP degenerate {model} c{cid}", flush=True)
             continue

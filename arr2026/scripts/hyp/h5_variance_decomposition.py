@@ -24,6 +24,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import sys as _sys
+_sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _orientation import to_human_orientation  # noqa: E402
+
 ITEMS = [f"i{i}" for i in range(1, 121)]
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "arr2026/results/h5"
@@ -57,7 +61,7 @@ def main():
         tr_f, te_f = cdir / "train_case_ids.csv", cdir / "test_case_ids.csv"
         if not (f.exists() and te_f.exists() and tr_f.exists()):
             continue
-        M = pd.read_csv(f)[ITEMS].to_numpy(float)
+        M = to_human_orientation(pd.read_csv(f)[ITEMS].to_numpy(float))
         if np.isnan(M).mean() > 0.5 or len(np.unique(M[~np.isnan(M)])) < 2:
             continue
         te = set(pd.read_csv(te_f)["case"]); tr = set(pd.read_csv(tr_f)["case"])

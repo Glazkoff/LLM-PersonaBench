@@ -43,7 +43,8 @@ replacement suite --- a classifier two-sample test, per-item distributional
 fidelity, and a variance ratio --- each reported against an explicit human ceiling
 and constant floor, and show it inverts the ranking correctly. Under it, current
 personas are near-perfectly separable from humans (C2ST-AUC $0.994$ vs.\ a human
-ceiling of $0.564$) and produce $43\%$ of human response variance. We release code
+ceiling of $0.564$) and reach only $0.43$ of human response \emph{spread} as a
+standard-deviation ratio. We release code
 and per-cell results.
 \end{abstract}
 
@@ -434,8 +435,9 @@ reverse. Two substantive findings follow. First, current personas are
 ceiling of $0.564$) --- and are in fact \emph{more} distinguishable than a
 constant vector ($0.926$), because they miss both the location and the spread of
 the human distribution. Second, they are systematically under-dispersed: VR
-$=0.43$, i.e.\ LLM personas produce fewer than half the response variance of the
-humans they simulate (Figure~\ref{fig:variance}). Evolutionary optimisation moves
+$=0.43$, a ratio of standard deviations, so LLM personas produce well under half
+the response \emph{spread} of the humans they simulate
+(Figure~\ref{fig:variance}). Evolutionary optimisation moves
 none of these appreciably.
 
 \paragraph{Under-dispersion is the wrong summary.} A single variance ratio hides
@@ -649,10 +651,12 @@ and under a third of the human value throughout, and neither the largest model
 nor the most dispersed one is the best at it.
 
 \paragraph{The prompt is not what caps individuation.} A persona is individuated
-only through a five-word quantisation of ten numbers, but that channel is not the
-limit: the best predictor of an item from that code, fitted on held-out
-respondents, reaches $0.482$ on these same personas, and no two personas share a
-code (App.~\ref{app:ceiling}). The best model delivers $0.295$.
+only through a five-word quantisation of ten numbers, but that channel carries
+more than the models extract: a supervised conditional-mean decoder fitted on
+held-out respondents reaches $0.482$ on these same personas, where the best model
+delivers $0.295$, and no two personas share a code (App.~\ref{app:ceiling}). The
+decoder is a reference, not a bound --- a mis-calibrated simulator could exceed it
+by dispersing wrongly --- so it shows the conditioning carries signal.
 
 \paragraph{How much of it points the right way.} $\mathrm{VR}_\text{between}$
 measures how far apart a simulator places its persona means, not whether that
@@ -660,11 +664,11 @@ spread identifies the right respondent. Correlating each model's persona means
 against the oracle's over the forty personas --- both on the corpus's recoded
 scale --- gives $r=0.16$--$0.52$. The aligned amplitude
 $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
-item SD, is $0.033$--$0.183$. That scale needs its own references: the same
-statistic applied to real respondents is $0.498$ and to the oracle $0.482$, so
-the best model reaches $37\%$ of the human reference and the weakest $7\%$. $A$
-also separates models that $\mathrm{VR}_\text{between}$ alone does not: GLM-4.7
-and Qwen3-235B differ by $0.007$ in spread but by $0.017$ in aligned amplitude.
+item SD, is $0.033$--$0.183$. That scale needs its own reference: the same
+statistic on real respondents is $0.498$, so the best model reaches $37\%$ of it
+and the weakest $7\%$. $A$ also separates models $\mathrm{VR}_\text{between}$
+does not --- GLM-4.7 and Qwen3-235B differ by $0.007$ in spread but $0.017$ in
+aligned amplitude.
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -678,9 +682,8 @@ lost afterwards. What no model supplies at any scale is \emph{individuation}.
 
 Three consequences follow. For the low-dispersion models the spread is not
 discarded at decoding; it was never present, so recovering it there means
-\emph{adding} dispersion rather than revealing it. Temperature reweighting
-$p^{1/T}$ does raise the marginal ratio --- Qwen2.5-7B from $0.43$ to $1.02$ at
-$T{=}5$ --- while supplying none of the alignment $A$ measures. Since all mass lands on valid answer tokens, accounts blaming mode
+\emph{adding} dispersion, not revealing it: $p^{1/T}$ lifts Qwen2.5-7B from
+$0.43$ to $1.02$ at $T{=}5$ while supplying none of the alignment $A$ measures. Since all mass lands on valid answer tokens, accounts blaming mode
 collapse on difficulty \emph{emitting} numbers are unsupported here. And it
 closes the loop with the answer-level results: the item main effect dominates
 realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
@@ -775,7 +778,10 @@ single same-cluster respondent, which underestimates what a well-specified
 individual-level twin could achieve; we make no claim about individual-level
 methods. C2ST-AUC depends on classifier capacity and on $n{=}40$ per side, so its
 absolute value should be read as a lower bound on separability, and
-\S\ref{sec:c2st-audit} shows most of what it reads is response style; and DF treats
+\S\ref{sec:c2st-audit} shows most of what it reads is response style; we fold the
+AUC as $\max(\mathrm{AUC},1-\mathrm{AUC})$, which places the null above $0.5$
+($0.517$ signed against $0.569$ folded) and makes our small-$n$ floor a property
+of this classifier rather than of C2ST; and DF treats
 items independently and so ignores within-respondent answer dependence. The
 corpus is self-reported, skewed toward respondents aged 18--25 and toward the
 USA, UK and Canada, so neither the clusters nor the ceilings should be read as
@@ -843,7 +849,7 @@ agreement must be read against a covariance-matched null or it certifies
 nothing.
 
 
-\section{The individuation ceiling of the prompt}
+\section{What the persona channel carries}
 \label{app:ceiling}
 
 A persona reaches the model only through \texttt{get\_modifier\_bisect}, which
@@ -891,21 +897,18 @@ models most invites.
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
 level. The named items carry $1.51\times$ more predictable-from-code variance
-(ceiling $0.671$ against $0.444$), and every model does individuate them more in
-absolute terms. Relative to what is available, however, models do \emph{worse}
-exactly where the prompt is most specific: mean efficiency
-$\mathrm{VR}_\text{between}/\text{ceiling}$ is $0.353$ on the named items
-against $0.433$ on the rest, and the gap runs the same way in $10$ of $11$ models
-(sign test $p=0.006$, Wilcoxon $p=0.002$). Stating a facet explicitly therefore
-buys less than it should, which is the same conclusion the ceiling reaches from
-the other direction: the binding constraint is the use of the conditioning, not
-its richness. One caveat cuts against reading the gap as purely a model failure.
-A facet score is computed from its own four items, so
-$\mathbb{E}[X_j\mid\text{facet}]$ is close to an arithmetic identity and is not
-recoverable by a model that does not know the scoring key; traits have the same
-structure diluted over twenty-four items. The named-item ceiling is therefore
-inflated by more than the trait-level one, and some of the $0.353$ against
-$0.433$ is that asymmetry rather than differential use.
+(reference $0.671$ against $0.444$), and every model does individuate them more
+in absolute terms. Measured against those references the ratio is \emph{lower}
+where the prompt is most specific --- $0.353$ on the named items against $0.433$
+on the rest, in the same direction for $10$ of $11$ models --- but we report this
+descriptively and draw no causal conclusion from it, for two reasons. A facet
+score is computed from its own four items, so $\mathbb{E}[X_j\mid\text{facet}]$
+is close to an arithmetic identity that a model without the scoring key cannot
+invert, while traits have the same structure diluted over twenty-four items; the
+named-item reference is inflated by more than the trait-level one, which alone
+could produce the gap. And the eleven models share personas, references and
+prompt structure, several within one family, so they are not independent
+replicates and we do not attach a $p$-value to the count.
 
 \paragraph{Widening the channel does not fix it.} The obvious remedy is to send
 more: we re-ran three models with every other word of the prompt held fixed and
