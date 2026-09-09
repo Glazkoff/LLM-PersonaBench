@@ -611,7 +611,9 @@ identity --- separates them. All eleven score better on the correct assignment
 than the permuted one by $0.004$--$0.017$, every paired interval excluding zero,
 yet all remain worse than a cluster empirical prior fitted on \emph{other}
 respondents --- which uses cluster membership but no persona --- by
-$0.036$--$0.095$.
+$0.036$--$0.095$. With conditioning and target items disjoint, the gain is
+resolved in three of four tested cells and unresolved for Granite-4.1 on IPIP,
+while all four still lose to the prior (App.~\ref{app:disjoint}).
 
 The two facts reconcile exactly, and without any fitted reference. Writing $I$
 for the identity gain above, $\bar q$ for the model's within-cluster mean CDF and
@@ -688,7 +690,7 @@ Personality conditioning of LLMs is commonly validated by administering
 psychometric inventories to the conditioned
 model~\citep{serapio2023personality,jiang2024evaluating}, and prompt sensitivity
 of the resulting traits is well
-documented~\citep{dong2025temperature,gupta2024personas}. Individual-level
+documented~\citep{han2026context,gupta2024personas}. Individual-level
 simulation from interview transcripts achieves high behavioural
 fidelity~\citep{park2024generative} at a per-person cost that motivates the
 cluster-level shortcut we study. Evolutionary and search-based prompt
@@ -707,8 +709,8 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath
-it the simulation is thinner still: correct persona assignment helps every model
-and none of them enough, and an exact decomposition puts the loss in the mixture,
+it the simulation is thinner still: on the same items correct persona
+assignment helps all eleven models and none of them enough, and an exact decomposition puts the loss in the mixture,
 not identity. Score with $S_{1/2}$; report floor and ceiling.
 
 \section*{Limitations}
@@ -718,9 +720,10 @@ optimisation family, and five models; the belief-level measurement of
 \S\ref{sec:mechanism} covers eleven open-weight models spanning 7B--235B,
 six families and three generations, and the cross-instrument replication of
 \S\ref{sec:crossinstrument} carries the structural findings and the identity
-result but not the full suite, since SD3
-carries no simulator runs; since it requires logprob access the API
-models in the audit do not provide; the within-family trend rests on three
+result but not the full suite, which needs sampled
+simulator outputs where SD3 has only the two belief readouts of
+App.~\ref{app:disjoint}; belief-level measurement anywhere needs logprob access
+the API models in the audit do not provide; the within-family trend rests on three
 points and the cross-family comparison on eleven, so both are directional rather
 than fitted laws; all models are read with thinking disabled and the assistant
 turn prefilled, and the four least confident of them (belief entropy above $1$
@@ -802,9 +805,13 @@ are split within each scale, the persona is built only from the input half, and
 the readout covers only the target half: two input and two target items per IPIP
 facet ($60$/$60$), four input and five target per SD3 trait ($12$/$15$). No
 cluster label is used --- the released IPIP clustering is derived from all $120$
-items and would reimport target information --- and the prior, the decoder and the
-bin thresholds are fitted on training respondents whose target answers are never
-seen. Elicitation is unchanged, so any difference is the split.
+items and would reimport target information --- and the prior and the decoder are fitted on training
+respondents whose target answers are never seen. The five score bins are fixed
+quintiles of the $0$--$100$ range, not fitted. This design differs from the
+body's in more than the split: the persona is one generated line per facet
+rather than the body's per-cluster prose, respondents are sampled globally
+rather than within clusters, and only half the items are scored. It is a
+replication under a stricter design, not a controlled ablation of overlap.
 
 On $256$ held-out respondents the second fact of \S\ref{sec:mechanism} is
 unqualified and the first is weakened. Every model still loses to the empirical
@@ -814,14 +821,15 @@ Qwen2.5-7B and $+0.017$ $[+0.013,+0.020]$ for Granite-4.1, and on IPIP by
 $+0.004$ $[+0.002,+0.005]$ for Qwen2.5-7B --- but Granite-4.1 on IPIP gives
 $+0.002$ $[-0.001,+0.005]$, which does not exclude zero.
 
-Two things follow, and they cut in opposite directions. The identity effect is
-not an artefact of scoring a simulator on the items its conditioning came from,
-since it is largest where that confound is absent entirely. But it is smaller
-than the body's same-item figure --- Qwen2.5-7B's IPIP gain falls from $0.006$ to
-$0.004$ --- and on IPIP it is fragile enough that one of two models does not show
-it. Part of what \S\ref{sec:mechanism} measures on IPIP is recoverable
-arithmetic. What does not depend on the split, in any cell, is that the simulator
-loses to a prior that ignores the persona.
+One thing follows and one does not. Positive identity gains occur with
+conditioning and target items disjoint, in three of four cells, so item overlap
+is not necessary for them. What this design cannot do is apportion the body's
+IPIP gain between overlap and identity, because it changes the persona text, the
+respondent sample and the scored items as well as the split: Qwen2.5-7B's
+$0.006$ there and $0.004$ here are not two measurements of one quantity, and an
+interval excluding zero in one design beside one that does not in another is no
+evidence of a decrease. What survives every cell is that the simulator loses to
+a prior that ignores the persona.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
