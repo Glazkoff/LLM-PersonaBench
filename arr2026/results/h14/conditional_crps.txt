@@ -1,0 +1,28 @@
+[cluster 0: prior and decoder fitted on 107134 held-out]
+[cluster 1: prior and decoder fitted on 108840 held-out]
+[cluster 2: prior and decoder fitted on 108827 held-out]
+[cluster 3: prior and decoder fitted on 85207 held-out]
+
+run                    correct  permuted     prior   decoder  cond.value  pred.err
+h4_qwen25_7b            0.2365    0.2428    0.1424    0.1172      0.0227    0.1171
+                       identity gain +0.0062 [+0.0047,+0.0078] | vs prior -0.0941 [-0.0990,-0.0899]
+h4_qwen25_32b           0.2375    0.2489    0.1424    0.1172      0.0227    0.1199
+                       identity gain +0.0113 [+0.0095,+0.0133] | vs prior -0.0952 [-0.0998,-0.0906]
+h4_qwen25_72b           0.2251    0.2422    0.1424    0.1172      0.0227    0.1067
+                       identity gain +0.0173 [+0.0148,+0.0198] | vs prior -0.0827 [-0.0881,-0.0771]
+h4_mistral_24b          0.2043    0.2145    0.1424    0.1172      0.0227    0.0841
+                       identity gain +0.0103 [+0.0090,+0.0118] | vs prior -0.0619 [-0.0663,-0.0575]
+h4_qwq_32b              0.1960    0.2020    0.1424    0.1172      0.0227    0.0766
+                       identity gain +0.0061 [+0.0048,+0.0073] | vs prior -0.0536 [-0.0563,-0.0511]
+h4_qwen35_9b            0.1854    0.1939    0.1424    0.1172      0.0227    0.0670
+                       identity gain +0.0085 [+0.0072,+0.0100] | vs prior -0.0430 [-0.0461,-0.0398]
+h4_glm47_flash          0.2247    0.2333    0.1424    0.1172      0.0227    0.1075
+                       identity gain +0.0087 [+0.0066,+0.0107] | vs prior -0.0823 [-0.0881,-0.0761]
+h4_gptoss_20b           0.1784    0.1819    0.1424    0.1172      0.0227    0.0584
+                       identity gain +0.0035 [+0.0028,+0.0042] | vs prior -0.0360 [-0.0391,-0.0330]
+h4_granite_8b           0.2277    0.2363    0.1424    0.1172      0.0227    0.1091
+                       identity gain +0.0087 [+0.0068,+0.0106] | vs prior -0.0853 [-0.0892,-0.0813]
+h4_apertus_8b           0.1957    0.1995    0.1424    0.1172      0.0227    0.0751
+                       identity gain +0.0038 [+0.0027,+0.0049] | vs prior -0.0534 [-0.0586,-0.0482]
+h4_qwen3_235b           0.2301    0.2409    0.1424    0.1172      0.0227    0.1132
+                       identity gain +0.0108 [+0.0084,+0.0132] | vs prior -0.0877 [-0.0938,-0.0820]

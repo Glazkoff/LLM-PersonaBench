@@ -44,7 +44,11 @@ fidelity, and a variance ratio --- each reported against an explicit human ceili
 and constant floor, and show it inverts the ranking correctly. Under it, current
 personas are near-perfectly separable from humans (C2ST-AUC $0.994$ vs.\ a human
 ceiling of $0.564$) and reach only $0.43$ of human response \emph{spread} as a
-standard-deviation ratio. We release code
+standard-deviation ratio. Scoring each persona against its own respondent
+separates two questions the literature runs together: every model uses the
+persona in the right direction, and every model still loses to ignoring it,
+because its prediction error exceeds the value conditioning carries. We release
+code
 and per-cell results.
 \end{abstract}
 
@@ -581,6 +585,32 @@ $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between an eighth
 and under a third of the human value throughout, and neither the largest model
 nor the most dispersed one is the best at it.
 
+\paragraph{The persona helps, and still loses.} Two questions have been running
+together: does the simulator reproduce the cluster's distribution, and does it
+identify \emph{this} respondent? They have different answers. Scoring each
+persona's predicted distribution against that person's own answers under
+normalised CRPS, and permuting whole belief rows among respondents within a
+cluster --- which leaves every population statistic identical while destroying
+identity --- separates them. All eleven models score better on the correct
+assignment than on the permuted one, by $0.004$ to $0.017$ with every paired
+interval excluding zero: the persona is used, and in the right direction. All
+eleven nevertheless lose to the cluster's empirical distribution, which ignores
+the persona entirely, by $0.036$ to $0.095$.
+
+The two facts are reconciled exactly. Writing $p_t(C)$ for the true conditional
+CDF given everything the simulator sees and $q_t(C)$ for the model's,
+\begin{equation}
+\mathbb{E}L(P_0)-\mathbb{E}L(Q)=\tfrac14\!\sum_t\!\operatorname{Var}[p_t(C)]
+-\tfrac14\!\sum_t\!\mathbb{E}\big[q_t(C)-p_t(C)\big]^2 ,
+\label{eq:decomp}
+\end{equation}
+the value of conditioning minus the cost of predicting it badly. Here the first
+term is $0.023$ and the second runs $0.058$--$0.120$, so error exceeds value by
+$2.6$ to $5.3$ times. A simulator can read the persona correctly and still be
+worse than ignoring it, because what it extracts cannot pay for what it gets
+wrong. That, rather than an absence of individuation, is what the audited metric
+has been hiding.
+
 \paragraph{The prompt is not what caps individuation.} A persona is individuated
 only through a five-word quantisation of ten numbers, but that channel carries
 more than the models extract: a supervised conditional-mean decoder fitted on
@@ -673,8 +703,10 @@ constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath
 it the simulation is thinner still: individuation that identifies the right
-respondent reaches about $37\%$ $[34,40]$ of the human reference. Score with
-$S_{1/2}$; report floor and ceiling beside every number.
+respondent reaches about $37\%$ $[34,40]$ of the human reference. Every model
+reads the persona in the right direction and still loses to ignoring it, because
+prediction error exceeds the value conditioning carries by $2.6$ to $5.3$ times.
+Score with $S_{1/2}$; report floor and ceiling beside every number.
 
 \section*{Limitations}
 
