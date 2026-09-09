@@ -16,7 +16,7 @@
     "constant_floor_mean": 0.0
   },
   "S_answer (old metric; note constant floor EXCEEDS human ceiling)": {
-    "model_mean": 0.7369,
+    "model_mean": 0.7386,
     "human_ceiling_mean": 0.7212,
     "constant_floor_mean": 0.7961
   },

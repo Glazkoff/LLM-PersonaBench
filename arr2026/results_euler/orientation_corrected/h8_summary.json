@@ -1,0 +1,41 @@
+{
+  "m_grid": [
+    1,
+    2,
+    3,
+    5,
+    8,
+    13,
+    21,
+    34,
+    55,
+    100,
+    200,
+    500
+  ],
+  "DF_by_m": {
+    "1": 0.7228,
+    "2": 0.7974,
+    "3": 0.8308,
+    "5": 0.8636,
+    "8": 0.8861,
+    "13": 0.9031,
+    "21": 0.9153,
+    "34": 0.9231,
+    "55": 0.9289,
+    "100": 0.933,
+    "200": 0.9357,
+    "500": 0.9376
+  },
+  "targets": {
+    "LLM_persona": 0.7835,
+    "constant": 0.7955,
+    "human_ceiling": 0.9389
+  },
+  "respondent_equivalents": {
+    "LLM_persona": 2,
+    "constant": 2,
+    "human_ceiling": null
+  },
+  "interpretation": "respondent_equivalents[LLM_persona] is how many real respondents you would need to sample before a plug-in estimate matches the persona. A single-digit value restates the audit in units of real people."
+}
