@@ -637,10 +637,12 @@ spread identifies the right respondent. Correlating each model's persona means
 against the oracle's over the forty personas --- both on the corpus's recoded
 scale --- gives $r=0.16$--$0.52$. The aligned amplitude
 $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
-item SD, is $0.033$--$0.183$. That scale needs its own reference: the same
-statistic on real respondents is $0.498$, so the best model reaches $37\%$ of it
-and the weakest $7\%$. $A$ also separates models $\mathrm{VR}_\text{between}$
-does not --- GLM-4.7 and Qwen3-235B differ by $0.007$ in spread but $0.017$ in
+item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
+respondents --- so the best model reaches about a third of the human reference
+and the weakest under a tenth. Intervals resample persona rows jointly across
+model, decoder and respondents, holding the decoder fixed, so they describe
+persona-sampling uncertainty. $A$ separates models $\mathrm{VR}_\text{between}$
+does not: GLM-4.7 and Qwen3-235B differ by $0.007$ in spread but $0.017$ in
 aligned amplitude.
 
 A simulator can therefore look more dispersed simply by being less confident:
