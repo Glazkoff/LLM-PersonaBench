@@ -1,0 +1,37 @@
+{
+  "by_variant": {
+    "A_full_items": {
+      "c2st_model": 0.9943,
+      "c2st_human_ceiling": 0.5639,
+      "c2st_constant_floor": 0.9259
+    },
+    "B_style_only": {
+      "c2st_model": 0.8938,
+      "c2st_human_ceiling": 0.584,
+      "c2st_constant_floor": 0.9884
+    },
+    "C_ipsatised": {
+      "c2st_model": 0.9887,
+      "c2st_human_ceiling": 0.5662,
+      "c2st_constant_floor": 0.9862
+    },
+    "D_facets_only": {
+      "c2st_model": 0.9909,
+      "c2st_human_ceiling": 0.565,
+      "c2st_constant_floor": 0.9084
+    },
+    "E_forward_only": {
+      "c2st_model": 0.9903,
+      "c2st_human_ceiling": 0.5676,
+      "c2st_constant_floor": 0.81
+    },
+    "E_reverse_only": {
+      "c2st_model": 0.9928,
+      "c2st_human_ceiling": 0.5831,
+      "c2st_constant_floor": 0.8434
+    }
+  },
+  "style_recovers_fraction_of_full_AUC_above_chance": 0.797,
+  "verdict": "TRAIT-BEARING: style scalars do not reproduce the separability, so C2ST is reading more than formatting.",
+  "n_cells": 20
+}

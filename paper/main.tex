@@ -802,11 +802,10 @@ recoded scale and is imported by every analysis that compares the two.
 A metric that separates simulators from humans at AUC $0.994$ invites an obvious
 objection: perhaps the classifier is detecting formatting rather than anything
 about personality. We test our own metric with a feature ladder, each rung scored
-identically against the same anchors. The ladder is computed on the
-\emph{original} orientation throughout, so its rungs are comparable to each other
-but not to the corrected suite, and its facet rung re-reverses the already-recoded
-human answers; a corrected version must handle orientation feature-by-feature
-rather than by one global flip. We therefore read the ladder qualitatively.
+identically against the same anchors. Orientation is handled per feature family:
+style features describe how a respondent uses the scale, so both sides sit on the
+literal scale the item was asked on, while content features compare
+trait-oriented quantities. The full-item rung reproduces the suite's $0.994$.
 
 \begin{center}\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -814,26 +813,25 @@ rather than by one global flip. We therefore read the ladder qualitatively.
 \toprule
 Features & LLM & Human & Const.\\
 \midrule
-Full 120 items & 0.983 & 0.564 & 0.926\\
-5 style scalars only & 0.950 & 0.566 & 0.994\\
-Items, ipsatised & 0.975 & 0.566 & 0.986\\
-30 facet scores only & 0.987 & 0.581 & 0.944\\
+Full 120 items & 0.994 & 0.564 & 0.926\\
+5 style scalars only & 0.894 & 0.584 & 0.988\\
+Items, ipsatised & 0.989 & 0.566 & 0.986\\
+30 facet scores only & 0.991 & 0.565 & 0.908\\
 Forward-keyed only & 0.990 & 0.568 & 0.810\\
-Reverse-keyed only & 0.984 & 0.583 & 0.843\\
+Reverse-keyed only & 0.993 & 0.583 & 0.843\\
 \bottomrule
 \end{tabular}
 \end{center}
 
 Five content-free scalars --- per-respondent mean and standard deviation, extreme
 -response rate, longest identical run, and forward-versus-reverse consistency ---
-already recover most of the separability above chance here. The objection has real
-force, and we state it plainly: \textbf{a large part of what C2ST detects is
-response style.} We quote no share, since the ladder's orientation handling is not
-yet consistent enough to support one.
+recover $80\%$ of the full separability above chance. The objection has real
+force, and we state it plainly: \textbf{most of what C2ST detects is response
+style.}
 
 It is not only style. Ipsatising each respondent (removing their own mean and
 standard deviation, i.e.\ the two largest style features) still leaves AUC
-$0.975$, and facet scores alone give $0.987$. Style and content are redundant
+$0.989$, and facet scores alone give $0.991$. Style and content are redundant
 routes to the same conclusion rather than one masking the other. The human
 ceiling is also stable at $0.56$--$0.58$ across every rung, so the anchor does
 not move with the feature set.

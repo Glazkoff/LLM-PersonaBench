@@ -154,3 +154,58 @@ respondent equivalents); E3's 18-vs-20 cell aggregation; e2b global-baseline gra
 H2 corrected rerun; Appendix D's classifier-specific n-floor wording.
 
 ---
+
+## Between rounds 3 and 4 — executor actions (verify; do not credit on my say-so)
+
+Round 3's four "blocks submission" items:
+1. JOINT PERSONA BOOTSTRAP CIs ON A — done (`h13c_bootstrap.py`, B=2000, seed 260909).
+   Persona rows resampled jointly across model / decoder / actual respondents so paired
+   comparisons stay paired; decoder fit held FIXED, stated inline as covering
+   persona-sampling uncertainty only.
+   human reference A = 0.4891 [0.4614, 0.5167] (identical on both clusters).
+   Qwen2.5-7B .0658 [.0564,.0747] | -32B .1139 [.1051,.1222] | -72B .1802 [.1676,.1925]
+   Mistral-24B .1032 [.0954,.1105] | QwQ-32B .0568 [.0514,.0620] | Qwen3.5-9B .0864 [.0792,.0936]
+   GLM-4.7 .1037 [.0936,.1138] | gpt-oss .0379 [.0335,.0426] | Granite .0799 [.0708,.0887]
+   Apertus .0321 [.0279,.0363] | Qwen3-235B .1209 [.1097,.1314]
+   Interventions: Granite .0799->.1316 and Apertus .0321->.0196, both NON-overlapping,
+   opposite directions. gpt-oss .0379->.0462 (marginal).
+   NOTE round 2 predicted Qwen72 [.1677,.1927]; I get [.1676,.1925] at a different seed.
+   RETRACTION: the paper had claimed A separates GLM-4.7 from Qwen3-235B. Their intervals
+   OVERLAP, so that is withdrawn and the appendix now states it as unresolvable. Replaced
+   with Qwen2.5-32B vs Granite-4.1 (spread differs .013, amplitudes [.105,.122] vs
+   [.071,.089], non-overlapping). New: Qwen2.5 scale trend is three non-overlapping steps.
+2. TENSORS — all 11 models AND all 3 interventions now committed (11MB total), with a
+   README fixing persona order to df[df.clusters==k].iloc[:40]. The failed FP8 run ships
+   marked valid:false rather than dropped.
+3. H8 — rebuilt at MATCHED 40-vs-40 with percentile intervals. Persona = 2 respondents:
+   DF .783 clears the m=1 upper bound (.766) and sits inside m=2 [.761,.825]. The
+   "human ceiling = 34 respondents" figure DOES NOT SURVIVE: at matched sizes the ceiling
+   (.939) exceeds the donor curve even at m=500 (.938), so it is reported off-curve.
+4. H12 LOIO — not attempted; interpretation remains descriptive, which round 3 said is
+   sufficient while it stays descriptive.
+
+Also fixed from round 3's list:
+- e3 s_answer dropped whole cells on all-NaN respondent rows (18 of 20). Fixed; e3 now
+  gives S=.7386, exactly reconciling with H3's .7386.
+- e2b's "global mean" was a rounded grand scalar; now the per-item global mean it claimed.
+  It scores .774 (was .720) and still beats the persona's corrected .739.
+- Suite table S .654 -> .739; head-to-head table caption now labels its orientation and
+  gives the +.079 correction.
+- Appendix table header "Ceiling" -> "Decoder SD"; the "interactions add nothing" inference
+  softened to consistency rather than proof.
+- C2ST small-n floor attributed to our classifier configuration (leaf 20->5 restores n=20).
+- H2 rerun with FEATURE-SPECIFIC orientation: style features on the literal scale (humans
+  un-recoded, since the map is its own inverse), content features trait-oriented (model
+  flipped, humans as stored); facet_scores no longer reverses internally. IN FLIGHT at the
+  time of writing -- if its numbers are not in the paper, the ladder is still withdrawn.
+- Page limit: now checked by measuring the Limitations boundary, not where a heading appears.
+
+---
+
+### H2 rerun landed (after the block above was written)
+Corrected ladder, feature-specific orientation:
+  full items .994 (matches e3's C2ST .9943) | style .894 | ipsatised .989
+  facets .991 | forward .990 | reverse .993 ; human ceiling .564-.584
+Style now recovers 80% of separability above chance, not the 93% previously claimed.
+The style/content conclusion therefore SURVIVES with a corrected number, and the
+ladder is restored to the paper rather than withdrawn.
