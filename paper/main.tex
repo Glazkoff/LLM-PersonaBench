@@ -611,21 +611,19 @@ excluding zero: the persona is used, in the right direction. All eleven still
 lose to the cluster's empirical distribution, which ignores the persona, by
 $0.036$--$0.095$.
 
-The two facts are reconciled exactly. Writing $p_t(C)$ for the true conditional
-CDF given everything the simulator sees and $q_t(C)$ for the model's,
+The two facts reconcile exactly, and without any fitted reference. Writing $I$
+for the identity gain above, $\bar q$ for the model's within-cluster mean CDF and
+$D_Q$ for the across-persona variance of its CDFs,
 \begin{equation}
-\begin{split}
-\mathbb{E}L(P_0)-\mathbb{E}L(Q)=\;&\tfrac14\textstyle\sum_t\operatorname{Var}[p_t(C)]\\
--\;&\tfrac14\textstyle\sum_t\mathbb{E}\big[q_t(C)-p_t(C)\big]^2 ,
-\end{split}
+R(P_0)-R(Q)\;=\;I\;-\;D_Q\;-\;\big[R(\bar q)-R(P_0)\big],
 \label{eq:decomp}
 \end{equation}
-the value of conditioning minus the cost of predicting it badly. Here the first
-term is $0.023$ and the second runs $0.058$--$0.120$, so error exceeds value by
-$2.6$ to $5.3$ times. A simulator can read the persona correctly and still be
-worse than ignoring it, because what it extracts cannot pay for what it gets
-wrong. That, rather than an absence of individuation, is what the audited metric
-has been hiding.
+an identity in measured quantities, exact on our data to machine precision. It
+locates the loss: the bracket --- how much worse the model's \emph{mixture} is
+than the prior --- is $0.038$--$0.090$, while $I$ is $0.004$--$0.017$ and $D_Q$
+is $0.002$--$0.021$. Identity effects are an order of magnitude smaller than the
+mixture error that dominates, so a simulator can read the persona correctly and
+still be far worse than ignoring it.
 
 \paragraph{The prompt is not what caps individuation.} A persona is individuated
 only through a five-word quantisation of ten numbers, but that channel carries
@@ -711,10 +709,10 @@ constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath
 it the simulation is thinner still: individuation that identifies the right
-respondent reaches about $37\%$ $[34,40]$ of the human reference. Every model
-reads the persona in the right direction and still loses to ignoring it, because
-prediction error exceeds the value conditioning carries by $2.6$ to $5.3$ times.
-Score with $S_{1/2}$; report floor and ceiling beside every number.
+respondent reaches about $37\%$ $[34,40]$ of the human reference. Correct persona
+assignment helps every model and none of them enough: an exact decomposition puts
+the loss in the mixture, not in identity. Score with $S_{1/2}$; report floor and
+ceiling beside every number.
 
 \section*{Limitations}
 

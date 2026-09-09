@@ -73,6 +73,28 @@ def ridge(X, Y, Xp, lam=1e-2):
     return Xpc @ np.linalg.solve(Xc.T @ Xc + lam * np.eye(Xc.shape[1]), Xc.T @ Y)
 
 
+
+def isotonic_rows(D):
+    """Project each length-4 threshold vector onto the non-decreasing cone."""
+    out = D.copy()
+    flat = out.reshape(-1, D.shape[-1])
+    for r in range(flat.shape[0]):
+        v = flat[r]
+        # pool adjacent violators, unit weights
+        vals, wts = [], []
+        for x in v:
+            vals.append(float(x)); wts.append(1.0)
+            while len(vals) > 1 and vals[-2] > vals[-1]:
+                b, wb = vals.pop(), wts.pop()
+                a, wa = vals.pop(), wts.pop()
+                vals.append((a * wa + b * wb) / (wa + wb)); wts.append(wa + wb)
+        o, i = [], 0
+        for val, w in zip(vals, wts):
+            o.extend([val] * int(w))
+        flat[r] = np.clip(np.array(o[:D.shape[-1]]), 0.0, 1.0)
+    return flat.reshape(D.shape)
+
+
 def crps_from_cdf(Qcdf, Y):
     """Qcdf: (n, items, 4) predicted P(X<=t). Y: (n, items) observed answers."""
     ind = np.stack([(Y <= t).astype(float) for t in THRESH], axis=2)
@@ -111,12 +133,16 @@ def main() -> None:
         tgt = np.concatenate([(Yf <= t).astype(float) for t in THRESH], axis=1)
         dec = np.clip(ridge(Xf, tgt, Xp), 0, 1).reshape(len(per), len(THRESH), 120)
         dec = np.transpose(dec, (0, 2, 1))                                    # (n,items,4)
+        # Independent per-threshold ridges are not monotone in t, so ~2% of
+        # predictions implied negative category probabilities. Project each
+        # four-vector onto the monotone cone (pool-adjacent-violators).
+        dec = isotonic_rows(dec)
         ctx[cl] = {"Y": Yp, "prior": np.broadcast_to(prior, (len(per), 120, 4)),
                    "dec": dec}
         print(f"[cluster {cl}: prior and decoder fitted on {len(fit)} held-out]", flush=True)
 
     print(f"\n{'run':20s} {'correct':>9s} {'permuted':>9s} {'prior':>9s} {'decoder':>9s} "
-          f"{'cond.value':>11s} {'pred.err':>9s}")
+          f"{'spread D_Q':>11s} {'mix.exc':>9s} {'residual':>10s}")
     for run in a.runs:
         rd = None
         for base in a.results:
@@ -124,7 +150,7 @@ def main() -> None:
                 rd = ROOT / base / run; break
         if rd is None:
             print(f"{run:20s} MISSING"); continue
-        acc = {k: [] for k in ("correct", "permuted", "prior", "dec", "V", "E")}
+        acc = {k: [] for k in ("correct", "permuted", "prior", "dec", "D_Q", "mix_excess")}
         for cl in ctx:
             d = rd / f"readout_cluster_{cl}"
             if not (d / "belief_probs.npy").exists():
@@ -137,22 +163,28 @@ def main() -> None:
             acc["correct"].append(np.nanmean(crps_from_cdf(Q, Y2)))
             acc["prior"].append(np.nanmean(crps_from_cdf(prior2, Y2)))
             acc["dec"].append(np.nanmean(crps_from_cdf(dec2, Y2)))
-            pl = []
-            for _ in range(a.perms):
-                pi = rng.permutation(n)
-                pl.append(np.nanmean(crps_from_cdf(Q[pi], Y2)))
-            acc["permuted"].append(float(np.mean(pl)))
+            # Exact expectation of the permutation control: average the loss of
+            # every donor row against every respondent, which removes Monte Carlo
+            # noise from the quantity the headline claim rests on.
+            per_pair = np.stack([np.nanmean(crps_from_cdf(
+                np.broadcast_to(Q[k:k + 1], Q.shape), Y2), axis=1) for k in range(n)])
+            acc["permuted"].append(float(per_pair.mean()))
+            acc.setdefault("row_perm", []).append(per_pair.mean(axis=0))
             # per-respondent losses, kept for a paired interval on the gap that
             # matters: does assigning beliefs to the RIGHT person help?
             acc.setdefault("row_correct", []).append(np.nanmean(crps_from_cdf(Q, Y2), axis=1))
-            rowperm = np.mean([np.nanmean(crps_from_cdf(Q[rng.permutation(n)], Y2), axis=1)
-                               for _ in range(a.perms)], axis=0)
-            acc.setdefault("row_perm", []).append(rowperm)
             acc.setdefault("row_prior", []).append(np.nanmean(crps_from_cdf(prior2, Y2), axis=1))
-            # decomposition, using the fitted conditional CDF as p_t
-            V = np.nanmean(np.var(dec2, axis=0))
-            E = np.nanmean((Q - dec2) ** 2)
-            acc["V"].append(float(V)); acc["E"].append(float(E))
+            # Exact, observable decomposition -- no oracle, no fitted reference:
+            #   R(prior) - R(correct) = I - D_Q - [ R(qbar) - R(prior) ]
+            # I is the exact expected permutation gain, D_Q the across-persona
+            # dispersion of the model's own CDFs, and the bracket the excess loss
+            # of the model's MIXTURE against the prior. Every term is measured.
+            qbar = np.nanmean(Q, axis=0, keepdims=True)
+            D_Q = float(np.nanmean(np.nanmean((Q - qbar) ** 2, axis=0)))
+            R_qbar = float(np.nanmean(crps_from_cdf(np.broadcast_to(qbar, Q.shape), Y2)))
+            R_prior = float(np.nanmean(crps_from_cdf(prior2, Y2)))
+            acc["D_Q"].append(D_Q)
+            acc["mix_excess"].append(R_qbar - R_prior)
         if not acc["correct"]:
             print(f"{run:20s} NO TENSORS"); continue
         m = {k: float(np.mean(v)) for k, v in acc.items()
@@ -164,8 +196,11 @@ def main() -> None:
         bs_id = np.array([np.mean(rng.choice(d_id, len(d_id))) for _ in range(2000)])
         bs_pr = np.array([np.mean(rng.choice(d_pr, len(d_pr))) for _ in range(2000)])
         ci_id = np.percentile(bs_id, [2.5, 97.5]); ci_pr = np.percentile(bs_pr, [2.5, 97.5])
+        ident = m['permuted'] - m['correct']
+        resid = (m['prior'] - m['correct']) - (ident - m['D_Q'] - m['mix_excess'])
         print(f"{run:20s} {m['correct']:9.4f} {m['permuted']:9.4f} {m['prior']:9.4f} "
-              f"{m['dec']:9.4f} {m['V']:11.4f} {m['E']:9.4f}", flush=True)
+              f"{m['dec']:9.4f} {m['D_Q']:11.4f} {m['mix_excess']:9.4f} {resid:+.2e}",
+              flush=True)
         print(f"{'':20s}   identity gain {d_id.mean():+.4f} [{ci_id[0]:+.4f},{ci_id[1]:+.4f}]"
               f" | vs prior {d_pr.mean():+.4f} [{ci_pr[0]:+.4f},{ci_pr[1]:+.4f}]", flush=True)
 
