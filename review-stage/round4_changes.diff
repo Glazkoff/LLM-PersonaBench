@@ -1,0 +1,518 @@
+diff --git a/arr2026/scripts/e2b_headtohead.py b/arr2026/scripts/e2b_headtohead.py
+index ce56584..a3e836e 100644
+--- a/arr2026/scripts/e2b_headtohead.py
++++ b/arr2026/scripts/e2b_headtohead.py
+@@ -28,7 +28,11 @@ def main():
+     OUT.mkdir(parents=True, exist_ok=True)
+     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
+     by_case = df.set_index("case")
+-    grand = np.round(np.full(120, df[ITEMS].to_numpy(float).mean()))
++    # Per-item global mean, as described: one value per item pooled over all
++    # clusters. The previous version collapsed this to a single grand scalar
++    # repeated across items, which is a strictly weaker baseline than the text
++    # claimed and understated what a cluster-blind predictor achieves.
++    grand = np.round(np.nanmean(df[ITEMS].to_numpy(float), axis=0))
+     rng = np.random.default_rng(2026)
+ 
+     rows = []
+diff --git a/arr2026/scripts/e3_metric_suite.py b/arr2026/scripts/e3_metric_suite.py
+index 70d2fe0..ceb593c 100644
+--- a/arr2026/scripts/e3_metric_suite.py
++++ b/arr2026/scripts/e3_metric_suite.py
+@@ -58,10 +58,20 @@ N_REPEAT = 10       # repeats of the C2ST draw
+ 
+ # ---------------------------------------------------------------- metrics
+ def s_answer(model, human):
+-    """Paper metric: mean over paired respondents of mean item similarity."""
++    """Paper metric: mean over paired respondents of mean item similarity.
++
++    A respondent whose answers are entirely missing gives an all-NaN row, and
++    np.nanmean returns NaN for it; averaging those with np.mean propagated the
++    NaN to the whole cell, which was then dropped downstream. That silently
++    reduced the reported average from 20 cells to 18. Skip empty rows instead.
++    """
+     n = min(len(model), len(human))
+-    return float(np.mean([
+-        np.nanmean(1.0 - np.abs(model[i] - human[i]) / 4.0) for i in range(n)]))
++    per = []
++    for i in range(n):
++        d = 1.0 - np.abs(model[i] - human[i]) / 4.0
++        if np.isfinite(d).any():
++            per.append(float(np.nanmean(d)))
++    return float(np.mean(per)) if per else float("nan")
+ 
+ 
+ def distributional_fidelity(model, human):
+diff --git a/arr2026/scripts/hyp/h13c_bootstrap.py b/arr2026/scripts/hyp/h13c_bootstrap.py
+new file mode 100644
+index 0000000..0cf1b54
+--- /dev/null
++++ b/arr2026/scripts/hyp/h13c_bootstrap.py
+@@ -0,0 +1,133 @@
++"""H13c: joint persona bootstrap for the aligned amplitude A.
++
++A is a point estimate over 40 fixed personas per cluster, so comparisons between
++models and the model-vs-human reference carry no stated uncertainty. This
++resamples persona ROWS jointly -- the same resampled indices are applied to the
++model's persona means, the decoder's predictions and the actual respondents, so
++paired comparisons stay paired -- and recomputes A in every draw.
++
++The decoder fit is held fixed across draws: it is estimated on respondents
++excluding these 40, so the intervals condition on that fit and describe
++persona-sampling uncertainty only. That is the quantity the comparative claims
++need; a fit-refitting interval would be wider and is not what is reported.
++"""
++import argparse
++import bisect
++import json
++import sys
++from pathlib import Path
++
++import numpy as np
++import pandas as pd
++
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++from _orientation import to_human_orientation  # noqa: E402
++
++ROOT = Path(__file__).resolve().parents[3]
++ITEMS = [f"i{i}" for i in range(1, 121)]
++TRAITS = ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"]
++B, L = [0, 20, 40, 60, 80, 100], 5
++
++
++def channel(cl):
++    b = ROOT / "src/prompt/mean_value_cluster"
++    tr = json.loads((b / "traits.json").read_text())
++    fa = json.loads((b / "facets.json").read_text())
++    return list(tr.get(str(cl), tr)) + list(fa.get(str(cl), fa))
++
++
++def q(v):
++    return np.clip([bisect.bisect_right(B, x) - 1 for x in v], 0, L - 1)
++
++
++def oh(a, k):
++    m = np.zeros((len(a), k * L))
++    for j in range(k):
++        m[np.arange(len(a)), j * L + a[:, j]] = 1.0
++    return m
++
++
++def ridge(X, Y, Xp, lam=1e-3):
++    Xc = np.hstack([X, np.ones((len(X), 1))])
++    Xpc = np.hstack([Xp, np.ones((len(Xp), 1))])
++    return Xpc @ np.linalg.solve(Xc.T @ Xc + lam * np.eye(Xc.shape[1]), Xc.T @ Y)
++
++
++def A_of(M, oracle, hsd, ok, rows):
++    """Aligned amplitude on a given set of persona rows."""
++    Mr, Or = M[rows], oracle[rows]
++    msd = np.sqrt(np.nanvar(Mr, axis=0))
++    out = []
++    for j in np.where(ok)[0]:
++        if np.nanstd(Mr[:, j]) < 1e-9 or np.nanstd(Or[:, j]) < 1e-9:
++            continue
++        out.append(float(np.corrcoef(Mr[:, j], Or[:, j])[0, 1]) * float(msd[j] / hsd[j]))
++    return float(np.nanmean(out)) if out else float("nan")
++
++
++def main() -> None:
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--results", nargs="+", required=True)
++    ap.add_argument("--runs", nargs="+", required=True)
++    ap.add_argument("--n-personas", type=int, default=40)
++    ap.add_argument("--draws", type=int, default=2000)
++    ap.add_argument("--seed", type=int, default=260909)
++    a = ap.parse_args()
++
++    df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
++    ctx = {}
++    for cl in (0, 1, 2, 3):
++        sub = df[df.clusters == cl]
++        per, fit = sub.iloc[: a.n_personas], sub.iloc[a.n_personas:]
++        hsd = np.nanstd(sub[ITEMS].to_numpy(float), axis=0)
++        c = [x for x in channel(cl) if x in df.columns]
++        qf = np.column_stack([q(fit[x].to_numpy(float)) for x in c])
++        qp = np.column_stack([q(per[x].to_numpy(float)) for x in c])
++        ctx[cl] = {"oracle": ridge(oh(qf, len(c)), fit[ITEMS].to_numpy(float), oh(qp, len(c))),
++                   "hsd": hsd, "ok": hsd > 0,
++                   "actual": per[ITEMS].to_numpy(float)}
++        print(f"[decoder fixed for cluster {cl}]", flush=True)
++
++    rng = np.random.default_rng(a.seed)
++    idx = {cl: [rng.integers(0, a.n_personas, a.n_personas) for _ in range(a.draws)]
++           for cl in ctx}          # shared draws: paired across every quantity
++
++    # human reference under the same resampling
++    href = []
++    for b in range(a.draws):
++        href.append(np.mean([A_of(ctx[cl]["actual"], ctx[cl]["oracle"], ctx[cl]["hsd"],
++                                  ctx[cl]["ok"], idx[cl][b]) for cl in ctx]))
++    href = np.array(href)
++    lo, hi = np.percentile(href, [2.5, 97.5])
++    print(f"\nhuman reference A = {href.mean():.4f}  95% CI [{lo:.4f}, {hi:.4f}]\n", flush=True)
++
++    print(f"{'run':22s} {'A':>8s} {'95% CI':>18s} {'A/human':>9s} {'CI(ratio)':>18s}")
++    for run in a.runs:
++        rd = None
++        for base in a.results:
++            if (ROOT / base / run / "summary.json").exists():
++                rd = ROOT / base / run
++                break
++        if rd is None:
++            print(f"{run:22s} MISSING"); continue
++        per_cl = {}
++        for d in sorted(rd.glob("readout_cluster_*")):
++            cl = int(d.name.rsplit("_", 1)[1])
++            probs = np.load(d / "belief_probs.npy")
++            mu = np.nansum(probs * np.arange(1, 6, dtype=float)[None, None, :], axis=2)
++            per_cl[cl] = to_human_orientation(mu)
++        if not per_cl:
++            print(f"{run:22s} NO TENSORS"); continue
++        draws = np.array([
++            np.mean([A_of(per_cl[cl], ctx[cl]["oracle"], ctx[cl]["hsd"], ctx[cl]["ok"], idx[cl][b])
++                     for cl in per_cl])
++            for b in range(a.draws)])
++        ratio = draws / href[: len(draws)]
++        l1, h1 = np.percentile(draws, [2.5, 97.5])
++        l2, h2 = np.percentile(ratio, [2.5, 97.5])
++        print(f"{run:22s} {draws.mean():8.4f} [{l1:7.4f},{h1:7.4f}] "
++              f"{ratio.mean():9.3f} [{l2:7.3f},{h2:7.3f}]", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/arr2026/scripts/hyp/h2_c2st_ablation.py b/arr2026/scripts/hyp/h2_c2st_ablation.py
+index 8fdc525..d4b3568 100644
+--- a/arr2026/scripts/hyp/h2_c2st_ablation.py
++++ b/arr2026/scripts/hyp/h2_c2st_ablation.py
+@@ -106,11 +106,16 @@ def ipsatise(M):
+ 
+ 
+ def facet_scores(M):
+-    """30 facet means per respondent (4 items each), reverse-scored."""
++    """30 facet means per respondent, from TRAIT-ORIENTED input.
++
++    This used to reverse negative items internally, which is right for raw model
++    answers and wrong for the corpus, whose humans are already stored recoded --
++    it un-recoded them. Orientation is now handled once by the caller, per
++    feature family, and this function assumes trait-oriented input.
++    """
+     if (FACET == "").all():
+         return np.zeros((len(M), 0))
+-    Mr = M.copy()
+-    Mr[:, REVERSE] = 6.0 - Mr[:, REVERSE]
++    Mr = M
+     cols = []
+     for f in sorted(set(FACET[FACET != ""])):
+         idx = np.where(FACET == f)[0]
+@@ -149,15 +154,28 @@ def main():
+             continue
+         const = np.tile(np.round(tri.mean(axis=0)), (N_REF, 1))
+ 
++        # Orientation is feature-specific. Style features describe how a
++        # respondent USES the scale, so both sides must sit on the literal scale
++        # the item was asked on: the model already answers raw, and the corpus's
++        # humans are recovered by flipping the stored recoding (the map is its
++        # own inverse). Content features compare trait-oriented quantities, so
++        # the model is flipped and the humans are left as stored.
++        def as_raw(X):
++            Y = X.copy(); Y[:, REVERSE] = 6.0 - Y[:, REVERSE]; return Y
++
++        M_to, M_raw = as_raw(M), M                # model answers arrive raw
+         for name, fn in VARIANTS.items():
++            literal = name == "B_style_only"
++            m_in = M_raw if literal else M_to
++            hum = (lambda X: as_raw(X)) if literal else (lambda X: X)
+             am, ah, ac = [], [], []
+             for r in range(N_REP):
+                 rr = np.random.default_rng(SEED + r)
+                 idx = rr.choice(len(pool), 2 * N_REF, replace=False)
+                 ra, rb = pool[idx[:N_REF]], pool[idx[N_REF:]]
+-                am.append(c2st(fn(M), fn(ra), SEED + r))
+-                ah.append(c2st(fn(rb), fn(ra), SEED + r))
+-                ac.append(c2st(fn(const), fn(ra), SEED + r))
++                am.append(c2st(fn(m_in), fn(hum(ra)), SEED + r))
++                ah.append(c2st(fn(hum(rb)), fn(hum(ra)), SEED + r))
++                ac.append(c2st(fn(hum(const)), fn(hum(ra)), SEED + r))
+             rows.append({"model": model, "cluster": cid, "variant": name,
+                          "c2st_model": float(np.nanmean(am)),
+                          "c2st_human_ceiling": float(np.nanmean(ah)),
+diff --git a/arr2026/scripts/hyp/h8_respondent_equivalents.py b/arr2026/scripts/hyp/h8_respondent_equivalents.py
+index 662d7c4..102adcb 100644
+--- a/arr2026/scripts/hyp/h8_respondent_equivalents.py
++++ b/arr2026/scripts/hyp/h8_respondent_equivalents.py
+@@ -28,7 +28,11 @@ ITEMS = [f"i{i}" for i in range(1, 121)]
+ ROOT = Path(__file__).resolve().parents[3]
+ OUT = ROOT / "arr2026/results/h8"
+ MS = [1, 2, 3, 5, 8, 13, 21, 34, 55, 100, 200, 500]
+-N_SYNTH, N_BOOT = 200, 40
++# Evaluation sizes must match the audited scores, which are ~40 synthetic
++# against 40 held-out humans (E3's N_REF). DF is sample-size dependent -- this
++# paper demonstrates that -- so a 200-vs-200 curve cannot calibrate 40-vs-40
++# scores. N_BOOT raised to keep the curve smooth at the smaller size.
++N_SYNTH, N_REF, N_BOOT = 40, 40, 200
+ 
+ 
+ def df_metric(a, b):
+@@ -53,7 +57,7 @@ def main():
+             for _ in range(N_BOOT):
+                 idx = rng.choice(len(Y), m, replace=False)
+                 donor = Y[idx]
+-                ref = Y[rng.choice(len(Y), 200, replace=False)]
++                ref = Y[rng.choice(len(Y), N_REF, replace=False)]
+                 synth = np.empty((N_SYNTH, 120))
+                 for j in range(120):
+                     col = donor[:, j][~np.isnan(donor[:, j])]
+@@ -63,6 +67,8 @@ def main():
+                 vrs.append(float(np.nanmean(np.nanstd(synth, 0)[ok] / np.nanstd(ref, 0)[ok])))
+             rows.append({"cluster": int(cl), "m": m,
+                          "DF_mean": float(np.mean(dfs)), "DF_sd": float(np.std(dfs)),
++                         "DF_lo": float(np.percentile(dfs, 2.5)),
++                         "DF_hi": float(np.percentile(dfs, 97.5)),
+                          "VR_mean": float(np.mean(vrs))})
+             print(f"  cluster {cl} m={m:4d}: DF={rows[-1]['DF_mean']:.4f} "
+                   f"VR={rows[-1]['VR_mean']:.3f}", flush=True)
+diff --git a/paper/main.pdf b/paper/main.pdf
+index 14b7ef1..9e32ddf 100644
+Binary files a/paper/main.pdf and b/paper/main.pdf differ
+diff --git a/paper/main.tex b/paper/main.tex
+index 66e4252..26efbcf 100644
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -252,14 +252,16 @@ $0.796$. The LLM loses in $20$ of $20$ cells under either orientation, by $13.6$
+ and $5.8$ points respectively. What survives correction is \emph{matched-cell}
+ dominance: the model loses to its own cluster's constant in every cell, while its
+ best cell ($0.807$) now exceeds the weakest constant elsewhere ($0.779$), so the
+-comparison only holds within a cluster. The global mean --- which never looks at
+-the cluster --- scores $0.720$.
++comparison only holds within a cluster. A per-item global mean --- which never
++looks at the cluster at all --- scores $0.774$, still above the persona's
++corrected $0.739$.
+ 
+ \begin{table*}[t]\centering\small
+ \input{table_headtohead}
+-\caption{Answer similarity $S$ on the original system's own test IDs. The
+-constant cluster mean (bold) beats every LLM in every cell. A real human from the
+-same cluster scores below the constant.}
++\caption{Answer similarity $S$ on the original system's own test IDs, in the
++\emph{original} orientation; correction adds $0.079$ on average and changes no
++ordering. The constant (bold) beats every LLM in every cell; a real human scores
++below it.}
+ \label{tab:headtohead}
+ \end{table*}
+ 
+@@ -280,8 +282,11 @@ response distribution matches what the persona gives you.
+ 
+ Drawing $m$ real respondents, forming the per-item empirical distribution, and
+ sampling a synthetic population from it yields distributional fidelity $0.723$ at
+-$m{=}1$, $0.802$ at $m{=}2$, $0.933$ at $m{=}21$ and $0.945$ at $m{=}34$.
+-Reading the audited systems off that curve:
++$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
++curve is evaluated at the same sizes as the audited scores --- forty synthetic
++against forty held-out humans --- because DF depends on sample size, so a curve
++built at any other size cannot calibrate them. Reading the audited systems off
++it:
+ 
+ \begin{center}\footnotesize
+ \setlength{\tabcolsep}{4pt}
+@@ -289,17 +294,19 @@ Reading the audited systems off that curve:
+ \toprule
+ System & DF & Resp.-equiv.\\
+ \midrule
+-Evolutionary LLM persona & 0.783 & \textbf{1--2}\\
++Evolutionary LLM persona & 0.783 & \textbf{2}\\
+ Constant cluster mean & 0.796 & 2\\
+-Human ceiling & 0.939 & 34\\
++Human ceiling & 0.939 & off-curve\\
+ \bottomrule
+ \end{tabular}
+ \end{center}
+ 
+-An evolutionary-optimised persona is worth between \textbf{one and two} real
+-respondents: it improves on a single-respondent plug-in ($0.783$ against
+-$0.723$) but not on a two-respondent one ($0.802$), and it remains below the
+-constant ($0.796$). This is the same result
++An evolutionary-optimised persona is worth about \textbf{two} real respondents:
++its DF clears the one-respondent interval ($0.783$ against an upper bound of
++$0.766$) and sits inside the two-respondent interval $[0.761,0.825]$, where the
++constant also sits. The human ceiling is not a point on this curve at all --- it
++is a direct sample of forty humans rather than a plug-in resample, and exceeds
++the curve even at $m{=}500$ --- so we no longer express it in respondent units. This is the same result
+ as \S\ref{sec:audit} in different units, and it is the version we would put to a
+ practitioner weighing synthetic respondents against a small pilot survey.
+ 
+@@ -632,11 +639,11 @@ spread identifies the right respondent. Correlating each model's persona means
+ against the oracle's over the forty personas --- both on the corpus's recoded
+ scale --- gives $r=0.16$--$0.52$. The aligned amplitude
+ $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
+-item SD, is $0.033$--$0.183$. That scale needs its own reference: the same
+-statistic on real respondents is $0.498$, so the best model reaches $37\%$ of it
+-and the weakest $7\%$. $A$ also separates models $\mathrm{VR}_\text{between}$
+-does not --- GLM-4.7 and Qwen3-235B differ by $0.007$ in spread but $0.017$ in
+-aligned amplitude.
++item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
++respondents: the best reaches about a third of that, the weakest under a tenth.
++Within Qwen2.5, $A$ rises with scale in three non-overlapping steps
++($0.066\to0.114\to0.180$), and it separates models $\mathrm{VR}_\text{between}$
++cannot (App.~\ref{app:ceiling}).
+ 
+ A simulator can therefore look more dispersed simply by being less confident:
+ $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
+@@ -707,10 +714,9 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
+ constant vector wins and a real human loses. We proved why, measured the
+ structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
+ matched cells, and proposed a suite that orders humans above constants. Beneath the
+-metric the simulation is thinner still: individuation that points at the right
+-respondent reaches at best $37\%$ of the same statistic measured on real
+-respondents, while the ten-score channel demonstrably carries more. Score with
+-$S_{1/2}$ and report the constant floor and human ceiling beside every number.
++metric the simulation is thinner still: individuation that identifies the right
++respondent reaches at best a third of the human reference. Score with $S_{1/2}$
++and report the floor and ceiling beside every number.
+ 
+ \section*{Limitations}
+ 
+@@ -781,8 +787,14 @@ independently on two clusters with different operating systems, Python versions
+ and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
+ figure --- the $\lambda^\star$ values, the orientation deltas, the variance
+ components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
+-ceilings --- agreed to all printed digits. Code and
+-per-cell results are released.
++ceilings --- agreed to all printed digits. Code and per-cell results are
++released, including the full belief simplex for every model and encoding
++variant we report: $(40\text{ personas}\times120\text{ items}\times5)$ per
++cluster, with the persona ordering fixed by the released corpus so every
++reported number can be recomputed from the artifacts alone. Runs that failed
++the validity guard ship too, marked invalid, so the record shows what was
++measured and rejected. One transform maps model answers onto the corpus's
++recoded scale and is imported by every analysis that compares the two.
+ 
+ \section{The C2ST feature ladder}
+ \label{app:c2staudit}
+@@ -790,11 +802,10 @@ per-cell results are released.
+ A metric that separates simulators from humans at AUC $0.994$ invites an obvious
+ objection: perhaps the classifier is detecting formatting rather than anything
+ about personality. We test our own metric with a feature ladder, each rung scored
+-identically against the same anchors. The ladder is computed on the
+-\emph{original} orientation throughout, so its rungs are comparable to each other
+-but not to the corrected suite, and its facet rung re-reverses the already-recoded
+-human answers; a corrected version must handle orientation feature-by-feature
+-rather than by one global flip. We therefore read the ladder qualitatively.
++identically against the same anchors. Orientation is handled per feature family:
++style features describe how a respondent uses the scale, so both sides sit on the
++literal scale the item was asked on, while content features compare
++trait-oriented quantities. The full-item rung reproduces the suite's $0.994$.
+ 
+ \begin{center}\footnotesize
+ \setlength{\tabcolsep}{4pt}
+@@ -802,26 +813,25 @@ rather than by one global flip. We therefore read the ladder qualitatively.
+ \toprule
+ Features & LLM & Human & Const.\\
+ \midrule
+-Full 120 items & 0.983 & 0.564 & 0.926\\
+-5 style scalars only & 0.950 & 0.566 & 0.994\\
+-Items, ipsatised & 0.975 & 0.566 & 0.986\\
+-30 facet scores only & 0.987 & 0.581 & 0.944\\
++Full 120 items & 0.994 & 0.564 & 0.926\\
++5 style scalars only & 0.894 & 0.584 & 0.988\\
++Items, ipsatised & 0.989 & 0.566 & 0.986\\
++30 facet scores only & 0.991 & 0.565 & 0.908\\
+ Forward-keyed only & 0.990 & 0.568 & 0.810\\
+-Reverse-keyed only & 0.984 & 0.583 & 0.843\\
++Reverse-keyed only & 0.993 & 0.583 & 0.843\\
+ \bottomrule
+ \end{tabular}
+ \end{center}
+ 
+ Five content-free scalars --- per-respondent mean and standard deviation, extreme
+ -response rate, longest identical run, and forward-versus-reverse consistency ---
+-already recover most of the separability above chance here. The objection has real
+-force, and we state it plainly: \textbf{a large part of what C2ST detects is
+-response style.} We quote no share, since the ladder's orientation handling is not
+-yet consistent enough to support one.
++recover $80\%$ of the full separability above chance. The objection has real
++force, and we state it plainly: \textbf{most of what C2ST detects is response
++style.}
+ 
+ It is not only style. Ipsatising each respondent (removing their own mean and
+ standard deviation, i.e.\ the two largest style features) still leaves AUC
+-$0.975$, and facet scores alone give $0.987$. Style and content are redundant
++$0.989$, and facet scores alone give $0.991$. Style and content are redundant
+ routes to the same conclusion rather than one masking the other. The human
+ ceiling is also stable at $0.56$--$0.58$ across every rung, so the anchor does
+ not move with the feature set.
+@@ -877,7 +887,7 @@ $\mathrm{VR}_\text{between}$ and is never fitted on its own evaluation set.
+ \begin{center}\footnotesize
+ \begin{tabular}{lc}
+ \toprule
+-Conditioning available to the model & Ceiling\\
++Conditioning available to the model & Decoder SD\\
+ \midrule
+ Ten scores, five words each \emph{(the audited system)} & 0.482\\
+ \quad same, with boosted trees & 0.483\\
+@@ -893,9 +903,9 @@ All 35 scores, written as numbers & 0.726\\
+ Three things follow. The quantisation is not the binding constraint: writing
+ numbers instead of words buys $0.03$. The channel is not degenerate: all forty
+ personas in all four clusters receive distinct codes, so no model is forced to
+-answer two personas identically. And interactions add nothing ($0.483$ against
+-$0.482$), so the additive fit is essentially the conditional mean rather than a
+-loose lower bound.
++answer two personas identically. And a boosted-tree decoder, which can use interactions, lands in the same place
++($0.483$ against $0.482$); that is consistent with the additive fit being close
++to the conditional mean, though two similar SD ratios do not prove it.
+ 
+ The oracle is fitted on this population and so knows its code-to-response
+ mapping, which a zero-shot model does not; we therefore do not claim that a model
+@@ -904,6 +914,19 @@ that the conditioning carries too little information to individuate --- and that
+ the explanation the flatness of $\mathrm{VR}_\text{between}$ across eleven
+ models most invites.
+ 
++\paragraph{Uncertainty on $A$.} Persona rows are resampled jointly across the
++model, the decoder and the actual respondents, so paired comparisons stay
++paired; the decoder fit is held fixed, so the intervals describe
++persona-sampling uncertainty rather than fit uncertainty. Over $2000$ draws the
++human reference is $0.489$ $[0.461,0.517]$ and the eleven models span $0.032$
++$[0.028,0.036]$ for Apertus-8B to $0.180$ $[0.168,0.193]$ for Qwen2.5-72B. The
++intervals are informative enough to separate models that
++$\mathrm{VR}_\text{between}$ ranks together: Qwen2.5-32B and Granite-4.1 differ
++by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
++against $[0.071,0.089]$. They are also honest about what is \emph{not}
++resolvable --- GLM-4.7 and Qwen3-235B differ by $0.017$ in $A$, and their
++intervals overlap, so we do not claim a difference there.
++
+ \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
+ items have their own facet stated and one hundred are covered only at trait
+ level. The named items carry $1.51\times$ more predictable-from-code signal (an SD ratio)
+@@ -980,11 +1003,13 @@ attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
+ bias and is pessimistic. Correcting the latter widens the gap to the simulator's
+ $0.783$ rather than narrowing it.
+ 
+-Below $n\approx40$ the suite is unusable: the classifier fails to separate even
+-the constant from real humans (the dashed entries above are the degenerate
+-$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
+-$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
+-it was measured at.
++Below $n\approx40$ \emph{this} classifier stops separating even the constant from
++real humans (the dashed entries above are the degenerate $0.5$). That floor is a
++property of the configuration we used, not of C2ST: relaxing the minimum leaf
++size from $20$ to $5$ restores separation at $n{=}20$. We therefore recommend
++reporting every anchor together with the $n$ and the classifier settings it was
++measured at, and treating any small-$n$ floor as something to establish per
++configuration rather than to inherit from us.
+ 
+ 
+ \bibliographystyle{acl_natbib}
+diff --git a/paper/table_metricsuite.tex b/paper/table_metricsuite.tex
+index c44dddb..9dc7ebf 100644
+--- a/paper/table_metricsuite.tex
++++ b/paper/table_metricsuite.tex
+@@ -7,6 +7,6 @@ Metric & LLM & Human & Const.\\
+ C2ST-AUC $\downarrow$ & 0.994 & 0.564 & 0.926\\
+ DF $\uparrow$ & 0.783 & 0.939 & 0.795\\
+ VR (1.0 ideal) & 0.431 & 1.018 & 0.000\\
+-$S_{\mathrm{answer}}$ $\uparrow$ (old) & 0.737 & 0.721 & 0.796\;$\dagger$\\
++$S_{\mathrm{answer}}$ $\uparrow$ (old) & 0.739 & 0.721 & 0.796\;$\dagger$\\
+ \bottomrule
+ \end{tabular}
+\ No newline at end of file
