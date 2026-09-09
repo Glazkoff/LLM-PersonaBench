@@ -252,8 +252,9 @@ $0.796$. The LLM loses in $20$ of $20$ cells under either orientation, by $13.6$
 and $5.8$ points respectively. What survives correction is \emph{matched-cell}
 dominance: the model loses to its own cluster's constant in every cell, while its
 best cell ($0.807$) now exceeds the weakest constant elsewhere ($0.779$), so the
-comparison only holds within a cluster. The global mean --- which never looks at
-the cluster --- scores $0.720$.
+comparison only holds within a cluster. A per-item global mean --- which never
+looks at the cluster at all --- scores $0.774$, still above the persona's
+corrected $0.739$.
 
 \begin{table*}[t]\centering\small
 \input{table_headtohead}
@@ -639,11 +640,10 @@ against the oracle's over the forty personas --- both on the corpus's recoded
 scale --- gives $r=0.16$--$0.52$. The aligned amplitude
 $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
 item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
-respondents: the best model reaches about a third of that, the weakest under a
-tenth. Intervals resample persona rows jointly across model, decoder and
-respondents with the decoder fixed. $A$ separates models
-$\mathrm{VR}_\text{between}$ does not --- GLM-4.7 and Qwen3-235B differ by
-$0.007$ in spread but $0.017$ in aligned amplitude.
+respondents: the best reaches about a third of that, the weakest under a tenth.
+Within Qwen2.5, $A$ rises with scale in three non-overlapping steps
+($0.066\to0.114\to0.180$), and it separates models $\mathrm{VR}_\text{between}$
+cannot (App.~\ref{app:ceiling}).
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -889,7 +889,7 @@ $\mathrm{VR}_\text{between}$ and is never fitted on its own evaluation set.
 \begin{center}\footnotesize
 \begin{tabular}{lc}
 \toprule
-Conditioning available to the model & Ceiling\\
+Conditioning available to the model & Decoder SD\\
 \midrule
 Ten scores, five words each \emph{(the audited system)} & 0.482\\
 \quad same, with boosted trees & 0.483\\
@@ -905,9 +905,9 @@ All 35 scores, written as numbers & 0.726\\
 Three things follow. The quantisation is not the binding constraint: writing
 numbers instead of words buys $0.03$. The channel is not degenerate: all forty
 personas in all four clusters receive distinct codes, so no model is forced to
-answer two personas identically. And interactions add nothing ($0.483$ against
-$0.482$), so the additive fit is essentially the conditional mean rather than a
-loose lower bound.
+answer two personas identically. And a boosted-tree decoder, which can use interactions, lands in the same place
+($0.483$ against $0.482$); that is consistent with the additive fit being close
+to the conditional mean, though two similar SD ratios do not prove it.
 
 The oracle is fitted on this population and so knows its code-to-response
 mapping, which a zero-shot model does not; we therefore do not claim that a model
@@ -915,6 +915,19 @@ mapping, which a zero-shot model does not; we therefore do not claim that a mode
 that the conditioning carries too little information to individuate --- and that is
 the explanation the flatness of $\mathrm{VR}_\text{between}$ across eleven
 models most invites.
+
+\paragraph{Uncertainty on $A$.} Persona rows are resampled jointly across the
+model, the decoder and the actual respondents, so paired comparisons stay
+paired; the decoder fit is held fixed, so the intervals describe
+persona-sampling uncertainty rather than fit uncertainty. Over $2000$ draws the
+human reference is $0.489$ $[0.461,0.517]$ and the eleven models span $0.032$
+$[0.028,0.036]$ for Apertus-8B to $0.180$ $[0.168,0.193]$ for Qwen2.5-72B. The
+intervals are informative enough to separate models that
+$\mathrm{VR}_\text{between}$ ranks together: Qwen2.5-32B and Granite-4.1 differ
+by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
+against $[0.071,0.089]$. They are also honest about what is \emph{not}
+resolvable --- GLM-4.7 and Qwen3-235B differ by $0.017$ in $A$, and their
+intervals overlap, so we do not claim a difference there.
 
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
