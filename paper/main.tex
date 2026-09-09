@@ -928,9 +928,9 @@ $[0.028,0.036]$ for Apertus-8B to $0.180$ $[0.168,0.193]$ for Qwen2.5-72B. The
 intervals are informative enough to separate models that
 $\mathrm{VR}_\text{between}$ ranks together: Qwen2.5-32B and Granite-4.1 differ
 by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
-against $[0.071,0.089]$. They are also honest about what is \emph{not}
-resolvable --- GLM-4.7 and Qwen3-235B differ by $0.017$ in $A$, and their
-intervals overlap, so we do not claim a difference there.
+against $[0.071,0.089]$. Comparisons between models are made on the paired draws, not by asking whether
+marginal intervals overlap: two overlapping marginals can still have a difference
+interval that excludes zero, and here they do.
 
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
@@ -954,7 +954,11 @@ more: we re-ran three models with every other word of the prompt held fixed and
 the ten modifier phrases replaced by the numbers themselves. The effect is
 inconsistent in magnitude --- $\mathrm{VR}_\text{between}$ rises for Granite-4.1
 ($0.207\!\to\!0.246$) and gpt-oss ($0.126\!\to\!0.146$) but falls for Apertus
-($0.130\!\to\!0.096$) --- and also inconsistent in direction, the aligned
+($0.130\!\to\!0.096$) --- and, using the same joint draws so the comparison is
+paired, every model moves resolvably: $A$ shifts by $+0.052$
+$[+0.045,+0.059]$ for Granite-4.1 and $+0.008$ $[+0.005,+0.012]$ for gpt-oss but
+$-0.012$ $[-0.016,-0.009]$ for Apertus. The effect is therefore not noise; it is
+real and model-dependent in sign. It is also also inconsistent in direction, the aligned
 amplitude moving $0.081\!\to\!0.134$ for Granite-4.1 and
 $0.039\!\to\!0.047$ for gpt-oss but $0.033\!\to\!0.020$ for Apertus. Granite
 gains on both counts --- its correlation with the oracle rises from $0.285$ to
