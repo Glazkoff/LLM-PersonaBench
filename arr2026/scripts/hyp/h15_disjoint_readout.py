@@ -42,7 +42,8 @@ def load_ipip():
     scale = {int(r.item): r.facet_key for r in key.itertuples()}
     rev = {int(r.item) for r in key.itertuples() if str(r.reverse).lower() == "true"}
     cols = [f"i{i}" for i in range(1, 121)]
-    return df[cols].to_numpy(float), list(range(1, 121)), text, scale, rev, 2
+    # corpus stores RECODED answers (trait-oriented already)
+    return df[cols].to_numpy(float), list(range(1, 121)), text, scale, rev, 2, True
 
 
 def load_sd3():
@@ -54,7 +55,9 @@ def load_sd3():
     text = {i + 1: str(r.Item).strip() for i, r in enumerate(kx.itertuples())}
     scale = {i + 1: keys[i][0] for i in range(len(keys))}
     rev = {i + 1 for i, r in enumerate(kx.itertuples()) if str(r.Sign).strip() == "-"}
-    return Y, list(range(1, 28)), text, scale, rev, 4
+    # corpus stores RAW answers: reverse items correlate -0.19..-0.31 with
+    # their trait's forward items, so they have not been recoded
+    return Y, list(range(1, 28)), text, scale, rev, 4, False
 
 
 def split_items(ids, scale, n_input):
@@ -67,7 +70,7 @@ def split_items(ids, scale, n_input):
     return sorted(inp), sorted(tgt)
 
 
-def scores_from(Y, ids, inp, scale, rev):
+def scores_from(Y, ids, inp, scale, rev, recoded):
     """Percentile-style score per scale, from the INPUT items only."""
     idx = {i: k for k, i in enumerate(ids)}
     out, names = [], []
@@ -78,7 +81,9 @@ def scores_from(Y, ids, inp, scale, rev):
         cols = []
         for i in mem:
             v = Y[:, idx[i]]
-            cols.append(6.0 - v if i in rev else v)     # trait-oriented
+            # flip only when the corpus is raw; flipping an already-recoded
+            # corpus would un-recode it and describe the wrong profile
+            cols.append(v if recoded or i not in rev else 6.0 - v)
         raw = np.mean(cols, axis=0)
         out.append((raw - 1.0) / 4.0 * 100.0)           # 1..5 -> 0..100
         names.append(s)
@@ -96,7 +101,8 @@ def main() -> None:
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
-    Y, ids, text, scale, rev, n_in = (load_ipip() if a.instrument == "ipip" else load_sd3())
+    Y, ids, text, scale, rev, n_in, recoded = (
+        load_ipip() if a.instrument == "ipip" else load_sd3())
     inp, tgt = split_items(ids, scale, n_in)
     print(f"{a.instrument}: {len(inp)} input items, {len(tgt)} target items, "
           f"{len(Y)} respondents", flush=True)
@@ -104,7 +110,7 @@ def main() -> None:
     rng = np.random.default_rng(a.seed)
     perm = rng.permutation(len(Y))
     test, train = perm[: a.n_test], perm[a.n_test: a.n_test + a.n_train]
-    S, names = scores_from(Y, ids, inp, scale, rev)
+    S, names = scores_from(Y, ids, inp, scale, rev, recoded)
 
     cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (0, 0)
     dtype = torch.bfloat16 if cap[0] >= 8 else torch.float16
@@ -176,7 +182,9 @@ def main() -> None:
         "input_items": len(inp), "target_items": len(tgt),
         "n_test": len(test), "n_train": len(train),
         "mass_on_scale_mean": round(mass, 4), "coverage": round(cov, 4),
+        "target_ids": tgt,
         "reverse_keyed_targets": sorted(j for j in tgt if j in rev),
+        "corpus_recoded": recoded,
         "valid": bool(mass >= 0.5 and cov >= 0.5),
     }, indent=2))
     print(json.dumps({"mass": mass, "coverage": cov,

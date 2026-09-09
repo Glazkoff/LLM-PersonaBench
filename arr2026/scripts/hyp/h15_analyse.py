@@ -73,6 +73,15 @@ def main() -> None:
         if not meta.get("valid", False):
             print(f"{run:28s} INVALID (mass {meta.get('mass_on_scale_mean')})"); continue
         P = np.load(d / "belief_probs.npy")
+        # The model always answers the LITERAL item. Where the corpus stores
+        # recoded answers (IPIP, not SD3), reverse the model's simplex on
+        # reverse-keyed targets before comparing. SD3 is raw, so it is untouched.
+        if meta.get("corpus_recoded"):
+            rk = set(meta["reverse_keyed_targets"])
+            flip = np.array([j in rk for j in meta["target_ids"]], dtype=bool)
+            if flip.any():
+                P[:, flip, :] = P[:, flip, ::-1]
+                print(f"  [{flip.sum()} of {len(flip)} targets reoriented]", flush=True)
         Yt = np.load(d / "target_answers.npy")
         Ytr = np.load(d / "train_answers.npy")
         Ste = np.load(d / "code_test.npy"); Str = np.load(d / "code_train.npy")
