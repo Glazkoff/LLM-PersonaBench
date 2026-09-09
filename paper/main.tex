@@ -75,9 +75,9 @@ is \emph{dominated} by the best constant predictor --- strictly so on every
 IPIP-NEO item we measure. The penalty is the excess of the Gini mean difference
 over the mean absolute deviation about the median, divided by the scale range.
 \item \textbf{An empirical audit} (\S\ref{sec:audit}): across five LLMs $\times$
-four clusters, on the original system's own train/test splits, trivial constant
-baselines beat every model in every cell, and so does the global mean, which
-ignores the personality clusters entirely.
+four clusters, on the original system's own train/test splits, the matched
+cluster-mean baseline beats every model in every cell, and a global mean that
+ignores the clusters entirely beats it in $19$ of $20$.
 \item \textbf{A diagnosis of the human ceiling} (\S\ref{sec:ceiling}): a real
 respondent from the target cluster --- the ideal a cluster-level twin can aspire
 to --- also loses to the constant in every cell.
@@ -259,18 +259,20 @@ corrected $0.739$.
 \begin{table*}[t]\centering\small
 \input{table_headtohead}
 \caption{Answer similarity $S$ on the original system's own test IDs, in the
-\emph{original} orientation; correction adds $0.079$ on average and changes no
-ordering. The constant (bold) beats every LLM in every cell; a real human scores
-below it.}
+\emph{original} orientation; correction adds $0.079$ on average and preserves
+all $20$ matched constant wins, though it does reorder the models. The constant
+(bold) beats every LLM in every cell; a real human scores below it.}
 \label{tab:headtohead}
 \end{table*}
 
-\paragraph{The effect is below the protocol's noise floor.} Re-drawing which 100
-respondents are sampled, holding the 60/40 split ratio fixed, moves the
-\emph{parameter-free} cluster-mean baseline by $1.3$--$2.5$ points across 20
-random draws. The improvement claimed for evolutionary optimisation in prior work
-is $+0.72$ points. With 40 test respondents per cell and a single fixed split,
-the reported effect is not separable from which rows landed in the test set.
+\paragraph{Split sensitivity.} Re-drawing which 100 respondents are sampled at a
+fixed 60/40 ratio moves the parameter-free cluster-mean baseline by
+$0.54$--$0.77$ points within a cluster over 20 draws, and the four-cluster
+average by $0.23$; pooling clusters gives $1.33$, but that mixes cluster
+differences into split variation. Prior work's optimisation gain is $+0.72$
+points on one fixed split. This is context for how far a single split can move a
+score, not a test of that gain --- variation in baseline \emph{levels} does not
+bound a \emph{paired} improvement.
 
 \section{What is a persona worth, in respondents?}
 \label{sec:equivalents}
@@ -302,11 +304,12 @@ Human ceiling & 0.939 & off-curve\\
 \end{center}
 
 An evolutionary-optimised persona is worth about \textbf{two} real respondents:
-its DF clears the one-respondent interval ($0.783$ against an upper bound of
-$0.766$) and sits inside the two-respondent interval $[0.761,0.825]$, where the
-constant also sits. The human ceiling is not a point on this curve at all --- it
-is a direct sample of forty humans rather than a plug-in resample, and exceeds
-the curve even at $m{=}500$ --- so we no longer express it in respondent units. This is the same result
+two is the smallest evaluated $m$ whose mean DF exceeds the persona's $0.783$,
+and the constant sits at the same place. This is a threshold on the mean curve,
+not an equivalence test. The human ceiling of $0.939$ is not crossed anywhere on
+the evaluated grid, up to $m{=}500$ ($0.938$), so we do not convert it into
+respondent units --- a statement about the grid we searched, not a proof that no
+$m$ reaches it. This is the same result
 as \S\ref{sec:audit} in different units, and it is the version we would put to a
 practitioner weighing synthetic respondents against a small pilot survey.
 
@@ -522,9 +525,9 @@ than the ten scores the belief prompts carry, and restoring marginal spread by
 resampling residuals is not evidence of faithful conditioning.
 App.~\ref{app:ceiling} takes that question up on the actual channel.
 
-One further number bounds what conditioning buys at all: the mean oracle beats the
-constant ($0.792$) by $0.9$ points. A perfect reader of the persona gains under a
-point over ignoring it.
+For scale, this fitted mean decoder beats the constant ($0.792$) by $0.9$ points.
+That is what one fitted reader achieved here, not a bound on what any reader
+could achieve.
 
 \section{Does this generalise beyond one questionnaire?}
 \label{sec:crossinstrument}

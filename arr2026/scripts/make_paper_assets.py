@@ -10,7 +10,11 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 RES = ROOT / "arr2026/results"
-OUT = ROOT.parent / "paper"
+# The paper lives inside the repo. This previously pointed at a sibling
+# directory, so regenerating assets silently wrote them somewhere the
+# submission never read -- which is how a stale Figure 1 survived several
+# rounds of corrections.
+OUT = ROOT / "paper"
 FIG = OUT / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 FIG.mkdir(parents=True, exist_ok=True)

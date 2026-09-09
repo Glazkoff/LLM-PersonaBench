@@ -72,6 +72,8 @@ def main() -> None:
     ap.add_argument("--n-personas", type=int, default=40)
     ap.add_argument("--draws", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=260909)
+    ap.add_argument("--pairs", nargs="*", default=[],
+                    help="run:run comparisons to report as PAIRED differences")
     a = ap.parse_args()
 
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
@@ -101,6 +103,10 @@ def main() -> None:
     lo, hi = np.percentile(href, [2.5, 97.5])
     print(f"\nhuman reference A = {href.mean():.4f}  95% CI [{lo:.4f}, {hi:.4f}]\n", flush=True)
 
+    href_point = np.mean([A_of(ctx[cl]["actual"], ctx[cl]["oracle"], ctx[cl]["hsd"],
+                               ctx[cl]["ok"], np.arange(a.n_personas)) for cl in ctx])
+    print(f"human reference A (original sample) = {href_point:.4f}\n")
+    store = {}
     print(f"{'run':22s} {'A':>8s} {'95% CI':>18s} {'A/human':>9s} {'CI(ratio)':>18s}")
     for run in a.runs:
         rd = None
@@ -125,8 +131,26 @@ def main() -> None:
         ratio = draws / href[: len(draws)]
         l1, h1 = np.percentile(draws, [2.5, 97.5])
         l2, h2 = np.percentile(ratio, [2.5, 97.5])
-        print(f"{run:22s} {draws.mean():8.4f} [{l1:7.4f},{h1:7.4f}] "
-              f"{ratio.mean():9.3f} [{l2:7.3f},{h2:7.3f}]", flush=True)
+        # Report the original-sample estimate alongside the percentile interval;
+        # the bootstrap mean is a different estimator and mixing the two silently
+        # was what produced .183 next to .180.
+        point = np.mean([A_of(per_cl[cl], ctx[cl]["oracle"], ctx[cl]["hsd"],
+                              ctx[cl]["ok"], np.arange(a.n_personas)) for cl in per_cl])
+        store[run] = draws
+        print(f"{run:22s} {point:8.4f} [{l1:7.4f},{h1:7.4f}] "
+              f"{point/href_point:9.3f} [{l2:7.3f},{h2:7.3f}]", flush=True)
+
+    # Paired differences use the SAME draws, so they are not the marginal
+    # intervals differenced: two overlapping marginals can still have a
+    # difference interval that excludes zero.
+    for spec in a.pairs:
+        x, y = spec.split(":")
+        if x in store and y in store:
+            d = store[x] - store[y]
+            lo, hi = np.percentile(d, [2.5, 97.5])
+            sig = "resolved" if (lo > 0 or hi < 0) else "not resolved"
+            print(f"  paired {x} - {y}: {d.mean():+.4f} [{lo:+.4f},{hi:+.4f}]  {sig}",
+                  flush=True)
 
 
 if __name__ == "__main__":
