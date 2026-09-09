@@ -991,11 +991,13 @@ attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
 bias and is pessimistic. Correcting the latter widens the gap to the simulator's
 $0.783$ rather than narrowing it.
 
-Below $n\approx40$ the suite is unusable: the classifier fails to separate even
-the constant from real humans (the dashed entries above are the degenerate
-$0.5$), so it cannot be trusted to separate anything else. We therefore recommend
-$n\ge 40$ per side as a floor, and reporting every anchor together with the $n$
-it was measured at.
+Below $n\approx40$ \emph{this} classifier stops separating even the constant from
+real humans (the dashed entries above are the degenerate $0.5$). That floor is a
+property of the configuration we used, not of C2ST: relaxing the minimum leaf
+size from $20$ to $5$ restores separation at $n{=}20$. We therefore recommend
+reporting every anchor together with the $n$ and the classifier settings it was
+measured at, and treating any small-$n$ floor as something to establish per
+configuration rather than to inherit from us.
 
 
 \bibliographystyle{acl_natbib}
