@@ -99,6 +99,12 @@ def main() -> None:
     ap.add_argument("--batch-size", type=int, default=8)
     ap.add_argument("--seed", type=int, default=260909)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--panel", choices=["h15", "val", "test2"], default="h15",
+                    help="which respondent panel to score. 'h15' is the original "
+                         "256 used in App. B and has already informed analysis; "
+                         "'val' and 'test2' are disjoint from it and from each "
+                         "other, for the selection experiment.")
+    ap.add_argument("--n-panel", type=int, default=128)
     a = ap.parse_args()
 
     Y, ids, text, scale, rev, n_in, recoded = (
@@ -109,7 +115,24 @@ def main() -> None:
 
     rng = np.random.default_rng(a.seed)
     perm = rng.permutation(len(Y))
-    test, train = perm[: a.n_test], perm[a.n_test: a.n_test + a.n_train]
+    # Baselines are always fitted on the same training respondents. The scored
+    # panel moves: 'h15' reproduces App. B exactly; 'val' and 'test2' are drawn
+    # from beyond the training block, so a model selected on 'val' is tested on
+    # respondents no selection decision has seen.
+    train = perm[a.n_test: a.n_test + a.n_train]
+    if a.panel == "h15":
+        test = perm[: a.n_test]
+    else:
+        # offset from the training block ACTUALLY used -- on SD3 the corpus is
+        # smaller than n_train, so a fixed offset would slice past the end.
+        b0 = a.n_test + len(train) + (0 if a.panel == "val" else a.n_panel)
+        test = perm[b0: b0 + a.n_panel]
+        if len(test) < a.n_panel:
+            raise SystemExit(
+                f"panel '{a.panel}' would hold {len(test)} of {a.n_panel} "
+                f"respondents: {len(Y)} in corpus, {a.n_test} scored, "
+                f"{len(train)} training. Lower --n-train.")
+    assert not (set(test.tolist()) & set(train.tolist())), "panel/train overlap"
     S, names = scores_from(Y, ids, inp, scale, rev, recoded)
 
     cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (0, 0)
@@ -178,7 +201,7 @@ def main() -> None:
     mass = float(np.nanmean(np.concatenate(massv)))
     cov = float(np.isfinite(P).all(axis=2).mean())
     (out / "summary.json").write_text(json.dumps({
-        "instrument": a.instrument, "model": a.model,
+        "instrument": a.instrument, "model": a.model, "panel": a.panel,
         "input_items": len(inp), "target_items": len(tgt),
         "n_test": len(test), "n_train": len(train),
         "mass_on_scale_mean": round(mass, 4), "coverage": round(cov, 4),
