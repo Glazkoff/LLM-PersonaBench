@@ -12,6 +12,7 @@
 \usepackage{amsthm}
 
 \newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
 
 \title{A Constant Vector Beats Your Digital Twin:\\
 On the Evaluation of Cluster-Level LLM Personality Simulation}
@@ -136,6 +137,20 @@ almost surely in the median set of $P_j$.
 Hence the constant is at least as good as the faithful simulator, and strictly
 better unless $P_j$ places all its mass on medians.
 \end{proposition}
+
+\begin{remark}[Where this applies]
+\label{rem:conditional}
+Proposition~\ref{prop:main} is unconditional; the audited systems condition on
+something. Let $C$ be everything the simulator observes, its draw independent of
+the response given $C$. Under \eqref{eq:metric} an optimal simulator emits a
+\emph{conditional} median $m_j(C)$, so one constant stays optimal exactly when
+the conditional median sets share a value almost surely, item by item.
+Cluster-only conditioning thus admits a cluster-specific constant optimum;
+individually informative conditioning can make different deterministic answers
+optimal, so the constant need not win --- but the winner is still a point, not a
+distribution. Richer conditioning does not make absolute error reward faithful
+sampling; it moves which point is rewarded.
+\end{remark}
 
 \begin{proof}
 (a) and (b) are immediate from \eqref{eq:metric}. For (c),
@@ -585,17 +600,16 @@ $\mathrm{VR}_\text{between}\approx0.30$. Individuation sits between an eighth
 and under a third of the human value throughout, and neither the largest model
 nor the most dispersed one is the best at it.
 
-\paragraph{The persona helps, and still loses.} Two questions have been running
-together: does the simulator reproduce the cluster's distribution, and does it
-identify \emph{this} respondent? They have different answers. Scoring each
-persona's predicted distribution against that person's own answers under
-normalised CRPS, and permuting whole belief rows among respondents within a
+\paragraph{The persona helps, and still loses.} Two questions have run together:
+does the simulator reproduce the cluster's distribution, and does it identify
+\emph{this} respondent? Scoring each persona against that person's own answers
+under normalised CRPS, and permuting belief rows among respondents within a
 cluster --- which leaves every population statistic identical while destroying
 identity --- separates them. All eleven models score better on the correct
-assignment than on the permuted one, by $0.004$ to $0.017$ with every paired
-interval excluding zero: the persona is used, and in the right direction. All
-eleven nevertheless lose to the cluster's empirical distribution, which ignores
-the persona entirely, by $0.036$ to $0.095$.
+assignment than the permuted one, by $0.004$--$0.017$, every paired interval
+excluding zero: the persona is used, in the right direction. All eleven still
+lose to the cluster's empirical distribution, which ignores the persona, by
+$0.036$--$0.095$.
 
 The two facts are reconciled exactly. Writing $p_t(C)$ for the true conditional
 CDF given everything the simulator sees and $q_t(C)$ for the model's,
@@ -644,17 +658,12 @@ is false for the largest 2024--25 model ($0.758$) and for the three that
 \emph{exceed} it ($1.078$, $1.131$, $1.242$); there, spread is present and is
 lost afterwards. What stays limited at every scale is \emph{individuation}.
 
-Three consequences follow. For the low-dispersion models the spread is not
+Two consequences follow. For the low-dispersion models the spread is not
 discarded at decoding; it was never present, so recovering it there means
 \emph{adding} dispersion, not revealing it: $p^{1/T}$ lifts Qwen2.5-7B from
-$0.43$ to $1.02$ at $T{=}5$ while supplying none of the alignment $A$ measures. Since all mass lands on valid answer tokens, accounts blaming mode
-collapse on difficulty \emph{emitting} numbers are unsupported here. And it
-closes the loop with the answer-level results: the item main effect dominates
-realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
-does nothing for dispersion or distinguishability (\S\ref{sec:permutation}) ---
-three measurements agreeing that persona conditioning moves \emph{which items}
-get endorsed far more than \emph{who} endorses them, respondent-specific
-alignment remaining limited.
+$0.43$ to $1.02$ at $T{=}5$ while supplying none of the alignment $A$ measures.
+And since all mass lands on valid answer tokens, accounts blaming mode collapse
+on difficulty \emph{emitting} numbers are unsupported here.
 
 \section{Is $k{=}4$ a partition at all?}
 \label{sec:clusters}
@@ -664,19 +673,16 @@ scores. We re-derive it and test $k \in \{2,\dots,15\}$ under three
 preprocessings. Our $k{=}4$ solution reproduces the published labels
 (ARI $=0.946$), confirming the pipeline.
 
-No criterion supports $k{=}4$. Silhouette falls from $0.134$ at $k{=}2$ to
-$0.053$ at $k{=}15$, with minor upward steps, taking $0.082$ at $k{=}4$, and Davies--Bouldin and
-the gap statistic select no interior $k$. Bootstrap stability looks at first like
-a defence (ARI $0.903$--$0.977$ for $k\le5$), but structureless surrogates matched
-to the facet covariance reproduce it exactly --- ARI $0.911$ and $0.921$ against the
-real data's $0.910$ --- while a separated control confirms the test has power
-(ARI $1.000$). At $n{=}410{,}168$ bootstrap agreement measures estimator variance,
-not multimodality. The clusters are not demographic artefacts either (Cram\'er's
-$V$ of $0.055$--$0.057$); they are a reproducible discretisation of a continuum,
-which bounds the cluster-conditional signal any persona can exploit
-(App.~\ref{app:clusters}). Since stability-based selection is common, the general
-point is worth stating: at large $n$, bootstrap agreement must be read against a
-covariance-matched null or it certifies nothing.
+No criterion supports $k{=}4$: silhouette is $0.082$ there and falls with $k$,
+and Davies--Bouldin and the gap statistic select no interior $k$. Bootstrap
+stability looks like a defence (ARI $0.903$--$0.977$ for $k\le5$) until
+structureless surrogates matched to the facet covariance reproduce it exactly
+($0.911$ and $0.921$ against the real data's $0.910$), while a separated control
+confirms the test has power. At $n{=}410{,}168$ bootstrap agreement measures
+estimator variance, not multimodality (App.~\ref{app:clusters}). Since
+stability-based selection is common, the general point is worth stating: at large
+$n$, bootstrap agreement must be read against a covariance-matched null or it
+certifies nothing.
 
 \section{Related work}
 \label{sec:related}
