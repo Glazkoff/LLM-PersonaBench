@@ -505,17 +505,18 @@ could achieve.
 \label{sec:crossinstrument}
 
 Every result so far comes from IPIP-NEO-120, so the objection is that the audit
-describes that questionnaire rather than the task. We re-test the two
-\emph{structural} findings --- the ones needing no LLM --- on an independent
+describes that questionnaire rather than the task. We re-test on an independent
 instrument, construct and population: the Short Dark Triad (SD3), $17{,}740$
 respondents on $27$ items.
 
-Both replicate. $\mathrm{GMD}\ge\mathrm{MAD}$ holds on $27/27$ items, with a
-structural penalty of $8.67$ points against IPIP's $7.75$; and the per-item
-constant again outscores a real respondent from the same population ($0.744$ vs
-$0.664$) in $200$ of $200$ bootstraps, matching the inversion of
-\S\ref{sec:ceiling}. The defect belongs to the metric applied to ordinal
-questionnaire data, not to the Big Five or to one corpus.
+The structural findings replicate: $\mathrm{GMD}\ge\mathrm{MAD}$ on $27/27$
+items with a penalty of $8.67$ points against IPIP's $7.75$, and the constant
+again outscores a real respondent ($0.744$ vs $0.664$) in $200$ of $200$
+bootstraps. The defect belongs to the metric applied to ordinal questionnaire
+data, not to the Big Five or one corpus.
+
+The behavioural finding transfers too, and under a design where the prompt
+cannot contain the answers being scored (App.~\ref{app:disjoint}).
 
 \section{Where the variance is lost}
 \label{sec:mechanism}
@@ -605,11 +606,11 @@ does the simulator reproduce the cluster's distribution, and does it identify
 \emph{this} respondent? Scoring each persona against that person's own answers
 under normalised CRPS, and permuting belief rows among respondents within a
 cluster --- which leaves every population statistic identical while destroying
-identity --- separates them. All eleven models score better on the correct
-assignment than the permuted one, by $0.004$--$0.017$, every paired interval
-excluding zero: the persona is used, in the right direction. All eleven nevertheless remain worse than a cluster
-empirical prior fitted on \emph{other} respondents --- a comparator that uses
-cluster membership but no persona --- by $0.036$--$0.095$.
+identity --- separates them. All eleven score better on the correct assignment
+than the permuted one by $0.004$--$0.017$, every paired interval excluding zero,
+yet all remain worse than a cluster empirical prior fitted on \emph{other}
+respondents --- which uses cluster membership but no persona --- by
+$0.036$--$0.095$.
 
 The two facts reconcile exactly, and without any fitted reference. Writing $I$
 for the identity gain above, $\bar q$ for the model's within-cluster mean CDF and
@@ -677,10 +678,7 @@ stability looks like a defence (ARI $0.903$--$0.977$ for $k\le5$) until
 structureless surrogates matched to the facet covariance reproduce it exactly
 ($0.911$ and $0.921$ against the real data's $0.910$), while a separated control
 confirms the test has power. At $n{=}410{,}168$ bootstrap agreement measures
-estimator variance, not multimodality (App.~\ref{app:clusters}). Since
-stability-based selection is common, the general point is worth stating: at large
-$n$, bootstrap agreement must be read against a covariance-matched null or it
-certifies nothing.
+estimator variance, not multimodality (App.~\ref{app:clusters}).
 
 \section{Related work}
 \label{sec:related}
@@ -708,11 +706,9 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath
-it the simulation is thinner still: individuation that identifies the right
-respondent reaches about $37\%$ $[34,40]$ of the human reference. Correct persona
-assignment helps every model and none of them enough: an exact decomposition puts
-the loss in the mixture, not in identity. Score with $S_{1/2}$; report floor and
-ceiling beside every number.
+it the simulation is thinner still: correct persona assignment helps every model
+and none of them enough, and an exact decomposition puts the loss in the mixture,
+not identity. Score with $S_{1/2}$; report floor and ceiling.
 
 \section*{Limitations}
 
@@ -720,7 +716,8 @@ Our audit covers one corpus (IPIP-NEO-120), one clustering pipeline, one
 optimisation family, and five models; the belief-level measurement of
 \S\ref{sec:mechanism} covers eleven open-weight models spanning 7B--235B,
 six families and three generations, and the cross-instrument replication of
-\S\ref{sec:crossinstrument} covers only the two structural findings, since SD3
+\S\ref{sec:crossinstrument} carries the structural findings and the identity
+result but not the full suite, since SD3
 carries no simulator runs; since it requires logprob access the API
 models in the audit do not provide; the within-family trend rests on three
 points and the cross-family comparison on eleven, so both are directional rather
@@ -793,6 +790,29 @@ reported number can be recomputed from the artifacts alone. Runs that failed
 the validity guard ship too, marked invalid, so the record shows what was
 measured and rejected. One transform maps model answers onto the corpus's
 recoded scale and is imported by every analysis that compares the two.
+
+\section{A disjoint conditioning/target replication}
+\label{app:disjoint}
+
+Every belief result in the body conditions on scores computed from the same
+items it is then scored on, so a sceptic can say the models reconstruct
+arithmetic rather than predict a person. We remove that by construction. Items
+are split within each scale, the persona is built only from the input half, and
+the readout covers only the target half: two input and two target items per IPIP
+facet ($60$/$60$), four input and five target per SD3 trait ($12$/$15$). No
+cluster label is used --- the released IPIP clustering is derived from all $120$
+items and would reimport target information --- and the prior, the decoder and the
+bin thresholds are fitted on training respondents whose target answers are never
+seen. Elicitation is unchanged, so any difference is the split.
+
+On $256$ held-out respondents the two facts of \S\ref{sec:mechanism} reappear.
+Correct assignment beats within-sample permutation on SD3 by $+0.010$
+$[+0.006,+0.015]$ for Qwen2.5-7B and $+0.017$ $[+0.013,+0.020]$ for
+Granite-4.1, and on IPIP by $+0.004$ $[+0.002,+0.005]$; every model still loses
+to the empirical prior, by $0.098$--$0.127$. The identity effect is real but
+smaller than the body's same-item figure --- Qwen2.5-7B's IPIP gain falls from
+$0.006$ to $0.004$ --- so part of what the body measures is recoverable
+arithmetic, and part is not. The comparison against the prior is unchanged.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
@@ -888,6 +908,10 @@ not move with the feature set.
 
 \section{Cluster validity in full}
 \label{app:clusters}
+
+Since stability-based model selection is common, the general point is worth
+stating: at large $n$, bootstrap agreement must be read against a
+covariance-matched null or it certifies nothing.
 
 No \emph{separation} criterion supports $k{=}4$. Silhouette falls overall from
 $0.134$ at $k{=}2$ to $0.053$ at $k{=}15$, with minor upward steps, taking
