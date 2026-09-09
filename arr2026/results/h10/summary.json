@@ -1,0 +1,7 @@
+{
+  "real_silhouette_k4": 0.0819,
+  "real_ari_k4": 0.9097,
+  "structureless_max_ari_k4": 0.9208,
+  "separated_control_ari_k4": 1.0,
+  "verdict": "STABILITY NOT DISCRIMINATIVE: structureless data reaches comparable ARI, so the k=4 stability number is not evidence of real clusters"
+}

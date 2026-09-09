@@ -1,12 +1,12 @@
 {
   "n_cells": 20,
   "C2ST_AUC (0.5=indistinguishable, lower is better)": {
-    "model_mean": 0.9828,
+    "model_mean": 0.9943,
     "human_ceiling_mean": 0.5639,
     "constant_floor_mean": 0.9259
   },
   "DF distributional fidelity (higher better)": {
-    "model_mean": 0.7028,
+    "model_mean": 0.7835,
     "human_ceiling_mean": 0.9389,
     "constant_floor_mean": 0.7955
   },
@@ -16,7 +16,7 @@
     "constant_floor_mean": 0.0
   },
   "S_answer (old metric; note constant floor EXCEEDS human ceiling)": {
-    "model_mean": 0.6545,
+    "model_mean": 0.7386,
     "human_ceiling_mean": 0.7212,
     "constant_floor_mean": 0.7961
   },
