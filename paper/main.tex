@@ -318,8 +318,8 @@ practitioner weighing synthetic respondents against a small pilot survey.
 
 No persona study we know of reports the wrong-persona control, so no reported
 persona effect is currently attributable to the persona. We score every simulator
-against every cluster's humans --- 80 cells --- and test diagonal dominance by
-permutation.
+against every cluster's humans --- 80 cells --- and report diagonal dominance
+descriptively.
 
 \begin{center}\footnotesize
 \setlength{\tabcolsep}{5pt}
@@ -718,8 +718,8 @@ constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath the
 metric the simulation is thinner still: individuation that identifies the right
-respondent reaches at best a third of the human reference. Score with $S_{1/2}$
-and report the floor and ceiling beside every number.
+respondent reaches about $37\%$ $[34,40]$ of the human reference. Score with
+$S_{1/2}$ and report the floor and ceiling beside every number.
 
 \section*{Limitations}
 
@@ -741,11 +741,12 @@ models through a chat-completions server returned almost no mass on the answer
 tokens where the forward pass recovers $0.99$--$1.00$, and harmony-format models
 require the assistant turn to open a channel before the prefill, without which
 mass on the scale falls to $0.39$ --- so a null result in this literature may
-report a readout rather than a model; every model we report is unquantised at
-inference, one FP8 checkpoint having resisted measurement through both available
-routes (its serving path returns no mass on the scale, and the forward-pass path
-hits a quantiser bug), so we make no claim about how quantisation affects
-individuation; the proposition is general to the
+report a readout rather than a model; precision varies across the models we
+report --- nine run at bf16, gpt-oss-20b ships MXFP4 and is dequantised to bf16 at
+load, and Qwen3-235B is an FP8 checkpoint served at FP8 --- and a further FP8
+checkpoint resisted measurement through both available routes, so we make no
+claim that individuation is invariant to quantisation; the proposition is general
+to the
 absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
 specific to this setting. The model answers we re-score were produced by prior
 runs we did not control, at temperatures we did not set, and one released run was
@@ -828,9 +829,10 @@ Reverse-keyed only & 0.993 & 0.583 & 0.843\\
 
 Five content-free scalars --- per-respondent mean and standard deviation, extreme
 -response rate, longest identical run, and forward-versus-reverse consistency ---
-recover $80\%$ of the full separability above chance. The objection has real
-force, and we state it plainly: \textbf{most of what C2ST detects is response
-style.}
+attain $80\%$ of the full above-chance AUC on their own. The objection has real
+force, and we state it plainly: \textbf{response style alone reproduces most of
+the separability}, which is a statement about what suffices, not a decomposition
+of what the full classifier uses.
 
 It is not only style. Ipsatising each respondent (removing their own mean and
 standard deviation, i.e.\ the two largest style features) still leaves AUC
@@ -933,8 +935,9 @@ intervals overlap, so we do not claim a difference there.
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
 level. The named items carry $1.51\times$ more predictable-from-code signal (an SD ratio)
-(reference $0.671$ against $0.444$), and every model does individuate them more
-in absolute terms. Measured against those references the ratio is \emph{lower}
+(reference $0.671$ against $0.444$), and $10$ of $11$ models individuate them more
+in absolute terms, Qwen3-235B being the exception ($0.224$ named against $0.264$
+elsewhere). Measured against those references the ratio is \emph{lower}
 where the prompt is most specific --- $0.353$ on the named items against $0.433$
 on the rest, in the same direction for $10$ of $11$ models --- but we report this
 descriptively and draw no causal conclusion from it, for two reasons. A facet
