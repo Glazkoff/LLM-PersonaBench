@@ -436,3 +436,41 @@ Reviewer's standing caveats: same-family review independence; acceptance assessm
 external bibliography not independently verified.
 
 ---
+
+## Round 10 — gpt-6-astra, 8.0/10, ready
+
+Opened by me, not the reviewer: the fourth H15 cell (Granite-4.1/IPIP,
++0.0018 [-0.0011,+0.0045]) landed after the round-9 verdict and did not
+exclude zero, so the appendix text — written from Qwen's IPIP number alone —
+overstated the replication.
+
+Reviewer found three further errors, all confirmed against source:
+
+1. "largest where that confound is absent entirely" — incoherent. Item
+   overlap is absent in ALL FOUR H15 cells by construction; the SD3/IPIP
+   difference is between instruments, not about overlap. WITHDRAWN.
+2. "Elicitation is unchanged, so any difference is the split" — false. H15
+   also changes persona text (generated facet lines vs per-cluster prose),
+   respondent sampling (256 global vs 40 per cluster) and scored items
+   (60 of 120). So Qwen 0.006 -> 0.004 identifies nothing, and a resolved
+   interval beside an unresolved one is not a decrease. WITHDRAWN.
+3. "bin thresholds are fitted on training respondents" — false.
+   BOUNDS = [0,20,40,60,80,100], min(int(S/20),4): fixed equal-width.
+
+Plus: null moved beside the claim in Sec. 5; conclusion scoped to the
+same-item experiment; Limitations no longer says SD3 has no simulator runs.
+
+dong2025temperature was not an unverifiable real paper — it does not exist.
+Replaced with Han, Kwon & Gratch, arXiv 2602.01063 (fetched and checked).
+
+Reviewer's single named path from 8 to 9: show the proposed evaluation
+changes which simulator you would ship. They ruled out reusing the eleven h4
+readouts (conditioned on scores derived from the target answers) and the
+cluster prior/constant (clusters derive from all 120 items). Design frozen
+with them: fit baselines on training respondents only; run all eleven under
+H15 prompts on a validation panel; select under S_0 and under S_1/2 from the
+same forecasts (expected similarity, not greedy answers); run only the
+selected models on a fresh test panel; report paired test CRPS with
+respondent-level uncertainty, log-loss secondary, gap to prior. Their
+caution: agreement between the rules is "no selection difference in this
+candidate set and split" and is not a ninth point.
