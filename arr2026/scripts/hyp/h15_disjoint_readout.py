@@ -137,6 +137,18 @@ def main() -> None:
 
     cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (0, 0)
     dtype = torch.bfloat16 if cap[0] >= 8 else torch.float16
+    # transformers 5.16.1 looks up a per-experts-implementation TP override table
+    # keyed on config._experts_implementation, which is None for a plain FP8
+    # checkpoint; the table has no None entry, so it calls .get() on None and
+    # dies before any weight is touched. "No special implementation" means "no
+    # rewrite", so register the empty override. Setting a real key instead would
+    # force a deep-gemm kernel and change the compute path.
+    try:
+        from transformers.integrations.finegrained_fp8 import FP8Experts
+        FP8Experts._impl_tp_layer_overrides.setdefault(None, {})
+    except Exception:
+        pass
+
     cfg = AutoConfig.from_pretrained(a.model, trust_remote_code=True)
     if getattr(cfg, "quantization_config", None):
         dtype = "auto"
