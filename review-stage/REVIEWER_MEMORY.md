@@ -312,3 +312,37 @@ Reviewer's standing caveats: review independence is same-family; acceptance stat
 external bibliography not independently verified.
 
 ---
+
+## Between rounds 6 and 7 — acting on the "what would make this an 8" guidance
+
+Round 6's follow-up ranked five routes. I executed rank 1 (CPU, existing tensors) in full.
+
+H14 (`arr2026/scripts/hyp/h14_conditional_crps.py`, results in `arr2026/results/h14/`):
+scores four predictors on the same respondents under normalised CRPS
+L(Q,y) = (1/4) sum_t (q_t - 1{y<=t})^2 --- correct assignment, rows permuted within
+cluster (identical mixture, destroyed identity), the cluster empirical prior, and a
+supervised conditional CDF fitted on held-out respondents.
+
+Across all 11 models:
+  identity gain (permuted - correct)  +0.0035 to +0.0173, EVERY paired interval excludes 0
+  versus the cluster prior            -0.0360 to -0.0952, every interval excludes 0
+  decomposition                       V = 0.0227 (conditioning value, constant)
+                                      E = 0.0584-0.1199 (model prediction error)
+                                      E/V = 2.6x to 5.3x
+  identity check                      prior - correct = -0.0827 vs V - E = -0.0840 (Qwen72)
+
+Both ranges independently reproduce round 6's own exploratory numbers (.0035-.0173 and
+.036-.095), which it computed before I ran this.
+
+New central claim, now in abstract, body and conclusion: every model reads the persona in the
+right direction AND still loses to ignoring it, because prediction error exceeds the value
+conditioning carries. This replaces "models do not individuate", explains the earlier VR and
+alignment results instead of sitting beside them, and rests on a control (row permutation)
+that no population-level metric can see through.
+
+NOT yet done from the follow-up: rank 2 (SD3 behavioural replication with disjoint
+conditioning/target items), rank 3 (fixed-candidate selection experiment), rank 4 (elicitation
+format), rank 5 (independent pipeline). Also not done: the conditional-median characterisation
+of constant-optimality.
+
+---
