@@ -280,8 +280,11 @@ response distribution matches what the persona gives you.
 
 Drawing $m$ real respondents, forming the per-item empirical distribution, and
 sampling a synthetic population from it yields distributional fidelity $0.723$ at
-$m{=}1$, $0.802$ at $m{=}2$, $0.933$ at $m{=}21$ and $0.945$ at $m{=}34$.
-Reading the audited systems off that curve:
+$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
+curve is evaluated at the same sizes as the audited scores --- forty synthetic
+against forty held-out humans --- because DF depends on sample size, so a curve
+built at any other size cannot calibrate them. Reading the audited systems off
+it:
 
 \begin{center}\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -289,17 +292,19 @@ Reading the audited systems off that curve:
 \toprule
 System & DF & Resp.-equiv.\\
 \midrule
-Evolutionary LLM persona & 0.783 & \textbf{1--2}\\
+Evolutionary LLM persona & 0.783 & \textbf{2}\\
 Constant cluster mean & 0.796 & 2\\
-Human ceiling & 0.939 & 34\\
+Human ceiling & 0.939 & off-curve\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-An evolutionary-optimised persona is worth between \textbf{one and two} real
-respondents: it improves on a single-respondent plug-in ($0.783$ against
-$0.723$) but not on a two-respondent one ($0.802$), and it remains below the
-constant ($0.796$). This is the same result
+An evolutionary-optimised persona is worth about \textbf{two} real respondents:
+its DF clears the one-respondent interval ($0.783$ against an upper bound of
+$0.766$) and sits inside the two-respondent interval $[0.761,0.825]$, where the
+constant also sits. The human ceiling is not a point on this curve at all --- it
+is a direct sample of forty humans rather than a plug-in resample, and exceeds
+the curve even at $m{=}500$ --- so we no longer express it in respondent units. This is the same result
 as \S\ref{sec:audit} in different units, and it is the version we would put to a
 practitioner weighing synthetic respondents against a small pilot survey.
 
@@ -781,8 +786,14 @@ independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure --- the $\lambda^\star$ values, the orientation deltas, the variance
 components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
-ceilings --- agreed to all printed digits. Code and
-per-cell results are released.
+ceilings --- agreed to all printed digits. Code and per-cell results are
+released, including the full belief simplex for every model and encoding
+variant we report: $(40\text{ personas}\times120\text{ items}\times5)$ per
+cluster, with the persona ordering fixed by the released corpus so every
+reported number can be recomputed from the artifacts alone. Runs that failed
+the validity guard ship too, marked invalid, so the record shows what was
+measured and rejected. One transform maps model answers onto the corpus's
+recoded scale and is imported by every analysis that compares the two.
 
 \section{The C2ST feature ladder}
 \label{app:c2staudit}
