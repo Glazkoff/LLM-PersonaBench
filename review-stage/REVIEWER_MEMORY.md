@@ -376,3 +376,34 @@ Still not done: SD3 behavioural replication with disjoint conditioning/target it
 next substantive priority, explicitly NOT required for 8), ranks 3-5 of the earlier route.
 
 ---
+
+## Round 8 — Score: 8/10 — Verdict: Almost (one BLOCKING manuscript-consistency item)
+Backend: codex · gpt-6-astra · thread 01a085ea-115a-75e2-8212-6892ae4ca819
+
+Verified independently: the observable identity reproduces to floating point for all eleven
+models, and follows algebraically from E_pi R(Q_pi) = R(qbar) + D_Q. Decoder monotonicity
+violations 449/19200 -> 0/19200, PAVA checked against enumeration of all contiguous partitions.
+10,000 joint cluster-stratified bootstrap draws recomputing the donor control: all identity
+intervals positive, all prior comparisons negative. Review formatting, content on p8.
+
+Round 8 caught that THREE corrections I had reported as applied were absent from source and PDF.
+It was right: the batch containing them aborted on a failed assertion for a fourth edit, which
+correctly prevented a partial write, and I then reported the batch as done without checking.
+Now applied and each verified in the BUILT pdf:
+  - abstract retired explanation ("prediction error exceeds the value conditioning carries")
+    replaced -- it named two quantities the replacement identity does not contain
+  - Remark 1's "the winner is still a point, not a distribution" removed; a deterministic
+    conditional median is always optimal and randomisation ties when supported on that set, so
+    absolute error never UNIQUELY rewards faithful sampling
+  - body comparator scoped to "a cluster empirical prior fitted on other respondents", noting it
+    uses cluster membership but no persona
+Plus round 8's item 3: mixture dominance now stated precisely as |D_Q - I| < 0.005 for every
+model and below a tenth of that model's mixture excess (verified, max ratio 0.095), instead of
+the vaguer "order of magnitude smaller".
+h14 docstring updated: it had still described the discarded fitted-reference decomposition as
+exact.
+
+Still open and NON-BLOCKING per round 8: SD3 behavioural replication with disjoint
+conditioning/target items; H14 interval conditioning could be described more fully.
+
+---
