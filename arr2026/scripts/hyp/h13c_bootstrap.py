@@ -101,12 +101,12 @@ def main() -> None:
                                   ctx[cl]["ok"], idx[cl][b]) for cl in ctx]))
     href = np.array(href)
     lo, hi = np.percentile(href, [2.5, 97.5])
-    print(f"\nhuman reference A = {href.mean():.4f}  95% CI [{lo:.4f}, {hi:.4f}]\n", flush=True)
+    _hr_ci = (lo, hi)   # keep the interval; the point estimate is printed below
 
     href_point = np.mean([A_of(ctx[cl]["actual"], ctx[cl]["oracle"], ctx[cl]["hsd"],
                                ctx[cl]["ok"], np.arange(a.n_personas)) for cl in ctx])
     print(f"human reference A (original sample) = {href_point:.4f}\n")
-    store = {}
+    store, points = {}, {}
     print(f"{'run':22s} {'A':>8s} {'95% CI':>18s} {'A/human':>9s} {'CI(ratio)':>18s}")
     for run in a.runs:
         rd = None
@@ -137,6 +137,7 @@ def main() -> None:
         point = np.mean([A_of(per_cl[cl], ctx[cl]["oracle"], ctx[cl]["hsd"],
                               ctx[cl]["ok"], np.arange(a.n_personas)) for cl in per_cl])
         store[run] = draws
+        points[run] = point
         print(f"{run:22s} {point:8.4f} [{l1:7.4f},{h1:7.4f}] "
               f"{point/href_point:9.3f} [{l2:7.3f},{h2:7.3f}]", flush=True)
 
@@ -149,7 +150,10 @@ def main() -> None:
             d = store[x] - store[y]
             lo, hi = np.percentile(d, [2.5, 97.5])
             sig = "resolved" if (lo > 0 or hi < 0) else "not resolved"
-            print(f"  paired {x} - {y}: {d.mean():+.4f} [{lo:+.4f},{hi:+.4f}]  {sig}",
+            # original-sample difference with the bootstrap interval, so the point
+            # estimate and the interval are not two different estimators
+            point_d = points[x] - points[y]
+            print(f"  paired {x} - {y}: {point_d:+.4f} [{lo:+.4f},{hi:+.4f}]  {sig}",
                   flush=True)
 
 

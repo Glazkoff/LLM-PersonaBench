@@ -135,7 +135,7 @@ vm = a.groupby("model").vr_model.mean().rename(index=PRETTY).sort_values()
 ax.barh(vm.index, vm.values, color="#c0392b")
 ax.axvline(1.0, ls="--", c="#2c7fb8", lw=1.2)
 ax.text(1.02, -0.4, "human", color="#2c7fb8", fontsize=7)
-ax.set_xlabel("variance ratio (model / human)", fontsize=8)
+ax.set_xlabel("SD ratio (model / human)", fontsize=8)
 ax.tick_params(labelsize=7); ax.spines[["top","right"]].set_visible(False)
 plt.tight_layout(); plt.savefig(FIG / "variance.pdf", bbox_inches="tight"); plt.close()
 

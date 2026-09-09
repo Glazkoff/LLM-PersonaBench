@@ -201,7 +201,7 @@ $\lambda$ & Model & Constant & Human\\
 $0$ \;(audited) & 0.726 & \textbf{0.796} & 0.720\\
 $0.25$ & 0.749 & \textbf{0.796} & 0.789\\
 $0.5$ \;(CRPS, proper) & 0.772 & 0.796 & \textbf{0.859}\\
-$0.75$ & 0.796 & 0.796 & \textbf{0.929}\\
+$0.75$ & 0.795 & 0.796 & \textbf{0.929}\\
 $1.0$ & 0.819 & 0.796 & \textbf{0.998}\\
 \bottomrule
 \end{tabular}
@@ -471,8 +471,8 @@ which predicts the conditional mean, and a \textbf{residual-resampled} one, the 
 plus a resampled residual, which restores marginal spread. The mean decoder
 scores $S=0.802$; the residual-resampled one, which is closer to the response
 \emph{distribution} on that margin, scores $S=0.730$ --- worse by $7.2$ points, against the $7.75$ that the
-$\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Predicting the distribution correctly is
-penalised, and by very nearly the predicted amount. This construction does
+$\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Restoring marginal spread is penalised in this
+construction, and by very nearly the predicted amount. This construction does
 \emph{not} settle whether the prompt limits the simulator: it reads a richer code
 than the ten scores the belief prompts carry, and restoring marginal spread by
 resampling residuals is not evidence of faithful conditioning.
@@ -599,7 +599,7 @@ item SD, is $0.033$--$0.183$, against $0.498$ $[0.461,0.517]$ for real
 respondents: the best reaches about a third of that, the weakest under a tenth.
 It separates models $\mathrm{VR}_\text{between}$ ranks together --- GLM-4.7 and
 Qwen3-235B sit $0.007$ apart in spread, yet differ in $A$ by $+0.017$
-$[+0.010,+0.025]$ --- and rises with scale across Qwen2.5 in three
+$[+0.009,+0.025]$ --- and rises with scale across Qwen2.5 in three
 non-overlapping steps ($0.067\to0.116\to0.183$).
 
 A simulator can therefore look more dispersed simply by being less confident:
@@ -621,7 +621,8 @@ closes the loop with the answer-level results: the item main effect dominates
 realised variance (\S\ref{sec:suite}) and conditioning on the correct cluster
 does nothing for dispersion or distinguishability (\S\ref{sec:permutation}) ---
 three measurements agreeing that persona conditioning moves \emph{which items}
-get endorsed, not \emph{who} endorses them.
+get endorsed far more than \emph{who} endorses them, respondent-specific
+alignment remaining limited.
 
 \section{Is $k{=}4$ a partition at all?}
 \label{sec:clusters}
@@ -745,8 +746,8 @@ independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure we compared --- the $\lambda^\star$ values, the orientation deltas, the
 variance components, and the null-calibration ARIs of App.~\ref{app:clusters} ---
-agreed to the digits we print, with the $k{=}4$ reproduction ARI differing in the
-fourth decimal ($0.9463$ against $0.9509$). Code and per-cell results are
+agreed to the digits we print, except the $k{=}4$ reproduction ARI, which is
+$0.946$ on one environment and $0.951$ on the other. Code and per-cell results are
 released, including the full belief simplex for every model and encoding
 variant we report: $(40\text{ personas}\times120\text{ items}\times5)$ per
 cluster, with the persona ordering fixed by the released corpus so every
@@ -789,7 +790,7 @@ it:
 System & DF & Resp.-equiv.\\
 \midrule
 Evolutionary LLM persona & 0.783 & \textbf{2}\\
-Constant cluster mean & 0.796 & 2\\
+Constant cluster mean & 0.795 & 2\\
 Human ceiling & 0.939 & off-curve\\
 \bottomrule
 \end{tabular}
@@ -938,7 +939,7 @@ by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
 against $[0.071,0.089]$. Comparisons are made on the paired draws, not by asking whether marginal
 intervals overlap --- two overlapping marginals can still have a difference
 interval excluding zero, as GLM-4.7 and Qwen3-235B do ($+0.017$
-$[+0.010,+0.025]$) --- and Qwen2.5-32B exceeds Granite-4.1 by $+0.034$
+$[+0.009,+0.025]$) --- and Qwen2.5-32B exceeds Granite-4.1 by $+0.034$
 $[+0.028,+0.040]$ despite a $0.013$ gap in spread.
 
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
