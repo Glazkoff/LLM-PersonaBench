@@ -257,9 +257,10 @@ the cluster --- scores $0.720$.
 
 \begin{table*}[t]\centering\small
 \input{table_headtohead}
-\caption{Answer similarity $S$ on the original system's own test IDs. The
-constant cluster mean (bold) beats every LLM in every cell. A real human from the
-same cluster scores below the constant.}
+\caption{Answer similarity $S$ on the original system's own test IDs, in the
+\emph{original} orientation; correction adds $0.079$ on average and changes no
+ordering. The constant (bold) beats every LLM in every cell; a real human scores
+below it.}
 \label{tab:headtohead}
 \end{table*}
 
@@ -638,12 +639,11 @@ against the oracle's over the forty personas --- both on the corpus's recoded
 scale --- gives $r=0.16$--$0.52$. The aligned amplitude
 $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
 item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
-respondents --- so the best model reaches about a third of the human reference
-and the weakest under a tenth. Intervals resample persona rows jointly across
-model, decoder and respondents, holding the decoder fixed, so they describe
-persona-sampling uncertainty. $A$ separates models $\mathrm{VR}_\text{between}$
-does not: GLM-4.7 and Qwen3-235B differ by $0.007$ in spread but $0.017$ in
-aligned amplitude.
+respondents: the best model reaches about a third of that, the weakest under a
+tenth. Intervals resample persona rows jointly across model, decoder and
+respondents with the decoder fixed. $A$ separates models
+$\mathrm{VR}_\text{between}$ does not --- GLM-4.7 and Qwen3-235B differ by
+$0.007$ in spread but $0.017$ in aligned amplitude.
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -714,10 +714,9 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath the
-metric the simulation is thinner still: individuation that points at the right
-respondent reaches at best $37\%$ of the same statistic measured on real
-respondents, while the ten-score channel demonstrably carries more. Score with
-$S_{1/2}$ and report the constant floor and human ceiling beside every number.
+metric the simulation is thinner still: individuation that identifies the right
+respondent reaches at best a third of the human reference. Score with $S_{1/2}$
+and report the floor and ceiling beside every number.
 
 \section*{Limitations}
 
