@@ -65,7 +65,11 @@ def s0(P, Y):
 def logloss(P, Y):
     idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, 4)
     p = np.take_along_axis(P, idx[:, :, None], axis=2)[:, :, 0]
-    return np.where(np.isnan(Y), np.nan, -np.log(np.clip(p, 1e-12, None)))
+    # Clip only to keep tiny-but-real probabilities finite in float; a genuine
+    # zero (the deterministic constant) must stay infinite rather than become
+    # a manufactured 27.6 nats.
+    return np.where(np.isnan(Y), np.nan,
+                    np.where(p > 0, -np.log(np.clip(p, 1e-300, None)), np.inf))
 
 
 def per_respondent(f, arg, Y):
@@ -78,6 +82,12 @@ def main() -> None:
                     help="validation-panel runs, one per candidate")
     ap.add_argument("--test", nargs="*", default=[],
                     help="test-panel runs for the SELECTED candidates only")
+    ap.add_argument("--with-baselines", action="store_true",
+                    help="add the training-fitted empirical prior and the "
+                         "training-fitted constant vector as candidates. This is "
+                         "the full-set control: it asks whether the evaluation "
+                         "would recommend an LLM at all. Declared before any "
+                         "validation forecast was read.")
     ap.add_argument("--seed", type=int, default=261009)
     ap.add_argument("--boot", type=int, default=5000)
     a = ap.parse_args()
@@ -98,6 +108,26 @@ def main() -> None:
             ll=np.nanmean(logloss(P, Yt)), panel=meta.get("panel"))
         r = rows[Path(run).name]
         print(f"{Path(run).name:22s} {r['s0']:10.4f} {r['crps']:12.4f} {r['ll']:9.4f}")
+
+    if a.with_baselines and rows:
+        # Both fitted on the training block alone, and scored on the same panel
+        # and the same targets as every model candidate.
+        _, _, (Yt, Ytr) = load(a.val[0])
+        pri = np.stack([[(Ytr[:, j] == v).mean() for v in LEVELS]
+                        for j in range(Ytr.shape[1])])
+        pri = np.broadcast_to(pri, (len(Yt), *pri.shape))
+        con = np.zeros_like(pri)
+        cj = np.clip(np.round(np.nanmean(Ytr, axis=0)).astype(int) - 1, 0, 4)
+        con[:, np.arange(con.shape[1]), cj] = 1.0
+        for nm, P in (("empirical prior", pri), ("constant vector", con)):
+            Q = np.cumsum(P, axis=2)[:, :, :4]
+            ll = np.nanmean(logloss(P, Yt))
+            rows[nm] = dict(s0=np.nanmean(s0(P, Yt)), crps=np.nanmean(crps(Q, Yt)),
+                            ll=ll, panel="val")
+            # The constant is deterministic, so log-loss is genuinely infinite
+            # wherever the answer differs. Reported, not clipped.
+            lls = "inf" if not np.isfinite(ll) else f"{ll:.4f}"
+            print(f"{nm:22s} {rows[nm]['s0']:10.4f} {rows[nm]['crps']:12.4f} {lls:>9s}")
 
     if not rows:
         raise SystemExit("no valid validation runs")
