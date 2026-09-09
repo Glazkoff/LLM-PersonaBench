@@ -1,0 +1,5 @@
+model,cluster,coverage,human_sd_mean,VR_belief_mixture,share_within,share_between,VR_within_only_NOT_COMPARABLE,VR_readout,belief_entropy_mean,mass_on_scale_mean
+Qwen/Qwen3.6-27B-FP8,0,0.0,1.0275442166461266,0.0,0.0,0.0,,,,
+Qwen/Qwen3.6-27B-FP8,1,0.0,0.9652548762887484,0.0,0.0,0.0,,,,
+Qwen/Qwen3.6-27B-FP8,2,0.0,1.0451794259826919,0.0,0.0,0.0,,,,
+Qwen/Qwen3.6-27B-FP8,3,0.0,1.1041915333014074,0.0,0.0,0.0,,,,

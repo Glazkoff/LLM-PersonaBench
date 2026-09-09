@@ -28,7 +28,11 @@ ITEMS = [f"i{i}" for i in range(1, 121)]
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "arr2026/results/h8"
 MS = [1, 2, 3, 5, 8, 13, 21, 34, 55, 100, 200, 500]
-N_SYNTH, N_BOOT = 200, 40
+# Evaluation sizes must match the audited scores, which are ~40 synthetic
+# against 40 held-out humans (E3's N_REF). DF is sample-size dependent -- this
+# paper demonstrates that -- so a 200-vs-200 curve cannot calibrate 40-vs-40
+# scores. N_BOOT raised to keep the curve smooth at the smaller size.
+N_SYNTH, N_REF, N_BOOT = 40, 40, 200
 
 
 def df_metric(a, b):
@@ -53,7 +57,7 @@ def main():
             for _ in range(N_BOOT):
                 idx = rng.choice(len(Y), m, replace=False)
                 donor = Y[idx]
-                ref = Y[rng.choice(len(Y), 200, replace=False)]
+                ref = Y[rng.choice(len(Y), N_REF, replace=False)]
                 synth = np.empty((N_SYNTH, 120))
                 for j in range(120):
                     col = donor[:, j][~np.isnan(donor[:, j])]
@@ -63,6 +67,8 @@ def main():
                 vrs.append(float(np.nanmean(np.nanstd(synth, 0)[ok] / np.nanstd(ref, 0)[ok])))
             rows.append({"cluster": int(cl), "m": m,
                          "DF_mean": float(np.mean(dfs)), "DF_sd": float(np.std(dfs)),
+                         "DF_lo": float(np.percentile(dfs, 2.5)),
+                         "DF_hi": float(np.percentile(dfs, 97.5)),
                          "VR_mean": float(np.mean(vrs))})
             print(f"  cluster {cl} m={m:4d}: DF={rows[-1]['DF_mean']:.4f} "
                   f"VR={rows[-1]['VR_mean']:.3f}", flush=True)

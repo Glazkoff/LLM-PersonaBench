@@ -28,7 +28,11 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
     by_case = df.set_index("case")
-    grand = np.round(np.full(120, df[ITEMS].to_numpy(float).mean()))
+    # Per-item global mean, as described: one value per item pooled over all
+    # clusters. The previous version collapsed this to a single grand scalar
+    # repeated across items, which is a strictly weaker baseline than the text
+    # claimed and understated what a cluster-blind predictor achieves.
+    grand = np.round(np.nanmean(df[ITEMS].to_numpy(float), axis=0))
     rng = np.random.default_rng(2026)
 
     rows = []

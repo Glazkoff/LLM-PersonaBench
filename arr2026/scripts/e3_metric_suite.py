@@ -58,10 +58,20 @@ N_REPEAT = 10       # repeats of the C2ST draw
 
 # ---------------------------------------------------------------- metrics
 def s_answer(model, human):
-    """Paper metric: mean over paired respondents of mean item similarity."""
+    """Paper metric: mean over paired respondents of mean item similarity.
+
+    A respondent whose answers are entirely missing gives an all-NaN row, and
+    np.nanmean returns NaN for it; averaging those with np.mean propagated the
+    NaN to the whole cell, which was then dropped downstream. That silently
+    reduced the reported average from 20 cells to 18. Skip empty rows instead.
+    """
     n = min(len(model), len(human))
-    return float(np.mean([
-        np.nanmean(1.0 - np.abs(model[i] - human[i]) / 4.0) for i in range(n)]))
+    per = []
+    for i in range(n):
+        d = 1.0 - np.abs(model[i] - human[i]) / 4.0
+        if np.isfinite(d).any():
+            per.append(float(np.nanmean(d)))
+    return float(np.mean(per)) if per else float("nan")
 
 
 def distributional_fidelity(model, human):

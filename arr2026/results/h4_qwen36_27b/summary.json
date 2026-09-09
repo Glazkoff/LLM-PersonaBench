@@ -1,0 +1,7 @@
+{
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "coverage": 0.0,
+  "mass_on_scale": null,
+  "valid": false,
+  "verdict": "INVALID: belief readout failed. No conclusion can be drawn; do NOT report these numbers."
+}
