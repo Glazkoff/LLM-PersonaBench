@@ -252,3 +252,33 @@ reproduced all 14 bootstrap intervals, the 56 valid tensors, and the H2 ladder a
 Content ends p8 under the boundary check; PDF is 12 pages total.
 
 ---
+
+## Round 5 — Score: 7/10 — Verdict: Almost ("only item 1 blocks uploading")
+Backend: codex · gpt-6-astra · thread 01a085a0-762b-7713-893f-68da73f2908a
+
+Round 5 confirmed in the BUILT PDF: Figure 1 shows .739/.994; noise-floor inference gone with
+correct stratification (.541/.574/.743/.770 within, .231 average, 1.329 pooled); H8 m=2 is a
+mean-curve threshold; H6 bound removed; Conclusion genuinely ends p8. Independently reproduced
+20/20 constant wins, 19/20 global-mean wins, H1 2/20 at CRPS, H5 .9422, all 56 tensors, all 14
+marginal and all 5 paired intervals. Confirmed 37% [34,40] is supported (36.8% [34.3,39.6]).
+
+### Fixed since round 5 (verify)
+BLOCKER (item 1) — both parts:
+  - decoder table overflowed 22.52pt on p11; retyped with p{0.72\columnwidth}r; zero large
+    overfull boxes remain.
+  - \usepackage[]{acl} -> \usepackage[review]{acl}; verified in the built PDF (lineno loaded,
+    consecutive line numbers on p1, "Anonymous ACL submission" header).
+NON-BLOCKING:
+  - original-sample estimates used consistently (human .498, Qwen2.5 .067/.116/.183,
+    Apertus .033); paired differences quoted at original-sample values.
+  - the asset generator's INPUT csv was still the stale 18-cell e3 file, so regenerating from
+    the repo would have restored .654/.983. Corrected 20-cell CSV committed at that path;
+    generator now reproduces .739/.994 from the repository alone (verified locally).
+  - H10 outputs supplied.
+  - reproducibility claim narrowed: k=4 ARI differs in the 4th decimal (.9463 vs .9509).
+  - H6 no longer "faithful"/"reproduces the conditional distribution"/"strictly closer to the
+    truth"; "no model supplies individuation" -> "what stays limited is individuation".
+  - silhouette not "monotonic"; Fig 2 caption says SD ratio not variance; "also also" fixed;
+    abstract says evolved personas average .739.
+
+---
