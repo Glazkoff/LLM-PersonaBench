@@ -45,11 +45,10 @@ fidelity, and a variance ratio --- each reported against an explicit human ceili
 and constant floor, and show it inverts the ranking correctly. Under it, current
 personas are near-perfectly separable from humans (C2ST-AUC $0.994$ vs.\ a human
 ceiling of $0.564$) and reach only $0.43$ of human response \emph{spread} as a
-standard-deviation ratio. Scoring each persona against its own respondent
-separates two questions the literature runs together: every model uses the
-persona in the right direction, and every model still loses to ignoring it,
-because its prediction error exceeds the value conditioning carries. We release
-code
+standard-deviation ratio. Correct persona assignment improves CRPS for all eleven
+models, yet all lose to a cluster empirical prior fitted on other respondents,
+and an exact decomposition shows the excess loss of the model's mixture dominates
+the shortfall. We release code
 and per-cell results.
 \end{abstract}
 
@@ -147,9 +146,10 @@ the response given $C$. Under \eqref{eq:metric} an optimal simulator emits a
 the conditional median sets share a value almost surely, item by item.
 Cluster-only conditioning thus admits a cluster-specific constant optimum;
 individually informative conditioning can make different deterministic answers
-optimal, so the constant need not win --- but the winner is still a point, not a
-distribution. Richer conditioning does not make absolute error reward faithful
-sampling; it moves which point is rewarded.
+optimal, so the constant need not win. A deterministic conditional median is
+always optimal and a randomised predictor ties exactly when its support lies in
+that median set, so absolute error never \emph{uniquely} rewards faithful
+conditional sampling; richer conditioning moves which prediction is rewarded.
 \end{remark}
 
 \begin{proof}
@@ -607,9 +607,9 @@ under normalised CRPS, and permuting belief rows among respondents within a
 cluster --- which leaves every population statistic identical while destroying
 identity --- separates them. All eleven models score better on the correct
 assignment than the permuted one, by $0.004$--$0.017$, every paired interval
-excluding zero: the persona is used, in the right direction. All eleven still
-lose to the cluster's empirical distribution, which ignores the persona, by
-$0.036$--$0.095$.
+excluding zero: the persona is used, in the right direction. All eleven nevertheless remain worse than a cluster
+empirical prior fitted on \emph{other} respondents --- a comparator that uses
+cluster membership but no persona --- by $0.036$--$0.095$.
 
 The two facts reconcile exactly, and without any fitted reference. Writing $I$
 for the identity gain above, $\bar q$ for the model's within-cluster mean CDF and
@@ -619,11 +619,11 @@ R(P_0)-R(Q)\;=\;I\;-\;D_Q\;-\;\big[R(\bar q)-R(P_0)\big],
 \label{eq:decomp}
 \end{equation}
 an identity in measured quantities, exact on our data to machine precision. It
-locates the loss: the bracket --- how much worse the model's \emph{mixture} is
-than the prior --- is $0.038$--$0.090$, while $I$ is $0.004$--$0.017$ and $D_Q$
-is $0.002$--$0.021$. Identity effects are an order of magnitude smaller than the
-mixture error that dominates, so a simulator can read the persona correctly and
-still be far worse than ignoring it.
+locates the loss. The bracket --- how much worse the model's \emph{mixture} is
+than the prior --- is $0.038$--$0.090$, whereas the net identity contribution
+$D_Q-I$ lies within $\pm0.005$ for every model, below a tenth of that model's
+mixture excess. Spreading predictions across personas can help or hurt slightly;
+what decides the comparison is that the mixture itself is wrong.
 
 \paragraph{The prompt is not what caps individuation.} A persona is individuated
 only through a five-word quantisation of ten numbers, but that channel carries

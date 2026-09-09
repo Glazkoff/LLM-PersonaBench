@@ -21,14 +21,19 @@ Permuting rows leaves every population-level statistic untouched, so any gap
 between `correct` and `permuted` is conditioning value that population metrics
 cannot see.
 
-We also report the exact decomposition (per item, within cluster)
+We also report an EXACT decomposition in measured quantities only -- no fitted
+reference, no oracle:
 
-    E L(prior) - E L(Q) = (1/4) sum_t Var[p_t(C)]  -  (1/4) sum_t E[(q_t - p_t)^2]
-                          \_____ value of conditioning _____/   \__ prediction error __/
+    R(prior) - R(correct) = I - D_Q - [ R(qbar) - R(prior) ]
 
-with p_t the fitted conditional CDF. It states precisely how a simulator can use
-the persona in the right direction and still lose to the unconditional
-distribution: its prediction error exceeds the value it extracts.
+with I the exact expected permutation gain, qbar the model's within-cluster mean
+CDF and D_Q the across-persona variance of its CDFs. It follows from
+E_pi R(Q_pi) = R(qbar) + D_Q and holds on our data to machine precision.
+
+An earlier version substituted a fitted ridge for the true conditional CDF and
+reported the result as exact; residuals were ~1e-3 and the framing it produced
+overweighted identity. This version locates the loss where it is: in the
+mixture.
 """
 import argparse
 import bisect
