@@ -407,3 +407,32 @@ Still open and NON-BLOCKING per round 8: SD3 behavioural replication with disjoi
 conditioning/target items; H14 interval conditioning could be described more fully.
 
 ---
+
+## Round 9 — Score: 8/10 — Verdict: READY FOR SUBMISSION: Yes
+Backend: codex · gpt-6-astra · thread 01a085f2-ef50-7f23-980b-399ce9f9e6f1
+
+"No remaining BLOCKING issue found. I would submit this version."
+
+All five corrections verified in the BUILT PDF this time (abstract p1 lines 039-043; Remark 1
+p2 lines 129-145; body comparator p7 lines 539-541; mixture-dominance statement p7 lines
+551-556; h14 docstring in the script). Independent reconstruction from all 44 tensors:
+  D_Q - I  range  [-0.004471224, +0.004997033]
+  max |D_Q - I| / mixture excess = 0.094160955
+  max decomposition residual = 1.8e-15
+Conclusion ends p8; review anonymity and line numbering active.
+
+Applied after round 9 (its two optional/non-blocking items):
+  - "in absolute value" added before "below a tenth", per its clarity note
+  - appendix paragraph documenting H14's interval construction: 2000 percentile-bootstrap
+    draws over respondents, 40 per cluster with equal cluster weight, permutation control
+    computed exactly rather than sampled, prior and decoder fitted once on excluded
+    respondents and held fixed, so intervals cover respondent sampling and not fitting
+
+Remaining NON-BLOCKING, carried into the submission as stated limitations:
+  - SD3 behavioural replication with disjoint conditioning/target items (next substantive step)
+  - the Dong et al. bibliography entry remains [VERIFY]; DBLP/CrossRef unreachable from here
+
+Reviewer's standing caveats: same-family review independence; acceptance assessment provisional;
+external bibliography not independently verified.
+
+---

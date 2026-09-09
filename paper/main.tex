@@ -621,9 +621,9 @@ R(P_0)-R(Q)\;=\;I\;-\;D_Q\;-\;\big[R(\bar q)-R(P_0)\big],
 an identity in measured quantities, exact on our data to machine precision. It
 locates the loss. The bracket --- how much worse the model's \emph{mixture} is
 than the prior --- is $0.038$--$0.090$, whereas the net identity contribution
-$D_Q-I$ lies within $\pm0.005$ for every model, below a tenth of that model's
-mixture excess. Spreading predictions across personas can help or hurt slightly;
-what decides the comparison is that the mixture itself is wrong.
+$D_Q-I$ lies within $\pm0.005$ for every model, in absolute value below a tenth
+of that model's mixture excess. Spread across personas can help or hurt
+slightly; what decides the comparison is that the mixture itself is wrong.
 
 \paragraph{The prompt is not what caps individuation.} A persona is individuated
 only through a five-word quantisation of ten numbers, but that channel carries
@@ -964,6 +964,13 @@ mapping, which a zero-shot model does not; we therefore do not claim that a mode
 that the conditioning carries too little information to individuate --- and that is
 the explanation the flatness of $\mathrm{VR}_\text{between}$ across eleven
 models most invites.
+
+\paragraph{Uncertainty in \S\ref{sec:mechanism}.} Identity gain and the prior
+comparison use $2000$ percentile-bootstrap draws over respondents, $40$ per
+cluster with equal cluster weight. The permutation control is not sampled but
+computed exactly, as the expectation of every donor row against every
+respondent; the prior and decoder are fitted once on the excluded respondents and
+held fixed, so intervals cover respondent sampling, not fitting.
 
 \paragraph{Uncertainty on $A$.} Persona rows are resampled jointly across the
 model, the decoder and the actual respondents, so paired comparisons stay
