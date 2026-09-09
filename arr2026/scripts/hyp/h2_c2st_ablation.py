@@ -106,11 +106,16 @@ def ipsatise(M):
 
 
 def facet_scores(M):
-    """30 facet means per respondent (4 items each), reverse-scored."""
+    """30 facet means per respondent, from TRAIT-ORIENTED input.
+
+    This used to reverse negative items internally, which is right for raw model
+    answers and wrong for the corpus, whose humans are already stored recoded --
+    it un-recoded them. Orientation is now handled once by the caller, per
+    feature family, and this function assumes trait-oriented input.
+    """
     if (FACET == "").all():
         return np.zeros((len(M), 0))
-    Mr = M.copy()
-    Mr[:, REVERSE] = 6.0 - Mr[:, REVERSE]
+    Mr = M
     cols = []
     for f in sorted(set(FACET[FACET != ""])):
         idx = np.where(FACET == f)[0]
@@ -149,15 +154,28 @@ def main():
             continue
         const = np.tile(np.round(tri.mean(axis=0)), (N_REF, 1))
 
+        # Orientation is feature-specific. Style features describe how a
+        # respondent USES the scale, so both sides must sit on the literal scale
+        # the item was asked on: the model already answers raw, and the corpus's
+        # humans are recovered by flipping the stored recoding (the map is its
+        # own inverse). Content features compare trait-oriented quantities, so
+        # the model is flipped and the humans are left as stored.
+        def as_raw(X):
+            Y = X.copy(); Y[:, REVERSE] = 6.0 - Y[:, REVERSE]; return Y
+
+        M_to, M_raw = as_raw(M), M                # model answers arrive raw
         for name, fn in VARIANTS.items():
+            literal = name == "B_style_only"
+            m_in = M_raw if literal else M_to
+            hum = (lambda X: as_raw(X)) if literal else (lambda X: X)
             am, ah, ac = [], [], []
             for r in range(N_REP):
                 rr = np.random.default_rng(SEED + r)
                 idx = rr.choice(len(pool), 2 * N_REF, replace=False)
                 ra, rb = pool[idx[:N_REF]], pool[idx[N_REF:]]
-                am.append(c2st(fn(M), fn(ra), SEED + r))
-                ah.append(c2st(fn(rb), fn(ra), SEED + r))
-                ac.append(c2st(fn(const), fn(ra), SEED + r))
+                am.append(c2st(fn(m_in), fn(hum(ra)), SEED + r))
+                ah.append(c2st(fn(hum(rb)), fn(hum(ra)), SEED + r))
+                ac.append(c2st(fn(hum(const)), fn(hum(ra)), SEED + r))
             rows.append({"model": model, "cluster": cid, "variant": name,
                          "c2st_model": float(np.nanmean(am)),
                          "c2st_human_ceiling": float(np.nanmean(ah)),
