@@ -600,8 +600,10 @@ the persona entirely, by $0.036$ to $0.095$.
 The two facts are reconciled exactly. Writing $p_t(C)$ for the true conditional
 CDF given everything the simulator sees and $q_t(C)$ for the model's,
 \begin{equation}
-\mathbb{E}L(P_0)-\mathbb{E}L(Q)=\tfrac14\!\sum_t\!\operatorname{Var}[p_t(C)]
--\tfrac14\!\sum_t\!\mathbb{E}\big[q_t(C)-p_t(C)\big]^2 ,
+\begin{split}
+\mathbb{E}L(P_0)-\mathbb{E}L(Q)=\;&\tfrac14\textstyle\sum_t\operatorname{Var}[p_t(C)]\\
+-\;&\tfrac14\textstyle\sum_t\mathbb{E}\big[q_t(C)-p_t(C)\big]^2 ,
+\end{split}
 \label{eq:decomp}
 \end{equation}
 the value of conditioning minus the cost of predicting it badly. Here the first
