@@ -26,29 +26,9 @@ BOUNDS = [0, 20, 40, 60, 80, 100]
 N_LEVELS = 5
 
 
-def reverse_keyed_mask():
-    """Items stored reverse-recoded in the corpus.
-
-    The corpus recodes 55 of the 120 items; models answer the literal item. VR
-    is invariant to a per-item sign flip, so the belief-variance results are
-    unaffected, but a CORRELATION is not: leaving this out flips the sign on 55
-    of 120 items and drags any alignment estimate toward zero. h3 already maps
-    models into the human orientation; these analyses must do the same.
-    """
-    import csv
-    key = list(csv.DictReader(open(ROOT / "data/IPIP-NEO/120/item_key.csv")))
-    neg = np.zeros(120, dtype=bool)
-    for r in key:
-        if str(r["reverse"]).strip().lower() == "true":
-            neg[int(r["item"]) - 1] = True
-    return neg
-
-
-def to_human_orientation(mu, neg):
-    """Map model item means onto the corpus's recoded scale."""
-    out = mu.copy()
-    out[:, neg] = 6.0 - out[:, neg]
-    return out
+import sys as _sys
+_sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _orientation import to_human_orientation  # noqa: E402
 
 
 def channel_scores(cluster: int):
@@ -77,7 +57,6 @@ def main() -> None:
     ap.add_argument("--n-personas", type=int, default=40)
     a = ap.parse_args()
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
-    NEG = reverse_keyed_mask()
 
     for run in a.runs:
         rd = ROOT / a.results / run
@@ -95,7 +74,7 @@ def main() -> None:
 
             vals = np.arange(1, 6, dtype=float)
             mu = np.nansum(probs * vals[None, None, :], axis=2)
-            mu = to_human_orientation(mu, NEG)     # (personas, items)
+            mu = to_human_orientation(mu)     # (personas, items)
 
             chan = [c for c in channel_scores(cl) if c in df.columns]
             qf = np.column_stack([quantise(fit_rows[c].to_numpy(float)) for c in chan])

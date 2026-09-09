@@ -104,34 +104,14 @@ def c2st_auc(a, b, seed=SEED):
     return float(max(np.mean(aucs), 1 - np.mean(aucs)))
 
 
-def reverse_keyed_mask():
-    """The 55 items the corpus stores reverse-recoded.
-
-    Humans are recoded so a higher number always means more of the trait; the
-    simulator sees the literal item and answers raw. Comparing the two directly
-    crosses that flip on 55 of 120 items, which is the defect audited in the
-    orientation section -- so the suite must be reported on a common scale.
-    """
-    import csv
-    key = list(csv.DictReader(open(ROOT / "data/IPIP-NEO/120/item_key.csv")))
-    neg = np.zeros(120, dtype=bool)
-    for r in key:
-        if str(r["reverse"]).strip().lower() == "true":
-            neg[int(r["item"]) - 1] = True
-    return neg
-
-
-def to_human_orientation(a, neg):
-    out = a.copy()
-    out[:, neg] = 6.0 - out[:, neg]
-    return out
+import sys as _sys
+_sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent / 'hyp'))
+from _orientation import to_human_orientation  # noqa: E402
 
 
 # ---------------------------------------------------------------- driver
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    global NEG
-    NEG = reverse_keyed_mask()
     df = pd.read_csv(ROOT / "data/raw/df_ipipneo_120_clusters")
     rng = np.random.default_rng(SEED)
 
@@ -167,7 +147,7 @@ def main():
                 model_ans_raw = m[ITEMS].to_numpy(float)
                 # default to the corrected orientation; the as-released
                 # numbers stay available for the both-orientations report.
-                model_ans = to_human_orientation(model_ans_raw, NEG)
+                model_ans = to_human_orientation(model_ans_raw)
                 # skip degenerate/failed runs: e.g. gpt4_nano_cluster_1_2/cluster_3
                 # is committed with 100% NaN answers and must not enter any average
                 nan_frac = float(np.isnan(model_ans_raw).mean())

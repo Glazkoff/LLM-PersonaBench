@@ -185,7 +185,8 @@ ceiling ($0.859$) rises decisively above the constant floor ($0.796$): the
 ordering that \S\ref{sec:ceiling} shows is inverted under the audited metric is
 \emph{correct} under the proper one. Humans overtake the constant at
 $\lambda^\star{=}0.30$, comfortably below the proper coefficient. The model needs
-$\lambda^\star{=}0.75$ --- a rule that over-rewards dispersion --- and beats the
+$\lambda^\star{=}0.75$ (median grid crossover; $0.757$ on the aggregate
+curve) --- a rule that over-rewards dispersion --- and beats the
 constant in only $2$ of $20$ cells at the proper $\lambda{=}1/2$, though it does
 overtake in most cells once $\lambda$ reaches $1$, where the reward for
 dispersion is twice proper. So the simulator's
@@ -248,10 +249,11 @@ same cluster.
 persona averages $0.660$ as released and $0.739$ after the orientation
 correction of \S\ref{sec:orientation}; the constant cluster mean averages
 $0.796$. The LLM loses in $20$ of $20$ cells under either orientation, by $13.6$
-and $5.8$ points respectively. The best single cell in
-the entire system ($0.737$) is below the \emph{worst} cluster-mean baseline
-($0.779$). The global mean --- which never looks at the cluster --- scores
-$0.720$ and also beats every model cell.
+and $5.8$ points respectively. What survives correction is \emph{matched-cell}
+dominance: the model loses to its own cluster's constant in every cell, while its
+best cell ($0.807$) now exceeds the weakest constant elsewhere ($0.779$), so the
+comparison only holds within a cluster. The global mean --- which never looks at
+the cluster --- scores $0.720$.
 
 \begin{table*}[t]\centering\small
 \input{table_headtohead}
@@ -311,23 +313,24 @@ permutation.
 
 \begin{center}\footnotesize
 \setlength{\tabcolsep}{5pt}
-\begin{tabular}{lcccc}
+\begin{tabular}{lccc}
 \toprule
-Metric & Matched & Mismatched & $\Delta$ & $p$\\
+Metric & Matched & Mismatched & $\Delta$\\
 \midrule
-$S$ & 0.728 & 0.663 & $+0.065$ & 0.0005\\
-DF & 0.782 & 0.705 & $+0.077$ & 0.0005\\
-C2ST & 0.996 & 0.985 & $-0.010$ & 0.997\\
-VR & 0.431 & 0.436 & $-0.005$ & 0.55\\
+$S$ & 0.728 & 0.663 & $+0.065$\\
+DF & 0.782 & 0.705 & $+0.077$\\
+C2ST & 0.996 & 0.985 & $-0.010$\\
+VR & 0.431 & 0.436 & $-0.005$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Conditioning on the correct cluster helps clearly on the two location-sensitive
-measures, both surviving permutation at $p=0.0005$, so the persona does carry
-cluster-level signal. It does nothing for distinguishability or dispersion: a
-persona scored against the \emph{wrong} cluster's humans is as hard to tell from
-them as one scored against the right cluster's. This is the behavioural counterpart of
+Matched comparisons improve $S$ and DF; they show no improvement in C2ST or VR.
+We report these gaps descriptively and attach no $p$-value: a permutation that
+shuffles the 80 cell labels freely destroys the matched structure of the five
+$4\times4$ matrices, and the models share clusters and personas, so its null is
+not the right one. Rescoring fixed outputs against different human populations
+also does not isolate a causal effect of changing the prompt. This is the behavioural counterpart of
 \S\ref{sec:suite} --- the persona moves which items get endorsed, and not who is
 endorsing them --- and it makes the wrong-persona control as necessary a baseline
 as the constant floor.
@@ -372,7 +375,7 @@ model in $20$ of $20$ cells.
 Correcting the defect in fact \emph{sharpens} the paper's claim. The corrected
 model scores $0.739$, \emph{above} the $0.721$ of a real member of the target
 cluster --- while a classifier separates that same model from real members at AUC
-$0.983$ (\S\ref{sec:suite}). A metric that ranks a near-perfectly detectable
+$0.994$ (\S\ref{sec:suite}). A metric that ranks a near-perfectly detectable
 simulator above the humans it fails to imitate is not measuring human-likeness
 under any reading.
 
@@ -435,7 +438,7 @@ not an optimisation target.
 \paragraph{Results.} Table~\ref{tab:suite} applies the suite to the same 20
 cells. All three order human $>$ constant, as required; the old metric does the
 reverse. Two substantive findings follow. First, current personas are
-\emph{near-perfectly separable} from real humans (C2ST-AUC $0.983$ against a human
+\emph{near-perfectly separable} from real humans (C2ST-AUC $0.994$ against a human
 ceiling of $0.564$) --- and are in fact \emph{more} distinguishable than a
 constant vector ($0.926$), because they miss both the location and the spread of
 the human distribution. Second, they are systematically under-dispersed: VR
@@ -451,7 +454,7 @@ and the person-by-item interaction that carries individuation --- tells a sharpe
 story. The simulator emits nearly the \emph{right total} variance (ratio $0.942$ over
 the 20 cells), but places it in the wrong component: the item main effect takes
 $81.2\%$ of its variance against $29.8\%$ for humans, while the interaction takes
-$17.7\%$ against $67.0\%$. The interaction variance ratio is $0.466$, and it is
+$17.7\%$ against $67.0\%$. The interaction SD ratio is $0.466$, and it is
 $0$ for a constant by construction.
 
 So the simulator is not emitting too little. It is emitting a confident
@@ -479,41 +482,13 @@ substantially under-dispersed.}
 \subsection{What is C2ST actually reading?}
 \label{sec:c2st-audit}
 
-A metric that separates simulators from humans at AUC $0.983$ invites an obvious
-objection: perhaps the classifier is detecting formatting rather than anything
-about personality. We test our own metric against it with a feature ladder, each
-rung scored identically and against the same anchors.
-
-\begin{center}\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lccc}
-\toprule
-Features & LLM & Human & Const.\\
-\midrule
-Full 120 items & 0.983 & 0.564 & 0.926\\
-5 style scalars only & 0.950 & 0.566 & 0.994\\
-Items, ipsatised & 0.975 & 0.566 & 0.986\\
-30 facet scores only & 0.987 & 0.581 & 0.944\\
-Forward-keyed only & 0.990 & 0.568 & 0.810\\
-Reverse-keyed only & 0.984 & 0.583 & 0.843\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Five content-free scalars --- per-respondent mean and standard deviation, extreme
--response rate, longest identical run, and forward-versus-reverse consistency ---
-recover $93\%$ of the full separability above chance. So the objection has real
-force, and we state it plainly: \textbf{most of what C2ST detects is response
-style.}
-
-It is not only style. Ipsatising each respondent (removing their own mean and
-standard deviation, i.e.\ the two largest style features) still leaves AUC
-$0.975$, and facet scores alone give $0.987$. Style and content are redundant
-routes to the same conclusion rather than one masking the other. The human
-ceiling is also stable at $0.56$--$0.58$ across every rung, so the anchor does
-not move with the feature set.
-
-We therefore recommend reporting C2ST with its style-only rung alongside it, so
+A metric that separates simulators from humans at AUC $0.994$ invites the
+objection that the classifier detects formatting rather than personality. A
+feature ladder (App.~\ref{app:c2staudit}) shows the objection has real force:
+five content-free response-style scalars already recover most of the separability
+above chance. It is not only style --- ipsatising each respondent, or using facet
+scores alone, still separates nearly as well --- so style and content are
+redundant routes to the same conclusion. We therefore recommend reporting C2ST with its style-only rung alongside it, so
 readers can see how much of any separability is carried by response style. A
 simulator that closed only the style gap would look far better on the headline
 number while remaining just as distinguishable on content.
@@ -524,32 +499,21 @@ bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
 (extrapolating to $1.000$, i.e.\ pessimistic), and recommends $n\ge40$ per side
 as a floor.
 
-\section{Is the prompt encoding the constraint?}
+\section{The proposition, reproduced in one experiment}
 \label{sec:encoding}
 
-A natural defence of the simulator is that the persona prompt simply cannot carry
-enough information. In this pipeline an individual reaches the model as a
-quantised code: each of $5$ traits and $30$ facets contributes one adverb drawn
-from a five-level scale, attached to text that is otherwise constant within a
-cluster. The whole individual is $35$ symbols over a five-letter alphabet.
-
-We test the defence by asking what an \emph{oracle} reader of that code could do.
 Fitting on half of each cluster and scoring on the other half, two oracles differ
 only in what they predict: a \textbf{mean} oracle (ridge on the ordinal code),
-which predicts the conditional mean; and a \textbf{faithful} oracle, the same fit
+which predicts the conditional mean, and a \textbf{faithful} oracle, the same fit
 plus a resampled residual, which reproduces the conditional \emph{distribution}.
-
-The faithful oracle attains a variance ratio of $0.988$ --- essentially human. So
-the encoding is not the binding constraint: $35$ symbols suffice for human-level
-dispersion, and the shortfall in \S\ref{sec:mechanism} belongs to the model, not
-to the prompt. Codes are also effectively unique (collision rate $0$), so
-quantisation is not merging individuals either.
-
-The two oracles also reproduce Proposition~\ref{prop:main} inside a single
-experiment. The mean oracle scores $S=0.802$; the faithful one, which is strictly
-closer to the truth, scores $S=0.730$ --- worse by $7.2$ points, against the
-$7.75$ the $\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Predicting the distribution
-correctly is penalised, and by the predicted amount.
+The mean oracle scores $S=0.802$; the faithful one, strictly closer to the truth,
+scores $S=0.730$ --- worse by $7.2$ points, against the $7.75$ that the
+$\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Predicting the distribution correctly is
+penalised, and by very nearly the predicted amount. This construction does
+\emph{not} settle whether the prompt limits the simulator: it reads a richer code
+than the ten scores the belief prompts carry, and restoring marginal spread by
+resampling residuals is not evidence of faithful conditioning.
+App.~\ref{app:ceiling} takes that question up on the actual channel.
 
 One further number bounds what conditioning buys at all: the mean oracle beats the
 constant ($0.792$) by $0.9$ points. A perfect reader of the persona gains under a
@@ -742,12 +706,11 @@ such losses blur predictions in generative modelling.
 Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
-cells, and proposed a suite that orders humans above constants. Beneath the
-metric the simulation is thinner still: across eleven models the individuation
-that points at the right respondent reaches at best $37\%$ of the same statistic
-measured on real respondents, and the prompt is not what limits it. Score with $S_{1/2}$, the proper
-member of \eqref{eq:slambda}, and report the constant floor and human ceiling
-beside every number.
+matched cells, and proposed a suite that orders humans above constants. Beneath the
+metric the simulation is thinner still: individuation that points at the right
+respondent reaches at best $37\%$ of the same statistic measured on real
+respondents, while the ten-score channel demonstrably carries more. Score with
+$S_{1/2}$ and report the constant floor and human ceiling beside every number.
 
 \section*{Limitations}
 
@@ -820,6 +783,49 @@ figure --- the $\lambda^\star$ values, the orientation deltas, the variance
 components, the null-calibration ARIs of \S\ref{sec:clusters}, and the oracle
 ceilings --- agreed to all printed digits. Code and
 per-cell results are released.
+
+\section{The C2ST feature ladder}
+\label{app:c2staudit}
+
+A metric that separates simulators from humans at AUC $0.994$ invites an obvious
+objection: perhaps the classifier is detecting formatting rather than anything
+about personality. We test our own metric with a feature ladder, each rung scored
+identically against the same anchors. The ladder is computed on the
+\emph{original} orientation throughout, so its rungs are comparable to each other
+but not to the corrected suite, and its facet rung re-reverses the already-recoded
+human answers; a corrected version must handle orientation feature-by-feature
+rather than by one global flip. We therefore read the ladder qualitatively.
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Features & LLM & Human & Const.\\
+\midrule
+Full 120 items & 0.983 & 0.564 & 0.926\\
+5 style scalars only & 0.950 & 0.566 & 0.994\\
+Items, ipsatised & 0.975 & 0.566 & 0.986\\
+30 facet scores only & 0.987 & 0.581 & 0.944\\
+Forward-keyed only & 0.990 & 0.568 & 0.810\\
+Reverse-keyed only & 0.984 & 0.583 & 0.843\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Five content-free scalars --- per-respondent mean and standard deviation, extreme
+-response rate, longest identical run, and forward-versus-reverse consistency ---
+already recover most of the separability above chance here. The objection has real
+force, and we state it plainly: \textbf{a large part of what C2ST detects is
+response style.} We quote no share, since the ladder's orientation handling is not
+yet consistent enough to support one.
+
+It is not only style. Ipsatising each respondent (removing their own mean and
+standard deviation, i.e.\ the two largest style features) still leaves AUC
+$0.975$, and facet scores alone give $0.987$. Style and content are redundant
+routes to the same conclusion rather than one masking the other. The human
+ceiling is also stable at $0.56$--$0.58$ across every rung, so the anchor does
+not move with the feature set.
+
 
 \section{Cluster validity in full}
 \label{app:clusters}
@@ -900,7 +906,7 @@ models most invites.
 
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
-level. The named items carry $1.51\times$ more predictable-from-code variance
+level. The named items carry $1.51\times$ more predictable-from-code signal (an SD ratio)
 (reference $0.671$ against $0.444$), and every model does individuate them more
 in absolute terms. Measured against those references the ratio is \emph{lower}
 where the prompt is most specific --- $0.353$ on the named items against $0.433$
@@ -972,7 +978,7 @@ from the same distribution must score. So the C2ST ceiling of $0.574$ at $n{=}40
 is \emph{entirely} finite-sample classifier bias and should be read with its $n$
 attached, while the DF ceiling of $0.939$ is \emph{entirely} plug-in Wasserstein
 bias and is pessimistic. Correcting the latter widens the gap to the simulator's
-$0.703$ rather than narrowing it.
+$0.783$ rather than narrowing it.
 
 Below $n\approx40$ the suite is unusable: the classifier fails to separate even
 the constant from real humans (the dashed entries above are the degenerate
