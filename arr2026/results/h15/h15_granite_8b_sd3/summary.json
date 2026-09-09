@@ -1,0 +1,34 @@
+{
+  "instrument": "sd3",
+  "model": "ibm-granite/granite-4.1-8b",
+  "input_items": 12,
+  "target_items": 15,
+  "n_test": 256,
+  "n_train": 17484,
+  "mass_on_scale_mean": 1.0,
+  "coverage": 1.0,
+  "target_ids": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    14,
+    15,
+    16,
+    17,
+    18,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "reverse_keyed_targets": [
+    15,
+    17,
+    25
+  ],
+  "corpus_recoded": false,
+  "valid": true
+}

@@ -1,0 +1,16 @@
+{
+  "instrument": "sd3",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "input_items": 12,
+  "target_items": 15,
+  "n_test": 256,
+  "n_train": 17484,
+  "mass_on_scale_mean": 1.0,
+  "coverage": 1.0,
+  "reverse_keyed_targets": [
+    15,
+    17,
+    25
+  ],
+  "valid": true
+}

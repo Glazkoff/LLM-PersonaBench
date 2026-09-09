@@ -515,8 +515,9 @@ again outscores a real respondent ($0.744$ vs $0.664$) in $200$ of $200$
 bootstraps. The defect belongs to the metric applied to ordinal questionnaire
 data, not to the Big Five or one corpus.
 
-The behavioural finding transfers too, and under a design where the prompt
-cannot contain the answers being scored (App.~\ref{app:disjoint}).
+Both behavioural findings of \S\ref{sec:mechanism} transfer to SD3, and
+under a design where the prompt cannot contain the answers being scored; on
+IPIP that design weakens one of them (App.~\ref{app:disjoint}).
 
 \section{Where the variance is lost}
 \label{sec:mechanism}
@@ -805,14 +806,22 @@ items and would reimport target information --- and the prior, the decoder and t
 bin thresholds are fitted on training respondents whose target answers are never
 seen. Elicitation is unchanged, so any difference is the split.
 
-On $256$ held-out respondents the two facts of \S\ref{sec:mechanism} reappear.
-Correct assignment beats within-sample permutation on SD3 by $+0.010$
-$[+0.006,+0.015]$ for Qwen2.5-7B and $+0.017$ $[+0.013,+0.020]$ for
-Granite-4.1, and on IPIP by $+0.004$ $[+0.002,+0.005]$; every model still loses
-to the empirical prior, by $0.098$--$0.127$. The identity effect is real but
-smaller than the body's same-item figure --- Qwen2.5-7B's IPIP gain falls from
-$0.006$ to $0.004$ --- so part of what the body measures is recoverable
-arithmetic, and part is not. The comparison against the prior is unchanged.
+On $256$ held-out respondents the second fact of \S\ref{sec:mechanism} is
+unqualified and the first is weakened. Every model still loses to the empirical
+prior, by $0.098$--$0.204$ across all four model--instrument cells. The identity
+effect survives in three of those four: on SD3 by $+0.010$ $[+0.006,+0.015]$ for
+Qwen2.5-7B and $+0.017$ $[+0.013,+0.020]$ for Granite-4.1, and on IPIP by
+$+0.004$ $[+0.002,+0.005]$ for Qwen2.5-7B --- but Granite-4.1 on IPIP gives
+$+0.002$ $[-0.001,+0.005]$, which does not exclude zero.
+
+Two things follow, and they cut in opposite directions. The identity effect is
+not an artefact of scoring a simulator on the items its conditioning came from,
+since it is largest where that confound is absent entirely. But it is smaller
+than the body's same-item figure --- Qwen2.5-7B's IPIP gain falls from $0.006$ to
+$0.004$ --- and on IPIP it is fragile enough that one of two models does not show
+it. Part of what \S\ref{sec:mechanism} measures on IPIP is recoverable
+arithmetic. What does not depend on the split, in any cell, is that the simulator
+loses to a prior that ignores the persona.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
