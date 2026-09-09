@@ -282,3 +282,33 @@ NON-BLOCKING:
     abstract says evolved personas average .739.
 
 ---
+
+## Round 6 — Score: 7/10 — Verdict: READY FOR SUBMISSION: Yes
+Backend: codex · gpt-6-astra · thread 01a085b0-dfc0-7223-b52b-28c66cfdc7f1
+
+"The round-5 upload blocker genuinely clears. I found no remaining BLOCKING issue."
+
+Verified in the built PDF: review mode active (anonymous heading + line numbers), decoder table
+fits on p11 without collision, Conclusion finishes on p8 before Limitations, zero overfull-box
+warnings. Independently reconstructed: corrected paired S .7386215; 20/20 constant and 19/20
+global-mean wins; E3 20 finite cells with C2ST .9942875 and DF .7834792; H1 2/20 wins at
+lambda=.5; H5 .9421871; human aligned-amplitude reference .4978048; Qwen2.5 .0671/.1155/.1831;
+best model 36.78% [34.33, 39.58] of the human reference. All 56 valid tensors validated; all 14
+marginal and 5 paired intervals reproduced; asset regeneration reproduces all three tables and
+both embedded figures from the repository alone.
+
+Four NON-BLOCKING items, all since fixed:
+  - categorical wording ("predicting the distribution correctly is penalised"; "not who endorses
+    them") -> restoring marginal spread / respondent-specific alignment remains limited
+  - h13c printed bootstrap means for the human reference and paired differences -> original-sample
+    estimates with bootstrap intervals throughout
+  - three double-rounding errors (lambda=.75 model .795 not .796; appendix constant DF .795 not
+    .796; Qwen3-235B/GLM paired lower endpoint +.009 not +.010) and my incorrect "fourth decimal"
+    description of the two k=4 ARIs (.946 vs .951 differ at the third)
+  - Figure 2 axis said "variance ratio" -> SD ratio; Dong et al. entry marked [VERIFY] rather than
+    given an invented arXiv id (DBLP/CrossRef unreachable from this environment)
+
+Reviewer's standing caveats: review independence is same-family; acceptance status provisional;
+external bibliography not independently verified.
+
+---
