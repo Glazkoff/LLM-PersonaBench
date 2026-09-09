@@ -1,0 +1,238 @@
+diff --git a/paper/main.pdf b/paper/main.pdf
+index fecdbca..c47679c 100644
+Binary files a/paper/main.pdf and b/paper/main.pdf differ
+diff --git a/paper/main.tex b/paper/main.tex
+index 7381577..ba7f918 100644
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -265,61 +265,13 @@ all $20$ matched constant wins, though it does reorder the models. The constant
+ \label{tab:headtohead}
+ \end{table*}
+ 
+-\paragraph{Split sensitivity.} Re-drawing which 100 respondents are sampled at a
+-fixed 60/40 ratio moves the parameter-free cluster-mean baseline by
+-$0.54$--$0.77$ points within a cluster over 20 draws, and the four-cluster
+-average by $0.23$; pooling clusters gives $1.33$, but that mixes cluster
+-differences into split variation. Prior work's optimisation gain is $+0.72$
+-points on one fixed split. This is context for how far a single split can move a
+-score, not a test of that gain --- variation in baseline \emph{levels} does not
+-bound a \emph{paired} improvement.
+-
+-\section{What is a persona worth, in respondents?}
+-\label{sec:equivalents}
+-
+-``It loses to a constant'' invites the reply that the constant is a strawman. So
+-we restate the finding in a unit that is harder to dismiss: how many real
+-respondents you would have to sample before a plug-in estimate of the cluster's
+-response distribution matches what the persona gives you.
+-
+-Drawing $m$ real respondents, forming the per-item empirical distribution, and
+-sampling a synthetic population from it yields distributional fidelity $0.723$ at
+-$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
+-curve is evaluated at the same sizes as the audited scores --- forty synthetic
+-against forty held-out humans --- because DF depends on sample size, so a curve
+-built at any other size cannot calibrate them. Reading the audited systems off
+-it:
+-
+-\begin{center}\footnotesize
+-\setlength{\tabcolsep}{4pt}
+-\begin{tabular}{lcc}
+-\toprule
+-System & DF & Resp.-equiv.\\
+-\midrule
+-Evolutionary LLM persona & 0.783 & \textbf{2}\\
+-Constant cluster mean & 0.796 & 2\\
+-Human ceiling & 0.939 & off-curve\\
+-\bottomrule
+-\end{tabular}
+-\end{center}
+-
+-An evolutionary-optimised persona is worth about \textbf{two} real respondents:
+-two is the smallest evaluated $m$ whose mean DF exceeds the persona's $0.783$,
+-and the constant sits at the same place. This is a threshold on the mean curve,
+-not an equivalence test. The human ceiling of $0.939$ is not crossed anywhere on
+-the evaluated grid, up to $m{=}500$ ($0.938$), so we do not convert it into
+-respondent units --- a statement about the grid we searched, not a proof that no
+-$m$ reaches it. This is the same result
+-as \S\ref{sec:audit} in different units, and it is the version we would put to a
+-practitioner weighing synthetic respondents against a small pilot survey.
+-
+ \section{Does conditioning on the right cluster matter?}
+ \label{sec:permutation}
+ 
+ No persona study we know of reports the wrong-persona control, so no reported
+ persona effect is currently attributable to the persona. We score every simulator
+-against every cluster's humans --- 80 cells --- and test diagonal dominance by
+-permutation.
++against every cluster's humans --- 80 cells --- and report diagonal dominance
++descriptively.
+ 
+ \begin{center}\footnotesize
+ \setlength{\tabcolsep}{5pt}
+@@ -506,8 +458,9 @@ number while remaining just as distinguishable on content.
+ The anchors are estimated at $n{=}40$ per side. Appendix~\ref{app:samplesize}
+ sweeps $n$ and shows the C2ST human ceiling is entirely finite-sample classifier
+ bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
+-(extrapolating to $1.000$, i.e.\ pessimistic), and recommends $n\ge40$ per side
+-as a floor.
++(extrapolating to $1.000$, i.e.\ pessimistic). Below $n\approx40$ our classifier
++configuration stops separating at all, so we report every anchor with the $n$ and
++the settings it was measured at rather than proposing a universal floor.
+ 
+ \section{The proposition, reproduced in one experiment}
+ \label{sec:encoding}
+@@ -644,9 +597,10 @@ scale --- gives $r=0.16$--$0.52$. The aligned amplitude
+ $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
+ item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
+ respondents: the best reaches about a third of that, the weakest under a tenth.
+-Within Qwen2.5, $A$ rises with scale in three non-overlapping steps
+-($0.066\to0.114\to0.180$), and it separates models $\mathrm{VR}_\text{between}$
+-cannot (App.~\ref{app:ceiling}).
++It separates models $\mathrm{VR}_\text{between}$ ranks together --- GLM-4.7 and
++Qwen3-235B sit $0.007$ apart in spread, yet differ in $A$ by $+0.017$
++$[+0.010,+0.025]$ --- and rises with scale across Qwen2.5 in three
++non-overlapping steps ($0.066\to0.114\to0.180$).
+ 
+ A simulator can therefore look more dispersed simply by being less confident:
+ $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
+@@ -716,10 +670,10 @@ such losses blur predictions in generative modelling.
+ Cluster-level LLM personality simulation is evaluated with a metric that a
+ constant vector wins and a real human loses. We proved why, measured the
+ structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
+-matched cells, and proposed a suite that orders humans above constants. Beneath the
+-metric the simulation is thinner still: individuation that identifies the right
+-respondent reaches at best a third of the human reference. Score with $S_{1/2}$
+-and report the floor and ceiling beside every number.
++matched cells, and proposed a suite that orders humans above constants. Beneath
++it the simulation is thinner still: individuation that identifies the right
++respondent reaches about $37\%$ $[34,40]$ of the human reference. Score with
++$S_{1/2}$; report floor and ceiling beside every number.
+ 
+ \section*{Limitations}
+ 
+@@ -741,11 +695,12 @@ models through a chat-completions server returned almost no mass on the answer
+ tokens where the forward pass recovers $0.99$--$1.00$, and harmony-format models
+ require the assistant turn to open a channel before the prefill, without which
+ mass on the scale falls to $0.39$ --- so a null result in this literature may
+-report a readout rather than a model; every model we report is unquantised at
+-inference, one FP8 checkpoint having resisted measurement through both available
+-routes (its serving path returns no mass on the scale, and the forward-pass path
+-hits a quantiser bug), so we make no claim about how quantisation affects
+-individuation; the proposition is general to the
++report a readout rather than a model; precision varies across the models we
++report --- nine run at bf16, gpt-oss-20b ships MXFP4 and is dequantised to bf16 at
++load, and Qwen3-235B is an FP8 checkpoint served at FP8 --- and a further FP8
++checkpoint resisted measurement through both available routes, so we make no
++claim that individuation is invariant to quantisation; the proposition is general
++to the
+ absolute-error metric in \eqref{eq:metric}, but the empirical magnitudes are
+ specific to this setting. The model answers we re-score were produced by prior
+ runs we did not control, at temperatures we did not set, and one released run was
+@@ -799,6 +754,56 @@ the validity guard ship too, marked invalid, so the record shows what was
+ measured and rejected. One transform maps model answers onto the corpus's
+ recoded scale and is imported by every analysis that compares the two.
+ 
++\section{Split sensitivity of the baselines}
++\label{app:split}
++
++Re-drawing which 100 respondents are sampled at a
++fixed 60/40 ratio moves the parameter-free cluster-mean baseline by
++$0.54$--$0.77$ points within a cluster over 20 draws, and the four-cluster
++average by $0.23$ (pooling clusters gives $1.33$, mixing cluster differences into
++split variation). Prior work's gain is $+0.72$ points on one fixed split. This is
++context for how far a split can move a score, not a test of that gain: variation
++in baseline \emph{levels} does not bound a \emph{paired} improvement.
++
++\section{What is a persona worth, in respondents?}
++\label{sec:equivalents}
++
++``It loses to a constant'' invites the reply that the constant is a strawman. So
++we restate the finding in a unit that is harder to dismiss: how many real
++respondents you would have to sample before a plug-in estimate of the cluster's
++response distribution matches what the persona gives you.
++
++Drawing $m$ real respondents, forming the per-item empirical distribution, and
++sampling a synthetic population from it yields distributional fidelity $0.723$ at
++$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
++curve is evaluated at the same sizes as the audited scores --- forty synthetic
++against forty held-out humans --- because DF depends on sample size, so a curve
++built at any other size cannot calibrate them. Reading the audited systems off
++it:
++
++\begin{center}\footnotesize
++\setlength{\tabcolsep}{4pt}
++\begin{tabular}{lcc}
++\toprule
++System & DF & Resp.-equiv.\\
++\midrule
++Evolutionary LLM persona & 0.783 & \textbf{2}\\
++Constant cluster mean & 0.796 & 2\\
++Human ceiling & 0.939 & off-curve\\
++\bottomrule
++\end{tabular}
++\end{center}
++
++An evolutionary-optimised persona is worth about \textbf{two} real respondents:
++two is the smallest evaluated $m$ whose mean DF exceeds the persona's $0.783$,
++and the constant sits at the same place. This is a threshold on the mean curve,
++not an equivalence test. The human ceiling of $0.939$ is not crossed anywhere on
++the evaluated grid, up to $m{=}500$ ($0.938$), so we do not convert it into
++respondent units --- a statement about the grid we searched, not a proof that no
++$m$ reaches it. This is the same result
++as \S\ref{sec:audit} in different units, and it is the version we would put to a
++practitioner weighing synthetic respondents against a small pilot survey.
++
+ \section{The C2ST feature ladder}
+ \label{app:c2staudit}
+ 
+@@ -828,9 +833,10 @@ Reverse-keyed only & 0.993 & 0.583 & 0.843\\
+ 
+ Five content-free scalars --- per-respondent mean and standard deviation, extreme
+ -response rate, longest identical run, and forward-versus-reverse consistency ---
+-recover $80\%$ of the full separability above chance. The objection has real
+-force, and we state it plainly: \textbf{most of what C2ST detects is response
+-style.}
++attain $80\%$ of the full above-chance AUC on their own. The objection has real
++force, and we state it plainly: \textbf{response style alone reproduces most of
++the separability}, which is a statement about what suffices, not a decomposition
++of what the full classifier uses.
+ 
+ It is not only style. Ipsatising each respondent (removing their own mean and
+ standard deviation, i.e.\ the two largest style features) still leaves AUC
+@@ -926,15 +932,18 @@ $[0.028,0.036]$ for Apertus-8B to $0.180$ $[0.168,0.193]$ for Qwen2.5-72B. The
+ intervals are informative enough to separate models that
+ $\mathrm{VR}_\text{between}$ ranks together: Qwen2.5-32B and Granite-4.1 differ
+ by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
+-against $[0.071,0.089]$. They are also honest about what is \emph{not}
+-resolvable --- GLM-4.7 and Qwen3-235B differ by $0.017$ in $A$, and their
+-intervals overlap, so we do not claim a difference there.
++against $[0.071,0.089]$. Comparisons are made on the paired draws, not by asking whether marginal
++intervals overlap --- two overlapping marginals can still have a difference
++interval excluding zero, as GLM-4.7 and Qwen3-235B do ($+0.017$
++$[+0.010,+0.025]$) --- and Qwen2.5-32B exceeds Granite-4.1 by $+0.034$
++$[+0.028,+0.040]$ despite a $0.013$ gap in spread.
+ 
+ \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
+ items have their own facet stated and one hundred are covered only at trait
+ level. The named items carry $1.51\times$ more predictable-from-code signal (an SD ratio)
+-(reference $0.671$ against $0.444$), and every model does individuate them more
+-in absolute terms. Measured against those references the ratio is \emph{lower}
++(reference $0.671$ against $0.444$), and $10$ of $11$ models individuate them more
++in absolute terms, Qwen3-235B being the exception ($0.224$ named against $0.264$
++elsewhere). Measured against those references the ratio is \emph{lower}
+ where the prompt is most specific --- $0.353$ on the named items against $0.433$
+ on the rest, in the same direction for $10$ of $11$ models --- but we report this
+ descriptively and draw no causal conclusion from it, for two reasons. A facet
+@@ -951,7 +960,11 @@ more: we re-ran three models with every other word of the prompt held fixed and
+ the ten modifier phrases replaced by the numbers themselves. The effect is
+ inconsistent in magnitude --- $\mathrm{VR}_\text{between}$ rises for Granite-4.1
+ ($0.207\!\to\!0.246$) and gpt-oss ($0.126\!\to\!0.146$) but falls for Apertus
+-($0.130\!\to\!0.096$) --- and also inconsistent in direction, the aligned
++($0.130\!\to\!0.096$) --- and, using the same joint draws so the comparison is
++paired, every model moves resolvably: $A$ shifts by $+0.052$
++$[+0.045,+0.059]$ for Granite-4.1 and $+0.008$ $[+0.005,+0.012]$ for gpt-oss but
++$-0.012$ $[-0.016,-0.009]$ for Apertus. The effect is therefore not noise; it is
++real and model-dependent in sign. It is also also inconsistent in direction, the aligned
+ amplitude moving $0.081\!\to\!0.134$ for Granite-4.1 and
+ $0.039\!\to\!0.047$ for gpt-oss but $0.033\!\to\!0.020$ for Apertus. Granite
+ gains on both counts --- its correlation with the oracle rises from $0.285$ to

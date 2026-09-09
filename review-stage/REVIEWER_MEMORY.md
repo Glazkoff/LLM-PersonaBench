@@ -209,3 +209,46 @@ Corrected ladder, feature-specific orientation:
 Style now recovers 80% of separability above chance, not the 93% previously claimed.
 The style/content conclusion therefore SURVIVES with a corrected number, and the
 ladder is restored to the paper rather than withdrawn.
+
+## Round 4 — Score: 6/10 — Verdict: Almost (would not submit current PDF)
+Backend: codex · gpt-6-astra · thread 01a08589-e5f8-78f3-923f-7d9f7c81ba53
+
+Round 4 confirmed all four prior blockers cleared or partially cleared, and independently
+reproduced all 14 bootstrap intervals, the 56 valid tensors, and the H2 ladder aggregates.
+
+### Fixed since round 4 (verify)
+1. FIGURE 1 — was still .654/.983 in the built PDF. Root cause: make_paper_assets.py wrote to
+   ROOT.parent/"paper", a sibling directory the submission never reads, so every prior
+   regeneration was a no-op. Path fixed; assets rebuilt on the cluster from corrected results;
+   figure now carries .739 and .994 (verified by extracting text from figures/inversion.pdf).
+2. NOISE FLOOR — inference deleted. Correctly stratified: .54-.77 within-cluster, .23 on the
+   four-cluster average, 1.33 only when clusters are pooled. Kept as descriptive context with
+   an explicit note that baseline LEVEL variation does not bound a PAIRED gain.
+3. H8 INTERVALS — equivalence argument withdrawn; m=2 retained as a mean-curve threshold;
+   human ceiling now "not crossed on the evaluated grid up to m=500" rather than off-curve.
+4. H6 — "a perfect reader gains under a point" deleted; reported as one fitted decoder's score.
+5. GLOBAL MEAN — intro corrected to 19/20 (GPT-4.1-nano c1 = .8066 > .7961).
+6. HEAD-TO-HEAD CAPTION — "changes no ordering" was false; now "preserves all 20 matched
+   constant wins, though it does reorder the models".
+7. FP8 CONTRADICTION — Limitations claimed every reported model is unquantised at inference,
+   but Qwen3-235B's checkpoint is ...-2507-FP8 served at FP8. Precision now stated per model.
+8. H12 — "every model" -> 10/11, Qwen3-235B the exception (.224 named vs .264 elsewhere).
+9. UNDERCLAIM CORRECTED — paired differences on the same joint draws:
+     Qwen3-235B - GLM-4.7      +0.0172 [+0.0095,+0.0249]  resolved
+     Qwen2.5-32B - Granite-4.1 +0.0340 [+0.0278,+0.0400]  resolved
+     Granite raw - orig        +0.0516 [+0.0446,+0.0589]  resolved
+     Apertus raw - orig        -0.0124 [-0.0158,-0.0089]  resolved
+     gpt-oss raw - orig        +0.0083 [+0.0048,+0.0119]  resolved
+   All match round 4's independent computation. My withdrawal of the GLM/235B claim on
+   marginal overlap was a statistical error; it is restored on the paired interval, and the
+   intervention is now "every model moves resolvably, in model-dependent direction".
+10. h13c reports the ORIGINAL-SAMPLE estimate with the percentile interval, not the bootstrap
+    mean (which is what produced .183 next to .180).
+11. Conclusion reports 37% [34,40] rather than "at best a third" (underclaim).
+12. n-floor qualified by classifier configuration in main text as well as appendix.
+13. H2 80% restated as attainment by style features, not an attribution decomposition.
+14. Split-sensitivity moved to an appendix now that only descriptive content remains.
+
+Content ends p8 under the boundary check; PDF is 12 pages total.
+
+---
