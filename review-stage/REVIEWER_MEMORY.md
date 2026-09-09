@@ -346,3 +346,33 @@ format), rank 5 (independent pipeline). Also not done: the conditional-median ch
 of constant-optimality.
 
 ---
+
+## Round 7 — Score: 7.5/10 — Verdict: Almost ("with these corrections, 8/10 and Yes")
+Backend: codex · gpt-6-astra · thread 01a085de-ca28-7c13-99cc-fb7cf7fcb900
+
+Verified independently: CRPS normalisation correct (agrees with the absolute-distance form to
+<5e-9); orientation correct; all 44 evaluated tensors finite simplexes; decoder trained on
+respondents disjoint from the 40 evaluated; permutation control valid. With 10,000 paired
+cluster-stratified bootstrap draws recomputing the control, all 11 identity intervals stay
+positive and all 11 prior comparisons stay negative.
+
+### Fixed since round 7 (verify)
+BLOCKER 1 — fitted reference presented as exact. Replaced with the identity round 7 supplied
+and verified, in measured quantities only:
+    R(prior) - R(correct) = I - D_Q - [R(qbar) - R(prior)]
+Now exact to machine precision: residuals |.|<6e-17 for all 11 models (was 1.4e-3 for Qwen72).
+The 2.6x-5.3x ratio is GONE from the paper. The exact decomposition also changes the reading:
+mixture excess 0.038-0.090 dominates, I is 0.004-0.017 and D_Q 0.002-0.021, so the loss sits in
+the population term and identity effects are an order of magnitude smaller. My earlier framing
+overweighted identity because the fitted reference concealed where the loss was.
+BLOCKER 2 — decoder was not a CDF (449/19200 non-monotone). Now projected onto the monotone
+cone by pool-adjacent-violators; loss effect negligible as round 7 predicted.
+NON-BLOCKING — permutation control computed as an exact expectation over all donor rows, not
+Monte Carlo; central claim scoped to "a cluster empirical prior fitted on other respondents";
+Remark 1 no longer claims the optimum is a point rather than a distribution, since randomisation
+on the conditional median set ties.
+
+Still not done: SD3 behavioural replication with disjoint conditioning/target items (round 7's
+next substantive priority, explicitly NOT required for 8), ranks 3-5 of the earlier route.
+
+---
