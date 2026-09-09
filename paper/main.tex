@@ -265,54 +265,6 @@ all $20$ matched constant wins, though it does reorder the models. The constant
 \label{tab:headtohead}
 \end{table*}
 
-\paragraph{Split sensitivity.} Re-drawing which 100 respondents are sampled at a
-fixed 60/40 ratio moves the parameter-free cluster-mean baseline by
-$0.54$--$0.77$ points within a cluster over 20 draws, and the four-cluster
-average by $0.23$; pooling clusters gives $1.33$, but that mixes cluster
-differences into split variation. Prior work's optimisation gain is $+0.72$
-points on one fixed split. This is context for how far a single split can move a
-score, not a test of that gain --- variation in baseline \emph{levels} does not
-bound a \emph{paired} improvement.
-
-\section{What is a persona worth, in respondents?}
-\label{sec:equivalents}
-
-``It loses to a constant'' invites the reply that the constant is a strawman. So
-we restate the finding in a unit that is harder to dismiss: how many real
-respondents you would have to sample before a plug-in estimate of the cluster's
-response distribution matches what the persona gives you.
-
-Drawing $m$ real respondents, forming the per-item empirical distribution, and
-sampling a synthetic population from it yields distributional fidelity $0.723$ at
-$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
-curve is evaluated at the same sizes as the audited scores --- forty synthetic
-against forty held-out humans --- because DF depends on sample size, so a curve
-built at any other size cannot calibrate them. Reading the audited systems off
-it:
-
-\begin{center}\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcc}
-\toprule
-System & DF & Resp.-equiv.\\
-\midrule
-Evolutionary LLM persona & 0.783 & \textbf{2}\\
-Constant cluster mean & 0.796 & 2\\
-Human ceiling & 0.939 & off-curve\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-An evolutionary-optimised persona is worth about \textbf{two} real respondents:
-two is the smallest evaluated $m$ whose mean DF exceeds the persona's $0.783$,
-and the constant sits at the same place. This is a threshold on the mean curve,
-not an equivalence test. The human ceiling of $0.939$ is not crossed anywhere on
-the evaluated grid, up to $m{=}500$ ($0.938$), so we do not convert it into
-respondent units --- a statement about the grid we searched, not a proof that no
-$m$ reaches it. This is the same result
-as \S\ref{sec:audit} in different units, and it is the version we would put to a
-practitioner weighing synthetic respondents against a small pilot survey.
-
 \section{Does conditioning on the right cluster matter?}
 \label{sec:permutation}
 
@@ -506,8 +458,9 @@ number while remaining just as distinguishable on content.
 The anchors are estimated at $n{=}40$ per side. Appendix~\ref{app:samplesize}
 sweeps $n$ and shows the C2ST human ceiling is entirely finite-sample classifier
 bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
-(extrapolating to $1.000$, i.e.\ pessimistic), and recommends $n\ge40$ per side
-as a floor.
+(extrapolating to $1.000$, i.e.\ pessimistic). Below $n\approx40$ our classifier
+configuration stops separating at all, so we report every anchor with the $n$ and
+the settings it was measured at rather than proposing a universal floor.
 
 \section{The proposition, reproduced in one experiment}
 \label{sec:encoding}
@@ -644,9 +597,10 @@ scale --- gives $r=0.16$--$0.52$. The aligned amplitude
 $A=\frac{1}{J}\sum_j r_j\,\mathrm{sd}(M_j)/\mathrm{sd}(H_j)$, in units of human
 item SD, is $0.033$--$0.183$, against $0.489$ $[0.461,0.517]$ for real
 respondents: the best reaches about a third of that, the weakest under a tenth.
-Within Qwen2.5, $A$ rises with scale in three non-overlapping steps
-($0.066\to0.114\to0.180$), and it separates models $\mathrm{VR}_\text{between}$
-cannot (App.~\ref{app:ceiling}).
+It separates models $\mathrm{VR}_\text{between}$ ranks together --- GLM-4.7 and
+Qwen3-235B sit $0.007$ apart in spread, yet differ in $A$ by $+0.017$
+$[+0.010,+0.025]$ --- and rises with scale across Qwen2.5 in three
+non-overlapping steps ($0.066\to0.114\to0.180$).
 
 A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
@@ -716,10 +670,10 @@ such losses blur predictions in generative modelling.
 Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
-matched cells, and proposed a suite that orders humans above constants. Beneath the
-metric the simulation is thinner still: individuation that identifies the right
+matched cells, and proposed a suite that orders humans above constants. Beneath
+it the simulation is thinner still: individuation that identifies the right
 respondent reaches about $37\%$ $[34,40]$ of the human reference. Score with
-$S_{1/2}$ and report the floor and ceiling beside every number.
+$S_{1/2}$; report floor and ceiling beside every number.
 
 \section*{Limitations}
 
@@ -799,6 +753,56 @@ reported number can be recomputed from the artifacts alone. Runs that failed
 the validity guard ship too, marked invalid, so the record shows what was
 measured and rejected. One transform maps model answers onto the corpus's
 recoded scale and is imported by every analysis that compares the two.
+
+\section{Split sensitivity of the baselines}
+\label{app:split}
+
+Re-drawing which 100 respondents are sampled at a
+fixed 60/40 ratio moves the parameter-free cluster-mean baseline by
+$0.54$--$0.77$ points within a cluster over 20 draws, and the four-cluster
+average by $0.23$ (pooling clusters gives $1.33$, mixing cluster differences into
+split variation). Prior work's gain is $+0.72$ points on one fixed split. This is
+context for how far a split can move a score, not a test of that gain: variation
+in baseline \emph{levels} does not bound a \emph{paired} improvement.
+
+\section{What is a persona worth, in respondents?}
+\label{sec:equivalents}
+
+``It loses to a constant'' invites the reply that the constant is a strawman. So
+we restate the finding in a unit that is harder to dismiss: how many real
+respondents you would have to sample before a plug-in estimate of the cluster's
+response distribution matches what the persona gives you.
+
+Drawing $m$ real respondents, forming the per-item empirical distribution, and
+sampling a synthetic population from it yields distributional fidelity $0.723$ at
+$m{=}1$, $0.797$ at $m{=}2$, $0.915$ at $m{=}21$ and $0.923$ at $m{=}34$. The
+curve is evaluated at the same sizes as the audited scores --- forty synthetic
+against forty held-out humans --- because DF depends on sample size, so a curve
+built at any other size cannot calibrate them. Reading the audited systems off
+it:
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+System & DF & Resp.-equiv.\\
+\midrule
+Evolutionary LLM persona & 0.783 & \textbf{2}\\
+Constant cluster mean & 0.796 & 2\\
+Human ceiling & 0.939 & off-curve\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+An evolutionary-optimised persona is worth about \textbf{two} real respondents:
+two is the smallest evaluated $m$ whose mean DF exceeds the persona's $0.783$,
+and the constant sits at the same place. This is a threshold on the mean curve,
+not an equivalence test. The human ceiling of $0.939$ is not crossed anywhere on
+the evaluated grid, up to $m{=}500$ ($0.938$), so we do not convert it into
+respondent units --- a statement about the grid we searched, not a proof that no
+$m$ reaches it. This is the same result
+as \S\ref{sec:audit} in different units, and it is the version we would put to a
+practitioner weighing synthetic respondents against a small pilot survey.
 
 \section{The C2ST feature ladder}
 \label{app:c2staudit}
@@ -928,9 +932,11 @@ $[0.028,0.036]$ for Apertus-8B to $0.180$ $[0.168,0.193]$ for Qwen2.5-72B. The
 intervals are informative enough to separate models that
 $\mathrm{VR}_\text{between}$ ranks together: Qwen2.5-32B and Granite-4.1 differ
 by $0.013$ in spread but their amplitudes do not overlap, $[0.105,0.122]$
-against $[0.071,0.089]$. Comparisons between models are made on the paired draws, not by asking whether
-marginal intervals overlap: two overlapping marginals can still have a difference
-interval that excludes zero, and here they do.
+against $[0.071,0.089]$. Comparisons are made on the paired draws, not by asking whether marginal
+intervals overlap --- two overlapping marginals can still have a difference
+interval excluding zero, as GLM-4.7 and Qwen3-235B do ($+0.017$
+$[+0.010,+0.025]$) --- and Qwen2.5-32B exceeds Granite-4.1 by $+0.034$
+$[+0.028,+0.040]$ despite a $0.013$ gap in spread.
 
 \paragraph{Where the shortfall falls.} Each cluster names five facets, so twenty
 items have their own facet stated and one hundred are covered only at trait
