@@ -32,6 +32,6 @@ print("weights at", snapshot_download("$M", max_workers=8), flush=True)
 PYEOF
 done
 "$PY" arr2026/scripts/hyp/h15_disjoint_readout.py \
-  --instrument ipip --model "$M" --panel val --n-panel 128 --batch-size "$BS" \
-  --out "arr2026/results_euler/h16_val_${TAG}_ipip"
+  --instrument ipip --model "$M" --panel "${PANEL:-val}" --n-panel 128 --batch-size "$BS" \
+  --out "arr2026/results_euler/h16_${PANEL:-val}_${TAG}_ipip"
 echo "DONE rc=$?"

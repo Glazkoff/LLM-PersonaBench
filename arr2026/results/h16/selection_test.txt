@@ -1,0 +1,23 @@
+=== validation panel: both rules see the same forecasts ===
+candidate                S_0 (up)  CRPS (down)   logloss
+h16_val_apertus_8b_ipip     0.6082       0.2752    2.2800
+h16_val_glm47_flash_ipip     0.5797       0.2405    1.9840
+h16_val_gptoss_20b_ipip     0.6529       0.1884    1.6231
+h16_val_granite_8b_ipip     0.6023       0.3521    5.2414
+h16_val_mistral_24b_ipip     0.5845       0.3150    2.8526
+h16_val_qwen25_32b_ipip     0.7463       0.2131    3.7679
+h16_val_qwen25_72b_ipip     0.7528       0.2039    3.1668
+h16_val_qwen25_7b_ipip     0.6684       0.2495    2.9968
+h16_val_qwen35_9b_ipip     0.6286       0.1873    1.6376
+h16_val_qwq_32b_ipip       0.6712       0.1981    1.8016
+
+rule A (S_0)   selects h16_val_qwen25_72b_ipip
+rule B (S_1/2) selects h16_val_qwen35_9b_ipip
+DISAGREE -- the two rules would ship different models
+
+=== test panel ===
+h16_test2_qwen25_72b_ipip CRPS 0.1962   logloss 2.9956
+h16_test2_qwen35_9b_ipip CRPS 0.1864   logloss 1.6264
+empirical prior        CRPS 0.1547   logloss 1.4138
+paired CRPS      h16_test2_qwen25_72b_ipip - h16_test2_qwen35_9b_ipip: +0.0098 [+0.0043,+0.0155]  resolved
+paired log-loss  h16_test2_qwen25_72b_ipip - h16_test2_qwen35_9b_ipip: +1.3692 [+1.2576,+1.4827]  resolved
