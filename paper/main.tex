@@ -713,8 +713,8 @@ it the simulation is thinner still: on the same items correct persona
 assignment helps all eleven models and none of them enough, and an exact decomposition puts the loss in the mixture,
 not identity. Score with $S_{1/2}$; report floor and ceiling. On one candidate set the
 switch is consequential: the two scores select different simulators, and the
-one $S_{1/2}$ picks predicts held-out people better
-(App.~\ref{app:selection}).
+one $S_{1/2}$ picks predicts held-out people better, though both lose to the
+prior (App.~\ref{app:selection}).
 
 \section*{Limitations}
 
@@ -857,10 +857,14 @@ panel. Only the selected models are run on the evaluation panel.
 
 The rules disagree. Rule~A selects Qwen2.5-72B ($S_0=0.753$); rule~B selects
 Qwen3.5-9B ($S_{1/2}=0.187$) --- models an order of magnitude apart in size. On
-the untouched panel rule~B's pick is better on $S_{1/2}$ by $0.010$
-$[0.004,0.015]$ and on categorical log-loss by $1.37$ nats
-$[1.26,1.48]$, both paired over respondents. Log-loss carries the argument:
-neither rule uses it, so it is an outcome independent of both criteria.
+the untouched panel rule~B's pick is better by $0.010$ $[0.004,0.015]$ under
+$S_{1/2}$, paired over respondents. The task is ordinal prediction, so that is
+the outcome we report; categorical log-loss agrees and is secondary, at $1.37$
+nats $[1.26,1.48]$. The log-loss gap is the larger number but the weaker
+argument, since it mostly registers the 72B's overconfidence rather than its
+ordinal accuracy --- its errors are confident, not distant. Its one advantage
+is independence: neither selection rule uses log-loss, whereas $S_{1/2}$ is
+rule~B's own criterion, evaluated on disjoint respondents.
 
 Two caveats belong with this. It is one candidate set, one split and one
 instrument, so it shows the evaluation changed a decision for the better ---
