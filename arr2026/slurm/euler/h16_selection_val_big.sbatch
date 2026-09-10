@@ -16,6 +16,14 @@ export HF_HOME=/home/glazkov/hf_cache
 cd /home/glazkov/personality-twins-arr/LLM-PersonaBench
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 
+# transformers 5.16.1 loads finegrained-fp8 through the `kernels` package and
+# pins it to [0.16.0, 0.17.0). It is absent from this venv, so adding it is
+# additive -- vllm 0.28.0 does not depend on it.
+if [ "${NEEDS_FP8_KERNEL:-0}" = "1" ]; then
+  "$PY" -c "import kernels" 2>/dev/null \
+    || /home/glazkov/.local/bin/uv pip install --python "$PY" --quiet "kernels==0.16.0"
+  "$PY" -c "import kernels, importlib.metadata as m; print('kernels', m.version('kernels'))"
+fi
 echo "=== $M on $(hostname), $(nvidia-smi -L | wc -l) GPUs visible ==="
 for try in 1 2 3; do
   "$PY" - <<PYEOF && break || { echo "download attempt $try failed; retrying"; sleep 60; }

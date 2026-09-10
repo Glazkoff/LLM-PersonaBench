@@ -105,6 +105,9 @@ def main() -> None:
                          "'val' and 'test2' are disjoint from it and from each "
                          "other, for the selection experiment.")
     ap.add_argument("--n-panel", type=int, default=128)
+    ap.add_argument("--debug-dump", type=int, default=0,
+                    help="1 = print the first prompt and its top tokens, then "
+                         "stop; 2 = print and continue")
     a = ap.parse_args()
 
     Y, ids, text, scale, rev, n_in, recoded = (
@@ -185,6 +188,24 @@ def main() -> None:
             except TypeError:
                 t = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
             prompts.append(t + prefill)
+
+    if a.debug_dump:
+        # A zero-mass readout is indistinguishable from a broken prompt unless
+        # you look at the prompt and at what the model actually emits.
+        print("=" * 72, flush=True)
+        print(repr(prompts[0]), flush=True)
+        print("=" * 72, flush=True)
+        with torch.no_grad():
+            enc = tok(prompts[:1], return_tensors="pt", padding=True).to(model.device)
+            lg = model(**enc).logits[:, -1, :].float()
+        pr = torch.softmax(lg, dim=-1)[0]
+        top = torch.topk(pr, 10)
+        print("top10:", [(repr(tok.decode([i])), round(float(v), 4))
+                         for v, i in zip(top.values, top.indices)], flush=True)
+        print("digit ids", dids, "mass", float(pr[dids].sum()),
+              "| nan/inf:", bool(torch.isnan(lg).any() or torch.isinf(lg).any()), flush=True)
+        if a.debug_dump == 1:
+            raise SystemExit("debug dump only")
 
     P = np.full((len(test), len(tgt), 5), np.nan)
     massv = []

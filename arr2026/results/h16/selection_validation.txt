@@ -1,0 +1,35 @@
+=== validation panel: both rules see the same forecasts ===
+candidate                S_0 (up)  CRPS (down)   logloss
+h16_val_apertus_8b_ipip     0.6082       0.2752    2.2800
+h16_val_glm47_flash_ipip     0.5797       0.2405    1.9840
+h16_val_gptoss_20b_ipip     0.6529       0.1884    1.6231
+h16_val_granite_8b_ipip     0.6023       0.3521    5.2414
+h16_val_mistral_24b_ipip     0.5845       0.3150    2.8526
+h16_val_qwen25_32b_ipip     0.7463       0.2131    3.7679
+h16_val_qwen25_72b_ipip     0.7528       0.2039    3.1668
+h16_val_qwen25_7b_ipip     0.6684       0.2495    2.9968
+h16_val_qwen35_9b_ipip     0.6286       0.1873    1.6376
+h16_val_qwq_32b_ipip       0.6712       0.1981    1.8016
+empirical prior            0.6878       0.1569    1.4252
+constant vector            0.7658       0.2342       inf
+
+rule A (S_0)   selects constant vector
+rule B (S_1/2) selects empirical prior
+DISAGREE -- the two rules would ship different models
+
+(no test-panel runs supplied; run the selected candidates on --panel test2 and re-invoke with --test)
+rule A (S_0)   selects h16_val_qwen25_72b_ipip
+rule B (S_1/2) selects h16_val_qwen35_9b_ipip
+DISAGREE -- the two rules would ship different models
+
+(no test-panel runs supplied; run the selected candidates on --panel test2 and re-invoke with --test)
+
+EXCLUDED under the pre-existing mass>=0.5 validity rule (predates this experiment):
+  Qwen/Qwen3-235B-A22B-Instruct-2507-FP8   mass 0.0, coverage 0.0
+  Read correctly on one allocation (0.9994 mass, no NaN) and produced garbage on
+  others -- top token ':UIControlState' at p=1.0 -- nondeterministically across
+  job launches. transformers warns that DeepGEMM's cached FP8 kernels bind to a
+  single CUDA context and corrupt across devices, and prescribes one device per
+  process. Reading it that way would give one candidate a different elicitation
+  path from the other ten, which this paper's own results show can move mass on
+  the answer tokens from 0.39 to 0.99. Excluded rather than read differently.
