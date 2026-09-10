@@ -3,7 +3,7 @@
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=06:00:00
+#SBATCH --time=16:00:00
 #SBATCH --output=/home/glazkov/personality-twins-arr/logs/h17_%A_%a.out
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/h17_%A_%a.err
 # 8 models x 4 instruments x 2 respondent panels = 64 readouts.
@@ -43,6 +43,6 @@ TAG=$(echo "$M" | tr '/' '_' | tr '.' 'p')
 echo "=== task $SLURM_ARRAY_TASK_ID : $M / $C / $P on $(hostname) ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 "$PY" arr2026/scripts/hyp/h17_readout.py \
-  --corpus "$C" --model "$M" --panel "$P" --n-panel 128 --batch-size "$BS" \
-  --out "arr2026/results_euler/h17_${TAG}_${C}_${P}"
+  --corpus "$C" --model "$M" --panel "$P" --n-panel "${NPANEL:-128}" --batch-size "$BS" \
+  --out "arr2026/results_euler/h17n${NPANEL:-128}_${TAG}_${C}_${P}"
 echo "DONE rc=$?"
