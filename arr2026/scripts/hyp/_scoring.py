@@ -27,25 +27,32 @@ from __future__ import annotations
 
 import numpy as np
 
-LEVELS = np.arange(1, 6, dtype=float)
-THRESH = [1, 2, 3, 4]
+# The scale length K is read from the forecast, never assumed. HEXACO is a
+# 7-point instrument; hard-coding 5 would silently mis-normalise every rule on
+# it and quietly change what "improper" means.
+def _K(P):
+    return P.shape[-1]
+
+
+def _levels(P):
+    return np.arange(1, _K(P) + 1, dtype=float)
 
 
 def _cdf(P):
-    return np.cumsum(P, axis=-1)[..., :4]
+    return np.cumsum(P, axis=-1)[..., :-1]
 
 
-def _ind(Y):
-    return np.stack([(Y <= t).astype(float) for t in THRESH], axis=-1)
+def _ind(P, Y):
+    return np.stack([(Y <= t).astype(float) for t in range(1, _K(P))], axis=-1)
 
 
 def rps(P, Y):
     """Ranked probability score == the paper's S_1/2, normalised to [0,1]."""
-    return np.nansum((_cdf(P) - _ind(Y)) ** 2, axis=-1) / 4.0
+    return np.nansum((_cdf(P) - _ind(P, Y)) ** 2, axis=-1) / (_K(P) - 1.0)
 
 
 def logloss(P, Y):
-    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, 4)
+    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, _K(P) - 1)
     p = np.take_along_axis(P, idx[..., None], axis=-1)[..., 0]
     # A genuine zero is infinitely wrong; only floor tiny-but-real values so
     # they stay finite in float. Never clip a true zero into a finite number.
@@ -53,14 +60,14 @@ def logloss(P, Y):
 
 
 def brier(P, Y):
-    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, 4)
+    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, _K(P) - 1)
     oh = np.zeros_like(P)
     np.put_along_axis(oh, idx[..., None], 1.0, axis=-1)
     return np.sum((P - oh) ** 2, axis=-1)
 
 
 def spherical(P, Y):
-    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, 4)
+    idx = np.clip(np.nan_to_num(Y, nan=1).astype(int) - 1, 0, _K(P) - 1)
     p = np.take_along_axis(P, idx[..., None], axis=-1)[..., 0]
     nrm = np.sqrt(np.sum(P ** 2, axis=-1))
     return -p / np.where(nrm > 0, nrm, 1.0)
@@ -68,16 +75,16 @@ def spherical(P, Y):
 
 def s0(P, Y):
     """The audited metric, negated so lower is better. S_0 = 1 - E|X-y|/4."""
-    d = np.abs(LEVELS - Y[..., None]) / 4.0
+    d = np.abs(_levels(P) - Y[..., None]) / (_K(P) - 1.0)
     return -(1.0 - np.sum(P * d, axis=-1))
 
 
 def ev_mae(P, Y):
-    return np.abs(np.sum(P * LEVELS, axis=-1) - Y) / 4.0
+    return np.abs(np.sum(P * _levels(P), axis=-1) - Y) / (_K(P) - 1.0)
 
 
 def ev_rmse(P, Y):
-    return ((np.sum(P * LEVELS, axis=-1) - Y) / 4.0) ** 2
+    return ((np.sum(P * _levels(P), axis=-1) - Y) / (_K(P) - 1.0)) ** 2
 
 
 def mode_acc(P, Y):
@@ -87,7 +94,7 @@ def mode_acc(P, Y):
 
 def wass_point(P, Y):
     """Wasserstein-1 between the forecast and the point mass at y == E|X-y|."""
-    return np.sum(np.abs(_cdf(P) - _ind(Y)), axis=-1) / 4.0
+    return np.sum(np.abs(_cdf(P) - _ind(P, Y)), axis=-1) / (_K(P) - 1.0)
 
 
 RULES = {

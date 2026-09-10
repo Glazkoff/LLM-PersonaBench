@@ -13,20 +13,21 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _scoring import RULES, STRICT, WEAK, IMPROPER, ELICITS, LEVELS  # noqa: E402
+from _scoring import RULES, STRICT, WEAK, IMPROPER, ELICITS  # noqa: E402
 
 
 def expected(rule, forecast, truth):
-    """E_{y~truth}[ score(forecast, y) ], exactly, over all five outcomes."""
-    P = np.broadcast_to(forecast, (5, 1, 5)).copy()
-    Y = LEVELS.reshape(5, 1)
+    """E_{y~truth}[ score(forecast, y) ], exactly, over all K outcomes."""
+    K = len(forecast)
+    P = np.broadcast_to(forecast, (K, 1, K)).copy()
+    Y = np.arange(1, K + 1, dtype=float).reshape(K, 1)
     return float(np.sum(truth * RULES[rule](P, Y)[:, 0]))
 
 
 def median_point_mass(F):
-    c = np.cumsum(F)
-    m = int(np.searchsorted(c, 0.5))
-    pm = np.zeros(5); pm[min(m, 4)] = 1.0
+    K = len(F)
+    m = int(np.searchsorted(np.cumsum(F), 0.5))
+    pm = np.zeros(K); pm[min(m, K - 1)] = 1.0
     return pm
 
 
@@ -36,28 +37,30 @@ def functional_twin(rule, F):
     If the rule only pins down that functional, this ties with the truth and
     the rule is weakly, not strictly, proper.
     """
+    K = len(F)
     if ELICITS.get(rule) == "mode":
-        pm = np.zeros(5); pm[int(np.argmax(F))] = 1.0
+        pm = np.zeros(K); pm[int(np.argmax(F))] = 1.0
         return pm
     if ELICITS.get(rule) == "mean":
-        mu = float(np.sum(F * LEVELS))
-        lo = int(np.clip(np.floor(mu), 1, 4)); w = mu - lo
-        tw = np.zeros(5); tw[lo - 1] = 1.0 - w; tw[lo] = w
+        mu = float(np.sum(F * np.arange(1, K + 1)))
+        lo = int(np.clip(np.floor(mu), 1, K - 1)); w = mu - lo
+        tw = np.zeros(K); tw[lo - 1] = 1.0 - w; tw[lo] = w
         return tw
     return None
 
 
-def main() -> None:
-    rng = np.random.default_rng(20260910)
+def main(K: int = 5) -> None:
+    print(f"\n########## K = {K} response levels ##########")
+    rng = np.random.default_rng(20260910 + K)
     fails, prefers_pm = {r: 0 for r in RULES}, {r: 0 for r in RULES}
     ties = {r: 0 for r in RULES}
     trials = 4000
     for _ in range(trials):
-        F = rng.dirichlet(np.full(5, rng.uniform(0.3, 3.0)))
+        F = rng.dirichlet(np.full(K, rng.uniform(0.3, 3.0)))
         pm = median_point_mass(F)
         if np.allclose(F, pm):
             continue
-        G = rng.dirichlet(np.full(5, 1.0))          # arbitrary rival
+        G = rng.dirichlet(np.full(K, 1.0))          # arbitrary rival
         for r in RULES:
             truth_s = expected(r, F, F)
             if expected(r, G, F) < truth_s - 1e-12:
@@ -96,4 +99,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # 5 levels is IPIP/SD3; 7 is HEXACO. If the taxonomy were an artefact of
+    # the five-point scale rather than a property of the rules, it would not
+    # survive the second call.
+    for k in (5, 7):
+        main(k)
