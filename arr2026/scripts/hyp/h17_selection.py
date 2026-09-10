@@ -56,13 +56,60 @@ def rule_means(runs):
     return out
 
 
+def rule_vectors(runs):
+    """{model: {rule: PER-RESPONDENT scores}} -- the bootstrap resamples these."""
+    return {name: {r: np.asarray(score(r, P, Y), dtype=float)
+                   for r in RULES}
+            for name, (meta, P, Y) in runs.items()}
+
+
+def _regret_from(means, models, evaluators):
+    reg = {}
+    for e in evaluators:
+        vals = np.array([means[m][e] for m in models])
+        lo, hi = vals.min(), vals.max()
+        rng = hi - lo if hi > lo else 1.0
+        reg[e] = {m: float((means[m][e] - lo) / rng) for m in models}
+    return reg
+
+
+def bootstrap(per_corpus_vec, rng, B):
+    """Mean regret per selector, resampling respondents on BOTH panels.
+
+    Selection is redone inside every replicate: which model a rule picks is
+    itself unstable, and a bootstrap that froze the picks would understate the
+    spread and make near-ties look separable.
+    """
+    draws = {r: [] for r in RULES}
+    for _ in range(B):
+        per_rule = {r: [] for r in RULES}
+        for corpus, (vvec, tvec, models) in per_corpus_vec.items():
+            nv = len(next(iter(vvec.values()))["rps"])
+            nt = len(next(iter(tvec.values()))["rps"])
+            iv = rng.integers(0, nv, nv)
+            it = rng.integers(0, nt, nt)
+            vm = {m: {r: float(np.nanmean(vvec[m][r][iv])) for r in RULES} for m in models}
+            tm = {m: {r: float(np.nanmean(tvec[m][r][it])) for r in RULES} for m in models}
+            reg = _regret_from(tm, models, STRICT)
+            for r in RULES:
+                pick = min(models, key=lambda m: vm[m][r])
+                excl = [e for e in STRICT if e != r]
+                per_rule[r].append(float(np.mean([reg[e][pick] for e in excl])))
+        for r in RULES:
+            draws[r].append(float(np.mean(per_rule[r])))
+    return {r: np.array(v) for r, v in draws.items()}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="arr2026/results_hse")
     ap.add_argument("--corpora", nargs="+", default=["ipip", "sd3", "big5", "hexaco"])
+    ap.add_argument("--boot", type=int, default=0,
+                    help="bootstrap replicates over respondents; 0 disables")
+    ap.add_argument("--seed", type=int, default=260910)
     a = ap.parse_args()
 
-    per_corpus, skipped = {}, []
+    per_corpus, skipped, per_corpus_vec = {}, [], {}
     for corpus in a.corpora:
         runs = {"val": {}, "test2": {}}
         for d in sorted((ROOT / a.results).glob(f"h17_*_{corpus}_*")):
@@ -85,6 +132,10 @@ def main() -> None:
         v = rule_means({m: runs["val"][m] for m in both})
         t = rule_means({m: runs["test2"][m] for m in both})
         per_corpus[corpus] = (v, t, sorted(both))
+        if a.boot:
+            per_corpus_vec[corpus] = (rule_vectors({m: runs["val"][m] for m in both}),
+                                      rule_vectors({m: runs["test2"][m] for m in both}),
+                                      sorted(both))
 
     if skipped:
         print("SKIPPED:"); [print("  -", s) for s in skipped]; print()
@@ -124,6 +175,25 @@ def main() -> None:
         print(f"{r:12s} {CLASS[r]:9s} {np.mean(agg[r]):>12.3f} {pc:>34s}")
     best = min(RULES, key=lambda r: float(np.mean(agg[r])))
     print(f"\nlowest mean regret: {best} ({CLASS[best]})")
+
+    if a.boot:
+        rng = np.random.default_rng(a.seed)
+        draws = bootstrap(per_corpus_vec, rng, a.boot)
+        print(f"\n===== bootstrap over respondents, B={a.boot} =====")
+        print(f"{'selector':12s} {'class':9s} {'mean':>7s} {'95% CI':>18s}")
+        for r in sorted(RULES, key=lambda r: float(np.mean(agg[r]))):
+            lo, hi = np.percentile(draws[r], [2.5, 97.5])
+            print(f"{r:12s} {CLASS[r]:9s} {np.mean(agg[r]):>7.3f} "
+                  f"[{lo:>7.3f},{hi:>7.3f}]")
+        print(f"\npaired differences against the best strict rule (rps):")
+        for r in RULES:
+            if r == "rps":
+                continue
+            d = draws[r] - draws["rps"]
+            lo, hi = np.percentile(d, [2.5, 97.5])
+            verdict = "resolved" if lo * hi > 0 else "UNRESOLVED"
+            print(f"  {r:12s} {CLASS[r]:9s} {d.mean():+7.3f} "
+                  f"[{lo:+7.3f},{hi:+7.3f}]  {verdict}")
     print("Regret is normalised WITHIN this candidate set, so 0 means 'the best "
           "of these models', never 'good'. All candidates may still lose to a "
           "persona-free prior; that comparison is reported separately.")

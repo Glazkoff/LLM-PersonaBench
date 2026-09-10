@@ -1,0 +1,84 @@
+===== ipip: 8 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+brier        strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+ev_mae       improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+ev_rmse      weak      Qwen3.6-35B-A3B                                 0.000   4        0.000
+logloss      strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+mode_acc     weak      Qwen3.6-35B-A3B                                 0.000   4        0.000
+rps          strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+s0           improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+spherical    strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+wass_point   improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+
+===== sd3: 8 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+ev_rmse      weak      gpt-oss-20b                                     0.026   4        0.026
+logloss      strict    Qwen3.8-27B                                     0.031   3        0.028
+rps          strict    gpt-oss-20b                                     0.035   3        0.026
+brier        strict    Qwen3.8-27B                                     0.037   3        0.028
+spherical    strict    Qwen3.8-27B                                     0.037   3        0.028
+ev_mae       improper  Apertus-8B-Instruct-2509                        0.084   4        0.084
+s0           improper  Apertus-8B-Instruct-2509                        0.084   4        0.084
+wass_point   improper  Apertus-8B-Instruct-2509                        0.084   4        0.084
+mode_acc     weak      gemma-4-12B-it                                  1.000   4        1.000
+
+===== big5: 8 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+ev_mae       improper  Qwen3.6-35B-A3B                                 0.013   4        0.013
+ev_rmse      weak      Qwen3.6-35B-A3B                                 0.013   4        0.013
+mode_acc     weak      Qwen3.6-35B-A3B                                 0.013   4        0.013
+s0           improper  Qwen3.6-35B-A3B                                 0.013   4        0.013
+wass_point   improper  Qwen3.6-35B-A3B                                 0.013   4        0.013
+brier        strict    gpt-oss-20b                                     0.014   3        0.011
+logloss      strict    gpt-oss-20b                                     0.014   3        0.011
+rps          strict    Qwen3.6-35B-A3B                                 0.018   3        0.013
+spherical    strict    Qwen3.6-35B-A3B                                 0.018   3        0.013
+
+===== hexaco: 8 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+ev_rmse      weak      gpt-oss-20b                                     0.008   4        0.008
+rps          strict    Qwen3.8-27B                                     0.015   3        0.021
+spherical    strict    Qwen3.8-27B                                     0.018   3        0.021
+ev_mae       improper  Qwen3.8-27B                                     0.021   4        0.021
+brier        strict    Qwen3.8-27B                                     0.022   3        0.021
+logloss      strict    Qwen3.8-27B                                     0.028   3        0.021
+s0           improper  Qwen3.6-35B-A3B                                 0.128   4        0.128
+wass_point   improper  Qwen3.6-35B-A3B                                 0.128   4        0.128
+mode_acc     weak      granite-4.2-30b                                 0.346   4        0.346
+
+===== across instruments: mean normalised regret =====
+selector     class      mean regret                         per-corpus
+ev_rmse      weak             0.012                0.00 0.03 0.01 0.01
+rps          strict           0.017                0.00 0.03 0.02 0.02
+brier        strict           0.018                0.00 0.04 0.01 0.02
+logloss      strict           0.018                0.00 0.03 0.01 0.03
+spherical    strict           0.018                0.00 0.04 0.02 0.02
+ev_mae       improper         0.030                0.00 0.08 0.01 0.02
+s0           improper         0.056                0.00 0.08 0.01 0.13
+wass_point   improper         0.056                0.00 0.08 0.01 0.13
+mode_acc     weak             0.340                0.00 1.00 0.01 0.35
+
+lowest mean regret: ev_rmse (weak)
+
+===== bootstrap over respondents, B=2000 =====
+selector     class        mean             95% CI
+ev_rmse      weak        0.012 [  0.003,  0.050]
+rps          strict      0.017 [  0.003,  0.063]
+brier        strict      0.018 [  0.006,  0.052]
+logloss      strict      0.018 [  0.006,  0.056]
+spherical    strict      0.018 [  0.006,  0.044]
+ev_mae       improper    0.030 [  0.010,  0.063]
+s0           improper    0.056 [  0.016,  0.290]
+wass_point   improper    0.056 [  0.016,  0.290]
+mode_acc     weak        0.340 [  0.062,  0.351]
+
+paired differences against the best strict rule (rps):
+  logloss      strict     +0.000 [ -0.040, +0.031]  UNRESOLVED
+  brier        strict     -0.001 [ -0.043, +0.033]  UNRESOLVED
+  spherical    strict     -0.003 [ -0.043, +0.028]  UNRESOLVED
+  s0           improper   +0.070 [ -0.017, +0.273]  UNRESOLVED
+  ev_mae       improper   +0.009 [ -0.026, +0.043]  UNRESOLVED
+  ev_rmse      weak       -0.004 [ -0.028, +0.020]  UNRESOLVED
+  mode_acc     weak       +0.271 [ +0.038, +0.338]  resolved
+  wass_point   improper   +0.070 [ -0.017, +0.273]  UNRESOLVED
+Regret is normalised WITHIN this candidate set, so 0 means 'the best of these models', never 'good'. All candidates may still lose to a persona-free prior; that comparison is reported separately.
