@@ -103,6 +103,11 @@ def bootstrap(per_corpus_vec, rng, B):
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="arr2026/results_hse")
+    ap.add_argument("--prefix", default="h17",
+                    help="result-dir prefix; h17 is the n=128 run, h17n512 the "
+                         "n=512 rerun. They must never be globbed together -- "
+                         "the panels differ, so mixing them would compare a "
+                         "model on 128 respondents against another on 512.")
     ap.add_argument("--corpora", nargs="+", default=["ipip", "sd3", "big5", "hexaco"])
     ap.add_argument("--boot", type=int, default=0,
                     help="bootstrap replicates over respondents; 0 disables")
@@ -112,7 +117,7 @@ def main() -> None:
     per_corpus, skipped, per_corpus_vec = {}, [], {}
     for corpus in a.corpora:
         runs = {"val": {}, "test2": {}}
-        for d in sorted((ROOT / a.results).glob(f"h17_*_{corpus}_*")):
+        for d in sorted((ROOT / a.results).glob(f"{a.prefix}_*_{corpus}_*")):
             panel = d.name.rsplit("_", 1)[-1]
             if panel not in runs:
                 continue
