@@ -709,12 +709,11 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
 matched cells, and proposed a suite that orders humans above constants. Beneath
-it the simulation is thinner still: on the same items correct persona
-assignment helps all eleven models and none of them enough, and an exact decomposition puts the loss in the mixture,
-not identity. Score with $S_{1/2}$; report floor and ceiling. On one candidate set the
-switch is consequential: the two scores select different simulators, and the
-one $S_{1/2}$ picks predicts held-out people better, though both lose to the
-prior (App.~\ref{app:selection}).
+it the simulation is thinner still: correct persona assignment helps all
+eleven models and none of them enough, and an exact decomposition puts the
+loss in the mixture, not identity. Score with $S_{1/2}$; report floor and
+ceiling. Across four instruments improper scores select measurably worse
+simulators than proper ones (App.~\ref{app:rules}).
 
 \section*{Limitations}
 
@@ -877,6 +876,75 @@ every model ($S_0=0.766$ against the 72B's $0.753$), which is
 Prop.~\ref{prop:main} arriving as a deployment recommendation; rule~B
 selects the prior. The constant's log-loss is infinite, and we report it as
 such rather than clipping it.
+
+\section{Which scoring rule selects best?}
+\label{app:rules}
+
+App.~\ref{app:selection} compares two rules on one instrument, and says plainly
+that this cannot show the replacement \emph{reliably} chooses better. Here we
+widen it: nine scoring rules, eight current-generation open-weight models
+across six families, and four instruments, two of which the body never uses.
+
+The rules span three classes. Strictly proper: $S_{1/2}$ (ranked probability
+score), Brier, log-loss, spherical. Weakly proper: RMSE of the forecast mean,
+and mode accuracy. Improper: the audited $S_0$, MAE of the forecast mean, and
+Wasserstein distance to the observed point mass. Instruments are IPIP-NEO-120,
+SD3 and IPIP-FFM-50 on five points, and HEXACO-PI-R on \emph{seven} --- the
+last is the only place the whole pipeline is exercised at $K\neq5$. Each rule
+selects on $512$ respondents and is graded on $512$ disjoint others, with
+baselines fitted on a further $8{,}000$; all $64$ readouts put at least $0.92$
+of their mass on the answer tokens.
+
+We score a selector by the \emph{regret} its pick incurs, normalised within the
+candidate set so $0$ is the best of these eight models and $1$ the worst, and
+averaged over the strictly proper evaluators \emph{excluding the selector's own
+rule}, so no rule is graded on the criterion it optimised.
+
+\begin{center}\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llr@{\,}l}
+\toprule
+rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$}\\
+\midrule
+RMSE of mean   & weak     & $-0.002$ & $[-0.009,+0.002]$\\
+Brier          & strict   & $+0.006$ & $[-0.003,+0.031]$\\
+spherical      & strict   & $+0.010$ & $[-0.005,+0.034]$\\
+log-loss       & strict   & $+0.010$ & $[-0.001,+0.024]$\\
+MAE of mean    & improper & $+0.027$ & $[+0.004,+0.053]$\\
+$S_0$ (audited) & improper & $+0.028$ & $[+0.011,+0.059]$\\
+Wasserstein    & improper & $+0.028$ & $[+0.011,+0.059]$\\
+mode accuracy  & weak     & $+0.324$ & $[+0.277,+0.335]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Paired over respondents, $B{=}4000$. The class boundary resolves: all three
+improper rules select worse than $S_{1/2}$, intervals excluding zero, and the
+audited $S_0$ is one of them. This is the paper's proposition as a deployment
+consequence rather than an ordering fact, and it now holds across four
+instruments and two scale lengths.
+
+Three things this does not say. The strictly proper rules are mutually
+indistinguishable, so the evidence is for the class boundary, not a ranking
+inside it. RMSE of the forecast mean --- only weakly proper --- ties $S_{1/2}$
+at $-0.002$ $[-0.009,+0.002]$; the interval is tight rather than merely
+inconclusive, so eliciting the mean is genuinely enough for this task, and we
+have no basis for preferring a strict rule over it here. And regret is
+normalised within the candidate set, so $0$ means the best of these eight, not
+good: every candidate still loses to the persona-free prior of
+App.~\ref{app:disjoint}.
+
+Mode accuracy is the exception that is not close. Discarding the distribution
+and keeping the argmax costs $+0.324$, and on SD3 it selects the worst
+candidate of the eight outright. If a practitioner takes one operational rule
+from this paper, it is that a simulator must be scored on the distribution it
+induces, not on the answer it would most likely give.
+
+Sample size decided this. At $128$ respondents per panel the same comparison
+was $+0.070$ $[-0.017,+0.273]$ --- the point estimate was larger and the
+interval spanned zero. Quadrupling the panels moved the estimate to $+0.028$
+and shrank the interval by a factor of six. A study of this shape at $n{=}128$
+would have reported no effect.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
