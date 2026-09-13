@@ -960,6 +960,61 @@ with eight candidates the $S_0$ comparison was $+0.070$ $[-0.017,+0.273]$ ---
 unresolved. Quadrupling the panels resolved it; widening the pool made it
 large.
 
+\section{When does impropriety actually bite?}
+\label{app:whenbites}
+
+App.~\ref{app:rules} shows $S_0$ selecting all but the worst simulator from a
+heterogeneous pool. It would be convenient to conclude that optimising $S_0$ is
+therefore harmful wherever it appears. We tested that directly and it is false.
+
+The system this paper audits was built by evolving cluster-level system prompts
+to maximise $S_0$. We take those evolved genotypes and the base genotypes the
+search started from, assemble both with the original code, and read the same
+belief distribution under each --- scoring with the objective that was
+optimised and with two proper rules. The prediction we registered before
+running was that $S_0$ would improve while the proper scores would not.
+
+\begin{center}\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lr@{\,}r@{\,}r@{}}
+\toprule
+model & $\Delta S_0$ & $\Delta S_{1/2}$ & $\Delta$log-loss\\
+\midrule
+Qwen3.8-27B      & $+0.060$ & $-0.039$ & $-0.235$\\
+granite-4.2-8B   & $+0.046$ & $-0.046$ & $-0.630$\\
+gpt-oss-20b      & $+0.052$ & $-0.043$ & $-0.251$\\
+gemma-4-12B-it   & $+0.070$ & $-0.068$ & $-0.619$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Evolved minus base, $256$ held-out respondents over four clusters, paired
+bootstrap. Every interval excludes zero and \emph{every} direction is an
+improvement: $S_{1/2}$ and log-loss are losses, so the negative signs are
+gains. The prediction is falsified on all four models. Across respondents the
+change in $S_0$ and the change in $S_{1/2}$ correlate at $r=0.96$--$0.99$, and
+$85$--$97\%$ of respondents improve on both at once.
+
+The two results are not in tension, and together they say something neither
+says alone. $S_0$ is maximised by a constant vector (Prop.~\ref{prop:main}), so
+it rewards a predictor for being flat. Whether that is dangerous depends on
+whether the optimiser can reach the flat region. Evolutionary prompt search
+moves through persona wordings, all of which induce non-degenerate answer
+distributions; the degenerate optimum is simply not reachable from there, and
+within that constrained space $S_0$ tracks a proper score almost perfectly.
+Model selection over a heterogeneous pool is the opposite case: a weak model
+that answers near-uniformly \emph{is} close to the constant, so $S_0$ rewards
+it and ships it.
+
+The practical rule that follows is narrower than ``never optimise $S_0$'' and
+more useful. An improper score is comparatively safe as a search objective over
+a family of candidates that are all well dispersed, and unsafe as a selection
+criterion over candidates that differ in how dispersed they are --- which is
+exactly the situation when comparing models of different capability. We report
+this because it bounds our own claim: the audit establishes that $S_0$ is
+improper and that it selects badly, not that every system built with it is
+worse for having used it.
+
 \section{Split sensitivity of the baselines}
 \label{app:split}
 
