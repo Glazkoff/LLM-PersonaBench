@@ -1,0 +1,86 @@
+===== ipip: 12 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+brier        strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+ev_mae       improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+ev_rmse      weak      Qwen3.6-35B-A3B                                 0.000   4        0.000
+logloss      strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+mode_acc     weak      Qwen3.6-35B-A3B                                 0.000   4        0.000
+rps          strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+s0           improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+spherical    strict    Qwen3.6-35B-A3B                                 0.000   3        0.000
+wass_point   improper  Qwen3.6-35B-A3B                                 0.000   4        0.000
+
+===== sd3: 12 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+brier        strict    gpt-oss-20b                                     0.000   3        0.000
+ev_rmse      weak      gpt-oss-20b                                     0.000   4        0.000
+logloss      strict    gpt-oss-20b                                     0.000   3        0.000
+rps          strict    gpt-oss-20b                                     0.000   3        0.000
+spherical    strict    gpt-oss-20b                                     0.000   3        0.000
+ev_mae       improper  Apertus-8B-Instruct-2509                        0.080   4        0.080
+mode_acc     weak      gemma-4-12B-it                                  0.730   4        0.730
+s0           improper  gemma-4-E2B-it                                  0.984   4        0.984
+wass_point   improper  gemma-4-E2B-it                                  0.984   4        0.984
+
+===== big5: 12 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+ev_mae       improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
+ev_rmse      weak      Qwen3.6-35B-A3B                                 0.007   4        0.007
+mode_acc     weak      Qwen3.6-35B-A3B                                 0.007   4        0.007
+s0           improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
+wass_point   improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
+brier        strict    Qwen3.6-35B-A3B                                 0.007   3        0.007
+rps          strict    Qwen3.6-35B-A3B                                 0.009   3        0.007
+spherical    strict    Qwen3.6-35B-A3B                                 0.009   3        0.007
+logloss      strict    gpt-oss-20b                                     0.028   3        0.021
+
+===== hexaco: 12 candidates =====
+selector     class     picks                               regret(self-excl)   n  regret(all)
+brier        strict    Apertus-v1.1-0.5B-Instruct                      0.000   3        0.000
+ev_rmse      weak      Apertus-v1.1-0.5B-Instruct                      0.000   4        0.000
+logloss      strict    Apertus-v1.1-0.5B-Instruct                      0.000   3        0.000
+rps          strict    Apertus-v1.1-0.5B-Instruct                      0.000   3        0.000
+spherical    strict    Apertus-v1.1-0.5B-Instruct                      0.000   3        0.000
+s0           improper  gpt-oss-20b                                     0.041   4        0.041
+wass_point   improper  gpt-oss-20b                                     0.041   4        0.041
+ev_mae       improper  Qwen3.8-27B                                     0.058   4        0.058
+mode_acc     weak      granite-4.2-30b                                 0.356   4        0.356
+
+===== across instruments: mean normalised regret =====
+selector     class      mean regret                         per-corpus
+ev_rmse      weak             0.002                0.00 0.00 0.01 0.00
+brier        strict           0.002                0.00 0.00 0.01 0.00
+rps          strict           0.002                0.00 0.00 0.01 0.00
+spherical    strict           0.002                0.00 0.00 0.01 0.00
+logloss      strict           0.007                0.00 0.00 0.03 0.00
+ev_mae       improper         0.036                0.00 0.08 0.01 0.06
+s0           improper         0.258                0.00 0.98 0.01 0.04
+wass_point   improper         0.258                0.00 0.98 0.01 0.04
+mode_acc     weak             0.273                0.00 0.73 0.01 0.36
+
+lowest mean regret: ev_rmse (weak)
+
+===== bootstrap over respondents, B=4000 =====
+selector     class        mean             95% CI
+ev_rmse      weak        0.002 [  0.000,  0.007]
+brier        strict      0.002 [  0.001,  0.036]
+rps          strict      0.002 [  0.001,  0.009]
+spherical    strict      0.002 [  0.001,  0.041]
+logloss      strict      0.007 [  0.002,  0.019]
+ev_mae       improper    0.036 [  0.021,  0.054]
+s0           improper    0.258 [  0.254,  0.365]
+wass_point   improper    0.258 [  0.254,  0.365]
+mode_acc     weak        0.273 [  0.226,  0.285]
+
+paired differences against the best strict rule (rps), 8 comparisons:
+  rule         class        diff             95% CI        p   Holm p      verdict
+  logloss      strict     +0.005 [ -0.003, +0.015]   0.2195   0.6585   unresolved
+  brier        strict     +0.006 [ -0.002, +0.034]   0.9530   1.0000   unresolved
+  spherical    strict     +0.013 [ -0.003, +0.038]   0.6570   1.0000   unresolved
+  s0           improper   +0.294 [ +0.250, +0.362]   0.0003   0.0020     resolved
+  ev_mae       improper   +0.032 [ +0.016, +0.052]   0.0003   0.0020     resolved
+  ev_rmse      weak       -0.001 [ -0.002, -0.000]   0.0025   0.0100     resolved
+  mode_acc     weak       +0.267 [ +0.223, +0.282]   0.0003   0.0020     resolved
+  wass_point   improper   +0.294 [ +0.250, +0.362]   0.0003   0.0020     resolved
+  verdict = Holm-adjusted p < 0.05 AND the Bonferroni simultaneous interval excludes zero
+Regret is normalised WITHIN this candidate set, so 0 means 'the best of these models', never 'good'. All candidates may still lose to a persona-free prior; that comparison is reported separately.

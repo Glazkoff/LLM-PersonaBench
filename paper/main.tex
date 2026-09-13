@@ -882,69 +882,83 @@ such rather than clipping it.
 
 App.~\ref{app:selection} compares two rules on one instrument, and says plainly
 that this cannot show the replacement \emph{reliably} chooses better. Here we
-widen it: nine scoring rules, eight current-generation open-weight models
-across six families, and four instruments, two of which the body never uses.
+widen it: nine scoring rules, twelve open-weight models spanning $0.5$B to
+$35$B across six families, and four instruments, two of which the body never
+uses.
 
 The rules span three classes. Strictly proper: $S_{1/2}$ (ranked probability
 score), Brier, log-loss, spherical. Weakly proper: RMSE of the forecast mean,
 and mode accuracy. Improper: the audited $S_0$, MAE of the forecast mean, and
 Wasserstein distance to the observed point mass. Instruments are IPIP-NEO-120,
 SD3 and IPIP-FFM-50 on five points, and HEXACO-PI-R on \emph{seven} --- the
-last is the only place the whole pipeline is exercised at $K\neq5$. Each rule
-selects on $512$ respondents and is graded on $512$ disjoint others, with
-baselines fitted on a further $8{,}000$; all $64$ readouts put at least $0.92$
-of their mass on the answer tokens.
+last is the only place the pipeline is exercised at $K\neq5$. Each rule selects
+on $512$ respondents and is graded on $512$ disjoint others, with baselines
+fitted on a further $8{,}000$; all $96$ readouts put at least $0.92$ of their
+mass on the answer tokens.
 
 We score a selector by the \emph{regret} its pick incurs, normalised within the
-candidate set so $0$ is the best of these eight models and $1$ the worst, and
+candidate set so $0$ is the best of these twelve models and $1$ the worst, and
 averaged over the strictly proper evaluators \emph{excluding the selector's own
-rule}, so no rule is graded on the criterion it optimised.
+rule}, so no rule is graded on the criterion it optimised. Because eight rules
+are compared against one reference, we report Holm-adjusted $p$ and Bonferroni
+simultaneous intervals, and call a difference resolved only when both agree.
+The four differences below with intervals excluding zero all carry Holm
+$p\le0.01$; the three strictly proper rules carry $p\ge0.66$.
 
 \begin{center}\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{llr@{\,}l}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}llr@{\,}l@{}}
 \toprule
-rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$}\\
+rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$, Bonferroni CI}\\
 \midrule
-RMSE of mean   & weak     & $-0.002$ & $[-0.009,+0.002]$\\
-Brier          & strict   & $+0.006$ & $[-0.003,+0.031]$\\
-spherical      & strict   & $+0.010$ & $[-0.005,+0.034]$\\
-log-loss       & strict   & $+0.010$ & $[-0.001,+0.024]$\\
-MAE of mean    & improper & $+0.027$ & $[+0.004,+0.053]$\\
-$S_0$ (audited) & improper & $+0.028$ & $[+0.011,+0.059]$\\
-Wasserstein    & improper & $+0.028$ & $[+0.011,+0.059]$\\
-mode accuracy  & weak     & $+0.324$ & $[+0.277,+0.335]$\\
+RMSE of mean & weak & $-0.001$ & $[-0.002,-0.000]$\\
+Brier & strict & $+0.006$ & $[-0.002,+0.034]$\\
+log-loss & strict & $+0.005$ & $[-0.003,+0.015]$\\
+spherical & strict & $+0.013$ & $[-0.003,+0.038]$\\
+MAE of mean & improper & $+0.032$ & $[+0.016,+0.052]$\\
+mode accuracy & weak & $+0.267$ & $[+0.223,+0.282]$\\
+$S_0$ audited & improper & $+0.294$ & $[+0.250,+0.362]$\\
+Wasserstein & improper & $+0.294$ & $[+0.250,+0.362]$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Paired over respondents, $B{=}4000$. The class boundary resolves: all three
-improper rules select worse than $S_{1/2}$, intervals excluding zero, and the
-audited $S_0$ is one of them. This is the paper's proposition as a deployment
-consequence rather than an ordering fact, and it now holds across four
-instruments and two scale lengths.
+Paired over respondents, $B{=}4000$. Every improper rule selects worse than
+$S_{1/2}$, and the audited $S_0$ is the worst of them. The gap is not marginal:
+mean regret is $0.258$ for $S_0$ against $0.002$ for $S_{1/2}$. On SD3, $S_0$
+selects a model whose regret is $0.98$ --- all but the worst of the twelve ---
+while every strictly proper rule selects the best. An evaluator using the
+audited metric on this pool would ship very nearly the worst simulator
+available.
 
-Three things this does not say. The strictly proper rules are mutually
+That number depends on the pool, and we state the dependence rather than bury
+it. With eight closely matched instruction-tuned models the same comparison
+gives $+0.028$ $[+0.011,+0.059]$: still resolved, ten times smaller. Regret is
+normalised within the candidate set, so a pool of uniformly competent models
+compresses every rule's mistakes toward zero. The honest reading is that the
+audited metric's errors are cheap when every candidate is good and expensive
+when they are not --- and a practitioner choosing among heterogeneous models is
+in the second case.
+
+Three things this does not say. The strictly proper rules remain mutually
 indistinguishable, so the evidence is for the class boundary, not a ranking
-inside it. RMSE of the forecast mean --- only weakly proper --- ties $S_{1/2}$
-at $-0.002$ $[-0.009,+0.002]$; the interval is tight rather than merely
-inconclusive, so eliciting the mean is genuinely enough for this task, and we
-have no basis for preferring a strict rule over it here. And regret is
-normalised within the candidate set, so $0$ means the best of these eight, not
-good: every candidate still loses to the persona-free prior of
-App.~\ref{app:disjoint}.
+inside it. RMSE of the forecast mean is resolved at $-0.001$
+$[-0.002,-0.000]$, which is statistically separable and practically nil;
+eliciting the mean is sufficient here, and we have no basis for preferring a
+strict rule over it. And regret is normalised within the candidate set, so $0$
+means the best of these twelve, never good: every candidate still loses to the
+persona-free prior of App.~\ref{app:disjoint}.
 
-Mode accuracy is the exception that is not close. Discarding the distribution
-and keeping the argmax costs $+0.324$, and on SD3 it selects the worst
-candidate of the eight outright. If a practitioner takes one operational rule
-from this paper, it is that a simulator must be scored on the distribution it
-induces, not on the answer it would most likely give.
+Mode accuracy is the other collapse, at $+0.267$. Discarding the distribution
+and keeping the argmax is as damaging as the metric this paper audits. If a
+practitioner takes one operational rule from this work, it is that a simulator
+must be scored on the distribution it induces, not on the answer it would most
+likely give.
 
-Sample size decided this. At $128$ respondents per panel the same comparison
-was $+0.070$ $[-0.017,+0.273]$ --- the point estimate was larger and the
-interval spanned zero. Quadrupling the panels moved the estimate to $+0.028$
-and shrank the interval by a factor of six. A study of this shape at $n{=}128$
-would have reported no effect.
+Sample size decided the weaker version of this. At $128$ respondents per panel
+with eight candidates the $S_0$ comparison was $+0.070$ $[-0.017,+0.273]$ ---
+unresolved. Quadrupling the panels resolved it; widening the pool made it
+large.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
