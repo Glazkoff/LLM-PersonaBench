@@ -996,15 +996,28 @@ change in $S_0$ and the change in $S_{1/2}$ correlate at $r=0.96$--$0.99$, and
 $85$--$97\%$ of respondents improve on both at once.
 
 The two results are not in tension, and together they say something neither
-says alone. $S_0$ is maximised by a constant vector (Prop.~\ref{prop:main}), so
-it rewards a predictor for being flat. Whether that is dangerous depends on
-whether the optimiser can reach the flat region. Evolutionary prompt search
-moves through persona wordings, all of which induce non-degenerate answer
-distributions; the degenerate optimum is simply not reachable from there, and
-within that constrained space $S_0$ tracks a proper score almost perfectly.
-Model selection over a heterogeneous pool is the opposite case: a weak model
-that answers near-uniformly \emph{is} close to the constant, so $S_0$ rewards
-it and ships it.
+says alone. $S_0$ is maximised by a constant vector (Prop.~\ref{prop:main}) ---
+a \emph{point mass}, not a flat distribution --- so it rewards a predictor for
+being under-dispersed. We measured this rather than assuming it. Writing
+$\bar\sigma$ for a model's mean predictive standard deviation, the rank
+correlation between $S_0$ and $\bar\sigma$ is negative on all four instruments
+($-0.02$, $-0.91$, $-0.05$, $-0.65$), while for $-S_{1/2}$ it is positive on
+all four ($+0.78$ to $+0.86$): the proper score rewards dispersion and the
+audited one penalises it. In every instrument the model $S_0$ selects is less
+dispersed than the model $S_{1/2}$ selects, strictly so in three and tied in
+the fourth. The size of the penalty tracks the size of the failure --- on SD3,
+where $S_0$'s correlation with dispersion is $-0.91$, it ships a model with
+$\bar\sigma=0.48$ against the proper rule's $1.10$ and incurs regret $0.98$;
+on IPIP and IPIP-FFM, where the correlation is near zero, its regret is zero
+too.
+
+Whether that penalty is dangerous depends on whether the optimiser can reach
+the under-dispersed region. Evolutionary prompt search moves through persona
+wordings, all of which induce comparably dispersed answer distributions; the
+degenerate optimum is not reachable from there, and within that constrained
+space $S_0$ tracks a proper score almost perfectly. Model selection over a
+heterogeneous pool is the opposite case: an over-confident weak model is
+already most of the way to a point mass, so $S_0$ rewards it and ships it.
 
 The practical rule that follows is narrower than ``never optimise $S_0$'' and
 more useful. An improper score is comparatively safe as a search objective over

@@ -1,0 +1,24 @@
+
+=== ipip (12 models) ===
+  corr(S0, dispersion SD) = -0.021   corr(S0, entropy) = +0.407
+  corr(-CRPS, dispersion) = +0.778
+  S_0 picks   openai_gpt-oss-20b                 sd=1.164 ent=1.438
+  CRPS picks  swiss-ai_Apertus-v1p1-0p5B-Instruct sd=1.321 ent=1.576
+
+=== sd3 (12 models) ===
+  corr(S0, dispersion SD) = -0.912   corr(S0, entropy) = -0.764
+  corr(-CRPS, dispersion) = +0.844
+  S_0 picks   google_gemma-4-E2B-it              sd=0.477 ent=0.539
+  CRPS picks  openai_gpt-oss-20b                 sd=1.104 ent=1.421
+
+=== big5 (12 models) ===
+  corr(S0, dispersion SD) = -0.047   corr(S0, entropy) = +0.238
+  corr(-CRPS, dispersion) = +0.816
+  S_0 picks   Qwen_Qwen3p6-35B-A3B               sd=1.034 ent=1.254
+  CRPS picks  Qwen_Qwen3p6-35B-A3B               sd=1.034 ent=1.254
+
+=== hexaco (12 models) ===
+  corr(S0, dispersion SD) = -0.645   corr(S0, entropy) = -0.274
+  corr(-CRPS, dispersion) = +0.855
+  S_0 picks   openai_gpt-oss-20b                 sd=1.415 ent=1.688
+  CRPS picks  swiss-ai_Apertus-v1p1-0p5B-Instruct sd=1.618 ent=1.837
