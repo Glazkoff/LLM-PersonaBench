@@ -122,10 +122,27 @@ def main() -> None:
         dtype = "auto"
     tok = AutoTokenizer.from_pretrained(a.model, trust_remote_code=True)
     kw = dict(device_map="auto", trust_remote_code=True)
+
+    def _load(cls):
+        try:
+            return cls.from_pretrained(a.model, dtype=dtype, **kw)
+        except TypeError:
+            return cls.from_pretrained(a.model, torch_dtype=dtype, **kw)
+
     try:
-        model = AutoModelForCausalLM.from_pretrained(a.model, dtype=dtype, **kw)
-    except TypeError:
-        model = AutoModelForCausalLM.from_pretrained(a.model, torch_dtype=dtype, **kw)
+        model = _load(AutoModelForCausalLM)
+    except ValueError:
+        # Not every decoder registers under AutoModelForCausalLM: GLM-5.3-Flash
+        # declares Glm5NextForConditionalGeneration, and the Auto lookup raises
+        # rather than falling back. Resolve the concrete class the config names.
+        import transformers as _tf
+        arch = (getattr(cfg, "architectures", None) or [None])[0]
+        cls = getattr(_tf, arch, None) if arch else None
+        if cls is None:
+            raise
+        print(f"  AutoModelForCausalLM rejected {type(cfg).__name__}; "
+              f"loading {arch} directly", flush=True)
+        model = _load(cls)
     model.eval()
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token

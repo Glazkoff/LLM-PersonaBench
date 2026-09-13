@@ -1,0 +1,25 @@
+Large-MoE candidates excluded from the H17 pool, and why
+========================================================
+All three were staged complete and verified file-by-file, and all three were
+given memory matched to their checkpoint (500-600GB) and enough GPUs. Each was
+excluded only after a real readout attempt on the same protocol every other
+candidate used.
+
+zai-org/GLM-5.3-Flash              306GB  3xH200  ran 7m10s  mass=nan
+  Loads only via the concrete class its config names
+  (Glm5NextForConditionalGeneration); AutoModelForCausalLM rejects the config.
+  With that fixed it runs to completion and returns NaN logits.
+
+Qwen/Qwen3.8-Flash-Next            336GB  4xH200  ran 14m08s mass=0.0000
+  Runs to completion, places no mass on the answer tokens. Same signature as
+  the Qwen3-235B-A22B-FP8 exclusion reported in App. B.
+
+deepseek-ai/DeepSeek-V4-Flash-0731 156GB  2xH200  fails at first use
+  No chat template. Neither DeepSeek-V4-Flash nor DeepSeek-V4.1-Flash ships
+  chat_template.jinja either, so this is the repo family, not the revision.
+
+Not excluded for convenience: six earlier probe failures on these same models
+were infrastructure or caller error -- 61GB of RAM against a 336GB checkpoint,
+an Auto-class mismatch, a gate written but not applied -- and were fixed and
+retried before any verdict was recorded. Five of six first-round failures were
+ours, one was the model.
