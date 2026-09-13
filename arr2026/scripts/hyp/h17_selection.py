@@ -178,6 +178,22 @@ def main() -> None:
     for r in sorted(RULES, key=lambda r: float(np.mean(agg[r]))):
         pc = " ".join(f"{x:.2f}" for x in agg[r])
         print(f"{r:12s} {CLASS[r]:9s} {np.mean(agg[r]):>12.3f} {pc:>34s}")
+    # Regret is normalised WITHIN a candidate set, so a rule's regret on one
+    # corpus is only comparable to another corpus if both scored the SAME
+    # models. A grid still landing cells silently violates this: an earlier run
+    # averaged 12 candidates on three corpora against 10 on HEXACO and moved
+    # s0's estimate by a factor of ten. Refuse rather than report that.
+    sets = {c: frozenset(v[2]) for c, v in per_corpus.items()}
+    if len(set(sets.values())) > 1:
+        print("\nINCONSISTENT CANDIDATE SETS -- refusing to aggregate:")
+        common = frozenset.intersection(*sets.values())
+        for c, st in sets.items():
+            print(f"  {c:8s} {len(st):3d} candidates, missing: "
+                  f"{sorted(set().union(*sets.values()) - st) or 'none'}")
+        print(f"  {len(common)} models are present in every corpus. Re-run once "
+              f"the grid is complete, or pass --corpora to restrict.")
+        raise SystemExit(3)
+
     best = min(RULES, key=lambda r: float(np.mean(agg[r])))
     print(f"\nlowest mean regret: {best} ({CLASS[best]})")
 
@@ -190,15 +206,44 @@ def main() -> None:
             lo, hi = np.percentile(draws[r], [2.5, 97.5])
             print(f"{r:12s} {CLASS[r]:9s} {np.mean(agg[r]):>7.3f} "
                   f"[{lo:>7.3f},{hi:>7.3f}]")
-        print(f"\npaired differences against the best strict rule (rps):")
-        for r in RULES:
-            if r == "rps":
-                continue
+        # Eight comparisons against one reference inflates the family-wise error
+        # rate; a NeurIPS reviewer of the companion method paper asked for this
+        # correction explicitly. Report the uncorrected interval, a bootstrap
+        # two-sided p, and the Holm-Bonferroni verdict over the whole family.
+        others = [r for r in RULES if r != "rps"]
+        m = len(others)
+        rows = []
+        for r in others:
             d = draws[r] - draws["rps"]
             lo, hi = np.percentile(d, [2.5, 97.5])
-            verdict = "resolved" if lo * hi > 0 else "UNRESOLVED"
-            print(f"  {r:12s} {CLASS[r]:9s} {d.mean():+7.3f} "
-                  f"[{lo:+7.3f},{hi:+7.3f}]  {verdict}")
+            # two-sided bootstrap p: how often the difference crosses zero
+            pv = 2.0 * min((d <= 0).mean(), (d >= 0).mean())
+            pv = min(1.0, max(pv, 1.0 / len(d)))   # floor at resolution
+            # Bonferroni-adjusted simultaneous interval
+            a = 2.5 / m
+            blo, bhi = np.percentile(d, [a, 100 - a])
+            rows.append([r, d.mean(), lo, hi, pv, blo, bhi])
+
+        order = sorted(range(m), key=lambda i: rows[i][4])
+        holm = {}
+        prev = 0.0
+        for rank, i in enumerate(order):
+            adj = min(1.0, rows[i][4] * (m - rank))
+            adj = max(adj, prev)          # Holm adjusted p is monotone
+            prev = adj
+            holm[rows[i][0]] = adj
+
+        print(f"\npaired differences against the best strict rule (rps), "
+              f"{m} comparisons:")
+        print(f"  {'rule':12s} {'class':9s} {'diff':>7s} {'95% CI':>18s} "
+              f"{'p':>8s} {'Holm p':>8s} {'verdict':>12s}")
+        for r, mu, lo, hi, pv, blo, bhi in rows:
+            hp = holm[r]
+            v = "resolved" if (hp < 0.05 and blo * bhi > 0) else "unresolved"
+            print(f"  {r:12s} {CLASS[r]:9s} {mu:+7.3f} [{lo:+7.3f},{hi:+7.3f}] "
+                  f"{pv:8.4f} {hp:8.4f} {v:>12s}")
+        print("  verdict = Holm-adjusted p < 0.05 AND the Bonferroni "
+              "simultaneous interval excludes zero")
     print("Regret is normalised WITHIN this candidate set, so 0 means 'the best "
           "of these models', never 'good'. All candidates may still lose to a "
           "persona-free prior; that comparison is reported separately.")
