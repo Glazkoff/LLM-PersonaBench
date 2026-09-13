@@ -725,7 +725,11 @@ six families and three generations, and the cross-instrument replication of
 result but not the full suite, which needs sampled
 simulator outputs where SD3 has only the two belief readouts of
 App.~\ref{app:disjoint}; belief-level measurement anywhere needs logprob access
-the API models in the audit do not provide; the within-family trend rests on three
+the API models in the audit do not provide, and three current large
+mixture-of-experts models --- GLM-5.3-Flash, Qwen3.8-Flash-Next and
+DeepSeek-V4-Flash --- could not be read at all on this protocol, returning NaN
+or zero mass on the answer tokens or shipping no chat template, so the
+candidate pools here reach $35$B and not beyond; the within-family trend rests on three
 points and the cross-family comparison on eleven, so both are directional rather
 than fitted laws; all models are read with thinking disabled and the assistant
 turn prefilled, and the four least confident of them (belief entropy above $1$
