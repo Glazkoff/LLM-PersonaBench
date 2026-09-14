@@ -729,7 +729,11 @@ the API models in the audit do not provide, and three current large
 mixture-of-experts models --- GLM-5.3-Flash, Qwen3.8-Flash-Next and
 DeepSeek-V4-Flash --- could not be read at all on this protocol, returning NaN
 or zero mass on the answer tokens or shipping no chat template, so the
-candidate pools here reach $35$B and not beyond; the within-family trend rests on three
+candidate pools here reach $35$B and not beyond; individual readouts are
+reproducible bit-for-bit across clusters and software stacks but \emph{not}
+across accelerator architectures, where $7.7\%$ of modal answers flip, so the
+per-item beliefs we release should be read as machine-specific even though the
+aggregates they feed are stable to $5\times10^{-3}$ (App.~\ref{app:repro}); the within-family trend rests on three
 points and the cross-family comparison on eleven, so both are directional rather
 than fitted laws; all models are read with thinking disabled and the assistant
 turn prefilled, and the four least confident of them (belief entropy above $1$
@@ -1031,6 +1035,54 @@ exactly the situation when comparing models of different capability. We report
 this because it bounds our own claim: the audit establishes that $S_0$ is
 improper and that it selects badly, not that every system built with it is
 worse for having used it.
+
+\section{Is a belief readout a measurement?}
+\label{app:repro}
+
+Every number in App.~\ref{app:rules} treats a readout as a stable property of a
+model. That is an assumption, and this paper's own Limitations record the
+readout \emph{path} moving mass on the answer tokens from $0.39$ to $0.99$, so
+we tested it rather than appealing to determinism. Two models and two
+instruments were re-read with the same script, seed and respondent panels on
+independent systems.
+
+\paragraph{Same architecture, different everything else.} Between two clusters
+running different software --- torch $2.11.0$ with transformers $5.17.0$
+against torch $2.13.0$ with transformers $5.16.1$, both on H200 --- the
+readouts are \emph{bit-identical}: maximum deviation $0$ over the full belief
+simplex and $0$ of $76{,}800$ item--respondent pairs changing their modal
+answer.
+
+\paragraph{Different architecture.} Against A100 (sm\_80) instead of H200
+(sm\_90), on the same \texttt{bf16} path, they are not. Mean absolute deviation
+per probability is $0.008$--$0.029$, and $5{,}946$ of $76{,}800$ modal answers
+flip --- $7.7\%$. The divergence is not a mismatched comparison: the four cells
+score identical respondents, and the flips sit precisely on near-ties. Where a
+modal answer flips, the median gap between the model's top two levels is
+$0.051$ against $0.507$ where it does not; for one cell that median gap is
+$0.000$, exact ties resolved differently by different kernels.
+
+\paragraph{What survives.} The scores do. Across architectures every aggregate
+we report moves by at most $5\times10^{-3}$ --- $1.6\times10^{-3}$ for $S_0$,
+$3.3\times10^{-3}$ for mode accuracy, $4.7\times10^{-3}$ for $S_{1/2}$. The
+effects this paper claims run from $0.028$, the smallest difference we call
+resolved, to $0.294$ for $S_0$ against $S_{1/2}$: six to sixty times larger
+than the hardware term. The conclusions are robust to the machine even though
+the individual predictions are not.
+
+We had expected the distribution-based scores to be the \emph{stable} ones,
+which would have given \S\ref{sec:suite} a second argument independent of
+propriety. They are the least stable of the three, and we report that rather
+than the argument we went looking for. The practical reading is narrower: a
+per-item LLM ``belief'' is not reproducible across accelerators and should not
+be published as though it were, while an average over hundreds of items and
+respondents is stable enough to carry an effect an order of magnitude larger
+than the noise.
+
+One arm is missing. V100 (sm\_70) would have tested the \texttt{fp16} path, but
+the available build ships no Volta kernels and the cluster's login node cannot
+reach a package index to install one, so this comparison spans two Hopper-class
+and one Ampere-class device only.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
