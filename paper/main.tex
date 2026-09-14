@@ -902,10 +902,13 @@ score), Brier, log-loss, spherical. Weakly proper: RMSE of the forecast mean,
 and mode accuracy. Improper: the audited $S_0$, MAE of the forecast mean, and
 Wasserstein distance to the observed point mass. Instruments are IPIP-NEO-120,
 SD3 and IPIP-FFM-50 on five points, and HEXACO-PI-R on \emph{seven} --- the
-last is the only place the pipeline is exercised at $K\neq5$. Each rule selects
-on $512$ respondents and is graded on $512$ disjoint others, with baselines
-fitted on a further $8{,}000$; all $96$ readouts put at least $0.92$ of their
-mass on the answer tokens.
+last is the only place the pipeline is exercised at $K\neq5$. The first three
+are keyed from published item keys; the HEXACO distribution we use ships none,
+so its reverse-keyed items are inferred from each item's correlation with the
+rest of its scale, and HEXACO results carry that caveat. Each rule selects on
+$512$ respondents and is graded on $512$ disjoint others, with baselines fitted
+on a further $8{,}000$; all $96$ readouts put at least $0.92$ of their mass on
+the answer tokens.
 
 We score a selector by the \emph{regret} its pick incurs, normalised within the
 candidate set so $0$ is the best of these twelve models and $1$ the worst, and

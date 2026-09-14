@@ -81,6 +81,24 @@ def _codebook_text(path, pattern):
     return out
 
 
+# Published IPIP Big-Five Factor Markers (50-item) key, in the item order this
+# dataset uses. Verified item by item against the codebook wording: every "-"
+# below is a negation or a low-pole statement ("I don't talk a lot", "I keep in
+# the background"), every "+" a high-pole one. HEXACO has no published key in
+# this distribution and its items carry facet codes in scrambled order, so it
+# still falls back to correlation inference -- stated as a limitation rather
+# than silently trusted.
+PUBLISHED_KEYS = {
+    "big5": {
+        **{f"E{i}": k for i, k in zip(range(1, 11), "+-+-+-+-+-")},
+        **{f"N{i}": k for i, k in zip(range(1, 11), "+-+-++++++")},
+        **{f"A{i}": k for i, k in zip(range(1, 11), "-+-+-+-+++")},
+        **{f"C{i}": k for i, k in zip(range(1, 11), "+-+-+-+-++")},
+        **{f"O{i}": k for i, k in zip(range(1, 11), "+-+-+-++++")},
+    },
+}
+
+
 def _openpsy(name, folder, pattern, scale_of, K, n_input):
     d = ROOT / "data/openpsychometrics" / folder
     df = pd.read_csv(d / "data.csv", sep=None, engine="python")
@@ -92,7 +110,23 @@ def _openpsy(name, folder, pattern, scale_of, K, n_input):
     text = {i: txt.get(c, c) for i, c in zip(ids, cols)}
     scale = {i: scale_of(c) for i, c in zip(ids, cols)}
     rec, _, _ = detect_recoded(Y, [scale_of(c) for c in cols])
-    rev = {ids[j] for j in reverse_keyed(Y, [scale_of(c) for c in cols])}
+    if name in PUBLISHED_KEYS:
+        # Prefer the instrument's published key. Inferring reverse-keying from
+        # correlation with the unkeyed remainder of a scale is unreliable: on
+        # BIG5 it flags "I start conversations", "I talk to a lot of different
+        # people at parties" and "I don't mind being the center of attention"
+        # as reverse-keyed. Those sit in the conditioning half, so a wrong flag
+        # does not merely mis-score -- it builds the persona from a reversed
+        # trait score.
+        keyed = PUBLISHED_KEYS[name]
+        rev = {i for i, c in zip(ids, cols) if keyed.get(c) == "-"}
+        inferred = {ids[j] for j in reverse_keyed(Y, [scale_of(c) for c in cols])}
+        if rev != inferred:
+            d = sorted(rev ^ inferred)
+            print(f"[{name}] published key overrides detector on {len(d)} items "
+                  f"(e.g. {[text[i][:34] for i in d[:3]]})", flush=True)
+    else:
+        rev = {ids[j] for j in reverse_keyed(Y, [scale_of(c) for c in cols])}
     return Corpus(name, Y, ids, text, scale, rev, n_input, rec, K)
 
 
