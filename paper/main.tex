@@ -733,7 +733,7 @@ candidate pools here reach $35$B and not beyond; individual readouts are
 reproducible bit-for-bit across clusters and software stacks but \emph{not}
 across accelerator architectures, where $7.7\%$ of modal answers flip, so the
 per-item beliefs we release should be read as machine-specific even though the
-aggregates they feed are stable to $5\times10^{-3}$ (App.~\ref{app:repro}); the within-family trend rests on three
+aggregates they feed move by at most $0.016$ (App.~\ref{app:repro}); the within-family trend rests on three
 points and the cross-family comparison on eleven, so both are directional rather
 than fitted laws; all models are read with thinking disabled and the assistant
 turn prefilled, and the four least confident of them (belief entropy above $1$
@@ -917,21 +917,23 @@ $p\le0.01$; the three strictly proper rules carry $p\ge0.66$.
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}llr@{\,}l@{}}
 \toprule
-rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$, Bonferroni CI}\\
+rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$ (Bonferroni CI)}\\
 \midrule
-RMSE of mean & weak & $-0.001$ & $[-0.002,-0.000]$\\
-Brier & strict & $+0.006$ & $[-0.002,+0.034]$\\
-log-loss & strict & $+0.005$ & $[-0.003,+0.015]$\\
-spherical & strict & $+0.013$ & $[-0.003,+0.038]$\\
-MAE of mean & improper & $+0.032$ & $[+0.016,+0.052]$\\
-mode accuracy & weak & $+0.267$ & $[+0.223,+0.282]$\\
-$S_0$ audited & improper & $+0.294$ & $[+0.250,+0.362]$\\
-Wasserstein & improper & $+0.294$ & $[+0.250,+0.362]$\\
+RMSE of mean & weak & $-0.001$ & $[-0.003,-0.000]$\\
+Brier & strict & $-0.001$ & $[-0.005,+0.042]$\\
+log-loss & strict & $+0.005$ & $[-0.005,+0.030]$\\
+spherical & strict & $+0.000$ & $[-0.007,+0.044]$\\
+MAE of mean & improper & $+0.034$ & $[+0.008,+0.059]$\\
+mode accuracy & weak & $+0.271$ & $[+0.098,+0.287]$\\
+$S_0$ audited & improper & $+0.256$ & $[+0.247,+0.365]$\\
+Wasserstein & improper & $+0.256$ & $[+0.247,+0.365]$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Paired over respondents, $B{=}4000$. Every improper rule selects worse than
+Differences are original-sample point estimates; intervals are Bonferroni
+simultaneous bounds from a respondent bootstrap with $B{=}4000$, so they hold
+jointly over all eight comparisons. Every improper rule selects worse than
 $S_{1/2}$, and the audited $S_0$ is the worst of them. The gap is not marginal:
 mean regret is $0.258$ for $S_0$ against $0.002$ for $S_{1/2}$. On SD3, $S_0$
 selects a model whose regret is $0.98$ --- all but the worst of the twelve ---
@@ -1062,13 +1064,15 @@ modal answer flips, the median gap between the model's top two levels is
 $0.051$ against $0.507$ where it does not; for one cell that median gap is
 $0.000$, exact ties resolved differently by different kernels.
 
-\paragraph{What survives.} The scores do. Across architectures every aggregate
-we report moves by at most $5\times10^{-3}$ --- $1.6\times10^{-3}$ for $S_0$,
-$3.3\times10^{-3}$ for mode accuracy, $4.7\times10^{-3}$ for $S_{1/2}$. The
-effects this paper claims run from $0.028$, the smallest difference we call
-resolved, to $0.294$ for $S_0$ against $S_{1/2}$: six to sixty times larger
-than the hardware term. The conclusions are robust to the machine even though
-the individual predictions are not.
+\paragraph{What survives.} The scores largely do. Averaged over the four
+cells, the change is $1.6\times10^{-3}$ for $S_0$, $3.3\times10^{-3}$ for mode
+accuracy and $4.7\times10^{-3}$ for $S_{1/2}$; the largest single-cell change
+is $1.6\times10^{-2}$, for $S_{1/2}$ on gemma-4-E2B/SD3. We do not convert
+these into a ratio against the regret differences of App.~\ref{app:rules}: raw
+score changes and candidate-range-normalised regrets are different units and
+the comparison would be meaningless. What we can say is bounded and direct ---
+a change of architecture moves a model's score by at most $0.016$ here, while
+it moves $7.7\%$ of that model's individual answers.
 
 We had expected the distribution-based scores to be the \emph{stable} ones,
 which would have given \S\ref{sec:suite} a second argument independent of

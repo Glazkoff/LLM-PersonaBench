@@ -222,7 +222,8 @@ def main() -> None:
             # Bonferroni-adjusted simultaneous interval
             a = 2.5 / m
             blo, bhi = np.percentile(d, [a, 100 - a])
-            rows.append([r, d.mean(), lo, hi, pv, blo, bhi])
+            point = float(np.mean(agg[r]) - np.mean(agg["rps"]))
+            rows.append([r, d.mean(), lo, hi, pv, blo, bhi, point])
 
         order = sorted(range(m), key=lambda i: rows[i][4])
         holm = {}
@@ -235,13 +236,17 @@ def main() -> None:
 
         print(f"\npaired differences against the best strict rule (rps), "
               f"{m} comparisons:")
+        # Print BOTH intervals. The verdict has always used the Bonferroni
+        # simultaneous bounds, but an earlier version printed only the ordinary
+        # 95% interval -- which was then transcribed into the paper under a
+        # "Bonferroni CI" heading. Showing both makes the mislabel impossible.
         print(f"  {'rule':12s} {'class':9s} {'diff':>7s} {'95% CI':>18s} "
-              f"{'p':>8s} {'Holm p':>8s} {'verdict':>12s}")
-        for r, mu, lo, hi, pv, blo, bhi in rows:
+              f"{'Bonferroni CI':>20s} {'p':>8s} {'Holm p':>8s} {'verdict':>11s}")
+        for r, mu, lo, hi, pv, blo, bhi, point in rows:
             hp = holm[r]
             v = "resolved" if (hp < 0.05 and blo * bhi > 0) else "unresolved"
             print(f"  {r:12s} {CLASS[r]:9s} {mu:+7.3f} [{lo:+7.3f},{hi:+7.3f}] "
-                  f"{pv:8.4f} {hp:8.4f} {v:>12s}")
+                  f"[{blo:+8.3f},{bhi:+8.3f}] {pv:8.4f} {hp:8.4f} {point:+8.3f} {v:>11s}")
         print("  verdict = Holm-adjusted p < 0.05 AND the Bonferroni "
               "simultaneous interval excludes zero")
     print("Regret is normalised WITHIN this candidate set, so 0 means 'the best "
