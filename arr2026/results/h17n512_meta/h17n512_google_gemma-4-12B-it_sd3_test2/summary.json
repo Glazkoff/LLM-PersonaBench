@@ -1,0 +1,37 @@
+{
+  "corpus": "sd3",
+  "model": "google/gemma-4-12B-it",
+  "panel": "test2",
+  "K": 5,
+  "input_items": 12,
+  "target_items": 15,
+  "n_scored": 512,
+  "n_train": 8000,
+  "n_dropped_incomplete": 0,
+  "mass_on_scale_mean": 0.967,
+  "coverage": 0.9658,
+  "target_ids": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    14,
+    15,
+    16,
+    17,
+    18,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "reverse_keyed_targets": [
+    15,
+    17,
+    25
+  ],
+  "corpus_recoded": false,
+  "valid": true
+}

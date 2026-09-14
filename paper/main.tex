@@ -27,17 +27,17 @@ The standard way to evaluate an LLM ``digital twin'' of a human personality
 group --- agreement between the model's questionnaire answers and real
 respondents' --- rewards the wrong thing. For this answer-similarity metric we
 prove that a simulator reproducing the target population's response
-distribution \emph{exactly} is strictly dominated by a constant vector,
-and that the gap is governed by the difference between the Gini mean difference
-and the mean absolute deviation about the median. On $410{,}168$ IPIP-NEO-120
-respondents this structural penalty is $7.75$ points. Empirically, across five
+distribution \emph{exactly} can never beat a constant vector, and is strictly
+beaten unless every item's mass sits on its medians; the gap is the difference
+between the Gini mean difference and the mean absolute deviation about the
+median. On $410{,}168$ IPIP-NEO-120 respondents the inequality is strict on all
+$480$ cluster--item combinations and the penalty is $7.75$ points. Empirically, across five
 LLMs and four personality clusters, a per-item cluster mean scores $0.796$ while
 evolved personas average $0.739$, losing in $20$ of $20$
 cells; a \emph{real human drawn from the target cluster} scores $0.721$ and also
-loses to the constant in $20$ of $20$ cells. We further find that the released
-benchmark scores raw model self-reports against reverse-recoded human answers on
-$55$ of $120$ items; we correct this and report every result under both
-orientations, the replacement suite included. A metric that ranks a constant above
+loses to the constant in $20$ of $20$ cells. The released benchmark also scores raw model
+self-reports against reverse-recoded human answers on $55$ of $120$ items; we
+correct this throughout. A metric that ranks a constant above
 a genuine group member cannot be measuring personality simulation. We propose a
 replacement suite --- a classifier two-sample test, per-item distributional
 fidelity, and a variance ratio --- each reported against an explicit human ceiling
@@ -392,10 +392,10 @@ evidence about personality fidelity.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{figures/inversion.pdf}
-\caption{Left: under the old metric the constant outscores a real human. Right:
-under the proposed C2ST-AUC the human sits near chance ($0.5$, ideal) and the
-constant is near-perfectly separable. Only the right panel orders the three
-correctly.}
+\caption{Corrected orientation, 20 cells. Left: under the old metric the
+constant outscores a real human. Right: under C2ST-AUC (lower is better) the
+human sits near chance ($0.5$) while model and constant are both highly
+separable. Only the right panel places the human above the constant.}
 \label{fig:inversion}
 \end{figure}
 
@@ -408,11 +408,13 @@ and \emph{constant floor}, so a number can be read as progress toward a real
 target rather than in the abstract. We propose three, computed from a set of
 simulated respondents rather than from paired individuals.
 
-\paragraph{C2ST-AUC (primary).} A classifier two-sample test: train a classifier
-to separate $n$ simulated answer vectors from $n$ held-out human vectors of the
-same cluster, and report cross-validated AUC. $0.5$ means indistinguishable ---
-the ideal twin. A constant is trivially separable. This directly operationalises
-the twin claim, and unlike $S$ it cannot be gamed by collapsing onto the mean.
+\paragraph{C2ST-AUC (primary).} Train a gradient-boosted classifier to separate
+$n$ simulated answer vectors from $n$ held-out human vectors of the same
+cluster; report cross-validated AUC, folded to $\max(\text{AUC},1-\text{AUC})$.
+An AUC near $0.5$ means this classifier cannot separate the samples at this
+sample size --- evidence of indistinguishability under the stated
+configuration, not of distributional equality (App.~\ref{app:samplesize}).
+Unlike $S$ it cannot be gamed by collapsing onto the mean.
 
 \paragraph{Distributional fidelity.} $1 - \frac{1}{J}\sum_j
 W_1(\hat P_j^{\text{model}}, \hat P_j^{\text{human}})/4$, with $W_1$ the per-item
@@ -425,31 +427,37 @@ not an optimisation target.
 \paragraph{Results.} Table~\ref{tab:suite} applies the suite to the same 20
 cells. All three order human $>$ constant, as required; the old metric does the
 reverse. Two substantive findings follow. First, current personas are
-\emph{near-perfectly separable} from real humans (C2ST-AUC $0.994$ against a human
-ceiling of $0.564$) --- and are in fact \emph{more} distinguishable than a
-constant vector ($0.926$), because they miss both the location and the spread of
-the human distribution. Second, they are systematically under-dispersed: VR
+\emph{near-perfectly separable} from real humans (C2ST-AUC $0.994$ against a
+human ceiling of $0.564$): a classifier separates a persona from the group it
+simulates almost perfectly, while barely separating one human sample from
+another. The constant scores $0.926$ here, but we do not read $0.994$ against
+$0.926$ as an intrinsic ordering --- constant detection reaches $1.000$ with
+more data, so the gap between two already-detectable systems is a property of
+the classifier. Second, they are systematically under-dispersed: VR
 $=0.43$, a ratio of standard deviations, so LLM personas produce well under half
 the response \emph{spread} of the humans they simulate
 (Figure~\ref{fig:variance}). Evolutionary optimisation moves
 none of these appreciably.
 
 \paragraph{Under-dispersion is the wrong summary.} A single variance ratio hides
-which variance is missing. Decomposing each answer matrix as
-$Y_{pj}=\mu+a_p+b_j+(ab)_{pj}+e$ --- respondent main effect, item main effect,
-and the person-by-item interaction that carries individuation --- tells a sharper
-story. The simulator emits nearly the \emph{right total} variance (ratio $0.942$ over
-the 20 cells), but places it in the wrong component: the item main effect takes
-$81.2\%$ of its variance against $29.8\%$ for humans, while the interaction takes
-$17.7\%$ against $67.0\%$. The interaction SD ratio is $0.466$, and it is
-$0$ for a constant by construction.
+which variance is missing. Writing each answer matrix as
+$Y_{pj}=\mu+a_p+b_j+r_{pj}$ --- respondent main effect, item main effect, and
+the two-way residual --- tells a sharper story. One observation per
+person--item cell cannot separate a stable interaction from response noise, so
+we read this term as a residual, not as individuation. The simulator emits
+nearly the \emph{right total}
+variance (ratio $0.942$ over the 20 cells) but places it differently: the item
+main effect takes $81.2\%$ of its variance against $29.8\%$ for humans, while
+the residual takes $17.7\%$ against $67.0\%$. The residual SD ratio is $0.466$,
+and $0$ for a constant by construction.
 
 So the simulator is not emitting too little. It is emitting a confident
-cluster-level \emph{answer key} --- which items are endorsable --- and almost
-none of which \emph{person} endorses which item. We recommend reporting the
-interaction ratio rather than the plain variance ratio, since the two rank
-systems differently and only the former measures the quantity a personality
-simulator exists to reproduce.
+cluster-level \emph{answer key} --- which items are endorsable --- with little
+variation in which \emph{person} endorses which item. We recommend reporting
+the residual ratio alongside the plain variance ratio, since the two rank
+systems differently. Individuation itself we measure with the aligned amplitude
+of \S\ref{sec:mechanism} and the correct-versus-permuted CRPS, which noise
+cannot inflate: permutation leaves the residual unchanged.
 
 \begin{table}[t]\centering\footnotesize
 \input{table_metricsuite}
@@ -487,25 +495,23 @@ bias (extrapolating to $0.500$) while the DF ceiling is entirely plug-in bias
 configuration stops separating at all, so we report every anchor with the $n$ and
 the settings it was measured at rather than proposing a universal floor.
 
-\section{The proposition, reproduced in one experiment}
+\section{The same penalty, in a fitted decoder}
 \label{sec:encoding}
 
-Fitting on half of each cluster and scoring on the other half, two oracles differ
-only in what they emit: a \textbf{mean} decoder (ridge on the ordinal code),
-which predicts the conditional mean, and a \textbf{residual-resampled} one, the same fit
-plus a resampled residual, which restores marginal spread. The mean decoder
-scores $S=0.802$; the residual-resampled one, which is closer to the response
-\emph{distribution} on that margin, scores $S=0.730$ --- worse by $7.2$ points, against the $7.75$ that the
-$\mathrm{GMD}-\mathrm{MAD}$ gap predicts. Restoring marginal spread is penalised in this
-construction, and by very nearly the predicted amount. This construction does
-\emph{not} settle whether the prompt limits the simulator: it reads a richer code
-than the ten scores the belief prompts carry, and restoring marginal spread by
-resampling residuals is not evidence of faithful conditioning.
-App.~\ref{app:ceiling} takes that question up on the actual channel.
-
-For scale, this fitted mean decoder beats the constant ($0.792$) by $0.9$ points.
-That is what one fitted reader achieved here, not a bound on what any reader
-could achieve.
+The proposition concerns a faithful sampler against a constant. A fitted
+predictor shows the same pressure. Fitting on half of each cluster and scoring
+on the other half, two oracles differ only in what they emit: a \textbf{mean}
+decoder (ridge on the ordinal code) predicting the conditional mean, and a
+\textbf{residual-resampled} one, the same fit plus a resampled residual, which
+restores marginal spread. The mean decoder scores $S=0.802$, the
+residual-resampled one $S=0.730$ --- worse by $7.2$ points for being closer to
+the response distribution on that margin. This is an illustration, not a test of
+Prop.~\ref{prop:main}: the decoder conditions on a richer code than the belief
+prompts carry, and its $7.2$ points are not a prediction of the
+$\mathrm{GMD}-\mathrm{MAD}$ gap, so the proximity to $7.75$ is not evidence for
+it. The fitted mean decoder beats the constant ($0.792$) by $0.9$ points ---
+what one fitted reader achieved, not a bound.
+App.~\ref{app:ceiling} takes up the channel question.
 
 \section{Does this generalise beyond one questionnaire?}
 \label{sec:crossinstrument}
@@ -660,11 +666,10 @@ A simulator can therefore look more dispersed simply by being less confident:
 $\mathrm{VR}_\text{total}$ confounds uncertainty with individuation, and
 $\mathrm{VR}_\text{between}$ is what a persona claim should be judged on.
 
-One limit, plainly: the strong form of the claim below --- that no sampling-side
-remedy could help --- needs total dispersion well under the human marginal, which
-is false for the largest 2024--25 model ($0.758$) and for the three that
-\emph{exceed} it ($1.078$, $1.131$, $1.242$); there, spread is present and is
-lost afterwards. What stays limited at every scale is \emph{individuation}.
+Total dispersion is not uniformly low: it is $0.758$ for the largest
+2024--25 model and exceeds the human marginal for three others ($1.078$,
+$1.131$, $1.242$), so for those the spread is present and lost afterwards. What
+stays limited at every scale is \emph{individuation}.
 
 Two consequences follow. For the low-dispersion models the spread is not
 discarded at decoding; it was never present, so recovering it there means
@@ -689,15 +694,14 @@ the systems use rather than for personality types.
 
 Personality conditioning of LLMs is commonly validated by administering
 psychometric inventories to the conditioned
-model~\citep{serapio2023personality,jiang2024evaluating}, and prompt sensitivity
-of the resulting traits is well
-documented~\citep{han2026context,gupta2024personas}. Individual-level
-simulation from interview transcripts achieves high behavioural
+model~\citep{serapio2023personality,jiang2024evaluating}, with well-documented
+prompt sensitivity~\citep{han2026context,gupta2024personas}. Individual-level
+simulation from transcripts achieves high behavioural
 fidelity~\citep{park2024generative} at a per-person cost that motivates the
-cluster-level shortcut we study. Evolutionary and search-based prompt
-optimisation~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
-optimiser. Our contribution is orthogonal: the objective they are scored against
-is maximised by a degenerate solution.
+cluster-level shortcut we study; evolutionary prompt
+search~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
+optimiser. Our contribution is orthogonal: the objective they are scored
+against is maximised by a degenerate solution.
 
 Classifier two-sample tests are standard for comparing
 distributions~\citep{lopezpaz2017revisiting}; the failure mode we identify, an
@@ -710,10 +714,9 @@ Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
 penalty at $7.75$ points, confirmed the inversion in $20$ of $20$ matched
 cells, and proposed a suite that orders humans above constants. Beneath it the
-simulation is thinner still: the persona helps all eleven models and none
-enough, the loss sitting in the mixture rather than identity. Across four
-instruments improper scores select measurably worse simulators. Score with
-$S_{1/2}$; report floor and ceiling.
+persona helps all eleven models and none enough, the loss sitting in the
+mixture rather than identity. Across four instruments improper scores select
+measurably worse simulators; score with $S_{1/2}$ and report floor and ceiling.
 
 \section*{Limitations}
 
