@@ -38,6 +38,16 @@ for corpus in ("ipip", "sd3", "big5", "hexaco"):
             Y = np.load(os.path.join(d, "target_answers.npy"))
         except Exception:
             continue
+        # The model answers the LITERAL item; IPIP-family corpora store answers
+        # already reverse-recoded. Without this flip every score on a recoded
+        # corpus is computed against mis-oriented targets -- the same defect
+        # that invalidated an earlier round of this project. h17_selection.py
+        # applies it; this script did not.
+        if meta.get("corpus_recoded"):
+            rk = set(meta.get("reverse_keyed_targets", []))
+            flip = np.array([j in rk for j in meta.get("target_ids", [])], dtype=bool)
+            if flip.any() and flip.size == P.shape[1]:
+                P[:, flip, :] = P[:, flip, ::-1]
         K = P.shape[2]
         lv = np.arange(1, K + 1, dtype=float)
         mean = (P * lv).sum(-1)
@@ -54,10 +64,21 @@ for corpus in ("ipip", "sd3", "big5", "hexaco"):
     cr = np.array([r["crps"] for r in rows]); en = np.array([r["ent"] for r in rows])
     ok = ~np.isnan(s0v)
     print(f"\n=== {corpus} ({len(rows)} models) ===")
+    def spearman(a, b):
+        ra = np.argsort(np.argsort(a)).astype(float)
+        rb = np.argsort(np.argsort(b)).astype(float)
+        return float(np.corrcoef(ra, rb)[0, 1])
+
     if ok.sum() >= 3:
-        print(f"  corr(S0, dispersion SD) = {np.corrcoef(s0v[ok], sd[ok])[0,1]:+.3f}   "
-              f"corr(S0, entropy) = {np.corrcoef(s0v[ok], en[ok])[0,1]:+.3f}")
-        print(f"  corr(-CRPS, dispersion) = {np.corrcoef(-cr[ok], sd[ok])[0,1]:+.3f}")
+        # Report both: the manuscript describes these as rank correlations, so
+        # Spearman is the figure it should quote. -cr is the NEGATED CRPS loss,
+        # i.e. the proper score itself (higher better), not its negation.
+        print(f"  pearson(S0, sd)={np.corrcoef(s0v[ok], sd[ok])[0,1]:+.3f}  "
+              f"spearman(S0, sd)={spearman(s0v[ok], sd[ok]):+.3f}")
+        print(f"  pearson(S0, entropy)={np.corrcoef(s0v[ok], en[ok])[0,1]:+.3f}  "
+              f"spearman(S0, entropy)={spearman(s0v[ok], en[ok]):+.3f}")
+        print(f"  pearson(S_1/2 as reward, sd)={np.corrcoef(-cr[ok], sd[ok])[0,1]:+.3f}  "
+              f"spearman={spearman(-cr[ok], sd[ok]):+.3f}")
         best_s0 = rows[int(np.nanargmax(s0v))]
         best_cr = rows[int(np.argmin(cr))]
         print(f"  S_0 picks   {best_s0['model']:34s} sd={best_s0['sd']:.3f} ent={best_s0['ent']:.3f}")

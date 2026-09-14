@@ -54,3 +54,56 @@ individual answers.
 - MAJOR: audited system is not cited; no artifact link.
 - MINOR: abstract/intro open on background; progress-report narration; defensive
   asides; Figure 1 legibility.
+
+## Round 2 — reviewer: gpt-6-astra (xhigh), fresh thread `01a09f66-2e8e-7a42-b476-2d39a62a5efb`
+
+Score **5/10** (from 4/10), verdict **No**. Again the reviewer recomputed from
+the artifacts; the central proposition and headline audit reproduced exactly
+(constant 0.799558 vs faithful 0.722081, gap 7.747759, strict on all 480
+cluster-item combinations; corrected model 0.738618 vs constant 0.796107,
+20/20 and 19/20).
+
+### CONFIRMED ERROR 4 — the released selection record did not match the paper
+
+I refreshed the paper from the common-evaluator rerun but left
+`selection_regret_n512_12cand.txt` holding the previous run, so the artifact
+and the table disagreed on every row. Line 964 also still quoted the old mode
+accuracy (+0.267) against its own table (+0.238). Both fixed; the file now
+comes from the same job as the table.
+
+### CONFIRMED ERROR 5 — h19_dispersion.py had no orientation correction
+
+`h17_selection.py` flips the model's simplex on reverse-keyed items when the
+corpus stores recoded answers; `h19_dispersion.py` did not, so every score it
+computed on IPIP used mis-oriented targets. This is the same defect that
+invalidated an earlier round of this project, reintroduced in a new script.
+
+Corrected, the IPIP result changes materially: the S_0/dispersion correlation
+goes from -0.02 to +0.03, and S_0's pick changes from gpt-oss-20b to
+Qwen3.6-35B-A3B -- the same model the proper rule picks.
+
+The paper had claimed the correlation was "negative on all four instruments".
+It is not: Spearman is +0.03, -0.09, -0.40, -0.97. The claim is now stated as
+measured, and the proper-score side (+0.71 to +0.86 on all four) carries the
+weight.
+
+The script also computed Pearson while the paper said "rank correlation"; it
+now reports both and the paper quotes Spearman.
+
+### Also fixed
+
+Removed the unsupported reachability/safety argument from App. E. The
+co-improvement of S_0 and proper scores under prompt search is retained as the
+measurement; the claim that the degenerate optimum was "not reachable" is not,
+because the dispersion of visited candidates was never measured.
+
+### Outstanding after Round 2
+
+- MAJOR: variance-decomposition "individuation" -- one observation per
+  person-item cell cannot separate interaction from noise.
+- MAJOR: C2ST presented as a fidelity ordering rather than classifier-specific
+  detectability.
+- MAJOR: abstract says "strictly dominated" where Prop. 1 has an equality case.
+- MAJOR: audited system still uncited; n=512 tensors not released.
+- MINOR: Limitations is one long paragraph; Eq. 3 definitions; global baseline
+  fitted on all respondents; "matched exactly" overstates 0.911/0.921 vs 0.910.
