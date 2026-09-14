@@ -1,0 +1,52 @@
+cell                                               maxdev    meandev  mode flips
+gemma-4-E2B-it / ipip                            9.31e-01   1.28e-02        1109
+gemma-4-E2B-it / sd3                             9.86e-01   2.92e-02         632
+Apertus-v1.1-0.5B-Instruct / ipip                5.33e-02   8.44e-03        3755
+Apertus-v1.1-0.5B-Instruct / sd3                 5.21e-02   8.71e-03         450
+
+worst max deviation across cells: 9.86e-01
+modal-answer flips: 5946 of 76800 item-respondent pairs (7.7422%)
+DIVERGENT -- the readout is not stack-invariant
+gemma-4-E2B-it / ipip                        same respondents=True
+   flips  1109  median top-2 gap at flips 0.0506  vs 0.5070 elsewhere
+   deviation: mean 1.28e-02  p99 1.69e-01  max 9.31e-01
+gemma-4-E2B-it / sd3                         same respondents=True
+   flips   632  median top-2 gap at flips 0.3492  vs 0.7325 elsewhere
+   deviation: mean 2.92e-02  p99 8.58e-01  max 9.86e-01
+Apertus-v1.1-0.5B-Instruct / ipip            same respondents=True
+   flips  3755  median top-2 gap at flips 0.0000  vs 0.0323 elsewhere
+   deviation: mean 8.44e-03  p99 2.81e-02  max 5.33e-02
+Apertus-v1.1-0.5B-Instruct / sd3             same respondents=True
+   flips   450  median top-2 gap at flips 0.0316  vs 0.0697 elsewhere
+   deviation: mean 8.71e-03  p99 3.23e-02  max 5.21e-02
+cell                                         metric           H200      A100    |diff|
+gemma-4-E2B-it / ipip                        S_1/2         0.29520   0.29771  2.51e-03
+gemma-4-E2B-it / ipip                        S_0           0.62805   0.62867  6.21e-04
+gemma-4-E2B-it / ipip                        mode acc      0.21745   0.21917  1.73e-03
+
+gemma-4-E2B-it / sd3                         S_1/2         0.24950   0.26571  1.62e-02
+gemma-4-E2B-it / sd3                         S_0           0.70142   0.69596  5.46e-03
+gemma-4-E2B-it / sd3                         mode acc      0.27982   0.26875  1.11e-02
+
+Apertus-v1.1-0.5B-Instruct / ipip            S_1/2         0.18577   0.18577  3.93e-06
+Apertus-v1.1-0.5B-Instruct / ipip            S_0           0.62882   0.62886  3.53e-05
+Apertus-v1.1-0.5B-Instruct / ipip            mode acc      0.25540   0.25508  3.26e-04
+
+Apertus-v1.1-0.5B-Instruct / sd3             S_1/2         0.21141   0.21151  9.30e-05
+Apertus-v1.1-0.5B-Instruct / sd3             S_0           0.62069   0.62050  1.91e-04
+Apertus-v1.1-0.5B-Instruct / sd3             mode acc      0.17018   0.16992  2.60e-04
+
+mean |A100 - H200| by metric:
+  S_1/2       4.70e-03
+  S_0         1.58e-03
+  mode acc    3.34e-03
+
+Stacks compared
+  HSE cHARISMa  A100-SXM4-80GB (sm_80), torch 2.11.0+cu128, transformers 5.17.0
+  AIRI Euler    H200 NVL       (sm_90), torch 2.13.0,       transformers 5.16.1
+Same bf16 path, same script, seed and respondent panels (verified: identical
+target_answers on all four cells).
+
+V100 (sm_70) could not be tested: torch 2.11+cu128 ships no Volta kernels
+(cudaErrorNoKernelImageForDevice on all four cells), the fallback env is broken
+by an undefined nvJitLink symbol, and HSE's login node cannot reach PyPI.
