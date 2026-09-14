@@ -50,3 +50,24 @@ target_answers on all four cells).
 V100 (sm_70) could not be tested: torch 2.11+cu128 ships no Volta kernels
 (cudaErrorNoKernelImageForDevice on all four cells), the fallback env is broken
 by an undefined nvJitLink symbol, and HSE's login node cannot reach PyPI.
+cell                                         metric           H200      A100    |diff|
+gemma-4-E2B-it / ipip                        S_1/2         0.34541   0.34783  2.43e-03
+gemma-4-E2B-it / ipip                        S_0           0.57784   0.57855  7.07e-04
+gemma-4-E2B-it / ipip                        mode acc      0.17594   0.17793  1.99e-03
+
+gemma-4-E2B-it / sd3                         S_1/2         0.24950   0.26571  1.62e-02
+gemma-4-E2B-it / sd3                         S_0           0.70142   0.69596  5.46e-03
+gemma-4-E2B-it / sd3                         mode acc      0.27982   0.26875  1.11e-02
+
+Apertus-v1.1-0.5B-Instruct / ipip            S_1/2         0.18984   0.18988  4.40e-05
+Apertus-v1.1-0.5B-Instruct / ipip            S_0           0.62476   0.62475  4.81e-06
+Apertus-v1.1-0.5B-Instruct / ipip            mode acc      0.22796   0.22812  1.63e-04
+
+Apertus-v1.1-0.5B-Instruct / sd3             S_1/2         0.21141   0.21151  9.30e-05
+Apertus-v1.1-0.5B-Instruct / sd3             S_0           0.62069   0.62050  1.91e-04
+Apertus-v1.1-0.5B-Instruct / sd3             mode acc      0.17018   0.16992  2.60e-04
+
+mean |A100 - H200| by metric:
+  S_1/2       4.69e-03
+  S_0         1.59e-03
+  mode acc    3.37e-03

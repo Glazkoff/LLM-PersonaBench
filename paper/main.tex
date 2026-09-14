@@ -505,13 +505,11 @@ decoder (ridge on the ordinal code) predicting the conditional mean, and a
 \textbf{residual-resampled} one, the same fit plus a resampled residual, which
 restores marginal spread. The mean decoder scores $S=0.802$, the
 residual-resampled one $S=0.730$ --- worse by $7.2$ points for being closer to
-the response distribution on that margin. This is an illustration, not a test of
-Prop.~\ref{prop:main}: the decoder conditions on a richer code than the belief
-prompts carry, and its $7.2$ points are not a prediction of the
-$\mathrm{GMD}-\mathrm{MAD}$ gap, so the proximity to $7.75$ is not evidence for
-it. The fitted mean decoder beats the constant ($0.792$) by $0.9$ points ---
-what one fitted reader achieved, not a bound.
-App.~\ref{app:ceiling} takes up the channel question.
+the response distribution on that margin. This is an illustration, not a test of Prop.~\ref{prop:main}: the decoder
+conditions on a richer code than the belief prompts carry, so its $7.2$ points
+are not a prediction of the $\mathrm{GMD}-\mathrm{MAD}$ gap. It beats the
+constant ($0.792$) by $0.9$ points --- what one fitted reader achieved, not a
+bound (App.~\ref{app:ceiling}).
 
 \section{Does this generalise beyond one questionnaire?}
 \label{sec:crossinstrument}
@@ -668,12 +666,13 @@ $\mathrm{VR}_\text{between}$ is what a persona claim should be judged on.
 
 Total dispersion is not uniformly low: it is $0.758$ for the largest
 2024--25 model and exceeds the human marginal for three others ($1.078$,
-$1.131$, $1.242$), so for those the spread is present and lost afterwards. What
-stays limited at every scale is \emph{individuation}.
+$1.131$, $1.242$). Nor is it lost at decoding: sampling retains almost all of
+it ($1.078\!\to\!1.061$, $1.243\!\to\!1.218$, $1.131\!\to\!1.115$). What stays
+limited at every scale is \emph{individuation}.
 
-Two consequences follow. For the low-dispersion models the spread is not
-discarded at decoding; it was never present, so recovering it there means
-\emph{adding} dispersion, not revealing it: $p^{1/T}$ lifts Qwen2.5-7B from
+For the low-dispersion models the spread is likewise not discarded at
+decoding; it was never present, so recovering it there means \emph{adding}
+dispersion, not revealing it: $p^{1/T}$ lifts Qwen2.5-7B from
 $0.43$ to $1.02$ at $T{=}5$ while supplying none of the alignment $A$ measures.
 And since all mass lands on valid answer tokens, accounts blaming mode collapse
 on difficulty \emph{emitting} numbers are unsupported here.
@@ -900,7 +899,8 @@ uses.
 The rules span three classes. Strictly proper: $S_{1/2}$ (ranked probability
 score), Brier, log-loss, spherical. Weakly proper: RMSE of the forecast mean,
 and mode accuracy. Improper: the audited $S_0$, MAE of the forecast mean, and
-Wasserstein distance to the observed point mass. Instruments are IPIP-NEO-120,
+Wasserstein distance to the observed point mass, which coincides with $S_0$ by
+construction here and so is not independent evidence. Instruments are IPIP-NEO-120,
 SD3 and IPIP-FFM-50 on five points, and HEXACO-PI-R on \emph{seven} --- the
 last is the only place the pipeline is exercised at $K\neq5$. The first three
 are keyed from published item keys; the HEXACO distribution we use ships none,
@@ -917,7 +917,7 @@ rule}, so no rule is graded on the criterion it optimised. Because eight rules
 are compared against one reference, we report Holm-adjusted $p$ and Bonferroni
 simultaneous intervals, and call a difference resolved only when both agree.
 The four differences below with intervals excluding zero all carry Holm
-$p\le0.01$; the three strictly proper rules carry $p\ge0.66$.
+$p\le0.01$; the three strictly proper alternatives carry $p=1.00$.
 
 \begin{center}\small
 \setlength{\tabcolsep}{3.5pt}

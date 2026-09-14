@@ -24,15 +24,15 @@ wass_point   improper  gemma-4-E2B-it                                  0.984   4
 
 ===== big5: 12 candidates =====
 selector     class     picks                               regret(self-excl)   n  regret(all)
-ev_mae       improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
-ev_rmse      weak      Qwen3.6-35B-A3B                                 0.007   4        0.007
-mode_acc     weak      Qwen3.6-35B-A3B                                 0.007   4        0.007
-s0           improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
-wass_point   improper  Qwen3.6-35B-A3B                                 0.007   4        0.007
-brier        strict    Qwen3.6-35B-A3B                                 0.007   3        0.007
-rps          strict    Qwen3.6-35B-A3B                                 0.009   3        0.007
-spherical    strict    Qwen3.6-35B-A3B                                 0.009   3        0.007
-logloss      strict    gpt-oss-20b                                     0.028   3        0.021
+ev_mae       improper  Qwen3.6-35B-A3B                                 0.009   4        0.009
+ev_rmse      weak      Qwen3.6-35B-A3B                                 0.009   4        0.009
+mode_acc     weak      Qwen3.6-35B-A3B                                 0.009   4        0.009
+s0           improper  Qwen3.6-35B-A3B                                 0.009   4        0.009
+wass_point   improper  Qwen3.6-35B-A3B                                 0.009   4        0.009
+rps          strict    Qwen3.6-35B-A3B                                 0.012   3        0.009
+spherical    strict    Qwen3.6-35B-A3B                                 0.012   3        0.009
+brier        strict    gpt-oss-20b                                     0.023   3        0.017
+logloss      strict    gpt-oss-20b                                     0.023   3        0.017
 
 ===== hexaco: 12 candidates =====
 selector     class     picks                               regret(self-excl)   n  regret(all)
@@ -49,34 +49,34 @@ mode_acc     weak      granite-4.2-30b                                 0.356   4
 ===== across instruments: mean normalised regret =====
 selector     class      mean regret                         per-corpus
 ev_rmse      weak             0.002                0.00 0.00 0.01 0.00
-brier        strict           0.002                0.00 0.00 0.01 0.00
-rps          strict           0.002                0.00 0.00 0.01 0.00
-spherical    strict           0.002                0.00 0.00 0.01 0.00
-logloss      strict           0.007                0.00 0.00 0.03 0.00
-ev_mae       improper         0.036                0.00 0.08 0.01 0.06
-s0           improper         0.258                0.00 0.98 0.01 0.04
-wass_point   improper         0.258                0.00 0.98 0.01 0.04
-mode_acc     weak             0.273                0.00 0.73 0.01 0.36
+rps          strict           0.003                0.00 0.00 0.01 0.00
+spherical    strict           0.003                0.00 0.00 0.01 0.00
+logloss      strict           0.006                0.00 0.00 0.02 0.00
+brier        strict           0.006                0.00 0.00 0.02 0.00
+ev_mae       improper         0.037                0.00 0.08 0.01 0.06
+s0           improper         0.259                0.00 0.98 0.01 0.04
+wass_point   improper         0.259                0.00 0.98 0.01 0.04
+mode_acc     weak             0.274                0.00 0.73 0.01 0.36
 
 lowest mean regret: ev_rmse (weak)
 
 ===== bootstrap over respondents, B=4000 =====
 selector     class        mean             95% CI
-ev_rmse      weak        0.002 [  0.000,  0.007]
-brier        strict      0.002 [  0.001,  0.036]
-rps          strict      0.002 [  0.001,  0.009]
-spherical    strict      0.002 [  0.001,  0.041]
-logloss      strict      0.007 [  0.002,  0.019]
-ev_mae       improper    0.036 [  0.021,  0.054]
-s0           improper    0.258 [  0.254,  0.365]
-wass_point   improper    0.258 [  0.254,  0.365]
-mode_acc     weak        0.273 [  0.226,  0.285]
+ev_rmse      weak        0.002 [  0.001,  0.007]
+rps          strict      0.003 [  0.001,  0.009]
+spherical    strict      0.003 [  0.001,  0.042]
+logloss      strict      0.006 [  0.002,  0.018]
+brier        strict      0.006 [  0.001,  0.037]
+ev_mae       improper    0.037 [  0.022,  0.055]
+s0           improper    0.259 [  0.255,  0.365]
+wass_point   improper    0.259 [  0.255,  0.365]
+mode_acc     weak        0.274 [  0.226,  0.285]
 
 paired differences against the best strict rule (rps), 8 comparisons:
   rule         class        diff             95% CI        Bonferroni CI        p   Holm p     verdict
-  logloss      strict     +0.006 [ -0.002, +0.014] [  -0.004,  +0.024]   0.1550   0.6200   +0.005  unresolved
-  brier        strict     +0.004 [ -0.002, +0.019] [  -0.007,  +0.025]   1.0000   1.0000   -0.001  unresolved
-  spherical    strict     +0.007 [ +0.000, +0.022] [  -0.002,  +0.029]   0.6665   1.0000   +0.000  unresolved
+  logloss      strict     +0.004 [ -0.004, +0.012] [  -0.007,  +0.022]   0.3275   1.0000   +0.003  unresolved
+  brier        strict     +0.003 [ -0.004, +0.019] [  -0.008,  +0.025]   0.8030   1.0000   +0.003  unresolved
+  spherical    strict     +0.007 [ +0.000, +0.022] [  -0.002,  +0.029]   0.6670   1.0000   +0.000  unresolved
   s0           improper   +0.298 [ +0.255, +0.364] [  +0.250,  +0.368]   0.0003   0.0020   +0.256    resolved
   ev_mae       improper   +0.025 [ +0.011, +0.046] [  +0.007,  +0.055]   0.0003   0.0020   +0.034    resolved
   ev_rmse      weak       +0.000 [ +0.000, +0.000] [  +0.000,  +0.000]   1.0000   1.0000   -0.001  unresolved

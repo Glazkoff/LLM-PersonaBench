@@ -107,3 +107,51 @@ because the dispersion of visited candidates was never measured.
 - MAJOR: audited system still uncited; n=512 tensors not released.
 - MINOR: Limitations is one long paragraph; Eq. 3 definitions; global baseline
   fitted on all respondents; "matched exactly" overstates 0.911/0.921 vs 0.910.
+
+## Round 3 and 4 — reviewer: gpt-6-astra (xhigh), fresh threads
+
+Round 3 `01a09f84`, Round 4 `01a09f9a`. Both 5/10, verdict No. Both recomputed
+from the corpus and artifacts; the proposition (480/480 strict, 7.7478) and the
+corrected audit (0.73862 / 0.79611, 20/20 and 19/20) reproduced independently
+each time.
+
+### CONFIRMED ERROR 6 — BIG5 personas built from a wrong scoring key (Round 3)
+
+_corpora.py inferred reverse-keying from correlation with the unkeyed remainder
+of each scale, mislabelling "I start conversations", "I talk to a lot of
+different people at parties" and "I don't mind being the center of attention".
+Those items are in the conditioning half, so the personas themselves were built
+from reversed trait scores.
+
+Fixed with the published IPIP-FFM-50 key, validated item by item against the
+codebook. All 24 BIG5 cells regenerated (job 3985, override confirmed in the
+log, 0 invalid) and the selection rerun (4012). The headline is unchanged:
+s0 +0.298 [+0.250,+0.368] resolved. The class boundary does not depend on BIG5.
+
+### CONFIRMED ERROR 7 — the decoding-loss claim contradicted the artifacts (Round 4)
+
+The paper said spread is "present and lost afterwards". The saved readouts show
+sampling retains almost all of it: 1.078->1.061, 1.243->1.218, 1.131->1.115.
+Claim replaced with the measured ratios.
+
+### CONFIRMED ERROR 8 — orientation correction missing for the third time (Round 4)
+
+h20d_scores.py scored raw tensors without the reverse-key flip, after the same
+omission was fixed in h19. Corrected and rerun (4013). The reported quantity is
+a DIFFERENCE between two runs sharing the orientation, so it barely moved
+(4.70e-3 -> 4.69e-3) -- but the absolute scores it printed were wrong.
+
+### Also fixed
+
+Holm p for the strict alternatives is 1.00, not ">= 0.66". S_0 and
+Wasserstein-to-a-point-mass coincide by construction and are no longer
+presented as two independent improper rules.
+
+### Outstanding
+
+- MAJOR: contributions not presented as one protocol (which quantity selects,
+  which diagnoses, which establishes identity).
+- MAJOR: n=512 tensors still unreleased; audited system still uncited.
+- MAJOR: "held-out" for the prompt comparison is uncertified against the
+  optimisation IDs.
+- MINOR: global baseline fitted on the full corpus; stale default result files.

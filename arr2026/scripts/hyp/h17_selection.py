@@ -81,8 +81,15 @@ def bootstrap(per_corpus_vec, rng, B):
     spread and make near-ties look separable.
     """
     draws = {r: [] for r in RULES}
+    # paired[r] grades r's pick AND rps's pick on the SAME evaluators --
+    # the strict rules minus both contestants' own criteria. Without this a
+    # selector is graded on a set that includes its opponent's rule but not its
+    # own, so the same selected model can receive different regrets on the two
+    # sides of the comparison.
+    paired = {r: [] for r in RULES if r != "rps"}
     for _ in range(B):
         per_rule = {r: [] for r in RULES}
+        per_pair = {r: [] for r in paired}
         for corpus, (vvec, tvec, models) in per_corpus_vec.items():
             nv = len(next(iter(vvec.values()))["rps"])
             nt = len(next(iter(tvec.values()))["rps"])
@@ -91,13 +98,24 @@ def bootstrap(per_corpus_vec, rng, B):
             vm = {m: {r: float(np.nanmean(vvec[m][r][iv])) for r in RULES} for m in models}
             tm = {m: {r: float(np.nanmean(tvec[m][r][it])) for r in RULES} for m in models}
             reg = _regret_from(tm, models, STRICT)
+            picks = {r: min(models, key=lambda m: vm[m][r]) for r in RULES}
             for r in RULES:
-                pick = min(models, key=lambda m: vm[m][r])
                 excl = [e for e in STRICT if e != r]
-                per_rule[r].append(float(np.mean([reg[e][pick] for e in excl])))
+                per_rule[r].append(float(np.mean([reg[e][picks[r]] for e in excl])))
+            for r in paired:
+                common = [e for e in STRICT if e not in (r, "rps")]
+                if not common:
+                    continue
+                a = float(np.mean([reg[e][picks[r]] for e in common]))
+                b = float(np.mean([reg[e][picks["rps"]] for e in common]))
+                per_pair[r].append(a - b)
         for r in RULES:
             draws[r].append(float(np.mean(per_rule[r])))
-    return {r: np.array(v) for r, v in draws.items()}
+        for r in paired:
+            if per_pair[r]:
+                paired[r].append(float(np.mean(per_pair[r])))
+    return ({r: np.array(v) for r, v in draws.items()},
+            {r: np.array(v) for r, v in paired.items()})
 
 
 def main() -> None:
@@ -199,7 +217,7 @@ def main() -> None:
 
     if a.boot:
         rng = np.random.default_rng(a.seed)
-        draws = bootstrap(per_corpus_vec, rng, a.boot)
+        draws, paired_draws = bootstrap(per_corpus_vec, rng, a.boot)
         print(f"\n===== bootstrap over respondents, B={a.boot} =====")
         print(f"{'selector':12s} {'class':9s} {'mean':>7s} {'95% CI':>18s}")
         for r in sorted(RULES, key=lambda r: float(np.mean(agg[r]))):
@@ -214,7 +232,9 @@ def main() -> None:
         m = len(others)
         rows = []
         for r in others:
-            d = draws[r] - draws["rps"]
+            # common-evaluator paired difference, not a difference of two
+            # self-excluded regrets
+            d = paired_draws[r]
             lo, hi = np.percentile(d, [2.5, 97.5])
             # two-sided bootstrap p: how often the difference crosses zero
             pv = 2.0 * min((d <= 0).mean(), (d >= 0).mean())

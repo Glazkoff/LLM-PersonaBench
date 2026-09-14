@@ -52,6 +52,18 @@ for k in sorted(a, key=lambda x: str(x)):
     Pa = np.load(os.path.join(a[k], "belief_probs.npy"))
     Pe = np.load(os.path.join(e[k], "belief_probs.npy"))
     Y = np.load(os.path.join(e[k], "target_answers.npy"))
+    # Apply the same orientation correction h17_selection.py uses. Without it
+    # every TARGET-DEPENDENT score here (S_0, CRPS, mode accuracy) is computed
+    # against mis-oriented answers on a recoded corpus. Deviation and modal-flip
+    # counts are orientation-invariant and were unaffected; the score table was
+    # not. This is the third script in which this correction was missing.
+    meta = json.load(open(os.path.join(e[k], "summary.json")))
+    if meta.get("corpus_recoded"):
+        rk = set(meta.get("reverse_keyed_targets", []))
+        flip = np.array([j in rk for j in meta.get("target_ids", [])], dtype=bool)
+        if flip.any() and flip.size == Pa.shape[1]:
+            Pa[:, flip, :] = Pa[:, flip, ::-1]
+            Pe[:, flip, :] = Pe[:, flip, ::-1]
     name = f"{str(k[0]).split('/')[-1]} / {k[1]}"
     for lab, fn in (("S_1/2", crps), ("S_0", s0), ("mode acc", mode_acc)):
         va, ve = fn(Pa, Y), fn(Pe, Y)

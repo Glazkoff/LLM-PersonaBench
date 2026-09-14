@@ -8,7 +8,7 @@
   "n_scored": 512,
   "n_train": 8000,
   "n_dropped_incomplete": 1,
-  "mass_on_scale_mean": 0.998,
+  "mass_on_scale_mean": 0.9979,
   "coverage": 1.0,
   "target_ids": [
     6,
@@ -39,9 +39,7 @@
   ],
   "reverse_keyed_targets": [
     6,
-    7,
     8,
-    9,
     10,
     27,
     36,

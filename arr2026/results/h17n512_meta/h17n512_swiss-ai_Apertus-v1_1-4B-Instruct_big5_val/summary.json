@@ -1,14 +1,14 @@
 {
   "corpus": "big5",
-  "model": "google/gemma-4-E4B-it",
-  "panel": "test2",
+  "model": "swiss-ai/Apertus-v1.1-4B-Instruct",
+  "panel": "val",
   "K": 5,
   "input_items": 25,
   "target_items": 25,
   "n_scored": 512,
   "n_train": 8000,
   "n_dropped_incomplete": 1,
-  "mass_on_scale_mean": 1.0,
+  "mass_on_scale_mean": 0.9964,
   "coverage": 1.0,
   "target_ids": [
     6,
