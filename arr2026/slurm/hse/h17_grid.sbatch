@@ -46,6 +46,20 @@ TAG=$(echo "$M" | tr '/' '_' | tr '.' 'p')
 
 echo "=== task $SLURM_ARRAY_TASK_ID : $M / $C / $P on $(hostname) ==="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
+
+# Weights are staged on the login node while this array drains, so a task can
+# start before its checkpoint has landed. Check the cache first and release the
+# GPU in seconds rather than discovering it after the model load.
+"$PY" - "$M" <<'PYEOF' || { echo "NOT STAGED: $M -- resubmit this task later"; exit 75; }
+import sys
+from transformers import AutoConfig
+try:
+    AutoConfig.from_pretrained(sys.argv[1], trust_remote_code=True)
+except Exception as e:
+    print(f"  {sys.argv[1]} not in local cache ({type(e).__name__})", flush=True)
+    raise SystemExit(1)
+print(f"  {sys.argv[1]} staged", flush=True)
+PYEOF
 "$PY" arr2026/scripts/hyp/h17_readout.py \
   --corpus "$C" --model "$M" --panel "$P" --n-panel 128 --batch-size "$BS" \
   --out "arr2026/results_hse/h17_${TAG}_${C}_${P}"
