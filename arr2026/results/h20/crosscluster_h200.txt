@@ -1,0 +1,16 @@
+cell                                               maxdev    meandev  mode flips
+gemma-4-E2B-it / ipip                            0.00e+00   0.00e+00           0
+gemma-4-E2B-it / sd3                             0.00e+00   0.00e+00           0
+Apertus-v1.1-0.5B-Instruct / ipip                0.00e+00   0.00e+00           0
+Apertus-v1.1-0.5B-Instruct / sd3                 0.00e+00   0.00e+00           0
+
+worst max deviation across cells: 0.00e+00
+modal-answer flips: 0 of 76800 item-respondent pairs (0.0000%)
+bit-identical
+
+Stacks compared
+  HSE cHARISMa : torch 2.11.0+cu128, transformers 5.17.0, H200 NVL
+  AIRI Euler   : torch 2.13.0,       transformers 5.16.1, H200 NVL
+Same GPU architecture, different clusters and different software stacks.
+This establishes stack invariance, NOT hardware invariance; the V100 arm
+(sm_70, fp16 path rather than bf16) tests the stronger claim.
