@@ -3,7 +3,7 @@ import statistics
 
 import numpy as np
 
-from src.evolution.operators import my_crossover, my_mutate
+from src.evolution.operators import personality_crossover, personality_mutation
 from src.evolution.utils import (
     clean_evoprompt_response,
     genotype_to_evoprompt_str,
@@ -498,7 +498,7 @@ class GAEvoluter(Evoluter):
 
                 if crossover_used:
                     crossover_prompt_id = self._next_operation_id("crossover", gen)
-                    child1_raw, child2_raw = my_crossover(
+                    child1_raw, child2_raw = personality_crossover(
                         parent1_prompt,
                         parent2_prompt,
                         self.evolution_model,
@@ -520,7 +520,7 @@ class GAEvoluter(Evoluter):
                         break
 
                     mutation_in = child_raw
-                    mutation_out = my_mutate(mutation_in, self.mutation_prob, self.evolution_model, self.config)
+                    mutation_out = personality_mutation(mutation_in, self.mutation_prob, self.evolution_model, self.config)
                     mutation_applied = mutation_out != mutation_in
                     mutation_prompt_id = self._next_operation_id("mutation", gen) if mutation_applied else None
 
