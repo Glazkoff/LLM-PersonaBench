@@ -23,12 +23,11 @@ On the Evaluation of Cluster-Level LLM Personality Simulation}
 \maketitle
 
 \begin{abstract}
-Large language models are increasingly prompted to act as ``digital twins'' of
-human personality groups, and such systems are routinely evaluated by how closely
-the model's questionnaire answers match those of real respondents. We show that
-this evaluation is broken. For the answer-similarity metric used throughout this
-literature, we prove that a simulator which reproduces the target population's
-response distribution \emph{exactly} is strictly dominated by a constant vector,
+The standard way to evaluate an LLM ``digital twin'' of a human personality
+group --- agreement between the model's questionnaire answers and real
+respondents' --- rewards the wrong thing. For this answer-similarity metric we
+prove that a simulator reproducing the target population's response
+distribution \emph{exactly} is strictly dominated by a constant vector,
 and that the gap is governed by the difference between the Gini mean difference
 and the mean absolute deviation about the median. On $410{,}168$ IPIP-NEO-120
 respondents this structural penalty is $7.75$ points. Empirically, across five
@@ -55,20 +54,15 @@ and per-cell results.
 \section{Introduction}
 \label{sec:intro}
 
-Simulating human respondents with large language models has become a common
-instrument in computational social science and in LLM-based user
-research. A widely used recipe conditions a model on a natural-language
-personality description and validates it by administering a psychometric
-inventory: the model answers the same Likert items a human answered, and the
-system is scored by the agreement between the two answer vectors.
-
-This paper argues that the scoring step invalidates the conclusion. Our starting
-point is a concrete artefact. In a cluster-level digital-twin system built on
+LLM simulations of human respondents are validated by administering a
+psychometric inventory and scoring the agreement between the model's answer
+vector and a human's. That scoring step invalidates the conclusion it is used
+to draw. Our starting point is a concrete artefact. In a cluster-level digital-twin system built on
 IPIP-NEO-120 \citep{johnson2014ipip}, evolutionary prompt optimisation raises
 answer-level agreement while simultaneously \emph{degrading} the recovered Big
 Five profile --- mean absolute error, trait similarity and facet similarity all
-move the wrong way. That pattern is usually reported as an open puzzle. We show
-it is a predictable consequence of the metric.
+move the wrong way. That pattern is usually reported as an open puzzle. We show the metric has a
+degenerate optimum, and measure where that bites.
 
 Our contributions are:
 
@@ -97,10 +91,19 @@ partition these systems condition on is not supported by any internal criterion.
 
 \paragraph{Task.} A population of respondents is partitioned into $K$ personality
 clusters by $k$-means over the 30 IPIP-NEO facet scores. For each cluster a
-natural-language description of the centroid is used to condition an LLM, which
-then answers the 120 IPIP-NEO items on a 1--5 Likert scale. Prompt wording is
-optimised by an evolutionary search whose fitness is answer agreement with
-held-out human members of the cluster.
+natural-language description is used to condition an LLM, which then answers the
+120 IPIP-NEO items on a 1--5 Likert scale. Prompt wording is optimised by an
+evolutionary search whose fitness is answer agreement with held-out human
+members of the cluster.
+
+Two regimes appear here and are not interchangeable. The \emph{cluster} regime
+conditions on the centroid alone, giving every member one prompt; it is what
+Prop.~\ref{prop:main} and the $7.75$-point penalty address. The
+\emph{individual} regime, used by the released prompt builder and by
+\S\ref{sec:mechanism}, inserts each respondent's own scores as intensity
+modifiers. By Remark~\ref{rem:conditional} one constant is optimal in the
+first and a per-respondent conditional median in the second; we name the
+regime wherever a result depends on it.
 
 \paragraph{The metric.} A simulated answer vector $x$ is scored against a human
 answer vector $y$ by
@@ -167,13 +170,13 @@ tight there despite large variance. On the IPIP items it is strict throughout
 (Table~\ref{tab:proposition}).
 \end{proof}
 
-The consequence is not a technicality. Under $S$, the ideal behaviour we actually
-want --- reproducing the population's response distribution --- is penalised
-relative to emitting one fixed vector. Optimising $S$ therefore pushes a
-simulator toward degenerate central-tendency responding, destroying exactly the
-answer variance that carries a personality profile. This is the mechanism behind
-the ``answer similarity up, profile fidelity down'' pattern reported as a puzzle
-in prior work.
+The consequence is not a technicality. Under $S$ the behaviour we want ---
+reproducing the population's response distribution --- is penalised relative to
+one fixed vector, so the optimum is degenerate in exactly the variance that
+carries a profile. Whether an optimiser is driven there is empirical and not
+uniform: $S_0$ ships a near-worst model from a heterogeneous pool
+(App.~\ref{app:rules}), yet prompt search under it improves proper scores too
+(App.~\ref{app:whenbites}).
 
 \subsection{The metric is CRPS with its dispersion term deleted}
 \label{sec:crps}
@@ -189,14 +192,13 @@ makes a constant optimal.
 
 This yields the natural repair. Define
 \begin{equation}
-S_\lambda \;=\; 1-\big[\,\mathbb{E}|X-y|-\lambda\,\mathbb{E}|X-X'|\,\big]/4 .
+S_\lambda \;=\; 1-\big[\,\mathbb{E}|X-y|-\lambda\,\mathbb{E}|X-X'|\,\big]/4 ,
 \label{eq:slambda}
 \end{equation}
 $\lambda{=}0$ is the audited metric --- improper, constant-optimal. $\lambda{=}1/2$
 is CRPS --- strictly proper, truth-optimal. $\lambda{>}1/2$ is improper in the
-opposite direction. Crucially $\lambda{=}1/2$ is \textbf{not} a tunable
-hyperparameter but the unique proper choice, so the repair cannot be dismissed as
-a metric tuned to produce a preferred conclusion.
+opposite direction. $\lambda{=}1/2$ is the unique proper choice, not a tunable
+hyperparameter.
 
 Sweeping $\lambda$ over the same 20 cells (Table~\ref{tab:lambda}) shows the
 repair works and what it costs the simulator. At $\lambda{=}1/2$ the human
@@ -210,6 +212,11 @@ constant in only $2$ of $20$ cells at the proper $\lambda{=}1/2$, though it does
 overtake in most cells once $\lambda$ reaches $1$, where the reward for
 dispersion is twice proper. So the simulator's
 failure is not an artefact of a bad metric: it survives the correct one.
+
+so larger is better. Scores in the appendices are reported as the
+corresponding \emph{loss} $L_{1/2}=1-S_{1/2}$, the normalised CRPS, where
+smaller is better; we use the loss wherever a table compares errors and mark
+the direction in each caption.
 
 \begin{table}[t]\centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -248,7 +255,7 @@ worse in every cluster.}
 \section{Empirical audit}
 \label{sec:audit}
 
-\paragraph{Setup.} We re-score a published cluster-level digital-twin system on
+\paragraph{Setup.} We re-score an existing cluster-level digital-twin system on
 its own artefacts: the same $410{,}168$-respondent IPIP-NEO-120 corpus, the same
 $k{=}4$ clusters, and the exact train/test respondent IDs it recorded, for five
 LLMs (GigaChat3-10B, GPT-4.1-mini, GPT-4.1-nano, Grok-4.1-fast, Qwen3-235B)
@@ -338,8 +345,7 @@ orientation raises the correlation between the model's and the humans' per-item
 mean profiles from $+0.09$ --- indistinguishable from no relationship at all ---
 to $+0.63$, and raises $S$ from $0.660$ to $0.739$.
 
-What matters is which conclusions survive. Three do, and the invariances are
-stated before the numbers rather than after:
+Three conclusions survive, with their invariances:
 
 \begin{itemize}\itemsep1pt
 \item \textbf{Proposition~\ref{prop:main} is invariant.} $\mathrm{MAD}$ and
@@ -585,8 +591,8 @@ says something the total does not, and the evidence for this is existential
 rather than correlational. gpt-oss-20b and Qwen2.5-72B invert cleanly: the
 former has $2.3\times$ the total dispersion of the latter ($1.131$ vs $0.488$)
 and \emph{less than half} its individuation ($0.126$ vs $0.295$). The rank
-correlation over the eleven models is $\rho=-0.30$, but its bootstrap 95\%
-interval is $[-0.92,0.42]$, so we rest nothing on it.
+correlation over the eleven models is $\rho=-0.30$ with a bootstrap 95\%
+interval of $[-0.92,0.42]$.
 
 QwQ-32B sharpens it: its dispersion is almost all per-item uncertainty ($0.729$
 of $0.753$), and it individuates less ($0.154$) than far smaller models.
@@ -670,18 +676,13 @@ on difficulty \emph{emitting} numbers are unsupported here.
 \section{Is $k{=}4$ a partition at all?}
 \label{sec:clusters}
 
-The systems we audit condition on a $k{=}4$ $k$-means partition of the 30 facet
-scores. We re-derive it and test $k \in \{2,\dots,15\}$ under three
-preprocessings. Our $k{=}4$ solution reproduces the published labels
-(ARI $=0.946$), confirming the pipeline.
-
-No criterion supports $k{=}4$: silhouette is $0.082$ there and falls with $k$,
-and Davies--Bouldin and the gap statistic select no interior $k$. Bootstrap
-stability looks like a defence (ARI $0.903$--$0.977$ for $k\le5$) until
-structureless surrogates matched to the facet covariance reproduce it exactly
-($0.911$ and $0.921$ against the real data's $0.910$), while a separated control
-confirms the test has power. At $n{=}410{,}168$ bootstrap agreement measures
-estimator variance, not multimodality (App.~\ref{app:clusters}).
+The audited systems condition on a $k{=}4$ $k$-means partition of the 30 facet
+scores. We reproduce it (ARI $=0.946$) and test $k\in\{2,\dots,15\}$ under three
+preprocessings: no criterion supports $k{=}4$, and the bootstrap stability that
+appears to defend it is matched exactly by structureless surrogates
+(App.~\ref{app:clusters}). The clusters are a convenient partition, not a
+discovered structure --- which is why our results are stated for the partition
+the systems use rather than for personality types.
 
 \section{Related work}
 \label{sec:related}
@@ -695,25 +696,24 @@ simulation from interview transcripts achieves high behavioural
 fidelity~\citep{park2024generative} at a per-person cost that motivates the
 cluster-level shortcut we study. Evolutionary and search-based prompt
 optimisation~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
-optimiser. Our contribution is orthogonal to all of these: we show the objective
-they are scored against is maximised by a degenerate solution.
+optimiser. Our contribution is orthogonal: the objective they are scored against
+is maximised by a degenerate solution.
 
 Classifier two-sample tests are standard for comparing
-distributions~\citep{lopezpaz2017revisiting}, and the failure mode we identify ---
-an absolute-error objective minimised by a conditional central tendency --- is why
+distributions~\citep{lopezpaz2017revisiting}; the failure mode we identify, an
+absolute-error objective minimised by a conditional central tendency, is why
 such losses blur predictions in generative modelling.
 
 \section{Conclusion}
 
 Cluster-level LLM personality simulation is evaluated with a metric that a
 constant vector wins and a real human loses. We proved why, measured the
-structural penalty at $7.75$ points, confirmed the inversion in $20$ of $20$
-matched cells, and proposed a suite that orders humans above constants. Beneath
-it the simulation is thinner still: correct persona assignment helps all
-eleven models and none of them enough, and an exact decomposition puts the
-loss in the mixture, not identity. Score with $S_{1/2}$; report floor and
-ceiling. Across four instruments improper scores select measurably worse
-simulators than proper ones (App.~\ref{app:rules}).
+penalty at $7.75$ points, confirmed the inversion in $20$ of $20$ matched
+cells, and proposed a suite that orders humans above constants. Beneath it the
+simulation is thinner still: the persona helps all eleven models and none
+enough, the loss sitting in the mixture rather than identity. Across four
+instruments improper scores select measurably worse simulators. Score with
+$S_{1/2}$; report floor and ceiling.
 
 \section*{Limitations}
 
@@ -863,9 +863,9 @@ respondents on which both baselines are fitted, and from App.~\ref{app:disjoint}
 panel. Only the selected models are run on the evaluation panel.
 
 The rules disagree. Rule~A selects Qwen2.5-72B ($S_0=0.753$); rule~B selects
-Qwen3.5-9B ($S_{1/2}=0.187$) --- models an order of magnitude apart in size. On
+Qwen3.5-9B ($L_{1/2}=0.187$) --- models an order of magnitude apart in size. On
 the untouched panel rule~B's pick is better by $0.010$ $[0.004,0.015]$ under
-$S_{1/2}$, paired over respondents. The task is ordinal prediction, so that is
+$L_{1/2}$ (lower is better), paired over respondents. The task is ordinal prediction, so that is
 the outcome we report; categorical log-loss agrees and is secondary, at $1.37$
 nats $[1.26,1.48]$. The log-loss gap is the larger number but the weaker
 argument, since it mostly registers the 72B's overconfidence rather than its
@@ -919,21 +919,23 @@ $p\le0.01$; the three strictly proper rules carry $p\ge0.66$.
 \toprule
 rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$ (Bonferroni CI)}\\
 \midrule
-RMSE of mean & weak & $-0.001$ & $[-0.003,-0.000]$\\
-Brier & strict & $-0.001$ & $[-0.005,+0.042]$\\
-log-loss & strict & $+0.005$ & $[-0.005,+0.030]$\\
-spherical & strict & $+0.000$ & $[-0.007,+0.044]$\\
-MAE of mean & improper & $+0.034$ & $[+0.008,+0.059]$\\
-mode accuracy & weak & $+0.271$ & $[+0.098,+0.287]$\\
-$S_0$ audited & improper & $+0.256$ & $[+0.247,+0.365]$\\
-Wasserstein & improper & $+0.256$ & $[+0.247,+0.365]$\\
+RMSE of mean & weak & $+0.000$ & $[+0.000,+0.000]$\\
+Brier & strict & $+0.004$ & $[-0.007,+0.025]$\\
+log-loss & strict & $+0.006$ & $[-0.004,+0.024]$\\
+spherical & strict & $+0.007$ & $[-0.002,+0.029]$\\
+MAE of mean & improper & $+0.025$ & $[+0.007,+0.055]$\\
+mode accuracy & weak & $+0.238$ & $[+0.084,+0.262]$\\
+$S_0$ audited & improper & $+0.298$ & $[+0.250,+0.368]$\\
+Wasserstein & improper & $+0.298$ & $[+0.250,+0.368]$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Differences are original-sample point estimates; intervals are Bonferroni
-simultaneous bounds from a respondent bootstrap with $B{=}4000$, so they hold
-jointly over all eight comparisons. Every improper rule selects worse than
+Each row grades the two selectors on the same evaluators --- the strictly
+proper rules minus both contestants' own criteria --- so a rule is never
+compared on a set containing its opponent's criterion but not its own.
+Differences are bootstrap means over respondents, $B{=}4000$; intervals are
+Bonferroni simultaneous bounds holding jointly over all eight comparisons. Every improper rule selects worse than
 $S_{1/2}$, and the audited $S_0$ is the worst of them. The gap is not marginal:
 mean regret is $0.258$ for $S_0$ against $0.002$ for $S_{1/2}$. On SD3, $S_0$
 selects a model whose regret is $0.98$ --- all but the worst of the twelve ---
@@ -941,8 +943,7 @@ while every strictly proper rule selects the best. An evaluator using the
 audited metric on this pool would ship very nearly the worst simulator
 available.
 
-That number depends on the pool, and we state the dependence rather than bury
-it. With eight closely matched instruction-tuned models the same comparison
+The number depends on the pool. With eight closely matched instruction-tuned models the same comparison
 gives $+0.028$ $[+0.011,+0.059]$: still resolved, ten times smaller. Regret is
 normalised within the candidate set, so a pool of uniformly competent models
 compresses every rule's mistakes toward zero. The honest reading is that the
@@ -952,11 +953,12 @@ in the second case.
 
 Three things this does not say. The strictly proper rules remain mutually
 indistinguishable, so the evidence is for the class boundary, not a ranking
-inside it. RMSE of the forecast mean is resolved at $-0.001$
-$[-0.002,-0.000]$, which is statistically separable and practically nil;
-eliciting the mean is sufficient here, and we have no basis for preferring a
-strict rule over it. And regret is normalised within the candidate set, so $0$
-means the best of these twelve, never good: every candidate still loses to the
+inside it. RMSE of the forecast mean --- only weakly proper --- is not
+distinguishable from $S_{1/2}$ at all: it selects the same model on every
+instrument, and its paired difference is exactly zero. Eliciting the mean is
+sufficient on this candidate set, and we have no basis for preferring a strict
+rule over it. And regret is normalised within the candidate set, so $0$ means
+the best of these twelve, never good: every candidate still loses to the
 persona-free prior of App.~\ref{app:disjoint}.
 
 Mode accuracy is the other collapse, at $+0.267$. Discarding the distribution
@@ -988,7 +990,7 @@ running was that $S_0$ would improve while the proper scores would not.
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lr@{\,}r@{\,}r@{}}
 \toprule
-model & $\Delta S_0$ & $\Delta S_{1/2}$ & $\Delta$log-loss\\
+model & $\Delta S_0$ & $\Delta L_{1/2}$ & $\Delta$log-loss\\
 \midrule
 Qwen3.8-27B      & $+0.060$ & $-0.039$ & $-0.235$\\
 granite-4.2-8B   & $+0.046$ & $-0.046$ & $-0.630$\\
@@ -1000,7 +1002,7 @@ gemma-4-12B-it   & $+0.070$ & $-0.068$ & $-0.619$\\
 
 Evolved minus base, $256$ held-out respondents over four clusters, paired
 bootstrap. Every interval excludes zero and \emph{every} direction is an
-improvement: $S_{1/2}$ and log-loss are losses, so the negative signs are
+improvement: $L_{1/2}$ and log-loss are losses, so the negative signs are
 gains. The prediction is falsified on all four models. Across respondents the
 change in $S_0$ and the change in $S_{1/2}$ correlate at $r=0.96$--$0.99$, and
 $85$--$97\%$ of respondents improve on both at once.
