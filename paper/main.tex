@@ -795,11 +795,14 @@ summaries.
 Every analysis in this paper is deterministic given its inputs and requires no
 LLM calls except the belief-level measurement of \S\ref{sec:mechanism}. The
 released corpus and committed run artefacts reconstruct the scoring, selection
-and orientation analyses. Three inputs are too large for the repository and are
-not in it: the refreshed belief tensors behind App.~\ref{app:current}, the
-per-respondent score arrays behind App.~\ref{app:reach}, and the $n{=}512$
-forecast tensors behind App.~\ref{app:rules}. Those three analyses cannot
-currently be reconstructed from the repository alone; everything else can. We ran the full analysis pipeline
+and orientation analyses. Some inputs are too large for the repository and are not in it: the refreshed
+belief tensors behind App.~\ref{app:current}, the per-respondent score arrays
+behind App.~\ref{app:reach}, the $n{=}512$ forecast tensors behind
+App.~\ref{app:rules}, and the cross-architecture replication tensors behind
+App.~\ref{app:repro}. Those analyses ship their printed outputs but cannot
+currently be reconstructed from the repository alone. We do not claim this list
+is exhaustive; where an analysis consumes a tensor, the tensor is in the
+repository only if this appendix says so. We ran the full analysis pipeline
 independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure we compared --- the $\lambda^\star$ values, the orientation deltas, the
@@ -1082,7 +1085,7 @@ $0.051$ against $0.507$ where it does not; for one cell that median gap is
 $0.000$, exact ties resolved differently by different kernels.
 
 \paragraph{What survives.} The scores largely do. Averaged over the four
-cells, the change is $1.6\times10^{-3}$ for $S_0$, $3.3\times10^{-3}$ for mode
+cells, the change is $1.6\times10^{-3}$ for $S_0$, $3.4\times10^{-3}$ for mode
 accuracy and $4.7\times10^{-3}$ for $S_{1/2}$; the largest single-cell change
 is $1.6\times10^{-2}$, for $S_{1/2}$ on gemma-4-E2B/SD3. We do not convert
 these into a ratio against the regret differences of App.~\ref{app:rules}: raw

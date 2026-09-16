@@ -6,8 +6,12 @@ np.nansum, which returns 0.0 for an all-NaN slice and therefore entered a
 missing persona-item readout as an answer of 0. The script is fixed, but a run
 that predates the fix left summary.json and variance_ladder.csv holding the
 contaminated aggregates. Re-running the model would need a GPU; the reduction
-does not -- the belief tensors it consumed are already on disk. This recomputes
-exactly the fields the bug touched and leaves every other field alone.
+does not -- the belief tensors it consumed are already on disk. This recomputes the
+fields the bug touched. It also rewrites `coverage` at full precision and adds a
+`repaired` note; the readout, entropy, token-mass and validity fields are left
+alone. Missing-cell counts are reported for every cluster, whether or not its
+aggregate moved -- an unchanged aggregate means the file was already repaired,
+not that the data are complete.
 """
 import argparse, json
 from pathlib import Path
@@ -48,6 +52,8 @@ def main():
         mix = np.sqrt(within + between)
         denom = max(float(np.nansum(within[ok] + between[ok])), 1e-12)
 
+        nmiss = int(missing.sum())
+        print(f"  cluster {cl}: {nmiss} missing persona-item cells")
         row = csv.cluster == cl
         old = float(csv.loc[row, "VR_belief_mixture"].iloc[0])
         new = float(np.nanmean(mix[ok] / human_sd[ok]))
@@ -56,7 +62,7 @@ def main():
         csv.loc[row, "share_between"] = float(np.nansum(between[ok]) / denom)
         csv.loc[row, "coverage"] = float(1.0 - missing.mean())
         if abs(old - new) > 1e-9:
-            changed.append((cl, old, new, int(missing.sum())))
+            changed.append((cl, old, new, nmiss))
 
     csv.to_csv(d / "variance_ladder.csv", index=False)
 
@@ -73,7 +79,8 @@ def main():
         print(f"  cluster {cl}: VR_belief_mixture {old:.4f} -> {new:.4f} "
               f"({nmiss} missing cells)")
     if not changed:
-        print(f"  no aggregate changed ({int(sum(nm for _,_,_,nm in changed))} differing clusters); missing-cell counts are reported per cluster above")
+        print("  no aggregate changed; the file was already repaired "
+              "(missing-cell counts above are the data, not the diff)")
     print(f"VR_belief_mixture_mean -> {s['VR_belief_mixture_mean']}  "
           f"share_between_mean -> {s['share_between_mean']}")
 

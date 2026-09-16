@@ -10,8 +10,12 @@ Each `h4_<tag>/` holds one belief measurement:
   reproducible without any additional index.
 - `readout_cluster_<k>/{train,test}_case_ids.csv` — the respondent ids.
 
-Every model and intervention reported in the paper ships its tensors, so
-each reported number can be recomputed from this directory alone.
+Most models and interventions reported in the paper ship their tensors here.
+Some do not, and App. A of the paper names them: the refreshed belief tensors,
+the per-respondent score arrays, the n=512 forecast tensors, and the
+cross-architecture replication tensors. Those analyses ship their printed
+outputs, not their inputs, so they cannot be recomputed from this directory
+alone.
 
 **Runs marked `"valid": false` are failures, kept for the record and excluded
 from every reported figure.** `h4_qwen36_27b` is one: the FP8 checkpoint
