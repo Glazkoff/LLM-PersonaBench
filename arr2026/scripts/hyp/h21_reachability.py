@@ -141,6 +141,8 @@ def main() -> None:
                if "<|channel|>" in tmpl else "My answer is ")
 
     results = {}
+
+    per_resp: dict = {}
     for gname, gens in (("base", base), ("evolved", evolved)):
         for dname, directive in DIRECTIVES.items():
             prompts, Y = [], np.full((len(rows), len(items)), np.nan)
@@ -175,10 +177,21 @@ def main() -> None:
 
             lv = np.arange(1, 6, dtype=float)
             mean = (P * lv).sum(-1)
-            sd = float(np.sqrt(np.clip((P * lv**2).sum(-1) - mean**2, 0, None)).mean())
+            sd_ri = np.sqrt(np.clip((P * lv**2).sum(-1) - mean**2, 0, None))
+            sd = float(sd_ri.mean())
             key = f"{gname}/{dname}"
-            results[key] = dict(s0=float(np.nanmean(s0(P, Y))),
-                                crps=float(np.nanmean(crps(np.cumsum(P, 2)[:, :, :4], Y))),
+            # Retain the respondent axis so downstream work can bootstrap over
+            # respondents. The scalars below keep their original definition
+            # (grand nanmean over the full respondent x item array) so the
+            # reported numbers are unchanged by this addition.
+            s0_ri = s0(P, Y)
+            crps_ri = crps(np.cumsum(P, 2)[:, :, :4], Y)
+            per_resp[key] = dict(
+                s0=np.nanmean(s0_ri, axis=1).tolist(),
+                crps=np.nanmean(crps_ri, axis=1).tolist(),
+                sd=sd_ri.mean(axis=1).tolist())
+            results[key] = dict(s0=float(np.nanmean(s0_ri)),
+                                crps=float(np.nanmean(crps_ri)),
                                 sd=sd)
             print(f"  {key:22s} S0={results[key]['s0']:.4f} "
                   f"CRPS={results[key]['crps']:.4f} sd={sd:.4f}", flush=True)
@@ -186,6 +199,8 @@ def main() -> None:
     d = Path(a.out); d.mkdir(parents=True, exist_ok=True)
     (d / "summary.json").write_text(json.dumps(
         {"model": a.model, "n": len(rows), "results": results}, indent=2))
+    (d / "per_respondent.json").write_text(json.dumps(
+        {"model": a.model, "n": len(rows), "per_respondent": per_resp}))
 
     pick_s0 = max(results, key=lambda k: results[k]["s0"])
     pick_cr = min(results, key=lambda k: results[k]["crps"])
