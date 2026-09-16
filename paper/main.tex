@@ -1031,12 +1031,14 @@ instrument and we read them as descriptive, not as an identified mechanism.
 
 What we can say about optimisation is narrower. Evolutionary prompt search
 improved both $S_0$ and the proper scores on all four models tested, so
-optimising an improper objective did not degrade the artefact here; we did not
-measure the dispersion of the candidates that search actually visited, so we
-cannot attribute that to the degenerate optimum being out of reach. Model
-selection over a
-heterogeneous pool is the opposite case: an over-confident weak model is
-already most of the way to a point mass, so $S_0$ rewards it and ships it.
+optimising an improper objective did not degrade the artefact here. We have
+since measured the dispersion of the candidates a prompt search can visit
+(App.~\ref{app:reach}): over twelve persona conditions, the two rules select
+\emph{different} candidates on one model of four, with $S_0$ taking the less
+dispersed one --- so the degenerate direction is reachable by prompt search,
+though the proper-rule cost of following $S_0$ there is small. Model selection
+over a heterogeneous pool remains the sharper case: an over-confident weak model
+is already most of the way to a point mass, so $S_0$ rewards it and ships it.
 
 The practical rule that follows is narrower than ``never optimise $S_0$'' and
 more useful. An improper score is comparatively safe as a search objective over
@@ -1406,6 +1408,75 @@ $0.076$, must not be read as an ordering. We note it because the same two models
 \emph{do} separate on $\mathrm{VR}_\text{between}$ itself ($-0.064$
 $[-0.073,-0.049]$): which quantity is reported decides whether these two models
 are distinguishable, and the point estimates alone would not have revealed that.
+
+\section{Is the degenerate direction reachable by prompt search?}
+\label{app:reach}
+
+App.~\ref{app:whenbites} reports that prompt search improved $S_0$ and the
+proper scores together, and notes that this alone cannot establish whether the
+degenerate optimum is out of reach --- we had not measured the dispersion of the
+candidates a search can actually visit. This appendix measures it.
+
+\paragraph{Design.} We cross six persona directives with the base and evolved
+genotypes, giving twelve candidates scored on the same $192$ respondents.
+Three directives push towards concentration (\textit{decisive}: avoid
+middle-of-the-scale answers; \textit{extreme}: answer at the ends;
+\textit{consistent}: similar items receive the same number), one pushes towards
+spread (\textit{varied}), one asks for the spread of a single real respondent
+(\textit{calibrated}), and one is the unmodified prompt. Each candidate is
+scored under $S_0$ and under CRPS, and we record its mean predictive SD. The
+verdict is fixed in code before the run: \textsc{reachable} iff the candidate
+$S_0$ selects is strictly less dispersed than the one the proper rule selects.
+
+\paragraph{Stability.} A strict inequality between two close candidates is not a
+result, so we resample respondents ($2000$ draws, paired --- all conditions are
+scored on the same respondents) and \emph{re-run the selection inside each
+replicate}, so the reported stability includes the selection uncertainty rather
+than freezing the point-estimate picks.
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\toprule
+Model & $S_0$ selects & rules differ & \textsc{reach.}\\
+\midrule
+Granite-4.2-8B & evolved/varied & $0\%$ & $0.0\%$\\
+Gemma-4-12B-it & evolved/varied & $0\%$ & $0.0\%$\\
+Qwen3.8-27B & evolved/varied & $73\%$ & $73.0\%$\\
+gpt-oss-20b & evolved/calibrated & $98\%$ & $\mathbf{98.5\%}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{One model of four, and it is real.} On Granite-4.2 and Gemma-4 both
+rules select the same candidate in every one of the $2000$ replicates: nothing
+to separate. On Qwen3.8 the point estimate fires \textsc{reachable}, but the
+proper rule's own choice is unstable --- it takes \textit{calibrated} in $73\%$
+of replicates and \textit{varied} in the rest --- so we do not count it. On
+gpt-oss-20b the disagreement is stable: $S_0$ selects \textit{evolved/calibrated}
+in $100\%$ of replicates, CRPS selects \textit{evolved/varied} in $98\%$, the two
+rules differ in $98.4\%$, and $S_0$'s candidate is less dispersed by $0.045$
+$[0.042,0.048]$. That is the phenomenon Prop.~\ref{prop:main} predicts, produced
+by an ordinary prompt search rather than by a constructed counterexample.
+
+\paragraph{The cost of following it is small.} Magnitude matters for the
+practical claim. On gpt-oss-20b the contested pair is
+\textit{evolved/varied} ($S_0=0.7173$, CRPS $=0.1667$, $\bar\sigma=0.899$)
+against \textit{evolved/calibrated} ($S_0=0.7234$, CRPS $=0.1677$,
+$\bar\sigma=0.854$). Following $S_0$ costs $0.0010$ of CRPS and buys a $5\%$
+reduction in dispersion. So prompt search can reach the degenerate direction,
+but the penalty it incurs there is nothing like the $0.98$ regret that model
+selection incurs on SD3 (App.~\ref{app:whenbites}). The two settings differ in
+degree, and the selection setting remains the dangerous one.
+
+\paragraph{Concentration directives do not win.} Across all four models neither
+\textit{decisive} nor \textit{extreme} is selected by either rule, and both
+\emph{lower} $S_0$ relative to the unmodified prompt. This is what
+Prop.~\ref{prop:main} implies: the optimum is a point mass \emph{at the
+conditional median}, so a directive can supply concentration but not location,
+and concentration in the wrong place is penalised by both rules. The one
+directive that reduced dispersion and was selected, \textit{calibrated}, asks
+for the spread of a single real respondent rather than for confidence.
 
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
