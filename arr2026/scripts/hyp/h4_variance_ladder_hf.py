@@ -258,8 +258,15 @@ def main():
         # of the persona-MIXTURE distribution, not the average within-persona SD.
         # Law of total variance:  Var(X_j) = E_i[Var(X_j|i)] + Var_i(E[X_j|i]).
         # Computed exactly from the retained probability vectors -- no sampling noise.
+        # An entirely missing probability vector must stay missing: np.nansum over
+        # an all-NaN slice returns 0.0, which would enter the moments as an answer
+        # of 0 (impossible on a 1..5 scale) and inflate between_var. Mask it back
+        # so the nanmean/nanvar below skip the cell.
+        missing_ij = np.isnan(probs_all).all(axis=2)
         mu_ij = np.nansum(probs_all * vals_f[None, None, :], axis=2)          # E[X|i,j]
         ex2_ij = np.nansum(probs_all * (vals_f ** 2)[None, None, :], axis=2)  # E[X^2|i,j]
+        mu_ij[missing_ij] = np.nan
+        ex2_ij[missing_ij] = np.nan
         var_ij = np.clip(ex2_ij - mu_ij ** 2, 0, None)                        # Var(X|i,j)
         within_var = np.nanmean(var_ij, axis=0)          # E_i[Var(X_j|i)]
         between_var = np.nanvar(mu_ij, axis=0)           # Var_i(E[X_j|i])

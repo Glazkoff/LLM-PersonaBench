@@ -38,8 +38,16 @@ VALS = np.arange(1, 6).astype(float)
 def decompose(probs, human_sd):
     """h4's law-of-total-variance reduction, verbatim in math."""
     ok = human_sd > 0
+    # A persona-item cell whose probability vector is entirely missing must stay
+    # missing. np.nansum over an all-NaN slice returns 0.0, which would enter the
+    # moments as an answer of 0 -- impossible on a 1..5 scale -- and inflate the
+    # between-persona variance. Mask those cells back to NaN so the nanmean /
+    # nanvar below skip them instead of averaging a fabricated zero.
+    missing = np.isnan(probs).all(axis=2)
     mu_ij = np.nansum(probs * VALS[None, None, :], axis=2)
     ex2_ij = np.nansum(probs * (VALS ** 2)[None, None, :], axis=2)
+    mu_ij[missing] = np.nan
+    ex2_ij[missing] = np.nan
     var_ij = np.clip(ex2_ij - mu_ij ** 2, 0, None)
     within_var = np.nanmean(var_ij, axis=0)
     between_var = np.nanvar(mu_ij, axis=0)

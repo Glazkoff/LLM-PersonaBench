@@ -608,9 +608,9 @@ while the total does not, moving $0.430 \to 0.343 \to 0.488$.
 One bound survives across the whole set --- a $34\times$ parameter range, six
 families, three generations, dense and mixture-of-experts, and both standard and
 reasoning-tuned models: no model here exceeds
-$\mathrm{VR}_\text{between}\approx0.30$. It is a bound on this set and not a
-law: on four current-generation models measured afterwards, Gemma-4-12B reaches
-$0.344$ (App.~\ref{app:current}). Individuation stays well under half the human
+$\mathrm{VR}_\text{between}\approx0.30$ --- a bound on this set, not a law:
+Gemma-4-12B, measured later, reaches $0.334$ (App.~\ref{app:current}).
+Individuation stays under half the human
 value throughout, and neither the largest model nor the most dispersed one is
 the best at it.
 
@@ -830,7 +830,7 @@ replication under a stricter design, not a controlled ablation of overlap.
 On $256$ held-out respondents the second fact of \S\ref{sec:mechanism} is
 unqualified and the first is weakened. Every model still loses to the empirical
 prior, by $0.098$--$0.204$ across all four model--instrument cells. The identity
-effect survives in three of those four: on SD3 by $+0.010$ $[+0.006,+0.015]$ for
+effect survives in three of those four: on SD3 by $+0.010$ $[+0.006,+0.016]$ for
 Qwen2.5-7B and $+0.017$ $[+0.013,+0.020]$ for Granite-4.1, and on IPIP by
 $+0.004$ $[+0.002,+0.005]$ for Qwen2.5-7B --- but Granite-4.1 on IPIP gives
 $+0.002$ $[-0.001,+0.005]$, which does not exclude zero.
@@ -868,7 +868,7 @@ panel. Only the selected models are run on the evaluation panel.
 
 The rules disagree. Rule~A selects Qwen2.5-72B ($S_0=0.753$); rule~B selects
 Qwen3.5-9B ($L_{1/2}=0.187$) --- models an order of magnitude apart in size. On
-the untouched panel rule~B's pick is better by $0.010$ $[0.004,0.015]$ under
+the untouched panel rule~B's pick is better by $0.010$ $[0.004,0.016]$ under
 $L_{1/2}$ (lower is better), paired over respondents. The task is ordinal prediction, so that is
 the outcome we report; categorical log-loss agrees and is secondary, at $1.37$
 nats $[1.26,1.48]$. The log-loss gap is the larger number but the weaker
@@ -928,8 +928,8 @@ $p\le0.01$; the three strictly proper alternatives carry $p=1.00$.
 rule & class & \multicolumn{2}{c}{regret vs.\ $S_{1/2}$ (Bonferroni CI)}\\
 \midrule
 RMSE of mean & weak & $+0.000$ & $[+0.000,+0.000]$\\
-Brier & strict & $+0.004$ & $[-0.007,+0.025]$\\
-log-loss & strict & $+0.006$ & $[-0.004,+0.024]$\\
+Brier & strict & $+0.003$ & $[-0.008,+0.025]$\\
+log-loss & strict & $+0.004$ & $[-0.007,+0.022]$\\
 spherical & strict & $+0.007$ & $[-0.002,+0.029]$\\
 MAE of mean & improper & $+0.025$ & $[+0.007,+0.055]$\\
 mode accuracy & weak & $+0.238$ & $[+0.084,+0.262]$\\
@@ -1352,7 +1352,11 @@ The eleven-model table in \S\ref{sec:mechanism} predates four model families
 released since. We repeated the belief-level measurement on one current model
 from each, under the identical protocol ($40$ personas per cluster, four
 clusters, exact readout from the retained probability vectors), and added the
-interval the original table lacks. Resampling is over personas --- the
+interval the original table lacks. One cell in thirty-two hundred is missing for
+Gemma-4 (cluster~1, $30$ persona--item readouts, coverage $0.9984$); those cells
+are held out of the moments rather than summed to zero, which would enter as an
+impossible answer of $0$ and inflate the between-persona term. Every other model
+here has complete coverage. Resampling is over personas --- the
 exchangeable unit for a between-persona variance --- with $2000$ draws; because
 the protocol assigns the same personas to every model, each replicate applies
 one set of persona indices to all four, so the differences below are paired.
@@ -1364,9 +1368,9 @@ one set of persona indices to all four, so the differences below are paired.
 Model & Params & VR$_\text{with}$ & VR$_\text{betw}$ [95\% CI] & VR$_\text{tot}$\\
 \midrule
 Granite-4.2-8B & 8B & 0.729 & \textbf{0.155} [0.143, 0.160] & 0.757\\
-Gemma-4-12B-it & 12B & 0.336 & \textbf{0.344} [0.308, 0.357] & 0.514\\
+Gemma-4-12B-it & 12B & 0.336 & \textbf{0.334} [0.303, 0.345] & 0.506\\
 gpt-oss-20b (MoE) & 21B & 1.120 & \textbf{0.127} [0.118, 0.130] & 1.130\\
-Qwen3.8-27B & 27B & 0.869 & \textbf{0.219} [0.197, 0.229] & 0.912\\
+Qwen3.8-27B & 27B & 0.869 & \textbf{0.219} [0.197, 0.229] & 0.911\\
 \midrule
 \textit{human} & --- & --- & 1.000 & 1.000\\
 \bottomrule
@@ -1380,23 +1384,25 @@ $\mathrm{VR}_\text{total}$ $1.130$ against $1.131$. We report this because it is
 the only direct check we have that the readout is stable across runs of the same
 model, and it bears on \S\ref{sec:mechanism} rather than on the new models.
 
-\paragraph{The $0.30$ bound does not hold.} Gemma-4-12B reaches
-$\mathrm{VR}_\text{between}=0.344$, with the interval's lower end at $0.308$,
-above the $\approx0.30$ ceiling that held across all eleven earlier models. The
-qualitative claim is unchanged --- $0.344$ is still about a third of the human
-value, and the conditioning still fails to individuate --- but the specific
-numerical ceiling was a property of the models available when we measured them,
-not a limit of the method, and we have corrected \S\ref{sec:mechanism} accordingly.
+\paragraph{The $0.30$ bound is not a law.} Gemma-4-12B measures
+$\mathrm{VR}_\text{between}=0.334$ $[0.303,0.345]$, above the $\approx0.30$
+figure that held across all eleven earlier models --- but the interval's lower
+end sits essentially \emph{at} that figure, so we read this as evidence that the
+ceiling is a property of the models we happened to measure rather than as a
+decisive refutation of it. The qualitative claim is unchanged: $0.334$ is still
+about a third of the human value. We have scoped
+\S\ref{sec:mechanism} accordingly rather than restating the bound as universal.
 
 \paragraph{The two failure modes are separable.} Gemma-4 and gpt-oss-20b fail in
 opposite directions, and the intervals separate them. gpt-oss-20b carries
 \emph{above}-human total dispersion ($\mathrm{VR}_\text{total}=1.130$) of which
 almost none individuates: the between-persona share of belief variance is
 $0.016$ $[0.014,0.018]$. Gemma-4 is its mirror --- a between-persona share of
-$0.518$ $[0.480,0.535]$, the only model we have measured where individuation and
-within-persona noise are comparable in size, but collapsed in magnitude
-($\mathrm{VR}_\text{total}=0.514$). The paired difference in that share is
-$-0.502$ $[-0.519,-0.464]$. Near-human total spread is therefore not evidence of
+$0.504$ $[0.466,0.524]$ but collapsed in magnitude
+($\mathrm{VR}_\text{total}=0.506$). It is not alone in that: Qwen2.5-32B and
+Qwen2.5-72B in the eleven-model set have between-persona shares of $0.485$ and
+$0.429$. The paired difference against gpt-oss is
+$-0.488$ $[-0.507,-0.451]$. Near-human total spread is therefore not evidence of
 individuation, and individuation is not evidence of human-like spread; a single
 variance ratio cannot distinguish the two, which is the argument of
 \S\ref{sec:mechanism} restated on models chosen after it was written.
@@ -1448,35 +1454,56 @@ gpt-oss-20b & evolved/calibrated & $98\%$ & $\mathbf{98.5\%}$\\
 \end{tabular}
 \end{center}
 
-\paragraph{One model of four, and it is real.} On Granite-4.2 and Gemma-4 both
-rules select the same candidate in every one of the $2000$ replicates: nothing
-to separate. On Qwen3.8 the point estimate fires \textsc{reachable}, but the
-proper rule's own choice is unstable --- it takes \textit{calibrated} in $73\%$
-of replicates and \textit{varied} in the rest --- so we do not count it. On
+\paragraph{Two point-estimate disagreements; one of them stable.} On Granite-4.2
+and Gemma-4 both rules select the same candidate in every one of the $2000$
+replicates: nothing to separate. On Qwen3.8 the point estimate fires
+\textsc{reachable}, but the proper rule's own choice is unstable --- it takes
+\textit{calibrated} in $73\%$ of replicates and \textit{varied} in the rest ---
+so we report it as inconclusive rather than as a second instance. On
 gpt-oss-20b the disagreement is stable: $S_0$ selects \textit{evolved/calibrated}
 in $100\%$ of replicates, CRPS selects \textit{evolved/varied} in $98\%$, the two
 rules differ in $98.4\%$, and $S_0$'s candidate is less dispersed by $0.045$
 $[0.042,0.048]$. That is the phenomenon Prop.~\ref{prop:main} predicts, produced
 by an ordinary prompt search rather than by a constructed counterexample.
 
+\paragraph{What these frequencies are, and are not.} The $90\%$ stability line
+that separates ``stable'' from ``inconclusive'' above is a descriptive cut we
+chose, not an inferential guarantee; at $80\%$, $90\%$ or $95\%$ only gpt-oss
+qualifies, and at $99\%$ neither model does, so the reported outcome is not an
+artefact of where we put it. A bootstrap selection frequency is the stability of
+a choice under resampling, not the probability that a claim is true. Two further
+limits: H21 draws $48$ respondents within each of four clusters while this
+resampling pools all $192$, so it does not reproduce the stratified design; and
+re-selecting inside each replicate measures selection instability on one
+evaluation panel, which is not an independent deployment test. We therefore read
+App.~\ref{app:reach} as an exploratory finite-candidate result.
+
 \paragraph{The cost of following it is small.} Magnitude matters for the
 practical claim. On gpt-oss-20b the contested pair is
 \textit{evolved/varied} ($S_0=0.7173$, CRPS $=0.1667$, $\bar\sigma=0.899$)
 against \textit{evolved/calibrated} ($S_0=0.7234$, CRPS $=0.1677$,
-$\bar\sigma=0.854$). Following $S_0$ costs $0.0010$ of CRPS and buys a $5\%$
-reduction in dispersion. So prompt search can reach the degenerate direction,
-but the penalty it incurs there is nothing like the $0.98$ regret that model
-selection incurs on SD3 (App.~\ref{app:whenbites}). The two settings differ in
-degree, and the selection setting remains the dangerous one.
+$\bar\sigma=0.854$). Following $S_0$ costs $0.0010$ of CRPS --- about $0.6\%$ of
+the better candidate's score --- and buys a $5\%$ reduction in dispersion. So the
+degenerate direction is reachable here, but the observed cost of taking it is
+small. We deliberately do not compare that figure to the $0.98$ regret reported
+for model selection in App.~\ref{app:whenbites}: that regret is normalised
+within a candidate set and averaged over evaluators, and this is a raw CRPS
+difference, so the two are not on one scale. What the two experiments jointly
+show is that the disagreement occurs in both settings, not that one is
+quantifiably more dangerous than the other.
 
-\paragraph{Concentration directives do not win.} Across all four models neither
-\textit{decisive} nor \textit{extreme} is selected by either rule, and both
-\emph{lower} $S_0$ relative to the unmodified prompt. This is what
-Prop.~\ref{prop:main} implies: the optimum is a point mass \emph{at the
-conditional median}, so a directive can supply concentration but not location,
-and concentration in the wrong place is penalised by both rules. The one
-directive that reduced dispersion and was selected, \textit{calibrated}, asks
-for the spread of a single real respondent rather than for confidence.
+\paragraph{The directives that ask for confidence do not deliver it.} Across all
+four models neither \textit{decisive} nor \textit{extreme} is selected by either
+rule, and both \emph{lower} $S_0$ relative to the unmodified prompt. The reason
+is not that they concentrate in the wrong place: measured against the matching
+base prompt they \emph{raise} mean predictive SD in $13$ of $16$ model--genotype
+comparisons. Their names describe an intention, and the measured effect usually
+runs the other way, so we report them as instruments that failed rather than as
+evidence about where $S_0$'s optimum lies. The one directive that did reduce
+dispersion and was selected, \textit{calibrated}, asks for the spread of a
+single real respondent rather than for confidence. A search that reliably
+produced low-dispersion candidates might well find more disagreement than we do;
+our directive set is a weak probe of that space.
 
 \section{Finite-sample behaviour of the anchors}
 \label{app:samplesize}
