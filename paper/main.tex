@@ -796,11 +796,10 @@ Every analysis in this paper is deterministic given its inputs and requires no
 LLM calls except the belief-level measurement of \S\ref{sec:mechanism}. The
 released corpus and committed run artefacts reconstruct the scoring, selection
 and orientation analyses. Three inputs are too large for the repository and are
-not in it: the belief tensors behind \S\ref{sec:mechanism} and
-App.~\ref{app:current}, the per-respondent score arrays behind
-App.~\ref{app:reach}, and the $n{=}512$ forecast tensors behind
-App.~\ref{app:rules}; those analyses are reconstructable only from the archive,
-not from the repository alone. We ran the full analysis pipeline
+not in it: the refreshed belief tensors behind App.~\ref{app:current}, the
+per-respondent score arrays behind App.~\ref{app:reach}, and the $n{=}512$
+forecast tensors behind App.~\ref{app:rules}. Those three analyses cannot
+currently be reconstructed from the repository alone; everything else can. We ran the full analysis pipeline
 independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure we compared --- the $\lambda^\star$ values, the orientation deltas, the
@@ -809,9 +808,7 @@ agreed to the digits we print, except the $k{=}4$ reproduction ARI, which is
 $0.946$ on one environment and $0.951$ on the other. Code and per-cell results are released. The belief simplices
 $(40\text{ personas}\times120\text{ items}\times5)$ per cluster are included for
 the eleven models of \S\ref{sec:mechanism}, with the persona ordering fixed by
-the released corpus; the three inputs named above are not, so the numbers
-depending on them are recomputable from the archive rather than from the
-repository alone. Runs that failed
+the released corpus. Runs that failed
 the validity guard ship too, marked invalid, so the record shows what was
 measured and rejected. One transform maps model answers onto the corpus's
 recoded scale and is imported by every analysis that compares the two.
@@ -962,8 +959,8 @@ The number depends on the pool. With eight closely matched instruction-tuned mod
 gives $+0.028$ $[+0.011,+0.059]$: still resolved, ten times smaller. Regret is
 normalised within the candidate set, so it measures position within that pool
 and cannot be read across pools. What it does show is where in \emph{this}
-pool the audited metric lands: near the bottom, while the proper rules land near
-the top.
+pool the audited metric lands: near the bottom on SD3, where its selection
+carries regret $0.98$, while the proper rules select the best.
 
 Three things this does not say. The strictly proper rules remain mutually
 indistinguishable, so the evidence is for the class boundary, not a ranking
@@ -1479,10 +1476,9 @@ by an ordinary prompt search rather than by a constructed counterexample.
 
 \paragraph{What these frequencies are, and are not.} The $90\%$ stability line
 that separates ``stable'' from ``inconclusive'' above is a descriptive cut we
-chose, not an inferential guarantee; at $80\%$, $90\%$ or $95\%$ only gpt-oss
-qualifies, and at $99\%$ neither model does, so the reported outcome is not an
-artefact of where we put it: gpt-oss alone qualifies at $80$, $90$, $95$ and
-$99\%$, and neither model qualifies at $99.5\%$. A bootstrap selection frequency is the stability
+chose, not an inferential guarantee. It is not load-bearing: gpt-oss alone
+qualifies at $80$, $90$, $95$ and $99\%$, and neither disagreement qualifies at
+$99.5\%$. A bootstrap selection frequency is the stability
 of a choice under resampling, not the probability that a claim is true. The
 resampling is stratified to match the design --- $48$ respondents drawn within
 each of four clusters, as H21 draws them --- but re-selecting inside each

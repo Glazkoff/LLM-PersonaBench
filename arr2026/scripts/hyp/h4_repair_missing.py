@@ -66,14 +66,14 @@ def main():
     s["share_between_mean"] = round(float(csv.share_between.mean()), 4)
     s["coverage"] = round(float(csv.coverage.mean()), 6)
     s["repaired"] = ("variance fields recomputed from the saved tensors after the "
-                     "missing-readout fix; fields the bug did not touch are unchanged")
+                     "missing-readout fix. Coverage is rewritten at full precision and repair metadata added; readout, entropy, token-mass and validity fields are untouched.")
     (d / "summary.json").write_text(json.dumps(s, indent=2))
 
     for cl, old, new, nmiss in changed:
         print(f"  cluster {cl}: VR_belief_mixture {old:.4f} -> {new:.4f} "
               f"({nmiss} missing cells)")
     if not changed:
-        print("  no cluster changed (no missing cells)")
+        print(f"  no aggregate changed ({int(sum(nm for _,_,_,nm in changed))} differing clusters); missing-cell counts are reported per cluster above")
     print(f"VR_belief_mixture_mean -> {s['VR_belief_mixture_mean']}  "
           f"share_between_mean -> {s['share_between_mean']}")
 
