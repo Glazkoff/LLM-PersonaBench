@@ -13,8 +13,12 @@ respondent's modal answer flips.
 import glob, json, os
 import numpy as np
 
-HSE = "/home/glazkov/personality-twins-arr/hse_repl"
-EUL = "/home/glazkov/personality-twins-arr/LLM-PersonaBench/arr2026/results_euler"
+# Paths are overridable so the released bundle can be pointed at from any
+# checkout: set ARR_HSE_REPL / ARR_EULER_RESULTS to the unpacked directories.
+HSE = os.environ.get("ARR_HSE_REPL",
+                     "/home/glazkov/personality-twins-arr/hse_repl")
+EUL = os.environ.get("ARR_EULER_RESULTS",
+                     "/home/glazkov/personality-twins-arr/LLM-PersonaBench/arr2026/results_euler")
 
 
 def index_by_identity(root, prefix):

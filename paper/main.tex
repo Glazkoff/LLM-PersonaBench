@@ -798,11 +798,17 @@ released corpus and committed run artefacts reconstruct the scoring, selection
 and orientation analyses. Some inputs are too large for the repository and are not in it: the refreshed
 belief tensors behind App.~\ref{app:current}, the per-respondent score arrays
 behind App.~\ref{app:reach}, the $n{=}512$ forecast tensors behind
-App.~\ref{app:rules}, and the cross-architecture replication tensors behind
-App.~\ref{app:repro}. Those analyses ship their printed outputs but cannot
-currently be reconstructed from the repository alone. We do not claim this list
-is exhaustive; where an analysis consumes a tensor, the tensor is in the
-repository only if this appendix says so. We ran the full analysis pipeline
+App.~\ref{app:rules}, and the cross-cluster and cross-architecture replication
+readouts behind App.~\ref{app:repro}. These accompany the submission as one
+archive ($568$ files, $92$\,MB compressed) carrying a per-file SHA-256 manifest
+and the CPU commands that regenerate each number above from it; no GPU and no
+model weights are required, because the archive holds the saved model outputs
+rather than the runs that produced them. We verified that path end to end: from
+the archive alone, the intervals of App.~\ref{app:current}, the frequencies of
+App.~\ref{app:reach}, the eight paired differences of App.~\ref{app:rules} and
+the deviations of App.~\ref{app:repro} all reproduce as printed. We do not claim
+the list is exhaustive; where an analysis consumes a tensor, the tensor is in
+the repository only if this appendix says so, and otherwise in the archive. We ran the full analysis pipeline
 independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure we compared --- the $\lambda^\star$ values, the orientation deltas, the

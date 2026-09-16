@@ -10,8 +10,11 @@ propriety.
 import glob, json, os
 import numpy as np
 
-A100 = "/home/glazkov/personality-twins-arr/a100_repl"
-EUL = "/home/glazkov/personality-twins-arr/LLM-PersonaBench/arr2026/results_euler"
+# Overridable for the released bundle: see ARR_A100_REPL / ARR_EULER_RESULTS.
+A100 = os.environ.get("ARR_A100_REPL",
+                      "/home/glazkov/personality-twins-arr/a100_repl")
+EUL = os.environ.get("ARR_EULER_RESULTS",
+                     "/home/glazkov/personality-twins-arr/LLM-PersonaBench/arr2026/results_euler")
 
 
 def idx(root, prefix):
