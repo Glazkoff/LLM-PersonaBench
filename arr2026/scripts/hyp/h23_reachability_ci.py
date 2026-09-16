@@ -41,6 +41,10 @@ def main():
     ap.add_argument("--results", default="arr2026/results_euler")
     ap.add_argument("--tags", nargs="+", required=True)
     ap.add_argument("--n-boot", type=int, default=2000)
+    ap.add_argument("--per-cluster", type=int, default=48,
+                    help="respondents drawn per cluster by h21; rows are laid "
+                         "out in contiguous per-cluster blocks, so the strata "
+                         "are recoverable from position alone")
     ap.add_argument("--seed", type=int, default=2026)
     ap.add_argument("--out", default="arr2026/results_euler/h23_reachability_ci")
     a = ap.parse_args()
@@ -67,12 +71,26 @@ def main():
         print(f"  verdict={'REACHABLE' if reach else 'NOT SEPARATED'} "
               f"sd gap={gap:+.4f}")
 
+        # h21 builds `rows` cluster by cluster (sorted), each contributing
+        # --per-cluster respondents, so respondent i belongs to cluster
+        # i // per_cluster. Resampling the pooled 192 would let the cluster
+        # proportions drift and would not reproduce the stratified design, so
+        # draw within each block and concatenate.
+        pc = a.per_cluster
+        if pc > 0 and n % pc == 0:
+            blocks = [np.arange(k * pc, (k + 1) * pc) for k in range(n // pc)]
+            print(f"  stratified bootstrap: {len(blocks)} blocks of {pc}")
+        else:
+            blocks = [np.arange(n)]
+            print(f"  WARNING: n={n} is not a multiple of per-cluster={pc}; "
+                  f"falling back to pooled resampling")
         rng = np.random.default_rng(a.seed)
         n_reach = 0
         gaps, agree = [], 0
         picks_s0, picks_cr = {}, {}
         for _ in range(a.n_boot):
-            idx = rng.integers(0, n, n)
+            idx = np.concatenate([b[rng.integers(0, len(b), len(b))]
+                                  for b in blocks])
             q_s0, q_cr, r, g = verdict(np.nanmean(S0[:, idx], 1),
                                        np.nanmean(CR[:, idx], 1),
                                        np.nanmean(SD[:, idx], 1), keys)

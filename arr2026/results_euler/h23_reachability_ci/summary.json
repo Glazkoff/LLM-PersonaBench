@@ -1,0 +1,92 @@
+{
+  "n_boot": 2000,
+  "seed": 2026,
+  "models": {
+    "h21_ibm-granite_granite-4_2-8b": {
+      "model": "ibm-granite/granite-4.2-8b",
+      "n_respondents": 192,
+      "point_pick_s0": "evolved/varied",
+      "point_pick_crps": "evolved/varied",
+      "point_verdict_reachable": false,
+      "point_sd_gap": 0.0,
+      "reachable_fraction": 0.0,
+      "sd_gap_lo": 0.0,
+      "sd_gap_hi": 0.0,
+      "sd_gap_excludes_zero": false,
+      "rules_agree_fraction": 1.0,
+      "selection_stability": 1.0,
+      "sd_gap_ci_interpretable": true,
+      "s0_pick_distribution": {
+        "evolved/varied": 1.0
+      },
+      "crps_pick_distribution": {
+        "evolved/varied": 1.0
+      }
+    },
+    "h21_Qwen_Qwen3_8-27B": {
+      "model": "Qwen/Qwen3.8-27B",
+      "n_respondents": 192,
+      "point_pick_s0": "evolved/varied",
+      "point_pick_crps": "evolved/calibrated",
+      "point_verdict_reachable": true,
+      "point_sd_gap": -0.030071380062827835,
+      "reachable_fraction": 0.774,
+      "sd_gap_lo": -0.031249736644022197,
+      "sd_gap_hi": 0.0,
+      "sd_gap_excludes_zero": false,
+      "rules_agree_fraction": 0.226,
+      "selection_stability": 0.774,
+      "sd_gap_ci_interpretable": false,
+      "s0_pick_distribution": {
+        "evolved/varied": 1.0
+      },
+      "crps_pick_distribution": {
+        "evolved/calibrated": 0.774,
+        "evolved/varied": 0.226
+      }
+    },
+    "h21_openai_gpt-oss-20b": {
+      "model": "openai/gpt-oss-20b",
+      "n_respondents": 192,
+      "point_pick_s0": "evolved/calibrated",
+      "point_pick_crps": "evolved/varied",
+      "point_verdict_reachable": true,
+      "point_sd_gap": -0.04529348142581269,
+      "reachable_fraction": 0.992,
+      "sd_gap_lo": -0.04649786695345261,
+      "sd_gap_hi": -0.04394204116685939,
+      "sd_gap_excludes_zero": true,
+      "rules_agree_fraction": 0.008,
+      "selection_stability": 0.992,
+      "sd_gap_ci_interpretable": true,
+      "s0_pick_distribution": {
+        "evolved/calibrated": 1.0
+      },
+      "crps_pick_distribution": {
+        "evolved/varied": 0.992,
+        "evolved/calibrated": 0.008
+      }
+    },
+    "h21_google_gemma-4-12B-it": {
+      "model": "google/gemma-4-12B-it",
+      "n_respondents": 192,
+      "point_pick_s0": "evolved/varied",
+      "point_pick_crps": "evolved/varied",
+      "point_verdict_reachable": false,
+      "point_sd_gap": 0.0,
+      "reachable_fraction": 0.0,
+      "sd_gap_lo": 0.0,
+      "sd_gap_hi": 0.0,
+      "sd_gap_excludes_zero": false,
+      "rules_agree_fraction": 1.0,
+      "selection_stability": 1.0,
+      "sd_gap_ci_interpretable": true,
+      "s0_pick_distribution": {
+        "evolved/varied": 1.0
+      },
+      "crps_pick_distribution": {
+        "evolved/varied": 1.0
+      }
+    }
+  }
+}

@@ -474,3 +474,43 @@ selected models on a fresh test panel; report paired test CRPS with
 respondent-level uncertainty, log-loss secondary, gap to prior. Their
 caution: agreement between the rules is "no selection difference in this
 candidate set and split" and is not a ninth point.
+
+---
+
+## Round 1 (run_20260916_6cf2a1b2) — gpt-6-astra, 7.5/10, Almost
+
+Reviewer credited App. C as genuinely answering the Round-10 simulator-selection
+challenge: independently reconstructed the choices (Qwen2.5-72B under S_0,
+Qwen3.5-9B under CRPS), verified the disjoint test panel, reproduced
+0.00984 CRPS [0.00430, 0.01554].
+
+### Confirmed blocker (verified by executor before acting)
+np.nansum over an all-NaN probability vector returns 0.0, so missing persona-item
+readouts entered the moments as an answer of 0. Gemma-4 cluster 1: 30 such cells,
+coverage 0.99375. Reviewer's count matched the data exactly. Shared by h4 and h22
+— agreement between them was therefore NOT independent replication.
+Fixed; Gemma VR_between 0.344 -> 0.334 [0.303,0.345]. Lower bound now sits at
+0.30, so the "bound does not hold" framing was withdrawn.
+
+### Further confirmed errors
+- "only model where individuation and noise are comparable" FALSE:
+  Qwen2.5-32B 0.485, Qwen2.5-72B 0.429.
+- decisive/extreme RAISE predictive SD in 13 of 16 comparisons; the
+  "concentration in the wrong place" explanation was unsupported.
+- 0.0010 raw CRPS vs 0.98 normalised regret = cross-unit comparison. Withdrawn.
+- App. D Brier/log-loss rows contradicted the released record (6 of 8 rows
+  matched, so the rows were wrong, not the file).
+- Two interval upper bounds truncated 0.0155 -> 0.015; now 0.016.
+
+### Reviewer's standing suspicions to track
+- shared bugs mistaken for replication
+- raw losses compared with normalised regret
+- prompt labels treated as measured mechanisms
+- manuscript corrections not propagated to code/documentation (H15 docstring
+  still repeats withdrawn fitted-threshold / identical-elicitation claims)
+- release package incomplete: H4 belief tensors, H21 per_respondent.json, and
+  H17 n=512 tensors absent; App. A's blanket reconstructability claim overstated
+- App. D "uniformly competent pool compresses normalised regret" is a
+  mathematical error (shrinking differences shrinks the denominator too)
+- NOT YET FIXED: H23 pools 192 respondents where H21 stratified 48 per cluster
+- Standing caveats: same-family review independence; bibliography not reverified

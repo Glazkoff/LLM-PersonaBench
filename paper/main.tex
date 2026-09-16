@@ -792,9 +792,15 @@ summaries.
 
 \section{Reproducibility}
 
-Every analysis in this paper is deterministic given the released corpus and the
-committed run artefacts, and requires no LLM calls except the belief-level
-measurement of \S\ref{sec:mechanism}. We ran the full analysis pipeline
+Every analysis in this paper is deterministic given its inputs and requires no
+LLM calls except the belief-level measurement of \S\ref{sec:mechanism}. The
+released corpus and committed run artefacts reconstruct the scoring, selection
+and orientation analyses. Three inputs are too large for the repository and are
+not in it: the belief tensors behind \S\ref{sec:mechanism} and
+App.~\ref{app:current}, the per-respondent score arrays behind
+App.~\ref{app:reach}, and the $n{=}512$ forecast tensors behind
+App.~\ref{app:rules}; those analyses are reconstructable only from the archive,
+not from the repository alone. We ran the full analysis pipeline
 independently on two clusters with different operating systems, Python versions
 and library versions (scikit-learn 1.2 vs 1.7, pandas 2.1 vs 3.0). Every reported
 figure we compared --- the $\lambda^\star$ values, the orientation deltas, the
@@ -945,7 +951,7 @@ compared on a set containing its opponent's criterion but not its own.
 Differences are bootstrap means over respondents, $B{=}4000$; intervals are
 Bonferroni simultaneous bounds holding jointly over all eight comparisons. Every improper rule selects worse than
 $S_{1/2}$, and the audited $S_0$ is the worst of them. The gap is not marginal:
-mean regret is $0.258$ for $S_0$ against $0.002$ for $S_{1/2}$. On SD3, $S_0$
+mean regret is $0.259$ for $S_0$ against $0.003$ for $S_{1/2}$. On SD3, $S_0$
 selects a model whose regret is $0.98$ --- all but the worst of the twelve ---
 while every strictly proper rule selects the best. An evaluator using the
 audited metric on this pool would ship very nearly the worst simulator
@@ -953,8 +959,8 @@ available.
 
 The number depends on the pool. With eight closely matched instruction-tuned models the same comparison
 gives $+0.028$ $[+0.011,+0.059]$: still resolved, ten times smaller. Regret is
-normalised within the candidate set, so a pool of uniformly competent models
-compresses every rule's mistakes toward zero. The honest reading is that the
+normalised within the candidate set, so it measures position within that pool
+and cannot be read across pools. The honest reading is that the
 audited metric's errors are cheap when every candidate is good and expensive
 when they are not --- and a practitioner choosing among heterogeneous models is
 in the second case.
@@ -1033,18 +1039,19 @@ What we can say about optimisation is narrower. Evolutionary prompt search
 improved both $S_0$ and the proper scores on all four models tested, so
 optimising an improper objective did not degrade the artefact here. We have
 since measured the dispersion of the candidates a prompt search can visit
-(App.~\ref{app:reach}): over twelve persona conditions, the two rules select
-\emph{different} candidates on one model of four, with $S_0$ taking the less
-dispersed one --- so the degenerate direction is reachable by prompt search,
-though the proper-rule cost of following $S_0$ there is small. Model selection
-over a heterogeneous pool remains the sharper case: an over-confident weak model
-is already most of the way to a point mass, so $S_0$ rewards it and ships it.
+(App.~\ref{app:reach}): over twelve persona conditions the rules disagree on
+two models of four, and on one of those the disagreement is stable under
+resampling, with $S_0$ taking the less dispersed candidate. The degenerate
+direction is therefore reachable by prompt search in this candidate set, at a
+small observed cost. Model selection over a heterogeneous pool is the other
+case we measured: an over-confident weak model is already most of the way to a
+point mass, so $S_0$ rewards it and ships it.
 
-The practical rule that follows is narrower than ``never optimise $S_0$'' and
-more useful. An improper score is comparatively safe as a search objective over
-a family of candidates that are all well dispersed, and unsafe as a selection
-criterion over candidates that differ in how dispersed they are --- which is
-exactly the situation when comparing models of different capability. We report
+The pattern across the two settings is narrower than ``never optimise $S_0$''.
+In the candidate sets we measured, $S_0$ disagreed with a proper rule far more
+damagingly when selecting among candidates that differ in dispersion than when
+searching over prompts that do not. We state that as what we observed in these
+pools, not as a general safety recommendation. We report
 this because it bounds our own claim: the audit establishes that $S_0$ is
 improper and that it selects badly, not that every system built with it is
 worse for having used it.
@@ -1352,8 +1359,9 @@ The eleven-model table in \S\ref{sec:mechanism} predates four model families
 released since. We repeated the belief-level measurement on one current model
 from each, under the identical protocol ($40$ personas per cluster, four
 clusters, exact readout from the retained probability vectors), and added the
-interval the original table lacks. One cell in thirty-two hundred is missing for
-Gemma-4 (cluster~1, $30$ persona--item readouts, coverage $0.9984$); those cells
+interval the original table lacks. Some readouts are missing for
+Gemma-4 --- $30$ persona--item readouts of $19{,}200$, one in $640$, all in
+cluster~1 where they are $30$ of $4{,}800$ (coverage $0.99375$); those cells
 are held out of the moments rather than summed to zero, which would enter as an
 impossible answer of $0$ and inflate the between-persona term. Every other model
 here has complete coverage. Resampling is over personas --- the
@@ -1401,7 +1409,7 @@ $0.016$ $[0.014,0.018]$. Gemma-4 is its mirror --- a between-persona share of
 $0.504$ $[0.466,0.524]$ but collapsed in magnitude
 ($\mathrm{VR}_\text{total}=0.506$). It is not alone in that: Qwen2.5-32B and
 Qwen2.5-72B in the eleven-model set have between-persona shares of $0.485$ and
-$0.429$. The paired difference against gpt-oss is
+$0.429$. The paired difference, gpt-oss minus Gemma-4, is
 $-0.488$ $[-0.507,-0.451]$. Near-human total spread is therefore not evidence of
 individuation, and individuation is not evidence of human-like spread; a single
 variance ratio cannot distinguish the two, which is the argument of
@@ -1425,7 +1433,7 @@ candidates a search can actually visit. This appendix measures it.
 
 \paragraph{Design.} We cross six persona directives with the base and evolved
 genotypes, giving twelve candidates scored on the same $192$ respondents.
-Three directives push towards concentration (\textit{decisive}: avoid
+Three directives are intended to push towards concentration (\textit{decisive}: avoid
 middle-of-the-scale answers; \textit{extreme}: answer at the ends;
 \textit{consistent}: similar items receive the same number), one pushes towards
 spread (\textit{varied}), one asks for the spread of a single real respondent
@@ -1448,8 +1456,8 @@ Model & $S_0$ selects & rules differ & \textsc{reach.}\\
 \midrule
 Granite-4.2-8B & evolved/varied & $0\%$ & $0.0\%$\\
 Gemma-4-12B-it & evolved/varied & $0\%$ & $0.0\%$\\
-Qwen3.8-27B & evolved/varied & $73\%$ & $73.0\%$\\
-gpt-oss-20b & evolved/calibrated & $98\%$ & $\mathbf{98.5\%}$\\
+Qwen3.8-27B & evolved/varied & $77\%$ & $77.4\%$\\
+gpt-oss-20b & evolved/calibrated & $99\%$ & $\mathbf{99.2\%}$\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1458,25 +1466,26 @@ gpt-oss-20b & evolved/calibrated & $98\%$ & $\mathbf{98.5\%}$\\
 and Gemma-4 both rules select the same candidate in every one of the $2000$
 replicates: nothing to separate. On Qwen3.8 the point estimate fires
 \textsc{reachable}, but the proper rule's own choice is unstable --- it takes
-\textit{calibrated} in $73\%$ of replicates and \textit{varied} in the rest ---
+\textit{calibrated} in $77\%$ of replicates and \textit{varied} in the rest ---
 so we report it as inconclusive rather than as a second instance. On
 gpt-oss-20b the disagreement is stable: $S_0$ selects \textit{evolved/calibrated}
-in $100\%$ of replicates, CRPS selects \textit{evolved/varied} in $98\%$, the two
-rules differ in $98.4\%$, and $S_0$'s candidate is less dispersed by $0.045$
-$[0.042,0.048]$. That is the phenomenon Prop.~\ref{prop:main} predicts, produced
+in $100\%$ of replicates, CRPS selects \textit{evolved/varied} in $99\%$, the two
+rules differ in $99.2\%$, and $S_0$'s candidate is less dispersed by $0.045$
+$[0.044,0.047]$. That is the phenomenon Prop.~\ref{prop:main} predicts, produced
 by an ordinary prompt search rather than by a constructed counterexample.
 
 \paragraph{What these frequencies are, and are not.} The $90\%$ stability line
 that separates ``stable'' from ``inconclusive'' above is a descriptive cut we
 chose, not an inferential guarantee; at $80\%$, $90\%$ or $95\%$ only gpt-oss
 qualifies, and at $99\%$ neither model does, so the reported outcome is not an
-artefact of where we put it. A bootstrap selection frequency is the stability of
-a choice under resampling, not the probability that a claim is true. Two further
-limits: H21 draws $48$ respondents within each of four clusters while this
-resampling pools all $192$, so it does not reproduce the stratified design; and
-re-selecting inside each replicate measures selection instability on one
-evaluation panel, which is not an independent deployment test. We therefore read
-App.~\ref{app:reach} as an exploratory finite-candidate result.
+artefact of where we put it, though the classification does change at $99\%$,
+where neither model qualifies. A bootstrap selection frequency is the stability
+of a choice under resampling, not the probability that a claim is true. The
+resampling is stratified to match the design --- $48$ respondents drawn within
+each of four clusters, as H21 draws them --- but re-selecting inside each
+replicate measures selection instability on one evaluation panel, which is not
+an independent deployment test. We therefore read App.~\ref{app:reach} as an
+exploratory finite-candidate result.
 
 \paragraph{The cost of following it is small.} Magnitude matters for the
 practical claim. On gpt-oss-20b the contested pair is
@@ -1501,7 +1510,9 @@ comparisons. Their names describe an intention, and the measured effect usually
 runs the other way, so we report them as instruments that failed rather than as
 evidence about where $S_0$'s optimum lies. The one directive that did reduce
 dispersion and was selected, \textit{calibrated}, asks for the spread of a
-single real respondent rather than for confidence. A search that reliably
+single real respondent rather than for confidence --- and it is not the only
+condition that lowered dispersion: \textit{evolved/varied} sits below
+\textit{evolved/base} on all four models. A search that reliably
 produced low-dispersion candidates might well find more disagreement than we do;
 our directive set is a weak probe of that space.
 
