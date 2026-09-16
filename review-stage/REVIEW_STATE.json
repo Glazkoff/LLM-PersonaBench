@@ -1,25 +1,14 @@
 {
-  "run_id": "run_20260908_83d21cad",
-  "round": 11,
-  "threadId": "01a085f2-ef50-7f23-980b-399ce9f9e6f1",
+  "run_id": "run_20260916_6cf2a1b2",
+  "round": 4,
+  "threadId": "01a0ab34-92d5-7ff1-bd1a-c3c3161253f7",
   "reviewer_backend": "codex",
-  "executor_model": "claude-opus-5",
-  "executor_model_source": "host-declared",
-  "executor_family": "anthropic",
-  "requested_reviewer_model": "gpt-6-astra",
-  "reported_reviewer_model": "gpt-6-astra",
-  "reviewer_model_source": "requested",
-  "reviewer_family": "openai",
-  "family_relation": "different",
-  "identity_assurance": "caller_declared",
-  "independence_verified": "unverified",
+  "reviewer_model": "gpt-6-astra",
   "requires_external_acquittal": false,
-  "status": "in_progress",
+  "status": "completed",
   "difficulty": "hard",
   "last_score": 8.0,
-  "last_verdict": "ready",
-  "pending_experiments": [
-    "round 11 review BLOCKED: codex credits exhausted until 2026-09-15"
-  ],
-  "timestamp": "2026-09-10T01:19:37Z"
+  "last_verdict": "almost",
+  "pending_experiments": [],
+  "timestamp": "2026-09-16T18:00:58.800973+00:00"
 }

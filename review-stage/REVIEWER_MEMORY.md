@@ -514,3 +514,27 @@ Fixed; Gemma VR_between 0.344 -> 0.334 [0.303,0.345]. Lower bound now sits at
   mathematical error (shrinking differences shrinks the denominator too)
 - NOT YET FIXED: H23 pools 192 respondents where H21 stratified 48 per cluster
 - Standing caveats: same-family review independence; bibliography not reverified
+
+## Rounds 2-4 (run_20260916_6cf2a1b2) — gpt-6-astra — 7.5 / 8.0 / 8.0, Almost
+
+R2: the Round-1 fix never reached the artifacts — corrected H22 job ran on the
+cluster, output never pulled, committed JSON contradicted the manuscript.
+Reviewer also showed the H23 stratification needed CPU only (h21 lays rows out
+in contiguous 48-blocks), refuting my "9.5h GPU re-run" claim.
+R3: named the recurring pattern — PARTIAL WITHDRAWALS: a corrective sentence
+added while the incompatible original assertion survives. Found four.
+R4: found two more of the same, both in the compiled PDF. Confirmed
+h4_repair_missing.py is a legitimate reduction (synthetic-missing-cell test,
+item-by-item cross-check, idempotent, no laundering).
+
+Closed across the run: missing-readout nansum bug (h4+h22); Gemma recomputed;
+stale released artifacts re-pulled and repaired by CPU reduction; H23
+stratified; App. A inventory made accurate; App. D/E comparative-cost claims
+withdrawn; App. M exclusivity and 99% errors fixed; 8 result dirs tracked.
+
+Still open at loop end (reviewer: acceptable as disclosed limitations, NOT
+blockers): three large inputs absent from the repository so those analyses are
+not independently reconstructable; small persona panels; exploratory
+prompt-selection experiment; H15 stale docstring (documentation debt).
+Standing caveats: same-family review independence; provisional acceptance;
+bibliography not independently reverified.
