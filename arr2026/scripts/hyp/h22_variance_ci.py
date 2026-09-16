@@ -45,8 +45,13 @@ def decompose(probs, human_sd):
     between_var = np.nanvar(mu_ij, axis=0)
     mixture_sd = np.sqrt(within_var + between_var)
     denom = max(float(np.nansum(within_var[ok] + between_var[ok])), 1e-12)
+    # VR_within / VR_between follow h13_individuation_fidelity.py: the per-item
+    # component SD divided by the human across-respondent SD, averaged over
+    # items with non-degenerate human spread. VR_total is h4's VR_belief_mixture.
     return {
         "share_between": float(np.nansum(between_var[ok]) / denom),
+        "VR_within": float(np.nanmean(np.sqrt(within_var[ok]) / human_sd[ok])),
+        "VR_between": float(np.nanmean(np.sqrt(between_var[ok]) / human_sd[ok])),
         "VR_mixture": float(np.nanmean(mixture_sd[ok] / human_sd[ok])),
     }
 
@@ -97,14 +102,15 @@ def main():
 
     # Paired bootstrap over personas.
     rng = np.random.default_rng(args.seed)
-    draws = {tag: {"share_between": [], "VR_mixture": []} for tag in args.tags}
+    STATS = ("share_between", "VR_within", "VR_between", "VR_mixture")
+    draws = {tag: {k: [] for k in STATS} for tag in args.tags}
     for b in range(args.n_boot):
         idx = {cl: rng.integers(0, n_personas[cl], n_personas[cl])
                for cl in args.clusters}
         for tag in args.tags:
             s = [decompose(data[tag][cl][idx[cl]], human[cl])
                  for cl in args.clusters]
-            for k in ("share_between", "VR_mixture"):
+            for k in STATS:
                 draws[tag][k].append(float(np.mean([x[k] for x in s])))
         if (b + 1) % 500 == 0:
             print(f"  bootstrap {b+1}/{args.n_boot}", flush=True)
@@ -116,7 +122,7 @@ def main():
     print("\n=== per-model (95% percentile CI over personas) ===", flush=True)
     for tag in args.tags:
         e = {}
-        for k in ("share_between", "VR_mixture"):
+        for k in STATS:
             lo, hi = ci(draws[tag][k])
             e[k] = {"point": point[tag][k], "lo": lo, "hi": hi}
             print(f"{tag:34s} {k:14s} {point[tag][k]:.4f}  [{lo:.4f}, {hi:.4f}]",
@@ -124,6 +130,18 @@ def main():
         out["models"][tag] = e
 
     # Paired pairwise differences on share_between.
+    print("\n=== paired differences in VR_between ===", flush=True)
+    out["pairs_vrb"] = {}
+    for i, a in enumerate(args.tags):
+        for bb in args.tags[i + 1:]:
+            d = np.array(draws[a]["VR_between"]) - np.array(draws[bb]["VR_between"])
+            lo, hi = ci(d)
+            pt = point[a]["VR_between"] - point[bb]["VR_between"]
+            sep = "SEPARATED" if (lo > 0 or hi < 0) else "overlaps zero"
+            print(f"{a} - {bb}: {pt:+.4f}  [{lo:+.4f}, {hi:+.4f}]  {sep}", flush=True)
+            out["pairs_vrb"][f"{a}|{bb}"] = {"point": pt, "lo": lo, "hi": hi,
+                                             "separated": bool(lo > 0 or hi < 0)}
+
     print("\n=== paired differences in share_between ===", flush=True)
     out["pairs"] = {}
     for i, a in enumerate(args.tags):
