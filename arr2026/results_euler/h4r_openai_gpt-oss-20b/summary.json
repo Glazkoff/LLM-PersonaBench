@@ -1,0 +1,16 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "VR_belief_mixture_mean": 1.1297,
+  "share_within_mean": 0.9838,
+  "share_between_mean": 0.0162,
+  "VR_within_only_NOT_COMPARABLE_mean": 1.1188,
+  "VR_readout_mean": 1.115,
+  "belief_entropy_mean": 1.3751,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.992,
+  "coverage": 1.0,
+  "valid": true,
+  "verdict": "DECODING LOSS: the persona-mixture belief carries near-human spread; sampling discards it.",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic.",
+  "repaired": "variance fields recomputed from the saved tensors after the missing-readout fix; fields the bug did not touch are unchanged"
+}

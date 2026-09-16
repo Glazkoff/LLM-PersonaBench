@@ -1,0 +1,16 @@
+{
+  "model": "ibm-granite/granite-4.2-8b",
+  "VR_belief_mixture_mean": 0.7568,
+  "share_within_mean": 0.9317,
+  "share_between_mean": 0.0683,
+  "VR_within_only_NOT_COMPARABLE_mean": 0.7242,
+  "VR_readout_mean": 0.7287,
+  "belief_entropy_mean": 0.8958,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.9989,
+  "coverage": 1.0,
+  "valid": true,
+  "verdict": "PARTIAL",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic.",
+  "repaired": "variance fields recomputed from the saved tensors after the missing-readout fix; fields the bug did not touch are unchanged"
+}

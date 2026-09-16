@@ -1,0 +1,16 @@
+{
+  "model": "google/gemma-4-12B-it",
+  "VR_belief_mixture_mean": 0.5057,
+  "share_within_mean": 0.4962,
+  "share_between_mean": 0.5038,
+  "VR_within_only_NOT_COMPARABLE_mean": 0.3015,
+  "VR_readout_mean": 0.4859,
+  "belief_entropy_mean": 0.3132,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.9993,
+  "coverage": 0.998437,
+  "valid": true,
+  "verdict": "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed.",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic.",
+  "repaired": "variance fields recomputed from the saved tensors after the missing-readout fix; fields the bug did not touch are unchanged"
+}
