@@ -1,0 +1,770 @@
+{
+  "n_boot": 2000,
+  "seed": 2026,
+  "models": {
+    "h4n160_google_gemma-4-31B-it": {
+      "share_between": {
+        "point": 0.7166204599835708,
+        "lo": 0.706382072647646,
+        "hi": 0.7236167873098788
+      },
+      "VR_within": {
+        "point": 0.219740149811257,
+        "lo": 0.21636289344610046,
+        "hi": 0.22158199169404963
+      },
+      "VR_between": {
+        "point": 0.3921673941829815,
+        "lo": 0.37891805648597576,
+        "hi": 0.4002548393171572
+      },
+      "VR_mixture": {
+        "point": 0.47097139522063514,
+        "lo": 0.4588465770771843,
+        "hi": 0.4792164651569945
+      }
+    },
+    "h4n160_google_gemma-4-12B-it": {
+      "share_between": {
+        "point": 0.48140504348735635,
+        "lo": 0.4648625478173157,
+        "hi": 0.4942726329422376
+      },
+      "VR_within": {
+        "point": 0.3379664030274689,
+        "lo": 0.33246752283625636,
+        "hi": 0.3416291350496854
+      },
+      "VR_between": {
+        "point": 0.329796869124919,
+        "lo": 0.3130729229125863,
+        "hi": 0.3397114944846482
+      },
+      "VR_mixture": {
+        "point": 0.5001767477682078,
+        "lo": 0.48663927231867415,
+        "hi": 0.5095857120569013
+      }
+    },
+    "h4n160_google_gemma-4-E4B-it": {
+      "share_between": {
+        "point": 0.2017944346968357,
+        "lo": 0.191950864049261,
+        "hi": 0.209502815595671
+      },
+      "VR_within": {
+        "point": 0.4775994622944234,
+        "lo": 0.47550264718166685,
+        "hi": 0.47939874749449457
+      },
+      "VR_between": {
+        "point": 0.21595198431545373,
+        "lo": 0.20771530133263416,
+        "hi": 0.22093523885527783
+      },
+      "VR_mixture": {
+        "point": 0.5463075153769412,
+        "lo": 0.5403754538708946,
+        "hi": 0.5503924888602221
+      }
+    },
+    "h4n160_google_gemma-4-E2B-it": {
+      "share_between": {
+        "point": 0.23537114737705767,
+        "lo": 0.22678377400546498,
+        "hi": 0.24157411742110418
+      },
+      "VR_within": {
+        "point": 0.5168704641506938,
+        "lo": 0.5129951393973656,
+        "hi": 0.5199576611663436
+      },
+      "VR_between": {
+        "point": 0.253175005983141,
+        "lo": 0.2449371438730901,
+        "hi": 0.25722103827046244
+      },
+      "VR_mixture": {
+        "point": 0.5958948755660612,
+        "lo": 0.5891096968845801,
+        "hi": 0.6001643455576059
+      }
+    },
+    "h4n160_ibm-granite_granite-4_2-30b": {
+      "share_between": {
+        "point": 0.08908932549649533,
+        "lo": 0.08431576010746887,
+        "hi": 0.0928686647004168
+      },
+      "VR_within": {
+        "point": 0.7279442610402274,
+        "lo": 0.7254897885941901,
+        "hi": 0.7302199694152032
+      },
+      "VR_between": {
+        "point": 0.21150070387044884,
+        "lo": 0.20463124422881204,
+        "hi": 0.21602304550742135
+      },
+      "VR_mixture": {
+        "point": 0.7703174957846084,
+        "lo": 0.7662900622758084,
+        "hi": 0.7736086674022096
+      }
+    },
+    "h4n160_ibm-granite_granite-4_2-8b": {
+      "share_between": {
+        "point": 0.06244175588984519,
+        "lo": 0.058617245913639864,
+        "hi": 0.06536898162439028
+      },
+      "VR_within": {
+        "point": 0.7287999963117847,
+        "lo": 0.7274210260722271,
+        "hi": 0.7301710096031823
+      },
+      "VR_between": {
+        "point": 0.14986643690341803,
+        "lo": 0.14495740731642,
+        "hi": 0.1532070729363967
+      },
+      "VR_mixture": {
+        "point": 0.7543443536260953,
+        "lo": 0.7517575664948469,
+        "hi": 0.756562217422685
+      }
+    },
+    "h4n160_ibm-granite_granite-4_1-8b": {
+      "share_between": {
+        "point": 0.26884327751066506,
+        "lo": 0.25787280552590786,
+        "hi": 0.2774771611461188
+      },
+      "VR_within": {
+        "point": 0.38667734111856417,
+        "lo": 0.38494679426505385,
+        "hi": 0.3881361689542654
+      },
+      "VR_between": {
+        "point": 0.20307943155139097,
+        "lo": 0.1964678368699718,
+        "hi": 0.2074105291736496
+      },
+      "VR_mixture": {
+        "point": 0.45406575705072133,
+        "lo": 0.4494717287700925,
+        "hi": 0.4574844864764965
+      }
+    },
+    "h4n160_Qwen_Qwen3_8-27B": {
+      "share_between": {
+        "point": 0.06767603634277562,
+        "lo": 0.062158889147190866,
+        "hi": 0.07277166659152592
+      },
+      "VR_within": {
+        "point": 0.8643462960823198,
+        "lo": 0.8610957625548349,
+        "hi": 0.8677079986916986
+      },
+      "VR_between": {
+        "point": 0.20954162606184695,
+        "lo": 0.20016156580413685,
+        "hi": 0.21625353459803637
+      },
+      "VR_mixture": {
+        "point": 0.9019921978900509,
+        "lo": 0.8961840357934358,
+        "hi": 0.9074069811626282
+      }
+    },
+    "h4n160_openai_gpt-oss-20b": {
+      "share_between": {
+        "point": 0.015060242171723463,
+        "lo": 0.014333621503010237,
+        "hi": 0.015651717914866636
+      },
+      "VR_within": {
+        "point": 1.1180980368972138,
+        "lo": 1.1162376800941067,
+        "hi": 1.119873635034079
+      },
+      "VR_between": {
+        "point": 0.12328103239920979,
+        "lo": 0.1201167054379989,
+        "hi": 0.12533795622100297
+      },
+      "VR_mixture": {
+        "point": 1.1266495069149463,
+        "lo": 1.1247356264861677,
+        "hi": 1.1283316992734942
+      }
+    },
+    "h4n160_allenai_Olmo-3-7B-Instruct": {
+      "share_between": {
+        "point": 0.014432332971401266,
+        "lo": 0.01357969089470958,
+        "hi": 0.015147775861738882
+      },
+      "VR_within": {
+        "point": 1.0806139567191941,
+        "lo": 1.078596099170766,
+        "hi": 1.082407135547775
+      },
+      "VR_between": {
+        "point": 0.11934294363060877,
+        "lo": 0.11578354897518846,
+        "hi": 0.12178373595378365
+      },
+      "VR_mixture": {
+        "point": 1.0898327813813495,
+        "lo": 1.0875396176263783,
+        "hi": 1.091850969930381
+      }
+    }
+  },
+  "pairs_vrb": {
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-12B-it": {
+      "point": 0.06237052505806251,
+      "lo": 0.0516193765573532,
+      "hi": 0.07380029576241189,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-E4B-it": {
+      "point": 0.1762154098675278,
+      "lo": 0.1662378267861224,
+      "hi": 0.1844737304246941,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": 0.1389923881998405,
+      "lo": 0.1283731885697679,
+      "hi": 0.14834311768764802,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.18066669031253269,
+      "lo": 0.17108682602374206,
+      "hi": 0.1875548878815417,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.2423009572795635,
+      "lo": 0.2316608057422846,
+      "hi": 0.24981797236491218,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.18908796263159056,
+      "lo": 0.17885705636521834,
+      "hi": 0.19681181528075267,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.18262576812113457,
+      "lo": 0.17302660359254704,
+      "hi": 0.18952704291276004,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.26888636178377173,
+      "lo": 0.25774511475180145,
+      "hi": 0.2761769835305452,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.27282445055237275,
+      "lo": 0.2611091896672087,
+      "hi": 0.2802294198038096,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_google_gemma-4-E4B-it": {
+      "point": 0.11384488480946528,
+      "lo": 0.10203332604946329,
+      "hi": 0.12195537213041384,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": 0.07662186314177799,
+      "lo": 0.06375085397979081,
+      "hi": 0.08629492307664736,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.11829616525447018,
+      "lo": 0.10641980598772993,
+      "hi": 0.1252056334963995,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.17993043222150099,
+      "lo": 0.16626767792897323,
+      "hi": 0.18815921427381435,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.12671743757352805,
+      "lo": 0.11331230588162665,
+      "hi": 0.13522893314832388,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.12025524306307206,
+      "lo": 0.11007103588400402,
+      "hi": 0.12632751513235865,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.20651583672570922,
+      "lo": 0.19173993008816953,
+      "hi": 0.21567424876254748,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.21045392549431025,
+      "lo": 0.1962926269481079,
+      "hi": 0.21915675893644826,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": -0.03722302166768729,
+      "lo": -0.04189894453829895,
+      "hi": -0.03159028456279141,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.004451280445004896,
+      "lo": 0.00013585868551387395,
+      "hi": 0.008066449842157205,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.0660855474120357,
+      "lo": 0.06137641103529743,
+      "hi": 0.06925013538944706,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.012872552764062767,
+      "lo": 0.008103588011007669,
+      "hi": 0.016659624105191024,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.006410358253606779,
+      "lo": 0.0012151915334609764,
+      "hi": 0.010907507246727684,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.09267095191624394,
+      "lo": 0.08683946022194984,
+      "hi": 0.09656656623658333,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.09660904068484497,
+      "lo": 0.09060564409038231,
+      "hi": 0.10081298839570253,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.041674302112692185,
+      "lo": 0.03559856131609319,
+      "hi": 0.04626523743897852,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.103308569079723,
+      "lo": 0.09757925303504889,
+      "hi": 0.10665770584513129,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.050095574431750056,
+      "lo": 0.04419111707566714,
+      "hi": 0.054596134830111796,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.04363337992129407,
+      "lo": 0.03611895467293698,
+      "hi": 0.05025114353890427,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.12989397358393123,
+      "lo": 0.12366898934391306,
+      "hi": 0.13376412034447316,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.13383206235253226,
+      "lo": 0.1270057358420548,
+      "hi": 0.13804477997733608,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.06163426696703081,
+      "lo": 0.057651801709657675,
+      "hi": 0.06477510532671696,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.008421272319057871,
+      "lo": 0.00483424102661448,
+      "hi": 0.012126263724731636,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.0019590778086018834,
+      "lo": -0.0022012710903689336,
+      "hi": 0.006610817909900818,
+      "separated": false
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.08821967147123905,
+      "lo": 0.08375171395641423,
+      "hi": 0.09166975299075691,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.09215776023984007,
+      "lo": 0.08704397982005552,
+      "hi": 0.09602321599428933,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": -0.05321299464797294,
+      "lo": -0.05583497523237745,
+      "hi": -0.049866847777352334,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": -0.059675189158428926,
+      "lo": -0.06511451677024936,
+      "hi": -0.05355526376614331,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.026585404504208238,
+      "lo": 0.023613205007002466,
+      "hi": 0.02939310784165044,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.03052349327280926,
+      "lo": 0.026583987364053232,
+      "hi": 0.03397941077609192,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": -0.0064621945104559875,
+      "lo": -0.01232273788157817,
+      "hi": -0.0006340665733299128,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.07979839915218118,
+      "lo": 0.07532246215274228,
+      "hi": 0.08314238697877697,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.0837364879207822,
+      "lo": 0.07849515689616668,
+      "hi": 0.08756945793534861,
+      "separated": true
+    },
+    "h4n160_Qwen_Qwen3_8-27B|h4n160_openai_gpt-oss-20b": {
+      "point": 0.08626059366263716,
+      "lo": 0.07911090442924282,
+      "hi": 0.09215231072829963,
+      "separated": true
+    },
+    "h4n160_Qwen_Qwen3_8-27B|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.09019868243123819,
+      "lo": 0.08275673230313073,
+      "hi": 0.09597877510389577,
+      "separated": true
+    },
+    "h4n160_openai_gpt-oss-20b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.003938088768601022,
+      "lo": 0.0013476998293344843,
+      "hi": 0.006489714667507883,
+      "separated": true
+    }
+  },
+  "pairs": {
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-12B-it": {
+      "point": 0.23521541649621447,
+      "lo": 0.22330000935612299,
+      "hi": 0.24846795124443324,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-E4B-it": {
+      "point": 0.5148260252867352,
+      "lo": 0.5053386619417659,
+      "hi": 0.5229435881843664,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": 0.48124931260651316,
+      "lo": 0.4720614244578527,
+      "hi": 0.489174077994613,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.6275311344870755,
+      "lo": 0.6197380338753635,
+      "hi": 0.6331219725154997,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.6541787040937256,
+      "lo": 0.6454016175520928,
+      "hi": 0.6604960080523841,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.44777718247290577,
+      "lo": 0.4391093735363474,
+      "hi": 0.45608381789156893,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.6489444236407952,
+      "lo": 0.640972014262988,
+      "hi": 0.6546919694487021,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.7015602178118474,
+      "lo": 0.691675737312025,
+      "hi": 0.7082731381679301,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-31B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.7021881270121696,
+      "lo": 0.6922236812102674,
+      "hi": 0.7090701916028663,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_google_gemma-4-E4B-it": {
+      "point": 0.2796106087905207,
+      "lo": 0.2678147556601835,
+      "hi": 0.2895027232967653,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": 0.2460338961102987,
+      "lo": 0.2326500947412044,
+      "hi": 0.25766049247045314,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.392315717990861,
+      "lo": 0.3789676224305953,
+      "hi": 0.40285410448059983,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.41896328759751117,
+      "lo": 0.4041168663261982,
+      "hi": 0.4307587614955633,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": 0.2125617659766913,
+      "lo": 0.19951414186883282,
+      "hi": 0.2242168965466468,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.4137290071445807,
+      "lo": 0.40095021482465104,
+      "hi": 0.4233721362128797,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.4663448013156329,
+      "lo": 0.45029980215663923,
+      "hi": 0.47896165015595554,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-12B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.46697271051595507,
+      "lo": 0.45103360253405006,
+      "hi": 0.4793408520680434,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_google_gemma-4-E2B-it": {
+      "point": -0.03357671268022197,
+      "lo": -0.040133474722193016,
+      "hi": -0.026133654644607048,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.11270510920034037,
+      "lo": 0.10622941629290375,
+      "hi": 0.11821949610757375,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.1393526788069905,
+      "lo": 0.1320338376145077,
+      "hi": 0.14522886596285875,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": -0.06704884281382936,
+      "lo": -0.07382897034280601,
+      "hi": -0.059402216582067104,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.1341183983540601,
+      "lo": 0.12747434480173458,
+      "hi": 0.13957445573345267,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.18673419252511222,
+      "lo": 0.17756989596247244,
+      "hi": 0.1940109100902033,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E4B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.18736210172543444,
+      "lo": 0.17794328912812737,
+      "hi": 0.1946799566101399,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_2-30b": {
+      "point": 0.14628182188056232,
+      "lo": 0.13938304700914522,
+      "hi": 0.15176192058871843,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.17292939148721248,
+      "lo": 0.16654941021190162,
+      "hi": 0.17767798822882608,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": -0.03347213013360739,
+      "lo": -0.04091422137803865,
+      "hi": -0.025544193754751695,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.16769511103428203,
+      "lo": 0.1599315804576776,
+      "hi": 0.17355207305596193,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_openai_gpt-oss-20b": {
+      "point": 0.2203109052053342,
+      "lo": 0.21220893237306007,
+      "hi": 0.22607118854803207,
+      "separated": true
+    },
+    "h4n160_google_gemma-4-E2B-it|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.2209388144056564,
+      "lo": 0.21262982551876328,
+      "hi": 0.22691979444032553,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_ibm-granite_granite-4_2-8b": {
+      "point": 0.026647569606650136,
+      "lo": 0.023380922382433264,
+      "hi": 0.02970053419218385,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": -0.17975395201416972,
+      "lo": -0.18581443672697917,
+      "hi": -0.17203382687942206,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.021413289153719706,
+      "lo": 0.01839162186149452,
+      "hi": 0.02435503583847976,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.07402908332477187,
+      "lo": 0.06980793796026555,
+      "hi": 0.07744099914765035,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-30b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.07465699252509406,
+      "lo": 0.0703006211942772,
+      "hi": 0.07815522880663345,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_ibm-granite_granite-4_1-8b": {
+      "point": -0.20640152162081987,
+      "lo": -0.21329475045690136,
+      "hi": -0.1975350645771814,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": -0.00523428045293043,
+      "lo": -0.009938083253918909,
+      "hi": -0.0010027934022276653,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.04738151371812173,
+      "lo": 0.04405308750860286,
+      "hi": 0.05008930685792211,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_2-8b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.04800942291844393,
+      "lo": 0.04463135537710851,
+      "hi": 0.05082718220886064,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_Qwen_Qwen3_8-27B": {
+      "point": 0.20116724116788942,
+      "lo": 0.19258092534402027,
+      "hi": 0.2078095502210405,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_openai_gpt-oss-20b": {
+      "point": 0.2537830353389416,
+      "lo": 0.24335908981817636,
+      "hi": 0.2619894584926652,
+      "separated": true
+    },
+    "h4n160_ibm-granite_granite-4_1-8b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.2544109445392638,
+      "lo": 0.2438552834318472,
+      "hi": 0.26257578789036945,
+      "separated": true
+    },
+    "h4n160_Qwen_Qwen3_8-27B|h4n160_openai_gpt-oss-20b": {
+      "point": 0.05261579417105216,
+      "lo": 0.047560415624038364,
+      "hi": 0.05720801234164006,
+      "separated": true
+    },
+    "h4n160_Qwen_Qwen3_8-27B|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.05324370337137436,
+      "lo": 0.048244266763216415,
+      "hi": 0.05791162482954977,
+      "separated": true
+    },
+    "h4n160_openai_gpt-oss-20b|h4n160_allenai_Olmo-3-7B-Instruct": {
+      "point": 0.0006279092003221975,
+      "lo": -0.0001135629872884603,
+      "hi": 0.0013732654628970898,
+      "separated": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "model": "allenai/Olmo-3-7B-Instruct",
+  "VR_belief_mixture_mean": 1.0912,
+  "share_within_mean": 0.9839,
+  "share_between_mean": 0.0161,
+  "VR_within_only_NOT_COMPARABLE_mean": 1.0776,
+  "VR_readout_mean": 1.0682,
+  "belief_entropy_mean": 1.2731,
+  "max_entropy_ln5": 1.6094,
+  "mass_on_scale_mean": 0.999,
+  "coverage": 1.0,
+  "valid": true,
+  "verdict": "DECODING LOSS: the persona-mixture belief carries near-human spread; sampling discards it.",
+  "note": "VR_belief_mixture is the SD of the persona-mixture distribution (law of total variance), which is the quantity comparable to a human across-respondent SD. VR_within_only is retained only to show the earlier, non-comparable statistic."
+}
