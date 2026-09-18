@@ -1156,14 +1156,51 @@ rises from $0.729$ to $0.984$ --- which inflates the within-persona term. Panel
 size is not the explanation: on sm\_90 Mistral moves $0.002$ between $40$ and
 $160$ personas.
 
-We report this as a limitation of the table rather than repair it silently. The
-dispersion statistic is more sensitive to the numeric path than the scores of
-App.~\ref{app:rules} are: a change of architecture moved those by at most
-$0.016$, and it moves this one by up to $0.19$. Readers should treat
-cross-family comparisons in \S\ref{sec:mechanism} that span the two device
-classes as carrying that additional uncertainty, and the refreshed measurements
-of App.~\ref{app:current}, which are all sm\_90 \texttt{bf16}, as the internally
-consistent set.
+\paragraph{The individuation column is not affected.} The quantity
+\S\ref{sec:mechanism} actually rests on is $\mathrm{VR}_\text{between}$, and it
+survives the change of path where the total does not. Re-reading ten of the
+eleven rows on sm\_90 \texttt{bf16} at a common $160$-persona panel (QwQ at
+$40$, the largest panel on which it returns a readout) reproduces every
+published $\mathrm{VR}_\text{between}$ to within $0.0064$, and the four
+\texttt{fp16}-origin rows are no worse than the six \texttt{bf16}-origin ones:
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lccc}
+\toprule
+Model & pub. & re-read & $\Delta$\\
+\midrule
+Qwen2.5-7B$^\dagger$ & 0.193 & 0.187 & $-0.006$\\
+Qwen2.5-32B$^\dagger$ & 0.220 & 0.221 & $+0.001$\\
+Qwen2.5-72B & 0.295 & 0.292 & $-0.003$\\
+Mistral-24B$^\dagger$ & 0.177 & 0.176 & $-0.001$\\
+QwQ-32B$^\dagger$ & 0.154 & 0.148 & $-0.006$\\
+gpt-oss-20b & 0.126 & 0.123 & $-0.003$\\
+Granite-4.1-8B & 0.207 & 0.203 & $-0.004$\\
+Apertus-8B & 0.130 & 0.125 & $-0.005$\\
+GLM-4.7-Flash & 0.265 & 0.263 & $-0.002$\\
+Qwen3.5-9B & 0.167 & 0.163 & $-0.004$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent$^\dagger$ published row measured on sm\_70 \texttt{fp16}.
+
+Mistral is the clearest case: its $\mathrm{VR}_\text{total}$ moves $0.192$
+between paths while its $\mathrm{VR}_\text{between}$ moves $0.001$. That is what
+the mechanism predicts. A change of numeric path alters how sharp each
+persona's answer distribution is, which is a within-persona quantity; it barely
+moves where those personas' \emph{means} sit, which is what
+$\mathrm{VR}_\text{between}$ measures.
+
+The practical consequence is narrower than the mixed path first suggests. The
+individuation claims of \S\ref{sec:mechanism} and the ordering of models by
+$\mathrm{VR}_\text{between}$ stand: every published value reproduces within
+$0.0064$ on one path. What does not transfer is the total-dispersion column and
+the within/between share derived from it, for the two models whose distributions
+sharpen. We leave the published table as measured and flag the affected
+statistic rather than restating numbers, and note that
+App.~\ref{app:current} is uniformly sm\_90 \texttt{bf16} throughout.
 
 One further caution for anyone reusing the script: at $160$ personas the QwQ
 read returned \texttt{NaN} for every cell while exiting normally, and was caught
