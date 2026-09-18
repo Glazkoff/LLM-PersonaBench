@@ -1074,12 +1074,14 @@ we tested it rather than appealing to determinism. Two models and two
 instruments were re-read with the same script, seed and respondent panels on
 independent systems.
 
-\paragraph{Same architecture, different everything else.} Between two clusters
-running different software --- torch $2.11.0$ with transformers $5.17.0$
-against torch $2.13.0$ with transformers $5.16.1$, both on H200 --- the
-readouts are \emph{bit-identical}: maximum deviation $0$ over the full belief
-simplex and $0$ of $76{,}800$ item--respondent pairs changing their modal
-answer.
+\paragraph{Same architecture and dtype, different everything else.} Between two
+clusters running different software --- torch $2.11.0$ with transformers
+$5.17.0$ against torch $2.13.0$ with transformers $5.16.1$, both on H200 and
+both on the \texttt{bf16} path --- the readouts are \emph{bit-identical}:
+maximum deviation $0$ over the full belief simplex and $0$ of $76{,}800$
+item--respondent pairs changing their modal answer. This is a statement about
+two small models on one numeric path, and \S\ref{app:mixedpath} below shows it
+does not extend to a change of dtype.
 
 \paragraph{Different architecture.} Against A100 (sm\_80) instead of H200
 (sm\_90), on the same \texttt{bf16} path, they are not. Mean absolute deviation
@@ -1109,10 +1111,65 @@ be published as though it were, while an average over hundreds of items and
 respondents is stable enough to carry an effect an order of magnitude larger
 than the noise.
 
-One arm is missing. V100 (sm\_70) would have tested the \texttt{fp16} path, but
-the available build ships no Volta kernels and the cluster's login node cannot
-reach a package index to install one, so this comparison spans two Hopper-class
-and one Ampere-class device only.
+One arm is missing from \emph{this} comparison, and it is not a minor one. V100
+(sm\_70) would have tested the \texttt{fp16} path; the build available when we
+ran these checks ships no Volta kernels, so the comparison above spans two
+Hopper-class and one Ampere-class device only. The \texttt{fp16} path is
+nevertheless the path on which part of \S\ref{sec:mechanism}'s table was
+measured, which we address next.
+
+\subsection{The table is not on a single numeric path}
+\label{app:mixedpath}
+
+Auditing the run records for \S\ref{sec:mechanism} showed that its rows were not
+all produced on one device class. \texttt{h4\_variance\_ladder\_hf.py} selects
+\texttt{bf16} at sm\_80 and above and \texttt{fp16} below it, and four rows ---
+Mistral-Small-24B, Qwen2.5-7B, Qwen2.5-32B and QwQ-32B --- were read on V100
+(sm\_70) in \texttt{fp16}, while the remainder were read on H200 (sm\_90) in
+\texttt{bf16}. The appendix above tests \texttt{bf16} against \texttt{bf16}; it
+never tested the path those four rows used.
+
+We therefore re-read all four on sm\_90 in \texttt{bf16}, holding the model, the
+script, the panel ($40$ personas per cluster) and the respondents fixed, so that
+only the device class and dtype differ. The belief readout is deterministic
+given a model and a panel --- the seed enters only the sampled answers --- so
+these are not repeated draws:
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Model & sm\_70 \texttt{fp16} & sm\_90 \texttt{bf16} & $\Delta$\\
+\midrule
+Qwen2.5-7B & 0.430 & 0.427 & $-0.003$\\
+Qwen2.5-32B & 0.343 & 0.340 & $-0.003$\\
+QwQ-32B & 0.753 & 0.824 & $\mathbf{+0.070}$\\
+Mistral-Small-24B & 0.579 & 0.771 & $\mathbf{+0.192}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two of the four reproduce to $0.003$ in $\mathrm{VR}_\text{total}$. Two do not:
+QwQ moves $9\%$ and Mistral $33\%$, in both cases because the model emits
+flatter answer distributions on the newer path --- Mistral's mean belief entropy
+rises from $0.729$ to $0.984$ --- which inflates the within-persona term. Panel
+size is not the explanation: on sm\_90 Mistral moves $0.002$ between $40$ and
+$160$ personas.
+
+We report this as a limitation of the table rather than repair it silently. The
+dispersion statistic is more sensitive to the numeric path than the scores of
+App.~\ref{app:rules} are: a change of architecture moved those by at most
+$0.016$, and it moves this one by up to $0.19$. Readers should treat
+cross-family comparisons in \S\ref{sec:mechanism} that span the two device
+classes as carrying that additional uncertainty, and the refreshed measurements
+of App.~\ref{app:current}, which are all sm\_90 \texttt{bf16}, as the internally
+consistent set.
+
+One further caution for anyone reusing the script: at $160$ personas the QwQ
+read returned \texttt{NaN} for every cell while exiting normally, and was caught
+only by the validity guard that rejects an all-missing run. The same read at
+$40$ personas succeeded. We have not traced the cause; a partially rather than
+wholly degenerate version of that fault would not trip the guard.
 
 \section{Split sensitivity of the baselines}
 \label{app:split}
