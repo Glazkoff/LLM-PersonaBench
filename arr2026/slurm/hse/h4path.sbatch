@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:v100:4
 #SBATCH --cpus-per-task=8
-#SBATCH --time=12:00:00
+#SBATCH --time=06:00:00
 #SBATCH --output=/home/lsavchenko/personality-twins-arr/logs/h4path_%j.out
 #SBATCH --error=/home/lsavchenko/personality-twins-arr/logs/h4path_%j.err
 # SAME-PATH replication: re-read on V100 (sm_70, fp16) -- the identical numeric
@@ -22,6 +22,14 @@
 #   mistralai/Mistral-Small-24B-Instruct-2501  44 GB  --gres=gpu:v100:2  BS=4
 #   Qwen/Qwen2.5-32B-Instruct                  62 GB  --gres=gpu:v100:3  BS=4
 #   Qwen/QwQ-32B-Preview                       62 GB  --gres=gpu:v100:3  BS=4
+#
+# WALLTIME. The same readout script completes in 1:46-7:25 on Euler's H200s
+# (sacct, h4-family jobs). V100 fp16 is several times slower and these models are
+# larger, but 12h was still off by an order of magnitude -- and an over-long
+# --time is not free: it disqualifies the job from backfilling into the gaps
+# ahead of a higher-priority reservation, which is exactly what left a 1-GPU 7B
+# job estimated 1.5 days out while a free device sat idle on cn-007. Request:
+#   7B  --time=02:00:00     24B --time=04:00:00     32B --time=06:00:00
 #
 # The directive below is the safe default for the largest target; a smaller
 # model MUST override it downward. This is not pedantry about tidiness -- on a

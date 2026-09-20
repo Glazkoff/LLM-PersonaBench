@@ -974,5 +974,34 @@ smaller models MUST override it downward on the command line:
     sbatch --gres=gpu:v100:1 --export=ALL,MODEL=Qwen/Qwen2.5-7B-Instruct,BS=8 \
            hse_h4path.sbatch                                              # 4340799
 
-The three larger models follow once 4340799's GPU preflight prints `preflight: gpu ok`,
-which is the first real evidence that sm_70 works on this interpreter.
+### 22.6 Walltime, and why the three are queued as dependents
+
+Cutting `--time` 12h -> 2h for the 7B did NOT move its estimated start: the binding
+constraint is fairshare priority (238, with 102 higher-priority jobs pending), not
+backfill eligibility. Walltime was still worth sizing honestly -- the same readout script
+completes in **1:46-7:25** on Euler's H200s (sacct, h4-family), so 12h was an order of
+magnitude off -- but it buys nothing here. Final sizing: 7B 2h, 24B 4h, 32B 6h.
+
+The probe therefore will not run for roughly a day and a half. Holding the other three
+behind it *serially* would have cost a week of wall-clock for no protection that is not
+already provided per-job by the GPU preflight.
+
+Slurm expresses the intent exactly, so the three are queued NOW with
+`--dependency=afterok:<probe>`: they accrue priority and age from this moment, and they
+start only if the probe exits 0 -- i.e. only after the whole 7B path, not merely the
+preflight, has run end to end. If the probe fails they are cancelled automatically as
+`DependencyNeverSatisfied`, which is the behaviour a manual gate would have produced.
+
+Submitted 2026-09-21:
+
+| job | model | gres | time | dependency |
+|---|---|---|---|---|
+| 4340804 | Qwen2.5-7B-Instruct | `gpu:v100:1` | 02:00:00 | none (the probe) |
+| 4340812 | Mistral-Small-24B-2501 | `gpu:v100:2` | 04:00:00 | `afterok:4340804` |
+| 4340813 | Qwen2.5-32B-Instruct | `gpu:v100:3` | 06:00:00 | `afterok:4340804` |
+| 4340814 | QwQ-32B-Preview | `gpu:v100:3` | 06:00:00 | `afterok:4340804` |
+
+All four verified after submission as `Features=type_a|type_b|type_c|type_d` (the V100
+node types; `type_e` a100 excluded, so the startup SIGILL cannot occur) with the intended
+`TresPerNode` and `TimeLimit`. NOTE: that Features string is applied by the site, not by
+the script -- do not add a `--constraint` on top of typed `gpu:v100:N`.
