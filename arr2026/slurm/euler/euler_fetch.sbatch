@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-h17fetch
+#SBATCH --job-name=hbs-h17fetch
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=8
 #SBATCH --time=08:00:00

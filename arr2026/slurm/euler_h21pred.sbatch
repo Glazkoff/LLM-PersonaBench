@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-h21pred
+#SBATCH --job-name=hbs-h21pred
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8

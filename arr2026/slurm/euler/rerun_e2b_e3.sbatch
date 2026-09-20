@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-e2b
+#SBATCH --job-name=hbs-e2b
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=16
 #SBATCH --time=02:00:00

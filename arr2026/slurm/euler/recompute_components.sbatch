@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-recomp
+#SBATCH --job-name=hbs-recomp
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=4
 #SBATCH --time=00:20:00

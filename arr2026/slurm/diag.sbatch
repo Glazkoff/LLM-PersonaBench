@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-diag
+#SBATCH --job-name=hbs-diag
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16

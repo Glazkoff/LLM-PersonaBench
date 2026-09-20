@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-cpu
+#SBATCH --job-name=hbs-cpu
 #SBATCH --partition=rocky
 #SBATCH --account=proj_1759
 #SBATCH --qos=normal

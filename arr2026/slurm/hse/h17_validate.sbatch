@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-h17val
+#SBATCH --job-name=hbs-h17val
 #SBATCH --partition=rocky
 #SBATCH --qos=normal
 #SBATCH -A proj_1759

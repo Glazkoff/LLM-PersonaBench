@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-h10
+#SBATCH --job-name=hbs-h10
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=48
 #SBATCH --mem=200G

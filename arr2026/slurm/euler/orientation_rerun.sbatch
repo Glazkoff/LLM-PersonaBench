@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-orient
+#SBATCH --job-name=hbs-orient
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=32
 #SBATCH --time=03:00:00

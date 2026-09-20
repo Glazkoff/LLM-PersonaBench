@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-hsefetch
+#SBATCH --job-name=hbs-hsefetch
 #SBATCH --partition=rocky
 #SBATCH --qos=normal
 #SBATCH -A proj_1759

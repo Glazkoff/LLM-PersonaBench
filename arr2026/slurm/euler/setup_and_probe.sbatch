@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-probe
+#SBATCH --job-name=hbs-probe
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=4
 #SBATCH --time=00:40:00

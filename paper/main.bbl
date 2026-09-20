@@ -1,5 +1,25 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Abels et~al.(2026)Abels, Fernandez~Domingos, Shah, and
+  Lenaerts}]{abels2026valuepersonas}
+Axel Abels, Elias Fernandez~Domingos, Apurva Shah, and Tom Lenaerts. 2026.
+\newblock \href {https://arxiv.org/abs/2605.16193} {Improving cross-cultural
+  survey simulation with calibrated value personas}.
+\newblock \emph{arXiv preprint arXiv:2605.16193}.
+
+\bibitem[{Binz et~al.(2025)Binz, Akata, Bethge et~al.}]{binz2025centaur}
+Marcel Binz, Elif Akata, Matthias Bethge, and 1 others. 2025.
+\newblock A foundation model to predict and capture human cognition.
+\newblock \emph{Nature}, 644(8078):1002--1009.
+
+\bibitem[{Choi et~al.(2026)Choi, Kim, Pugalenthi, Chen, and
+  Huang}]{choi2026beyondmean}
+Eun~Cheol Choi, Youngrae Kim, Prabhu Pugalenthi, Hong-En Chen, and Bo-Ruei
+  Huang. 2026.
+\newblock \href {https://arxiv.org/abs/2606.28963} {Beyond the mean: Three-axis
+  fidelity for aligning {LLM}-based survey simulators from small pilot data}.
+\newblock In \emph{Pluralistic Alignment Workshop at ICML}.
 
 \bibitem[{Guo et~al.(2024)Guo, Wang, Guo, Li, Song, Tan, Liu, Bian, and
   Yang}]{guo2024connecting}
@@ -23,6 +43,20 @@ Bin Han, Deuksin Kwon, and Jonathan Gratch. 2026.
   variation in {LLM} agents.
 \newblock \emph{arXiv preprint arXiv:2602.01063}.
 
+\bibitem[{Huang et~al.(2025)Huang, Li, and Shao}]{huang2025dsa}
+Ji~Huang, Mengfei Li, and Shuai Shao. 2025.
+\newblock \href {https://arxiv.org/abs/2510.21977} {Distribution shift
+  alignment helps {LLM}s simulate survey response distributions}.
+\newblock \emph{arXiv preprint arXiv:2510.21977}.
+
+\bibitem[{Huang et~al.(2026)Huang, Xie, Song, Zhang, Yuan, Jackson, and
+  Mei}]{huang2026behaviorbench}
+Jin Huang, Yutong Xie, Wanli Song, Xingjian Zhang, Walter Yuan, Matthew~O.
+  Jackson, and Qiaozhu Mei. 2026.
+\newblock \href {https://arxiv.org/abs/2606.24162} {{BehaviorBench}:
+  Benchmarking foundation models for behavioral science tasks}.
+\newblock \emph{arXiv preprint arXiv:2606.24162}.
+
 \bibitem[{Jiang et~al.(2024)Jiang, Xu, Zhu, Han, Zhang, and
   Zhu}]{jiang2024evaluating}
 Guangyuan Jiang, Manjie Xu, Song-Chun Zhu, Wenjuan Han, Chi Zhang, and Yixin
@@ -30,16 +64,19 @@ Guangyuan Jiang, Manjie Xu, Song-Chun Zhu, Wenjuan Han, Chi Zhang, and Yixin
 \newblock Evaluating and inducing personality in pre-trained language models.
 \newblock In \emph{Advances in Neural Information Processing Systems}.
 
-\bibitem[{Johnson(2014)}]{johnson2014ipip}
-John~A. Johnson. 2014.
-\newblock Measuring thirty facets of the five factor model with a 120-item
-  public domain inventory: Development of the ipip-neo-120.
-\newblock \emph{Journal of Research in Personality}, 51:78--89.
-
 \bibitem[{Lopez-Paz and Oquab(2017)}]{lopezpaz2017revisiting}
 David Lopez-Paz and Maxime Oquab. 2017.
 \newblock Revisiting classifier two-sample tests.
 \newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Park et~al.(2026)Park, Zou, Kamphorst, Egan, Shaw, Hill, Cai, Morris,
+  Liang, Willer, and Bernstein}]{park2026selfreports}
+Joon~Sung Park, Carolyn~Q. Zou, Jonne Kamphorst, Niles Egan, Aaron Shaw,
+  Benjamin~Mako Hill, Carrie Cai, Meredith~Ringel Morris, Percy Liang, Robb
+  Willer, and Michael~S. Bernstein. 2026.
+\newblock \href {https://arxiv.org/abs/2411.10109} {{LLM} agents grounded in
+  self-reports enable general-purpose simulation of individuals}.
+\newblock \emph{arXiv preprint arXiv:2411.10109}.
 
 \bibitem[{Park et~al.(2024)Park, Zou, Shaw, Hill, Cai, Morris, Willer, Liang,
   and Bernstein}]{park2024generative}
@@ -63,6 +100,15 @@ Greg Serapio-Garc{\'\i}a, Mustafa Safdari, Cl{\'e}ment Crepy, Luning Sun,
   Matari{\'c}. 2023.
 \newblock Personality traits in large language models.
 \newblock \emph{arXiv preprint arXiv:2307.00184}.
+
+\bibitem[{Suh et~al.(2025)Suh, Jahanparast, Moon, Kang, and
+  Chang}]{suh2025subpop}
+Joseph Suh, Erfan Jahanparast, Suhong Moon, Minwoo Kang, and Serina Chang.
+  2025.
+\newblock \href {https://arxiv.org/abs/2502.16761} {Language model fine-tuning
+  on scaled survey data for predicting distributions of public opinions}.
+\newblock In \emph{Proceedings of the 63rd Annual Meeting of the Association
+  for Computational Linguistics}.
 
 \bibitem[{Zhou et~al.(2022)Zhou, Muresanu, Han, Paster, Pitis, Chan, and
   Ba}]{zhou2022large}

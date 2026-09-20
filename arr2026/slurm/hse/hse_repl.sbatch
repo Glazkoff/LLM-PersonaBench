@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-hserepl
+#SBATCH --job-name=hbs-hserepl
 #SBATCH --partition=rocky
 #SBATCH --qos=normal
 #SBATCH -A proj_1759

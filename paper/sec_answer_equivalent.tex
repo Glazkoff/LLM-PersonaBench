@@ -1,0 +1,186 @@
+% ===================================================================
+% The answer-equivalent: definition, protocol, price, mechanism, boundary.
+% Included from main.tex after the audit sections, which supply the
+% design rationale for every choice made here.
+% ===================================================================
+
+\section{The answer-equivalent}
+\label{sec:equiv}
+
+\paragraph{Definition.} Let $S$ be a strictly proper ordinal score --- we use the
+ranked probability score, normalised by the $K{-}1$ thresholds, so $S$ is
+comparable across the $5$- and $7$-point inventories we study. Let a respondent
+$i$ have observed answers $x_i$ and held-out answers $y_i$ on disjoint item sets.
+Write $D_m$ for a conditional model fitted on training respondents that sees $m$
+of respondent $i$'s observed answers, and $\widehat{F}$ for the simulator under
+test. The answer-equivalent is
+\[
+m^{*}(\widehat{F})=\min\{m: \mathbb{E}\,S(D_m, y)\le \mathbb{E}\,S(\widehat{F}, y)\}.
+\]
+We report both this integer crossing, which is what a practitioner acts on, and
+its linear interpolation between the bracketing budgets, which is the honest
+effect size: the crossing is coarse and rounds a simulator up by as much as a
+whole answer.
+
+\paragraph{What the simulator is allowed.} $\widehat{F}$ is the persona readout
+after population calibration; the raw readout scores worse than the population
+prior, so pricing it raw would price the prompt format rather than the model. We
+fit $\widehat{F}_{ij}=\Pi_{\mathrm{CDF}}[F_{0j}+\alpha(Q_{ij}-\bar{Q}_j)]$, with
+$Q$ the model's own CDF from its digit logprobs, $F_0$ a population CDF fitted on
+training respondents, $\bar{Q}$ its mean CDF on a calibration pool,
+$\Pi_{\mathrm{CDF}}$ the exact $L_2$ projection onto monotone CDFs, and $\alpha$
+chosen on calibration respondents. This is deliberately the most favourable
+treatment: it hands the simulator a correctly located population distribution for
+free and asks only whether its \emph{person-specific} deviations are worth
+anything.
+
+\paragraph{What the baseline is allowed.} $D_m$ is a ridge over the one-hot
+observed answers onto the threshold indicators, projected onto monotone CDFs.
+Its penalty is retuned at \emph{every} budget $m$, on the same calibration
+respondents that select $\alpha$. This is not a detail: holding the penalty fixed
+overfits the small budgets, and in development that alone manufactured an
+apparent $15\%$ relative gain for the simulator at $m{=}100$ which vanished once
+the baseline was tuned at each budget. A comparison across label budgets that
+does not retune baseline capacity is measuring the baseline's misspecification.
+
+\paragraph{Protocol.} Conditioning and target items are disjoint by
+construction; respondents are split into a training block, a calibration half on
+which every hyperparameter is selected, and an evaluation half on which every
+reported number is computed frozen; uncertainty is a paired bootstrap over
+evaluation respondents. Appendix~\ref{app:protocol} gives the full specification,
+including the reverse-orientation correction, the common-support rule and the
+multiplicity control.
+
+\section{What a persona is worth}
+\label{sec:price}
+
+We price $89$ cells: every model in our artifact set, on IPIP-NEO-120, SD3,
+IPIP-FFM-50 and HEXACO, on two disjoint respondent panels, plus the IPIP-NEO-300
+unseen-item holdout of \S\ref{sec:transfer}.
+
+\paragraph{The instrument is stable.} Across the $32$ (model, instrument) pairs
+scored on both panels, $m^{*}$ on the \texttt{val} panel and on the \texttt{test2}
+panel correlate at Spearman $\rho{=}0.78$ ($p{=}1.7\times10^{-7}$). The price is a
+property of the model and instrument, not of a panel draw. Without this, nothing
+below would be worth reporting.
+
+\paragraph{The price.} Table~\ref{tab:ladder} gives the IPIP-NEO-120 ladder.
+Median $m^{*}$ per inventory is $0.00$ on HEXACO, $0.06$ on IPIP-FFM-50, $0.32$
+on IPIP-NEO-120, $0.40$ on SD3 and $0.61$ on the IPIP-NEO-300 holdout
+(App.~\ref{app:equivfull}). The strongest persona we
+measure on the short form is worth $3.07$ of $60$ answers; the weakest is worth
+exactly zero, in the strong sense that calibration selects $\alpha{=}0$ and
+discards its person-specific deviations entirely. Across all $89$ cells the median
+is $0.19$ answers.
+
+\begin{table}[t]\centering\footnotesize
+\input{table_ladder}
+\caption{Answer-equivalent on IPIP-NEO-120, averaged over both panels. $S$ is the
+normalised ordinal RPS of the raw readout. $\alpha^{*}$ is the selected
+calibration coefficient. Raw accuracy does not order the ladder;
+$\alpha^{*}$ does.}
+\label{tab:ladder}
+\end{table}
+
+\paragraph{Reading the number.} $3.07$ of $60$ is a real, replicable, non-zero
+price, and it is small. Both halves matter. A practitioner with a $60$-item
+instrument and a budget for three more questions should ask them. A practitioner
+choosing between open models should read the ladder, because the spread across
+models --- $0$ to $3.07$ --- is larger than any effect reported for prompt
+optimisation on these systems.
+
+\subsection{Transfer to an unseen item family}
+\label{sec:transfer}
+
+The splits above put every target facet's siblings in the conditioning half. The
+IPIP-NEO-300 holdout removes that crutch: $300$ respondents answered the full
+inventory, $120$ of whose items are exactly the short form used everywhere else,
+and the other $180$ --- spanning all $30$ facets --- are items the same person
+answered that no arm has been fitted on, with only $150$ training respondents
+behind them. This is the thinnest supervision we measure and the most favourable
+regime for a simulator, and it is where the price is highest: $\mathbf{5.38}$ of
+$120$ answers, against $3.24$ of $60$ on the short form, with the model ordering
+preserved. A persona is worth most exactly where human labels are scarcest.
+
+The same model given its persona as $m$ literal (item, answer) pairs instead of a
+$30$-line trait profile prices at $0.00$, $0.19$, $0.49$ and $1.10$ for
+$m{=}5,20,60,120$: monotone, as it must be, but the profile computed from those
+same $120$ answers is worth almost five times the raw transcript of all of them
+($\alpha^{*}$ $0.9$ against $0.3$). The aggregation is doing the work. How the
+observations are presented matters more than how many there are
+(App.~\ref{app:transfer}).
+
+\section{Why some personas are worth more}
+\label{sec:why}
+
+The ladder is not ordered by accuracy. The raw score of the best-priced model
+($0.172$) and of \texttt{gpt-oss-20b} ($0.188$) are close, but their prices differ
+by more than a factor of ten. Across all $89$ cells, raw score correlates with
+$m^{*}$ at $\rho{=}-0.48$, and the \emph{calibrated} score --- the thing one would
+naively report --- does not correlate with it at all.
+
+What does order the ladder is $\alpha^{*}$, the share of a model's person-specific
+deviation that survives calibration: $\rho{=}+0.74$ ($p{<}10^{-13}$), and
+$\rho{=}+0.72$ after partialling out raw score. A model whose forecast barely
+moves between people offers calibration nothing to keep; \texttt{Apertus-8B} has
+$\alpha^{*}{=}0$ and a price of exactly zero, despite a middling raw score.
+
+We state the limit of this plainly. $\alpha^{*}$ is fitted against the same score
+$m^{*}$ is derived from, on a disjoint respondent half but the same objective, so
+it is a tight proxy rather than an independent cause. We therefore also measured
+between-person dispersion directly from the saved belief tensors, with no fitting
+and no labels, and we report the cluster-level variance-ratio statistics of
+\S\ref{sec:mechanism} against $m^{*}$ as well. Those cluster-level statistics do
+\emph{not} predict the price (all $|\rho|\le0.17$, none significant over the $42$
+matched cells) --- which is itself informative: a population-level dispersion
+audit does not tell you what a persona is worth to an individual.
+
+\section{The boundary: personas are redundant given real answers}
+\label{sec:boundary}
+
+The price is quoted against a model given $m$ answers. The complementary question
+is whether a persona adds anything to a model that already has \emph{all} of the
+respondent's observed answers. It does not.
+
+We screen $160$ cells. For each, three combination families are fitted on the
+calibration half and frozen on the evaluation half: a convex weight between the
+conditional model and the calibrated persona; a linear combiner taking the
+persona's CDF as additional features beside the conditional model's; and a
+gradient-boosted combiner over the same features. The control in each case is the
+identical combiner, of identical capacity, fitted on identical rows, without the
+persona features --- so the comparison isolates the persona and nothing else.
+
+\begin{table}[t]\centering\footnotesize
+\input{table_incremental}
+\caption{Incremental value of a persona given the respondent's own observed
+answers. $\bar w^{*}$ is the mean selected convex weight on the persona.
+Significant cells are \emph{uncorrected} counts, shown to make the multiplicity
+visible: across all $426$ one-sided tests, one survives Benjamini--Hochberg at
+$q<0.05$, and it reverses sign on its own disjoint panel.}
+\label{tab:incremental}
+\end{table}
+
+The selected convex weight on the persona is $0$ in $127$ of $160$ cells, $0.05$
+in the remaining $33$, and never higher. The linear combiner finds a nominally
+significant positive increment in $0$ of $160$ cells. Across the full grid ---
+$426$ one-sided tests --- $35$ are nominally significant at $5\%$, which is what
+chance produces, and exactly \emph{one} survives Benjamini--Hochberg at $q<0.05$:
+Qwen3.8-27B on HEXACO, \texttt{val} panel, gradient-boosted combiner,
+$+0.00092$ $[+0.00046,+0.00140]$, $q{=}0.026$.
+
+That cell does not survive scrutiny: on the disjoint \texttt{test2} panel the gain
+reverses sign ($-0.00034$), and at four times the panel size it falls to
+$+0.00006$ --- a small-sample artefact, as is every other nominally significant
+HEXACO cell, all of which sit on the same $64$-respondent panel. We report it
+rather than filter it out; a boundary claim that discards its one exception is
+not a boundary claim.
+
+We also report the null as a null rather than as a failed superiority test: the
+comparison is pre-specified, the combiner is given every advantage its control is
+given, and the selected weight --- not merely the $p$-value --- is what concedes.
+A method whose own validation selection sets the persona's weight to zero in $127$
+of $160$ cells is making a stronger statement than an inconclusive test would.
+
+This is the sharp statement the price makes precise. A persona carries a small,
+real, model-scaling amount of personal information --- and a handful of the
+person's actual answers renders it redundant.

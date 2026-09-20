@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-hyp2
+#SBATCH --job-name=hbs-hyp2
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=96G

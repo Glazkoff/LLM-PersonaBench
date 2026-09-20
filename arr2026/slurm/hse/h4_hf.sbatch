@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-h4hf
+#SBATCH --job-name=hbs-h4hf
 #SBATCH --partition=rocky
 #SBATCH --account=proj_1759
 #SBATCH --qos=normal

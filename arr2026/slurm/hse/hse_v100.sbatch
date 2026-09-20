@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-hsev100
+#SBATCH --job-name=hbs-hsev100
 #SBATCH --partition=rocky
 #SBATCH --qos=normal
 #SBATCH -A proj_1759

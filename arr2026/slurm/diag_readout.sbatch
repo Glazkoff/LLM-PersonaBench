@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-diag
+#SBATCH --job-name=hbs-diag
 #SBATCH --partition=infer
 #SBATCH --cpus-per-task=8
 #SBATCH --time=01:00:00

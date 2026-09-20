@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=arr-env
+#SBATCH --job-name=hbs-env
 #SBATCH --partition=rocky
 #SBATCH --account=proj_1759
 #SBATCH --qos=normal

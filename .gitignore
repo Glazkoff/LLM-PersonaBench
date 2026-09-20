@@ -212,4 +212,14 @@ data/kaggle/*
 data/PAPI/*
 data/PAPA/*
 data/PAlign/*
-data/raw/df_ipipneo_120_clustersarr_bundle.tar.gz
+# NOTE: these were a single concatenated line with no newline between them,
+# so NEITHER was actually ignored and the 151 MB corpus showed as untracked
+# but stageable -- a `git add -A` would have failed the push on GitHub's
+# 100 MB limit.
+data/raw/df_ipipneo_120_clusters
+arr_bundle.tar.gz
+
+# local working backups and superseded shard outputs
+*.pre-strengthen
+*.json.bak
+arr2026/results_euler/h26_equiv/superseded/
