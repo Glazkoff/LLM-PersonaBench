@@ -122,20 +122,26 @@ $m^{*}$ at $\rho{=}-0.48$, and the \emph{calibrated} score --- the thing one wou
 naively report --- does not correlate with it at all.
 
 What does order the ladder is $\alpha^{*}$, the share of a model's person-specific
-deviation that survives calibration: $\rho{=}+0.74$ ($p{<}10^{-13}$), and
-$\rho{=}+0.72$ after partialling out raw score. A model whose forecast barely
+deviation that survives calibration: $\rho{=}+0.72$ ($p{<}10^{-14}$), and
+$\rho{=}+0.66$ after partialling out raw score. A model whose forecast barely
 moves between people offers calibration nothing to keep; \texttt{Apertus-8B} has
 $\alpha^{*}{=}0$ and a price of exactly zero, despite a middling raw score.
 
-We state the limit of this plainly. $\alpha^{*}$ is fitted against the same score
-$m^{*}$ is derived from, on a disjoint respondent half but the same objective, so
-it is a tight proxy rather than an independent cause. We therefore also measured
-between-person dispersion directly from the saved belief tensors, with no fitting
-and no labels, and we report the cluster-level variance-ratio statistics of
-\S\ref{sec:mechanism} against $m^{*}$ as well. Those cluster-level statistics do
-\emph{not} predict the price (all $|\rho|\le0.17$, none significant over the $42$
-matched cells) --- which is itself informative: a population-level dispersion
-audit does not tell you what a persona is worth to an individual.
+$\alpha^{*}$ is fitted against the same score $m^{*}$ is derived from, so on its
+own it is a tight proxy rather than an independent cause. We therefore measured
+the belief tensor directly, with no fitting and no labels. Controlling for raw
+score, the \emph{entropy} of the model's person-conditional belief predicts the
+price at $\rho{=}-0.52$ ($p{=}2.4\times10^{-7}$, $n{=}88$) while its marginal
+correlation is null ($\rho{=}-0.03$): sharper conditional beliefs are worth more
+real answers, independently of accuracy. Each step of the mechanism is then
+measured rather than assumed --- sharper beliefs, larger person-specific
+deviations, more of them surviving calibration, a higher price.
+
+Between-person \emph{spread} of the belief does not predict the price
+($\rho{=}+0.13$, $p{=}0.22$), nor do the cluster-level variance ratios of
+\S\ref{sec:mechanism}. A population-level dispersion audit does not tell you what
+a persona is worth to an individual; it is the sharpness of the conditional
+belief, not the spread of the mixture, that carries the value.
 
 \section{The boundary: personas are redundant given real answers}
 \label{sec:boundary}
@@ -177,11 +183,9 @@ HEXACO cell, all of which sit on the same $64$-respondent panel. We report it
 rather than filter it out; a boundary claim that discards its one exception is
 not a boundary claim.
 
-We also report the null as a null rather than as a failed superiority test: the
-comparison is pre-specified, the combiner is given every advantage its control is
-given, and the selected weight --- not merely the $p$-value --- is what concedes.
-A method whose own validation selection sets the persona's weight to zero in $127$
-of $160$ cells is making a stronger statement than an inconclusive test would.
+This is a null reported as a null, not a failed superiority test: the combiner
+gets every advantage its control gets, and it is the selected weight --- zero in
+$127$ of $160$ cells --- rather than a $p$-value that concedes.
 
 This is the sharp statement the price makes precise. A persona carries a small,
 real, model-scaling amount of personal information --- and a handful of the

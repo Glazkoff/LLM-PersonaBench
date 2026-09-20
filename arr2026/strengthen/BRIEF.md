@@ -901,3 +901,60 @@ The first pass covered only `arr2026/slurm/` inside the repo. Most of this proje
 sbatch files live in the cluster working directories ABOVE the checkout. Completed:
 **49 files renamed on HSE, 45 on Euler**; zero `job-name=arr-` remain on either cluster
 (95 and 90 now carry `hbs-`).
+
+## 22. `hbs-h4path` repaired and resubmitted (2026-09-21)
+
+The same-path V100 replication had **never once succeeded** — every attempt since
+2026-09-18 failed, and all four `arr2026/results_v100/h4v100_*` directories are EMPTY
+(the script creates the output dir before it crashes). Three independent defects, all now
+fixed. The corrected script is committed at `arr2026/slurm/hse/h4path.sbatch` and deployed
+to `~/personality-twins-arr/hse_h4path.sbatch`.
+
+### 22.1 The preflight could never pass (exit 2)
+
+`[ -e "\$f" ]` — written through an ssh heredoc, so the backslash reached disk and the test
+asked whether a file literally named `$f` existed. Every file it checks was present on all
+four failing submissions, and the message could not name what it thought was missing.
+Fixed; dry-run now prints `preflight: data ok`.
+
+### 22.2 No GPU was ever reserved
+
+The script carried **no `--gres` at all**, yet called `nvidia-smi` and loaded a
+24B-32B model. It was using whatever devices happened to be visible on the node without
+reserving any — a collision waiting to happen with whoever legitimately held them.
+
+Fixed with **`--gres=gpu:v100:4`**, which does three jobs at once:
+- reserves the devices;
+- pins the run to the sm_70/fp16 path this experiment exists to measure;
+- cannot land on a `type_e` a100 (SIGILL at python startup), so no separate
+  `--constraint` is needed.
+
+**Four devices, not one.** V100s are 32 GB and the targets are 44-62 GB of weights
+(Qwen2.5-7B 15G, Mistral-24B 44G, Qwen2.5-32B 62G, QwQ-32B 62G, all present in the shared
+cache so `HF_HUB_OFFLINE=1` holds). A single V100 cannot hold three of the four. This
+matches `hse_h4v100.sbatch`, the variant that was sized correctly; `--time` drops 16h -> 12h
+to match it too.
+
+### 22.3 sm_70 was an assumption, never a measurement
+
+Every previous attempt died before touching the GPU, so "torch works on V100 here" had
+never been demonstrated — and the sibling `arrenv` is a cu128 build with NO sm_70 kernels
+(§20). h4path uses a different interpreter
+(`/opt/software/python/envs/pytorch2_4`, torch 2.6.0+cu124) which *should* carry sm_70,
+but should is not a measurement.
+
+The script now runs a GPU preflight that reports device capability and performs a real
+fp16 matmul, exiting 3 in seconds if the kernels are absent — rather than discovering it
+after a 12-hour allocation and a 62 GB model load. A missing `--export=MODEL` also now
+fails with an instruction instead of a bare `set -u` error.
+
+### 22.4 Submission
+
+Resubmitted smallest-first so the preflight settles sm_70 cheaply before larger
+allocations:
+
+    sbatch --export=ALL,MODEL=Qwen/Qwen2.5-7B-Instruct,BS=8  hse_h4path.sbatch   # 4340580
+    # then, on a clean preflight:
+    #   mistralai/Mistral-Small-24B-Instruct-2501  BS=4
+    #   Qwen/QwQ-32B-Preview                       BS=4
+    #   Qwen/Qwen2.5-32B-Instruct                  BS=4

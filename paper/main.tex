@@ -42,10 +42,10 @@ same respondents answered. The answer-equivalent is stable across disjoint
 respondent panels (Spearman $\rho{=}0.78$, $p{<}10^{-6}$) and orders models
 consistently: the strongest persona we measure is worth $5.38$ of $120$ answers
 on the unseen item family and $3.07$ of $60$ on the short form, the weakest
-exactly $0$. What separates them is not accuracy. It is the share of
-each model's person-specific deviation that survives population calibration
-($\rho{=}0.77$ with $m^{*}$; raw accuracy does not predict $m^{*}$ once that is
-controlled), and how the observations are presented: a $30$-line trait profile is
+exactly $0$. What separates them is not accuracy but the sharpness of each model's
+person-conditional belief: controlling for accuracy, belief entropy predicts the
+price at $\rho{=}-0.52$, and the share of person-specific deviation surviving
+calibration at $\rho{=}+0.66$, and how the observations are presented: a $30$-line trait profile is
 worth almost five times the raw transcript of the same $120$ answers. Finally we
 bound the result: across $160$ cells and three combination families --- convex,
 linear, and gradient-boosted --- adding a persona to a conditional model of the
@@ -336,92 +336,48 @@ Appendix~\ref{app:orientation} gives the audit in full.
 \section{The human ceiling sits below the constant floor}
 \label{sec:ceiling}
 
-The decisive check on the metric is what a \emph{real} member of the
-target cluster scores, since a cluster-level twin cannot do better than
-being an actual member. A randomly drawn same-cluster respondent scores
-$0.721$ and is beaten by the constant cluster mean in $20$ of $20$ cells.
-A metric that ranks a constant above a genuine group member is not
-measuring simulation, which is why the price in \S\ref{sec:equiv} is
-anchored to a proper score instead. Appendix~\ref{app:ceiling} gives the
-per-cell numbers and the bootstrap.
 
-\section{A replacement suite}
-\label{sec:suite}
+The decisive check is what a \emph{real} member of the target cluster scores. A
+cluster-level digital twin cannot do better than being an actual member of the
+cluster; that is the definition of success.
 
-A usable metric must (i) be maximised by distributional fidelity rather than
-central tendency, and (ii) be reported against an explicit \emph{human ceiling}
-and \emph{constant floor}, so a number can be read as progress toward a real
-target rather than in the abstract. We propose three, computed from a set of
-simulated respondents rather than from paired individuals.
+A randomly drawn same-cluster respondent scores $0.721$ --- and is beaten by the
+constant cluster mean in $20$ of $20$ cells (Table~\ref{tab:headtohead},
+Figure~\ref{fig:inversion}, left). This is exactly Proposition~\ref{prop:main}
+realised: a real human \emph{is} a draw from $P_j$, so their expected score is
+$1-\mathrm{GMD}/4$, which the constant's $1-\mathrm{MAD}/4$ must exceed. The
+predicted values ($0.7996$ constant, $0.7221$ faithful) match the measured ones
+($0.796$, $0.721$) to within $0.4$ points.
 
-\paragraph{C2ST-AUC (primary).} Train a gradient-boosted classifier to separate
-$n$ simulated answer vectors from $n$ held-out human vectors of the same
-cluster; report cross-validated AUC, folded to $\max(\text{AUC},1-\text{AUC})$.
-An AUC near $0.5$ means this classifier cannot separate the samples at this
-sample size --- evidence of indistinguishability under the stated
-configuration, not of distributional equality (App.~\ref{app:samplesize}).
-Unlike $S$ it cannot be gamed by collapsing onto the mean.
-
-\paragraph{Distributional fidelity.} $1 - \frac{1}{J}\sum_j
-W_1(\hat P_j^{\text{model}}, \hat P_j^{\text{human}})/4$, with $W_1$ the per-item
-Wasserstein-1 distance. Rewards matching the full response distribution.
-
-\paragraph{Variance ratio.} $\frac{1}{J}\sum_j \mathrm{sd}(\text{model}_j) /
-\mathrm{sd}(\text{human}_j)$; $1.0$ is ideal, a constant gives $0$. A diagnostic,
-not an optimisation target.
-
-\paragraph{Results.} Table~\ref{tab:suite} applies the suite to the same 20
-cells. All three order human $>$ constant, as required; the old metric does the
-reverse. Two substantive findings follow. First, current personas are
-\emph{near-perfectly separable} from real humans (C2ST-AUC $0.994$ against a
-human ceiling of $0.564$): a classifier separates a persona from the group it
-simulates almost perfectly, while barely separating one human sample from
-another. The constant scores $0.926$ here, but we do not read $0.994$ against
-$0.926$ as an intrinsic ordering --- constant detection reaches $1.000$ with
-more data, so the gap between two already-detectable systems is a property of
-the classifier. Second, they are systematically under-dispersed: VR
-$=0.43$, a ratio of standard deviations, so LLM personas produce well under half
-the response \emph{spread} of the humans they simulate
-(Figure~\ref{fig:variance}). Evolutionary optimisation moves
-none of these appreciably.
-
-\paragraph{Under-dispersion is the wrong summary.} A single variance ratio hides
-which variance is missing. Writing each answer matrix as
-$Y_{pj}=\mu+a_p+b_j+r_{pj}$ --- respondent main effect, item main effect, and
-the two-way residual --- tells a sharper story. One observation per
-person--item cell cannot separate a stable interaction from response noise, so
-we read this term as a residual, not as individuation. The simulator emits
-nearly the \emph{right total}
-variance (ratio $0.942$ over the 20 cells) but places it differently: the item
-main effect takes $81.2\%$ of its variance against $29.8\%$ for humans, while
-the residual takes $17.7\%$ against $67.0\%$. The residual SD ratio is $0.466$,
-and $0$ for a constant by construction.
-
-So the simulator is not emitting too little. It is emitting a confident
-cluster-level \emph{answer key} --- which items are endorsable --- with little
-variation in which \emph{person} endorses which item. We recommend reporting
-the residual ratio alongside the plain variance ratio, since the two rank
-systems differently. Individuation itself we measure with the aligned amplitude
-of \S\ref{sec:mechanism} and the correct-versus-permuted CRPS, which noise
-cannot inflate: permutation leaves the residual unchanged.
-
-\begin{table}[t]\centering\footnotesize
-\input{table_metricsuite}
-\caption{The suite over 20 cluster $\times$ model cells, each metric against its
-human ceiling and constant floor. $\dagger$: under the old metric the constant
-floor \emph{exceeds} the human ceiling --- the failure this paper documents.}
-\label{tab:suite}
-\end{table}
+A measure that ranks a fixed vector above a genuine group member is not measuring
+group membership. Any ranking it induces over simulators --- including the
+ranking prior work uses to select prompts --- is therefore uninterpretable as
+evidence about personality fidelity.
 
 \begin{figure}[t]\centering
-\includegraphics[width=0.85\linewidth]{figures/variance.pdf}
-\caption{Response \emph{spread} relative to the humans being simulated, as a
-ratio of standard deviations. Every model is substantially under-dispersed.}
-\label{fig:variance}
+\includegraphics[width=\linewidth]{figures/inversion.pdf}
+\caption{Corrected orientation, 20 cells. Left: under the old metric the
+constant outscores a real human. Right: under C2ST-AUC (lower is better) the
+human sits near chance ($0.5$) while model and constant are both highly
+separable. Only the right panel places the human above the constant.}
+\label{fig:inversion}
 \end{figure}
 
-The style-only rung of the C2ST ladder, and what separability it carries,
-is reported in Appendix~\ref{app:c2streading}.
+
+\section{A distributional suite, and what it shows}
+\label{sec:suite}
+
+Before pricing anything we need a measurement maximised by distributional
+fidelity rather than by central tendency, read against an explicit human
+ceiling and constant floor. Three such measures --- a classifier two-sample
+test, per-item distributional fidelity, and a variance ratio --- invert the
+ranking correctly, placing humans above constants. Under them current
+personas are near-perfectly separable from humans (C2ST-AUC $0.994$ against
+a human ceiling of $0.564$) and reach only $0.43$ of human response
+\emph{spread}. That spread shortfall is what \S\ref{sec:why} shows to govern
+a persona's price, so it is the property the instrument quantifies rather
+than merely flags. Appendix~\ref{app:suite} gives the definitions, anchors
+and per-cell results.
 
 \section{The same penalty, in a fitted decoder}
 \label{sec:encoding}
@@ -1812,35 +1768,84 @@ transcript's $0.3$. The aggregation is doing the work, not the model's reading o
 individual responses. How the observations are presented matters more than how
 many there are.
 
-\section{The human ceiling, per cell}
-\label{app:ceiling}
+\section{The distributional suite in full}
+\label{app:suite}
 
 
-The decisive check is what a \emph{real} member of the target cluster scores. A
-cluster-level digital twin cannot do better than being an actual member of the
-cluster; that is the definition of success.
+A usable metric must (i) be maximised by distributional fidelity rather than
+central tendency, and (ii) be reported against an explicit \emph{human ceiling}
+and \emph{constant floor}, so a number can be read as progress toward a real
+target rather than in the abstract. We propose three, computed from a set of
+simulated respondents rather than from paired individuals.
 
-A randomly drawn same-cluster respondent scores $0.721$ --- and is beaten by the
-constant cluster mean in $20$ of $20$ cells (Table~\ref{tab:headtohead},
-Figure~\ref{fig:inversion}, left). This is exactly Proposition~\ref{prop:main}
-realised: a real human \emph{is} a draw from $P_j$, so their expected score is
-$1-\mathrm{GMD}/4$, which the constant's $1-\mathrm{MAD}/4$ must exceed. The
-predicted values ($0.7996$ constant, $0.7221$ faithful) match the measured ones
-($0.796$, $0.721$) to within $0.4$ points.
+\paragraph{C2ST-AUC (primary).} Train a gradient-boosted classifier to separate
+$n$ simulated answer vectors from $n$ held-out human vectors of the same
+cluster; report cross-validated AUC, folded to $\max(\text{AUC},1-\text{AUC})$.
+An AUC near $0.5$ means this classifier cannot separate the samples at this
+sample size --- evidence of indistinguishability under the stated
+configuration, not of distributional equality (App.~\ref{app:samplesize}).
+Unlike $S$ it cannot be gamed by collapsing onto the mean.
 
-A measure that ranks a fixed vector above a genuine group member is not measuring
-group membership. Any ranking it induces over simulators --- including the
-ranking prior work uses to select prompts --- is therefore uninterpretable as
-evidence about personality fidelity.
+\paragraph{Distributional fidelity.} $1 - \frac{1}{J}\sum_j
+W_1(\hat P_j^{\text{model}}, \hat P_j^{\text{human}})/4$, with $W_1$ the per-item
+Wasserstein-1 distance. Rewards matching the full response distribution.
+
+\paragraph{Variance ratio.} $\frac{1}{J}\sum_j \mathrm{sd}(\text{model}_j) /
+\mathrm{sd}(\text{human}_j)$; $1.0$ is ideal, a constant gives $0$. A diagnostic,
+not an optimisation target.
+
+\paragraph{Results.} Table~\ref{tab:suite} applies the suite to the same 20
+cells. All three order human $>$ constant, as required; the old metric does the
+reverse. Two substantive findings follow. First, current personas are
+\emph{near-perfectly separable} from real humans (C2ST-AUC $0.994$ against a
+human ceiling of $0.564$): a classifier separates a persona from the group it
+simulates almost perfectly, while barely separating one human sample from
+another. The constant scores $0.926$ here, but we do not read $0.994$ against
+$0.926$ as an intrinsic ordering --- constant detection reaches $1.000$ with
+more data, so the gap between two already-detectable systems is a property of
+the classifier. Second, they are systematically under-dispersed: VR
+$=0.43$, a ratio of standard deviations, so LLM personas produce well under half
+the response \emph{spread} of the humans they simulate
+(Figure~\ref{fig:variance}). Evolutionary optimisation moves
+none of these appreciably.
+
+\paragraph{Under-dispersion is the wrong summary.} A single variance ratio hides
+which variance is missing. Writing each answer matrix as
+$Y_{pj}=\mu+a_p+b_j+r_{pj}$ --- respondent main effect, item main effect, and
+the two-way residual --- tells a sharper story. One observation per
+person--item cell cannot separate a stable interaction from response noise, so
+we read this term as a residual, not as individuation. The simulator emits
+nearly the \emph{right total}
+variance (ratio $0.942$ over the 20 cells) but places it differently: the item
+main effect takes $81.2\%$ of its variance against $29.8\%$ for humans, while
+the residual takes $17.7\%$ against $67.0\%$. The residual SD ratio is $0.466$,
+and $0$ for a constant by construction.
+
+So the simulator is not emitting too little. It is emitting a confident
+cluster-level \emph{answer key} --- which items are endorsable --- with little
+variation in which \emph{person} endorses which item. We recommend reporting
+the residual ratio alongside the plain variance ratio, since the two rank
+systems differently. Individuation itself we measure with the aligned amplitude
+of \S\ref{sec:mechanism} and the correct-versus-permuted CRPS, which noise
+cannot inflate: permutation leaves the residual unchanged.
+
+\begin{table}[t]\centering\footnotesize
+\input{table_metricsuite}
+\caption{The suite over 20 cluster $\times$ model cells, each metric against its
+human ceiling and constant floor. $\dagger$: under the old metric the constant
+floor \emph{exceeds} the human ceiling --- the failure this paper documents.}
+\label{tab:suite}
+\end{table}
 
 \begin{figure}[t]\centering
-\includegraphics[width=\linewidth]{figures/inversion.pdf}
-\caption{Corrected orientation, 20 cells. Left: under the old metric the
-constant outscores a real human. Right: under C2ST-AUC (lower is better) the
-human sits near chance ($0.5$) while model and constant are both highly
-separable. Only the right panel places the human above the constant.}
-\label{fig:inversion}
+\includegraphics[width=0.85\linewidth]{figures/variance.pdf}
+\caption{Response \emph{spread} relative to the humans being simulated, as a
+ratio of standard deviations. Every model is substantially under-dispersed.}
+\label{fig:variance}
 \end{figure}
+
+The style-only rung of the C2ST ladder, and what separability it carries,
+is reported in Appendix~\ref{app:c2streading}.
 
 
 \bibliographystyle{acl_natbib}
