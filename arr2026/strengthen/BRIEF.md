@@ -953,8 +953,26 @@ fails with an instruction instead of a bare `set -u` error.
 Resubmitted smallest-first so the preflight settles sm_70 cheaply before larger
 allocations:
 
-    sbatch --export=ALL,MODEL=Qwen/Qwen2.5-7B-Instruct,BS=8  hse_h4path.sbatch   # 4340580
-    # then, on a clean preflight:
-    #   mistralai/Mistral-Small-24B-Instruct-2501  BS=4
-    #   Qwen/QwQ-32B-Preview                       BS=4
-    #   Qwen/Qwen2.5-32B-Instruct                  BS=4
+### 22.5 Size the GPU request per model, or wait six days
+
+The first resubmission (4340580) asked for `gpu:v100:4` for every model, including the
+15 GB 7B. Slurm estimated its start at **2026-09-27 — six days out**: the rocky queue held
+458 jobs with 102 higher-priority pending, and NO v100 node had four free devices
+(cn-002 had 2, cn-007 had 1, the rest 0) while a single idle device sat there the whole
+time. Cancelled and right-sized:
+
+| model | weights | `--gres` | BS |
+|---|---:|---|---:|
+| Qwen/Qwen2.5-7B-Instruct | 15 GB | `gpu:v100:1` | 8 |
+| mistralai/Mistral-Small-24B-Instruct-2501 | 44 GB | `gpu:v100:2` | 4 |
+| Qwen/Qwen2.5-32B-Instruct | 62 GB | `gpu:v100:3` | 4 |
+| Qwen/QwQ-32B-Preview | 62 GB | `gpu:v100:3` | 4 |
+
+The `#SBATCH --gres` directive stays at 4 as the safe default for the largest target;
+smaller models MUST override it downward on the command line:
+
+    sbatch --gres=gpu:v100:1 --export=ALL,MODEL=Qwen/Qwen2.5-7B-Instruct,BS=8 \
+           hse_h4path.sbatch                                              # 4340799
+
+The three larger models follow once 4340799's GPU preflight prints `preflight: gpu ok`,
+which is the first real evidence that sm_70 works on this interpreter.

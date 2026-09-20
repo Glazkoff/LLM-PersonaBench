@@ -16,6 +16,19 @@
 # run-to-run drift within one path. If these reproduce the published values
 # tightly, the cross-path deltas are attributable to the path.
 #
+# GPU SIZING. Request only what the model needs, and pass it on the command line:
+#
+#   Qwen/Qwen2.5-7B-Instruct                   15 GB  --gres=gpu:v100:1  BS=8
+#   mistralai/Mistral-Small-24B-Instruct-2501  44 GB  --gres=gpu:v100:2  BS=4
+#   Qwen/Qwen2.5-32B-Instruct                  62 GB  --gres=gpu:v100:3  BS=4
+#   Qwen/QwQ-32B-Preview                       62 GB  --gres=gpu:v100:3  BS=4
+#
+# The directive below is the safe default for the largest target; a smaller
+# model MUST override it downward. This is not pedantry about tidiness -- on a
+# 458-job queue no V100 node had four free devices, and a blanket gpu:v100:4
+# request for the 7B model was scheduled six days out while a single free device
+# sat on cn-007. Ask for four when you need four.
+#
 # GPU request (2026-09-21). This script previously carried NO --gres at all: it
 # called nvidia-smi and loaded a multi-billion-parameter model on whatever GPUs
 # happened to be visible on the node, without reserving any. That is a collision
