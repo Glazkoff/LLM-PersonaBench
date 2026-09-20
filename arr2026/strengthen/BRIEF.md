@@ -829,3 +829,75 @@ Limitations and Conclusion all updated to the hardened numbers (89 priced cells,
 screened cells, 426 tests, 15 models, 5 inventories). Body fits exactly 8 pages;
 Limitations p9; 24 pages total; zero LaTeX warnings; all citations resolve. A stale-number
 sweep confirms no pre-hardening figure survives in the text.
+
+## 20. HSE arm (2026-09-20) — small-model end of the transfer ladder
+
+`hbs-h24h` array 4337734: **4/4 COMPLETED, exit 0:0, on cn-051 (H200)** after the
+V100 retarget. The earlier array (4337541) died on every V100 with
+`torch.AcceleratorError: no kernel image is available` — HSE's `arrenv` carries a cu128
+torch with no sm_70 kernels. Constraint is now `type_f|type_h` (H100 cn-047/048,
+H200 cn-049..051); `type_e` stays excluded for the startup SIGILL.
+
+All four readouts are genuine: P = (150, 180, 5), mass 0.975-0.999, coverage 0.99-1.0,
+valid. The short runtimes (2-8 min) are legitimate for 0.5B/2B models on an H200.
+
+### 20.1 The transfer ladder now spans 0.5B to 35B across two clusters
+
+| model | persona | raw S | alpha* | m* (of 120) |
+|---|---|---:|---:|---:|
+| Qwen3.6-35B-A3B | profile | 0.1172 | 0.9 | **5.38** |
+| Qwen3.8-27B | profile | 0.1473 | 1.1 | 2.23 |
+| Qwen3.6-35B-A3B | hist m=120 | 0.1462 | 0.3 | 1.10 |
+| granite-4.2-30b | profile | 0.2261 | 0.7 | 0.73 |
+| gemma-4-E2B-it | hist m=20 | 0.1810 | 0.1 | 0.54 |
+| Qwen3.6-35B-A3B | hist m=60 | 0.1478 | 0.2 | 0.49 |
+| gemma-4-E2B-it | profile | 0.2507 | 0.1 | 0.22 |
+| Qwen3.6-35B-A3B | hist m=20 | 0.1470 | 0.2 | 0.19 |
+| Apertus-0.5B | profile | 0.1308 | 0.8 | 0.13 |
+| Apertus-0.5B | hist m=20 | 0.1260 | 0.7 | 0.06 |
+| Qwen2.5-7B | profile | 0.2166 | 0.3 | 0.03 |
+| Qwen3.6-35B-A3B | hist m=5 | 0.1484 | 0.1 | 0.00 |
+
+### 20.2 CORRECTION — "profile beats transcript" is NOT universal
+
+§19.3 stated the aggregation does the work. With the HSE small models that claim is
+too strong and the paper has been qualified accordingly:
+
+| model | profile | transcript (m=20) | direction |
+|---|---:|---:|---|
+| Qwen3.6-35B-A3B | 5.38 | 0.19 | profile, by ~28x |
+| Apertus-0.5B | 0.13 | 0.06 | profile |
+| gemma-4-E2B-it | 0.22 | 0.54 | **transcript** |
+
+Two of three favour the profile and the strong model favours it overwhelmingly, but
+gemma-4-E2B reverses it. Three models cannot settle the general direction. What the
+price DOES establish is that the presentation choice is worth several observations and
+must therefore be reported — which is a claim about the instrument, not about prompting.
+
+## 21. Slurm hygiene — two findings on HSE
+
+### 21.1 `hbs-h4path` was failing on an unconditional preflight, not on data
+
+Jobs 4337750-53 exited 2 with `PREFLIGHT FAIL: missing $f`. All four files it checks are
+present. The script (`~/personality-twins-arr/hse_h4path.sbatch`) was written through an
+ssh heredoc and line 28 reached disk as
+
+    [ -e "\$f" ] || { echo "PREFLIGHT FAIL: missing \$f"; exit 2; }
+
+The escaped `\$f` tests for a file literally named `$f`, so the preflight can NEVER pass,
+and the message cannot name the file it is complaining about. This is the exact trap in
+the standing rule: write multi-line sbatch locally and `scp` it, never `ssh "cat > f <<EOF"`.
+Fixed in place with `sed` (backup kept alongside) and verified by dry-running the loop:
+`preflight ok`.
+
+Still outstanding on that script, NOT changed because it alters scheduling and it is not
+mine to redesign: it requests **no `--gres`** yet calls `nvidia-smi` and loads a model, so
+it is using a GPU it never reserved; and it carries **no `--constraint`**, so nothing
+stops it landing on a `type_e` a100 that SIGILLs at python startup.
+
+### 21.2 The `hbs-` rename was incomplete
+
+The first pass covered only `arr2026/slurm/` inside the repo. Most of this project's
+sbatch files live in the cluster working directories ABOVE the checkout. Completed:
+**49 files renamed on HSE, 45 on Euler**; zero `job-name=arr-` remain on either cluster
+(95 and 90 now carry `hbs-`).
