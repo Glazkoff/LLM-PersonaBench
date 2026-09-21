@@ -1005,3 +1005,52 @@ All four verified after submission as `Features=type_a|type_b|type_c|type_d` (th
 node types; `type_e` a100 excluded, so the startup SIGILL cannot occur) with the intended
 `TresPerNode` and `TimeLimit`. NOTE: that Features string is applied by the site, not by
 the script -- do not add a `--constraint` on top of typed `gpu:v100:N`.
+
+## 23. h4path probe PASSED (2026-09-21) — sm_70 measured, replication exact
+
+`4340804` COMPLETED in **33:52**, exit 0:0, on cn-019. The GPU preflight printed what no
+previous attempt in this campaign had ever reached:
+
+    preflight: data ok
+    [0] Tesla V100-SXM2-32GB sm_70
+    fp16 matmul ok, checksum finite: True
+    preflight: gpu ok
+    loading Qwen/Qwen2.5-7B-Instruct ... (sm_70, dtype=torch.float16)
+
+**sm_70 works on this interpreter** (torch 2.6.0+cu124) — now a measurement, not an
+assumption. Note the contrast with `arrenv` (cu128, no sm_70 kernels, §20): on this
+cluster the interpreter decides whether V100 is usable, so record which one a job used.
+
+33:52 against the 2h request also vindicates the walltime fix; the original 12h was ~21x
+the actual runtime.
+
+### 23.1 The same-path replication is exact
+
+| statistic | published | replication | delta |
+|---|---:|---:|---:|
+| VR_belief_mixture | 0.4300 | 0.4301 | +0.0001 |
+| share_between | 0.2717 | 0.2716 | -0.0000 |
+| VR_readout | 0.4099 | 0.4108 | +0.0009 |
+| belief_entropy_mean | 0.4147 | 0.4148 | +0.0001 |
+
+Per cluster the agreement is just as tight (0.4239/0.4240, 0.4696/0.4698, 0.4542/0.4544,
+0.3721/0.3722). **Run-to-run drift within a path is ~1e-4**, so App. F's cross-path deltas
+are attributable to the path rather than to noise — which is exactly the control this
+experiment exists to provide.
+
+### 23.2 CAVEAT — the original run's path is asserted, not recorded
+
+The comparison above is only a *same-path* control if the published run really was
+V100/fp16. That is claimed by the sbatch header, but `h4_variance_ladder_hf.py` printed
+`sm_XX, dtype=...` to the Slurm log (line 153) and never wrote it into `summary.json`, so
+no committed artifact records the hardware that produced it. Do not state the same-path
+claim as established until the original run's provenance is confirmed from its log.
+
+Fixed forward: the summary now records `device_name`, `sm`, `dtype`, `n_gpus`, `torch` and
+`transformers`. Deployed before the three dependents start (04:43-07:24 on 09-22), so they
+will carry provenance.
+
+### 23.3 The dependency gate worked
+
+All three dependents flipped to `Dependency=(null)` the moment the probe exited 0 and are
+queued on their own priority: 4340813 04:43, 4340812 07:00, 4340814 07:24 on 2026-09-22.

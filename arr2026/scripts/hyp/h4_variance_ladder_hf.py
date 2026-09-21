@@ -337,6 +337,19 @@ def main():
         "mass_on_scale_mean": round(float(t.mass_on_scale_mean.mean()), 4),
         "coverage": round(float(t.coverage.mean()), 4),
         "valid": True,
+        # Numeric-path provenance. App. F's central claim is a comparison ACROSS
+        # paths (fp16/sm_70 vs bf16/sm_90), yet until now the path was only
+        # printed to the Slurm log and never written into the artifact -- so a
+        # committed result could not be attributed to the hardware that produced
+        # it once the log rotated. Record it where the numbers live.
+        "device_name": (torch.cuda.get_device_name(0)
+                        if torch.cuda.is_available() else None),
+        "sm": (lambda c: f"sm_{c[0]}{c[1]}")(torch.cuda.get_device_capability(0))
+              if torch.cuda.is_available() else None,
+        "dtype": str(dtype),
+        "n_gpus": (torch.cuda.device_count() if torch.cuda.is_available() else 0),
+        "torch": torch.__version__,
+        "transformers": __import__("transformers").__version__,
         "verdict": ("DECODING LOSS: the persona-mixture belief carries near-human spread; "
                     "sampling discards it." if v >= 0.8 else
                     "REPRESENTATIONAL LOSS: the persona-mixture belief is itself collapsed."
