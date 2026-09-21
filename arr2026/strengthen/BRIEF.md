@@ -1038,13 +1038,24 @@ Per cluster the agreement is just as tight (0.4239/0.4240, 0.4696/0.4698, 0.4542
 are attributable to the path rather than to noise — which is exactly the control this
 experiment exists to provide.
 
-### 23.2 CAVEAT — the original run's path is asserted, not recorded
+### 23.2 RESOLVED — the original run's path is confirmed sm_70/fp16
 
-The comparison above is only a *same-path* control if the published run really was
-V100/fp16. That is claimed by the sbatch header, but `h4_variance_ladder_hf.py` printed
-`sm_XX, dtype=...` to the Slurm log (line 153) and never wrote it into `summary.json`, so
-no committed artifact records the hardware that produced it. Do not state the same-path
-claim as established until the original run's provenance is confirmed from its log.
+Checked, and it holds. Three independent lines agree that the published Qwen2.5-7B row
+was measured on V100 / sm_70 / fp16:
+
+1. **The paper already says so.** App.~F (`app:mixedpath`) audits the run records and
+   states that four rows — Mistral-24B, Qwen2.5-7B, Qwen2.5-32B, QwQ-32B — were read on
+   V100 in fp16 and the rest on H200 in bf16. Those four are exactly h4path's targets,
+   and the published row carries a dagger marking it fp16-origin.
+2. **Numeric agreement.** The V100/fp16 replication reproduces it to 1e-4
+   (0.4300 -> 0.4301), which a different path does not.
+3. **The contrast arm separates cleanly.** Euler log `h4tab_5135_1.out` (job 5135_1,
+   2026-09-18) records `loading Qwen/Qwen2.5-7B-Instruct ... (sm_90, dtype=torch.bfloat16)`
+   and returns VR_belief_mixture 0.4272 — Delta -0.003 from the published row, matching
+   App.~F's own Delta column exactly. Every h4-family load line on Euler is sm_90/bf16.
+
+So the comparison IS a same-path control. The provenance gap was real and is fixed
+forward (§23.2 of the summary now records device/sm/dtype), but the specific claim stands.
 
 Fixed forward: the summary now records `device_name`, `sm`, `dtype`, `n_gpus`, `torch` and
 `transformers`. Deployed before the three dependents start (04:43-07:24 on 09-22), so they
@@ -1054,3 +1065,34 @@ will carry provenance.
 
 All three dependents flipped to `Dependency=(null)` the moment the probe exited 0 and are
 queued on their own priority: 4340813 04:43, 4340812 07:00, 4340814 07:24 on 2026-09-22.
+
+
+## 24. Two things the probe changes in App. F
+
+### 24.1 Within-path drift is now MEASURED, not assumed
+
+App.~F justifies not repeating a readout by asserting determinism: *"The belief readout is
+deterministic given a model and a panel --- the seed enters only the sampled answers --- so
+these are not repeated draws."* That is an assumption stated in order to skip the control.
+
+4340804 is the first actual same-path repeat, and it confirms the assumption empirically:
+**~1e-4 across all four statistics and all four clusters.** The cross-path deltas App.~F
+reports (-0.003 for Qwen2.5-7B, up to +0.192 for Mistral-24B) are therefore 30x to 2000x
+the within-path drift and are attributable to the path. This is precisely the control
+h4path exists to supply, and the paper can now state it as measured.
+
+### 24.2 The missing fp16 arm is NOT blocked
+
+App.~F currently says: *"V100 (sm_70) would have tested the fp16 path; the build available
+when we ran these checks ships no Volta kernels, so the comparison above spans two
+Hopper-class and one Ampere-class device only."*
+
+That is true of `arrenv` (cu128, no sm_70 kernels — the same build that killed the h24h
+array in §20), but NOT of the interpreter h4path uses:
+`/opt/software/python/envs/pytorch2_4`, torch 2.6.0+cu124, which 4340804 demonstrated runs
+on a Tesla V100 with a verified fp16 matmul. **The blocker is build-specific, not a
+hardware limitation, and the missing arm can be filled.**
+
+Jobs 4340812/13/14 fill it for the remaining three fp16-origin models. Once they land,
+App.~F's caveat about a missing arm should be replaced with the completed comparison ---
+do NOT edit that text before the results exist.
