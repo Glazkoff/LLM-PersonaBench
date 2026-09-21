@@ -1096,3 +1096,54 @@ hardware limitation, and the missing arm can be filled.**
 Jobs 4340812/13/14 fill it for the remaining three fp16-origin models. Once they land,
 App.~F's caveat about a missing arm should be replaced with the completed comparison ---
 do NOT edit that text before the results exist.
+
+## 25. VR_between, all four fp16-origin rows (2026-09-21)
+
+All four h4path runs COMPLETED (7B 33:52 / 1 GPU, Qwen2.5-32B 2:08:47 / 3, QwQ-32B
+2:09:59 / 3, Mistral-24B 1:49:03 / 2), every one exit 0:0 on V100 sm_70 fp16 with the new
+provenance fields written.
+
+`VR_between` is NOT a column in `variance_ladder.csv`; it is defined in
+`h22_variance_ci.py:62` as `mean_i( sqrt(between_var_i) / human_sd_i )` over items with
+non-degenerate human spread, where `between_var_i` is the variance across personas of the
+per-persona expected answer. Do not confuse it with `share_between`, which is a variance
+proportion. Computed by running the paper's own `h22_variance_ci.py` over the v100 tree
+(2000 paired bootstrap replicates, personas as the resampling unit):
+
+| model | VR_between [95% CI] | published | delta | pub in CI | VR_total | published | delta |
+|---|---|---:|---:|:--:|---:|---:|---:|
+| Qwen2.5-7B | 0.1931 [0.1767, 0.1992] | 0.193 | +0.0001 | yes | 0.4301 | 0.430 | +0.0001 |
+| Qwen2.5-32B | 0.2204 [0.2056, 0.2247] | 0.220 | +0.0004 | yes | 0.3434 | 0.343 | +0.0004 |
+| QwQ-32B | 0.1538 [0.1452, 0.1564] | 0.154 | -0.0002 | yes | 0.7537 | 0.753 | +0.0007 |
+| **Mistral-24B** | **0.1619 [0.1481, 0.1678]** | **0.177** | **-0.0151** | **NO** | 0.5733 | 0.579 | -0.0057 |
+
+### 25.1 Three reproduce exactly; Mistral-24B does not
+
+For three of four the same-path repeat lands on the published value to 1e-4 and the
+published number sits inside the bootstrap CI. **Mistral-24B is outside its CI on
+VR_between**, and drifts on every statistic: VR_total -0.0057, VR_between -0.0151,
+belief entropy +0.029 (0.729 -> 0.7581) — roughly 100x the other three.
+
+This bears directly on App.~F. That appendix argues VR_between "survives the change of
+path", citing agreement "to within 0.0064" across paths. Mistral's **within-path** drift
+of 0.0151 is more than twice that cross-path tolerance. And Mistral is precisely the model
+carrying App.~F's headline cross-path delta (+0.192 in VR_total), which the appendix
+attributes to the path. If its readout is unstable within a path as well, that attribution
+is weaker for the one model the claim leans on hardest.
+
+### 25.2 Candidate explanation, and the test now running
+
+My Mistral run used **2 GPUs**; the two models that reproduced exactly used 3.
+`device_map="auto"` shards differently with a different device count, changing the order
+of floating-point reductions — enough to matter for a model App.~F already flags as
+numerically sensitive. The published run's GPU count is unrecorded (the provenance fix
+postdates it), so this cannot be settled from the artifacts.
+
+Job **4341752** re-runs Mistral on `gpu:v100:3`, holding model, script, panel and
+respondents fixed so only the device count differs. If it lands on 0.177, sharding is the
+cause and App.~F's determinism assumption needs qualifying by device count rather than by
+path. If it lands on 0.1619 again, Mistral's readout is genuinely unstable and App.~F's
+Mistral row cannot carry a path attribution.
+
+The 2-GPU result is preserved as `h4v100_..._2gpu` on both the cluster and locally — the
+re-run writes to the same directory and would otherwise have destroyed the comparison.

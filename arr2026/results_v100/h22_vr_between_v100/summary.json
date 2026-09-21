@@ -1,0 +1,170 @@
+{
+  "n_boot": 2000,
+  "seed": 2026,
+  "models": {
+    "h4v100_Qwen_Qwen2_5-7B-Instruct": {
+      "share_between": {
+        "point": 0.27164866471916643,
+        "lo": 0.24449323118015712,
+        "hi": 0.28580202671915755
+      },
+      "VR_within": {
+        "point": 0.36705365232736975,
+        "lo": 0.3634631795138242,
+        "hi": 0.3693675422166325
+      },
+      "VR_between": {
+        "point": 0.1931304213516231,
+        "lo": 0.17665780401769968,
+        "hi": 0.1991639567606269
+      },
+      "VR_mixture": {
+        "point": 0.4301042536062048,
+        "lo": 0.4180716894555016,
+        "hi": 0.43651828547143395
+      }
+    },
+    "h4v100_Qwen_Qwen2_5-32B-Instruct": {
+      "share_between": {
+        "point": 0.48496060964108656,
+        "lo": 0.458783335770329,
+        "hi": 0.49609044506839267
+      },
+      "VR_within": {
+        "point": 0.24243917008174234,
+        "lo": 0.23872324187132477,
+        "hi": 0.24385016123651887
+      },
+      "VR_between": {
+        "point": 0.22042117157043634,
+        "lo": 0.20555224153872137,
+        "hi": 0.22466613474587013
+      },
+      "VR_mixture": {
+        "point": 0.343382978046667,
+        "lo": 0.3317954739593741,
+        "hi": 0.34767520221795933
+      }
+    },
+    "h4v100_Qwen_QwQ-32B-Preview": {
+      "share_between": {
+        "point": 0.053703258937705174,
+        "lo": 0.048772961788354954,
+        "hi": 0.05621005438365433
+      },
+      "VR_within": {
+        "point": 0.7295887819758073,
+        "lo": 0.7266066527881726,
+        "hi": 0.7326762603898627
+      },
+      "VR_between": {
+        "point": 0.15378917464966643,
+        "lo": 0.14519163966562942,
+        "hi": 0.15638862538996734
+      },
+      "VR_mixture": {
+        "point": 0.7536726587988346,
+        "lo": 0.7492025038249932,
+        "hi": 0.7567146114276061
+      }
+    },
+    "h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "share_between": {
+        "point": 0.10221404049796709,
+        "lo": 0.08834453319104872,
+        "hi": 0.11129812739207454
+      },
+      "VR_within": {
+        "point": 0.542258932415992,
+        "lo": 0.5381107830480018,
+        "hi": 0.5463636607498985
+      },
+      "VR_between": {
+        "point": 0.16188075782255115,
+        "lo": 0.14809319739475219,
+        "hi": 0.16783883213769735
+      },
+      "VR_mixture": {
+        "point": 0.5733192304209884,
+        "lo": 0.5657690598032988,
+        "hi": 0.5790929908388326
+      }
+    }
+  },
+  "pairs_vrb": {
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_Qwen_Qwen2_5-32B-Instruct": {
+      "point": -0.027290750218813248,
+      "lo": -0.03674385454321878,
+      "hi": -0.017311460770089483,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_Qwen_QwQ-32B-Preview": {
+      "point": 0.039341246701956656,
+      "lo": 0.027285121131377092,
+      "hi": 0.04700778514170765,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": 0.031249663529071936,
+      "lo": 0.022974125890163125,
+      "hi": 0.03716766952291838,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-32B-Instruct|h4v100_Qwen_QwQ-32B-Preview": {
+      "point": 0.0666319969207699,
+      "lo": 0.057337888174762326,
+      "hi": 0.07140013513901529,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-32B-Instruct|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": 0.058540413747885184,
+      "lo": 0.04814327637575273,
+      "hi": 0.06547046292168097,
+      "separated": true
+    },
+    "h4v100_Qwen_QwQ-32B-Preview|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": -0.00809158317288472,
+      "lo": -0.015580722630786225,
+      "hi": 0.0015069327572114497,
+      "separated": false
+    }
+  },
+  "pairs": {
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_Qwen_Qwen2_5-32B-Instruct": {
+      "point": -0.21331194492192013,
+      "lo": -0.22933322279901627,
+      "hi": -0.19434560981668303,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_Qwen_QwQ-32B-Preview": {
+      "point": 0.21794540578146127,
+      "lo": 0.19326332948894864,
+      "hi": 0.23175921345412867,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-7B-Instruct|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": 0.16943462422119934,
+      "lo": 0.15206614192283108,
+      "hi": 0.17942399716152493,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-32B-Instruct|h4v100_Qwen_QwQ-32B-Preview": {
+      "point": 0.4312573507033814,
+      "lo": 0.4084948498131197,
+      "hi": 0.44173077894194807,
+      "separated": true
+    },
+    "h4v100_Qwen_Qwen2_5-32B-Instruct|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": 0.38274656914311944,
+      "lo": 0.3635936109941833,
+      "hi": 0.3923024290851011,
+      "separated": true
+    },
+    "h4v100_Qwen_QwQ-32B-Preview|h4v100_mistralai_Mistral-Small-24B-Instruct-2501": {
+      "point": -0.048510781560261916,
+      "lo": -0.0574984925294771,
+      "hi": -0.03683452999197746,
+      "separated": true
+    }
+  }
+}
