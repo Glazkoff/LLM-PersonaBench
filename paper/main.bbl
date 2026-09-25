@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Abels et~al.(2026)Abels, Fernandez~Domingos, Shah, and
@@ -42,6 +42,22 @@ Bin Han, Deuksin Kwon, and Jonathan Gratch. 2026.
 \newblock Personality expression across contexts: Linguistic and behavioral
   variation in {LLM} agents.
 \newblock \emph{arXiv preprint arXiv:2602.01063}.
+
+\bibitem[{Hu et~al.(2026)Hu, Baumann, Lupo, Collier, Hovy, and
+  R{\"o}ttger}]{hu2026simbench}
+Tiancheng Hu, Joachim Baumann, Lorenzo Lupo, Nigel Collier, Dirk Hovy, and Paul
+  R{\"o}ttger. 2026.
+\newblock \href {https://arxiv.org/abs/2510.17516} {{SimBench}: Benchmarking
+  the ability of large language models to simulate human behaviors}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Hu and Collier(2024)}]{hu2024persona}
+Tiancheng Hu and Nigel Collier. 2024.
+\newblock \href {https://arxiv.org/abs/2402.10811} {Quantifying the persona
+  effect in {LLM} simulations}.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}, pages 10289--10307,
+  Bangkok, Thailand.
 
 \bibitem[{Huang et~al.(2025)Huang, Li, and Shao}]{huang2025dsa}
 Ji~Huang, Mengfei Li, and Shuai Shao. 2025.

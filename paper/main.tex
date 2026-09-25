@@ -438,7 +438,12 @@ prompt sensitivity~\citep{han2026context,gupta2024personas}; simulation from
 transcripts achieves high fidelity~\citep{park2024generative} at a per-person
 cost that motivates the cluster-level shortcut, and evolutionary prompt
 search~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
-optimiser. None of this reports what a persona is worth. Classifier two-sample
+optimiser. That persona variables carry \emph{some} signal is already
+established, and already quantified against supervised regression:
+\citet{hu2024persona} find they explain under $10\%$ of annotation variance,
+with persona prompting recovering about $81\%$ of what a regression on ground
+truth achieves. Our question is the complementary one --- not whether the signal
+exists, but what it is worth in answers. None of this literature reports that. Classifier two-sample
 tests are standard for comparing
 distributions~\citep{lopezpaz2017revisiting}, but the absolute-error objective
 these systems optimise is minimised by a conditional central tendency, which is
@@ -454,8 +459,11 @@ fine-tuning are established is exactly why we claim neither; we contribute the
 unit their gains should be quoted in. Simulation grounded in
 self-reports~\citep{park2026selfreports} and behaviour-trained foundation
 models~\citep{huang2026behaviorbench,binz2025centaur} target richer behaviour
-than questionnaire response, and the answer-equivalent applies to them unchanged
-wherever a held-out response distribution exists.
+than questionnaire response. Standardised group-level evaluation across many
+datasets~\citep{hu2026simbench} is complementary to the price: it establishes
+\emph{whether} a simulator matches a population, not how many of a person's
+answers it substitutes for. The answer-equivalent applies to all of these
+unchanged wherever a held-out response distribution exists.
 
 \section{Conclusion}
 
@@ -1876,7 +1884,11 @@ The style-only rung of the C2ST ladder, and what separability it carries,
 is reported in Appendix~\ref{app:c2streading}.
 
 
-\bibliographystyle{acl_natbib}
+% acl.sty already issues \bibliographystyle{acl_natbib}; repeating it here put a
+% second \bibstyle into main.aux and made every bibtex run emit
+% "Illegal, another \bibstyle command". Harmless in effect -- bibtex skips the
+% duplicate and still builds the bibliography -- but it masks real bibtex errors
+% behind a permanent one, so the redundant line is removed.
 \bibliography{refs}
 
 \end{document}
