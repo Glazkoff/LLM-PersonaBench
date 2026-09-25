@@ -1147,3 +1147,51 @@ Mistral row cannot carry a path attribution.
 
 The 2-GPU result is preserved as `h4v100_..._2gpu` on both the cluster and locally — the
 re-run writes to the same directory and would otherwise have destroyed the comparison.
+
+## 26. RESOLVED (2026-09-25) — sharding ruled out; the PUBLISHED Mistral row is what fails
+
+Job 4341752 re-ran Mistral-24B on `gpu:v100:3` (the earlier run used 2). All jobs on both
+clusters are now complete and both queues are empty.
+
+**The two runs are bit-identical.** Not "agree to 1e-4" — `np.array_equal` on the belief
+tensors returns True for all four clusters, max|diff| exactly 0.0:
+
+    cluster 0..3: shapes (40,120,5) | bit-identical=True | max|diff|=0.000e+00
+
+So device count does not affect the readout at all, and the sharding hypothesis in §25.2
+is dead. More importantly this is the strongest possible form of the within-path
+determinism result: **two independent runs, different device counts, identical output.**
+
+### 26.1 The consequence: it is the published value that does not reproduce
+
+Mistral's readout is reproducible. The published row is not reachable from it:
+
+| statistic | published | re-read (2 GPU) | re-read (3 GPU) |
+|---|---:|---:|---:|
+| VR_between | 0.177 | 0.1619 | 0.1619 |
+| VR_total | 0.579 | 0.5733 | 0.5733 |
+| belief entropy | 0.729 | 0.7581 | 0.7581 |
+
+Two independent re-reads agree exactly with each other and disagree systematically with
+the published number, which sits outside the bootstrap CI [0.1481, 0.1678]. Some
+unrecorded aspect of the original Mistral run — library version, script revision, panel
+construction — differs from the configuration its record describes. It cannot be
+identified, because artifacts of that era carry no device/dtype/library provenance. That
+is exactly the gap §23.2 closed going forward, one run too late to settle this one.
+
+### 26.2 What went into the paper
+
+App.~F now carries a new paragraph, *"The fp16 arm, and one row that does not reproduce"*:
+
+- The missing-arm caveat is retired. The blocker was build-specific (arrenv, cu128, no
+  sm_70 kernels), not hardware; torch 2.6.0+cu124 on the same cluster runs on V100.
+- Three of four rows reproduce to 1e-4 with the published value inside a 2000-replicate
+  persona bootstrap interval. This is the FIRST measurement of within-path drift rather
+  than an assumption of determinism, and it puts that drift one to three orders of
+  magnitude below the cross-path deltas — which is what licenses attributing those deltas
+  to the path.
+- Mistral is reported as **not reproduced**, not silently replaced. The cross-path
+  contrast for that model should be read from the reproducible endpoint (0.5733 fp16 vs
+  0.771 bf16), which leaves direction and rough magnitude unchanged.
+
+Body still fits 8 pages; zero LaTeX warnings; 25 pages total.

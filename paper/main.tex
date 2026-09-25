@@ -885,12 +885,11 @@ be published as though it were, while an average over hundreds of items and
 respondents is stable enough to carry an effect an order of magnitude larger
 than the noise.
 
-One arm is missing from \emph{this} comparison, and it is not a minor one. V100
-(sm\_70) would have tested the \texttt{fp16} path; the build available when we
-ran these checks ships no Volta kernels, so the comparison above spans two
-Hopper-class and one Ampere-class device only. The \texttt{fp16} path is
-nevertheless the path on which part of \S\ref{sec:mechanism}'s table was
-measured, which we address next.
+One arm was initially missing from \emph{this} comparison: V100 (sm\_70) tests
+the \texttt{fp16} path, and the build we first used ships no Volta kernels, so
+the comparison above spans two Hopper-class and one Ampere-class device only.
+The \texttt{fp16} path is the path on which part of \S\ref{sec:mechanism}'s table
+was measured. We fill that arm below.
 
 \subsection{The table is not on a single numeric path}
 \label{app:mixedpath}
@@ -929,6 +928,35 @@ flatter answer distributions on the newer path --- Mistral's mean belief entropy
 rises from $0.729$ to $0.984$ --- which inflates the within-persona term. Panel
 size is not the explanation: on sm\_90 Mistral moves $0.002$ between $40$ and
 $160$ personas.
+
+\paragraph{The \texttt{fp16} arm, and one row that does not reproduce.}
+The missing V100 arm above was attributed to a build without Volta kernels. That
+is a property of the build, not of the hardware: a different interpreter
+available on the same cluster (torch 2.6.0+cu124) runs on sm\_70, so we re-read
+all four \texttt{fp16}-origin rows on V100 in \texttt{fp16}, holding model,
+script, panel and respondents fixed. Three reproduce their published values to
+$10^{-4}$ in both columns --- Qwen2.5-7B $0.1931$ against $0.193$, Qwen2.5-32B
+$0.2204$ against $0.220$, QwQ-32B $0.1538$ against $0.154$ in
+$\mathrm{VR}_\text{between}$ --- and each published value falls inside a
+$2000$-replicate persona bootstrap interval. This is the first measurement of
+\emph{within}-path drift rather than an assumption of it, and it puts that drift
+at or below $10^{-4}$, one to three orders of magnitude under the cross-path
+deltas above.
+
+Mistral-Small-24B does not reproduce. Its re-read gives
+$\mathrm{VR}_\text{between}=0.1619$ $[0.1481,0.1678]$ against a published
+$0.177$, which lies outside the interval, with
+$\mathrm{VR}_\text{total}$ $0.5733$ against $0.579$ and mean belief entropy
+$0.758$ against $0.729$. The discrepancy is not run-to-run noise and not device
+sharding: two independent re-reads on two and on three V100s return
+\emph{bit-identical} belief tensors. Some unrecorded aspect of the original
+Mistral run therefore differs from the configuration its record describes, and
+we cannot say which, because the artifacts of that era do not carry the device,
+dtype or library versions that produced them --- a gap our released readouts now
+close. We report the figure as not reproduced rather than silently replacing it;
+the cross-path contrast for this model should be read from the reproducible
+endpoint ($0.5733$ on \texttt{fp16} against $0.771$ on \texttt{bf16}), which
+leaves its direction and rough magnitude unchanged.
 
 \paragraph{The individuation column is not affected.} The quantity
 \S\ref{sec:mechanism} actually rests on is $\mathrm{VR}_\text{between}$, and it
