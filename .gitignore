@@ -223,3 +223,10 @@ arr_bundle.tar.gz
 *.pre-strengthen
 *.json.bak
 arr2026/results_euler/h26_equiv/superseded/
+
+# icml2027: large regenerable tensors and logs stay out of git (see icml2027/results/README.md)
+icml2027/results/**/*.npz
+icml2027/results/**/*.npy
+icml2027/results/**/*.log
+icml2027/queue/*.lock
+logs/

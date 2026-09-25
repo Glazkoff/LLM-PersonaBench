@@ -1,0 +1,5 @@
+arm: de
+description: EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member
+population_size: 8
+generations: 10
+crossover_rate: 0.8

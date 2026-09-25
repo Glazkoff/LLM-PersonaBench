@@ -1,0 +1,6 @@
+arm: promptbreeder
+description: Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)
+population_size: 8
+generations: 10
+mutation_prompt_pool: 8
+hyper_mutation_rate: 0.25

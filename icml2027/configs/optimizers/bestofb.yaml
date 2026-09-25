@@ -1,0 +1,3 @@
+arm: bestofb
+description: selection without evolution; B samples from the initial-population generator, best on the optimisation panel
+samples: 80

@@ -1,0 +1,7 @@
+arm: gepa
+description: Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.
+minibatch_respondents: 8
+pareto_pool_max: 12
+reflection_items_shown: 10
+evaluations: 80            # full-panel evaluations; minibatch reflections are charged at 8/40 each and rounded up into the budget
+library: optional          # if `import gepa` works and its adapter API fits, wrap it; otherwise the built-in implementation is used and recorded

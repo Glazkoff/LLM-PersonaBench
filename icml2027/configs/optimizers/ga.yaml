@@ -1,0 +1,9 @@
+arm: ga
+description: EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation
+population_size: 8
+generations: 10            # 8 x 10 = 80 = B
+elites: 2
+selection: tournament
+tournament_k: 3
+crossover_rate: 0.8
+mutation_rate: 0.3

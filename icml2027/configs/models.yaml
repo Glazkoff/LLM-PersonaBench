@@ -1,0 +1,103 @@
+# Model slate for Paper B. slug = hf_id with '/'->'_' and '.'->'p'.
+# readout: belief_vllm (logprobs via local vLLM), belief_hf (forward pass), sampled (API, k samples)
+# prefill: assistant-turn prefill used by the belief readout
+# tier: 1 = full optimizer grid, 2 = GA+GEPA+baselines, 3 = API frontier (sampled readout)
+# gate: minimum mean mass on the five answer tokens required in preflight (PREREGISTRATION §2)
+defaults:
+  dtype: bf16
+  tp: 1
+  readout: belief_vllm
+  prefill: "My answer is "
+  gate_mass_on_scale: 0.5
+  max_model_len: 8192
+  gpu_memory_utilization: 0.90
+
+models:
+  - hf_id: Qwen/Qwen3.6-35B-A3B
+    slug: Qwen_Qwen3p6-35B-A3B
+    released: 2026-04
+    tier: 1
+    pilot: true
+  - hf_id: Qwen/Qwen3.8-27B
+    slug: Qwen_Qwen3p8-27B
+    released: 2026-07
+    tier: 1
+  - hf_id: google/gemma-4-12B-it
+    slug: google_gemma-4-12B-it
+    released: 2026-03
+    tier: 1
+  - hf_id: openai/gpt-oss-20b
+    slug: openai_gpt-oss-20b
+    released: 2025-08
+    tier: 1
+    prefill: "<|channel|>final<|message|>My answer is "
+    dtype: mxfp4-bf16
+  - hf_id: ai-sage/GigaChat3-10B-A1.8B
+    slug: ai-sage_GigaChat3-10B-A1p8B
+    released: 2025-12
+    tier: 1
+    notes: "MLA v_head_dim=192 unsupported by vLLM 0.28 FlashAttention MLA prefill; use readout: belief_hf if vLLM fails preflight"
+  - hf_id: Qwen/Qwen3-235B-A22B-Instruct-2507-FP8
+    slug: Qwen_Qwen3-235B-A22B-Instruct-2507-FP8
+    released: 2025-07
+    tier: 1
+    dtype: fp8
+    tp: 4
+    notes: "the NeurIPS paper's own model; FP8 read correctly on one allocation and returned near-zero mass on others -- preflight per allocation"
+  - hf_id: zai-org/GLM-4.7-Flash
+    slug: zai-org_GLM-4p7-Flash
+    released: 2026-01
+    tier: 2
+  - hf_id: ibm-granite/granite-4.2-30b
+    slug: ibm-granite_granite-4p2-30b
+    released: 2026-02
+    tier: 2
+  - hf_id: ibm-granite/granite-4.2-8b
+    slug: ibm-granite_granite-4p2-8b
+    released: 2026-02
+    tier: 2
+  - hf_id: swiss-ai/Apertus-8B-Instruct-2509
+    slug: swiss-ai_Apertus-8B-Instruct-2509
+    released: 2025-09
+    tier: 2
+  - hf_id: deepseek-ai/DeepSeek-V4-Flash-0731
+    slug: deepseek-ai_DeepSeek-V4-Flash-0731
+    released: 2026-07
+    tier: 2
+    tp: 2
+    notes: "returned NaN / zero mass on the audit protocol; include only if preflight passes"
+  # Tier 3: API models, sampled readout (k=5, T=1). provider from src/models/registry.py.
+  - hf_id: openai/gpt-4.1-mini
+    slug: openai_gpt-4p1-mini
+    released: 2025-04
+    tier: 3
+    readout: sampled
+    provider: openrouter
+  - hf_id: openai/gpt-5
+    slug: openai_gpt-5
+    released: 2025-08
+    tier: 3
+    readout: sampled
+    provider: openrouter
+    notes: "replace with the current GPT-5-class id at run time; record the exact id in run_meta.json"
+  - hf_id: anthropic/claude-sonnet-5
+    slug: anthropic_claude-sonnet-5
+    released: 2026
+    tier: 3
+    readout: sampled
+    provider: openrouter
+  - hf_id: google/gemini-3-flash
+    slug: google_gemini-3-flash
+    released: 2026
+    tier: 3
+    readout: sampled
+    provider: openrouter
+    notes: "record the exact id at run time"
+
+mutator:
+  # The LLM that performs mutation / crossover / reflection for every arm in Tier 1.
+  # Fixed across arms so the comparison is between search strategies, not mutators.
+  hf_id: Qwen/Qwen3.8-27B
+  temperature: 0.7
+  max_tokens: 1200
+  # E8 varies this: {same-as-evaluated, this fixed model, Qwen/Qwen3.5-9B}

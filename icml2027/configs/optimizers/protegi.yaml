@@ -1,0 +1,6 @@
+arm: protegi
+description: Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items
+beam: 4
+rounds: 20                 # 4 x 20 = 80
+gradients_per_candidate: 2
+edits_per_gradient: 1

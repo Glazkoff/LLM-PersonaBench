@@ -1,0 +1,11 @@
+arm: mapelites
+description: GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)
+islands: 2
+archive_bins:
+  prompt_length_chars: [0, 1500, 2500, 4000, 100000]      # 4 bins
+  predicted_sd: [0.0, 0.8, 1.0, 1.2, 9.0]                  # mean per-item predictive SD of the belief, 4 bins
+init_per_island: 4         # 8 evaluations
+iterations: 72             # 72 mutations = 80 total
+migrate_every: 12
+insight_window: 6          # lineage records shown to the mutator
+gigaevo_engine: optional   # if the GigaEvo package exposes a mutation-operator hook, wrap it; otherwise the built-in archive is used and recorded in run_meta

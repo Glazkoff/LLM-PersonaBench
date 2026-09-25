@@ -1,0 +1,3 @@
+arm: paraphrase
+description: paraphrase-only search without selection pressure; B paraphrases, the LAST one is returned (no selection), best-on-train reported separately
+samples: 80

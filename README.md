@@ -10,6 +10,13 @@ with the original participant.
 The repository also includes an EvoPrompt-based genetic optimization loop for
 improving the personality prompt components per psychometric cluster.
 
+## Papers built on this repository
+
+| Directory | Paper | Status |
+|---|---|---|
+| `arr2026/`, `paper/` | *What Is a Persona Worth? Pricing LLM Human Simulation in Human Answers* (audit of the metric and pricing of personas in real answers) | ARR October 2026 |
+| `icml2027/` | Paper B: prompt optimizers for persona simulation under a proper score (successor to NeurIPS 2026 #22622, withdrawn). Plan, pre-registration, agent instructions, configs, Slurm templates and results contract live there; implementation plans in `docs/superpowers/plans/`. | in preparation, ICML 2027 |
+
 ## What Is Measured
 
 For each participant, the simulator compares model answers against human IPIP

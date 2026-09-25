@@ -1,0 +1,29 @@
+# Respondent panels and item split. PREREGISTRATION §2. Do not edit after freeze.
+corpus: data/raw/df_ipipneo_120_clusters
+item_key: data/IPIP-NEO/120/item_key.csv
+clusters: [0, 1, 2, 3]
+seeds_tier1: [1, 2, 3]
+seeds_headline: [1, 2, 3, 4, 5]
+panel_sizes:
+  train: 8000        # fits F0 (population CDF prior), the conditional decoders for m*, and the cluster prior
+  opt: 40            # optimisation panel: fitness during search; alpha by 2-fold cross-fitting inside it
+  cal: 40            # calibration panel: alpha and ridge penalties at frozen evaluation only
+  eval: 200          # frozen evaluation panel: every reported number
+baseline_redraws: 20 # split-noise floor for deterministic baselines
+exclude_case_ids_from:
+  # respondents already used by prior runs of this project are excluded from every panel
+  - results_experiments/evoprompt_iter2/**/cluster_*/dataset_split_ids.json
+item_split:
+  rule: "within each facet (30), the two lowest item ids are input, the two highest are target"
+  n_input_per_facet: 2
+  n_target_per_facet: 2
+transfer:
+  ipip300: data/PAlign/Test-set.json   # 300 respondents; 180 items outside the short form are targets
+  sd3: data/PAlign/Dark-Triad.csv
+  big5: data/openpsychometrics/BIG5
+  hexaco: data/openpsychometrics/HEXACO
+alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
+bootstrap:
+  B: 2000
+  seed: 20260925
+bh_q: 0.05

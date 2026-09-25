@@ -1,0 +1,3 @@
+arm: random
+description: budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel
+samples: 80

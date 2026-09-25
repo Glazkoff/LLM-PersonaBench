@@ -1,0 +1,21 @@
+# Tier-1 grid. Expanded by icml2027/scripts/queue.py into cells {arm}__{slug}__c{cluster}__s{seed}.
+name: tier1
+budget_B: 80
+fitness: rps_cal
+arms: [ga, de, mapelites, gepa, opro, promptbreeder, protegi, random, paraphrase, bestofb]
+models_tier: [1]
+clusters: [0, 1, 2, 3]
+seeds: [1, 2, 3]
+ablations:
+  # H1: the same GA under the audited improper fitness, two models only
+  - arm: ga
+    fitness: s0
+    models: [Qwen_Qwen3p6-35B-A3B, openai_gpt-oss-20b]
+    clusters: [0, 1, 2, 3]
+    seeds: [1, 2, 3]
+slurm:
+  partition: infer
+  time: "12:00:00"
+  cpus: 16
+  mem: 200G
+  max_concurrent_arrays: 4

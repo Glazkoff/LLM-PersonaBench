@@ -1,0 +1,5 @@
+arm: opro
+description: LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for
+proposals_per_round: 8
+rounds: 10
+history_shown: 12
