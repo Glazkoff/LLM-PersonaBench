@@ -434,9 +434,10 @@ paper needs both.
 Personality conditioning of LLMs is validated by administering psychometric
 inventories to the conditioned
 model~\citep{serapio2023personality,jiang2024evaluating}, with well-documented
-prompt sensitivity~\citep{han2026context,gupta2024personas}; simulation from
-transcripts achieves high fidelity~\citep{park2024generative} at a per-person
-cost that motivates the cluster-level shortcut, and evolutionary prompt
+prompt sensitivity~\citep{han2026context,gupta2024personas}; simulation grounded
+in interviews and self-reports achieves high individual
+fidelity~\citep{park2026selfreports} at a per-person cost that motivates the
+cluster-level shortcut, and evolutionary prompt
 search~\citep{guo2024connecting,prasad2023grips,zhou2022large} supplies the
 optimiser. That persona variables carry \emph{some} signal is already
 established, and already quantified against supervised regression:
@@ -451,13 +452,12 @@ why we anchor the price to a proper score instead.
 
 Closest to us are methods that \emph{fix} simulator distributions rather than
 price them: distributional fine-tuning on survey data~\citep{suh2025subpop},
-two-stage shift alignment~\citep{huang2025dsa}, mean-preserving dispersion
+two-stage shift alignment~\citep{huang2026dsa}, mean-preserving dispersion
 adjustment over value profiles~\citep{abels2026valuepersonas} --- the family our
 $\alpha$ belongs to --- and three-axis fidelity from small
 pilots~\citep{choi2026beyondmean}. That calibration and distributional
 fine-tuning are established is exactly why we claim neither; we contribute the
-unit their gains should be quoted in. Simulation grounded in
-self-reports~\citep{park2026selfreports} and behaviour-trained foundation
+unit their gains should be quoted in. That work and behaviour-trained foundation
 models~\citep{huang2026behaviorbench,binz2025centaur} target richer behaviour
 than questionnaire response. Standardised group-level evaluation across many
 datasets~\citep{hu2026simbench} is complementary to the price: it establishes

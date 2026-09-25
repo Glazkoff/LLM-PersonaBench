@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Abels et~al.(2026)Abels, Fernandez~Domingos, Shah, and
@@ -6,11 +6,22 @@
 Axel Abels, Elias Fernandez~Domingos, Apurva Shah, and Tom Lenaerts. 2026.
 \newblock \href {https://arxiv.org/abs/2605.16193} {Improving cross-cultural
   survey simulation with calibrated value personas}.
-\newblock \emph{arXiv preprint arXiv:2605.16193}.
+\newblock In \emph{Fourth International Workshop on Value Engineering in AI
+  (VALE) at IJCAI-ECAI}.
 
-\bibitem[{Binz et~al.(2025)Binz, Akata, Bethge et~al.}]{binz2025centaur}
-Marcel Binz, Elif Akata, Matthias Bethge, and 1 others. 2025.
-\newblock A foundation model to predict and capture human cognition.
+\bibitem[{Binz et~al.(2025)Binz, Akata, Bethge, Br{\"a}ndle, Callaway,
+  Coda-Forno, Dayan, Demircan, Eckstein, {\'E}lt{\H{e}}t{\H{o}}, Griffiths,
+  Haridi, Jagadish, Ji-An, Kipnis, Kumar, Ludwig, Mathony, Mattar,
+  Modirshanechi, Nath, Peterson, Rmus, Russek, Saanum, Schubert,
+  Schulze~Buschoff, Singhi, Sui, Thalmann, Theis, Truong, Udandarao, Voudouris,
+  Wilson, Witte, Wu, Wulff, Xiong, and Schulz}]{binz2025centaur}
+Marcel Binz, Elif Akata, Matthias Bethge, Franziska Br{\"a}ndle, Fred Callaway,
+  Julian Coda-Forno, Peter Dayan, Can Demircan, Maria~K. Eckstein, No{\'e}mi
+  {\'E}lt{\H{e}}t{\H{o}}, Thomas~L. Griffiths, Susanne Haridi, Akshay~K.
+  Jagadish, Li~Ji-An, Alexander Kipnis, Sreejan Kumar, Tobias Ludwig, Marvin
+  Mathony, Marcelo Mattar, and 21 others. 2025.
+\newblock \href {https://doi.org/10.1038/s41586-025-09215-4} {A foundation
+  model to predict and capture human cognition}.
 \newblock \emph{Nature}, 644(8078):1002--1009.
 
 \bibitem[{Choi et~al.(2026)Choi, Kim, Pugalenthi, Chen, and
@@ -59,16 +70,17 @@ Tiancheng Hu and Nigel Collier. 2024.
   for Computational Linguistics (Volume 1: Long Papers)}, pages 10289--10307,
   Bangkok, Thailand.
 
-\bibitem[{Huang et~al.(2025)Huang, Li, and Shao}]{huang2025dsa}
-Ji~Huang, Mengfei Li, and Shuai Shao. 2025.
+\bibitem[{Huang et~al.(2026{\natexlab{a}})Huang, Li, and Shao}]{huang2026dsa}
+Ji~Huang, Mengfei Li, and Shuai Shao. 2026{\natexlab{a}}.
 \newblock \href {https://arxiv.org/abs/2510.21977} {Distribution shift
   alignment helps {LLM}s simulate survey response distributions}.
 \newblock \emph{arXiv preprint arXiv:2510.21977}.
+\newblock V2, April 2026.
 
-\bibitem[{Huang et~al.(2026)Huang, Xie, Song, Zhang, Yuan, Jackson, and
-  Mei}]{huang2026behaviorbench}
+\bibitem[{Huang et~al.(2026{\natexlab{b}})Huang, Xie, Song, Zhang, Yuan,
+  Jackson, and Mei}]{huang2026behaviorbench}
 Jin Huang, Yutong Xie, Wanli Song, Xingjian Zhang, Walter Yuan, Matthew~O.
-  Jackson, and Qiaozhu Mei. 2026.
+  Jackson, and Qiaozhu Mei. 2026{\natexlab{b}}.
 \newblock \href {https://arxiv.org/abs/2606.24162} {{BehaviorBench}:
   Benchmarking foundation models for behavioral science tasks}.
 \newblock \emph{arXiv preprint arXiv:2606.24162}.
@@ -93,14 +105,7 @@ Joon~Sung Park, Carolyn~Q. Zou, Jonne Kamphorst, Niles Egan, Aaron Shaw,
 \newblock \href {https://arxiv.org/abs/2411.10109} {{LLM} agents grounded in
   self-reports enable general-purpose simulation of individuals}.
 \newblock \emph{arXiv preprint arXiv:2411.10109}.
-
-\bibitem[{Park et~al.(2024)Park, Zou, Shaw, Hill, Cai, Morris, Willer, Liang,
-  and Bernstein}]{park2024generative}
-Joon~Sung Park, Carolyn~Q. Zou, Aaron Shaw, Benjamin~Mako Hill, Carrie Cai,
-  Meredith~Ringel Morris, Robb Willer, Percy Liang, and Michael~S. Bernstein.
-  2024.
-\newblock Generative agent simulations of 1,000 people.
-\newblock In \emph{arXiv preprint arXiv:2411.10109}.
+\newblock V3, June 2026.
 
 \bibitem[{Prasad et~al.(2023)Prasad, Hase, Zhou, and Bansal}]{prasad2023grips}
 Archiki Prasad, Peter Hase, Xiang Zhou, and Mohit Bansal. 2023.
