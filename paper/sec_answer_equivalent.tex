@@ -158,7 +158,9 @@ gradient-boosted combiner over the same features. The control in each case is th
 identical combiner, of identical capacity, fitted on identical rows, without the
 persona features --- so the comparison isolates the persona and nothing else.
 
-\begin{table}[t]\centering\footnotesize
+% eight columns do not fit one ACL column: as \begin{table} this overflowed the
+% column by 98pt (about 1.4in of text in the margin). table* spans both.
+\begin{table*}[t]\centering\footnotesize
 \input{table_incremental}
 \caption{Incremental value of a persona given the respondent's own observed
 answers. $\bar w^{*}$ is the mean selected convex weight on the persona.
@@ -166,7 +168,7 @@ Significant cells are \emph{uncorrected} counts, shown to make the multiplicity
 visible: across all $426$ one-sided tests, one survives Benjamini--Hochberg at
 $q<0.05$, and it reverses sign on its own disjoint panel.}
 \label{tab:incremental}
-\end{table}
+\end{table*}
 
 The selected convex weight on the persona is $0$ in $127$ of $160$ cells, $0.05$
 in the remaining $33$, and never higher. The linear combiner finds a nominally
