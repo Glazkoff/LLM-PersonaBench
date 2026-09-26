@@ -43,7 +43,7 @@ def main():
         hist = [json.loads(l) for l in (d / "history.jsonl").read_text().splitlines() if l.strip()]
         best = np.minimum.accumulate([h["rps_cal_opt"] for h in hist]) if hist else []
         init = hist[0]["rps_cal_opt"] if hist else np.nan
-        hit = next((h["eval_idx"] for h, b in zip(hist, best) if b <= init - 0.002), np.nan)
+        hit = next((h["eval_idx"] for h, b in zip(hist, best) if b <= init - 0.005), np.nan)
         e2t.append({"cell_id": d.name, "arm": meta["arm"], "model": meta["model_slug"], "evals": hit,
                     "final_best_opt": float(best[-1]) if len(best) else np.nan, "init_opt": init})
     pd.DataFrame(rows).to_csv(O / "tier1_cells.csv", index=False)

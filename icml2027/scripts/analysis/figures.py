@@ -62,7 +62,7 @@ def fig_e2t(A, F):
     arms = _arms(e.arm.unique())
     fig, ax = plt.subplots(figsize=(6, 3))
     ax.boxplot([e[e.arm == a].evals.dropna() for a in arms], labels=arms)
-    ax.set_ylabel("evaluations to beat seed by 0.002\n(optimisation panel)")
+    ax.set_ylabel("evaluations to beat seed by 0.005\n(optimisation panel)")
     plt.xticks(rotation=30, ha="right")
     fig.tight_layout()
     fig.savefig(F / "fig3_efficiency.pdf")
