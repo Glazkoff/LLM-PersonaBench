@@ -10,6 +10,7 @@
 # Gate G0 on Euler: unit tests, orientation regression, and the readout guard per Tier-1 model.
 # usage: sbatch icml2027/slurm/preflight.sbatch [tier]
 set -uo pipefail
+export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
 export HF_HOME=/home/glazkov/hf_cache
 export TOKENIZERS_PARALLELISM=false
 cd /home/glazkov/personality-twins-arr/LLM-PersonaBench

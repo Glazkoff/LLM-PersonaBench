@@ -9,6 +9,7 @@
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/icml_serve_%j.err
 # Serve $MODEL (dtype $DTYPE, TP $TP) and run $CMD with LOCAL_LLM_BASE_URL set. Used for transfer runs.
 set -uo pipefail
+export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
 export HF_HOME=/home/glazkov/hf_cache VLLM_LOGGING_LEVEL=WARNING TOKENIZERS_PARALLELISM=false
 R=/home/glazkov/personality-twins-arr/LLM-PersonaBench; cd $R
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python; LOGDIR=/home/glazkov/personality-twins-arr/logs

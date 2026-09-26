@@ -1,0 +1,7 @@
+arm: nsga2
+description: NSGA-II over (calibrated RPS, -VR_between); returns the knee of the final front, writes pareto_front.json (E5, H5)
+population_size: 8
+generations: 10
+tournament_k: 3
+crossover_rate: 0.8
+mutation_rate: 0.3

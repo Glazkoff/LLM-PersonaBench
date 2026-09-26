@@ -9,6 +9,7 @@
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/icml_probe_%j.err
 # Readout guard for every model listed in $MODELS ("hf_id|slug|prefill|dtype" per line, one GPU, sequential).
 set -uo pipefail
+export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
 export HF_HOME=/home/glazkov/hf_cache VLLM_LOGGING_LEVEL=WARNING TOKENIZERS_PARALLELISM=false
 R=/home/glazkov/personality-twins-arr/LLM-PersonaBench; cd $R
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python; LOGDIR=/home/glazkov/personality-twins-arr/logs

@@ -10,6 +10,7 @@
 # Long-lived shared mutator server. Every cell job reads icml2027/queue/mutator.json for its URL,
 # so all arms use the identical mutator. Single-node cluster: 127.0.0.1 is reachable from other jobs.
 set -uo pipefail
+export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
 export HF_HOME=/home/glazkov/hf_cache
 export VLLM_LOGGING_LEVEL=WARNING
 R=/home/glazkov/personality-twins-arr/LLM-PersonaBench

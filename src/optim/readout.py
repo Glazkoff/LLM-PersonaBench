@@ -65,16 +65,21 @@ class VLLMReadout:
         return out, int(getattr(r.usage, "prompt_tokens", 0) or 0)
 
     def beliefs(self, systems, item_ids, texts=None):
+        """Two phases so vLLM's prefix cache pays off: (1) one item per respondent, which computes and caches
+        each persona's system-prompt blocks; (2) every respondent's remaining items as one request, which then
+        only prefills the item question."""
         n, J = len(systems), len(item_ids)
         texts = texts or TEXT_OF_ITEM
-        prompts = [render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=texts[item_ids[b]]),
-                                 self.prefill) for a in range(n) for b in range(J)]
-        chunks = [prompts[i:i + self.batch] for i in range(0, len(prompts), self.batch)]
+        prompts = [[render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=texts[item_ids[b]]), self.prefill)
+                    for b in range(J)] for a in range(n)]
+        warm = [[prompts[a][0] for a in range(i, min(i + self.batch, n))] for i in range(0, n, self.batch)]
         with ThreadPoolExecutor(self.workers) as ex:
-            res = list(ex.map(self._batch, chunks))
-        flat = [p for ps, _ in res for p in ps]
-        tok = sum(t for _, t in res)
-        raw = np.array(flat).reshape(n, J, 5)
+            res_w = list(ex.map(self._batch, warm))
+            res_r = list(ex.map(self._batch, [prompts[a][1:] for a in range(n)])) if J > 1 else []
+        first = [p for ps, _ in res_w for p in ps]
+        rows = [[first[a]] + (res_r[a][0] if J > 1 else []) for a in range(n)]
+        tok = sum(t for _, t in res_w) + sum(t for _, t in res_r)
+        raw = np.array(rows).reshape(n, J, 5)
         mass = raw.sum(-1)
         P = np.where(mass[..., None] > 0, raw / np.maximum(mass[..., None], 1e-12), 0.2)
         return P, mass, tok

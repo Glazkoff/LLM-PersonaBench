@@ -10,6 +10,7 @@
 # One array task = one (model, cluster) group from $GROUPS: serve the model once and run every cell of
 # that group in the manifest. Submitted by icml2027/scripts/queue.py with GROUPS and MANIFEST exported.
 set -uo pipefail
+export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
 export HF_HOME=/home/glazkov/hf_cache
 export VLLM_LOGGING_LEVEL=WARNING
 export TOKENIZERS_PARALLELISM=false
