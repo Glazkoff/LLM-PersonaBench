@@ -1,10 +1,10 @@
 # Pre-registration: prompt optimizers for persona simulation under a proper score
 
-Status: **DRAFT — freeze before the first Tier-1 job is submitted.** Freezing means: commit
+Status: **FROZEN 2026-09-27** (git; OSF registration of this exact text is pending the authors). Freezing means: commit
 this file, record the commit hash below, and register the same text on OSF. After freezing,
 changes go in the "Amendments" section with a date and a reason; the original text stays.
 
-Frozen at commit: `<hash>` · OSF: `<url>` · Date: `<YYYY-MM-DD>`
+Frozen at: the git commit that last modified this file (recorded as `prereg_sha` in every `run_meta.json`) · OSF: pending (authors) · Date: 2026-09-27
 
 ## 1. Question
 
@@ -88,4 +88,15 @@ sensitivity study. These are reported as exploratory.
 
 ## Amendments
 
-_(none yet)_
+### A1 — 2026-09-27, before any Tier-1 job (implementation details fixed at freeze)
+- Mutator: one shared Qwen3.8-27B vLLM service for every arm and cell (temperature 0.7, thinking disabled).
+- Readout: prompts rendered with each model's own chat template (thinking disabled), assistant turn prefilled with
+  `My answer is ` (gpt-oss: harmony `final` channel), scored through vLLM `/v1/completions`, first-token top-20
+  logprobs over the digits 1-5.
+- Frozen-evaluation calibration: alpha selected on the calibration panel; the model's mean CDF used for centring is
+  the calibration panel's (as in the audit's h26).
+- Pilot (E0, Gate G1) cells for Qwen3.6-35B-A3B x cluster 0 x arms {ga, gepa, random} x seeds {1,2,3} use this
+  same protocol and are part of the Tier-1 grid; they are not re-run.
+- A "human" row (one random same-cluster respondent used as a point forecast) is reported for continuity with the
+  audit but is not a ceiling under a probabilistic score; the reference for probabilistic simulators is the
+  cluster prior (m* = 0) and the conditional decoder curve.
