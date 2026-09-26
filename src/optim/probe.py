@@ -25,6 +25,12 @@ def main():
     systems = [system_prompt(seed_genotype(0), persona_scores(x)) for x in answers(rows, ITEM_SPLIT[0])]
     print("PROMPT SAMPLE:\n" + render_prompt(r.tok, systems[0], ITEM_QUESTION.format(text=TEXT_OF_ITEM[ITEM_SPLIT[1][0]]),
                                              a.prefill)[-600:], flush=True)
+    one = render_prompt(r.tok, systems[0], ITEM_QUESTION.format(text=TEXT_OF_ITEM[ITEM_SPLIT[1][0]]), a.prefill)
+    dbg = r.client.completions.create(model=a.model, prompt=[one], max_tokens=8, temperature=0.0, logprobs=20)
+    ch = dbg.choices[0]
+    print("DEBUG continuation:", repr(ch.text), flush=True)
+    print("DEBUG first-token top-20:", ch.logprobs.top_logprobs[0] if ch.logprobs and ch.logprobs.top_logprobs else None, flush=True)
+    print("DEBUG prompt token count:", len(r.tok(one, add_special_tokens=False)["input_ids"]), flush=True)
     t0 = time.time()
     P, M, tok = r.beliefs(systems, ITEM_SPLIT[1])
     dt = time.time() - t0

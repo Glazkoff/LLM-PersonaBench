@@ -46,8 +46,18 @@ for i in $(seq 1 180); do
 done
 [ "$UP" = 1 ] || { echo "FATAL: server never came up"; exit 3; }
 export LOCAL_LLM_BASE_URL="http://127.0.0.1:$PORT/v1"
-$PY -m src.optim.run_cell --manifest "$MANIFEST" --model-slug "$SLUG" --cluster "$CLUSTER" \
-  --slurm-job-id "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}" --workers 16
-rc=$?
+# one process per seed against the same server: the GPU stays busy while each process waits on the mutator
+SEEDS=$($PY -c "
+import json; m=json.load(open('$MANIFEST'))
+print(' '.join(sorted({str(c['seed']) for c in m['cells'] if c['model_slug']=='$SLUG' and c['cluster']==$CLUSTER})))")
+PIDS=()
+for S in $SEEDS; do
+  $PY -m src.optim.run_cell --manifest "$MANIFEST" --model-slug "$SLUG" --cluster "$CLUSTER" --seeds $S \
+    --slurm-job-id "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}" --workers 8 > "$LOGDIR/icml_run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}_s$S.log" 2>&1 &
+  PIDS+=($!)
+done
+rc=0
+for P in "${PIDS[@]}"; do wait $P || rc=1; done
+grep -h "completed\|failed" $LOGDIR/icml_run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}_s*.log
 echo "CELLS DONE rc=$rc"
 exit $rc

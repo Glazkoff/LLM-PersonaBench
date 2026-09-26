@@ -102,10 +102,11 @@ def main():
     ap.add_argument("--slurm-job-id", default="local")
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--only", nargs="*", default=None, help="restrict to these cell ids")
+    ap.add_argument("--seeds", nargs="*", type=int, default=None, help="restrict to these seeds")
     a = ap.parse_args()
     man = json.load(open(a.manifest))
     cells = [c for c in man["cells"] if c["model_slug"] == a.model_slug and c["cluster"] == a.cluster
-             and (not a.only or c["cell_id"] in a.only)]
+             and (not a.only or c["cell_id"] in a.only) and (not a.seeds or c["seed"] in a.seeds)]
     if not cells:
         print("no cells")
         sys.exit(0)
