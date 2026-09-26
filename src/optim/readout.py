@@ -22,7 +22,7 @@ class FakeReadout:
     def __init__(self, rng):
         self.rng = rng
 
-    def beliefs(self, systems, item_ids):
+    def beliefs(self, systems, item_ids, texts=None):
         n, J = len(systems), len(item_ids)
         return self.rng.dirichlet(np.ones(5), size=(n, J)), np.full((n, J), 0.99), 100 * n * J
 
@@ -64,9 +64,10 @@ class VLLMReadout:
             out[ch.index] = p
         return out, int(getattr(r.usage, "prompt_tokens", 0) or 0)
 
-    def beliefs(self, systems, item_ids):
+    def beliefs(self, systems, item_ids, texts=None):
         n, J = len(systems), len(item_ids)
-        prompts = [render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=TEXT_OF_ITEM[item_ids[b]]),
+        texts = texts or TEXT_OF_ITEM
+        prompts = [render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=texts[item_ids[b]]),
                                  self.prefill) for a in range(n) for b in range(J)]
         chunks = [prompts[i:i + self.batch] for i in range(0, len(prompts), self.batch)]
         with ThreadPoolExecutor(self.workers) as ex:

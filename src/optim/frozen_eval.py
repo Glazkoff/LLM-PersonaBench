@@ -28,13 +28,14 @@ def _score_arm(readout, g, panels, F0, alphas):
     Ycal, Yev = answers(panels.cal, tgt), answers(panels.eval, tgt)
     Pc, _ = beliefs_for(readout, g, panels.cal, tgt)
     a, _ = S.select_alpha(S.cdf(Pc), F0, Ycal, alphas)
+    Qbar = S.cdf(Pc).mean(axis=0)
     Pe, Me = beliefs_for(readout, g, panels.eval, tgt)
-    per = S.per_respondent(S.cal_cells(S.cdf(Pe), F0, Yev, a))
+    per = S.per_respondent(S.cal_cells(S.cdf(Pe), F0, Yev, a, Qbar))
     mu = (Pe * np.arange(1, 6)).sum(-1)
     vr = float(np.var(mu, 0).mean() / np.nanvar(Yev, 0).mean())
     return ({"rps_cal": float(np.nanmean(per)), "rps_raw": float(np.nanmean(S.rps(Pe, Yev))),
              "s0": float(np.nanmean(S.s0(Pe, Yev))), "alpha": a, "vr_between": vr,
-             "mass_on_scale": float(Me.mean())}, per, Pe, Pc, a)
+             "mass_on_scale": float(Me.mean())}, per, Pe, Pc, (a, Qbar))
 
 
 def floors(panels, draws=20, seed=0):
@@ -62,11 +63,11 @@ def evaluate_frozen(panels, readout, base_g, evolved_g, alphas, boot_B=2000, boo
     F0 = S.pop_cdf(answers(panels.train, tgt))
     Yev = answers(panels.eval, tgt)
     base, pb, Pb, _, _ = _score_arm(readout, base_g, panels, F0, alphas)
-    evo, pe, Pe, _, a_e = _score_arm(readout, evolved_g, panels, F0, alphas)
+    evo, pe, Pe, _, (a_e, qbar_e) = _score_arm(readout, evolved_g, panels, F0, alphas)
     # wrong-persona control: evolved genotype, personas permuted within the eval panel, alpha from cal
     perm = np.random.default_rng(wrong_persona_seed).permutation(len(panels.eval))
     Pw, _ = beliefs_for(readout, evolved_g, panels.eval.iloc[perm], tgt)
-    evo["wrong_persona_rps_cal"] = float(np.nanmean(S.cal_cells(S.cdf(Pw), F0, Yev, a_e)))
+    evo["wrong_persona_rps_cal"] = float(np.nanmean(S.cal_cells(S.cdf(Pw), F0, Yev, a_e, qbar_e)))
     m, lo, hi = paired_boot_ci(pb, pe, boot_B, boot_seed)
     ids = ",".join(map(str, sorted(panels.eval["case"].tolist())))
     excl = evo["mass_on_scale"] < 0.5 or base["mass_on_scale"] < 0.5

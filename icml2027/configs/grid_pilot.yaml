@@ -1,0 +1,9 @@
+# E0 pilot (Gate G1): one model, one cluster, three arms, three seeds.
+name: pilot
+budget_B: 80
+fitness: rps_cal
+arms: [ga, gepa, random]
+models_tier: [1]
+models: [Qwen_Qwen3p6-35B-A3B]
+clusters: [0]
+seeds: [1, 2, 3]

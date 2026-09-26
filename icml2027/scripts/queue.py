@@ -100,7 +100,7 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
         cmd = ["sbatch", "--parsable", f"--array=0-{len(gl) - 1}%{conc}", f"--gres=gpu:{gpus}",
                f"--export=ALL,GROUPS={gfile.relative_to(ROOT)},MANIFEST={mpath.relative_to(ROOT)}"]
         if after:
-            cmd.append(f"--dependency=afterok:{after}")
+            cmd.append(f"--dependency={after}" if ":" in str(after) else f"--dependency=afterok:{after}")
         cmd.append("icml2027/slurm/cell_group.sbatch")
         print(" ".join(cmd))
         if not dry:

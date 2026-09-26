@@ -82,13 +82,15 @@ def iso_project(F):
     return best.reshape(F.shape)
 
 
-def calibrate(Q, F0, alpha):
-    Qbar = Q.mean(axis=0, keepdims=True)
+def calibrate(Q, F0, alpha, Qbar=None):
+    """Population calibration: prior F0 plus alpha times the person-specific deviation of the model CDF.
+    Qbar (the model's mean CDF) comes from the panel alpha was fitted on when given."""
+    Qbar = Q.mean(axis=0, keepdims=True) if Qbar is None else Qbar[None] if Qbar.ndim == Q.ndim - 1 else Qbar
     return iso_project(F0[None] + alpha * (Q - Qbar))
 
 
-def cal_cells(Q, F0, Y, alpha):
-    return rps(cdf_to_simplex(calibrate(Q, F0, alpha)), Y)
+def cal_cells(Q, F0, Y, alpha, Qbar=None):
+    return rps(cdf_to_simplex(calibrate(Q, F0, alpha, Qbar)), Y)
 
 
 def _cal_score(Q, F0, Y, alpha):
