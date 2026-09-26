@@ -26,7 +26,7 @@ def main():
     print("PROMPT SAMPLE:\n" + render_prompt(r.tok, systems[0], ITEM_QUESTION.format(text=TEXT_OF_ITEM[ITEM_SPLIT[1][0]]),
                                              a.prefill)[-600:], flush=True)
     one = render_prompt(r.tok, systems[0], ITEM_QUESTION.format(text=TEXT_OF_ITEM[ITEM_SPLIT[1][0]]), a.prefill)
-    dbg = r.client.completions.create(model=a.model, prompt=[one], max_tokens=8, temperature=0.0, logprobs=20)
+    dbg = r.client.completions.create(model=a.model, prompt=[r._ids(one)], max_tokens=8, temperature=0.0, logprobs=20)
     ch = dbg.choices[0]
     print("DEBUG continuation:", repr(ch.text), flush=True)
     print("DEBUG first-token top-20:", ch.logprobs.top_logprobs[0] if ch.logprobs and ch.logprobs.top_logprobs else None, flush=True)

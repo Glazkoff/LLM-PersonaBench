@@ -50,6 +50,9 @@ class VLLMReadout:
         self.client = OpenAI(base_url=base_url or os.environ.get("LOCAL_LLM_BASE_URL", "http://127.0.0.1:8000/v1"),
                              api_key=os.environ.get("LOCAL_LLM_API_KEY", "EMPTY"), timeout=1800, max_retries=3)
 
+    def _ids(self, text):
+        return self.tok(text, add_special_tokens=False)["input_ids"]
+
     def _batch(self, prompts):
         r = self.client.completions.create(model=self.model, prompt=prompts, max_tokens=1, temperature=0.0,
                                            logprobs=20)
@@ -70,8 +73,10 @@ class VLLMReadout:
         only prefills the item question."""
         n, J = len(systems), len(item_ids)
         texts = texts or TEXT_OF_ITEM
-        prompts = [[render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=texts[item_ids[b]]), self.prefill)
-                    for b in range(J)] for a in range(n)]
+        # token ids, not text: the server then sees exactly the HF token sequence (for harmony-format models the
+        # text route lost the prefilled channel and the model restarted with an 'analysis' channel)
+        prompts = [[self._ids(render_prompt(self.tok, systems[a], ITEM_QUESTION.format(text=texts[item_ids[b]]),
+                                            self.prefill)) for b in range(J)] for a in range(n)]
         warm = [[prompts[a][0] for a in range(i, min(i + self.batch, n))] for i in range(0, n, self.batch)]
         with ThreadPoolExecutor(self.workers) as ex:
             res_w = list(ex.map(self._batch, warm))
