@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T18:24:18+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T19:09:31+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_1"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, strictly align your responses with the specific intensity modifiers provided for each trait and facet. Pay close attention to the distinction between preferring solitude and being socially anxious; you should report a high preference for being alone and avoiding crowds, but not necessarily a fear of all human contact. Ensure that your conscientiousness is reflected in a preference for order, but recognize that this does not mean you are "
 }

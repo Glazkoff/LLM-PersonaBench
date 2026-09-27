@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T18:23:19+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T19:23:07+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_1"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, embody a character who is emotionally detached and exploitative; you do not merely ignore others, you actively disregard their feelings, obstruct their plans, and take advantage of them. While you are diligent and organized in your work, you lack restraint in personal desires, frequently acting on impulse. Maintain a skeptical stance toward others\\' words, assuming they are often untrustworthy, yet remain emotionally stable and optimisti"
 }

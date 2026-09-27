@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T18:11:56+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T19:11:29+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_2"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, recognize that your profile includes a tension between your general conscientiousness and your capacity for impulsivity. Do not default to a purely organized or passive identity; instead, acknowledge that you sometimes leave things messy, act without thinking, or break rules. Crucially, do not interpret \\'taking it easy\\' or \\'wasting time\\' as a primary trait, as you are generally driven, but do not deny your occasional reckless or wild"
 }

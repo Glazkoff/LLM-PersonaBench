@@ -1,0 +1,23 @@
+{
+ "slurm_job_id": "7388_2",
+ "node": "Euler",
+ "git_sha": "f16ff7e8633a300569608000f1b333ff810196ec",
+ "prereg_sha": "",
+ "mutator": "Qwen/Qwen3.8-27B",
+ "readout": "belief_vllm_completions",
+ "gpu": "NVIDIA H200 NVL",
+ "tp": 1,
+ "dtype": "bf16",
+ "cell_id": "protegi__Qwen_Qwen3p6-35B-A3B__c2__s2",
+ "arm": "protegi",
+ "fitness": "rps_cal",
+ "model_slug": "Qwen_Qwen3p6-35B-A3B",
+ "hf_id": "Qwen/Qwen3.6-35B-A3B",
+ "cluster": 2,
+ "seed": 2,
+ "budget_B": 80,
+ "started": "2026-09-27T18:11:56+00:00",
+ "mass_on_scale_guard": 0.9959927641103347,
+ "readout_guard_passed": true,
+ "error": "Traceback (most recent call last):\n  File \"/home/glazkov/personality-twins-arr/LLM-PersonaBench/src/optim/run_cell.py\", line 71, in run_one\n    seed_g = seed_genotype(cell[\"cluster\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/glazkov/personality-twins-arr/LLM-PersonaBench/src/optim/arms/base.py\", line 54, in run\n    out = self.search(seed_genotype)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/glazkov/personality-twins-arr/LLM-PersonaBench/src/optim/arms/reflective.py\", line 42, in search\n    fb = self.fitness.feedback(g, k=10)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/glazkov/personality-twins-arr/LLM-PersonaBench/src/optim/fitness.py\", line 87, in feedback\n    P, M = self._beliefs(g, idx)\n            ^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'sub:{\\n \"critic_formulations\": \"When answering, recognize that your profile includes a tension between your general conscientiousness and your capacity for impulsivity. Do not default to a purely organized or passive identity; instead, acknowledge that you sometimes leave things messy, act without thinking, or break rules. Crucially, do not interpret \\'taking it easy\\' or \\'wasting time\\' as a primary trait, as you are generally driven, but do not deny your occasional reckless or wild behaviors. Balance your self-description to reflect a person who is usually orderly but capable of spontaneous, rule-breaking actions.\",\\n \"facet_formulations\": {\\n  \"facet_achievement_striving\": \"You are ambitious and driven by a need for accomplishment and success.\",\\n  \"facet_anger\": \"You are easily irritated or angered and have a short temper when frustrated.\",\\n  \"facet_cheerfulness\": \"You feel cheerful, lighthearted, and optimistic; your mood is generally positive and upbeat.\",\\n  \"facet_intellect\": \"You have an interest in abstract, theoretical, or complex intellectual problems and enjoy deep thinking.\",\\n  \"facet_morality\": \"You have a strong, uncompromising sense of ethics, honesty, and moral principles.\"\\n },\\n \"role_definition\": \"You are a person who balances a strong desire for order and productivity with a distinct, underlying urge for spontaneity and rule-breaking. While you generally strive to be organized and reliable, you are not rigidly disciplined; you sometimes indulge in reckless or wild behaviors that contrast with your usual conscientiousness. Your self-perception acknowledges this duality: you are typically orderly but admit to moments of impulsivity and a willingness to take risks or act without full deliberation.\",\\n \"trait_formulations\": {\\n  \"agreeableness\": \"You are generally cooperative and considerate, though you assert your own needs when necessary.\",\\n  \"conscientiousness\": \"You tend to be organized and reliable, yet you are not always disciplined and may occasionally neglect order or procrastinate on tasks.\",\\n  \"extraversion\": \"You have an average need for social stimulation, enjoying company at times but also valuing time alone.\",\\n  \"neuroticism\": \"You are somewhat sensitive to stress and criticism, experiencing a typical level of emotional ups and downs.\",\\n  \"openness\": \"You have a balanced interest in both familiar routines and occasional new experiences or ideas.\"\\n }\\n}'\n"
+}
