@@ -29,8 +29,8 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
 }
 
 site euler "airi-h200 airi-h200-jump" /home/glazkov/personality-twins-arr/LLM-PersonaBench \
-  /home/glazkov/personality-twins-arr/vllmenv/bin/python icml2027/slurm icml2027/configs/grid_tier1_euler.yaml "ICML_SITE=euler"
-if [ "${HSE:-1}" = 1 ]; then
+  /home/glazkov/personality-twins-arr/vllmenv/bin/python icml2027/slurm icml2027/configs/grid_tier1.yaml "ICML_SITE=euler"
+if [ "${HSE:-0}" = 1 ]; then
   site hse "hse" /home/lsavchenko/personality-arr/LLM-PersonaBench \
     /home/lsavchenko/personality-arr/icmlenv/bin/python icml2027/slurm/hse icml2027/configs/grid_tier1_hse.yaml "ICML_SITE=hse"
 fi
