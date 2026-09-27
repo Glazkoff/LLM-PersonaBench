@@ -1,1 +1,5 @@
-{"state": "pending", "attempt": 0}
+{
+ "state": "completed",
+ "updated": "2026-09-27T04:23:28+00:00",
+ "attempt": 2
+}

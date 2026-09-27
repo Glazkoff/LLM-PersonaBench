@@ -1,0 +1,49 @@
+{
+ "cell_id": "de__Qwen_Qwen3p6-35B-A3B__c0__s1",
+ "arm": "de",
+ "fitness": "rps_cal",
+ "model_slug": "Qwen_Qwen3p6-35B-A3B",
+ "hf_id": "Qwen/Qwen3.6-35B-A3B",
+ "prefill": "My answer is ",
+ "tp": 1,
+ "dtype": "bf16",
+ "gpu_memory_utilization": 0.9,
+ "cluster": 0,
+ "seed": 1,
+ "arm_cfg": {
+  "arm": "de",
+  "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+  "population_size": 8,
+  "generations": 10,
+  "crossover_rate": 0.8
+ },
+ "panel_sizes": {
+  "train": 8000,
+  "opt": 40,
+  "cal": 40,
+  "eval": 200
+ },
+ "alphas": [
+  0.0,
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.8,
+  0.9,
+  1.0,
+  1.2,
+  1.4,
+  1.6,
+  1.8,
+  2.0
+ ],
+ "exclude_globs": [
+  "results_experiments/evoprompt_iter2/**/cluster_*/dataset_split_ids.json"
+ ],
+ "boot_B": 2000,
+ "budget_B": 80
+}

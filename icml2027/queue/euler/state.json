@@ -1,0 +1,57 @@
+{
+ "jobs": [
+  {
+   "label": "tp1",
+   "job_id": "7285",
+   "groups": 1,
+   "grid": "pilot"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7293",
+   "groups": 1,
+   "grid": "pilot"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7298",
+   "groups": 1,
+   "grid": "pilot"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7311",
+   "groups": 1,
+   "grid": "pilot"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7324",
+   "groups": 20,
+   "grid": "tier1"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7332",
+   "groups": 12,
+   "grid": "tier1e"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7387",
+   "groups": 8,
+   "grid": "tier1h"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7388",
+   "groups": 20,
+   "grid": "tier1"
+  }
+ ],
+ "counts": {
+  "pending": 613,
+  "running": 10,
+  "completed": 1
+ }
+}

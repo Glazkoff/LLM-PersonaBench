@@ -1,0 +1,66 @@
+[
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 0,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 1,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 2,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 3,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "ibm-granite/granite-4.2-30b",
+  "slug": "ibm-granite_granite-4p2-30b",
+  "cluster": 0,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "ibm-granite/granite-4.2-30b",
+  "slug": "ibm-granite_granite-4p2-30b",
+  "cluster": 1,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "ibm-granite/granite-4.2-30b",
+  "slug": "ibm-granite_granite-4p2-30b",
+  "cluster": 2,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ },
+ {
+  "hf_id": "ibm-granite/granite-4.2-30b",
+  "slug": "ibm-granite_granite-4p2-30b",
+  "cluster": 3,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.9
+ }
+]

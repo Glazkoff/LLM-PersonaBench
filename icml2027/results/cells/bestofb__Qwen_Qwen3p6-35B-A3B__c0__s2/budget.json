@@ -1,0 +1,8 @@
+{
+ "budget_B": 80,
+ "candidate_evaluations": 80,
+ "candidate_evaluations_exact": 80.0,
+ "forward_passes": 189600,
+ "prompt_tokens": 106833527,
+ "generated_tokens": 37866
+}

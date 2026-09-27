@@ -1,2 +1,5 @@
 arm,cells,mean_delta_vs_base,lo,hi,n_vs_base,sig_better_vs_base,sig_worse_vs_base,n_vs_random,sig_better_vs_random,sig_worse_vs_random,n_vs_paraphrase,sig_better_vs_paraphrase,sig_worse_vs_paraphrase,n_vs_bestofb,sig_better_vs_bestofb,sig_worse_vs_bestofb
-ga,1,-0.0049302674919382864,,,1,1,0,0,0,0,0,0,0,0,0,0
+bestofb,9,-0.003749628627396422,-0.004338794358214675,-0.0031704074976492357,9,9,0,0,0,0,0,0,0,0,0,0
+de,9,-0.0028865320916984013,-0.0037114541020777086,-0.0019631817233970107,9,9,0,0,0,0,0,0,0,9,0,4
+ga,9,-0.004241539463242801,-0.00481673341888805,-0.0036678451451454073,9,9,0,0,0,0,0,0,0,9,3,0
+ga-s0,1,-0.0034719924428395573,,,1,1,0,0,0,0,0,0,0,1,0,1
