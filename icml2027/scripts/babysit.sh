@@ -19,6 +19,10 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   if ! run "squeue -h -u $U -n hbs-icml-mutator -o %i" | grep -q .; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
   fi
+  # throttle hand-off: 7461 ran at %1 while the first Tier-1 array (7388) finished; restore %3 once it is gone
+  if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %i" | grep -q .; then
+    run "scontrol update jobid=7461 ArrayTaskThrottle=3" && OUT="$OUT | 7461 throttle -> 3"
+  fi
   # retries: only when no campaign job of any kind is queued; unfinished cells of every grid are resubmitted as one
   # chain (each array waits for the previous), so the campaign still holds at most 3 cell GPUs
   if [ "$(run "squeue -h -u $U -o %j" | grep -c '^hbs-icml-\(cells\|stage\|transfer\|analysis\)')" = "0" ]; then
