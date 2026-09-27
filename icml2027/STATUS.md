@@ -17,9 +17,23 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 | Wave | Submitted | Completed | Failed (OOM) | Failed (readout) | Stuck | Notes |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | — | nothing submitted yet |
+| tier1 (7388) | 624 cells / 20 groups | 1 | 0 | 0 | 0 | gpt-oss/GigaChat excluded before submission |
 
 ## Journal
+
+### 2026-09-27 (early morning) — first result, throughput fixes, GPU contention
+- First completed cell (GA, Qwen3.6-35B-A3B, cluster 0, seed 1): calibrated RPS 0.1399 -> 0.1349,
+  delta -0.0049 [-0.0062, -0.0037]; below the cluster prior (0.1406) and the wrong-persona control (0.1482);
+  VR_between 0.024 -> 0.161; m* 0.42 -> 3.42 answers.
+- Readout: prompts now sent as token ids (text prompts lost gpt-oss's prefilled channel); two-phase cache warm-up.
+- gpt-oss-20b excluded (0.0 mass on digits under vLLM, both text and token-id prompts); GigaChat3-10B excluded
+  (vLLM server fails, MLA). GLM-4.7-Flash and granite-4.2-30b promoted to Tier 1. H1 ablation moved to gemma-4-12B.
+- vLLM metrics showed prefill capped at ~15 concurrent prompts (868 waiting, KV cache 2%) and zero prefix-cache hits
+  on the hybrid Qwen3.6; --max-num-batched-tokens raised to 65536.
+- HSE second site attempted and dropped: the shared account is at its 1 TB quota and no scratch/project space
+  exists for proj_1759; the model files this session downloaded there were removed again.
+- Restarting the Tier-1 array to apply the throughput fix released 3 GPUs that ~30 queued carl-* jobs took
+  immediately; array 7388 (20 groups, %3) now waits behind carl jobs 7383-7386.
 
 ### 2026-09-27 — implementation deployed, waiting for GPUs
 - `src/optim/` implemented: calibrated-RPS fitness (alpha cross-fitted in the optimisation panel), orientation
