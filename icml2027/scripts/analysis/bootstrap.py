@@ -49,6 +49,8 @@ def main():
             if json.loads((d / "eval_frozen.json").read_text()).get("excluded"):
                 continue
             arm, slug, c, s = d.name.split("__")
+            if "-" in arm:      # ablation / mutator-sensitivity cells (ga-s0, ga-mutself, ...) are not in the H2 family
+                continue
             per[(arm, slug, c, s)] = json.loads((d / "per_respondent.json").read_text())
     rows = []
     for (arm, slug, c, s), v in sorted(per.items()):

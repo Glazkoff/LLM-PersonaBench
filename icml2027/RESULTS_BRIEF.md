@@ -22,7 +22,7 @@ Completed cells: 89 (Tier-1 main-fitness: 80).
 
 - **H1 (improper S0 fitness vs calibrated-RPS fitness): pending.** pairs_holding = 0; rule = >= 6 of 8 (model, cluster) pairs
 - **H2 (selection-pressure arms beat random and paraphrase): not supported.** rule = >= 50% of an arm's cells significantly better (BH q<0.05) than random AND paraphrase
-- **H3 (reflective arms reach threshold with fewer evaluations): pending.** n_reflective = 2; n_evolutionary = 13
+- **H3 (reflective arms reach threshold with fewer evaluations): pending.** n_reflective = 2; n_evolutionary = 4
 - **H4 (optimised personas raise m* on unseen IPIP-300 items): pending.** reason = IPIP-NEO-300 transfer not run yet
 - **H5 (multi-objective search yields a non-degenerate front): pending.** 
 - **H6 (cross-model transfer weaker than cross-cluster): pending.** 

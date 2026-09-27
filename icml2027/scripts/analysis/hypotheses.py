@@ -86,6 +86,8 @@ def h2(tests):
 def h3(e2t):
     if e2t.empty:
         return {"verdict": "pending"}
+    if "fitness" in e2t:
+        e2t = e2t[(e2t.fitness == "rps_cal") & (e2t.mutator.fillna(DEFAULT_MUT) == DEFAULT_MUT)]
     refl = e2t[e2t.arm.isin(["gepa", "protegi"])].evals.dropna()
     evo = e2t[e2t.arm.isin(["ga", "de"])].evals.dropna()
     if len(refl) < 3 or len(evo) < 3:

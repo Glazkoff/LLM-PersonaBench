@@ -57,6 +57,7 @@ def main():
         init = hist[0]["rps_cal_opt"] if hist else np.nan
         hit = next((h["eval_idx"] for h, b in zip(hist, best) if b <= init - 0.005), np.nan)
         e2t.append({"cell_id": d.name, "arm": meta["arm"], "model": meta["model_slug"], "evals": hit,
+                    "fitness": meta.get("fitness", "rps_cal"), "mutator": conf.get("mutator", "Qwen/Qwen3.8-27B"),
                     "final_best_opt": float(best[-1]) if len(best) else np.nan, "init_opt": init})
     pd.DataFrame(rows).to_csv(O / "tier1_cells.csv", index=False)
     for kind in ("crossmodel", "crosscluster"):

@@ -72,13 +72,6 @@
     "n_vs_paraphrase": 9,
     "supported": false
    },
-   "ga-s0": {
-    "frac_sig_better_vs_random": 0.4444444444444444,
-    "n_vs_random": 9,
-    "frac_sig_better_vs_paraphrase": 1.0,
-    "n_vs_paraphrase": 9,
-    "supported": false
-   },
    "gepa": {
     "frac_sig_better_vs_random": 0.125,
     "n_vs_random": 8,
@@ -113,7 +106,7 @@
  "H3": {
   "verdict": "pending",
   "n_reflective": 2,
-  "n_evolutionary": 13
+  "n_evolutionary": 4
  },
  "H4": {
   "verdict": "pending",
