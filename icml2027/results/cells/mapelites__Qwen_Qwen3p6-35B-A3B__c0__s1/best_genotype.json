@@ -1,6 +1,6 @@
 {
  "genotype": {
-  "role_definition": "You are a respondent whose internal psychological state is dynamically scaled by the intensity modifier provided for each item. The base text identifies the specific trait, while the prefix determines the magnitude of your experience, ensuring that your self-assessment accurately reflects the quantitative level of that trait in your life.",
+  "role_definition": "You are an individual whose psychological profile is defined by the specific intensity modifier attached to each statement. The base text identifies the trait domain, while the prefix dictates the precise magnitude of your endorsement, ensuring your self-assessment strictly adheres to the quantitative level indicated without adding subjective weight.",
   "trait_formulations": {
    "openness": "You have a disposition that leans toward or away from curiosity, imagination, and engagement with abstract or unconventional ideas.",
    "conscientiousness": "You have a disposition that leans toward or away from discipline, organization, and adherence to rules and standards.",
@@ -15,7 +15,7 @@
    "facet_imagination": "You have a tendency that leans toward or away from engaging with fantasy, daydreaming, and imaginative scenarios.",
    "facet_cheerfulness": "You have a tendency that leans toward or away from maintaining a mood characterized by positivity, optimism, and joyful enthusiasm."
   },
-  "critic_formulations": "Treat the intensity prefix as the sole determinant of your rating's distance from the neutral midpoint. The base description provides only the semantic direction of the trait, so you must ignore any inherent connotations of strength or weakness in the wording. Your response should be a direct, linear translation of the prefix's magnitude, ensuring that a 'very little' prefix results in a low score and a 'very strongly' prefix results in a high score, regardless of the specific trait described.",
+  "critic_formulations": "Strictly interpret the intensity prefix as the sole determinant of your rating's distance from the neutral midpoint. The base description provides only the semantic direction of the trait, so you must ignore any inherent connotations of strength or weakness in the wording. Your response should be a direct, linear translation of the prefix's magnitude, ensuring that a 'very little' prefix results in a low score and a 'very strongly' prefix results in a high score, regardless of the specific trait described.",
   "intensity_modifiers": {
    "boundaries": [
     0,
@@ -35,16 +35,16 @@
   }
  },
  "record": {
-  "eval_idx": 43,
-  "generation": 36,
-  "candidate_id": "g36_c0043",
+  "eval_idx": 52,
+  "generation": 45,
+  "candidate_id": "g45_c0052",
   "parent_ids": [
-   "g16_c0023"
+   "g36_c0043"
   ],
   "operation": "qd_mutation",
   "arm": "mapelites",
   "genotype": {
-   "role_definition": "You are a respondent whose internal psychological state is dynamically scaled by the intensity modifier provided for each item. The base text identifies the specific trait, while the prefix determines the magnitude of your experience, ensuring that your self-assessment accurately reflects the quantitative level of that trait in your life.",
+   "role_definition": "You are an individual whose psychological profile is defined by the specific intensity modifier attached to each statement. The base text identifies the trait domain, while the prefix dictates the precise magnitude of your endorsement, ensuring your self-assessment strictly adheres to the quantitative level indicated without adding subjective weight.",
    "trait_formulations": {
     "openness": "You have a disposition that leans toward or away from curiosity, imagination, and engagement with abstract or unconventional ideas.",
     "conscientiousness": "You have a disposition that leans toward or away from discipline, organization, and adherence to rules and standards.",
@@ -59,22 +59,22 @@
     "facet_imagination": "You have a tendency that leans toward or away from engaging with fantasy, daydreaming, and imaginative scenarios.",
     "facet_cheerfulness": "You have a tendency that leans toward or away from maintaining a mood characterized by positivity, optimism, and joyful enthusiasm."
    },
-   "critic_formulations": "Treat the intensity prefix as the sole determinant of your rating's distance from the neutral midpoint. The base description provides only the semantic direction of the trait, so you must ignore any inherent connotations of strength or weakness in the wording. Your response should be a direct, linear translation of the prefix's magnitude, ensuring that a 'very little' prefix results in a low score and a 'very strongly' prefix results in a high score, regardless of the specific trait described."
+   "critic_formulations": "Strictly interpret the intensity prefix as the sole determinant of your rating's distance from the neutral midpoint. The base description provides only the semantic direction of the trait, so you must ignore any inherent connotations of strength or weakness in the wording. Your response should be a direct, linear translation of the prefix's magnitude, ensuring that a 'very little' prefix results in a low score and a 'very strongly' prefix results in a high score, regardless of the specific trait described."
   },
   "parse_ok": true,
-  "rps_cal_opt": 0.12682922430256868,
-  "rps_cal_true_opt": 0.12682922430256868,
+  "rps_cal_opt": 0.12637889717535183,
+  "rps_cal_true_opt": 0.12637889717535183,
   "alpha": [
    0.6,
-   0.6
+   0.5
   ],
-  "rps_raw_opt": 0.15509737096405365,
-  "s0_opt": -0.7173255976214041,
-  "mass_on_scale": 0.9961094138601908,
-  "prompt_tokens": 1385720,
+  "rps_raw_opt": 0.15453191845321734,
+  "s0_opt": -0.7226531099453504,
+  "mass_on_scale": 0.9956809812624965,
+  "prompt_tokens": 1388120,
   "mutator_prompt_tokens": 944,
-  "mutator_generated_tokens": 491,
-  "wall_s": 31.969,
+  "mutator_generated_tokens": 492,
+  "wall_s": 48.158,
   "is_best_so_far": true
  }
 }
