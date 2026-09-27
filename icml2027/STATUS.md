@@ -18,8 +18,18 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 | Wave | Submitted | Completed | Failed (OOM) | Failed (readout) | Stuck | Notes |
 |---|---|---|---|---|---|---|
 | tier1 (7388) | 624 cells / 20 groups | 1 | 0 | 0 | 0 | gpt-oss/GigaChat excluded before submission |
+| pause 2026-09-28 | 780 cells (tier1+e5+e8) | 89 | 0 | 0 | 0 | 10 failed_other (cache KeyError, fixed; retry on resume) |
 
 ## Journal
+
+### 2026-09-28 — campaign paused by the user (queue-wide hold)
+- Around 15:30-16:30 on 2026-09-27 almost every pending job on the Euler account (~200: carl, mage, medevo, mars and
+  hbs-icml 7522/7523/7524) was placed on user hold. The user confirmed: keep everything held.
+- This session had released 7461 before noticing the hold was account-wide; 7461 was re-held and its one task that had
+  started (7461_0) was cancelled, so its cells return to pending. The first Tier-1 array (7388) finished normally.
+- The idle shared mutator (7292) was cancelled; babysit restarts it only when a non-held cell array exists.
+- State at pause: 89 cells completed, 10 failed with the (fixed) fitness-cache KeyError from pre-fix processes,
+  3 stale 'running' (reset on resubmission), 678 pending. Resume = `scontrol release 7461 7522 7523 7524`.
 
 ### 2026-09-27 (afternoon) — full pipeline chained on Euler; jobs renamed hbs-
 - All campaign jobs renamed with the `hbs-` prefix (live jobs via scontrol, scripts via --job-name).
