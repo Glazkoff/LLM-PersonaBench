@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-28 — holds released by the user; campaign resumed
+- 7461 (groups 1-16), 7522 (E5), 7523 (E8), 7524 (stage) no longer held; mutator resubmitted as 7673; 7461 throttle 3.
+- 7461 group 0 (Qwen3.6-35B-A3B, cluster 3) was cancelled during the pause and is not in the array any more; it is
+  picked up by babysit's retry pass once the queue drains, together with the 10 cache-KeyError cells.
+
 ### 2026-09-28 — campaign paused by the user (queue-wide hold)
 - Around 15:30-16:30 on 2026-09-27 almost every pending job on the Euler account (~200: carl, mage, medevo, mars and
   hbs-icml 7522/7523/7524) was placed on user hold. The user confirmed: keep everything held.
