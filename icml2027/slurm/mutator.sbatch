@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=icml-mutator
+#SBATCH --job-name=hbs-icml-mutator
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8

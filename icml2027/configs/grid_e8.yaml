@@ -1,0 +1,12 @@
+# E8 mutator sensitivity (exploratory, PREREGISTRATION section 7). The Tier-1 cells already give the fixed
+# Qwen3.8-27B mutator; this grid adds the evaluated model mutating itself and a small mutator (Qwen3.5-9B,
+# served on the cell's own GPU). GA (population search) and GEPA (reflective) on two models, all clusters, 3 seeds.
+name: e8
+budget_B: 80
+fitness: rps_cal
+arms: [ga, gepa]
+models_tier: [1]
+models: [google_gemma-4-12B-it, zai-org_GLM-4p7-Flash]
+clusters: [0, 1, 2, 3]
+seeds: [1, 2, 3]
+mutators: [self, Qwen/Qwen3.5-9B]

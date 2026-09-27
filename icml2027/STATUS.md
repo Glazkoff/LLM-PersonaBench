@@ -9,7 +9,7 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 |---|---|---|---|
 | G0 P0 done | `pytest tests/optim` green; orientation regression test passes on the `evoprompt_iter2` artefacts (per-item mean correlation 0.09 → ≥ 0.60); preflight sbatch passes on Euler | open | — |
 | G0b Pre-registration frozen | `PREREGISTRATION.md` committed with hash + OSF link | open | — |
-| G1 Pilot | On Qwen3.6-35B-A3B × cluster 0, GA and GEPA improve RPS_cal over the base persona with paired-bootstrap CI excluding 0 on the frozen panel, and `m*_interp` rises | open | — |
+| G1 Pilot | On Qwen3.6-35B-A3B × cluster 0, GA and GEPA improve RPS_cal over the base persona with paired-bootstrap CI excluding 0 on the frozen panel, and `m*_interp` rises | passed | GA 3/3 seeds CI<0, GEPA CI<0; m* rises (+3.5 GA, +1.9 GEPA mean over completed cells); see RESULTS_BRIEF.md |
 | G2 Tier-1 complete | ≥ 80% of Tier-1 cells `completed` with 3 seeds; E6 transfers computed | open | — |
 | G3 Results frozen | `results/aggregates/` regenerated from scratch; every table reproducible from `results/` | open | — |
 
@@ -20,6 +20,19 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 | tier1 (7388) | 624 cells / 20 groups | 1 | 0 | 0 | 0 | gpt-oss/GigaChat excluded before submission |
 
 ## Journal
+
+### 2026-09-27 (afternoon) — full pipeline chained on Euler; jobs renamed hbs-
+- All campaign jobs renamed with the `hbs-` prefix (live jobs via scontrol, scripts via --job-name).
+- Fixed: fitness cache could evict the entry just written when an identical genotype was re-evaluated
+  (GEPA KeyError in gepa__Qwen3.6__c1__s3); LRU insert + regression test. Completed cells were unaffected.
+- Throughput: prefix-caching models now split each seed's arms over two processes (6 per GPU); Qwen3.6 stays at 3.
+- New code: E8 mutator sensitivity (evaluated model as its own mutator, or Qwen3.5-9B served on the cell GPU),
+  cross-cluster transfer, m* on IPIP-NEO-300 unseen items, C2ST with style-only rung, pre-registered headline
+  selection, H1-H6 tests and RESULTS_BRIEF.md writer, transfer array, stage job, pipeline.sh.
+- Chain on Euler: Tier-1 7388 -> 7461 -> E5 7522 (60 cells) -> E8 7523 (96 cells) -> stage 7524
+  (headline seeds 4-5 for the winning arm on two models -> transfer array -> CPU analysis). At most 3 cell GPUs
+  plus the shared mutator at any time. Babysit resubmits unfinished cells of every grid as one chain once the
+  queue is empty.
 
 ### 2026-09-27 (early morning) — first result, throughput fixes, GPU contention
 - First completed cell (GA, Qwen3.6-35B-A3B, cluster 0, seed 1): calibrated RPS 0.1399 -> 0.1349,

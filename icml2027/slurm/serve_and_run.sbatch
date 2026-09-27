@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=icml-serve
+#SBATCH --job-name=hbs-icml-serve
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16

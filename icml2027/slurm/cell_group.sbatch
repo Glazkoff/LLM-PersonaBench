@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=icml-cells
+#SBATCH --job-name=hbs-icml-cells
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
@@ -19,9 +19,9 @@ cd $R
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 LOGDIR=/home/glazkov/personality-twins-arr/logs
 : "${GROUPS:?}" "${MANIFEST:?}"
-read MODEL SLUG CLUSTER TP DTYPE UTIL SPLIT < <($PY -c "
+read MODEL SLUG CLUSTER TP DTYPE UTIL SPLIT MUT2 < <($PY -c "
 import json,sys; g=json.load(open('$GROUPS'))[int('$SLURM_ARRAY_TASK_ID')]
-print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'], g.get('split', 1))")
+print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'], g.get('split', 1), g.get('mutator2') or '-')")
 PORT=$((8100 + SLURM_ARRAY_TASK_ID % 600))
 export GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)
 echo "=== $MODEL ($SLUG) cluster=$CLUSTER TP=$TP port=$PORT node=$(hostname) gpu=$GPU_NAME ==="
@@ -46,6 +46,18 @@ for i in $(seq 1 180); do
 done
 [ "$UP" = 1 ] || { echo "FATAL: server never came up"; exit 3; }
 export LOCAL_LLM_BASE_URL="http://127.0.0.1:$PORT/v1"
+if [ "$MUT2" != "-" ]; then
+  # E8: a second mutator model served on the same GPU (the evaluated server was started at UTIL=0.55)
+  MPORT=$((PORT + 700))
+  $PY -m vllm.entrypoints.openai.api_server --model "$MUT2" --port "$MPORT" --host 127.0.0.1 --trust-remote-code \
+    --max-model-len 16384 --gpu-memory-utilization 0.30 --enable-prefix-caching --max-num-seqs 64 \
+    > "$LOGDIR/vllm_icml_mut2_${SLURM_JOB_ID}.log" 2>&1 &
+  M2PID=$!; trap 'kill $VPID $M2PID 2>/dev/null || true' EXIT
+  for i in $(seq 1 180); do curl -sf "http://127.0.0.1:$MPORT/v1/models" >/dev/null 2>&1 && break
+    kill -0 $M2PID 2>/dev/null || { echo "FATAL: mutator2 exited"; tail -20 "$LOGDIR/vllm_icml_mut2_${SLURM_JOB_ID}.log"; exit 3; }; sleep 10; done
+  export MUTATOR2_BASE_URL="http://127.0.0.1:$MPORT/v1"
+  echo "mutator2 $MUT2 up on $MPORT"
+fi
 # one process per seed against the same server: the GPU stays busy while each process waits on the mutator
 SEEDS=$($PY -c "
 import json; m=json.load(open('$MANIFEST'))

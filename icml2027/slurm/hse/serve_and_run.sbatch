@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=icml-serve
+#SBATCH --job-name=hbs-icml-serve
 #SBATCH --partition=rocky
 #SBATCH --account=proj_1759
 #SBATCH --constraint=type_e|type_h

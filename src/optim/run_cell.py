@@ -33,6 +33,17 @@ def git_sha():
         return p.read_text().strip() if p.exists() else "unknown"
 
 
+def mutator_for(cell, default_model):
+    """Mutator used by a cell: the shared service (default), the evaluated model itself ('self', served by the
+    readout server), or a second model served inside the cell job (MUTATOR2_BASE_URL)."""
+    m = cell.get("mutator") or default_model
+    if m == default_model:
+        return LLMMutator(default_model, base_url=os.environ.get("MUTATOR_BASE_URL")), default_model
+    if m == "self":
+        return LLMMutator(cell["hf_id"], base_url=os.environ.get("LOCAL_LLM_BASE_URL")), cell["hf_id"]
+    return LLMMutator(m, base_url=os.environ.get("MUTATOR2_BASE_URL")), m
+
+
 def run_one(cell, df, readout, mutator, results_root, meta_extra, panels_cache=None) -> str:
     w = CellWriter(results_root, cell["cell_id"])
     st = w.dir / "status.json"
@@ -114,14 +125,14 @@ def main():
         sys.exit(0)
     from src.optim.readout import VLLMReadout
     readout = VLLMReadout(cells[0]["hf_id"], prefill=cells[0].get("prefill", "My answer is "), workers=a.workers)
-    mutator = LLMMutator(man["mutator"]["hf_id"], base_url=os.environ.get("MUTATOR_BASE_URL"))
     df = load_corpus()
     meta = {"slurm_job_id": a.slurm_job_id, "node": platform.node(), "git_sha": git_sha(),
             "prereg_sha": man.get("prereg_sha"), "mutator": man["mutator"]["hf_id"], "readout": "belief_vllm_completions",
             "gpu": os.environ.get("GPU_NAME", ""), "tp": cells[0].get("tp"), "dtype": cells[0].get("dtype")}
     states, cache = [], {}
     for c in sorted(cells, key=lambda c: (c["seed"], c["arm"])):
-        s = run_one(c, df, readout, mutator, RESULTS, meta, panels_cache=cache)
+        mutator, mut_model = mutator_for(c, man["mutator"]["hf_id"])
+        s = run_one(c, df, readout, mutator, RESULTS, {**meta, "mutator": mut_model}, panels_cache=cache)
         states.append(s)
         print(f"{now()} {c['cell_id']}: {s}", flush=True)
     sys.exit(0 if all(s in ("completed", "failed_readout") for s in states) else 1)

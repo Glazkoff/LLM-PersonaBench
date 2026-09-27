@@ -9,6 +9,7 @@ fi
 $PY icml2027/scripts/analysis/price_mstar.py --results icml2027/results --panels icml2027/configs/panels.yaml --out icml2027/results/aggregates
 $PY icml2027/scripts/analysis/aggregate.py --results icml2027/results --out icml2027/results/aggregates
 $PY icml2027/scripts/analysis/bootstrap.py --results icml2027/results --panels icml2027/configs/panels.yaml --out icml2027/results/aggregates
+$PY icml2027/scripts/analysis/hypotheses.py
 $PY icml2027/scripts/analysis/figures.py --aggregates icml2027/results/aggregates --out icml2027/results/aggregates/figures
 $PY icml2027/scripts/analysis/manifest.py --results icml2027/results
 echo REGENERATED

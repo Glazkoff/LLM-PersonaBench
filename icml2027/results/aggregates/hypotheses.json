@@ -1,0 +1,114 @@
+{
+ "H1": {
+  "verdict": "pending",
+  "pairs_holding": 0,
+  "pairs": 3,
+  "detail": [
+   {
+    "model": "Qwen_Qwen3p6-35B-A3B",
+    "cluster": 0,
+    "s0_fitness_delta": [
+     -0.004792210940797894,
+     -0.00535443784792855,
+     -0.004205200460347254
+    ],
+    "rpscal_fitness_delta": [
+     -0.005235098754507808,
+     -0.005885259141967866,
+     -0.004580384197591195
+    ],
+    "pattern_holds": false,
+    "s0_fitness_s0_change": -0.08138227886147142
+   },
+   {
+    "model": "Qwen_Qwen3p6-35B-A3B",
+    "cluster": 1,
+    "s0_fitness_delta": [
+     -0.004443204300834217,
+     -0.005055844978461897,
+     -0.003846138279346405
+    ],
+    "rpscal_fitness_delta": [
+     -0.004318195780214422,
+     -0.004869131901772005,
+     -0.003765793777090111
+    ],
+    "pattern_holds": false,
+    "s0_fitness_s0_change": -0.10613860252165563
+   },
+   {
+    "model": "Qwen_Qwen3p6-35B-A3B",
+    "cluster": 2,
+    "s0_fitness_delta": [
+     -0.002937340257653643,
+     -0.0034284270488794213,
+     -0.002434297690736547
+    ],
+    "rpscal_fitness_delta": [
+     -0.0031713238550061707,
+     -0.00372765237785055,
+     -0.002660716776232914
+    ],
+    "pattern_holds": false,
+    "s0_fitness_s0_change": -0.09903321490201589
+   }
+  ],
+  "rule": ">= 6 of 8 (model, cluster) pairs"
+ },
+ "H2": {
+  "verdict": "pending",
+  "reason": "random/paraphrase comparison cells not complete",
+  "per_arm": {
+   "de": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
+   },
+   "ga": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
+   },
+   "ga-s0": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
+   },
+   "gepa": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
+   },
+   "mapelites": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
+   }
+  }
+ },
+ "H3": {
+  "verdict": "pending",
+  "n_reflective": 2,
+  "n_evolutionary": 13
+ },
+ "H4": {
+  "verdict": "pending",
+  "reason": "IPIP-NEO-300 transfer not run yet"
+ },
+ "H5": {
+  "verdict": "pending"
+ },
+ "H6": {
+  "verdict": "pending"
+ }
+}

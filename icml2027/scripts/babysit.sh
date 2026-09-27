@@ -9,27 +9,43 @@ MAXC=${MAXC:-3}
 OUT=""
 
 site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
-  local NAME=$1 HOSTS=$2 R=$3 PY=$4 SD=$5 GRID=$6 SITEENV=$7 HOST=""
+  local NAME=$1 HOSTS=$2 R=$3 PY=$4 SD=$5 GRIDS=$6 SITEENV=$7 HOST=""
   for h in $HOSTS; do
     if timeout 45 ssh -o ConnectTimeout=25 -o BatchMode=yes "$h" true 2>/dev/null; then HOST=$h; break; fi
   done
   [ -z "$HOST" ] && { OUT="$OUT | $NAME unreachable"; return; }
   run() { timeout 300 ssh -o ConnectTimeout=25 -o BatchMode=yes "$HOST" "cd $R && $*"; }
   local U; U=$(run 'whoami')
-  if ! run "squeue -h -u $U -n icml-mutator -o %i" | grep -q .; then
+  if ! run "squeue -h -u $U -n hbs-icml-mutator -o %i" | grep -q .; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
   fi
-  if [ "$(run "squeue -h -u $U -n icml-cells -o %i" | wc -l | tr -d ' ')" = "0" ]; then
-    run "$SITEENV $PY icml2027/scripts/queue.py submit --grid $GRID --max-concurrent $MAXC --reset-running" | tail -1 >/dev/null
+  # retries: only when no campaign job of any kind is queued; unfinished cells of every grid are resubmitted as one
+  # chain (each array waits for the previous), so the campaign still holds at most 3 cell GPUs
+  if [ "$(run "squeue -h -u $U -o %j" | grep -c '^hbs-icml-\(cells\|stage\|transfer\|analysis\)')" = "0" ]; then
+    local PREV=""
+    for G in $GRIDS; do
+      run "test -f $G" || continue
+      local J
+      J=$(run "$SITEENV $PY icml2027/scripts/queue.py submit --grid $G --max-concurrent $MAXC --reset-running ${PREV:+--after afterany:$PREV}" \
+          | grep -o "submitted [0-9]*" | awk '{print $2}' | tail -1)
+      [ -n "$J" ] && { PREV=$J; OUT="$OUT | $NAME: resubmitted $(basename $G .yaml) as $J"; }
+    done
   fi
-  rsync -az -e "ssh -o ConnectTimeout=25" --include='*/' --include='*.json' --include='*.jsonl' --include='*.csv' \
-    --exclude='*' "$HOST:$R/icml2027/results/cells/" "$LOCAL/icml2027/results/cells/" 2>/dev/null
+  for sub in cells crossmodel crosscluster; do
+    rsync -az -e "ssh -o ConnectTimeout=25" --include='*/' --include='*.json' --include='*.jsonl' --include='*.csv' \
+      --exclude='*' "$HOST:$R/icml2027/results/$sub/" "$LOCAL/icml2027/results/$sub/" 2>/dev/null
+  done
+  rsync -az -e "ssh -o ConnectTimeout=25" "$HOST:$R/icml2027/results/aggregates/ipip300_decoder_curve.json" \
+    "$LOCAL/icml2027/results/aggregates/" 2>/dev/null
+  rsync -az -e "ssh -o ConnectTimeout=25" "$HOST:$R/icml2027/configs/grid_headline.yaml" "$LOCAL/icml2027/configs/" 2>/dev/null
   rsync -az -e "ssh -o ConnectTimeout=25" "$HOST:$R/icml2027/queue/" "$LOCAL/icml2027/queue/$NAME/" 2>/dev/null
-  OUT="$OUT | $NAME: $(run "squeue -h -u $U -n icml-cells,icml-mutator -o '%j:%T'" | sort | uniq -c | tr '\n' ' ')"
+  OUT="$OUT | $NAME: $(run "squeue -h -u $U -o '%j:%T'" | grep '^hbs-icml' | sort | uniq -c | tr '\n' ' ')"
 }
 
 site euler "airi-h200 airi-h200-jump" /home/glazkov/personality-twins-arr/LLM-PersonaBench \
-  /home/glazkov/personality-twins-arr/vllmenv/bin/python icml2027/slurm icml2027/configs/grid_tier1.yaml "ICML_SITE=euler"
+  /home/glazkov/personality-twins-arr/vllmenv/bin/python icml2027/slurm \
+  "icml2027/configs/grid_tier1.yaml icml2027/configs/grid_e5.yaml icml2027/configs/grid_e8.yaml icml2027/configs/grid_headline.yaml" \
+  "ICML_SITE=euler"
 if [ "${HSE:-0}" = 1 ]; then
   site hse "hse" /home/lsavchenko/personality-arr/LLM-PersonaBench \
     /home/lsavchenko/personality-arr/icmlenv/bin/python icml2027/slurm/hse icml2027/configs/grid_tier1_hse.yaml "ICML_SITE=hse"

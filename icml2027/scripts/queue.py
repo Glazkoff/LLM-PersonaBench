@@ -32,16 +32,27 @@ def expand(grid_yaml, models_yaml="icml2027/configs/models.yaml", panels_yaml="i
               "budget_B": grid["budget_B"]}
     only = set(grid.get("models", []) or [])
 
-    def cell(arm, m, c, s, fitness):
-        suffix = "" if fitness == "rps_cal" else f"-{fitness}"
+    default_mut = models["mutator"]["hf_id"]
+
+    def mut_tag(mut):
+        if mut in (None, "default", default_mut):
+            return ""
+        if mut == "self":
+            return "-mutself"
+        return "-mut" + mut.split("/")[-1].replace(".", "p")
+
+    def cell(arm, m, c, s, fitness, mut=None):
+        suffix = ("" if fitness == "rps_cal" else f"-{fitness}") + mut_tag(mut)
         return {"cell_id": f"{arm}{suffix}__{m['slug']}__c{c}__s{s}", "arm": arm, "fitness": fitness,
+                "mutator": default_mut if mut in (None, "default") else mut,
                 "model_slug": m["slug"], "hf_id": m["hf_id"], "prefill": m["prefill"], "tp": m["tp"],
                 "dtype": m["dtype"], "gpu_memory_utilization": m["gpu_memory_utilization"], "cluster": c, "seed": s,
                 "arm_cfg": arm_cfg[arm], **common}
 
-    cells = [cell(a, m, c, s, grid["fitness"]) for m in by_slug.values()
+    cells = [cell(a, m, c, s, grid["fitness"], mu) for m in by_slug.values()
              if m["tier"] in grid["models_tier"] and (not only or m["slug"] in only)
-             for a in grid["arms"] for c in grid["clusters"] for s in grid["seeds"]]
+             for a in grid["arms"] for c in grid["clusters"] for s in grid["seeds"]
+             for mu in (grid.get("mutators") or ["default"])]
     for ab in grid.get("ablations", []) or []:
         cells += [cell(ab["arm"], by_slug[sl], c, s, ab["fitness"]) for sl in ab["models"] for c in ab["clusters"]
                   for s in ab["seeds"]]
@@ -97,8 +108,14 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
         if not gl:
             continue
         gfile = QDIR / f"groups_{man['name']}_{label}.json"
+        def mut2(k):
+            ms = {x["mutator"] for x in man["cells"] if (x["model_slug"], x["cluster"]) == k}
+            ms -= {man["mutator"]["hf_id"], "self"}
+            return sorted(ms)[0] if ms else ""
         gfile.write_text(json.dumps([{"hf_id": c["hf_id"], "slug": k[0], "cluster": k[1], "tp": c["tp"],
-                                      "dtype": c["dtype"], "gpu_util": c["gpu_memory_utilization"],
+                                      "dtype": c["dtype"],
+                                      "gpu_util": 0.55 if mut2(k) else c["gpu_memory_utilization"],
+                                      "mutator2": mut2(k),
                                       "split": 1 if "Qwen3p6" in k[0] else 2} for k, c in gl],
                                     indent=1))
         gpus = max(int(c["tp"]) for _, c in gl)

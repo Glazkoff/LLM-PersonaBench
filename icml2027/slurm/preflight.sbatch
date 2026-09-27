@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=icml-preflight
+#SBATCH --job-name=hbs-icml-preflight
 #SBATCH --partition=infer
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
