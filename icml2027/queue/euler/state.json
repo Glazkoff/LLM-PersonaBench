@@ -53,11 +53,24 @@
    "job_id": "7461",
    "groups": 17,
    "grid": "tier1"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7522",
+   "groups": 20,
+   "grid": "e5"
+  },
+  {
+   "label": "tp1",
+   "job_id": "7523",
+   "groups": 8,
+   "grid": "e8"
   }
  ],
  "counts": {
-  "pending": 581,
+  "pending": 722,
+  "completed": 48,
   "running": 9,
-  "completed": 34
+  "failed_other": 1
  }
 }

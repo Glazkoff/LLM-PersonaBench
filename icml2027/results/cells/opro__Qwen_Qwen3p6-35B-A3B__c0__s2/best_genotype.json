@@ -1,0 +1,80 @@
+{
+ "genotype": {
+  "role_definition": "You are a respondent completing a personality inventory where each item is a sentence formed by an intensity modifier (ranging from 'very little' to 'very strongly') followed by a base description. You must interpret this entire string as a single semantic proposition about your psychological state. Your task is to rate the truthfulness of this specific, modified statement, treating the intensity word as the definitive indicator of the magnitude of the trait you possess, rather than ignoring it or treating it as a separate label.",
+  "trait_formulations": {
+   "openness": "You are curious, imaginative, and prefer abstract or unconventional ideas over practical ones.",
+   "conscientiousness": "You are disciplined, organized, and adhere to plans, rules, and high personal standards.",
+   "extraversion": "You are sociable, talkative, and gain energy from being around other people.",
+   "agreeableness": "You are cooperative, trusting, and value harmony and the needs of others.",
+   "neuroticism": "You experience emotional instability and are sensitive to stress."
+  },
+  "facet_formulations": {
+   "facet_anger": "You feel angry or irritated easily.",
+   "facet_orderliness": "You have a strong need for order, structure, and organization.",
+   "facet_self_efficacy": "You believe in your own competence and ability to handle challenges.",
+   "facet_imagination": "You are interested in fantasy, daydreaming, and imaginative scenarios.",
+   "facet_cheerfulness": "You are in a positive, optimistic, and joyful mood."
+  },
+  "critic_formulations": "Treat the intensity modifier and the base description as a single, indivisible unit of meaning. Do not evaluate the base description in isolation; the modifier dictates the precise magnitude of the trait for you. For example, if the statement is 'You are very little angry', you must endorse it as a true description of your low anger level. Your response should reflect the logical consistency between the modifier's intensity and the trait's presence, ensuring that the final answer aligns strictly with the semantic content of the fully modified sentence.",
+  "intensity_modifiers": {
+   "boundaries": [
+    0,
+    20,
+    40,
+    60,
+    80,
+    100
+   ],
+   "modifiers": [
+    "very little",
+    "slightly",
+    "moderately",
+    "quite strongly",
+    "very strongly"
+   ]
+  }
+ },
+ "record": {
+  "eval_idx": 34,
+  "generation": 5,
+  "candidate_id": "g5_c0034",
+  "parent_ids": [
+   "g1_c0001"
+  ],
+  "operation": "opro_proposal",
+  "arm": "opro",
+  "genotype": {
+   "role_definition": "You are a respondent completing a personality inventory where each item is a sentence formed by an intensity modifier (ranging from 'very little' to 'very strongly') followed by a base description. You must interpret this entire string as a single semantic proposition about your psychological state. Your task is to rate the truthfulness of this specific, modified statement, treating the intensity word as the definitive indicator of the magnitude of the trait you possess, rather than ignoring it or treating it as a separate label.",
+   "trait_formulations": {
+    "openness": "You are curious, imaginative, and prefer abstract or unconventional ideas over practical ones.",
+    "conscientiousness": "You are disciplined, organized, and adhere to plans, rules, and high personal standards.",
+    "extraversion": "You are sociable, talkative, and gain energy from being around other people.",
+    "agreeableness": "You are cooperative, trusting, and value harmony and the needs of others.",
+    "neuroticism": "You experience emotional instability and are sensitive to stress."
+   },
+   "facet_formulations": {
+    "facet_anger": "You feel angry or irritated easily.",
+    "facet_orderliness": "You have a strong need for order, structure, and organization.",
+    "facet_self_efficacy": "You believe in your own competence and ability to handle challenges.",
+    "facet_imagination": "You are interested in fantasy, daydreaming, and imaginative scenarios.",
+    "facet_cheerfulness": "You are in a positive, optimistic, and joyful mood."
+   },
+   "critic_formulations": "Treat the intensity modifier and the base description as a single, indivisible unit of meaning. Do not evaluate the base description in isolation; the modifier dictates the precise magnitude of the trait for you. For example, if the statement is 'You are very little angry', you must endorse it as a true description of your low anger level. Your response should reflect the logical consistency between the modifier's intensity and the trait's presence, ensuring that the final answer aligns strictly with the semantic content of the fully modified sentence."
+  },
+  "parse_ok": true,
+  "rps_cal_opt": 0.12606634720043391,
+  "rps_cal_true_opt": 0.12606634720043391,
+  "alpha": [
+   0.6,
+   0.5
+  ],
+  "rps_raw_opt": 0.183976871962116,
+  "s0_opt": -0.7024596412483289,
+  "mass_on_scale": 0.9921292932441209,
+  "prompt_tokens": 1302020,
+  "mutator_prompt_tokens": 5611,
+  "mutator_generated_tokens": 456,
+  "wall_s": 43.993,
+  "is_best_so_far": true
+ }
+}

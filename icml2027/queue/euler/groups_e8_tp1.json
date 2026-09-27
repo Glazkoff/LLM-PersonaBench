@@ -1,0 +1,82 @@
+[
+ {
+  "hf_id": "google/gemma-4-12B-it",
+  "slug": "google_gemma-4-12B-it",
+  "cluster": 0,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "google/gemma-4-12B-it",
+  "slug": "google_gemma-4-12B-it",
+  "cluster": 1,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "google/gemma-4-12B-it",
+  "slug": "google_gemma-4-12B-it",
+  "cluster": 2,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "google/gemma-4-12B-it",
+  "slug": "google_gemma-4-12B-it",
+  "cluster": 3,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 0,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 1,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 2,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ },
+ {
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "slug": "zai-org_GLM-4p7-Flash",
+  "cluster": 3,
+  "tp": 1,
+  "dtype": "bf16",
+  "gpu_util": 0.55,
+  "mutator2": "Qwen/Qwen3.5-9B",
+  "split": 2
+ }
+]

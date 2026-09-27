@@ -93,6 +93,13 @@
     "frac_sig_better_vs_paraphrase": NaN,
     "n_vs_paraphrase": 0,
     "supported": false
+   },
+   "opro": {
+    "frac_sig_better_vs_random": NaN,
+    "n_vs_random": 0,
+    "frac_sig_better_vs_paraphrase": NaN,
+    "n_vs_paraphrase": 0,
+    "supported": false
    }
   }
  },
