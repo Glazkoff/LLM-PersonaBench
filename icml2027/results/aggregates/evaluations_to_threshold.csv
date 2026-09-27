@@ -73,4 +73,12 @@ paraphrase__Qwen_Qwen3p6-35B-A3B__c2__s3,paraphrase,Qwen_Qwen3p6-35B-A3B,,0.1407
 promptbreeder__Qwen_Qwen3p6-35B-A3B__c0__s1,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.1283153145341383,0.1326340928848737
 promptbreeder__Qwen_Qwen3p6-35B-A3B__c0__s2,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.12619163051060153,0.13006959976165694
 promptbreeder__Qwen_Qwen3p6-35B-A3B__c0__s3,promptbreeder,Qwen_Qwen3p6-35B-A3B,60.0,0.12793643967266233,0.13384929143843038
+promptbreeder__Qwen_Qwen3p6-35B-A3B__c1__s1,promptbreeder,Qwen_Qwen3p6-35B-A3B,1.0,0.12272269773396224,0.12989868428043105
+promptbreeder__Qwen_Qwen3p6-35B-A3B__c1__s2,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.1179516258352767,0.12241151468289266
 promptbreeder__Qwen_Qwen3p6-35B-A3B__c1__s3,promptbreeder,Qwen_Qwen3p6-35B-A3B,77.0,0.12032418300397188,0.12553560736097252
+promptbreeder__Qwen_Qwen3p6-35B-A3B__c2__s1,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.13900967821471805,0.14286847124639876
+promptbreeder__Qwen_Qwen3p6-35B-A3B__c2__s2,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.14033600144679498,0.1450519337685631
+promptbreeder__Qwen_Qwen3p6-35B-A3B__c2__s3,promptbreeder,Qwen_Qwen3p6-35B-A3B,,0.1385488079050016,0.14163494775159333
+random__Qwen_Qwen3p6-35B-A3B__c0__s1,random,Qwen_Qwen3p6-35B-A3B,,0.12803947975890556,0.13260776067735658
+random__Qwen_Qwen3p6-35B-A3B__c0__s2,random,Qwen_Qwen3p6-35B-A3B,,0.12645142026896572,0.13012660544382848
+random__Qwen_Qwen3p6-35B-A3B__c0__s3,random,Qwen_Qwen3p6-35B-A3B,9.0,0.1282936666918876,0.1337644401303824

@@ -1,1 +1,6 @@
-{"state": "pending", "attempt": 0}
+{
+ "state": "failed_other",
+ "updated": "2026-09-27T18:52:32+00:00",
+ "attempt": 1,
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"Reflect on these descriptions as if they are your own self-perception, and respond to questions by evaluating how accurately they describe you, as a real person would. Internally critique and adjust your responses for consistency with this personality profile, ensuring that your level of optimism, intellectual curiosity, and willingness to take risks are clearly reflected in your answers.\",\\n \"facet_formulations\": {\\n  \"facet_achievement_striving\": \"You"
+}

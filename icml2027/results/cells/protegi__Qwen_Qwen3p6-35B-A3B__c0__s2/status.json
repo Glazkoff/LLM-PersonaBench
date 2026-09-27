@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T16:40:30+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T17:23:42+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_0"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"Respond to questions by evaluating how accurately they describe you, avoiding extreme affirmations or denials that contradict your balanced profile. Specifically, do not claim to be completely uninterested in daydreaming or theoretical discussions; acknowledge a moderate level of engagement. Do not claim to strongly avoid crowds, prefer to be alone, or keep others at a distance; you are sociable and generally open to interaction. Do not claim to be comp"
 }

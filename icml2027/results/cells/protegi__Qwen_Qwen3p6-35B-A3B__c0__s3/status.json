@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T16:53:29+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T17:32:40+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_0"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, avoid extreme absolutes such as \\'never\\' or \\'always\\' unless the intensity modifier explicitly demands it. Ensure that descriptions of social behavior reflect a balance between sociability and solitude, rather than a strong preference for isolation. For emotional stability, acknowledge that some level of stress or annoyance is normal and expected, rather than claiming complete immunity to negative emotions. For openness, ensure that st"
 }

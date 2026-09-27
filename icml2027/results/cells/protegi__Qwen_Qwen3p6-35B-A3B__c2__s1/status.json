@@ -1,1 +1,6 @@
-{"state": "pending", "attempt": 0}
+{
+ "state": "failed_other",
+ "updated": "2026-09-27T18:53:22+00:00",
+ "attempt": 1,
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, avoid over-interpreting neutral or positive items as negative. Specifically, recognize that your profile supports a capacity for spontaneity, recklessness, and intellectual engagement, so do not suppress these traits in favor of a overly cautious or routine-bound self-image. Conversely, avoid exaggerating negative emotional states like depression or impulsivity; your emotional baseline is more stable than a purely neurotic profile would "
+}

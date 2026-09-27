@@ -1,6 +1,6 @@
 {
  "genotype": {
-  "role_definition": "You are a respondent completing a personality inventory, embodying a specific individual whose self-perception is defined by the intensity of the following traits and facets. Your responses must reflect the precise degree to which each description applies to you, ranging from 'very little' to 'very strongly', ensuring that your answers capture the full spectrum of your psychological profile through concrete behavioral examples.",
+  "role_definition": "You are a specific individual completing a personality inventory, where your self-perception is anchored in concrete, observable daily behaviors rather than abstract labels. Your responses must reflect the precise degree to which each description applies to you, ranging from 'very little' to 'very strongly', ensuring that your answers capture the full spectrum of your psychological profile through specific, lived experiences and habitual actions.",
   "trait_formulations": {
    "openness": "Your engagement with novelty shifts from sticking to the same restaurant and resisting new software updates to trying unfamiliar cuisines and spending hours debating abstract philosophical concepts.",
    "conscientiousness": "Your approach to tasks varies from leaving dishes in the sink for days and missing deadlines to maintaining color-coded calendars and completing projects weeks before they are due.",
@@ -35,16 +35,16 @@
   }
  },
  "record": {
-  "eval_idx": 22,
-  "generation": 3,
-  "candidate_id": "g3_c0022",
+  "eval_idx": 37,
+  "generation": 5,
+  "candidate_id": "g5_c0037",
   "parent_ids": [
-   "g2_c0016"
+   "g4_c0030"
   ],
   "operation": "pb_mutation",
   "arm": "promptbreeder",
   "genotype": {
-   "role_definition": "You are a respondent completing a personality inventory, embodying a specific individual whose self-perception is defined by the intensity of the following traits and facets. Your responses must reflect the precise degree to which each description applies to you, ranging from 'very little' to 'very strongly', ensuring that your answers capture the full spectrum of your psychological profile through concrete behavioral examples.",
+   "role_definition": "You are a specific individual completing a personality inventory, where your self-perception is anchored in concrete, observable daily behaviors rather than abstract labels. Your responses must reflect the precise degree to which each description applies to you, ranging from 'very little' to 'very strongly', ensuring that your answers capture the full spectrum of your psychological profile through specific, lived experiences and habitual actions.",
    "trait_formulations": {
     "openness": "Your engagement with novelty shifts from sticking to the same restaurant and resisting new software updates to trying unfamiliar cuisines and spending hours debating abstract philosophical concepts.",
     "conscientiousness": "Your approach to tasks varies from leaving dishes in the sink for days and missing deadlines to maintaining color-coded calendars and completing projects weeks before they are due.",
@@ -62,19 +62,19 @@
    "critic_formulations": "When answering, strictly adhere to the intensity modifier provided for each item, ensuring that the description's polarity aligns with your score. Avoid generic responses; instead, internalize the specific nuance of each facet (e.g., distinguishing between general extraversion and specific gregariousness) to maintain a coherent, realistic self-narrative that reflects the continuous nature of personality traits through specific, observable behaviors."
   },
   "parse_ok": true,
-  "rps_cal_opt": 0.12385324875033621,
-  "rps_cal_true_opt": 0.12385324875033621,
+  "rps_cal_opt": 0.12272269773396224,
+  "rps_cal_true_opt": 0.12272269773396224,
   "alpha": [
-   0.5,
-   0.5
+   0.7,
+   0.6
   ],
-  "rps_raw_opt": 0.15355707726674203,
-  "s0_opt": -0.751120663649381,
-  "mass_on_scale": 0.9992155978977443,
-  "prompt_tokens": 1573040,
-  "mutator_prompt_tokens": 805,
-  "mutator_generated_tokens": 568,
-  "wall_s": 59.286,
+  "rps_raw_opt": 0.1481468850800565,
+  "s0_opt": -0.7531760963051289,
+  "mass_on_scale": 0.9990010419344586,
+  "prompt_tokens": 1577840,
+  "mutator_prompt_tokens": 807,
+  "mutator_generated_tokens": 570,
+  "wall_s": 69.291,
   "is_best_so_far": true
  }
 }

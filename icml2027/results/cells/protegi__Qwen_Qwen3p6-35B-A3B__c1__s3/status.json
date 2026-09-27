@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T16:15:05+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T17:47:53+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_1"
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"Evaluate each item based on the specific behaviors and feelings described, not just the general trait label. Pay close attention to the direction of the statement (positive vs. negative) and ensure your response aligns with the specific intensity modifier provided. Do not over-interpret \\'skepticism\\' as \\'distrust\\' or \\'calm\\' as \\'apathetic\\'; instead, focus on the concrete actions like \\'trusting words\\', \\'leaving messes\\', or \\'taking time for oth"
 }

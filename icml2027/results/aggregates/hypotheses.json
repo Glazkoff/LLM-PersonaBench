@@ -56,59 +56,59 @@
   "rule": ">= 6 of 8 (model, cluster) pairs"
  },
  "H2": {
-  "verdict": "pending",
-  "reason": "random/paraphrase comparison cells not complete",
+  "verdict": "supported",
   "per_arm": {
    "de": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.0,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
     "n_vs_paraphrase": 9,
     "supported": false
    },
    "ga": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.3333333333333333,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
     "n_vs_paraphrase": 9,
     "supported": false
    },
    "ga-s0": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.6666666666666666,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
     "n_vs_paraphrase": 9,
-    "supported": false
+    "supported": true
    },
    "gepa": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.0,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 0.875,
     "n_vs_paraphrase": 8,
     "supported": false
    },
    "mapelites": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.6666666666666666,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
     "n_vs_paraphrase": 9,
-    "supported": false
+    "supported": true
    },
    "opro": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.0,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
     "n_vs_paraphrase": 9,
     "supported": false
    },
    "promptbreeder": {
-    "frac_sig_better_vs_random": NaN,
-    "n_vs_random": 0,
+    "frac_sig_better_vs_random": 0.0,
+    "n_vs_random": 3,
     "frac_sig_better_vs_paraphrase": 1.0,
-    "n_vs_paraphrase": 4,
+    "n_vs_paraphrase": 9,
     "supported": false
    }
-  }
+  },
+  "rule": ">= 50% of an arm's cells significantly better (BH q<0.05) than random AND paraphrase"
  },
  "H3": {
   "verdict": "pending",
