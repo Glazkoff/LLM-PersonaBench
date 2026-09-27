@@ -36,6 +36,7 @@ class Fitness:
         self.forward_passes_per_candidate = self.n_opt * len(self.tgt)
         self.last_prompt_tokens = 0
         self._cache = {}
+        self._summ = {}      # key -> small, never-evicted summaries used by feedback() and per_respondent_scores()
         self._last_key = None
 
     def _beliefs(self, g, idx):
@@ -63,7 +64,14 @@ class Fitness:
         if self.objective == "s0":
             per = S.per_respondent(S.s0(P, self.Y))
         self._put(key, {"P": P, "per": per, "cal": cal})
+        self._summ[key] = self._summary(P, self.Y, per)
         return res
+
+    @staticmethod
+    def _summary(P, Y, per=None):
+        ev = (P * np.arange(1, 6)).sum(-1)
+        return {"err": np.nanmean(ev - Y, axis=0), "pred": np.nanmean(ev, axis=0), "hum": np.nanmean(Y, axis=0),
+                "per": per}
 
     def _put(self, key, val):
         """LRU insert: an existing key is moved to the end, so the entry just written is never the one evicted
@@ -79,25 +87,22 @@ class Fitness:
         P, M = self._beliefs(g, idx)
         key = to_json(g)
         self._put("sub:" + key, {"P": P, "idx": idx})
+        self._summ["sub:" + key] = self._summary(P, self.Y[idx])
         return self._result(P, M, self.Y[idx], t0)[0]
 
     def per_respondent_scores(self, g):
-        return self._cache[to_json(g)]["per"]
+        return self._summ[to_json(g)]["per"]
 
     def feedback(self, g, k=10, prefer_subset=False) -> str:
         key = to_json(g)
-        if key in self._cache and not (prefer_subset and "sub:" + key in self._cache):
-            P, Y = self._cache[key]["P"], self.Y
-        else:
-            c = self._cache["sub:" + key]
-            P, Y = c["P"], self.Y[c["idx"]]
-        ev = (P * np.arange(1, 6)).sum(-1)
-        err = np.nanmean(ev - Y, axis=0)
+        sk = "sub:" + key
+        c = self._summ[sk] if (prefer_subset and sk in self._summ) or key not in self._summ else self._summ[key]
+        err, pred, hum = c["err"], c["pred"], c["hum"]
         order = np.argsort(-np.abs(err))[:k]
         return "\n".join(
             f"item {self.tgt[j]} '{TEXT_OF_ITEM[self.tgt[j]]}' (scored so that higher = more of the trait): "
             f"model too {'high' if err[j] > 0 else 'low'} by {abs(err[j]):.2f} "
-            f"(mean predicted {np.nanmean(ev[:, j]):.2f}, human {np.nanmean(Y[:, j]):.2f})"
+            f"(mean predicted {pred[j]:.2f}, human {hum[j]:.2f})"
             for j in order)
 
     def last_descriptor(self):

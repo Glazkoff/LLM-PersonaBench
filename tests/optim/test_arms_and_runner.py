@@ -106,3 +106,17 @@ def test_cache_keeps_reevaluated_genotype(corpus):
     assert f.per_respondent_scores(gs[5]).shape == (40,)
     f.evaluate(gs[39]); f.evaluate(gs[39])
     assert f.per_respondent_scores(gs[39]).shape == (40,)
+
+
+def test_feedback_survives_cache_eviction(corpus):
+    """Regression: ProTeGi asks for feedback on beam members evaluated many candidates ago."""
+    import copy
+    p = make_panels(corpus, 0, 1, SIZES)
+    f = Fitness(p, PersonaReadout(), [0, .5, 1], np.random.default_rng(0))
+    old = copy.deepcopy(TEMPLATE); old["role_definition"] += " oldest"
+    f.evaluate(old)
+    for i in range(80):
+        g = copy.deepcopy(TEMPLATE); g["role_definition"] += f" n{i}"
+        f.evaluate(g); f.evaluate_subset(g, np.arange(4))
+    assert "model too" in f.feedback(old, 3)
+    assert f.per_respondent_scores(old).shape == (40,)
