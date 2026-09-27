@@ -35,7 +35,7 @@ EXTRA=()
 [ "$DTYPE" = "fp8" ] && EXTRA+=(--quantization fp8)
 $PY -m vllm.entrypoints.openai.api_server --model "$MODEL" --port "$PORT" --host 127.0.0.1 --trust-remote-code \
   --tensor-parallel-size "$TP" --max-model-len 4096 --gpu-memory-utilization "$UTIL" --enable-prefix-caching \
-  --max-logprobs 20 --max-num-seqs 512 "${EXTRA[@]}" > "$LOGDIR/vllm_icml_${SLURM_JOB_ID}.log" 2>&1 &
+  --max-logprobs 20 --max-num-seqs 1024 --max-num-batched-tokens 65536 "${EXTRA[@]}" > "$LOGDIR/vllm_icml_${SLURM_JOB_ID}.log" 2>&1 &
 VPID=$!
 trap 'kill $VPID 2>/dev/null || true' EXIT
 UP=0

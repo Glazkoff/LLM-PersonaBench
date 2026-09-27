@@ -19,7 +19,7 @@ while IFS='|' read -r MODEL SLUG PREFILL DTYPE; do
   [ -z "$MODEL" ] && continue
   EXTRA=(); [ "$DTYPE" = "fp8" ] && EXTRA+=(--quantization fp8)
   $PY -m vllm.entrypoints.openai.api_server --model "$MODEL" --port $PORT --host 127.0.0.1 --trust-remote-code \
-    --max-model-len 4096 --gpu-memory-utilization 0.90 --enable-prefix-caching --max-logprobs 20 --max-num-seqs 512 \
+    --max-model-len 4096 --gpu-memory-utilization 0.90 --enable-prefix-caching --max-logprobs 20 --max-num-seqs 1024 --max-num-batched-tokens 65536 \
     "${EXTRA[@]}" > "$LOGDIR/vllm_probe_${SLURM_JOB_ID}_${SLUG}.log" 2>&1 &
   VPID=$!; UP=0
   for i in $(seq 1 180); do curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 && { UP=1; break; }; kill -0 $VPID 2>/dev/null || break; sleep 10; done
