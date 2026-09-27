@@ -19,9 +19,9 @@ cd $R
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 LOGDIR=/home/glazkov/personality-twins-arr/logs
 : "${GROUPS:?}" "${MANIFEST:?}"
-read MODEL SLUG CLUSTER TP DTYPE UTIL < <($PY -c "
+read MODEL SLUG CLUSTER TP DTYPE UTIL SPLIT < <($PY -c "
 import json,sys; g=json.load(open('$GROUPS'))[int('$SLURM_ARRAY_TASK_ID')]
-print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'])")
+print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'], g.get('split', 1))")
 PORT=$((8100 + SLURM_ARRAY_TASK_ID % 600))
 export GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)
 echo "=== $MODEL ($SLUG) cluster=$CLUSTER TP=$TP port=$PORT node=$(hostname) gpu=$GPU_NAME ==="
@@ -51,10 +51,18 @@ SEEDS=$($PY -c "
 import json; m=json.load(open('$MANIFEST'))
 print(' '.join(sorted({str(c['seed']) for c in m['cells'] if c['model_slug']=='$SLUG' and c['cluster']==$CLUSTER})))")
 PIDS=()
+# arms of this group split into $SPLIT chunks; one process per (seed, chunk)
+CHUNKS=$($PY -c "
+import json; m=json.load(open('$MANIFEST'))
+arms=sorted({c['arm'] for c in m['cells'] if c['model_slug']=='$SLUG' and c['cluster']==$CLUSTER})
+k=int('$SPLIT'); print(' '.join(','.join(arms[i::k]) for i in range(k)))")
 for S in $SEEDS; do
-  $PY -m src.optim.run_cell --manifest "$MANIFEST" --model-slug "$SLUG" --cluster "$CLUSTER" --seeds $S \
-    --slurm-job-id "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}" --workers 8 > "$LOGDIR/icml_run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}_s$S.log" 2>&1 &
-  PIDS+=($!)
+  j=0
+  for CH in $CHUNKS; do
+    $PY -m src.optim.run_cell --manifest "$MANIFEST" --model-slug "$SLUG" --cluster "$CLUSTER" --seeds $S --arms ${CH//,/ } \
+      --slurm-job-id "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}" --workers 8 > "$LOGDIR/icml_run_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}_s${S}_$j.log" 2>&1 &
+    PIDS+=($!); j=$((j+1))
+  done
 done
 rc=0
 for P in "${PIDS[@]}"; do wait $P || rc=1; done

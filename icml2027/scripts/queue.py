@@ -71,7 +71,11 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
     mpath = QDIR / f"manifest_{man['name']}.json"
     mpath.write_text(json.dumps(man, indent=1))
     groups = collections.OrderedDict()
+    busy = {(c["model_slug"], c["cluster"]) for c in man["cells"]
+            if not reset_running and (_state(c["cell_id"]) or {}).get("state") == "running"}
     for c in man["cells"]:
+        if (c["model_slug"], c["cluster"]) in busy:
+            continue
         st = _state(c["cell_id"])
         if st is None:
             (CELLS / c["cell_id"]).mkdir(parents=True, exist_ok=True)
@@ -94,7 +98,8 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
             continue
         gfile = QDIR / f"groups_{man['name']}_{label}.json"
         gfile.write_text(json.dumps([{"hf_id": c["hf_id"], "slug": k[0], "cluster": k[1], "tp": c["tp"],
-                                      "dtype": c["dtype"], "gpu_util": c["gpu_memory_utilization"]} for k, c in gl],
+                                      "dtype": c["dtype"], "gpu_util": c["gpu_memory_utilization"],
+                                      "split": 1 if "Qwen3p6" in k[0] else 2} for k, c in gl],
                                     indent=1))
         gpus = max(int(c["tp"]) for _, c in gl)
         conc = max_concurrent if gpus == 1 else 1
