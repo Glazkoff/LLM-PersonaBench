@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=120G
-#SBATCH --time=14-00:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --output=/home/glazkov/personality-twins-arr/logs/icml_mutator_%j.out
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/icml_mutator_%j.err
 # Long-lived shared mutator server. Every cell job reads icml2027/queue/mutator.json for its URL,

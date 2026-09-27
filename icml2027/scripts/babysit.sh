@@ -16,8 +16,14 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   [ -z "$HOST" ] && { OUT="$OUT | $NAME unreachable"; return; }
   run() { timeout 300 ssh -o ConnectTimeout=25 -o BatchMode=yes "$HOST" "cd $R && $*"; }
   local U; U=$(run 'whoami')
-  if ! run "squeue -h -u $U -n hbs-icml-mutator -o %i" | grep -q .; then
+  # the shared mutator is needed only while cell arrays exist (pending or running); transfer and analysis jobs never
+  # call it. Start it when cells are queued, cancel it when none are left, so it does not hold a GPU idle.
+  local NCELLS; NCELLS=$(run "squeue -h -u $U -n hbs-icml-cells -o %i" | wc -l | tr -d ' ')
+  local MUT; MUT=$(run "squeue -h -u $U -n hbs-icml-mutator -o %i" | head -1)
+  if [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
+  elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ]; then
+    run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
   # throttle hand-off: 7461 ran at %1 while the first Tier-1 array (7388) finished; restore %3 once it is gone
   if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %i" | grep -q .; then
