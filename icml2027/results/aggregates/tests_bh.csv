@@ -1,0 +1,2 @@
+arm,model,cluster,seed,comparator,delta,lo,hi,p,q_bh
+ga,Qwen_Qwen3p6-35B-A3B,c0,s1,base,-0.0049302674919382864,-0.006175536886095283,-0.0036816612321234642,0.0005,0.0005

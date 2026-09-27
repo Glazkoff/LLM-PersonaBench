@@ -1,0 +1,2 @@
+cell_id,arm,model,cluster,seed,mstar_base,mstar_evolved,delta
+ga__Qwen_Qwen3p6-35B-A3B__c0__s1,ga,Qwen_Qwen3p6-35B-A3B,0,1,0.41705806760243874,3.4219814980658323,3.0049234304633936

@@ -1,0 +1,2 @@
+cell_id,arm,model,evals,final_best_opt,init_opt
+ga__Qwen_Qwen3p6-35B-A3B__c0__s1,ga,Qwen_Qwen3p6-35B-A3B,20,0.12685695891619536,0.1326270968855166

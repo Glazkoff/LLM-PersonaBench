@@ -1,0 +1,15 @@
+{
+ "model": "openai/gpt-oss-20b",
+ "mass_mean": 0.0,
+ "mass_min": 0.0,
+ "n_requests": 960,
+ "seconds": 2.3203489780426025,
+ "req_per_s": 413.73086940130696,
+ "mean_belief": [
+  0.2,
+  0.2,
+  0.2,
+  0.2,
+  0.2
+ ]
+}
