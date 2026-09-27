@@ -62,18 +62,23 @@ class Fitness:
         per = S.per_respondent(S.cal_cells(S.cdf(P), self.F0, self.Y, a))
         if self.objective == "s0":
             per = S.per_respondent(S.s0(P, self.Y))
-        self._cache[key] = {"P": P, "per": per, "cal": cal}
-        if len(self._cache) > 32:
-            self._cache.pop(next(iter(self._cache)))
+        self._put(key, {"P": P, "per": per, "cal": cal})
         return res
+
+    def _put(self, key, val):
+        """LRU insert: an existing key is moved to the end, so the entry just written is never the one evicted
+        (re-evaluating an identical genotype used to leave it in its old slot, where eviction removed it)."""
+        self._cache.pop(key, None)
+        while len(self._cache) >= 32:
+            self._cache.pop(next(iter(self._cache)))
+        self._cache[key] = val
 
     def evaluate_subset(self, g, idx) -> FitnessResult:
         t0 = time.perf_counter()
         idx = np.asarray(idx)
         P, M = self._beliefs(g, idx)
         key = to_json(g)
-        self._cache.setdefault("sub:" + key, {})["P"] = P
-        self._cache["sub:" + key]["idx"] = idx
+        self._put("sub:" + key, {"P": P, "idx": idx})
         return self._result(P, M, self.Y[idx], t0)[0]
 
     def per_respondent_scores(self, g):

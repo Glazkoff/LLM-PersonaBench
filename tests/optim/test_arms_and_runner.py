@@ -90,3 +90,19 @@ def test_s0_ablation_runs(corpus, tmp_path):
     assert run_one(cell, corpus, PersonaReadout(), JitterMutator(), tmp_path, {}) == "completed"
     h = json.loads((tmp_path / cell["cell_id"] / "history.jsonl").read_text().splitlines()[0])
     assert h["rps_cal_opt"] == h["s0_opt"] and h["rps_cal_true_opt"] == h["rps_cal_true_opt"]
+
+
+def test_cache_keeps_reevaluated_genotype(corpus):
+    """Regression: re-evaluating a genotype already in a full cache must not evict the fresh entry."""
+    import copy
+    p = make_panels(corpus, 0, 1, SIZES)
+    f = Fitness(p, PersonaReadout(), [0, .5, 1], np.random.default_rng(0))
+    gs = []
+    for i in range(40):
+        g = copy.deepcopy(TEMPLATE); g["role_definition"] += f" v{i}"; gs.append(g)
+        f.evaluate(g)
+        f.evaluate_subset(g, np.arange(4))
+    f.evaluate(gs[5])  # identical to an old, long-evicted-or-oldest entry
+    assert f.per_respondent_scores(gs[5]).shape == (40,)
+    f.evaluate(gs[39]); f.evaluate(gs[39])
+    assert f.per_respondent_scores(gs[39]).shape == (40,)
