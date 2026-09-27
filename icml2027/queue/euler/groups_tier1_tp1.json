@@ -2,34 +2,11 @@
  {
   "hf_id": "Qwen/Qwen3.6-35B-A3B",
   "slug": "Qwen_Qwen3p6-35B-A3B",
-  "cluster": 0,
-  "tp": 1,
-  "dtype": "bf16",
-  "gpu_util": 0.9
- },
- {
-  "hf_id": "Qwen/Qwen3.6-35B-A3B",
-  "slug": "Qwen_Qwen3p6-35B-A3B",
-  "cluster": 1,
-  "tp": 1,
-  "dtype": "bf16",
-  "gpu_util": 0.9
- },
- {
-  "hf_id": "Qwen/Qwen3.6-35B-A3B",
-  "slug": "Qwen_Qwen3p6-35B-A3B",
-  "cluster": 2,
-  "tp": 1,
-  "dtype": "bf16",
-  "gpu_util": 0.9
- },
- {
-  "hf_id": "Qwen/Qwen3.6-35B-A3B",
-  "slug": "Qwen_Qwen3p6-35B-A3B",
   "cluster": 3,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 1
  },
  {
   "hf_id": "Qwen/Qwen3.8-27B",
@@ -37,7 +14,8 @@
   "cluster": 0,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "Qwen/Qwen3.8-27B",
@@ -45,7 +23,8 @@
   "cluster": 1,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "Qwen/Qwen3.8-27B",
@@ -53,7 +32,8 @@
   "cluster": 2,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "Qwen/Qwen3.8-27B",
@@ -61,7 +41,8 @@
   "cluster": 3,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "google/gemma-4-12B-it",
@@ -69,7 +50,8 @@
   "cluster": 0,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "google/gemma-4-12B-it",
@@ -77,7 +59,8 @@
   "cluster": 1,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "google/gemma-4-12B-it",
@@ -85,7 +68,8 @@
   "cluster": 2,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "google/gemma-4-12B-it",
@@ -93,7 +77,8 @@
   "cluster": 3,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "zai-org/GLM-4.7-Flash",
@@ -101,7 +86,8 @@
   "cluster": 0,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "zai-org/GLM-4.7-Flash",
@@ -109,7 +95,8 @@
   "cluster": 1,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "zai-org/GLM-4.7-Flash",
@@ -117,7 +104,8 @@
   "cluster": 2,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "zai-org/GLM-4.7-Flash",
@@ -125,7 +113,8 @@
   "cluster": 3,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "ibm-granite/granite-4.2-30b",
@@ -133,7 +122,8 @@
   "cluster": 0,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "ibm-granite/granite-4.2-30b",
@@ -141,7 +131,8 @@
   "cluster": 1,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "ibm-granite/granite-4.2-30b",
@@ -149,7 +140,8 @@
   "cluster": 2,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  },
  {
   "hf_id": "ibm-granite/granite-4.2-30b",
@@ -157,6 +149,7 @@
   "cluster": 3,
   "tp": 1,
   "dtype": "bf16",
-  "gpu_util": 0.9
+  "gpu_util": 0.9,
+  "split": 2
  }
 ]

@@ -1,6 +1,6 @@
 {
- "state": "running",
- "updated": "2026-09-27T09:41:20+00:00",
+ "state": "failed_other",
+ "updated": "2026-09-27T10:10:38+00:00",
  "attempt": 1,
- "slurm_job_id": "7388_1"
+ "message": "KeyError: '{\\n \"critic_formulations\": \"When answering, evaluate how accurately each statement describes your specific personality profile. Do not assume that being low in extraversion or agreeableness means you are lazy, messy, or pessimistic; instead, focus on your preference for solitude, your skepticism of others\\' motives, your high standards for order, and your emotional stability. Ensure your responses reflect a person who is disciplined and optimistic but socially detached and self-focuse"
 }
