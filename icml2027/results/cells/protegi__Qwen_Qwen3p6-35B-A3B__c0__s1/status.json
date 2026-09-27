@@ -1,1 +1,6 @@
-{"state": "pending", "attempt": 0}
+{
+ "state": "failed_other",
+ "updated": "2026-09-27T15:54:46+00:00",
+ "attempt": 1,
+ "message": "KeyError: 'sub:{\\n \"critic_formulations\": \"When answering, carefully consider the specific wording of the item. If an item suggests extreme behavior (e.g., \\'always\\', \\'never\\', \\'completely\\') that is not supported by the facet description, rate it lower. For example, if the facet says you \\'enjoy daydreaming\\', do not rate \\'Love to daydream\\' as low; if the facet says you \\'can tolerate mess\\', do not rate \\'Leave a mess\\' as extremely high. Ensure your responses reflect a realistic human ra"
+}
