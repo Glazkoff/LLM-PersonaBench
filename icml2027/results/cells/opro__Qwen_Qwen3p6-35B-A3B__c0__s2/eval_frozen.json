@@ -1,0 +1,41 @@
+{
+ "panel": {
+  "cluster": 0,
+  "seed": 2,
+  "n_eval": 200,
+  "respondent_ids_sha256": "c5cafb2233f9469cadc5744368086413f341d032ff6d38c3e68222cc4e607f8e"
+ },
+ "base": {
+  "rps_cal": 0.13830148692733754,
+  "rps_raw": 0.2828969899040887,
+  "s0": -0.6583145991336108,
+  "alpha": 0.6,
+  "vr_between": 0.022485732676067842,
+  "mass_on_scale": 0.9955848961716666
+ },
+ "evolved": {
+  "rps_cal": 0.13350922133533938,
+  "rps_raw": 0.18486241913286258,
+  "s0": -0.6997418230562297,
+  "alpha": 0.6,
+  "vr_between": 0.17424294017460126,
+  "mass_on_scale": 0.9920919515651546,
+  "wrong_persona_rps_cal": 0.14469488308037934
+ },
+ "delta": {
+  "rps_cal": -0.00479226559199816,
+  "rps_cal_ci95": [
+   -0.005917418802758063,
+   -0.003723519660234738
+  ],
+  "boot_B": 2000,
+  "boot_seed": 20260925
+ },
+ "floors": {
+  "cluster_mean_rps": 0.207375,
+  "cluster_prior_rps": 0.1390022779296875,
+  "human_rps": 0.2714791666666667
+ },
+ "excluded": false,
+ "exclusion_reason": null
+}

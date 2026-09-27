@@ -62,43 +62,43 @@
    "de": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 2,
     "supported": false
    },
    "ga": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 2,
     "supported": false
    },
    "ga-s0": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 2,
     "supported": false
    },
    "gepa": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 1,
     "supported": false
    },
    "mapelites": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 2,
     "supported": false
    },
    "opro": {
     "frac_sig_better_vs_random": NaN,
     "n_vs_random": 0,
-    "frac_sig_better_vs_paraphrase": NaN,
-    "n_vs_paraphrase": 0,
+    "frac_sig_better_vs_paraphrase": 1.0,
+    "n_vs_paraphrase": 2,
     "supported": false
    }
   }
