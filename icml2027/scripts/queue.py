@@ -5,6 +5,7 @@ import argparse
 import collections
 import glob
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -101,7 +102,8 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
                f"--export=ALL,GROUPS={gfile.relative_to(ROOT)},MANIFEST={mpath.relative_to(ROOT)}"]
         if after:
             cmd.append(f"--dependency={after}" if ":" in str(after) else f"--dependency=afterok:{after}")
-        cmd.append("icml2027/slurm/cell_group.sbatch")
+        site = os.environ.get("ICML_SITE", "euler")
+        cmd.append("icml2027/slurm/hse/cell_group.sbatch" if site == "hse" else "icml2027/slurm/cell_group.sbatch")
         print(" ".join(cmd))
         if not dry:
             jid = subprocess.check_output(cmd, text=True, cwd=ROOT).strip()

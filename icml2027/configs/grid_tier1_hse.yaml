@@ -1,0 +1,9 @@
+# Tier-1 grid. Expanded by icml2027/scripts/queue.py into cells {arm}__{slug}__c{cluster}__s{seed}.
+name: tier1h
+budget_B: 80
+fitness: rps_cal
+arms: [ga, de, mapelites, gepa, opro, promptbreeder, protegi, random, paraphrase, bestofb]
+models_tier: [1]
+models: [zai-org_GLM-4p7-Flash, ibm-granite_granite-4p2-30b]
+clusters: [0, 1, 2, 3]
+seeds: [1, 2, 3]
