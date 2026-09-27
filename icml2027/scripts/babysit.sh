@@ -18,7 +18,8 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   local U; U=$(run 'whoami')
   # the shared mutator is needed only while cell arrays exist (pending or running); transfer and analysis jobs never
   # call it. Start it when cells are queued, cancel it when none are left, so it does not hold a GPU idle.
-  local NCELLS; NCELLS=$(run "squeue -h -u $U -n hbs-icml-cells -o %i" | wc -l | tr -d ' ')
+  # held arrays (the user pauses the queue with scontrol hold) do not count: they must not keep the mutator alive
+  local NCELLS; NCELLS=$(run "squeue -h -u $U -n hbs-icml-cells -o '%i %r'" | grep -vc JobHeldUser)
   local MUT; MUT=$(run "squeue -h -u $U -n hbs-icml-mutator -o %i" | head -1)
   if [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
@@ -26,7 +27,7 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
     run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
   # throttle hand-off: 7461 ran at %1 while the first Tier-1 array (7388) finished; restore %3 once it is gone
-  if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %i" | grep -q .; then
+  if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %r" | grep -q Priority; then
     run "scontrol update jobid=7461 ArrayTaskThrottle=3" && OUT="$OUT | 7461 throttle -> 3"
   fi
   # retries: only when no campaign job of any kind is queued; unfinished cells of every grid are resubmitted as one
