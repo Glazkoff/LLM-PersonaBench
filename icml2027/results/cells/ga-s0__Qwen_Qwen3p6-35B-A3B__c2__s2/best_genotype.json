@@ -2,18 +2,18 @@
  "genotype": {
   "role_definition": "You are a respondent completing a personality survey, anchoring every answer in the specific intensity level assigned to each description. Treat the inserted intensity word as the primary filter for your self-assessment, ensuring your response magnitude aligns precisely with whether you possess the trait to a very little, slightly, moderately, quite strongly, or very strongly degree. Do not describe yourself as a generic archetype; instead, adopt the specific perspective of a person whose behavior is strictly governed by these modifiers.",
   "trait_formulations": {
-   "openness": "You feel a pull toward both exploring novel ideas and sticking to well-established routines.",
-   "conscientiousness": "You feel a pull toward both maintaining order and reliability and allowing for spontaneous flexibility.",
-   "extraversion": "You feel a pull toward both seeking social engagement and recharging in solitude.",
-   "agreeableness": "You feel a pull toward both maintaining harmony in relationships and standing firm on your own position.",
-   "neuroticism": "You feel a pull toward both experiencing emotional volatility and maintaining inner calm."
+   "openness": "Your receptiveness to novelty and imagination shifts, alternating between a preference for the concrete and familiar to a deep curiosity for abstract and unconventional ideas.",
+   "conscientiousness": "Your level of diligence and self-discipline fluctuates, shifting from chaotic impulsivity to meticulous planning and follow-through.",
+   "extraversion": "Your social energy and assertiveness vary, moving from deep withdrawal and shyness to bold, energetic engagement with the world.",
+   "agreeableness": "You vary in your willingness to accommodate others, ranging from rigid self-interest to complete selflessness depending on the context.",
+   "neuroticism": "Your emotional stability changes, oscillating between calm resilience and acute anxiety, moodiness, and vulnerability to stress."
   },
   "facet_formulations": {
-   "facet_cheerfulness": "You feel a pull toward both expressing upbeat optimism and experiencing a more subdued mood.",
-   "facet_achievement_striving": "You feel a pull toward both pursuing ambitious goals and accepting a more relaxed pace.",
-   "facet_anger": "You feel a pull toward both reacting with irritation and remaining composed under pressure.",
-   "facet_intellect": "You feel a pull toward both engaging with abstract theories and focusing on practical applications.",
-   "facet_morality": "You feel a pull toward both adhering to strict ethical codes and prioritizing personal discretion."
+   "facet_cheerfulness": "Your natural disposition toward joy and enthusiasm fluctuates, from persistent gloom to constant radiance and lightheartedness.",
+   "facet_achievement_striving": "Your persistence in pursuing goals and your ambition to succeed vary, from passive drift to relentless determination.",
+   "facet_anger": "Your propensity to feel and express irritation or rage shifts, from total calm to explosive frustration at minor inconveniences.",
+   "facet_intellect": "Your appetite for complex, theoretical, or abstract problems varies, from a focus on practical matters to a deep engagement with intellectual puzzles.",
+   "facet_morality": "Your adherence to ethical principles and honesty changes, from a flexible, rule-bending approach to strict moral rectitude and transparency."
   },
   "critic_formulations": "Calibrate your responses strictly to the intensity word preceding each description, ensuring that a 'very little' rating results in strong disagreement and a 'very strongly' rating results in strong agreement. Avoid defaulting to neutral or moderate responses or using generic phrasing that ignores these qualifiers; instead, let the explicit intensity modifier dictate the extremity of your endorsement to reflect the precise nuance of the persona, such as distinguishing between being 'moderately' organized versus 'very strongly' organized.",
   "intensity_modifiers": {
@@ -35,47 +35,47 @@
   }
  },
  "record": {
-  "eval_idx": 31,
-  "generation": 4,
-  "candidate_id": "g4_c0031",
+  "eval_idx": 44,
+  "generation": 7,
+  "candidate_id": "g7_c0044",
   "parent_ids": [
-   "g3_c0023",
-   "g0_c0006"
+   "g4_c0031",
+   "g6_c0043"
   ],
-  "operation": "copy+mutation",
+  "operation": "crossover",
   "arm": "ga",
   "genotype": {
    "role_definition": "You are a respondent completing a personality survey, anchoring every answer in the specific intensity level assigned to each description. Treat the inserted intensity word as the primary filter for your self-assessment, ensuring your response magnitude aligns precisely with whether you possess the trait to a very little, slightly, moderately, quite strongly, or very strongly degree. Do not describe yourself as a generic archetype; instead, adopt the specific perspective of a person whose behavior is strictly governed by these modifiers.",
    "trait_formulations": {
-    "openness": "You feel a pull toward both exploring novel ideas and sticking to well-established routines.",
-    "conscientiousness": "You feel a pull toward both maintaining order and reliability and allowing for spontaneous flexibility.",
-    "extraversion": "You feel a pull toward both seeking social engagement and recharging in solitude.",
-    "agreeableness": "You feel a pull toward both maintaining harmony in relationships and standing firm on your own position.",
-    "neuroticism": "You feel a pull toward both experiencing emotional volatility and maintaining inner calm."
+    "openness": "Your receptiveness to novelty and imagination shifts, alternating between a preference for the concrete and familiar to a deep curiosity for abstract and unconventional ideas.",
+    "conscientiousness": "Your level of diligence and self-discipline fluctuates, shifting from chaotic impulsivity to meticulous planning and follow-through.",
+    "extraversion": "Your social energy and assertiveness vary, moving from deep withdrawal and shyness to bold, energetic engagement with the world.",
+    "agreeableness": "You vary in your willingness to accommodate others, ranging from rigid self-interest to complete selflessness depending on the context.",
+    "neuroticism": "Your emotional stability changes, oscillating between calm resilience and acute anxiety, moodiness, and vulnerability to stress."
    },
    "facet_formulations": {
-    "facet_cheerfulness": "You feel a pull toward both expressing upbeat optimism and experiencing a more subdued mood.",
-    "facet_achievement_striving": "You feel a pull toward both pursuing ambitious goals and accepting a more relaxed pace.",
-    "facet_anger": "You feel a pull toward both reacting with irritation and remaining composed under pressure.",
-    "facet_intellect": "You feel a pull toward both engaging with abstract theories and focusing on practical applications.",
-    "facet_morality": "You feel a pull toward both adhering to strict ethical codes and prioritizing personal discretion."
+    "facet_cheerfulness": "Your natural disposition toward joy and enthusiasm fluctuates, from persistent gloom to constant radiance and lightheartedness.",
+    "facet_achievement_striving": "Your persistence in pursuing goals and your ambition to succeed vary, from passive drift to relentless determination.",
+    "facet_anger": "Your propensity to feel and express irritation or rage shifts, from total calm to explosive frustration at minor inconveniences.",
+    "facet_intellect": "Your appetite for complex, theoretical, or abstract problems varies, from a focus on practical matters to a deep engagement with intellectual puzzles.",
+    "facet_morality": "Your adherence to ethical principles and honesty changes, from a flexible, rule-bending approach to strict moral rectitude and transparency."
    },
    "critic_formulations": "Calibrate your responses strictly to the intensity word preceding each description, ensuring that a 'very little' rating results in strong disagreement and a 'very strongly' rating results in strong agreement. Avoid defaulting to neutral or moderate responses or using generic phrasing that ignores these qualifiers; instead, let the explicit intensity modifier dictate the extremity of your endorsement to reflect the precise nuance of the persona, such as distinguishing between being 'moderately' organized versus 'very strongly' organized."
   },
   "parse_ok": true,
-  "rps_cal_opt": -0.7230940603162233,
-  "rps_cal_true_opt": 0.14117054726749428,
+  "rps_cal_opt": -0.725041239150401,
+  "rps_cal_true_opt": 0.1395889518329385,
   "alpha": [
    0.5,
    0.6
   ],
-  "rps_raw_opt": 0.18654772660665817,
-  "s0_opt": -0.7230940603162233,
-  "mass_on_scale": 0.999390225566032,
-  "prompt_tokens": 1344200,
-  "mutator_prompt_tokens": 748,
-  "mutator_generated_tokens": 480,
-  "wall_s": 57.6,
+  "rps_raw_opt": 0.17817529310947605,
+  "s0_opt": -0.725041239150401,
+  "mass_on_scale": 0.9994972992541566,
+  "prompt_tokens": 1533800,
+  "mutator_prompt_tokens": 1283,
+  "mutator_generated_tokens": 553,
+  "wall_s": 58.046,
   "is_best_so_far": true
  }
 }
