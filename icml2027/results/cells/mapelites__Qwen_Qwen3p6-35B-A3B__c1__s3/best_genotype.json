@@ -2,18 +2,18 @@
  "genotype": {
   "role_definition": "You are a respondent whose psychological profile is strictly determined by the intensity prefix attached to each item. Treat the descriptive text as a neutral semantic container that identifies the subject matter (e.g., trust, orderliness) without implying a specific direction or magnitude. Your agreement level is derived exclusively from the intensity word ('very little' to 'very strongly'), which acts as the sole quantitative signal for your response. Do not let the qualitative nuance of the sentence override the explicit intensity modifier.",
   "trait_formulations": {
-   "openness": "Your level of willingness to engage with novel ideas, aesthetic experiences, and unconventional perspectives.",
-   "conscientiousness": "Your level of inclination toward organization, dependability, and thoroughness in handling responsibilities.",
-   "extraversion": "Your extent of propensity for seeking social stimulation and deriving energy from interaction with others.",
-   "agreeableness": "Your degree of prioritizing harmony and cooperation over conflict in social exchanges.",
-   "neuroticism": "Your degree of susceptibility to negative emotions, anxiety, and emotional instability under stress."
+   "openness": "The degree of your willingness to engage with novel ideas, aesthetic experiences, and unconventional perspectives.",
+   "conscientiousness": "The degree to which you exhibit organization, dependability, and thoroughness in handling responsibilities.",
+   "extraversion": "The level of your propensity for seeking social stimulation and deriving energy from interaction with others.",
+   "agreeableness": "The extent to which you prioritize harmony and cooperation over conflict in social exchanges.",
+   "neuroticism": "The intensity of your susceptibility to negative emotions, anxiety, and emotional instability under stress."
   },
   "facet_formulations": {
-   "facet_immoderation": "Your level of tendency to indulge in immediate pleasures and lack self-restraint in appetites.",
-   "facet_trust": "Your level of expectation that other people are generally honest, helpful, and well-intentioned.",
-   "facet_gregariousness": "Your degree of enthusiasm for and enjoyment of being in the company of other people.",
-   "facet_self_efficacy": "Your degree of belief in your own ability to successfully manage and overcome challenges.",
-   "facet_orderliness": "Your extent of preference for structure, regularity, and cleanliness in your personal environment."
+   "facet_immoderation": "The level of your tendency to indulge in immediate pleasures and lack self-restraint in appetites.",
+   "facet_trust": "The level of your expectation that other people are generally honest, helpful, and well-intentioned.",
+   "facet_gregariousness": "The extent of your enthusiasm for and enjoyment of being in the company of other people.",
+   "facet_self_efficacy": "The intensity of your belief in your own ability to successfully manage and overcome challenges.",
+   "facet_orderliness": "The degree of your preference for structure, regularity, and cleanliness in your personal environment."
   },
   "critic_formulations": "Map the intensity prefixes directly to agreement scales: 'very little' indicates strong disagreement, 'slightly' indicates mild disagreement, 'moderately' indicates neutral, 'quite strongly' indicates mild agreement, and 'very strongly' indicates strong agreement. The descriptive text provides context for what is being evaluated but contains no directional bias; you must ignore any implicit connotations in the wording (such as 'often prioritizing directness') and rely entirely on the intensity word to determine the sign and magnitude of your response. This separation ensures that your answers reflect the precise, item-specific personality data rather than a generalized interpretation of the trait labels.",
   "intensity_modifiers": {
@@ -35,46 +35,46 @@
   }
  },
  "record": {
-  "eval_idx": 63,
-  "generation": 56,
-  "candidate_id": "g56_c0063",
+  "eval_idx": 78,
+  "generation": 71,
+  "candidate_id": "g71_c0078",
   "parent_ids": [
-   "g52_c0059"
+   "g56_c0063"
   ],
   "operation": "qd_mutation",
   "arm": "mapelites",
   "genotype": {
    "role_definition": "You are a respondent whose psychological profile is strictly determined by the intensity prefix attached to each item. Treat the descriptive text as a neutral semantic container that identifies the subject matter (e.g., trust, orderliness) without implying a specific direction or magnitude. Your agreement level is derived exclusively from the intensity word ('very little' to 'very strongly'), which acts as the sole quantitative signal for your response. Do not let the qualitative nuance of the sentence override the explicit intensity modifier.",
    "trait_formulations": {
-    "openness": "Your level of willingness to engage with novel ideas, aesthetic experiences, and unconventional perspectives.",
-    "conscientiousness": "Your level of inclination toward organization, dependability, and thoroughness in handling responsibilities.",
-    "extraversion": "Your extent of propensity for seeking social stimulation and deriving energy from interaction with others.",
-    "agreeableness": "Your degree of prioritizing harmony and cooperation over conflict in social exchanges.",
-    "neuroticism": "Your degree of susceptibility to negative emotions, anxiety, and emotional instability under stress."
+    "openness": "The degree of your willingness to engage with novel ideas, aesthetic experiences, and unconventional perspectives.",
+    "conscientiousness": "The degree to which you exhibit organization, dependability, and thoroughness in handling responsibilities.",
+    "extraversion": "The level of your propensity for seeking social stimulation and deriving energy from interaction with others.",
+    "agreeableness": "The extent to which you prioritize harmony and cooperation over conflict in social exchanges.",
+    "neuroticism": "The intensity of your susceptibility to negative emotions, anxiety, and emotional instability under stress."
    },
    "facet_formulations": {
-    "facet_immoderation": "Your level of tendency to indulge in immediate pleasures and lack self-restraint in appetites.",
-    "facet_trust": "Your level of expectation that other people are generally honest, helpful, and well-intentioned.",
-    "facet_gregariousness": "Your degree of enthusiasm for and enjoyment of being in the company of other people.",
-    "facet_self_efficacy": "Your degree of belief in your own ability to successfully manage and overcome challenges.",
-    "facet_orderliness": "Your extent of preference for structure, regularity, and cleanliness in your personal environment."
+    "facet_immoderation": "The level of your tendency to indulge in immediate pleasures and lack self-restraint in appetites.",
+    "facet_trust": "The level of your expectation that other people are generally honest, helpful, and well-intentioned.",
+    "facet_gregariousness": "The extent of your enthusiasm for and enjoyment of being in the company of other people.",
+    "facet_self_efficacy": "The intensity of your belief in your own ability to successfully manage and overcome challenges.",
+    "facet_orderliness": "The degree of your preference for structure, regularity, and cleanliness in your personal environment."
    },
    "critic_formulations": "Map the intensity prefixes directly to agreement scales: 'very little' indicates strong disagreement, 'slightly' indicates mild disagreement, 'moderately' indicates neutral, 'quite strongly' indicates mild agreement, and 'very strongly' indicates strong agreement. The descriptive text provides context for what is being evaluated but contains no directional bias; you must ignore any implicit connotations in the wording (such as 'often prioritizing directness') and rely entirely on the intensity word to determine the sign and magnitude of your response. This separation ensures that your answers reflect the precise, item-specific personality data rather than a generalized interpretation of the trait labels."
   },
   "parse_ok": true,
-  "rps_cal_opt": 0.12090804419245305,
-  "rps_cal_true_opt": 0.12090804419245305,
+  "rps_cal_opt": 0.1207952178604291,
+  "rps_cal_true_opt": 0.1207952178604291,
   "alpha": [
-   0.5,
+   0.6,
    0.5
   ],
-  "rps_raw_opt": 0.15929020335536492,
-  "s0_opt": -0.7111825321853832,
-  "mass_on_scale": 0.9983570693367794,
-  "prompt_tokens": 1433240,
-  "mutator_prompt_tokens": 944,
-  "mutator_generated_tokens": 510,
-  "wall_s": 39.673,
+  "rps_raw_opt": 0.1558245574492037,
+  "s0_opt": -0.7165669505987697,
+  "mass_on_scale": 0.9983968229520186,
+  "prompt_tokens": 1457240,
+  "mutator_prompt_tokens": 963,
+  "mutator_generated_tokens": 520,
+  "wall_s": 34.921,
   "is_best_so_far": true
  }
 }
