@@ -1,6 +1,5 @@
 {
- "state": "running",
- "updated": "2026-09-27T09:42:15+00:00",
- "attempt": 1,
- "slurm_job_id": "7388_1"
+ "state": "completed",
+ "updated": "2026-09-27T11:49:14+00:00",
+ "attempt": 1
 }
