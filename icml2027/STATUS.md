@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-29 00:55 MSK — holds released by the user; campaign running
+- The holds were lifted in steps; babysit cancelled mutator 7892 while the cells were still held, and cell 7461_13 then
+  started without a mutator. Mutator resubmitted as 7906 (first in the queue). Babysit now cancels a mutator only
+  when it is RUNNING with no runnable cells; a pending mutator is left in place.
+
 ### 2026-09-28 19:09 MSK — released at 18:50, held again at ~19:05 (mutator 7892 included)
 - Babysit changed so that it never cancels or re-nices a job held by the user (mutator or cells); it only acts on
   non-held hbs-icml jobs. Cell counts unchanged (89 completed, 678 pending).

@@ -23,7 +23,8 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   local MUT; MUT=$(run "squeue -h -u $U -n hbs-icml-mutator -o %i" | head -1)
   if [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
-  elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ] && ! run "squeue -h -j $MUT -o %r" | grep -q JobHeldUser; then
+  elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ] && run "squeue -h -j $MUT -o %T" | grep -q RUNNING; then
+    # only a RUNNING mutator holds a GPU; a pending one keeps its queue place (holds are often lifted in steps)
     run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
   # our own cell arrays queue behind the mutator (a cell that starts first waits 1 h for it and exits): nice=500 on
