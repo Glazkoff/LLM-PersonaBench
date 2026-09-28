@@ -33,7 +33,8 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
       && OUT="$OUT | nice reset to 0"
   fi
   # throttle hand-off: 7461 ran at %1 while the first Tier-1 array (7388) finished; restore %3 once it is gone
-  if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %r" | grep -q Priority; then
+  if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %r" | grep -q Priority \
+     && ! run "scontrol show job 7461 2>/dev/null" | grep -q 'ArrayTaskThrottle=3'; then
     run "scontrol update jobid=7461 ArrayTaskThrottle=3" && OUT="$OUT | 7461 throttle -> 3"
   fi
   # retries: only when no campaign job of any kind is queued; unfinished cells of every grid are resubmitted as one
