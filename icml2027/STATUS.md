@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-28 16:00 MSK — hbs-icml holds released by the user (other account jobs stay held)
+- Mutator resubmitted as 7852. Its FIFO priority was below the 7461 cell tasks, which would have started, waited 1 h
+  for a mutator and exited; 7461 set to nice=10 (own jobs only) so the mutator starts first. Unheld mage jobs keep
+  their place ahead of the campaign.
+
 ### 2026-09-28 (afternoon) — queue held again account-wide
 - Around 15:50 MSK every pending job of the account (177, including all hbs-icml cell tasks of 7461/7522/7523) was put on
   user hold again. Holds are left alone; the campaign resumes when the user releases them.
