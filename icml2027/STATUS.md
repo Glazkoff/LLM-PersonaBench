@@ -22,6 +22,10 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-28 19:09 MSK — released at 18:50, held again at ~19:05 (mutator 7892 included)
+- Babysit changed so that it never cancels or re-nices a job held by the user (mutator or cells); it only acts on
+  non-held hbs-icml jobs. Cell counts unchanged (89 completed, 678 pending).
+
 ### 2026-09-28 18:44 MSK — account-wide hold again (359 jobs); idle mutator 7852 cancelled
 - Mutator 7852 started at 18:42; within two minutes every pending job of the account, hbs-icml cells included, was held.
   Holds left alone; babysit cancelled the idle mutator. Babysit now keeps pending hbs-icml-cells arrays at nice=500

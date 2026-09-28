@@ -23,13 +23,13 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   local MUT; MUT=$(run "squeue -h -u $U -n hbs-icml-mutator -o %i" | head -1)
   if [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
-  elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ]; then
+  elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ] && ! run "squeue -h -j $MUT -o %r" | grep -q JobHeldUser; then
     run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
   # our own cell arrays queue behind the mutator (a cell that starts first waits 1 h for it and exits): nice=500 on
   # pending hbs-icml-cells while the mutator is pending, back to 0 once it runs. Only hbs-icml jobs are touched.
   local MST; MST=$(run "squeue -h -u $U -n hbs-icml-mutator -o %T" | head -1)
-  local CARR; CARR=$(run "squeue -h -u $U -n hbs-icml-cells -t PD -o %A" | sort -u | tr '\n' ' ')
+  local CARR; CARR=$(run "squeue -h -u $U -n hbs-icml-cells -t PD -o '%A %r'" | grep -v JobHeldUser | awk '{print $1}' | sort -u | tr '\n' ' ')
   if [ -n "$CARR" ] && [ "$MST" = PENDING ]; then
     run "for j in $CARR; do scontrol update jobid=\$j nice=500 2>/dev/null; done"
   elif [ -n "$CARR" ] && [ "$MST" = RUNNING ]; then
