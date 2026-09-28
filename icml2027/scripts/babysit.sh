@@ -26,6 +26,12 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ]; then
     run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
+  # temporary nice=300 on other pending jobs (user-approved, to put the mutator first): undo once the mutator runs
+  if [ "$NAME" = euler ] && run "test -f /home/glazkov/personality-twins-arr/logs/hbs_nice_ids.txt" \
+     && run "squeue -h -u $U -n hbs-icml-mutator -o %T" | grep -q RUNNING; then
+    run 'for j in $(cat /home/glazkov/personality-twins-arr/logs/hbs_nice_ids.txt); do scontrol update jobid=$j nice=0 2>/dev/null; done; mv /home/glazkov/personality-twins-arr/logs/hbs_nice_ids.txt /home/glazkov/personality-twins-arr/logs/hbs_nice_ids.done' \
+      && OUT="$OUT | nice reset to 0"
+  fi
   # throttle hand-off: 7461 ran at %1 while the first Tier-1 array (7388) finished; restore %3 once it is gone
   if [ "$NAME" = euler ] && ! run "squeue -h -j 7388 -o %i" | grep -q . && run "squeue -h -j 7461 -o %r" | grep -q Priority; then
     run "scontrol update jobid=7461 ArrayTaskThrottle=3" && OUT="$OUT | 7461 throttle -> 3"
