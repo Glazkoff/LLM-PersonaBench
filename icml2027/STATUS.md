@@ -22,6 +22,13 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-29 01:57 MSK — held again after mutator 7906 started
+- 7461_13 (granite cluster 0) started before any mutator, waited 1 h and exited 4 ("no mutator service"); its cells stay
+  pending for the retry pass. Mutator 7906 took that GPU at 01:55; about two minutes later every pending job of the account
+  was held again (336 user holds, 7 admin holds).
+- Babysit now keeps a running idle mutator unless another job is actually waiting for a GPU (no job can use it
+  while everything is held), so the next release does not queue the mutator from scratch.
+
 ### 2026-09-29 00:55 MSK — holds released by the user; campaign running
 - The holds were lifted in steps; babysit cancelled mutator 7892 while the cells were still held, and cell 7461_13 then
   started without a mutator. Mutator resubmitted as 7906 (first in the queue). Babysit now cancels a mutator only
