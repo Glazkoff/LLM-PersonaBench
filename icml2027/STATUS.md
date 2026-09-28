@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-28 18:44 MSK — account-wide hold again (359 jobs); idle mutator 7852 cancelled
+- Mutator 7852 started at 18:42; within two minutes every pending job of the account, hbs-icml cells included, was held.
+  Holds left alone; babysit cancelled the idle mutator. Babysit now keeps pending hbs-icml-cells arrays at nice=500
+  while the mutator is pending (0 once it runs), so on the next release the mutator starts before our cells.
+
 ### 2026-09-28 16:00 MSK — hbs-icml holds released by the user (other account jobs stay held)
 - Mutator resubmitted as 7852. Its FIFO priority was below the 7461 cell tasks, which would have started, waited 1 h
   for a mutator and exited; 7461 set to nice=10 (own jobs only) so the mutator starts first. Unheld mage jobs keep

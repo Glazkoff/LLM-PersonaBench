@@ -26,6 +26,15 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   elif [ "$NCELLS" = "0" ] && [ -n "$MUT" ]; then
     run "scancel $MUT; rm -f icml2027/queue/mutator.json" && OUT="$OUT | $NAME: cancelled idle mutator $MUT"
   fi
+  # our own cell arrays queue behind the mutator (a cell that starts first waits 1 h for it and exits): nice=500 on
+  # pending hbs-icml-cells while the mutator is pending, back to 0 once it runs. Only hbs-icml jobs are touched.
+  local MST; MST=$(run "squeue -h -u $U -n hbs-icml-mutator -o %T" | head -1)
+  local CARR; CARR=$(run "squeue -h -u $U -n hbs-icml-cells -t PD -o %A" | sort -u | tr '\n' ' ')
+  if [ -n "$CARR" ] && [ "$MST" = PENDING ]; then
+    run "for j in $CARR; do scontrol update jobid=\$j nice=500 2>/dev/null; done"
+  elif [ -n "$CARR" ] && [ "$MST" = RUNNING ]; then
+    run "for j in $CARR; do scontrol update jobid=\$j nice=0 2>/dev/null; done"
+  fi
   # temporary nice=300 on other pending jobs (user-approved, to put the mutator first): undo once the mutator runs
   if [ "$NAME" = euler ] && run "test -f /home/glazkov/personality-twins-arr/logs/hbs_nice_ids.txt" \
      && run "squeue -h -u $U -n hbs-icml-mutator -o %T" | grep -q RUNNING; then
