@@ -22,6 +22,14 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-28 (afternoon) — queue held again account-wide
+- Around 15:50 MSK every pending job of the account (177, including all hbs-icml cell tasks of 7461/7522/7523) was put on
+  user hold again. Holds are left alone; the campaign resumes when the user releases them.
+- Mutator 7673 had just started (after the user-approved nice=300 on other jobs); with no runnable cells it was idle, so
+  babysit cancelled it and the temporary nice values were reset to 0 (hbs_nice_ids.txt -> .done). Babysit resubmits
+  the mutator as soon as any cell task is not held.
+- Cell counts unchanged: 89 completed, 678 pending, 10 failed_other (cache KeyError, retried later), 3 stale running.
+
 ### 2026-09-28 — holds released by the user; campaign resumed
 - 7461 (groups 1-16), 7522 (E5), 7523 (E8), 7524 (stage) no longer held; mutator resubmitted as 7673; 7461 throttle 3.
 - 7461 group 0 (Qwen3.6-35B-A3B, cluster 3) was cancelled during the pause and is not in the array any more; it is
