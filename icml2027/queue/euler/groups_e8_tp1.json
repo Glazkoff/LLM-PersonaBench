@@ -7,6 +7,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -17,6 +19,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -27,6 +31,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -37,6 +43,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -47,6 +55,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -57,6 +67,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -67,6 +79,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  },
  {
@@ -77,6 +91,8 @@
   "dtype": "bf16",
   "gpu_util": 0.55,
   "mutator2": "Qwen/Qwen3.5-9B",
+  "mutator_local": "-",
+  "mutator_util": 0.42,
   "split": 2
  }
 ]

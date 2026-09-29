@@ -5,7 +5,7 @@
   "temperature": 0.7,
   "max_tokens": 1200
  },
- "prereg_sha": "",
+ "prereg_sha": "a1155b4ce4894e6654a8b9e64be1d9589b69b74c",
  "cells": [
   {
    "cell_id": "ga__Qwen_Qwen3p6-35B-A3B__c0__s1",

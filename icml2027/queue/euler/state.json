@@ -65,12 +65,30 @@
    "job_id": "7523",
    "groups": 8,
    "grid": "e8"
+  },
+  {
+   "label": "tp1",
+   "job_id": "8195",
+   "groups": 20,
+   "grid": "tier1"
+  },
+  {
+   "label": "tp1",
+   "job_id": "8196",
+   "groups": 20,
+   "grid": "e5"
+  },
+  {
+   "label": "tp1",
+   "job_id": "8197",
+   "groups": 8,
+   "grid": "e8"
   }
  ],
  "counts": {
-  "pending": 722,
-  "completed": 48,
-  "running": 9,
-  "failed_other": 1
+  "pending": 678,
+  "completed": 89,
+  "failed_other": 10,
+  "running": 3
  }
 }
