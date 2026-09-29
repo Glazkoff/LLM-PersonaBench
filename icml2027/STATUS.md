@@ -26,6 +26,8 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 - Released ~03:00, mutator 7909 started ~03:13, all 40 hbs-icml cell tasks held ~03:15. This time the hold is
   selective: 53 other jobs of the account stay pending normally. Pattern (4x, always within ~2 min of the mutator
   starting) suggests an automated agent on the shared account; left untouched, asked the user.
+- The user confirmed the holds are theirs (campaign paused). Mutator 7909 cancelled; babysit resubmits it when the cells
+  are released.
 
 ### 2026-09-29 01:57 MSK — held again after mutator 7906 started
 - 7461_13 (granite cluster 0) started before any mutator, waited 1 h and exited 4 ("no mutator service"); its cells stay
