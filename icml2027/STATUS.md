@@ -22,6 +22,12 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-29 16:25 MSK — user-managed pause continues
+- The user released one task (7461_12, GLM-4.7-Flash cluster 3) at 15:20 and held the resubmitted mutator 8021; 7461_12
+  waited 1 h without a mutator and exited (cells stay pending). Mutator 8021 released by the user and running since 16:20;
+  the other 39 cell tasks stay held.
+- Babysit no longer cancels the mutator while any hbs-icml-cells job exists (the user manages holds deliberately).
+
 ### 2026-09-29 03:15 MSK — cells held a fourth time right after the mutator started
 - Released ~03:00, mutator 7909 started ~03:13, all 40 hbs-icml cell tasks held ~03:15. This time the hold is
   selective: 53 other jobs of the account stay pending normally. Pattern (4x, always within ~2 min of the mutator
