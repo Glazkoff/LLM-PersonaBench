@@ -21,7 +21,8 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
   # held arrays (the user pauses the queue with scontrol hold) do not count: they must not keep the mutator alive
   local NCELLS; NCELLS=$(run "squeue -h -u $U -n hbs-icml-cells -o '%i %r'" | grep -vc JobHeldUser)
   local MUT; MUT=$(run "squeue -h -u $U -n hbs-icml-mutator -o %i" | head -1)
-  if [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
+  # cell jobs serve the mutator themselves (queue.py mutator_local); the shared service only with ICML_SHARED_MUTATOR=1
+  if [ "${ICML_SHARED_MUTATOR:-0}" = 1 ] && [ "$NCELLS" != "0" ] && [ -z "$MUT" ]; then
     run "rm -f icml2027/queue/mutator.json; sbatch --parsable $SD/mutator.sbatch" >/dev/null && OUT="$OUT | $NAME: resubmitted mutator"
   elif [ -n "$MUT" ] && [ "$(run "squeue -h -u $U -n hbs-icml-cells -o %i" | wc -l | tr -d ' ')" = "0" ] \
        && ! run "squeue -h -j $MUT -o %r" | grep -q JobHeldUser; then
@@ -60,6 +61,11 @@ site() {  # name hosts remote_root python slurm_dir grid extra_sbatch_env
           | grep -o "submitted [0-9]*" | awk '{print $2}' | tail -1)
       [ -n "$J" ] && { PREV=$J; OUT="$OUT | $NAME: resubmitted $(basename $G .yaml) as $J"; }
     done
+    # the stage job (headline seeds -> transfers -> analysis) has not run yet while grid_headline.yaml is absent
+    if [ -n "$PREV" ] && [ "$NAME" = euler ] && ! run "test -f icml2027/configs/grid_headline.yaml"; then
+      local ST; ST=$(run "sbatch --parsable --dependency=afterany:$PREV $SD/stage.sbatch")
+      [ -n "$ST" ] && OUT="$OUT | $NAME: stage resubmitted as $ST"
+    fi
   fi
   for sub in cells crossmodel crosscluster; do
     rsync -az -e "ssh -o ConnectTimeout=25" --include='*/' --include='*.json' --include='*.jsonl' --include='*.csv' \

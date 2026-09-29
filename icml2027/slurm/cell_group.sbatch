@@ -19,25 +19,51 @@ cd $R
 PY=/home/glazkov/personality-twins-arr/vllmenv/bin/python
 LOGDIR=/home/glazkov/personality-twins-arr/logs
 : "${GROUPS:?}" "${MANIFEST:?}"
-read MODEL SLUG CLUSTER TP DTYPE UTIL SPLIT MUT2 < <($PY -c "
+read MODEL SLUG CLUSTER TP DTYPE UTIL SPLIT MUT2 MUTLOC MUTU < <($PY -c "
 import json,sys; g=json.load(open('$GROUPS'))[int('$SLURM_ARRAY_TASK_ID')]
-print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'], g.get('split', 1), g.get('mutator2') or '-')")
+print(g['hf_id'], g['slug'], g['cluster'], g['tp'], g['dtype'], g['gpu_util'], g.get('split', 1), g.get('mutator2') or '-',
+      g.get('mutator_local') or '-', g.get('mutator_util', 0.42))")
 PORT=$((8100 + SLURM_ARRAY_TASK_ID % 600))
 export GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)
 echo "=== $MODEL ($SLUG) cluster=$CLUSTER TP=$TP port=$PORT node=$(hostname) gpu=$GPU_NAME ==="
 
-for i in $(seq 1 360); do [ -f icml2027/queue/mutator.json ] && break; sleep 10; done
-[ -f icml2027/queue/mutator.json ] || { echo "FATAL: no mutator service"; exit 4; }
-export MUTATOR_BASE_URL=$($PY -c "import json;print(json.load(open('icml2027/queue/mutator.json'))['url'])")
-curl -sf "$MUTATOR_BASE_URL/models" >/dev/null || { echo "FATAL: mutator not answering at $MUTATOR_BASE_URL"; exit 4; }
+PIDS_SRV=""
+trap 'kill $PIDS_SRV 2>/dev/null || true' EXIT
+MAXLEN=4096
+case "$MUTLOC" in
+  colocate)
+    # the default mutator (same model, bf16, same launch flags as slurm/mutator.sbatch) served on this GPU first, so
+    # the evaluated server sizes its KV cache from what is left
+    MUT_ID=$($PY -c "import yaml;print(yaml.safe_load(open('icml2027/configs/models.yaml'))['mutator']['hf_id'])")
+    MPORT0=$((PORT + 300))
+    $PY -m vllm.entrypoints.openai.api_server --model "$MUT_ID" --port "$MPORT0" --host 127.0.0.1 --trust-remote-code \
+      --max-model-len 16384 --gpu-memory-utilization "$MUTU" --enable-prefix-caching --max-num-seqs 64 \
+      > "$LOGDIR/vllm_icml_mut_${SLURM_JOB_ID}.log" 2>&1 &
+    MPID=$!; PIDS_SRV="$PIDS_SRV $MPID"
+    UP=0
+    for i in $(seq 1 180); do
+      curl -sf "http://127.0.0.1:$MPORT0/v1/models" >/dev/null 2>&1 && { UP=1; break; }
+      kill -0 $MPID 2>/dev/null || { echo "FATAL: local mutator exited"; tail -30 "$LOGDIR/vllm_icml_mut_${SLURM_JOB_ID}.log"; exit 3; }
+      sleep 10
+    done
+    [ "$UP" = 1 ] || { echo "FATAL: local mutator never came up"; exit 3; }
+    export MUTATOR_BASE_URL="http://127.0.0.1:$MPORT0/v1"
+    echo "local mutator $MUT_ID up on $MPORT0 (util $MUTU)";;
+  self)
+    MAXLEN=16384;;  # the evaluated model is the mutator: its own server answers both, with the mutator's context
+  *)
+    for i in $(seq 1 360); do [ -f icml2027/queue/mutator.json ] && break; sleep 10; done
+    [ -f icml2027/queue/mutator.json ] || { echo "FATAL: no mutator service"; exit 4; }
+    export MUTATOR_BASE_URL=$($PY -c "import json;print(json.load(open('icml2027/queue/mutator.json'))['url'])")
+    curl -sf "$MUTATOR_BASE_URL/models" >/dev/null || { echo "FATAL: mutator not answering at $MUTATOR_BASE_URL"; exit 4; };;
+esac
 
 EXTRA=()
 [ "$DTYPE" = "fp8" ] && EXTRA+=(--quantization fp8)
 $PY -m vllm.entrypoints.openai.api_server --model "$MODEL" --port "$PORT" --host 127.0.0.1 --trust-remote-code \
-  --tensor-parallel-size "$TP" --max-model-len 4096 --gpu-memory-utilization "$UTIL" --enable-prefix-caching \
+  --tensor-parallel-size "$TP" --max-model-len "$MAXLEN" --gpu-memory-utilization "$UTIL" --enable-prefix-caching \
   --max-logprobs 20 --max-num-seqs 1024 --max-num-batched-tokens 65536 "${EXTRA[@]}" > "$LOGDIR/vllm_icml_${SLURM_JOB_ID}.log" 2>&1 &
-VPID=$!
-trap 'kill $VPID 2>/dev/null || true' EXIT
+VPID=$!; PIDS_SRV="$PIDS_SRV $VPID"
 UP=0
 for i in $(seq 1 180); do
   curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1 && { echo "server up after $((i*10))s"; UP=1; break; }
@@ -46,13 +72,14 @@ for i in $(seq 1 180); do
 done
 [ "$UP" = 1 ] || { echo "FATAL: server never came up"; exit 3; }
 export LOCAL_LLM_BASE_URL="http://127.0.0.1:$PORT/v1"
+[ "$MUTLOC" = self ] && export MUTATOR_BASE_URL="$LOCAL_LLM_BASE_URL" && echo "mutator = evaluated server"
 if [ "$MUT2" != "-" ]; then
   # E8: a second mutator model served on the same GPU (the evaluated server was started at UTIL=0.55)
   MPORT=$((PORT + 700))
   $PY -m vllm.entrypoints.openai.api_server --model "$MUT2" --port "$MPORT" --host 127.0.0.1 --trust-remote-code \
     --max-model-len 16384 --gpu-memory-utilization 0.30 --enable-prefix-caching --max-num-seqs 64 \
     > "$LOGDIR/vllm_icml_mut2_${SLURM_JOB_ID}.log" 2>&1 &
-  M2PID=$!; trap 'kill $VPID $M2PID 2>/dev/null || true' EXIT
+  M2PID=$!; PIDS_SRV="$PIDS_SRV $M2PID"
   for i in $(seq 1 180); do curl -sf "http://127.0.0.1:$MPORT/v1/models" >/dev/null 2>&1 && break
     kill -0 $M2PID 2>/dev/null || { echo "FATAL: mutator2 exited"; tail -20 "$LOGDIR/vllm_icml_mut2_${SLURM_JOB_ID}.log"; exit 3; }; sleep 10; done
   export MUTATOR2_BASE_URL="http://127.0.0.1:$MPORT/v1"

@@ -112,10 +112,33 @@ def submit(grid_yaml, max_concurrent, dry, after=None, reset_running=False):
             ms = {x["mutator"] for x in man["cells"] if (x["model_slug"], x["cluster"]) == k}
             ms -= {man["mutator"]["hf_id"], "self"}
             return sorted(ms)[0] if ms else ""
+        default_mut = man["mutator"]["hf_id"]
+        shared = os.environ.get("ICML_SHARED_MUTATOR", "0") == "1"
+
+        def mut_local(k, c):
+            """How a group gets the default mutator. The GPU broker on Euler gives a project a fair share of GPUs, so
+            a separate mutator job can take the whole share; by default each cell job serves the mutator itself:
+            'self' = the evaluated model is the mutator (one server), 'colocate' = a second vLLM server on the same
+            GPU, '' = no cell of the group uses the default mutator (E8) or ICML_SHARED_MUTATOR=1."""
+            if shared or not any(x["mutator"] == default_mut for x in man["cells"]
+                                 if (x["model_slug"], x["cluster"]) == k):
+                return ""
+            return "self" if c["hf_id"] == default_mut else "colocate"
+
+        def util(k, c):
+            ml = mut_local(k, c)
+            if mut2(k):
+                return 0.55
+            if ml == "colocate":  # weights (GiB): Qwen3.6 67, GLM 59, granite 55, gemma 23; mutator 52 at 0.42
+                return 0.54 if "Qwen3p6" in k[0] else (0.45 if "gemma" in k[0] else 0.52)
+            return c["gpu_memory_utilization"]
+
         gfile.write_text(json.dumps([{"hf_id": c["hf_id"], "slug": k[0], "cluster": k[1], "tp": c["tp"],
                                       "dtype": c["dtype"],
-                                      "gpu_util": 0.55 if mut2(k) else c["gpu_memory_utilization"],
+                                      "gpu_util": util(k, c),
                                       "mutator2": mut2(k),
+                                      "mutator_local": mut_local(k, c) or "-",
+                                      "mutator_util": 0.42,
                                       "split": 1 if "Qwen3p6" in k[0] else 2} for k, c in gl],
                                     indent=1))
         gpus = max(int(c["tp"]) for _, c in gl)

@@ -100,3 +100,10 @@ sensitivity study. These are reported as exploratory.
 - A "human" row (one random same-cluster respondent used as a point forecast) is reported for continuity with the
   audit but is not a ceiling under a probabilistic score; the reference for probabilistic simulators is the
   cluster prior (m* = 0) and the conditional decoder curve.
+
+### A2 — 2026-09-29, after 89 Tier-1 cells (mutator placement)
+- A fair-share GPU broker on Euler gives this project one GPU at a time, which a separate mutator job would occupy.
+  From now on every cell job serves the default mutator itself: the same model (Qwen3.8-27B), bf16, same launch flags
+  and sampling, on the cell's own GPU (a second vLLM server at 0.42 memory), or, for Qwen3.8-27B cells, the evaluated
+  server itself. The mutator's weights, prompts and sampling are unchanged; only its placement differs. The 89 cells
+  already completed used the shared service. `run_meta.json` records the job id, so the two placements can be compared.

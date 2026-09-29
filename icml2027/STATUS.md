@@ -22,6 +22,17 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-09-29 22:30 MSK — root cause of the holds: GPU broker; mutator moved into the cell jobs
+- The holds come from the account's fair-share GPU broker (`~/mage-campaign/repo/campaign/scripts/gpu_broker.py --mode
+  queue --apply`, tmux `gpu-broker`, every 120 s): quotas by jobs in queue, hbs = 1 GPU (carl 6, mage 1). The shared
+  mutator used that GPU, so every cell was held.
+- With the user's choice, every cell job now serves the mutator itself (queue.py `mutator_local`: `colocate` = second
+  vLLM server on the same GPU at 0.42, evaluated model at 0.45-0.54; `self` for Qwen3.8-27B; E8 unchanged).
+  Pre-registration amendment A2. Babysit no longer starts a shared mutator (ICML_SHARED_MUTATOR=1 restores it) and its
+  retry pass also resubmits the stage job while no headline grid exists.
+- The queued arrays 7461/7522/7523, stage 7524 and idle mutator 8021 still carry the old job script (Slurm copies it at
+  submission) and must be cancelled by the user; babysit then resubmits the whole chain with the new script.
+
 ### 2026-09-29 16:25 MSK — user-managed pause continues
 - The user released one task (7461_12, GLM-4.7-Flash cluster 3) at 15:20 and held the resubmitted mutator 8021; 7461_12
   waited 1 h without a mutator and exited (cells stay pending). Mutator 8021 released by the user and running since 16:20;
