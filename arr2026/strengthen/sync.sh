@@ -47,6 +47,9 @@ case "$target" in
   euler-preflight)
     (cd "$SRC" && rsync -avzR --no-perms --no-owner --no-group "${EXTRA[@]}" \
       ./src/optim/checks.py ./icml2027/slurm/preflight.sbatch ./tests/optim/test_checks.py "$EULER") ;;
-  *) echo "usage: $0 [euler|hse|both|euler-preflight]" >&2; exit 2 ;;
+  euler-glm-smoke)
+    (cd "$SRC" && rsync -avzR --no-perms --no-owner --no-group "${EXTRA[@]}" \
+      ./icml2027/scripts/smoke_mutator.py ./icml2027/slurm/colocate_glm_smoke.sbatch "$EULER") ;;
+  *) echo "usage: $0 [euler|hse|both|euler-preflight|euler-glm-smoke]" >&2; exit 2 ;;
 esac
 echo "sync ok: $target"

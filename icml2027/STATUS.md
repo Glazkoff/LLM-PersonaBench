@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-10-01 13:32 MSK — bounded GLM serving diagnostic queued
+- The active Euler wave advanced to 219 completed cells; 96 GLM cells still show `failed_oom`, and three array tasks are running. All eight GPUs were occupied. The broker held most pending `hbs-icml` tasks, so no existing hold or job was changed.
+- Submitted **8311**, a 45-minute, one-H200 `hbs-icml-smoke` Slurm job, PENDING (Priority) at this entry. It leaves the scientific result tree untouched. It runs the same GLM and default mutator together, tests GLM GPU utilization 0.45 with mutator 0.42, caps batching at 256 sequences and 16,384 tokens, and sends parallel non-evaluation readouts plus bounded mutator requests. Only a clean completion and OOM-free logs license a single-cell retry; queued status is not a pass.
+- The smoke uses a targeted code sync containing only its two scripts. No live manifest or results file was overwritten. The earlier local fix is in commit `682491c`; publishing it remains subject to the pending user approval after automatic review rejected the push.
+
 ### 2026-10-01 12:55 MSK — live Euler audit and Gate G0 repair
 - Live `queue.py status`: 215 completed, 438 pending, 21 marked running, 96 `failed_oom`, 10 `failed_other`. Three `hbs-icml-cells` array tasks were actually RUNNING; other queued tasks were mostly held by the shared GPU broker. No holds were released and no live arrays were cancelled.
 - The 96 GLM failures are server losses: per-cell logs show `APIConnectionError`, and the colocated GLM vLLM log shows GPU allocations of about 11 GB failing with only 2–7 GB free. Qwen array task `8195_0` also failed server startup after its colocated mutator came up. These cells need a measured serving-memory/concurrency smoke before a retry; scientific outcomes are not inferred from them.
