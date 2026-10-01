@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=hbs-icml-preflight
 #SBATCH --partition=infer
-#SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=120G
-#SBATCH --time=03:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=00:30:00
 #SBATCH --output=/home/glazkov/personality-twins-arr/logs/icml_preflight_%j.out
 #SBATCH --error=/home/glazkov/personality-twins-arr/logs/icml_preflight_%j.err
-# Gate G0 on Euler: unit tests, orientation regression, and the readout guard per Tier-1 model.
+# Gate G0 on Euler: unit tests, orientation regression, and validation of saved
+# per-model GPU readout probe receipts. This job is CPU-only.
 # usage: sbatch icml2027/slurm/preflight.sbatch [tier]
 set -uo pipefail
 export PATH=/home/glazkov/personality-twins-arr/vllmenv/bin:$PATH
@@ -25,10 +25,10 @@ echo "########## orientation regression on evoprompt_iter2 artefacts ##########"
 "$PY" -m src.optim.checks orientation_regression --min-corr 0.60 2>&1 | tail -5
 rc_orient=${PIPESTATUS[0]}
 
-echo "########## readout guard, tier $TIER ##########"
-# For each model: start vLLM, read 8 respondents x 20 items, report mean mass on scale, stop.
+echo "########## saved readout probe receipts, tier $TIER ##########"
+# Probe inference was already run inside finite GPU Slurm jobs. Validate its receipts here.
 "$PY" -m src.optim.checks readout_guard --models-yaml icml2027/configs/models.yaml --tier "$TIER" \
-  --n-respondents 8 --n-items 20 --out icml2027/results/aggregates/preflight_readout.json 2>&1 | tail -30
+  --out icml2027/results/aggregates/preflight_readout.json 2>&1 | tail -30
 rc_guard=${PIPESTATUS[0]}
 
 echo "PREFLIGHT tests=$rc_tests orientation=$rc_orient guard=$rc_guard"

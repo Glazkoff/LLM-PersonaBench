@@ -7,7 +7,7 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 | Gate | Criterion | Status | Evidence |
 |---|---|---|---|
-| G0 P0 done | `pytest tests/optim` green; orientation regression test passes on the `evoprompt_iter2` artefacts (per-item mean correlation 0.09 → ≥ 0.60); preflight sbatch passes on Euler | open | — |
+| G0 P0 done | `pytest tests/optim` green; orientation regression test passes on the `evoprompt_iter2` artefacts (per-item mean correlation 0.09 → ≥ 0.60); preflight sbatch passes on Euler | passed | Euler job 8309 COMPLETED 0:0: 28 tests, 0.092 → 0.633, five Tier-1 probe receipts validated |
 | G0b Pre-registration frozen | `PREREGISTRATION.md` committed with hash + OSF link | open | — |
 | G1 Pilot | On Qwen3.6-35B-A3B × cluster 0, GA and GEPA improve RPS_cal over the base persona with paired-bootstrap CI excluding 0 on the frozen panel, and `m*_interp` rises | passed | GA 3/3 seeds CI<0, GEPA CI<0; m* rises (+3.5 GA, +1.9 GEPA mean over completed cells); see RESULTS_BRIEF.md |
 | G2 Tier-1 complete | ≥ 80% of Tier-1 cells `completed` with 3 seeds; E6 transfers computed | open | — |
@@ -21,6 +21,12 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 | pause 2026-09-28 | 780 cells (tier1+e5+e8) | 89 | 0 | 0 | 0 | 10 failed_other (cache KeyError, fixed; retry on resume) |
 
 ## Journal
+
+### 2026-10-01 12:55 MSK — live Euler audit and Gate G0 repair
+- Live `queue.py status`: 215 completed, 438 pending, 21 marked running, 96 `failed_oom`, 10 `failed_other`. Three `hbs-icml-cells` array tasks were actually RUNNING; other queued tasks were mostly held by the shared GPU broker. No holds were released and no live arrays were cancelled.
+- The 96 GLM failures are server losses: per-cell logs show `APIConnectionError`, and the colocated GLM vLLM log shows GPU allocations of about 11 GB failing with only 2–7 GB free. Qwen array task `8195_0` also failed server startup after its colocated mutator came up. These cells need a measured serving-memory/concurrency smoke before a retry; scientific outcomes are not inferred from them.
+- Gate G0 was still open and its preflight script called a nonexistent `readout_guard` command. Added a CPU-only validator for the saved per-model Slurm GPU probe receipts; all five current Tier-1 receipts pass the mass threshold. The preflight now runs tests and orientation regression plus this receipt check in a finite CPU allocation. Local tests passed (28/28). Euler job **8309** completed 0:0 in 6 seconds: 28 tests passed, orientation correlation 0.092 → 0.633, and five Tier-1 receipts validated. This validates the saved GPU probes; it is not a new inference run.
+- The code sync script's dry run would have copied the Mac `.venv` and could have overwritten `icml2027/results/` and live queue files. Those paths are now excluded. A new targeted `euler-preflight` mode copied only the validator, preflight script, and its test; the live result trees were untouched.
 
 ### 2026-09-29 22:30 MSK — root cause of the holds: GPU broker; mutator moved into the cell jobs
 - The holds come from the account's fair-share GPU broker (`~/mage-campaign/repo/campaign/scripts/gpu_broker.py --mode

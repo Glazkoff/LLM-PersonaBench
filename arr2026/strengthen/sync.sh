@@ -14,6 +14,8 @@ HSE="hse:/home/lsavchenko/personality-arr/LLM-PersonaBench/"
 COMMON=(
   -avz --no-perms --no-owner --no-group
   --exclude '.git/'
+  --exclude '.venv/' --exclude '.pytest_cache/' --exclude '.aris/'
+  --exclude '.env' --exclude '.env.*'
   --exclude 'arr2026/results_euler/'
   --exclude 'arr2026/results_hse/'
   # arr2026/results/ was NOT excluded until a design-workflow audit caught it.
@@ -23,6 +25,10 @@ COMMON=(
   # that prefix over Euler's intact copy on the next code sync. Results move
   # cluster -> laptop only, and never the other way.
   --exclude 'arr2026/results/'
+  --exclude 'icml2027/results/'      # live experiment receipts; cluster -> laptop only
+  --exclude 'icml2027/queue/'        # active manifests and status; cluster -> laptop only
+  --exclude 'results_experiments/'   # original run artefacts
+  --exclude 'results/'
   --exclude 'data/raw/'                 # 150 MB, already on both
   --exclude 'data/openpsychometrics/'   # already on both
   --exclude '*.pyc' --exclude '__pycache__/'
@@ -30,11 +36,17 @@ COMMON=(
   --exclude '.DS_Store'
 )
 
+EXTRA=(--stats)
+[ "${SYNC_DRY_RUN:-0}" = 1 ] && EXTRA+=(--dry-run)
+
 target="${1:-both}"
 case "$target" in
-  euler) rsync "${COMMON[@]}" "$SRC" "$EULER" ;;
-  hse)   rsync "${COMMON[@]}" "$SRC" "$HSE" ;;
-  both)  rsync "${COMMON[@]}" "$SRC" "$EULER"; rsync "${COMMON[@]}" "$SRC" "$HSE" ;;
-  *) echo "usage: $0 [euler|hse|both]" >&2; exit 2 ;;
+  euler) rsync "${COMMON[@]}" "${EXTRA[@]}" "$SRC" "$EULER" ;;
+  hse)   rsync "${COMMON[@]}" "${EXTRA[@]}" "$SRC" "$HSE" ;;
+  both)  rsync "${COMMON[@]}" "${EXTRA[@]}" "$SRC" "$EULER"; rsync "${COMMON[@]}" "${EXTRA[@]}" "$SRC" "$HSE" ;;
+  euler-preflight)
+    (cd "$SRC" && rsync -avzR --no-perms --no-owner --no-group "${EXTRA[@]}" \
+      ./src/optim/checks.py ./icml2027/slurm/preflight.sbatch ./tests/optim/test_checks.py "$EULER") ;;
+  *) echo "usage: $0 [euler|hse|both|euler-preflight]" >&2; exit 2 ;;
 esac
 echo "sync ok: $target"
