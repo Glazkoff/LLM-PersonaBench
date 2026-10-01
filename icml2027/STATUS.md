@@ -22,6 +22,10 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-10-01 14:03 MSK — broker changed to MAGE-only priority
+- The Euler result counter reached 224 completed; three HBS array tasks remain running, while the failed GLM count stays at 96. Smoke job **8311** has not run and is held (`JobHeldUser`); this is not a diagnostic outcome.
+- At 13:59 MSK the shared GPU broker command changed from `--priority mage hbs` to `--priority mage --exclude mage`. Its live log assigns MAGE all eight slots and HBS zero, holding the HBS smoke and pending cell tasks. This is an external scheduling change; no hold, broker setting, or running job was modified by this campaign. User guidance on restoring a shared HBS allocation is pending.
+
 ### 2026-10-01 13:32 MSK — bounded GLM serving diagnostic queued
 - The active Euler wave advanced to 219 completed cells; 96 GLM cells still show `failed_oom`, and three array tasks are running. All eight GPUs were occupied. The broker held most pending `hbs-icml` tasks, so no existing hold or job was changed.
 - Submitted **8311**, a 45-minute, one-H200 `hbs-icml-smoke` Slurm job, PENDING (Priority) at this entry. It leaves the scientific result tree untouched. It runs the same GLM and default mutator together, tests GLM GPU utilization 0.45 with mutator 0.42, caps batching at 256 sequences and 16,384 tokens, and sends parallel non-evaluation readouts plus bounded mutator requests. Only a clean completion and OOM-free logs license a single-cell retry; queued status is not a pass.
