@@ -22,6 +22,11 @@ history. Counts come from `python icml2027/scripts/queue.py status`, not from me
 
 ## Journal
 
+### 2026-10-01 22:20 MSK — active HBS work drained; broker still holds the queue
+- The last two live `hbs-icml-cells` tasks, `8195_16` and `8195_11`, completed with Slurm exit `0:0`; their per-cell logs end in `CELLS DONE rc=0`. Euler now reports 266 completed cells, 405 pending, 96 `failed_oom`, 10 `failed_other`, and three cells still labelled `running` in result metadata. There are no physically running HBS jobs.
+- The three `running` labels belong to Qwen3.6 cluster 3 seeds 1–3, all last updated by `7461_0` on 2026-09-27. Slurm records that task as cancelled on 2026-09-28; no active job owns those states. Their later array task `8195_0` failed during model-server startup with `No available memory for the cache blocks` in its per-task vLLM log. These are unfinished engineering cells, not scientific outcomes; no result or status file was deleted or reset.
+- Diagnostic job `8311` remains held (`JobHeldUser`) and has not run. The live broker still assigns MAGE eight GPU slots and HBS zero. Resume of the measured serving smoke and any cell retry depends on restoring an HBS allocation through the shared broker; the campaign has not changed the broker or released any holds.
+
 ### 2026-10-01 14:03 MSK — broker changed to MAGE-only priority
 - The Euler result counter reached 224 completed; three HBS array tasks remain running, while the failed GLM count stays at 96. Smoke job **8311** has not run and is held (`JobHeldUser`); this is not a diagnostic outcome.
 - At 13:59 MSK the shared GPU broker command changed from `--priority mage hbs` to `--priority mage --exclude mage`. Its live log assigns MAGE all eight slots and HBS zero, holding the HBS smoke and pending cell tasks. This is an external scheduling change; no hold, broker setting, or running job was modified by this campaign. User guidance on restoring a shared HBS allocation is pending.
