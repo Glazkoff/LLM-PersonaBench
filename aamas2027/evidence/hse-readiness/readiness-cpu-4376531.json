@@ -1,0 +1,26 @@
+{
+  "scientific_evidence": false,
+  "job": "4376531",
+  "host": "cn-010",
+  "models": {},
+  "packages": {
+    "torch": "2.13.0",
+    "vllm": "0.28.0",
+    "numpy": "2.3.5",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "openai": "3.19.2",
+    "transformers": "5.17.0",
+    "gepa": null,
+    "gigaevo": null
+  },
+  "errors": [
+    "Qwen/Qwen3.6-35B-A3B: FileNotFoundError: [Errno 2] No such file or directory: '/home/lsavchenko/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0/model.safetensors.index.json'",
+    "ibm-granite/granite-4.2-30b: FileNotFoundError: [Errno 2] No such file or directory: '/home/lsavchenko/.cache/huggingface/hub/models--ibm-granite--granite-4.2-30b/snapshots/9e668ce1c538387ef24d3644e9b0606647762636/model.safetensors.index.json'",
+    "Qwen/Qwen3.8-27B: FileNotFoundError: [Errno 2] No such file or directory: '/home/lsavchenko/.cache/huggingface/hub/models--Qwen--Qwen3.8-27B/snapshots/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model.safetensors.index.json'"
+  ],
+  "corpus_sha256": "7572de8b38af378e4740affe50705823efe085b1961e8ad19583d4e1cf1740c7",
+  "check_passed": false,
+  "campaign_ready": false
+}

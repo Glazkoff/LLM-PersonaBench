@@ -1,0 +1,877 @@
+{
+  "status": "PROPOSED_NOT_DISPATCHED",
+  "source_manifest_sha256": "772e1cbb30a4709ab0581a7c8d7a1564a7c5807248d54ab7d2e15f90df1f23c4",
+  "activation_requires": [
+    "HSE CPU and GPU witness",
+    "matched isolated environments",
+    "real-model parity on development-only fixtures",
+    "durable unique cell ownership and cross-site result import",
+    "replace pending Euler dependencies without affecting running cells"
+  ],
+  "profiles": {
+    "hse_2_gpu": {
+      "gpu_count": {
+        "euler": 4,
+        "hse": 2
+      },
+      "counts": {
+        "euler": 56,
+        "hse": 28
+      },
+      "assignment": [
+        {
+          "index": 0,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 1,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 2,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 3,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 4,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 5,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 6,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 7,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 8,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 9,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 10,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 11,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 12,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 13,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 14,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 15,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 16,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 17,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 18,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 19,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 20,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 21,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 22,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 23,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 24,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 25,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 26,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 27,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 28,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 29,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 30,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 31,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 32,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 33,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 34,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 35,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 36,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 37,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 38,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 39,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 40,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 41,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 42,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 43,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 44,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 45,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 46,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 47,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 48,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 49,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 50,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 51,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 52,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 53,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 54,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 55,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s1",
+          "site": "euler"
+        },
+        {
+          "index": 56,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 57,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 58,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 59,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 60,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 61,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 62,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 63,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 64,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 65,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 66,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 67,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 68,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 69,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s2",
+          "site": "hse"
+        },
+        {
+          "index": 70,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 71,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 72,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 73,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 74,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 75,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 76,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 77,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 78,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 79,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 80,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 81,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 82,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        },
+        {
+          "index": 83,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s3",
+          "site": "euler"
+        }
+      ]
+    },
+    "hse_4_gpu": {
+      "gpu_count": {
+        "euler": 4,
+        "hse": 4
+      },
+      "counts": {
+        "euler": 42,
+        "hse": 42
+      },
+      "assignment": [
+        {
+          "index": 0,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 1,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 2,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 3,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 4,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 5,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 6,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 7,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 8,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 9,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 10,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 11,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 12,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 13,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+          "site": "euler"
+        },
+        {
+          "index": 14,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 15,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 16,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 17,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 18,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 19,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 20,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 21,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 22,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 23,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 24,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 25,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 26,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 27,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+          "site": "hse"
+        },
+        {
+          "index": 28,
+          "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 29,
+          "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 30,
+          "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 31,
+          "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 32,
+          "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 33,
+          "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 34,
+          "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 35,
+          "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 36,
+          "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 37,
+          "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 38,
+          "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 39,
+          "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 40,
+          "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 41,
+          "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+          "site": "euler"
+        },
+        {
+          "index": 42,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 43,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 44,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 45,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 46,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 47,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 48,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 49,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 50,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 51,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 52,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 53,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 54,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 55,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s1",
+          "site": "hse"
+        },
+        {
+          "index": 56,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 57,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 58,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 59,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 60,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 61,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 62,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 63,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 64,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 65,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 66,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 67,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 68,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 69,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s2",
+          "site": "euler"
+        },
+        {
+          "index": 70,
+          "cell_id": "ga__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 71,
+          "cell_id": "de__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 72,
+          "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 73,
+          "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 74,
+          "cell_id": "gepa__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 75,
+          "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 76,
+          "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 77,
+          "cell_id": "opro__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 78,
+          "cell_id": "protegi__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 79,
+          "cell_id": "random__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 80,
+          "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 81,
+          "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 82,
+          "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        },
+        {
+          "index": 83,
+          "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s3",
+          "site": "hse"
+        }
+      ]
+    }
+  }
+}
