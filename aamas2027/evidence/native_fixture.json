@@ -1,0 +1,22 @@
+{
+ "scientific_evidence": false,
+ "label": "synthetic integration fixture",
+ "native_mutator_requests": 8,
+ "budget": {
+  "budget_B": 3,
+  "full_panel_forecasts": 12,
+  "executed_forecasts": 36,
+  "full_panel_equivalents": 3.0,
+  "candidate_evaluations": 3,
+  "candidate_evaluations_exact": 3.0,
+  "forward_passes": 36,
+  "evaluator_calls": 3,
+  "proposal_attempts": 3,
+  "invalid_proposals": 0,
+  "mutator_calls": 8,
+  "hypermutation_calls": 0,
+  "prompt_tokens": 1160,
+  "generated_tokens": 1600,
+  "gepa_total_metric_calls": null
+ }
+}

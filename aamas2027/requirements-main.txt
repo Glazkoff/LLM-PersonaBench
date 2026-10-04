@@ -1,0 +1,9 @@
+gepa==0.1.4
+pytest==8.4.2
+numpy==2.3.5
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.7.2
+openai==3.8.0
+transformers==5.16.1
+PyYAML==6.0.3

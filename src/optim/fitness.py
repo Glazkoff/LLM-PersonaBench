@@ -26,6 +26,8 @@ class FitnessResult:
 
 class Fitness:
     def __init__(self, panels, readout, alphas, rng, objective="rps_cal"):
+        if objective not in ("rps_cal", "rps_raw", "s0"):
+            raise ValueError(f"unknown fitness objective: {objective}")
         self.readout, self.alphas, self.rng, self.objective = readout, list(alphas), rng, objective
         inp, self.tgt = ITEM_SPLIT
         self.F0 = S.pop_cdf(answers(panels.train, self.tgt))
@@ -33,6 +35,8 @@ class Fitness:
         self.scores = [persona_scores(x) for x in answers(panels.opt, inp)]
         self.human_between_var = float(np.nanvar(self.Y, axis=0).mean())
         self.n_opt = len(self.Y)
+        perm = self.rng.permutation(self.n_opt)
+        self.folds = (perm[: self.n_opt // 2], perm[self.n_opt // 2:])
         self.forward_passes_per_candidate = self.n_opt * len(self.tgt)
         self.last_prompt_tokens = 0
         self._cache = {}
@@ -45,24 +49,23 @@ class Fitness:
         self.last_prompt_tokens = tok
         return flip_simplex(P, self.tgt), M
 
-    def _result(self, P, M, Y, t0):
-        cal, alphas = S.crossfit_rps_cal(S.cdf(P), self.F0, Y, self.alphas, self.rng)
-        raw = float(np.nanmean(S.rps(P, Y)))
-        s0v = float(np.nanmean(S.s0(P, Y)))
-        primary = s0v if self.objective == "s0" else cal
+    def _result(self, P, M, Y, t0, folds):
+        cal, alphas, cells = S.crossfit_rps_cal(S.cdf(P), self.F0, Y, self.alphas, self.rng,
+                                                folds=folds, return_cells=True)
+        raw_cells, s0_cells = S.rps(P, Y), S.s0(P, Y)
+        raw = float(np.nanmean(S.per_respondent(raw_cells)))
+        s0v = float(np.nanmean(S.per_respondent(s0_cells)))
+        primary = {"rps_cal": cal, "rps_raw": raw, "s0": s0v}[self.objective]
+        per = S.per_respondent({"rps_cal": cells, "rps_raw": raw_cells, "s0": s0_cells}[self.objective])
         return FitnessResult(float(primary), raw, s0v, float(M.mean()), self.last_prompt_tokens,
-                             time.perf_counter() - t0, tuple(alphas), float(cal)), cal
+                             time.perf_counter() - t0, tuple(alphas), float(cal)), cal, per
 
     def evaluate(self, g) -> FitnessResult:
         t0 = time.perf_counter()
         P, M = self._beliefs(g, range(self.n_opt))
-        res, cal = self._result(P, M, self.Y, t0)
+        res, cal, per = self._result(P, M, self.Y, t0, self.folds)
         key = to_json(g)
         self._last_key = key
-        a = float(np.mean(res.alphas))
-        per = S.per_respondent(S.cal_cells(S.cdf(P), self.F0, self.Y, a))
-        if self.objective == "s0":
-            per = S.per_respondent(S.s0(P, self.Y))
         self._put(key, {"P": P, "per": per, "cal": cal})
         self._summ[key] = self._summary(P, self.Y, per)
         return res
@@ -84,11 +87,21 @@ class Fitness:
     def evaluate_subset(self, g, idx) -> FitnessResult:
         t0 = time.perf_counter()
         idx = np.asarray(idx)
+        if (idx.ndim != 1 or len(idx) < 2 or not np.issubdtype(idx.dtype, np.integer)
+                or len(np.unique(idx)) != len(idx) or np.any(idx < 0) or np.any(idx >= self.n_opt)):
+            raise ValueError("subset must contain at least two unique in-range integer respondent indices")
         P, M = self._beliefs(g, idx)
         key = to_json(g)
         self._put("sub:" + key, {"P": P, "idx": idx})
         self._summ["sub:" + key] = self._summary(P, self.Y[idx])
-        return self._result(P, M, self.Y[idx], t0)[0]
+        # Restrict the persistent panel split to this subset. If all its people
+        # are in one half, split by their fixed panel order instead.
+        A = np.flatnonzero(np.isin(idx, self.folds[0]))
+        B = np.flatnonzero(np.isin(idx, self.folds[1]))
+        if not len(A) or not len(B):
+            order = np.argsort(idx)
+            A, B = order[::2], order[1::2]
+        return self._result(P, M, self.Y[idx], t0, (A, B))[0]
 
     def per_respondent_scores(self, g):
         return self._summ[to_json(g)]["per"]

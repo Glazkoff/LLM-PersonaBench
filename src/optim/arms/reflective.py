@@ -71,7 +71,7 @@ class GEPA(Arm):
         sid, _ = self._eval(seed, 0, [], "init")
         pool = {sid: (seed, self.fitness.per_respondent_scores(seed))}
         rnd = 1
-        while self.ledger.remaining_fraction() >= 2 * frac + 1:
+        while self._remaining() and self.ledger.remaining_fraction() >= 2 * frac + 1:
             front, wts = pareto_front({k: v[1] for k, v in pool.items()})
             p = np.array([wts[k] for k in front], float)
             pid = front[self.rng.choice(len(front), p=p / p.sum())]
@@ -94,10 +94,7 @@ class GEPA(Arm):
                     keep = set(pareto_front({k: v[1] for k, v in pool.items()})[0]) | {self.best_candidate_id}
                     pool = {k: v for k, v in pool.items() if k in keep}
             rnd += 1
-        # spend the remainder on full evaluations of mutations of the best, so every arm exhausts B
+        # Full evaluations may use any whole remaining equivalent; partial residue remains unspent.
         while self._remaining() > 0 and self.ledger.remaining_fraction() >= 1:
             self._mutate(self.best_genotype, rnd, [self.best_candidate_id], op="gepa_fill_mutation")
-        rest = self.ledger.remaining_fraction()
-        if rest > 1e-9:
-            self.ledger.charge_fraction(rest)
         return self.best_genotype

@@ -1,0 +1,1821 @@
+{
+ "schema": "hbs-aamas-global-v2",
+ "cohort": "IPIP120-global-complete-case",
+ "split_seed": 20261004,
+ "panel_sizes": {
+  "train": 8000,
+  "opt": 80,
+  "select": 120,
+  "cal": 120,
+  "eval": 600
+ },
+ "scorer": "v2",
+ "alphas": [
+  0,
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.8,
+  0.9,
+  1,
+  1.2,
+  1.4,
+  1.6,
+  1.8,
+  2
+ ],
+ "primary_objective": "rps_raw",
+ "primary_final_metric": "rps_cal",
+ "primary_method": "mapelites",
+ "comparator_selection": "lowest mean selection RPS across seeds per model, excluding primary and objective ablations",
+ "selection_candidates": 5,
+ "mutator": "Qwen/Qwen3.8-27B",
+ "prefill": "My answer is ",
+ "seeds": [
+  1,
+  2,
+  3
+ ],
+ "cells": [
+  {
+   "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s1",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 1,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s2",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 2,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__Qwen_Qwen3.6-35B-A3B__s3",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "Qwen/Qwen3.6-35B-A3B",
+   "seed": 3,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga__ibm-granite_granite-4.2-30b__s1",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__ibm-granite_granite-4.2-30b__s1",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s1",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s1",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__ibm-granite_granite-4.2-30b__s1",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s1",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s1",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__ibm-granite_granite-4.2-30b__s1",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__ibm-granite_granite-4.2-30b__s1",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__ibm-granite_granite-4.2-30b__s1",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s1",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s1",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s1",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s1",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 1,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga__ibm-granite_granite-4.2-30b__s2",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__ibm-granite_granite-4.2-30b__s2",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s2",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s2",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__ibm-granite_granite-4.2-30b__s2",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s2",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s2",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__ibm-granite_granite-4.2-30b__s2",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__ibm-granite_granite-4.2-30b__s2",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__ibm-granite_granite-4.2-30b__s2",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s2",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s2",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s2",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s2",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 2,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga__ibm-granite_granite-4.2-30b__s3",
+   "arm": "ga",
+   "arm_label": "ga",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "de__ibm-granite_granite-4.2-30b__s3",
+   "arm": "de",
+   "arm_label": "de",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "de",
+    "description": "EvoPrompt differential evolution; the LLM applies the (a - b) difference to c, then crossover with the current member",
+    "population_size": 8,
+    "generations": 10,
+    "crossover_rate": 0.8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "promptbreeder__ibm-granite_granite-4.2-30b__s3",
+   "arm": "promptbreeder",
+   "arm_label": "promptbreeder",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "promptbreeder",
+    "description": "Self-referential co-evolution of task prompts and mutation prompts (Fernando et al.)",
+    "population_size": 8,
+    "generations": 10,
+    "mutation_prompt_pool": 8,
+    "hyper_mutation_rate": 0.25,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites__ibm-granite_granite-4.2-30b__s3",
+   "arm": "mapelites",
+   "arm_label": "mapelites",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa__ibm-granite_granite-4.2-30b__s3",
+   "arm": "gepa",
+   "arm_label": "gepa",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "gepa",
+    "description": "Reflective prompt evolution with a Pareto candidate pool (Agrawal et al., ICLR 2026). Feedback text = worst target items and error direction on a minibatch.",
+    "minibatch_respondents": 8,
+    "pareto_pool_max": 12,
+    "reflection_items_shown": 10,
+    "evaluations": 80,
+    "library": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gepa_official__ibm-granite_granite-4.2-30b__s3",
+   "arm": "gepa_official",
+   "arm_label": "gepa_official",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "reflection_minibatch_size": 8,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "gigaevo_native__ibm-granite_granite-4.2-30b__s3",
+   "arm": "gigaevo_native",
+   "arm_label": "gigaevo_native",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "max_mutants": 160,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "opro__ibm-granite_granite-4.2-30b__s3",
+   "arm": "opro",
+   "arm_label": "opro",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "opro",
+    "description": "LLM-as-optimizer over a scored trajectory (Yang et al.); non-evolutionary rewriting baseline reviewers asked for",
+    "proposals_per_round": 8,
+    "rounds": 10,
+    "history_shown": 12,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "protegi__ibm-granite_granite-4.2-30b__s3",
+   "arm": "protegi",
+   "arm_label": "protegi",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "protegi",
+    "description": "Textual-gradient beam search (Pryzant et al.); the gradient is a natural-language critique of the worst items",
+    "beam": 4,
+    "rounds": 20,
+    "gradients_per_candidate": 2,
+    "edits_per_gradient": 1,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "random__ibm-granite_granite-4.2-30b__s3",
+   "arm": "random",
+   "arm_label": "random",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "random",
+    "description": "budget-matched random search; B independent mutations of the seed genotype, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "bestofb__ibm-granite_granite-4.2-30b__s3",
+   "arm": "bestofb",
+   "arm_label": "bestofb",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_raw",
+   "arm_cfg": {
+    "arm": "bestofb",
+    "description": "selection without evolution; B samples from the initial-population generator, best on the optimisation panel",
+    "samples": 80,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_rps_cal__ibm-granite_granite-4.2-30b__s3",
+   "arm": "ga",
+   "arm_label": "ga_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "ga_s0__ibm-granite_granite-4.2-30b__s3",
+   "arm": "ga",
+   "arm_label": "ga_s0",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "s0",
+   "arm_cfg": {
+    "arm": "ga",
+    "description": "EvoPrompt-style genetic algorithm (the NeurIPS paper's method), JSON genotype, LLM crossover + mutation",
+    "population_size": 8,
+    "generations": 10,
+    "elites": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "crossover_rate": 0.8,
+    "mutation_rate": 0.3,
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  },
+  {
+   "cell_id": "mapelites_rps_cal__ibm-granite_granite-4.2-30b__s3",
+   "arm": "mapelites",
+   "arm_label": "mapelites_rps_cal",
+   "hf_id": "ibm-granite/granite-4.2-30b",
+   "seed": 3,
+   "fitness": "rps_cal",
+   "arm_cfg": {
+    "arm": "mapelites",
+    "description": "GigaEvo-style quality-diversity search (MAP-Elites archive, islands, insight-conditioned mutation)",
+    "islands": 2,
+    "archive_bins": {
+     "prompt_length_chars": [
+      0,
+      1500,
+      2500,
+      4000,
+      100000
+     ],
+     "predicted_sd": [
+      0.0,
+      0.8,
+      1.0,
+      1.2,
+      9.0
+     ]
+    },
+    "init_per_island": 4,
+    "iterations": 72,
+    "migrate_every": 12,
+    "insight_window": 6,
+    "gigaevo_engine": "optional",
+    "max_tokens": 2500,
+    "temperature": 0.7
+   },
+   "budget_B": 80
+  }
+ ],
+ "actual_budget": "80 * N_opt * N_target executed forecasts; invalid proposals do not spend forecast budget",
+ "native_sources": {
+  "gepa": "8b0ce6cd99a234f6b74daf37558a2ac0ce18f975",
+  "gigaevo_internal": "f72ab08c628cc49f4c4c1b6ee48bd11b68d3ce08"
+ },
+ "labels": {
+  "gepa": "GEPA-style local",
+  "mapelites": "MAP-Elites-style local",
+  "gepa_official": "official GEPA v0.1.4",
+  "gigaevo_native": "native GigaEvo internal v2.20.1"
+ },
+ "sha256": "9037e61283d70779e78bd90c36441b41c3efd778d808a86c89a7b6e2d292e5d0"
+}

@@ -109,17 +109,32 @@ class PromptBreeder(GA):
             while len(new) < P and self._remaining() > 0:
                 parent = self._tournament(pop)
                 mp = parent[3]
+                hyper_toks = (0, 0)
                 if self.rng.random() < float(self.cfg.get("hyper_mutation_rate", 0.25)):
+                    hyper_seed = int(self.rng.integers(0, 2**31 - 1))
                     try:
-                        text, _, _ = self.mutator.complete(ops.SYSTEM.split("\n")[0], ops.META_MUTATE.format(mutation_prompt=mp),
-                                                           temperature=0.9, max_tokens=200)
+                        import inspect
+                        kw = {"temperature": 0.9, "max_tokens": 200}
+                        sig = inspect.signature(self.mutator.complete)
+                        if "seed" in sig.parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
+                            kw["seed"] = hyper_seed
+                        text, hp, hg = self.mutator.complete(ops.SYSTEM.split("\n")[0],
+                                                  ops.META_MUTATE.format(mutation_prompt=mp), **kw)
+                        hyper_toks = (hp, hg)
                     except Exception:  # noqa: BLE001
+                        if self.cfg.get('fatal_mutator_errors', False):
+                            raise
                         text = ""
+                    self.ledger.record_proposal(valid=bool(text.strip() and "{" not in text),
+                                                prompt_tokens=hyper_toks[0], generated_tokens=hyper_toks[1],
+                                                hypermutation=True)
                     if text.strip() and "{" not in text:
                         mp = text.strip()[:400]
                         pool.append(mp)
                 child = self._ask(ops.SYSTEM, f"{mp}\n\nPERSONA:\n{self._gjson(parent[2])}", fallback=parent[2])
                 cid, sc = self._eval_asked(child, gen, [parent[0]], "pb_mutation")
+                self.history[-1]["hypermutation_prompt_tokens"] = hyper_toks[0]
+                self.history[-1]["hypermutation_generated_tokens"] = hyper_toks[1]
                 if self.last_parse_ok:
                     new.append((cid, sc, child, mp))
             pop = new if len(new) >= 2 else pop

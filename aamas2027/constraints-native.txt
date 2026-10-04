@@ -1,0 +1,11 @@
+# Interface versions verified by the local real-native fixture.
+langfuse==4.0.6
+langchain-core==1.2.26
+pydantic==2.12.5
+pandas==2.2.2
+langgraph==1.1.6
+langchain==1.2.15
+numpy==2.4.4
+hydra-core==1.3.2
+omegaconf==2.3.0
+langchain-openai==1.1.12

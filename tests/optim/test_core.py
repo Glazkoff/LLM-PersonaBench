@@ -68,11 +68,17 @@ def test_genotype_parse_and_budget():
     assert "facet_made_up" not in out["facet_formulations"] and "intensity_modifiers" in out
     with pytest.raises(GenotypeParseError):
         parse_genotype("no json", TEMPLATE)
-    L = BudgetLedger(3); L.charge(10); L.charge_fraction(0.2); L.charge_fraction(0.2)
+    L = BudgetLedger(3, full_panel_forecasts=10)
+    L.charge(10)
+    L.charge_fraction(0.2, passes=2)
+    L.charge_fraction(0.2, passes=2)
     assert L.used == 2 and L.remaining == 1 and abs(L.remaining_fraction() - 1.6) < 1e-9
-    L.charge(1)
+    assert L.executed_forecasts == 14
+    with pytest.raises(ValueError):
+        L.charge_fraction(0.2)  # a ledger-only charge has no executed forecasts
+    L.charge(10)
     with pytest.raises(BudgetExhausted):
-        L.charge(1)
+        L.charge(10)
 
 
 def test_item_split_and_panels(corpus):

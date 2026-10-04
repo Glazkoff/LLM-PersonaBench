@@ -1,0 +1,42 @@
+{
+ "source_sha": "f72ab08c628cc49f4c4c1b6ee48bd11b68d3ce08",
+ "args": [
+  "/Users/glazkov/Development/gigaevo-core-internal/.venv/bin/python",
+  "/private/tmp/hbs-native-fixture-4/native_fixture/native_problem/launch.py",
+  "problem.name=hbs_persona",
+  "problem.dir=/private/tmp/hbs-native-fixture-4/native_fixture/native_problem",
+  "program_format=json_document",
+  "pipeline=guided",
+  "memory=none",
+  "llm=local_proxy",
+  "algorithm=single_island_no_distant_parents",
+  "storage=disk",
+  "model_name=fixture-mutator",
+  "temperature=0.7",
+  "max_tokens=2500",
+  "max_in_flight=1",
+  "max_concurrent_dags=1",
+  "dag_concurrency=1",
+  "llm_max_concurrent=1",
+  "prefetch_factor=1",
+  "sync_min_delta=1",
+  "runner_poll_interval=0.1",
+  "loop_interval=0.1",
+  "post_cap_drain_grace_s=120",
+  "max_mutants=3",
+  "stopper._target_=aamas2027.native_stop.ForecastStopper",
+  "+stopper.flag=/private/tmp/hbs-native-fixture-4/native_fixture/native_problem/FORECAST_BUDGET_REACHED",
+  "behavior_space.keys=[prompt_length_chars,predicted_sd]",
+  "behavior_space.bounds=[[0,16000],[0,2]]",
+  "behavior_space.resolutions=[8,8]",
+  "behavior_space.binning_types=[linear,linear]",
+  "hydra.run.dir=/private/tmp/hbs-native-fixture-4/native_fixture/native_output"
+ ],
+ "identity": "native GigaEvo internal 2.20.1",
+ "adapter_changes": [
+  "JSON-format prompt adaptation",
+  "external forecast stopper",
+  "shared validator"
+ ],
+ "evaluator": "same fixed global optimization panel and raw RPS"
+}

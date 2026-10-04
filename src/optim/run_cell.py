@@ -81,8 +81,9 @@ def run_one(cell, df, readout, mutator, results_root, meta_extra, panels_cache=N
         ledger = BudgetLedger(cell["budget_B"])
         best = arm.run(fit, seed_g, ledger, w)
         meta["mass_on_scale_mean"] = arm.history[0]["mass_on_scale"]
-        if abs(ledger.used_f - cell["budget_B"]) > 1e-6:
-            raise RuntimeError(f"budget not exhausted: {ledger.used_f}/{cell['budget_B']}")
+        if ledger.used_f > cell["budget_B"] + 1e-6:
+            raise RuntimeError(f"budget exceeded: {ledger.used_f}/{cell['budget_B']}")
+        meta["unused_full_panel_equivalents"] = ledger.remaining_fraction()
         ev = evaluate_frozen(panels, readout, seed_g, best, cell["alphas"], boot_B=cell.get("boot_B", 2000))
         bel = ev.pop("_beliefs")
         np.savez_compressed(w.dir / "belief_probs.npz", **bel)
