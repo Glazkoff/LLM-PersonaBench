@@ -1,0 +1,209 @@
+% Reproducibility appendix extracted on 2026-10-08 from the deployed source,
+% immutable campaign manifest, and frozen result receipts. This is an \input{}
+% fragment; it deliberately contains no respondent identifiers.
+\section{Reproducibility specification}
+\label{app:reproducibility}
+
+\paragraph{Common execution contract.}
+Every cell used the same Qwen/Qwen3.8-27B mutator, a strict mutable JSON genome,
+temperature $0.7$, at most 2,500 generated tokens per ordinary mutation,
+disabled thinking, and a fresh seeded mutator request.  The serialized genome has
+exactly four top-level fields: \texttt{role\_definition}, fixed-length arrays of five
+\texttt{trait\_formulations} and 30 \texttt{facet\_formulations}, and
+\texttt{critic\_formulations}.  The runtime genotype also carries fixed
+intensity modifiers copied from the neutral template; they are never mutated.
+Malformed proposals consumed no forecast budget, whereas any mutator transport
+failure invalidated the cell.  Search was capped at $B=80$ full optimization-panel
+equivalents. Since the panel has 80 respondents and 60 target items, the cap
+is $80\times80\times60=384{,}000$ respondent--item forecasts per cell;
+realized search usage ranges from 78.2 to 80.0 equivalents.  The
+separate shortlist stage rescored at most five candidates on 120 respondents
+($7{,}200$ forecasts per candidate; at most $36{,}000$).  It selected the
+lowest raw RPS with the genotype hash as a deterministic tie break.  Thus the
+\texttt{generations}, \texttt{rounds}, and \texttt{iterations} fields below
+describe the planned schedule; the forecast ledger, rather than those fields,
+was the operative stopping rule.
+
+\begin{table}[H]
+\caption{Exact initialization, update/history, and budget-relevant parameters
+for the eleven search methods.  ``Seed'' is the neutral genotype specified
+below; all fitness comparisons minimize the cell's declared optimization
+objective.}
+\label{tab:repro-search}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.105\textwidth}p{0.19\textwidth}p{0.45\textwidth}p{0.19\textwidth}}
+\toprule
+Method & Initialization & Update and retained history & Fixed parameters \\
+\midrule
+GA & Seed plus mutations to population 8. & Two elites; two independent
+tournament-$3$ parents.  LLM crossover with probability .8 when parents differ;
+a crossed child is mutated with probability .3 and a copied parent is always
+mutated. & Population 8; elites 2; tournament 3; crossover .8; mutation .3;
+configured 10 generations. \\
+
+Differential evolution & Same seed-plus-mutations population as GA. & For each
+member $x$, sample three distinct other members $a,b,c$; the LLM applies the
+$a-b$ difference to $c$ and crosses the result with $x$; greedily replace $x$
+only on improvement. & Population 8; configured 10 generations.  The recorded
+crossover-rate field is .8, but the deployed loop does not use it as a
+stochastic gate. \\
+
+Prompt-\allowbreak Breeder & Seed, then seven mutations using successive members of a fixed
+eight-instruction mutation-prompt pool. & One elite; tournament-$3$ parent;
+each member carries its mutation instruction.  With probability .25 the LLM
+rewrites that instruction (temperature .9, 200 tokens), then applies it to the
+parent genotype. & Population 8; instruction pool 8; hypermutation .25;
+configured 10 generations. \\
+
+MAP-Elites style & Two islands, four initial evaluations per island; only the
+first is the unchanged seed, all others are seed mutations. & Uniformly sample
+an occupied archive cell; mutate using the last six lineage records
+(operation, score, prompt length, predicted SD); replace a cell only on lower
+score; migrate the island champion every 12 iterations. & $2$ islands;
+$4\times4$ bins with length edges $[0,1500,2500,$ $4000,100000]$ and SD edges
+$[0,.8,1,1.2,9]$; 4 initial points/island; history 6; configured 72 iterations. \\
+
+Local GEPA & Evaluate seed on the full panel and initialize a respondent-wise
+Pareto pool. & Select a Pareto member in proportion to its number of
+respondent-wise wins; compare parent and reflected child on the same eight
+respondents; give the reflector the ten worst target-item errors; run a full
+evaluation only after a minibatch improvement.  Retain the Pareto front and
+global best; spend remaining whole equivalents on best-candidate mutations. &
+Minibatch 8; at most 12 Pareto candidates; 10 feedback items; configured 80
+evaluations. \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[H]\centering\small
+\caption{Search specifications, continued. The same executed-forecast budget applies.}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.105\textwidth}p{0.19\textwidth}p{0.45\textwidth}p{0.19\textwidth}}
+\toprule
+Method & Initialization & Update and retained history & Fixed parameters \\
+\midrule
+Official GEPA & Seed candidate and optimization respondents indexed $0$--$79$.
+& GEPA v0.1.4 Pareto selection with per-example metric $-\mathrm{RPS}_{raw}$;
+reflection minibatches of 8; merge disabled; no metric cache.  The external
+forecast ledger is authoritative and returns the last fully scored elite at
+exhaustion. & Reflection minibatch 8; package v0.1.4. \\
+
+Native GigaEvo & Exact neutral JSON written as the initial program. & Pinned
+native guided pipeline; single island without distant parents; no memory;
+fitness $1-\mathrm{RPS}$; external validator and forecast stopper. & Internal
+v2.20.1 at commit \texttt{f72ab08c}; maximum 160 mutants; concurrency 1;
+$8\times8$ behavior space over length $[0,16000]$ and predicted SD $[0,2]$. \\
+
+OPRO & Evaluate seed. & Propose in blocks of 8 from up to the 12 best valid
+scored genotypes, printed from worse to better within that retained set. & 8
+proposals/round; history 12; configured 10 rounds. \\
+
+ProTeGi & Evaluate seed and start a beam. & For every beam member, generate two
+textual-gradient edits using the ten worst target-item errors; evaluate one
+edit per gradient; retain the best four candidates. & Beam 4; 2 gradients per
+candidate; 1 edit/gradient; configured 20 rounds. \\
+
+Random search & Evaluate seed. & Draw $B-1$ independent mutations of the seed;
+return the best full-panel candidate. & 80 evaluations. \\
+
+Best-of-$B$ & Evaluate seed. & Draw $B-1$ independent seed mutations with the
+initial-population generator at temperature 1.0; return the best full-panel
+candidate. & 80 evaluations; mutation temperature 1.0. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Neutral genotype and exact rendering.}
+The neutral role is: ``You are a simulated respondent. Answer each statement
+according to the supplied personality profile.''  For each of the five
+canonical traits $t\in\{$neuroticism, extraversion, openness, agreeableness,
+conscientiousness$\}$, its exact formulation is ``Tendency toward $t$.''  For
+each canonical facet label $f$ in the item key, the exact formulation is
+``Tendency toward $\operatorname{lowercase}(f)$.''  The critic is: ``Use only
+the supplied profile. Interpret the response scale consistently.''  Scores use
+boundaries $[0,20,40,60,80,100]$ with labels \emph{very little}, \emph{slightly},
+\emph{moderately}, \emph{quite strongly}, and \emph{very strongly}; operational
+intervals are $[0,20)$, $[20,40)$, $[40,60)$, $[60,80)$, and $[80,100]$ after
+endpoint clipping.
+
+For a genotype $(r,T,F,c)$, the exact system-prompt skeleton is
+\texttt{r\textbackslash nYour profile:\textbackslash n}, followed first by one
+line per trait and then one per facet:
+\texttt{- This trait (NAME) describes you MODIFIER: DESCRIPTION} and
+\texttt{- This facet (NAME) describes you MODIFIER: DESCRIPTION}.  It ends with
+\texttt{\textbackslash n\textbackslash nInternal reflection guideline:\textbackslash n}
+and $c$.  A facet score is
+$100(\bar{x}-1)/4$ from its two observed items; a trait score is the mean of its
+six facet scores.
+
+\paragraph{Selected wording example.}
+The frozen Qwen calibrated-GA seed-1 template changes the neutral
+``Tendency toward extraversion.'' to ``The intensity with which you derive
+energy from social interaction, assertiveness, and positive emotional
+experiences.'' Its critic includes: ``Avoid converging on a central tendency;
+instead, maximize the semantic variance between answers to accurately reflect
+the specific magnitude indicated, ensuring that a 'very little' response is
+distinctly different from a 'slightly' one in both tone and content, so that
+your agreement or disagreement scales linearly with the provided intensity.''
+These are exact excerpts from one selected template, showing the intervention
+on profile interpretation. They neither characterize every optimized template
+nor establish a causal mechanism. The complete genotype accompanies the
+source notes.
+
+\paragraph{Items, people, and partitions.}
+Items are grouped by facet after sorting by item number.  The first two items
+of each of 30 facets form the 60-item observed input; the remaining two form
+the disjoint 60-item prediction target.  Eligible rows have all 120 item values
+in $\{1,2,3,4,5\}$, unique case IDs, and no match to the inventoried historical
+exposure set.  Rows are sorted by case ID, permuted with seed 20261004, and
+sliced without overlap into train/optimization/selection/calibration/evaluation
+panels of 8,000/80/120/120/600 people (8,920 reserved rows).  A subsequent inventory records 410,168 complete cases, of which 374,049
+match the accumulated exclusion set and 36,119 remain eligible in that
+inventory. These are inventory counts, not a claim of new untouched test
+people; all-host exposure coverage is unproven. The local reproducibility
+bundle does not include the raw corpus, a verified dataset license, or
+validated demographic summaries.  Sex, age, and
+country are loadable fields, but no demographic interpretation or distribution
+is asserted here.
+
+\paragraph{Frozen exemplar and cryptographic closure.}
+The saved Qwen calibrated-GA seed-1 selection has raw selection RPS
+$0.1692038488$, five shortlisted candidates, and canonical selected-record hash
+\texttt{4131b9d1dc37cd4f}; its complete runtime genotype is transcribed in the
+accompanying source notes.  A second located exemplar, Granite calibrated
+MAP-Elites seed 1, has selected-record hash \texttt{09d79eb1c951f4f8}.
+The canonical manifest hash is \texttt{9037e61283d70779}; panel hash
+\texttt{786de40844429e19}; frozen-record file hash \texttt{155b512315b52679};
+final 84-cell recomputation hash \texttt{7a3009c03446254d}; model-lock file hash
+\texttt{342d9215e991e973}; item-key hash \texttt{2cd1483c7d3d539c}; and deployed
+source-closure hash \texttt{e333de246887ab0c}.  Full 64-hex digests, model
+revision pins, source anchors, and the exact exemplar appear in
+\texttt{REPRO\_SOURCE\_NOTES.md}.
+
+\paragraph{Statistical predictors and score translation.}
+The 60 ordinal targets are encoded as 240 indicators $\mathbf{1}[y_j\leq k]$
+for $k=1,\ldots,4$. Raw inputs use 300 one-hot indicators; categorical inputs
+use 175. Ridge fits an intercept with the Cholesky solver, without scaling
+these one-hot features. Select120 minimizes RPS over penalties
+$\{1,10,100,1000\}$, with smaller penalties breaking ties. Continuous-profile
+features alone are standardized using training statistics. Predictions undergo
+the exact squared-error projection of each four-threshold vector onto
+$0\leq F_1\leq\cdots\leq F_4\leq1$. ExtraTrees uses 64 trees,
+minimum leaf size selected from $\{10,30\}$, feature fraction .8, random seed
+20261004, one worker, and otherwise scikit-learn defaults. Answer-equivalent
+curves use a nonincreasing isotonic fit and linear interpolation over the
+registered budget grid; out-of-grid values remain censored. Their bootstrap
+resamples respondents and the three fixed input orders, not training fits.
+
+\paragraph{Pinned model revisions.}
+The full model revision pins are:
+\begin{quote}\small
+Qwen predictor: \texttt{995ad96eacd98c81ed38be0c5b274b04031597b0}\\
+Granite predictor: \texttt{9e668ce1c538387ef24d3644e9b0606647762636}\\
+Qwen mutator: \texttt{1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0}.
+\end{quote}
+The documented analysis environment uses Python 3.12.14, NumPy 2.3.5,
+scikit-learn 1.7.2, and serving vLLM 0.28.0. Full source notes and receipts
+are retained locally; no publicly executable anonymous artifact is claimed.

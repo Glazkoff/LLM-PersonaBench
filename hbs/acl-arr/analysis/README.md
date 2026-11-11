@@ -1,0 +1,1 @@
+Execution source requires the restricted audit_result module and hash-locked dataset/configuration tree. It is retained for inspection, not advertised as standalone runnable code. Do not run without controlled data access and a finite scheduler allocation. Aggregate audit is standalone in ../aggregates/.

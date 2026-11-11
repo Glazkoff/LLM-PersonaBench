@@ -1,0 +1,4396 @@
+{
+  "status": "PASS",
+  "scope": "exploratory exposed-R2 fixed forecasts; no new confirmatory inference",
+  "people": 658,
+  "endpoints": 49,
+  "bootstrap_draws": 10000,
+  "seed": 20261110,
+  "spec_sha256": "affaadda29a93397cea9a90348d12cb545928da93a5b9368d694f8c3214ede48",
+  "source_sha256": "7e6696111b40c191f12ceb10a3341dd5ebc41153110f3241e1b1220c9d95efb3",
+  "freeze_sha256": "bce98bbedba4f424954ef096413491380e45f5f07b4c6af038ab332ee9456468",
+  "maximum_aggregation_error": 8.326672684688674e-17,
+  "contrasts": [
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": -0.0028861226898722037,
+        "ci95": [
+          -0.004477821485549669,
+          -0.001282264659653616
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.002980448036182065,
+        "ci95": [
+          -0.004437581140519586,
+          -0.001537377189583297
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.0030352175921039195,
+          "ci95": [
+            -0.004708207615128389,
+            -0.001360323155007133
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -0.0027370277876404884,
+          "ci95": [
+            -0.0055200833062900604,
+            4.372092054693542e-05
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": -0.0028921624042847175
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": -0.0028965730975599926
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": -0.0030627607981060976
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": -0.0029599293310887246
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -0.003074704822210452
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": -0.0027329278589758484
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": -0.0028693110385094845
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": -0.002634637400725203
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": -0.0028478170758122856
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": -0.0028089600667486237
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": -0.0028070020551440385
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": -0.0029061424681738413
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -0.0028758667589450083
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": -0.0028936178350964076
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": -0.0025186459927235404
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": -0.002684263159657499
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": -0.0027088088710886466
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": -0.0028386305677989315
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": -0.0028388786843910603
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": -0.002925035735924819
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": -0.00308653463609182
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": -0.00293105368918439
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": -0.0026361623931307598
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": -0.0021149779250309404
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": -0.0023321098439728944
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": -0.003057186926599735
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.004039716977061409
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": -0.003057186926599735
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.0026416248194399325
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.0030389514704146983
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.003057186926599735
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.5113692999916212
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5445182251143169
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0025641198679278703,
+          "system_native_loss": 0.667773356971993,
+          "reference_native_loss": 0.6695176994115637
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6310736768497972
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0022200857924564235,
+          "system_native_loss": 0.2832053434516528,
+          "reference_native_loss": 0.2841515806557688
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.48142590494441906,
+          "reference_native_loss": 0.48142590494441906
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4332398161076198,
+          "reference_native_loss": 0.4332398161076198
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.5918898116366189
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.010742554850139792,
+          "system_native_loss": 0.4892442619531729,
+          "reference_native_loss": 0.4817612072386434
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6031908164280063
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6227020872166151,
+          "reference_native_loss": 0.6227020872166151
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0027217004227846914,
+          "system_native_loss": 0.5108294572616876,
+          "reference_native_loss": 0.5093574088814387
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.011674188730279434,
+          "system_native_loss": 0.5497532172186692,
+          "reference_native_loss": 0.541681742339258
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41113196084907333
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5842759642749071,
+          "reference_native_loss": 0.5842759642749071
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4880346643731948,
+          "reference_native_loss": 0.4880346643731948
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.49816810985036375
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.014984414402019626,
+          "system_native_loss": 0.4385121512242865,
+          "reference_native_loss": 0.4463456382852489
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00434652639839605,
+          "system_native_loss": 0.52696156263184,
+          "reference_native_loss": 0.5297122137591989
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.02265107014557002,
+          "system_native_loss": 0.6248846857049191,
+          "reference_native_loss": 0.6405743589035001
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.006023055488777552,
+          "system_native_loss": 0.5755263766041065,
+          "reference_native_loss": 0.5796710105820849
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5508070059931659,
+          "reference_native_loss": 0.5508070059931659
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.009053902195743178,
+          "system_native_loss": 0.557897766317644,
+          "reference_native_loss": 0.5635743014847187
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.4349289656932032
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5480385735315296
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6457941845744575,
+          "reference_native_loss": 0.6457941845744575
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.009206627100900857,
+          "system_native_loss": 0.5382737419931165,
+          "reference_native_loss": 0.5440107225761943
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.001473674884576188,
+          "system_native_loss": 0.47163092766298786,
+          "reference_native_loss": 0.4726257553483926
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6231084536575301
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0038351802044251926,
+          "system_native_loss": 0.4601118839825828,
+          "reference_native_loss": 0.4626066433102832
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0024505962646160593,
+          "system_native_loss": 0.3997134616272689,
+          "reference_native_loss": 0.4006525661591668
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.031698399969699684,
+          "system_native_loss": 0.5030361665272178,
+          "reference_native_loss": 0.5235621942842591
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.018780260948850904,
+          "system_native_loss": 0.5257596476638239,
+          "reference_native_loss": 0.5386869193230042
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40934319538544967
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.016865695457221417,
+          "system_native_loss": 0.5335888581433018,
+          "reference_native_loss": 0.5444689953633531
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0067396031138192035,
+          "system_native_loss": 0.574062058581533,
+          "reference_native_loss": 0.5786898421425487
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0067202500196331385,
+          "system_native_loss": 0.6358309757287433,
+          "reference_native_loss": 0.6404892456063405
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6089172555000781
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.012596914213026113,
+          "system_native_loss": 0.5972467101063106,
+          "reference_native_loss": 0.5885067469251264
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0004694003542465422,
+          "system_native_loss": 0.5590280000160245,
+          "reference_native_loss": 0.5587170257189762
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.0067363925355036,
+          "system_native_loss": 0.07392743628708415,
+          "reference_native_loss": 0.07444161864013052
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.015075344025100716,
+          "system_native_loss": 0.1336016637000046,
+          "reference_native_loss": 0.13541658856781086
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.01160123332202945,
+          "system_native_loss": 0.14943986467856696,
+          "reference_native_loss": 0.15125465288058604
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.14336353137688562,
+          "reference_native_loss": 0.14336353137688562
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.015720480807386788,
+          "system_native_loss": 0.13997437520351788,
+          "reference_native_loss": 0.13776565212518802
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.10723495369596259
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.006648993714556837,
+          "system_native_loss": 0.09545554357684506,
+          "reference_native_loss": 0.09619764523651557
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.00029176729896057734,
+          "system_native_loss": 0.10114213500788369,
+          "reference_native_loss": 0.10117339251714548
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.662077327212778,
+          "reference_native_loss": 0.662077327212778
+        }
+      ]
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": -0.002689159131144959,
+        "ci95": [
+          -0.0042391275407554305,
+          -0.0011225160878784101
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.0025495216830121936,
+        "ci95": [
+          -0.003924486242485255,
+          -0.00120622301174713
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.0024684418744189748,
+          "ci95": [
+            -0.004031519056404848,
+            -0.0009403926662622841
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -0.0029098763878709437,
+          "ci95": [
+            -0.005703942331264329,
+            -0.00014964997759142458
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": -0.0026575842304598163
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": -0.0026273467187041305
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": -0.002661246239378705
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": -0.0026704808745628764
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": -0.0028555576793265628
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": -0.0027412516819249194
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -0.002877714262909139
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": -0.0027111643726961125
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": -0.0026181749264972045
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": -0.0026403770363511514
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": -0.00242987841386144
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": -0.0026680075379228846
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": -0.0026008545423211074
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": -0.0026654099052296058
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": -0.002651278354517714
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": -0.002776870131440747
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -0.0026480082788773013
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": -0.0024127821783762565
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": -0.0025282262023026297
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": -0.0026108152621714285
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": -0.00281802580095651
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": -0.002720805821842639
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": -0.002520821571378292
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": -0.002066286963080569
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": -0.002203255266966424
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": -0.0028710264053868934
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.003596204295341664
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": -0.0028710264053868934
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.002320037008040274
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.0028827478593367335
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.0028710264053868934
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.5113692999916212
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5445182251143169
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004931284127860167,
+          "system_native_loss": 0.666163001258252,
+          "reference_native_loss": 0.6695176994115637
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6310736768497972
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.007289810044803607,
+          "system_native_loss": 0.2810445433066854,
+          "reference_native_loss": 0.2841515806557688
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004645647432186793,
+          "system_native_loss": 0.4783380103795413,
+          "reference_native_loss": 0.48142590494441906
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.003925345887821456,
+          "system_native_loss": 0.431003992947929,
+          "reference_native_loss": 0.4332398161076198
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.5918898116366189
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.010510644883746098,
+          "system_native_loss": 0.4890827179823412,
+          "reference_native_loss": 0.4817612072386434
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6031908164280063
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6227020872166151,
+          "reference_native_loss": 0.6227020872166151
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0015947770864179465,
+          "system_native_loss": 0.5102199538578317,
+          "reference_native_loss": 0.5093574088814387
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.012238858403187006,
+          "system_native_loss": 0.5501436269666473,
+          "reference_native_loss": 0.541681742339258
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41113196084907333
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5842759642749071,
+          "reference_native_loss": 0.5842759642749071
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0007520330334290224,
+          "system_native_loss": 0.48757842511255467,
+          "reference_native_loss": 0.4880346643731948
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.49816810985036375
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.008005209836943807,
+          "system_native_loss": 0.44216070946550556,
+          "reference_native_loss": 0.4463456382852489
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.006273445268336005,
+          "system_native_loss": 0.5257421333505903,
+          "reference_native_loss": 0.5297122137591989
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.02269233782253353,
+          "system_native_loss": 0.6248561009024765,
+          "reference_native_loss": 0.6405743589035001
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004118266145740814,
+          "system_native_loss": 0.5768371157541526,
+          "reference_native_loss": 0.5796710105820849
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5508070059931659,
+          "reference_native_loss": 0.5508070059931659
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.009356199802679448,
+          "system_native_loss": 0.5577082344495502,
+          "reference_native_loss": 0.5635743014847187
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.4349289656932032
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5480385735315296
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004320881495816553,
+          "system_native_loss": 0.6428619066273911,
+          "reference_native_loss": 0.6457941845744575
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005423142451344099,
+          "system_native_loss": 0.540631367400662,
+          "reference_native_loss": 0.5440107225761943
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00437301614865242,
+          "system_native_loss": 0.47557782949916616,
+          "reference_native_loss": 0.4726257553483926
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6231084536575301
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00567820835129631,
+          "system_native_loss": 0.4589130063769578,
+          "reference_native_loss": 0.4626066433102832
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4006525661591668,
+          "reference_native_loss": 0.4006525661591668
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.024025844190377767,
+          "system_native_loss": 0.5080044643922317,
+          "reference_native_loss": 0.5235621942842591
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.015021210324120684,
+          "system_native_loss": 0.5283471659490516,
+          "reference_native_loss": 0.5386869193230042
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40934319538544967
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.008579263654354356,
+          "system_native_loss": 0.5389344731704716,
+          "reference_native_loss": 0.5444689953633531
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5786898421425487,
+          "reference_native_loss": 0.5786898421425487
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6404892456063405,
+          "reference_native_loss": 0.6404892456063405
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6089172555000781
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.007583158370881951,
+          "system_native_loss": 0.5937680771078836,
+          "reference_native_loss": 0.5885067469251264
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5587170257189762,
+          "reference_native_loss": 0.5587170257189762
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.005603277344137625,
+          "system_native_loss": 0.07401392587810761,
+          "reference_native_loss": 0.07444161864013052
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.012875831076901196,
+          "system_native_loss": 0.1338664636767151,
+          "reference_native_loss": 0.13541658856781086
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.010684338214727519,
+          "system_native_loss": 0.1495832951550544,
+          "reference_native_loss": 0.15125465288058604
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.14336353137688562,
+          "reference_native_loss": 0.14336353137688562
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.011602846239276318,
+          "system_native_loss": 0.13939584871885455,
+          "reference_native_loss": 0.13776565212518802
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.10723495369596259
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.008815830357545915,
+          "system_native_loss": 0.09521370050433971,
+          "reference_native_loss": 0.09619764523651557
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0001875432631974332,
+          "system_native_loss": 0.10119348433451937,
+          "reference_native_loss": 0.10117339251714548
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.662077327212778,
+          "reference_native_loss": 0.662077327212778
+        }
+      ]
+    },
+    {
+      "system": "qwen__neutral__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": -0.0008723493380169753,
+        "ci95": [
+          -0.003070465570172376,
+          0.0013143875729928897
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.0013977761974503522,
+        "ci95": [
+          -0.002818652911769417,
+          -4.2370277182425764e-05
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.0017028627609923127,
+          "ci95": [
+            -0.0031494726614603227,
+            -0.00035628926008318034
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -4.1835915041638064e-05,
+          "ci95": [
+            -0.004170304719153664,
+            0.0040932375410941725
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": -0.0007515127231117368
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": -0.0005736331012527572
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": -0.0009169353463195892
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": -0.0008443128898755409
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": -0.0008805561436762201
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -0.001091687057928036
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": -0.0008589624190974518
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": -0.0009104958442599927
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": -0.0006028932447834744
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": -0.0008395038031662753
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": -0.0008580840407878639
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": -0.0008156356086358633
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": -0.0009085017126976619
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": -0.0007266354181150981
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": -0.0009601013700751761
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": -0.0008941809118758515
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": -0.0002479641645950048
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": -0.0008749640827070779
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": -0.00033386199059488284
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": -0.0006689237990361686
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.001670773933881429
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": -0.0008749640827070779
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.0009345948663998055
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.0010653783170272266
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.0011797188052041058
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.5113692999916212
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5445182251143169
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.011128118723600913,
+          "system_native_loss": 0.6619473630926753,
+          "reference_native_loss": 0.6695176994115637
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6310736768497972
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.025002729228601337,
+          "system_native_loss": 0.27349500482391165,
+          "reference_native_loss": 0.2841515806557688
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.48142590494441906,
+          "reference_native_loss": 0.48142590494441906
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4332398161076198,
+          "reference_native_loss": 0.4332398161076198
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.5918898116366189
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0017748458866115424,
+          "system_native_loss": 0.48299753035401466,
+          "reference_native_loss": 0.4817612072386434
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0038897057160242146,
+          "system_native_loss": 0.6005291104218591,
+          "reference_native_loss": 0.6031908164280063
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0010627319195712515,
+          "system_native_loss": 0.6219657228493257,
+          "reference_native_loss": 0.6227020872166151
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5093574088814387,
+          "reference_native_loss": 0.5093574088814387
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.015405479392070397,
+          "system_native_loss": 0.552333012658014,
+          "reference_native_loss": 0.541681742339258
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41113196084907333
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0027470424367151735,
+          "system_native_loss": 0.5823885084524828,
+          "reference_native_loss": 0.5842759642749071
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4880346643731948,
+          "reference_native_loss": 0.4880346643731948
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.49816810985036375
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4463456382852489,
+          "reference_native_loss": 0.4463456382852489
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00127256472596303,
+          "system_native_loss": 0.5305175422622994,
+          "reference_native_loss": 0.5297122137591989
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.022720438033205375,
+          "system_native_loss": 0.6248366367835886,
+          "reference_native_loss": 0.6405743589035001
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5796710105820849,
+          "reference_native_loss": 0.5796710105820849
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0042648144793469315,
+          "system_native_loss": 0.5478540226524282,
+          "reference_native_loss": 0.5508070059931659
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5635743014847187,
+          "reference_native_loss": 0.5635743014847187
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.4349289656932032
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5480385735315296
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0028155559448630172,
+          "system_native_loss": 0.6438834650571906,
+          "reference_native_loss": 0.6457941845744575
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.006126533652719094,
+          "system_native_loss": 0.5401930590364401,
+          "reference_native_loss": 0.5440107225761943
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4726257553483926,
+          "reference_native_loss": 0.4726257553483926
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6231084536575301
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4626066433102832,
+          "reference_native_loss": 0.4626066433102832
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4006525661591668,
+          "reference_native_loss": 0.4006525661591668
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0011170224641012232,
+          "system_native_loss": 0.5242855126260461,
+          "reference_native_loss": 0.5235621942842591
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5386869193230042,
+          "reference_native_loss": 0.5386869193230042
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40934319538544967
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.01306854851333872,
+          "system_native_loss": 0.5360384149907458,
+          "reference_native_loss": 0.5444689953633531
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5786898421425487,
+          "reference_native_loss": 0.5786898421425487
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6404892456063405,
+          "reference_native_loss": 0.6404892456063405
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6089172555000781
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.005141795739547337,
+          "system_native_loss": 0.5920742162822126,
+          "reference_native_loss": 0.5885067469251264
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5587170257189762,
+          "reference_native_loss": 0.5587170257189762
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.010031998689793166,
+          "system_native_loss": 0.07367588584399526,
+          "reference_native_loss": 0.07444161864013052
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.13541658856781086,
+          "reference_native_loss": 0.13541658856781086
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.008657633473795119,
+          "system_native_loss": 0.1499003338483316,
+          "reference_native_loss": 0.15125465288058604
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.0032966445387345453,
+          "system_native_loss": 0.14285864013688862,
+          "reference_native_loss": 0.14336353137688562
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.012732957618789623,
+          "system_native_loss": 0.13955462904597035,
+          "reference_native_loss": 0.13776565212518802
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.10723495369596259
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0009540925390836394,
+          "system_native_loss": 0.09630413257687553,
+          "reference_native_loss": 0.09619764523651557
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.003046627749122387,
+          "system_native_loss": 0.1014997827446478,
+          "reference_native_loss": 0.10117339251714548
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.004876075559952444,
+          "system_native_loss": 0.6652141173546321,
+          "reference_native_loss": 0.662077327212778
+        }
+      ]
+    },
+    {
+      "system": "qwen__t0__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": 4.9965172362427615e-05,
+        "ci95": [
+          -0.0015492794902415544,
+          0.0016357916861433665
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.0009604608945640148,
+        "ci95": [
+          -0.0024416731501340242,
+          0.0004126384613759633
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.0015471599011664652,
+          "ci95": [
+            -0.0032567623109357254,
+            3.413494658576992e-05
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": 0.0016470902458913211,
+          "ci95": [
+            -0.0011079981547352066,
+            0.004384122846075854
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": 7.139072498882981e-05
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": 0.0002751659304160914
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": 3.907349574860486e-05
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": 6.944084392642686e-05
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -3.0726875563081175e-05
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": 4.0827661311035433e-05
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": 5.0353648854126906e-05
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": 5.394567120864965e-06
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": 0.00030826636913898074
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": 1.090722825717782e-05
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": 0.00010493263922126743
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": 0.00013150979544373985
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -6.0078856062662384e-05
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": 2.4348023981995322e-05
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": 0.00019167449367901376
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": 4.3012267695343087e-05
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": 3.012978901413972e-05
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": 0.00015290831273063527
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": 0.00015290831273063527
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": 0.0007242458623134424
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": 0.0002947102102834782
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.0004720256812553226
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": 0.00015290831273063527
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.0001892414487755526
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.00017970154850776709
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.00018702578098833437
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.5113692999916212
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5445182251143169
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0032183530060258267,
+          "system_native_loss": 0.6673282893905464,
+          "reference_native_loss": 0.6695176994115637
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6310736768497972
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.019112819029352267,
+          "system_native_loss": 0.27600538175545586,
+          "reference_native_loss": 0.2841515806557688
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.48142590494441906,
+          "reference_native_loss": 0.48142590494441906
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4332398161076198,
+          "reference_native_loss": 0.4332398161076198
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.5918898116366189
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.000697609125288286,
+          "system_native_loss": 0.4812752662938019,
+          "reference_native_loss": 0.4817612072386434
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6031908164280063
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0030662622831584096,
+          "system_native_loss": 0.6205774815239659,
+          "reference_native_loss": 0.6227020872166151
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5093574088814387,
+          "reference_native_loss": 0.5093574088814387
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.004746819837023247,
+          "system_native_loss": 0.5449636694998365,
+          "reference_native_loss": 0.541681742339258
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41113196084907333
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0008344340391578639,
+          "system_native_loss": 0.5837026358965073,
+          "reference_native_loss": 0.5842759642749071
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4880346643731948,
+          "reference_native_loss": 0.4880346643731948
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.001577461067519015,
+          "system_native_loss": 0.4972475272526404,
+          "reference_native_loss": 0.49816810985036375
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4463456382852489,
+          "reference_native_loss": 0.4463456382852489
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0019293473076754332,
+          "system_native_loss": 0.5309331798503936,
+          "reference_native_loss": 0.5297122137591989
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.02169465324973762,
+          "system_native_loss": 0.6255471651569172,
+          "reference_native_loss": 0.6405743589035001
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5796710105820849,
+          "reference_native_loss": 0.5796710105820849
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0014993597390430106,
+          "system_native_loss": 0.5518451717451835,
+          "reference_native_loss": 0.5508070059931659
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5635743014847187,
+          "reference_native_loss": 0.5635743014847187
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.4349289656932032
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5480385735315296
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005834622316155972,
+          "system_native_loss": 0.6418346373469554,
+          "reference_native_loss": 0.6457941845744575
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.007907640501508802,
+          "system_native_loss": 0.5390831872782048,
+          "reference_native_loss": 0.5440107225761943
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4726257553483926,
+          "reference_native_loss": 0.4726257553483926
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6231084536575301
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.007036274315990548,
+          "system_native_loss": 0.4671836931609844,
+          "reference_native_loss": 0.4626066433102832
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4006525661591668,
+          "reference_native_loss": 0.4006525661591668
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00045097767250726264,
+          "system_native_loss": 0.5238542210184962,
+          "reference_native_loss": 0.5235621942842591
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5386869193230042,
+          "reference_native_loss": 0.5386869193230042
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40934319538544967
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.012600486963860184,
+          "system_native_loss": 0.5363403636354771,
+          "reference_native_loss": 0.5444689953633531
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5786898421425487,
+          "reference_native_loss": 0.5786898421425487
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6404892456063405,
+          "reference_native_loss": 0.6404892456063405
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0010048333371338839,
+          "system_native_loss": 0.6082209807718398,
+          "reference_native_loss": 0.6089172555000781
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5885067469251264,
+          "reference_native_loss": 0.5885067469251264
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5587170257189762,
+          "reference_native_loss": 0.5587170257189762
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.07444161864013052,
+          "reference_native_loss": 0.07444161864013052
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.13541658856781086,
+          "reference_native_loss": 0.13541658856781086
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.009141400793324912,
+          "system_native_loss": 0.1498246578232371,
+          "reference_native_loss": 0.15125465288058604
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.0022688303608454866,
+          "system_native_loss": 0.14301605303617565,
+          "reference_native_loss": 0.14336353137688562
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.00999894390377533,
+          "system_native_loss": 0.13917050089729532,
+          "reference_native_loss": 0.13776565212518802
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.10723495369596259
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.005474396184099005,
+          "system_native_loss": 0.09680864874596687,
+          "reference_native_loss": 0.09619764523651557
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.005321757779814434,
+          "system_native_loss": 0.1017435211562502,
+          "reference_native_loss": 0.10117339251714548
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0054389454995035155,
+          "system_native_loss": 0.6655762128258407,
+          "reference_native_loss": 0.662077327212778
+        }
+      ]
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "full1400",
+      "equal_family": {
+        "estimate": -0.00403564138015154,
+        "ci95": [
+          -0.007178367963737737,
+          -0.0009321778596429218
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.0030851716622506175,
+        "ci95": [
+          -0.006058734342759295,
+          -8.681716448252129e-05
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.002533286019598469,
+          "ci95": [
+            -0.006017569944915565,
+            0.0008686019104652743
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -0.005537996740704609,
+          "ci95": [
+            -0.010653760572561913,
+            -0.00046293358116054515
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": -0.003984080713618023
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": -0.004093656021319237
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": -0.004075789449820049
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": -0.004071558633588316
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": -0.0036181210573286967
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": -0.004049787302860082
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": -0.004263268677090887
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": -0.0035677598183460934
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": -0.004192650853743924
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": -0.004001977961204545
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": -0.004065108038815668
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": -0.004160169958588197
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -0.003986091298539111
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": -0.004051123057229483
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": -0.003999143958973284
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": -0.0041249092765721675
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": -0.0040998256553645565
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": -0.0038960251807962634
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": -0.004161822009460104
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": -0.0041824557908072
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": -0.0038647125403776907
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": -0.0042213120049844005
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": -0.003908447072211294
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": -0.004053154321649884
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": -0.004070835375086248
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": -0.004329823239463784
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": -0.003911797766783654
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": -0.00401545349839964
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": -0.004048157699727358
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -0.004018630476882789
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": -0.00403734394361441
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": -0.00390918675516563
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": -0.004066539830297874
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": -0.004074966448239144
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": -0.003906646327203985
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": -0.003986169010504715
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": -0.003937256248128687
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": -0.004070568196280599
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": -0.0042710785840506
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": -0.004078251152943287
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": -0.004449671426687247
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": -0.0034404406733421996
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": -0.003439820188364917
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": -0.0020535898265275384
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.005338871440443665
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": -0.004405581853864124
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.004431609062977631
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.004352576533370557
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.004408611415785972
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0065550180092126915,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.515973816519804
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0019918559914820066,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5431374328978018
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0005982634145453418,
+          "system_native_loss": 0.667773356971993,
+          "reference_native_loss": 0.667366364975602
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0002682597484701128,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6308923101283208
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.035099871199780135,
+          "system_native_loss": 0.2832053434516528,
+          "reference_native_loss": 0.29816548783065105
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0014299040483321303,
+          "system_native_loss": 0.48142590494441906,
+          "reference_native_loss": 0.4823763414559267
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.015221643141670606,
+          "system_native_loss": 0.4332398161076198,
+          "reference_native_loss": 0.4245697770238578
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.03902804784042319,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.6172770568954346
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.009713452920607515,
+          "system_native_loss": 0.4892442619531729,
+          "reference_native_loss": 0.48247805962180046
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005159032697463957,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6067211164864863
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00023488664379635882,
+          "system_native_loss": 0.6227020872166151,
+          "reference_native_loss": 0.6228648396019143
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0071799430984607875,
+          "system_native_loss": 0.5108294572616876,
+          "reference_native_loss": 0.5069461409643138
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.006398192385367924,
+          "system_native_loss": 0.5497532172186692,
+          "reference_native_loss": 0.554176894983805
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0013257152075188527,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41172590337278
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0053800848715023185,
+          "system_native_loss": 0.5842759642749071,
+          "reference_native_loss": 0.5879725480553882
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00442960990121053,
+          "system_native_loss": 0.4880346643731948,
+          "reference_native_loss": 0.4853473330241484
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0024730874470169023,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.4967248531429556
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.013423349569309965,
+          "system_native_loss": 0.4385121512242865,
+          "reference_native_loss": 0.4455295515940862
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.007308803066469678,
+          "system_native_loss": 0.52696156263184,
+          "reference_native_loss": 0.5223362674991919
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.008918238011543107,
+          "system_native_loss": 0.6248846857049191,
+          "reference_native_loss": 0.6187073069316852
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.015865735521958548,
+          "system_native_loss": 0.5755263766041065,
+          "reference_native_loss": 0.586444035697975
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.011949022717364694,
+          "system_native_loss": 0.5508070059931659,
+          "reference_native_loss": 0.5425334303913788
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.012454442038937552,
+          "system_native_loss": 0.557897766317644,
+          "reference_native_loss": 0.5657063417464312
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0011672765827275594,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.43574272525160196
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00021184558530882103,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5479013938768725
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.020412899006756573,
+          "system_native_loss": 0.6457941845744575,
+          "reference_native_loss": 0.6319413877201217
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.01219308786229353,
+          "system_native_loss": 0.5382737419931165,
+          "reference_native_loss": 0.545871693723658
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004107940796246602,
+          "system_native_loss": 0.47163092766298786,
+          "reference_native_loss": 0.4744040584782594
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0015570130926845882,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6241751258609156
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.003860136474560947,
+          "system_native_loss": 0.4601118839825828,
+          "reference_native_loss": 0.46262287719875445
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.002400486069494512,
+          "system_native_loss": 0.3997134616272689,
+          "reference_native_loss": 0.4006333631953769
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.012396746768499382,
+          "system_native_loss": 0.5030361665272178,
+          "reference_native_loss": 0.5110635738572555
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0001232069081843698,
+          "system_native_loss": 0.5257596476638239,
+          "reference_native_loss": 0.5258444563454884
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0005340692912347185,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40907553542974756
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.012594900149507673,
+          "system_native_loss": 0.5335888581433018,
+          "reference_native_loss": 0.541713885791706
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0063921308520507565,
+          "system_native_loss": 0.574062058581533,
+          "reference_native_loss": 0.5784512485052434
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.010207326317380907,
+          "system_native_loss": 0.6358309757287433,
+          "reference_native_loss": 0.6429063792592888
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00019100563846820274,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6087849028062515
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.015830815884528244,
+          "system_native_loss": 0.5972467101063106,
+          "reference_native_loss": 0.5862630084140495
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0007902762581578628,
+          "system_native_loss": 0.5590280000160245,
+          "reference_native_loss": 0.5585044477825605
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.001086484003866709,
+          "system_native_loss": 0.07392743628708415,
+          "reference_native_loss": 0.07384450600968255
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.015061208049654036,
+          "system_native_loss": 0.1336016637000046,
+          "reference_native_loss": 0.13541488673378796
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.01507113580929056,
+          "system_native_loss": 0.14943986467856696,
+          "reference_native_loss": 0.15179745190214183
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.03725082159868861,
+          "system_native_loss": 0.14336353137688562,
+          "reference_native_loss": 0.1490686091573028
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.015313684223969405,
+          "system_native_loss": 0.13997437520351788,
+          "reference_native_loss": 0.13782280692935647
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0003810508386967498,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.1071952857124653
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0007974861845128598,
+          "system_native_loss": 0.09545554357684506,
+          "reference_native_loss": 0.09536653524769058
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.00046703428920032543,
+          "system_native_loss": 0.10114213500788369,
+          "reference_native_loss": 0.1011921691572632
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0004295238294463237,
+          "system_native_loss": 0.662077327212778,
+          "reference_native_loss": 0.6618010135877465
+        }
+      ]
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "full1400",
+      "equal_family": {
+        "estimate": -0.0038386778214242944,
+        "ci95": [
+          -0.0069607497129644995,
+          -0.0007557685891882627
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": -0.002654245309080746,
+        "ci95": [
+          -0.0055828073140635785,
+          0.0002348129466820332
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": -0.001966510301913524,
+          "ci95": [
+            -0.0053960655297144115,
+            0.0013311757865373487
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -0.005710845340935065,
+          "ci95": [
+            -0.01089457630179566,
+            -0.0006027754204659082
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": -0.0037798507995358433
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": -0.0038894261072370574
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": -0.003841211275995147
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": -0.003867328719506136
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": -0.0033488946784728355
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": -0.0037859978063139684
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": -0.004008713815728943
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": -0.0033635299042639134
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": -0.003985447734964389
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": -0.003797748047122366
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": -0.0038608781247334886
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": -0.003941492309424391
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": -0.0037891007392377957
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": -0.003846893143147303
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": -0.0037949140448911046
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": -0.003911037913343462
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": -0.0038955957412823757
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": -0.0037812722483176195
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": -0.003932888007301772
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": -0.003977696803943436
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": -0.0036849030024882906
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": -0.004017082090902221
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": -0.0037003415477837778
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": -0.003848924407567704
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": -0.0038666054610040678
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": -0.0040701974087685696
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": -0.0037560740661573295
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": -0.0038861811616665454
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": -0.0038439277856451783
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": -0.0037907719968150815
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": -0.0038645319303606406
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": -0.0038033229408183464
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": -0.003910502872943004
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": -0.003870736534156964
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": -0.0038086527182867678
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": -0.0038683442645484215
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": -0.0038191833855802655
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": -0.0038663382821984187
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": -0.004002569748915289
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": -0.0038680032856015355
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": -0.004334330604934779
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": -0.0033917497113918277
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": -0.003310965611358447
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": -0.0018674293053146977
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": -0.004895358758723919
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": -0.004219421332651282
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": -0.004110021251577972
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": -0.004196372922292591
+        },
+        {
+          "removed": "QID196",
+          "estimate": -0.004222450894573132
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0065550180092126915,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.515973816519804
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0019918559914820066,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5431374328978018
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.001768900845386955,
+          "system_native_loss": 0.666163001258252,
+          "reference_native_loss": 0.667366364975602
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0002682597484701128,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6308923101283208
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.04016959545212732,
+          "system_native_loss": 0.2810445433066854,
+          "reference_native_loss": 0.29816548783065105
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0060755514805189235,
+          "system_native_loss": 0.4783380103795413,
+          "reference_native_loss": 0.4823763414559267
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.011296297253849149,
+          "system_native_loss": 0.431003992947929,
+          "reference_native_loss": 0.4245697770238578
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.03902804784042319,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.6172770568954346
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.009481542954213822,
+          "system_native_loss": 0.4890827179823412,
+          "reference_native_loss": 0.48247805962180046
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005159032697463957,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6067211164864863
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00023488664379635882,
+          "system_native_loss": 0.6227020872166151,
+          "reference_native_loss": 0.6228648396019143
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.006053019762094046,
+          "system_native_loss": 0.5102199538578317,
+          "reference_native_loss": 0.5069461409643138
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00583352271246035,
+          "system_native_loss": 0.5501436269666473,
+          "reference_native_loss": 0.554176894983805
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0013257152075188527,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41172590337278
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0053800848715023185,
+          "system_native_loss": 0.5842759642749071,
+          "reference_native_loss": 0.5879725480553882
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.003677576867781504,
+          "system_native_loss": 0.48757842511255467,
+          "reference_native_loss": 0.4853473330241484
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0024730874470169023,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.4967248531429556
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.006444145004234147,
+          "system_native_loss": 0.44216070946550556,
+          "reference_native_loss": 0.4455295515940862
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.005381884196529725,
+          "system_native_loss": 0.5257421333505903,
+          "reference_native_loss": 0.5223362674991919
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.008876970334579605,
+          "system_native_loss": 0.6248561009024765,
+          "reference_native_loss": 0.6187073069316852
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.013960946178921812,
+          "system_native_loss": 0.5768371157541526,
+          "reference_native_loss": 0.586444035697975
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.011949022717364694,
+          "system_native_loss": 0.5508070059931659,
+          "reference_native_loss": 0.5425334303913788
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.012756739645873823,
+          "system_native_loss": 0.5577082344495502,
+          "reference_native_loss": 0.5657063417464312
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0011672765827275594,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.43574272525160196
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00021184558530882103,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5479013938768725
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.016092017510940016,
+          "system_native_loss": 0.6428619066273911,
+          "reference_native_loss": 0.6319413877201217
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.008409603212736773,
+          "system_native_loss": 0.540631367400662,
+          "reference_native_loss": 0.545871693723658
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0017387502369820037,
+          "system_native_loss": 0.47557782949916616,
+          "reference_native_loss": 0.4744040584782594
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0015570130926845882,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6241751258609156
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005703164621432065,
+          "system_native_loss": 0.4589130063769578,
+          "reference_native_loss": 0.46262287719875445
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 5.011019512154324e-05,
+          "system_native_loss": 0.4006525661591668,
+          "reference_native_loss": 0.4006333631953769
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004724190989177461,
+          "system_native_loss": 0.5080044643922317,
+          "reference_native_loss": 0.5110635738572555
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.003635843716545855,
+          "system_native_loss": 0.5283471659490516,
+          "reference_native_loss": 0.5258444563454884
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0005340692912347185,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40907553542974756
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004308468346640612,
+          "system_native_loss": 0.5389344731704716,
+          "reference_native_loss": 0.541713885791706
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0003474722617684468,
+          "system_native_loss": 0.5786898421425487,
+          "reference_native_loss": 0.5784512485052434
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0034870762977477696,
+          "system_native_loss": 0.6404892456063405,
+          "reference_native_loss": 0.6429063792592888
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00019100563846820274,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6087849028062515
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.01081706004238408,
+          "system_native_loss": 0.5937680771078836,
+          "reference_native_loss": 0.5862630084140495
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0003208759039113209,
+          "system_native_loss": 0.5587170257189762,
+          "reference_native_loss": 0.5585044477825605
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0022195991952326855,
+          "system_native_loss": 0.07401392587810761,
+          "reference_native_loss": 0.07384450600968255
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.012861695101454516,
+          "system_native_loss": 0.1338664636767151,
+          "reference_native_loss": 0.13541488673378796
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.014154240701988622,
+          "system_native_loss": 0.1495832951550544,
+          "reference_native_loss": 0.15179745190214183
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.03725082159868861,
+          "system_native_loss": 0.14336353137688562,
+          "reference_native_loss": 0.1490686091573028
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.011196049655858936,
+          "system_native_loss": 0.13939584871885455,
+          "reference_native_loss": 0.13782280692935647
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0003810508386967498,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.1071952857124653
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.0013693504584762154,
+          "system_native_loss": 0.09521370050433971,
+          "reference_native_loss": 0.09536653524769058
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 1.2276272957683875e-05,
+          "system_native_loss": 0.10119348433451937,
+          "reference_native_loss": 0.1011921691572632
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0004295238294463237,
+          "system_native_loss": 0.662077327212778,
+          "reference_native_loss": 0.6618010135877465
+        }
+      ]
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "granite__neutral__cal_selected",
+      "equal_family": {
+        "estimate": 0.00019696355872724465,
+        "ci95": [
+          -0.0005411917710881828,
+          0.0009570210913808742
+        ]
+      },
+      "equal_endpoint": {
+        "estimate": 0.0004309263531698714,
+        "ci95": [
+          -0.0003379468942474686,
+          0.0012246927437169685
+        ]
+      },
+      "families": {
+        "economic_preferences": {
+          "estimate": 0.000566775717684945,
+          "ci95": [
+            -0.0003414194023769073,
+            0.0014993892575144252
+          ]
+        },
+        "heuristics_cognitive_bias": {
+          "estimate": -0.00017284860023045553,
+          "ci95": [
+            -0.0013176964044968,
+            0.000995941601070691
+          ]
+        }
+      },
+      "leave_one_endpoint_out": [
+        {
+          "removed": "QID9_1",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_2",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_3",
+          "estimate": 0.00023457817382490165
+        },
+        {
+          "removed": "QID9_4",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_5",
+          "estimate": 0.0002692263788558618
+        },
+        {
+          "removed": "QID9_6",
+          "estimate": 0.00026378949654611304
+        },
+        {
+          "removed": "QID9_7",
+          "estimate": 0.00025455486136194216
+        },
+        {
+          "removed": "QID9_8",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_9",
+          "estimate": 0.00020720311877953494
+        },
+        {
+          "removed": "QID9_10",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_11",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_12",
+          "estimate": 0.00021867764916380482
+        },
+        {
+          "removed": "QID9_13",
+          "estimate": 0.00019699055930131357
+        },
+        {
+          "removed": "QID9_14",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_15",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_16",
+          "estimate": 0.00021387136322870587
+        },
+        {
+          "removed": "QID9_17",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_18",
+          "estimate": 0.00011475293247864374
+        },
+        {
+          "removed": "QID9_19",
+          "estimate": 0.00022893400215833316
+        },
+        {
+          "removed": "QID9_20",
+          "estimate": 0.0002047589868637633
+        },
+        {
+          "removed": "QID9_21",
+          "estimate": 0.00017980953788940127
+        },
+        {
+          "removed": "QID9_22",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_23",
+          "estimate": 0.0002081055244275166
+        },
+        {
+          "removed": "QID9_24",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_25",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_26",
+          "estimate": 0.0002596258306952127
+        },
+        {
+          "removed": "QID9_27",
+          "estimate": 0.00015572370062632402
+        },
+        {
+          "removed": "QID9_28",
+          "estimate": 0.00012927233673309523
+        },
+        {
+          "removed": "QID9_29",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_30",
+          "estimate": 0.00022785848006770716
+        },
+        {
+          "removed": "QID9_31",
+          "estimate": 0.0001728120132537688
+        },
+        {
+          "removed": "QID9_32",
+          "estimate": 0.00010586381434728366
+        },
+        {
+          "removed": "QID9_33",
+          "estimate": 0.00015603695735486928
+        },
+        {
+          "removed": "QID9_34",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_35",
+          "estimate": 9.799360891721764e-05
+        },
+        {
+          "removed": "QID9_36",
+          "estimate": 0.0001178247459562927
+        },
+        {
+          "removed": "QID9_37",
+          "estimate": 0.0001180728625484218
+        },
+        {
+          "removed": "QID9_38",
+          "estimate": 0.00020422991408217987
+        },
+        {
+          "removed": "QID9_39",
+          "estimate": 0.00026850883513531023
+        },
+        {
+          "removed": "QID9_40",
+          "estimate": 0.0002102478673417511
+        },
+        {
+          "removed": "QID288_1",
+          "estimate": 0.00011534082175246778
+        },
+        {
+          "removed": "QID288_2",
+          "estimate": 4.869096195037122e-05
+        },
+        {
+          "removed": "QID288_3",
+          "estimate": 0.0001288545770064701
+        },
+        {
+          "removed": "QID288_4",
+          "estimate": 0.0001861605212128412
+        },
+        {
+          "removed": "QID289_1",
+          "estimate": 0.0004435126817197454
+        },
+        {
+          "removed": "QID289_2",
+          "estimate": 0.0001861605212128412
+        },
+        {
+          "removed": "QID289_3",
+          "estimate": 0.0003215878113996584
+        },
+        {
+          "removed": "QID289_4",
+          "estimate": 0.0001562036110779657
+        },
+        {
+          "removed": "QID196",
+          "estimate": 0.0001861605212128412
+        }
+      ],
+      "endpoints": [
+        {
+          "endpoint": "QID9_1",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5113692999916212,
+          "reference_native_loss": 0.5113692999916212
+        },
+        {
+          "endpoint": "QID9_2",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5445182251143169,
+          "reference_native_loss": 0.5445182251143169
+        },
+        {
+          "endpoint": "QID9_3",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.002367164259932295,
+          "system_native_loss": 0.666163001258252,
+          "reference_native_loss": 0.667773356971993
+        },
+        {
+          "endpoint": "QID9_4",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6310736768497972,
+          "reference_native_loss": 0.6310736768497972
+        },
+        {
+          "endpoint": "QID9_5",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.005069724252347186,
+          "system_native_loss": 0.2810445433066854,
+          "reference_native_loss": 0.2832053434516528
+        },
+        {
+          "endpoint": "QID9_6",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004645647432186793,
+          "system_native_loss": 0.4783380103795413,
+          "reference_native_loss": 0.48142590494441906
+        },
+        {
+          "endpoint": "QID9_7",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.003925345887821456,
+          "system_native_loss": 0.431003992947929,
+          "reference_native_loss": 0.4332398161076198
+        },
+        {
+          "endpoint": "QID9_8",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5918898116366189,
+          "reference_native_loss": 0.5918898116366189
+        },
+        {
+          "endpoint": "QID9_9",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00023190996639369302,
+          "system_native_loss": 0.4890827179823412,
+          "reference_native_loss": 0.4892442619531729
+        },
+        {
+          "endpoint": "QID9_10",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6031908164280063,
+          "reference_native_loss": 0.6031908164280063
+        },
+        {
+          "endpoint": "QID9_11",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6227020872166151,
+          "reference_native_loss": 0.6227020872166151
+        },
+        {
+          "endpoint": "QID9_12",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0011269233363667439,
+          "system_native_loss": 0.5102199538578317,
+          "reference_native_loss": 0.5108294572616876
+        },
+        {
+          "endpoint": "QID9_13",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0005646696729075694,
+          "system_native_loss": 0.5501436269666473,
+          "reference_native_loss": 0.5497532172186692
+        },
+        {
+          "endpoint": "QID9_14",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.41113196084907333,
+          "reference_native_loss": 0.41113196084907333
+        },
+        {
+          "endpoint": "QID9_15",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5842759642749071,
+          "reference_native_loss": 0.5842759642749071
+        },
+        {
+          "endpoint": "QID9_16",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0007520330334290224,
+          "system_native_loss": 0.48757842511255467,
+          "reference_native_loss": 0.4880346643731948
+        },
+        {
+          "endpoint": "QID9_17",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.49816810985036375,
+          "reference_native_loss": 0.49816810985036375
+        },
+        {
+          "endpoint": "QID9_18",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.006979204565075819,
+          "system_native_loss": 0.44216070946550556,
+          "reference_native_loss": 0.4385121512242865
+        },
+        {
+          "endpoint": "QID9_19",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.001926918869939955,
+          "system_native_loss": 0.5257421333505903,
+          "reference_native_loss": 0.52696156263184
+        },
+        {
+          "endpoint": "QID9_20",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -4.126767696350992e-05,
+          "system_native_loss": 0.6248561009024765,
+          "reference_native_loss": 0.6248846857049191
+        },
+        {
+          "endpoint": "QID9_21",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0019047893430367397,
+          "system_native_loss": 0.5768371157541526,
+          "reference_native_loss": 0.5755263766041065
+        },
+        {
+          "endpoint": "QID9_22",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5508070059931659,
+          "reference_native_loss": 0.5508070059931659
+        },
+        {
+          "endpoint": "QID9_23",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.00030229760693626956,
+          "system_native_loss": 0.5577082344495502,
+          "reference_native_loss": 0.557897766317644
+        },
+        {
+          "endpoint": "QID9_24",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.4349289656932032,
+          "reference_native_loss": 0.4349289656932032
+        },
+        {
+          "endpoint": "QID9_25",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.5480385735315296,
+          "reference_native_loss": 0.5480385735315296
+        },
+        {
+          "endpoint": "QID9_26",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.004320881495816553,
+          "system_native_loss": 0.6428619066273911,
+          "reference_native_loss": 0.6457941845744575
+        },
+        {
+          "endpoint": "QID9_27",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0037834846495567584,
+          "system_native_loss": 0.540631367400662,
+          "reference_native_loss": 0.5382737419931165
+        },
+        {
+          "endpoint": "QID9_28",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.005846691033228607,
+          "system_native_loss": 0.47557782949916616,
+          "reference_native_loss": 0.47163092766298786
+        },
+        {
+          "endpoint": "QID9_29",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6231084536575301,
+          "reference_native_loss": 0.6231084536575301
+        },
+        {
+          "endpoint": "QID9_30",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.001843028146871117,
+          "system_native_loss": 0.4589130063769578,
+          "reference_native_loss": 0.4601118839825828
+        },
+        {
+          "endpoint": "QID9_31",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0024505962646160593,
+          "system_native_loss": 0.4006525661591668,
+          "reference_native_loss": 0.3997134616272689
+        },
+        {
+          "endpoint": "QID9_32",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.00767255577932192,
+          "system_native_loss": 0.5080044643922317,
+          "reference_native_loss": 0.5030361665272178
+        },
+        {
+          "endpoint": "QID9_33",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0037590506247302245,
+          "system_native_loss": 0.5283471659490516,
+          "reference_native_loss": 0.5257596476638239
+        },
+        {
+          "endpoint": "QID9_34",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.40934319538544967,
+          "reference_native_loss": 0.40934319538544967
+        },
+        {
+          "endpoint": "QID9_35",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.008286431802867061,
+          "system_native_loss": 0.5389344731704716,
+          "reference_native_loss": 0.5335888581433018
+        },
+        {
+          "endpoint": "QID9_36",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0067396031138192035,
+          "system_native_loss": 0.5786898421425487,
+          "reference_native_loss": 0.574062058581533
+        },
+        {
+          "endpoint": "QID9_37",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0067202500196331385,
+          "system_native_loss": 0.6404892456063405,
+          "reference_native_loss": 0.6358309757287433
+        },
+        {
+          "endpoint": "QID9_38",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.6089172555000781,
+          "reference_native_loss": 0.6089172555000781
+        },
+        {
+          "endpoint": "QID9_39",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0050137558421441625,
+          "system_native_loss": 0.5937680771078836,
+          "reference_native_loss": 0.5972467101063106
+        },
+        {
+          "endpoint": "QID9_40",
+          "family": "economic_preferences",
+          "kind": "binary",
+          "normalized_difference": -0.0004694003542465422,
+          "system_native_loss": 0.5587170257189762,
+          "reference_native_loss": 0.5590280000160245
+        },
+        {
+          "endpoint": "QID288_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0011331151913659765,
+          "system_native_loss": 0.07401392587810761,
+          "reference_native_loss": 0.07392743628708415
+        },
+        {
+          "endpoint": "QID288_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0021995129481995205,
+          "system_native_loss": 0.1338664636767151,
+          "reference_native_loss": 0.1336016637000046
+        },
+        {
+          "endpoint": "QID288_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0009168951073019367,
+          "system_native_loss": 0.1495832951550544,
+          "reference_native_loss": 0.14943986467856696
+        },
+        {
+          "endpoint": "QID288_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.14336353137688562,
+          "reference_native_loss": 0.14336353137688562
+        },
+        {
+          "endpoint": "QID289_1",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.0041176345681104695,
+          "system_native_loss": 0.13939584871885455,
+          "reference_native_loss": 0.13997437520351788
+        },
+        {
+          "endpoint": "QID289_2",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.10723495369596259,
+          "reference_native_loss": 0.10723495369596259
+        },
+        {
+          "endpoint": "QID289_3",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": -0.002166836642989077,
+          "system_native_loss": 0.09521370050433971,
+          "reference_native_loss": 0.09545554357684506
+        },
+        {
+          "endpoint": "QID289_4",
+          "family": "heuristics_cognitive_bias",
+          "kind": "ordinal",
+          "normalized_difference": 0.0004793105621580097,
+          "system_native_loss": 0.10119348433451937,
+          "reference_native_loss": 0.10114213500788369
+        },
+        {
+          "endpoint": "QID196",
+          "family": "heuristics_cognitive_bias",
+          "kind": "binary",
+          "normalized_difference": 0.0,
+          "system_native_loss": 0.662077327212778,
+          "reference_native_loss": 0.662077327212778
+        }
+      ]
+    }
+  ]
+}

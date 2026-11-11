@@ -1,0 +1,732 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=.73in]{geometry}
+\usepackage[T1]{fontenc}\usepackage{lmodern,microtype,booktabs,amsmath,graphicx,float,natbib,hyperref,balance}
+\newcommand{\Description}[1]{}
+\renewcommand{\thefigure}{S\arabic{figure}}\renewcommand{\thetable}{S\arabic{table}}
+\input{assets/a89ea547303b.tex}
+\input{assets/fdf8204cecb9.tex}
+\input{assets/7ca54f120517.tex}
+\title{Supplement S4: Historical diagnostics}\author{Anonymous authors}\date{}\begin{document}\maketitle
+\section{Source-data identity audit}
+A separate CPU audit compared the derived corpus with the original
+\href{https://osf.io/q9jrh}{IPIP120.dat} from Johnson's data repository.
+The article describes the IPIP-NEO-120 study~\cite{johnson2014ipip}; the
+later OSF deposit linked here supplies the audited source file.
+The original file contains 619,150 records. All 410,168 retained derived
+records matched exactly by case identifier and the 120 recoded item values:
+zero absent cases and zero item mismatches. The source file's SHA-256 was
+checked against its published OSF metadata, and the derived corpus's SHA-256
+matched the frozen experiment input before and after the audit. Only aggregate
+counts were exported; respondent records used private temporary storage.
+The original DAT120 codebook confirms that reverse-keyed items were already
+recoded and zero denotes missingness. No second reversal was applied.
+This verifies retained case/item identity, not demographic-field equivalence,
+completeness of the historical filtering procedure, participant consent,
+upstream data permissions, or absence from pretraining. The audit did not
+estimate predictive performance or inspect panel-specific outcomes.
+
+\section{Scope}
+The evidence map in Table~\ref{tab:evidence-map} distinguishes the analysis families.
+These additional analyses are post hoc, using the exposed original 600-person
+cohort and three search seeds. They do not supply a new confirmatory sample.
+Original 110-test results are unchanged. The initial representation tests use one
+33-test Holm family; direct objective and interaction tests use a separate
+nine-test family. The figure/table differences are computed from unrounded
+values. Intervals for LLM comparisons cross respondents and observed search
+seeds; sign-flip p-values condition on those seeds. Ridge-only contrasts
+resample respondents with trained predictors held fixed.
+
+\begin{table*}[t]\centering\small
+\caption{Raw and calibrated losses of the same selected templates; the final
+column lists three seed-specific calibrated differences from each cell's base.}
+\begin{tabular}{@{}llrrl@{}}\toprule
+Model & Search family, fitness & Raw RPS & Calibrated RPS & Differences by seed\\\midrule
+\SeedRows
+\bottomrule\end{tabular}\end{table*}
+
+\paragraph{Objective contrasts.}
+The first four contrasts are raw-fitness minus calibrated-fitness RPS.
+Positive values favor calibrated fitness. Remaining rows subtract these
+paired objective effects; they are not inferred from subgroup significance.
+All five interaction intervals contain zero. No effect is claimed to generalize
+to an unseen optimizer seed. The smallest possible two-sided sign-test p-value
+with three seed pairs is .25; the table instead uses respondent-level sign flips
+after averaging the three seeds.
+\begin{table*}[t]\centering\small
+\caption{All nine post-hoc objective contrasts. Intervals cross respondents and observed seeds; Holm $p$ values condition on the three frozen runs.}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Contrast & Difference & Crossed 95\% interval & Conditional $p_{\rm H}$\\\midrule
+Qwen:GA:raw--calibrated & +0.00163 & [+0.00111,+0.00219] & 0.002\\
+Qwen:MAP:raw--calibrated & +0.00156 & [-0.00012,+0.00347] & 0.002\\
+Granite:GA:raw--calibrated & +0.00130 & [+0.00060,+0.00204] & 0.002\\
+Granite:MAP:raw--calibrated & +0.00205 & [+0.00015,+0.00340] & 0.002\\
+Qwen: GA--MAP objective & +0.00007 & [-0.00190,+0.00206] & 0.719\\
+Granite: GA--MAP objective & -0.00075 & [-0.00249,+0.00185] & 0.002\\
+GA:Qwen--Granite & +0.00033 & [-0.00028,+0.00099] & 0.252\\
+MAP:Qwen--Granite & -0.00049 & [-0.00158,+0.00049] & 0.047\\
+Optimizer--model interaction & +0.00082 & [-0.00029,+0.00211] & 0.012\\
+\bottomrule\end{tabular}\end{table*}
+
+\section{Representation controls}
+Categorical ridge uses 175 one-hot features: five categories for each of
+30 facets and five traits. Continuous ridge uses the same 35 values before
+discretization, standardized on training people. Both use 8,000 training and
+120 selection respondents, choosing penalty from $\{1,10,100,1000\}$ before
+reading evaluation labels. Selected penalties are 100 and 1, respectively.
+Categorical, continuous and raw-history ridge score 0.11384, 0.11558 and
+0.10955. Their pairwise differences (categorical--raw, continuous--raw,
+categorical--continuous) are 0.00428, 0.00603 and $-0.00174$; corresponding
+95\% intervals are $[.00378,.00478]$, $[.00540,.00664]$ and
+$[-.00231,-.00120]$. All have Holm $p=.006599$. These are fitted-model
+gaps, not a causal decomposition or an information bound.
+
+\section{Search ranking diagnostic}
+Each observed pool contributes the first complete evaluation per distinct
+candidate. We compare the saved raw and cross-fitted-calibrated scores,
+excluding tied pairs from the discordance denominator. The 24 pools span both
+models, three seeds, two optimizers and two objectives. Median Spearman
+correlation is .344, median discordant fraction .356, and median overlap of the
+two top-five sets is zero. These are within-search descriptors, not independent
+hypothesis tests or evidence of causal mediation.
+
+\paragraph{Independent summary recomputation.}
+A separate implementation reconstructed the 48 mixture-screen and 24
+prior-anchored extension comparisons from the retained individual loss arrays.
+For all 72 contrasts it exactly reproduced the mean differences, 5,000-draw
+respondent-bootstrap intervals, conditional sign-flip probabilities, Holm
+adjustments and joint screen decisions. The same declared random stream was
+used for numerical comparison. This check validates aggregation from saved
+losses; it does not regenerate model forecasts, refit predictors, or provide
+independent confirmation of the adaptive scientific findings. The aggregate
+receipt and checking source accompany the evidence bundle; individual losses
+remain on the research host.
+
+\section{Artifact inventory}
+Machine-readable aggregates contain all 33 representation contrasts and all 9
+objective contrasts, plus 24 history summaries. The fixed diagnostic protocol,
+analysis scripts and figure scripts accompany this local draft. Raw human
+records remain on the research host. Their inclusion in an anonymous release
+requires a separate permission and de-identification review; this local
+inventory is not a claim that a public release already exists.
+\begin{table*}[t]\centering\small
+\caption{Distinct analysis families. Original post-hoc families reuse the
+exposed Evaluate600; fixed-template transfer uses 600 additional people from
+the same corpus. Holm corrections are within families, not across the adaptive
+research program.}\label{tab:evidence-map}
+\begin{tabular}{@{}p{.25\textwidth}p{.23\textwidth}p{.40\textwidth}@{}}\toprule
+Question / family & Status & Target and interpretation\\\midrule
+Primary and original arm contrasts / 110 & Frozen before evaluation & Respondent mean over three frozen runs; crossed intervals also resample observed runs.\\
+Representation / 33 & Post hoc & Fitted-model comparison at 8,000 labels, same exposed people.\\
+Objectives and interactions / 9 & Post hoc & Direct run-index paired effects, conditional sign flips; three seeds.\\
+Ordinary budget / 48; shared-prior budget / 48 & Sequential adaptive diagnostics & Fixed fitted predictors at each budget, three LLM runs; separate families.\\
+Mixture screen / 48 & Adaptive exploratory & Respondent effects conditional on nine fixed fit/run combinations; no optimizer or subset resampling.\\
+Anchored rival / 24 & Subsequent adaptive extension & Frozen original hybrid versus prior-anchored ridge and its neutral mixture; same nine fixed combinations.\\
+Readout replay / 4 intervals & Engineering diagnostic & Calibration-only numerical compatibility, separate from predictive improvement.\\
+Selected-template replay / 4 primary + 4 secondary & Frozen replay on exposed data & Two fresh-server rounds of the GA objective contrast; separate Holm-four families. No new optimizer runs or people.\\
+Additional-respondent transfer / 3 primary & Fixed after original outcomes & Historical GA/MAP winners on 600 inventoried-disjoint same-corpus people; three Granite tests, conditional on old seeds. Qwen and ridge are mandatory diagnostics.\\
+Same-shortlist selector / 10 & Subsequent exploratory intervention & Five candidates from each of 12 archived GA pools; raw versus cross-fitted calibrated selection, then the old exposed Evaluate600. Four selector effects, four search effects, two interactions; three old seeds.\\\bottomrule
+\end{tabular}\end{table*}
+
+
+\clearpage\onecolumn
+\section{Full method visualization}
+\begin{center}
+\includegraphics[width=.90\textwidth]{assets/99a7b3e5d11c.pdf}
+\end{center}
+\noindent\textbf{Figure S1.} All 14 method/objective identities relative to their
+own base. Circles are mean differences, bars are crossed 95\% intervals,
+and ticks are seed values. Blue highlights calibrated-fitness variants.
+The family remains the original 110 comparisons.
+\clearpage
+\section{Paired MAP-Elites objective effects}
+\begin{center}
+\includegraphics[width=.98\textwidth]{assets/5220d2537bbe.pdf}
+\end{center}
+\noindent\textbf{Figure S2.} All paired MAP-Elites seed effects and overall
+crossed interval. Seeds are paired by initialization index, not a shared
+mutator-sample trajectory. Points show independent search runs. Positive favors calibrated fitness.
+
+\section{Calibration-only readout repeatability}
+An engineering replay used the same neutral persona, pinned source and serving
+configuration, and all 120 calibration people twice per model. No search or
+new evaluation-person forecast was run. A pointwise probability tolerance of
+$5\times10^{-4}$ failed; archived original runs also fail that tolerance against
+their shared reference. Before reading the new full-panel replay results, a
+dated amendment fixed a separate calibration-score compatibility criterion:
+four paired respondent-bootstrap 98.75\% intervals, each wholly within
+$[-0.0001,+0.0001]$ RPS (20,000 draws; Bonferroni-four interval levels).
+The margin is below 8\% of the smaller exploratory GA objective effect.
+This is a post-failure engineering amendment, not an original scientific
+preregistration or a claim of population equivalence.
+
+Source, model, configuration, current token reconstruction, repeated token
+sequences, person/item order, probabilities and costs passed their checks.
+Three raw-RPS comparisons passed the amended interval rule. Qwen repeat 2
+had mean difference $+0.0000700$ and interval $[-0.0001570,+0.0002709]$,
+which failed. All four comparisons and failed pointwise probes were retained;
+the planned new-seed search was not released. The observed score variation
+does not establish its cause, invalidate every original effect estimate, or
+bound optimized-candidate variability. Historical token sequences were not
+saved, so present reconstruction cannot retrospectively prove their identity.
+
+\begin{table}[H]\centering\small
+\caption{Calibration replay versus historical neutral readout. Intervals are
+98.75\% paired respondent intervals; the fixed compatibility margin is
+$\pm0.0001$. These differences are not optimized-template uncertainty bounds.}
+\begin{tabular}{@{}lrrl@{}}\toprule
+Replay & Mean raw RPS change & Interval & Within margin\\\midrule
+Qwen 1 & +0.0000121 & [-0.0000012,+0.0000364] & Yes\\
+Qwen 2 & +0.0000700 & [-0.0001570,+0.0002709] & No\\
+Granite 1 & +0.0000011 & [0,+0.0000034] & Yes\\
+Granite 2 & +0.0000001 & [-0.0000036,+0.0000030] & Yes\\\bottomrule
+\end{tabular}\end{table}
+For scale, the saved three-run GA raw-minus-calibrated effects are 0.00163
+(Qwen) and 0.00130 (Granite); the planned Granite MAP-Elites effect is 0.00205.
+The replay intervals concern neutral calibration forecasts, whereas these
+scientific effects concern selected-template evaluation forecasts. The saved
+forecast scores reproduce exactly; serving-level repeatability remains open.
+
+\paragraph{Concurrency intervention.}
+A subsequent frozen engineering protocol restarted the Qwen server for four
+blocks with request concurrency $4,1,1,4$, each replaying the same 120-person
+neutral calibration panel twice. All 57,600 forecasts completed with identical
+prompt-token hashes. Within-server respondent RPS root-mean-square differences
+were $0.000118$, $0.000979$, $0.001071$, and $0.000084$, respectively.
+Serial requests therefore did not repair repeatability in this diagnostic.
+Six of eight historical-reference intervals extended beyond the original
+$\pm0.0001$ margin, including both replays of the final concurrency-four block
+despite its small within-server difference. These intervals are descriptive
+diagnostics, not a new multiplicity-controlled acceptance test. Two blocks per
+setting do not identify a particular numerical kernel as the cause or bound
+optimized-template variation. The additional-seed scientific campaign remains
+blocked; no failed replay was replaced or tolerance relaxed.
+
+\section{Selected-template serving robustness}
+A separate protocol fixed two complete replay rounds before new inference.
+Each round covers both models, both GA fitness objectives and all three
+historical template seeds: 24 cells in total, each with a fresh server and
+the unchanged final runner. Selected templates, model locks, input panels,
+source hashes, the 8,000-person prior and historical results were preserved.
+Each cell repeats base/evolved calibration on 120 people and
+base/evolved/wrong-profile prediction on the same exposed 600 people.
+There is no new search, prospective respondent sample or hybrid-mixture test.
+
+The primary analysis refits calibration on the original calibration panel.
+The secondary analysis transfers each historical calibration weight and CDF
+center to the new evaluation forecasts. Each regime has four model-by-round
+contrasts and a separate Holm-four correction. The frozen positive screen
+requires all four positive differences, positive lower crossed-interval bounds
+and adjusted $p<.05$. Intervals use 5,000 crossed respondent/template draws;
+sign flips condition on the same three templates. Neither two serving rounds
+nor resampling those templates estimates variation across new optimization runs.
+
+\input{assets/44de11002e15.tex}
+
+Both regimes satisfy their four-contrast screen. All 12 seed-specific primary
+differences are positive; the complete seed values and cell-level controls
+are retained in the aggregate report. Calibration weights do not change in
+any of the 48 base/evolved comparisons with historical values, although CDF
+centers and probabilities can change. Across the 24 base/evolved evaluations
+per model, mean refitted-RPS changes versus history range from
+$-0.0000493$ to $+0.0000783$ for Qwen and $-0.00000281$ to $+0.00000109$
+for Granite. Corresponding raw-RPS changes range from $-0.0000851$ to
+$+0.0001075$ and from $-0.00000352$ to $+0.00000581$, respectively.
+The largest individual probability-coordinate drift is 0.4337 for Qwen and
+0.0617 for Granite; preserved aggregate contrasts therefore do not establish
+pointwise reproduction. Wrong-profile minus evolved RPS remains positive in
+every cell (Qwen 0.04078--0.04810; Granite 0.03164--0.03782).
+Ridge fits and their saved losses are unchanged by this experiment.
+
+All 24 cells complete with 2,937,600 confirmed forecasts, zero failed or
+uncertain forecasts, and 3,596,132,160 reported prompt tokens. Slurm records
+29,223 allocated single-GPU seconds (8.1175 GPU-hours), including server startup.
+This is replay cost, not an end-to-end optimization-efficiency estimate.
+All four primary contrasts were additionally recomputed from saved individual
+losses by an independent statistics implementation; its receipt reports the
+numerical agreement. The historical failed engineering gates remain failed.
+These results support the observed GA contrast under the two tested serving
+replays, not a repaired serving configuration or independent confirmation on
+new people, optimizer trajectories, or behavioral outcomes.
+
+\section{Additional-respondent fixed-template transfer}\label{sec:transfer}
+After the original outcomes were inspected, a separate internal protocol
+froze 24 historical selected GA/MAP-Elites-style templates: both models, two
+search fitness objectives and three old seeds. The new 600 complete-case
+respondents were sampled from 36,119 eligible people after exclusion of the
+reachable inventoried historical exposure union. They come from the same
+public IPIP120 corpus, so lifetime or model-pretraining exposure cannot be
+excluded. Original Train8000 priors, Calibrate120 alpha and CDF centers,
+frozen prompts, model snapshots and the selected same-history ridge
+specification were reused. No new search or shortlist selection occurred;
+this test does not evaluate the separate developmental aligned-selector
+recipe. The internal freeze is not an external preregistration.
+
+The three declared primary tests are Granite calibrated MAP versus raw MAP,
+calibrated MAP versus its neutral base, and calibrated GA versus its neutral
+base. Positive differences below are comparator minus calibrated-template
+RPS. Crossed intervals resample respondents and the three \emph{observed}
+search seeds; sign flips condition on those seeds. The original combined
+decision rule requires a positive crossed interval and Holm $p<.05$ within
+the three-test family. Qwen and other comparisons are diagnostics with their
+uncorrected sign-flip $p$ values shown for completeness; their small values
+are not additional declared primary successes.
+
+\begin{table}[H]\centering\scriptsize
+\caption{All eight E1 objective and neutral comparisons on the 600 additional
+respondents. Positive favors the calibrated historical winner. Primary Holm
+$p$ applies only to the three Granite tests marked P; the Granite MAP
+calibrated-versus-raw interval crosses zero and fails the combined rule.}
+\label{tab:e1-contrasts}
+\begin{tabular}{@{}llllrr@{}}\toprule
+Model & Arm & Contrast & $\Delta$ RPS [crossed 95\% CI] & Sign-flip $p$ & Primary $p_{\rm H}$\\\midrule
+Qwen & GA & cal vs raw & $+0.001805$ [$+0.001358,+0.002257$] & .0002 & --\\
+Qwen & GA & cal vs base & $+0.000337$ [$-0.000174,+0.000854$] & .1184 & --\\
+Qwen & MAP & cal vs raw & $+0.001680$ [$+0.000007,+0.003393$] & .0002 & --\\
+Qwen & MAP & cal vs base & $+0.000180$ [$-0.000506,+0.000806$] & .4043 & --\\
+Granite & GA & cal vs raw & $+0.001229$ [$+0.000626,+0.001812$] & .0002 & --\\
+Granite & GA & cal vs base (P) & $+0.002286$ [$+0.001661,+0.002893$] & .0002 & .0006\\
+Granite & MAP & cal vs raw (P) & $+0.001523$ [$-0.000182,+0.002733$] & .0002 & .0006\\
+Granite & MAP & cal vs base (P) & $+0.002156$ [$+0.001344,+0.003113$] & .0002 & .0006\\\bottomrule
+\end{tabular}\end{table}
+
+\begin{table}[H]\centering\scriptsize
+\caption{Mandatory E1 controls for each calibrated historical winner. Values
+are comparator minus calibrated-template RPS with crossed 95\% intervals;
+negative ridge differences mean ridge is better. These diagnostics were not
+in the three-test primary family.}
+\label{tab:e1-controls}
+\begin{tabular}{@{}lll l@{}}\toprule
+Model & Arm & Same-history ridge minus template & Wrong-persona minus matched template\\\midrule
+Qwen & GA & $-0.020850$ [$-0.021898,-0.019877$] & $+0.044778$ [$+0.041452,+0.048465$]\\
+Qwen & MAP & $-0.020995$ [$-0.022161,-0.019898$] & $+0.041762$ [$+0.039263,+0.044285$]\\
+Granite & GA & $-0.025188$ [$-0.026441,-0.023977$] & $+0.035653$ [$+0.032601,+0.038636$]\\
+Granite & MAP & $-0.025318$ [$-0.026688,-0.023941$] & $+0.035213$ [$+0.031855,+0.038961$]\\\bottomrule
+\end{tabular}\end{table}
+
+All 24 cells have 600 people and 60 target items. The independent output gate
+confirmed the original frozen lineage, 24 immutable attempts, serving logs,
+probability and mass arrays, and $2{,}937{,}600$ requested and confirmed
+forecasts with no failed or uncertain request. Prompt-token receipts sum to
+$3{,}500{,}088{,}480$; these are new inference costs, not search costs.
+The separately written finite CPU verifier reconstructed all 72 labelled
+cell/control score rows, the selected ridge, all 16 contrast distributions
+and the three-test Holm correction from saved raw forecasts and target labels;
+its maximum discrepancy from the frozen analysis was
+$8.33\times10^{-17}$. It shares the pinned CDF projection and ridge-fit
+numerical primitives and does not independently regenerate model forecasts.
+
+The same-history ridge, selected originally and refit on 8,000 old training
+people with the same 60 observed answers, scores 0.10821 RPS here. Calibrated
+GA/MAP means are 0.12906/0.12920 on Qwen and 0.13340/0.13353 on Granite.
+The three observed Granite MAP seed effects against raw are
+$-0.000288,+0.002381,+0.002477$; the first is unfavorable. A low answer-token
+mass diagnostic for raw Granite MAP seed 3 is retained (mean 0.9473; 2.37\%
+of target cells below 0.5), above the frozen mean-mass exclusion threshold.
+Neither favorable base comparisons nor matched-versus-wrong-persona signals
+establish optimizer superiority to ridge, new-search generalization, or
+behavioral transfer.
+
+\section{Exploratory same-shortlist selector intervention}
+This E2 experiment reused the \emph{original exposed} Evaluate600, rather
+than E1's additional 600 people. For each of the 12 archived GA trajectories
+(two models, raw/calibrated search objectives, three seeds), the same five
+historical candidates received new Select120 forecasts. Raw RPS and a fixed
+two-fold cross-fitted calibrated RPS each selected one candidate from that
+identical pool. Both choices were frozen before fresh Calibrate120/Evaluate600
+inference, with a fresh neutral-base readback; one coincident pair was
+deduplicated. There was no new search or new respondent cohort. The selection
+stage confirmed 432,000 forecasts and the final stage 1,512,000, with zero
+failed or uncertain requests; prompt-token receipts were 624,369,600 and
+1,843,379,400, respectively. These are additional serving costs, not total
+optimizer costs.
+
+In Table~\ref{tab:e2-contrasts}, selector effects subtract raw-selector RPS
+from calibrated-selector RPS within the named search objective. Search effects
+subtract raw-search RPS from calibrated-search RPS within the named selector.
+Negative values favor the first, calibrated option. The interaction is the
+calibrated-selector search effect minus the raw-selector search effect.
+Crossed 95\% intervals resample respondents and the three \emph{observed}
+search seeds; respondent sign flips condition on those seeds, with Holm over
+all ten two-sided tests. A favorable claim requires both a crossed interval
+excluding zero and adjusted $p<.05$. The three seed columns are differences
+on the fixed, paired archived trajectories, not new-search replicates.
+
+\begin{table}[H]\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{All ten E2 contrasts on the exposed original Evaluate600. Values are
+calibrated RPS differences as defined in text; lower is better. All four
+direct selector intervals include zero. The Qwen search effect under the raw
+selector is the only interval wholly below zero; it is not selector benefit.}
+\label{tab:e2-contrasts}
+\begin{tabular}{@{}lp{.19\textwidth}lrrrc@{}}\toprule
+Model & Contrast & $\Delta$ [crossed 95\% CI] & Seed 1 & Seed 2 & Seed 3 & $p_{\rm H}$\\\midrule
+Qwen & Selector; calibrated search & $-0.000153$ [$-0.000495,+0.000181$] & $+0.000044$ & $-0.000434$ & $-0.000068$ & .3179\\
+Qwen & Selector; raw search & $-0.000587$ [$-0.001456,+0.000044$] & $+0.000000$ & $-0.001541$ & $-0.000221$ & .0020\\
+Qwen & Search; calibrated selector & $-0.000740$ [$-0.001712,+0.000308$] & $-0.001699$ & $+0.000376$ & $-0.000896$ & .0020\\
+Qwen & Search; raw selector & $-0.001174$ [$-0.001852,-0.000562$] & $-0.001743$ & $-0.000730$ & $-0.001049$ & .0020\\
+Qwen & Search $\times$ selector & $+0.000434$ [$-0.000152,+0.001131$] & $+0.000044$ & $+0.001107$ & $+0.000153$ & .0144\\\midrule
+Granite & Selector; calibrated search & $-0.000013$ [$-0.000208,+0.000302$] & $+0.000249$ & $-0.000134$ & $-0.000154$ & .8352\\
+Granite & Selector; raw search & $-0.000473$ [$-0.001334,+0.000104$] & $+0.000062$ & $-0.001435$ & $-0.000045$ & .0020\\
+Granite & Search; calibrated selector & $-0.000171$ [$-0.001693,+0.001081$] & $-0.001782$ & $+0.001124$ & $+0.000143$ & .3179\\
+Granite & Search; raw selector & $-0.000631$ [$-0.001872,+0.000357$] & $-0.001969$ & $-0.000177$ & $+0.000252$ & .0020\\
+Granite & Search $\times$ selector & $+0.000460$ [$-0.000158,+0.001250$] & $+0.000187$ & $+0.001301$ & $-0.000109$ & .0020\\\bottomrule
+\end{tabular}\end{table}
+
+Calibrated selection changed 11 of 12 winners but none of its four direct
+effects passes the combined interval-and-$p$ rule. The two raw-search
+selector tests have small adjusted sign-flip probabilities despite crossed
+intervals spanning zero; they are not declared improvements. Original
+selection-audit attempt failed on a post-receipt server shutdown
+diagnostic. Versioned selection gate classified that event explicitly
+and passed the archived arrays; final gate and independent CPU readback
+passed all 12 cells and ten contrasts. This operational chain does not
+repair numerical serving compatibility. Compared with the historical base,
+fresh Qwen base per-cell mean absolute RPS-loss drift was roughly
+0.00031--0.00037 (maximum individual drift 0.0028--0.0048); Granite drift was
+much smaller. All reported E2 contrasts therefore compare predictions within
+the fresh serving execution. E2 does not test its selected winners on E1's
+additional people, and E1 never evaluated those winners.
+
+\input{assets/afb4d1486c35.tex}
+\input{assets/1315ec97e322.tex}
+\input{assets/7f629743eacd.tex}
+
+\clearpage
+\section{Full-data representation comparison}
+\begin{center}\includegraphics[width=.86\textwidth]{assets/492d193482a7.pdf}\end{center}
+\noindent\textbf{Figure S3.} Full-data ridge and persona controls. Shared statistical predictors are repeated across panels for comparison. All ridge controls in this figure use 8,000 person-level labelled mappings. LLM arms use their frozen population calibration; ridge directly predicts ordinal CDFs. These are held-out RPS values, not an equal-supervision comparison. The dashed vertical line marks categorical-profile ridge.
+
+\section{Associative label-budget diagnostics}
+Two additional 48-test families cover the ordinary and shared-prior budget diagnostics, separately from the earlier 33 representation and nine objective contrasts.
+
+The original 600-person cohort was already exposed. The ordinary-ridge diagnostic
+was followed by a separate rival test using the 8,000-person empirical item prior.
+Both are post hoc. For each fitting subset, the anchored variant predicts
+\begin{equation}
+\widehat F_{\rm anchored}(x)=\operatorname{Proj}\bigl(\widehat F_{\rm ridge}(x)+F_{0,8000}-\overline Y_{\rm subset}\bigr),
+\end{equation}
+where $\widehat F_{\rm ridge}$ is the unprojected intercept-fit ridge output and
+$\overline Y_{\rm subset}$ the mean target-threshold vector. This changes only the
+intercept at a given penalty; each variant selects its penalty on the same 120
+selection people. It is algebraically centered no-intercept ridge about the
+population prior. Using the original solver precision makes the full 8,000-point
+correction zero and exactly reproduces every original individual loss.
+
+\begin{table}[H]\centering\small
+\caption{Mean RPS at each ridge fitting budget. Lower is better.}\label{tab:budget}
+\begin{tabular}{@{}llrr@{}}\toprule
+Features & Fit people & Ordinary & Shared prior\\\midrule
+categorical & 80 & 0.13956 & 0.13802\\
+categorical & 200 & 0.13150 & 0.13099\\
+categorical & 320 & 0.12791 & 0.12759\\
+categorical & 1,000 & 0.12069 & 0.12059\\
+categorical & 8,000 & 0.11384 & 0.11384\\
+categorical & exact 80 & 0.13814 & 0.13669\\
+raw & 80 & 0.13795 & 0.13643\\
+raw & 200 & 0.12972 & 0.12921\\
+raw & 320 & 0.12607 & 0.12575\\
+raw & 1,000 & 0.11824 & 0.11815\\
+raw & 8,000 & 0.10955 & 0.10955\\
+raw & exact 80 & 0.13624 & 0.13494\\
+\bottomrule\end{tabular}\end{table}
+
+Positive contrast values in the accompanying diagnostic files mean LLM minus
+ridge RPS; negative values favour the LLM. Every variant has 48 comparisons:
+2 representations times 6 fitting conditions times 4 GA model/objective arms.
+Each family is separately Holm corrected. This does not correct for adaptively
+choosing the second diagnostic after seeing the first. The full 48-row tables,
+all subset means and frozen selection specifications are retained in the local
+research artifact; no public data-release claim is made.
+
+The ten fitting subsets per budget overlap. Their mean losses average separate
+predictors, not ensemble probabilities; their min/max spread is not a confidence
+interval. Crossed intervals resample only respondents and LLM search seeds,
+conditioning on statistical fits and the population prior. Fitting counts omit
+120 selection people. LLMs additionally use 120 calibration people and foundation-model
+pretraining, so matching the empirical prior does not imply identical total
+supervision or prove a causal sample-efficiency advantage. The exact 80 row uses
+the original search people instead of training-panel subsets.
+
+\section{Fitting-budget visualization}
+\begin{center}\includegraphics[width=.95\textwidth]{assets/8fc919841dd2.pdf}\end{center}
+\noindent\textbf{Figure S4.} Ordinary and shared-prior ridge learning curves.
+Whiskers are ranges across ten overlapping fitted subsets, not confidence
+intervals. At 8,000 there is one fit. LLM lines average three frozen runs;
+statistical curves repeat across model panels for comparison.
+
+\section{Exploratory complementarity protocol}
+We apply the established linear forecast pool~\cite{gneiting2011combining}:
+\begin{equation}H_{ij}=(1-w)R_{ij}+wP_{ij},\qquad w\in\{0,.05,\ldots,1\}.\end{equation}
+The convex combination is a valid CDF because both components are valid CDFs.
+Ridge uses categorical or raw-answer features and nested subsets of 80, 200 or
+320 training people, defined by seeds 202610081--202610083. It selects its
+penalty on Select120. The first 60 ordered Calibrate people fit each persona's
+scale and mean CDF; the last 60 choose the mixture weight. Neither calibration
+nor mixture weights are refitted after selection. All three calibrated-GA runs
+and their own neutral counterparts are retained. No new LLM calls are made.
+
+The empirical prior uses Train8000 and the original prompt search uses
+Search80/Select120. Each mixture requires the same last60 selection labels;
+neutral and population mixtures independently select their weights. Thus all
+supervision roles remain explicit. Train subsets overlap Train8000 and do not
+represent additional distinct people. RPS first averages 60 items per person,
+then averages losses over nine fixed fit/run combinations. This is not an
+ensemble of nine prediction vectors. A single 48-test Holm family covers all
+12 conditions against four controls. Intervals and sign flips use 5,000 paired
+respondent draws with seed 20261008, conditional on these fixed fits. A useful
+screen result requires gain at least 0.001, a positive 95\% interval and
+Holm $p<.05$. All comparisons and nulls are retained. Selection parameters
+were saved before explicit evaluation extraction; the full corpus and
+evaluation-bearing result containers had already been loaded. This is a
+procedural dataflow guard, not capability-level isolation; original full120-calibrated losses
+reproduce exactly in all 12 base/evolved checks.
+
+
+
+\clearpage
+\setcounter{figure}{4}
+\section{Complete complementarity results}
+\begin{figure}[H]\centering
+\includegraphics[width=.96\textwidth]{assets/38626aff3166.pdf}
+\Description{All forty-eight mean score contrasts and respondent intervals across two models, two feature representations and three fitting budgets.}
+\caption{All 48 contrasts: control minus optimized-persona mixture RPS.
+Positive favors the mixture. Bars are respondent-bootstrap 95\% intervals
+conditional on the fixed nine fits; the dotted line is the 0.001 screening
+threshold. Color and marker identify the comparator. Full numerical means,
+intervals and within-family Holm values are retained in the associated table.}
+\end{figure}
+Mixtures beat both standalone components in every condition. Optimization
+itself passes the additional magnitude/statistical gate over the neutral
+mixture only on Granite for categorical 80/200 and raw 80. No Qwen condition
+passes that gate. The selected prior-mixture weights are all zero. Prior
+mixing is a different comparator from refitting the intercept around the
+population prior; the latter is tested separately below.
+The analysis is adaptive on exposed respondents and complements, rather than
+supersedes, earlier corpus-specific null evidence on persona combinations.
+
+\clearpage
+\section{Adversarial prior-anchored comparison}
+After viewing the original screen, a separate protocol froze all 12 conditions
+and the original hybrid forecasts. The two new rivals are the prior-anchored
+ridge defined above, selecting its penalty on Select120, and a neutral-persona
+mixture using that ridge. Neutral calibration uses the first 60 Calibrate
+people and its independently selected mixture weight uses the last 60.
+All 18 anchored fits reproduce the corresponding earlier individual losses
+within $8.4\times10^{-17}$; original hybrid means are unchanged exactly.
+No new LLM calls or GPU inference are used. The procedural evaluation guard
+does not restrict the process's underlying file access.
+
+The 24 contrasts form a separate Holm family with 5,000 paired respondent
+bootstrap/sign-flip draws, conditional on the same nine fixed combinations.
+The unchanged screening rule requires gain at least 0.001, positive marginal
+95\% interval and adjusted $p<.05$. All twelve hybrids beat anchored ridge
+by 0.00161--0.00984 RPS (all $p_{\rm H}=.0048$). Against neutral-plus-anchored
+ridge, Granite gains 0.00044--0.00164; only categorical 80 and raw 80 also
+clear the magnitude threshold. Qwen loses 0.00025--0.00038 in all six
+conditions; five differences have $p_{\rm H}<.05$ and categorical 80 has
+$p_{\rm H}=.0514$. Thus the stronger rival preserves the component-combination
+result while narrowing the case for optimized personas. This remains adaptive
+exposed-cohort evidence. Changing both the prompt and decoder makes the rival
+a practical comparison, not a causal ablation of optimization.
+
+\begin{figure}[H]\centering
+\includegraphics[width=.92\textwidth]{assets/426770f79060.pdf}
+\Description{All twenty-four contrasts against stronger anchored ridge and neutral-plus-anchored controls, including negative Qwen differences.}
+\caption{All 24 adversarial contrasts: comparator minus the unchanged original
+hybrid. Bars are conditional respondent-bootstrap 95\% intervals; positive
+favors the hybrid. The dotted line is the 0.001 screening threshold. All
+conditions and unfavorable outcomes are retained; this family is separate
+from the original 48 contrasts.}
+\end{figure}
+
+\clearpage
+\input{assets/297c7f9cdedc.tex}
+
+\begin{table}[H]\centering\small
+\caption{All exploratory mixture conditions: mean RPS, lower is better.
+Each mean averages losses of the nine fixed fits. The preceding forest plot
+shows every paired contrast and its conditional interval.}
+\begin{tabular}{@{}llrrrrrr@{}}\toprule
+Model & Features & Fit $n$ & Hybrid & Ridge & Persona & Neutral mix & Prior mix\\\midrule
+Qwen & categorical & 80 & 0.12859 & 0.14017 & 0.12972 & 0.12846 & 0.14017\\
+Qwen & categorical & 200 & 0.12613 & 0.13163 & 0.12972 & 0.12595 & 0.13163\\
+Qwen & categorical & 320 & 0.12427 & 0.12776 & 0.12972 & 0.12413 & 0.12776\\
+Qwen & raw & 80 & 0.12800 & 0.13891 & 0.12972 & 0.12786 & 0.13891\\
+Qwen & raw & 200 & 0.12468 & 0.12984 & 0.12972 & 0.12448 & 0.12984\\
+Qwen & raw & 320 & 0.12237 & 0.12590 & 0.12972 & 0.12221 & 0.12590\\
+Granite & categorical & 80 & 0.13198 & 0.14017 & 0.13392 & 0.13392 & 0.14017\\
+Granite & categorical & 200 & 0.12838 & 0.13163 & 0.13392 & 0.12946 & 0.13163\\
+Granite & categorical & 320 & 0.12584 & 0.12776 & 0.13392 & 0.12656 & 0.12776\\
+Granite & raw & 80 & 0.13121 & 0.13891 & 0.13392 & 0.13303 & 0.13891\\
+Granite & raw & 200 & 0.12667 & 0.12984 & 0.13392 & 0.12761 & 0.12984\\
+Granite & raw & 320 & 0.12383 & 0.12590 & 0.13392 & 0.12448 & 0.12590\\
+\bottomrule\end{tabular}\end{table}
+
+\section{AI-assistance record}
+This revision additionally used Claude Code for independent manuscript critique and Codex for analysis, editing and plotting; the main paper states the combined disclosure. Historical records below concern earlier stages.
+
+Codex assisted source inspection, experiment specification, coding and writing;
+retained review records identify GPT-5.6-Sol for draft and claim review.
+Retained Claude artifacts document generic figure-layout assistance; research
+labels and numerical values were bound and checked locally. Available records
+are inventoried in \texttt{AI\_CONTRIBUTION\_LEDGER\_20261020.json} in the
+research evidence directory, including artifact hashes and coverage limits.
+This is a partial record: complete prompt/response retention and independently
+attested model identities are unavailable. Exact versions and prompts for older
+unrecorded interactions remain unknown.
+
+\section{Exploratory mixture uncertainty}
+\begin{figure*}[t]
+\centering\includegraphics[trim={0 .75cm 1.5cm 1.2cm},clip,width=.96\textwidth]{assets/b5f29adb5aa2.pdf}
+\Description{Two model panels show raw-answer hybrid gains over ridge,
+calibrated persona, and the stronger neutral-plus-anchored-ridge rival at
+three fitting budgets. Intervals are conditional on fixed fitted predictors;
+the stronger neutral rival beats the hybrid in all three Qwen conditions.}
+\caption{Exploratory paired gains on the exposed 600 respondents (raw-answer
+features). Positive values favor the optimized-persona mixture; bars are 95\%
+respondent intervals conditional on nine fixed fit/run combinations. The
+vertical dotted line marks the 0.001 practical threshold. Component comparisons
+belong to the 48-test family; the stronger neutral rival to the separately
+frozen 24-test family. Intervals are pointwise. All LLMs also use the
+8,000-person prior; small fitting counts are not total supervision budgets.
+The supplement includes categorical features and every declared comparison.}
+\label{fig:hybrid}
+\end{figure*}
+
+\section{Original-cohort objective effects}
+\begin{figure*}[t]
+\centering\includegraphics[width=.96\textwidth]{assets/9fc06813afc7.pdf}
+\Description{Two model panels show three paired seed effects and pooled
+crossed intervals for GA and MAP-Elites. Positive raw-minus-calibrated RPS
+favors calibrated fitness. Qwen MAP-Elites includes a negative seed effect.}
+\caption{Direct objective effects, post-hoc analysis. Ticks show
+three paired seed effects; circles and bars show means and crossed
+95\% intervals. Positive values favor calibrated fitness. All observed GA
+seeds favor calibrated fitness, but three seeds do not establish generalization
+over optimizer randomness. Original comparisons remain in
+the main complete-comparison tables.}
+\label{fig:objective}
+\end{figure*}
+
+\section{Detailed original-cohort budget and mixture diagnostics}
+\subsection{Exploratory fitting-budget diagnostics}
+On the exposed cohort, shared-prior statistical controls have higher mean RPS
+than calibrated GA at 80 fitting people but lower mean RPS at 320; the
+supplement reports full learning curves and supervision counts.
+
+Using the exact 80 search respondents, common-prior categorical ridge scores
+0.13669. Calibrated GA is lower by 0.00705 on Qwen and 0.00278 on Granite.
+Against the stronger raw-answer control (0.13494), the Qwen difference is
+$-0.00530$ (crossed interval $[-0.00638,-0.00422]$, conditional Holm
+$p=.0096$); Granite's $-0.00103$ contrast does not satisfy the combined
+decision rule ($p=.0656$). Thus a restricted positive Qwen result survives
+the shared-prior check, whereas a cross-model claim against that control
+does not. The LLM still uses 120 additional calibration people and pretrained
+parameters; the ridge fitting count excludes its 120 selection people.
+These diagnostics neither establish equal-total-budget efficiency nor select
+an optimal budget on unexposed data.
+
+
+
+Under the frozen ridge input curve, the primary Qwen persona corresponds
+to 10.97 answers (conditional 95\% interval $[9.06,12.92]$) and Granite to
+7.51 ($[6.36,8.84]$). These intervals propagate respondent and nested-order
+variation after averaging the three persona seeds; they do not propagate
+fresh optimizer-seed uncertainty. All 84 search curves reach 78.2--80
+full-panel equivalents. Their checkpoints describe development efficiency,
+not a second procedure for selecting on evaluation respondents.
+
+\subsection{Exploratory complementarity}
+The selected persona--ridge mixture improves over both components in all
+12 conditions under the screen rule. Gains over ridge range from 0.00192 to
+0.01158 RPS, and gains over the calibrated persona from 0.00113 to 0.01009
+(all conditional Holm $p=.0096$). The supplement shows paired gains and uncertainty for both representations
+and all 48 contrasts.
+No new model inference was needed: the experiment reuses saved forecasts,
+with calibration fitting and mixture selection separated.
+
+The selected mixtures had lower RPS on this exposed cohort; the neutral
+control separates this observation from optimizer value. On Granite, the optimized mixture has lower
+mean RPS than the neutral mixture in all six conditions; three pass the
+0.001 magnitude threshold as well as the statistical rule (categorical 80/200,
+raw 80). On Qwen, all six neutral mixtures have slightly lower means, with no
+significant difference after correction. Population-mixture selectors choose
+zero prior weight throughout, reproducing ridge. This linear-pool control is
+distinct from the earlier prior-anchored intercept refit. The observed advantage of combining predictors spans both tested models,
+while additional utility from persona search remains model- and budget-specific.
+
+A separately frozen adversarial extension tests prior-anchored ridge and
+neutral-plus-anchored ridge in all 12 conditions (24-test Holm family).
+The original hybrid beats anchored ridge throughout, by 0.00161--0.00984 RPS
+(all $p_{\rm H}=.0048$). Against the stronger neutral mixture, only Granite
+categorical/raw 80 clear the magnitude/statistical rule. Qwen loses in all
+six conditions, five significantly. This practical rival changes both prompt
+and decoder; it is not a pure optimizer ablation or independent confirmation.
+
+
+
+
+\section{Detailed saved-forecast protocols}
+After inspecting the original evaluation, we fixed the following saved-forecast
+analyses before executing them. They reuse the exposed 600-person cohort and
+are \emph{post hoc}, not independent confirmation. Within these diagnostics,
+no prompts are changed and no new LLM predictions are generated. The original
+110-test analysis is retained.
+
+Representation controls compare the exact 175 one-hot profile features
+visible in prompts with 35 continuous pre-discretization values and raw
+history. All use Train8000 and Select120; original losses reproduce within
+$10^{-10}$. Separate Holm families cover 33 representation contrasts and
+nine objective/optimizer contrasts. Rank diagnostics retain the first
+complete evaluation per genotype in all 24 GA/MAP search pools.
+
+Budget diagnostics fit categorical and raw-history ridge at 80, 200, 320,
+1,000 and 8,000 people and exact Search80. Ten fixed nested subsets per
+smaller budget share Select120 penalty choice. A subsequent prior-anchored
+control replaces the subset target mean with the Train8000 prior. Both
+curves reproduce full-data losses. Each has a separate 48-test family;
+intervals condition on fits and resample respondents and observed LLM runs.
+Subset ranges are not confidence intervals. Full specifications and the
+adaptive exposure history are in the supplement.
+
+\paragraph{Exploratory forecast combination.}
+A final fixed screen tests complementarity using a linear pool of ordinal
+CDFs~\cite{gneiting2011combining}, $H=(1-w)R+wP$, where $R$ is ridge and $P$
+a calibrated-GA persona. Both models, both ridge representations and fitting
+sizes 80, 200 and 320 are included. Three fixed nested training subsets cross
+all three saved optimizer runs. Ridge penalties use Select. The first 60
+Calibrate people fit the persona scale and center; the remaining 60 select
+$w\in\{0,.05,\ldots,1\}$ by RPS. Parameters are fixed before evaluation.
+Controls are ridge, persona, neutral-persona plus ridge, and population-prior
+plus ridge; each mixture tunes its own weight on the same 60 people.
+A separate 48-test Holm family and 5,000 respondent-bootstrap draws condition
+on the nine fixed fit/run combinations. The screen requires mean gain at least
+0.001, a positive gain interval and adjusted $p<.05$. All 12 conditions are
+reported. This adaptive analysis reuses the exposed cohort and the 8,000-person
+prior; low ridge fitting counts do not mean low total supervision.
+
+
+\section{Detailed representation contrasts}
+The additional categorical-profile ridge scores 0.11384, compared with
+0.11558 for continuous-profile ridge and 0.10955 for raw-history ridge
+(Supplementary Figure S3). Its deficit to raw-history ridge is
+0.00428 (paired respondent interval $[0.00378,0.00478]$), while every LLM
+arm is 0.01581--0.02388 worse than categorical ridge; all 28 intervals are
+positive with Holm $p<.01$ in the 33-test family. Neutral personas also lose
+by 0.01625 on Qwen and 0.02273 on Granite. The profile retains information
+usable by a simple predictor even when persona search adds little. Ridge fits
+8,000 person-level labelled mappings; the LLM pipeline uses those labels for
+item priors, while prompt optimization uses 80 search and 120 selection people.
+Thus person-level supervision budgets are not matched. This does
+not equate their learning procedures or give a causal compression/readout
+decomposition.
+
+Relative to the empirical prior, categorical ridge retains
+$(0.15174-0.11384)/(0.15174-0.10955)=89.8\%$ of raw-history ridge's
+RPS improvement. This is an observed prediction-improvement ratio, not a
+fraction of human information. Calibrated GA and MAP-Elites recover only
+2.1\% and 1.6\% of their base-to-raw-ridge gaps on Qwen and 9.8\% and
+9.9\% on Granite. These descriptive ratios have no additional significance claim.
+
+
+
+\bibliographystyle{plainnat}\bibliography{references}\end{document}

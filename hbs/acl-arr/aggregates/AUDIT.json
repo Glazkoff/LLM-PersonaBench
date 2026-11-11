@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "checks": 149,
+  "scope": "aggregate arithmetic and schema only; no independent bootstrap reconstruction"
+}

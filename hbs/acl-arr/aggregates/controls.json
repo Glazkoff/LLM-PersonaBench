@@ -1,0 +1,2675 @@
+{
+  "status": "PASS",
+  "scope": "exploratory post-review, exposed R2, no independent confirmation",
+  "people": 658,
+  "cal_people": 200,
+  "endpoints": 49,
+  "spec_sha256": "7807404cca436ff7ce512afc086a21ee2bf889e8da40b9ebdf97aaa0d930d775",
+  "source_sha256": "b7ab995259050dc67a931a28d459e26f02d9302de86906fafadd38ce9c3cc34e",
+  "freeze_sha256": "bce98bbedba4f424954ef096413491380e45f5f07b4c6af038ab332ee9456468",
+  "absolute_losses": {
+    "decoder1200": {
+      "normalized": 0.9105999760776117,
+      "economic_logloss": 0.5330330447567759,
+      "ordinal_RPS": 0.1183560043800281,
+      "other_logloss": 0.662077327212778
+    },
+    "full1400": {
+      "normalized": 0.911749494767891,
+      "economic_logloss": 0.5325468318584723,
+      "ordinal_RPS": 0.11896278135621134,
+      "other_logloss": 0.6618010135877465
+    },
+    "granite__neutral": {
+      "normalized": 1.3444209382290198,
+      "economic_logloss": 0.6842297765264872,
+      "ordinal_RPS": 0.19846589471104759,
+      "other_logloss": 0.7285809181225777
+    },
+    "granite__t0": {
+      "normalized": 1.2873888703266547,
+      "economic_logloss": 0.6746895717376479,
+      "ordinal_RPS": 0.18311284854308857,
+      "other_logloss": 0.85042867196327
+    },
+    "qwen__neutral": {
+      "normalized": 1.2204712152874755,
+      "economic_logloss": 0.7454351585310107,
+      "ordinal_RPS": 0.15555815443666374,
+      "other_logloss": 0.6808650665138554
+    },
+    "qwen__t0": {
+      "normalized": 1.251135865942335,
+      "economic_logloss": 0.7566362300826354,
+      "ordinal_RPS": 0.15995978613965017,
+      "other_logloss": 0.6788402921256157
+    },
+    "granite__neutral__fixed_half": {
+      "normalized": 1.0078933008919873,
+      "economic_logloss": 0.5599520187903398,
+      "ordinal_RPS": 0.13764628261851422,
+      "other_logloss": 0.6810001257717568
+    },
+    "granite__neutral__cal_selected": {
+      "normalized": 0.9077138533877396,
+      "economic_logloss": 0.5311207145836213,
+      "ordinal_RPS": 0.11801743794084382,
+      "other_logloss": 0.662077327212778
+    },
+    "granite__t0__fixed_half": {
+      "normalized": 0.992903169879805,
+      "economic_logloss": 0.5569174851779723,
+      "ordinal_RPS": 0.13377598065724594,
+      "other_logloss": 0.7104759509177303
+    },
+    "granite__t0__cal_selected": {
+      "normalized": 0.9079108169464667,
+      "economic_logloss": 0.5314982234464296,
+      "ordinal_RPS": 0.11798315041755485,
+      "other_logloss": 0.662077327212778
+    },
+    "qwen__neutral__fixed_half": {
+      "normalized": 0.9807690524870029,
+      "economic_logloss": 0.5801780760876143,
+      "ordinal_RPS": 0.12684089103028573,
+      "other_logloss": 0.6652141173546321
+    },
+    "qwen__neutral__cal_selected": {
+      "normalized": 0.9097276267395945,
+      "economic_logloss": 0.5320485848167563,
+      "ordinal_RPS": 0.11830561830756034,
+      "other_logloss": 0.6652141173546321
+    },
+    "qwen__t0__fixed_half": {
+      "normalized": 0.9883928637788616,
+      "economic_logloss": 0.5816493522135497,
+      "ordinal_RPS": 0.1281687398983192,
+      "other_logloss": 0.6655762128258407
+    },
+    "qwen__t0__cal_selected": {
+      "normalized": 0.910649941249974,
+      "economic_logloss": 0.5321138169149158,
+      "ordinal_RPS": 0.11845706782035363,
+      "other_logloss": 0.6655762128258407
+    },
+    "control__prior": {
+      "normalized": 0.9094033935542236,
+      "economic_logloss": 0.5329894090230958,
+      "ordinal_RPS": 0.11800678856727917,
+      "other_logloss": 0.6620060913000761
+    },
+    "control__uniform": {
+      "normalized": 0.9100425830504378,
+      "economic_logloss": 0.5325919467475432,
+      "ordinal_RPS": 0.11827283196865926,
+      "other_logloss": 0.662077327212778
+    },
+    "control__stimulus_prior": {
+      "normalized": 0.9073409782915006,
+      "economic_logloss": 0.5307561318885057,
+      "ordinal_RPS": 0.11800678856727917,
+      "other_logloss": 0.6620060913000761
+    },
+    "control__neutral_proxy": {
+      "normalized": 0.9097983123973594,
+      "economic_logloss": 0.5321930408240004,
+      "ordinal_RPS": 0.11833592866683043,
+      "other_logloss": 0.662077327212778
+    },
+    "control__t0_proxy": {
+      "normalized": 0.909421058222181,
+      "economic_logloss": 0.5321166536841393,
+      "ordinal_RPS": 0.11824383726775116,
+      "other_logloss": 0.662077327212778
+    },
+    "control__stat_library": {
+      "normalized": 0.9075774226110982,
+      "economic_logloss": 0.5310776408327059,
+      "ordinal_RPS": 0.11800678856727917,
+      "other_logloss": 0.6620060913000761
+    },
+    "fit_prior": {
+      "normalized": 1.0000561053929686,
+      "economic_logloss": 0.6400513416591213,
+      "ordinal_RPS": 0.11975838270578389,
+      "other_logloss": 0.6620060913000761
+    }
+  },
+  "contrasts": [
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": -0.0028861226898722037,
+        "ci95": [
+          -0.004477821485549669,
+          -0.001282264659653616
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0030352175921039204,
+        "heuristics_cognitive_bias": -0.0027370277876404875
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "full1400",
+      "equal_family": {
+        "estimate": -0.00403564138015154,
+        "ci95": [
+          -0.007178367963737737,
+          -0.0009321778596429221
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0025332860195984687,
+        "heuristics_cognitive_bias": -0.0055379967407046095
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "control__prior",
+      "equal_family": {
+        "estimate": -0.001689540166484219,
+        "ci95": [
+          -0.003562472474982366,
+          0.00021445914994951213
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0035450111512378333,
+        "heuristics_cognitive_bias": 0.0001659308182693981
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "control__uniform",
+      "equal_family": {
+        "estimate": -0.0023287296626983978,
+        "ci95": [
+          -0.003836693335704195,
+          -0.0008244001012883596
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.002386745155038279,
+        "heuristics_cognitive_bias": -0.0022707141703585164
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "control__stimulus_prior",
+      "equal_family": {
+        "estimate": 0.00037287509623879384,
+        "ci95": [
+          -0.0018641181999686247,
+          0.0025703175653583894
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": 0.0005798193742081907,
+        "heuristics_cognitive_bias": 0.0001659308182693981
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "control__stat_library",
+      "equal_family": {
+        "estimate": 0.00013643077664140117,
+        "ci95": [
+          -0.0020940917006339226,
+          0.002351201504528308
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": 0.00010693073501340601,
+        "heuristics_cognitive_bias": 0.0001659308182693981
+      }
+    },
+    {
+      "system": "granite__neutral__cal_selected",
+      "reference": "control__neutral_proxy",
+      "equal_family": {
+        "estimate": -0.0020844590096199904,
+        "ci95": [
+          -0.002991135965624415,
+          -0.0011559259291609976
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0017339108522458025,
+        "heuristics_cognitive_bias": -0.002435007166994178
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "decoder1200",
+      "equal_family": {
+        "estimate": -0.002689159131144959,
+        "ci95": [
+          -0.0042391275407554305,
+          -0.0011225160878784101
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.002468441874418975,
+        "heuristics_cognitive_bias": -0.002909876387870944
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "full1400",
+      "equal_family": {
+        "estimate": -0.0038386778214242944,
+        "ci95": [
+          -0.0069607497129644995,
+          -0.000755768589188263
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.001966510301913524,
+        "heuristics_cognitive_bias": -0.005710845340935064
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "control__prior",
+      "equal_family": {
+        "estimate": -0.0014925766077569735,
+        "ci95": [
+          -0.0034720162995911853,
+          0.0004764514043013183
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.002978235433552888,
+        "heuristics_cognitive_bias": -6.917781961058041e-06
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "control__uniform",
+      "equal_family": {
+        "estimate": -0.002131766103971153,
+        "ci95": [
+          -0.0035494178442705593,
+          -0.0006907077852501001
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0018199694373533342,
+        "heuristics_cognitive_bias": -0.0024435627705889727
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "control__stimulus_prior",
+      "equal_family": {
+        "estimate": 0.0005698386549660386,
+        "ci95": [
+          -0.001706381924645185,
+          0.0027834593410338755
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": 0.0011465950918931361,
+        "heuristics_cognitive_bias": -6.917781961058041e-06
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "control__stat_library",
+      "equal_family": {
+        "estimate": 0.00033339433536864614,
+        "ci95": [
+          -0.0019191998634069617,
+          0.0025620117664676683
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": 0.0006737064526983515,
+        "heuristics_cognitive_bias": -6.917781961058041e-06
+      }
+    },
+    {
+      "system": "granite__t0__cal_selected",
+      "reference": "control__t0_proxy",
+      "equal_family": {
+        "estimate": -0.001510241275714264,
+        "ci95": [
+          -0.0025538846968221904,
+          -0.00047248945385501616
+        ]
+      },
+      "family_estimates": {
+        "economic_preferences": -0.0009154499233584079,
+        "heuristics_cognitive_bias": -0.00210503262807012
+      }
+    }
+  ],
+  "selected_weights": {
+    "prior": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.6,
+      "QID9_4": 0.0,
+      "QID9_5": 0.1,
+      "QID9_6": 0.1,
+      "QID9_7": 0.0,
+      "QID9_8": 0.0,
+      "QID9_9": 0.0,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.0,
+      "QID9_13": 0.1,
+      "QID9_14": 0.0,
+      "QID9_15": 0.2,
+      "QID9_16": 0.0,
+      "QID9_17": 0.0,
+      "QID9_18": 0.0,
+      "QID9_19": 0.0,
+      "QID9_20": 0.1,
+      "QID9_21": 0.0,
+      "QID9_22": 0.0,
+      "QID9_23": 0.0,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.0,
+      "QID9_27": 0.2,
+      "QID9_28": 0.0,
+      "QID9_29": 0.0,
+      "QID9_30": 0.0,
+      "QID9_31": 0.4,
+      "QID9_32": 0.2,
+      "QID9_33": 0.1,
+      "QID9_34": 0.0,
+      "QID9_35": 0.1,
+      "QID9_36": 0.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.1,
+      "QID9_39": 0.0,
+      "QID9_40": 0.0,
+      "QID288_1": 0.5,
+      "QID288_2": 0.0,
+      "QID288_3": 0.7,
+      "QID288_4": 0.5,
+      "QID289_1": 1.0,
+      "QID289_2": 0.0,
+      "QID289_3": 0.6,
+      "QID289_4": 1.0,
+      "QID196": 1.0
+    },
+    "uniform": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.4,
+      "QID9_4": 0.0,
+      "QID9_5": 0.0,
+      "QID9_6": 0.0,
+      "QID9_7": 0.0,
+      "QID9_8": 0.0,
+      "QID9_9": 0.0,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.0,
+      "QID9_13": 0.1,
+      "QID9_14": 0.0,
+      "QID9_15": 0.2,
+      "QID9_16": 0.0,
+      "QID9_17": 0.0,
+      "QID9_18": 0.0,
+      "QID9_19": 0.0,
+      "QID9_20": 0.1,
+      "QID9_21": 0.0,
+      "QID9_22": 0.0,
+      "QID9_23": 0.0,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.0,
+      "QID9_27": 0.1,
+      "QID9_28": 0.0,
+      "QID9_29": 0.0,
+      "QID9_30": 0.0,
+      "QID9_31": 0.0,
+      "QID9_32": 0.1,
+      "QID9_33": 0.1,
+      "QID9_34": 0.0,
+      "QID9_35": 0.0,
+      "QID9_36": 0.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.1,
+      "QID9_39": 0.1,
+      "QID9_40": 0.0,
+      "QID288_1": 0.0,
+      "QID288_2": 0.0,
+      "QID288_3": 0.5,
+      "QID288_4": 0.3,
+      "QID289_1": 0.0,
+      "QID289_2": 0.0,
+      "QID289_3": 0.0,
+      "QID289_4": 0.0,
+      "QID196": 0.0
+    },
+    "stimulus_prior": {
+      "QID9_1": 0.0,
+      "QID9_2": 1.0,
+      "QID9_3": 1.0,
+      "QID9_4": 0.0,
+      "QID9_5": 0.4,
+      "QID9_6": 0.0,
+      "QID9_7": 0.4,
+      "QID9_8": 0.0,
+      "QID9_9": 0.3,
+      "QID9_10": 0.1,
+      "QID9_11": 1.0,
+      "QID9_12": 0.0,
+      "QID9_13": 0.8,
+      "QID9_14": 0.0,
+      "QID9_15": 0.0,
+      "QID9_16": 1.0,
+      "QID9_17": 0.4,
+      "QID9_18": 1.0,
+      "QID9_19": 0.7,
+      "QID9_20": 0.6,
+      "QID9_21": 0.5,
+      "QID9_22": 0.2,
+      "QID9_23": 0.1,
+      "QID9_24": 0.3,
+      "QID9_25": 0.0,
+      "QID9_26": 0.4,
+      "QID9_27": 0.7,
+      "QID9_28": 1.0,
+      "QID9_29": 0.0,
+      "QID9_30": 0.0,
+      "QID9_31": 0.9,
+      "QID9_32": 0.9,
+      "QID9_33": 0.6,
+      "QID9_34": 0.3,
+      "QID9_35": 0.5,
+      "QID9_36": 1.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.0,
+      "QID9_39": 1.0,
+      "QID9_40": 0.0,
+      "QID288_1": 0.5,
+      "QID288_2": 0.0,
+      "QID288_3": 0.7,
+      "QID288_4": 0.5,
+      "QID289_1": 1.0,
+      "QID289_2": 0.0,
+      "QID289_3": 0.6,
+      "QID289_4": 1.0,
+      "QID196": 1.0
+    },
+    "neutral": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.2,
+      "QID9_4": 0.0,
+      "QID9_5": 0.1,
+      "QID9_6": 0.0,
+      "QID9_7": 0.0,
+      "QID9_8": 0.0,
+      "QID9_9": 0.1,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.2,
+      "QID9_13": 0.2,
+      "QID9_14": 0.0,
+      "QID9_15": 0.0,
+      "QID9_16": 0.0,
+      "QID9_17": 0.0,
+      "QID9_18": 0.2,
+      "QID9_19": 0.1,
+      "QID9_20": 0.2,
+      "QID9_21": 0.2,
+      "QID9_22": 0.0,
+      "QID9_23": 0.1,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.0,
+      "QID9_27": 0.2,
+      "QID9_28": 0.1,
+      "QID9_29": 0.0,
+      "QID9_30": 0.1,
+      "QID9_31": 0.1,
+      "QID9_32": 0.4,
+      "QID9_33": 0.4,
+      "QID9_34": 0.0,
+      "QID9_35": 0.2,
+      "QID9_36": 0.1,
+      "QID9_37": 0.2,
+      "QID9_38": 0.0,
+      "QID9_39": 0.2,
+      "QID9_40": 0.1,
+      "QID288_1": 0.1,
+      "QID288_2": 0.2,
+      "QID288_3": 0.4,
+      "QID288_4": 0.0,
+      "QID289_1": 0.1,
+      "QID289_2": 0.0,
+      "QID289_3": 0.4,
+      "QID289_4": 0.1,
+      "QID196": 0.0
+    },
+    "t0": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.2,
+      "QID9_4": 0.0,
+      "QID9_5": 0.2,
+      "QID9_6": 0.1,
+      "QID9_7": 0.1,
+      "QID9_8": 0.0,
+      "QID9_9": 0.1,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.1,
+      "QID9_13": 0.2,
+      "QID9_14": 0.0,
+      "QID9_15": 0.0,
+      "QID9_16": 0.1,
+      "QID9_17": 0.0,
+      "QID9_18": 0.1,
+      "QID9_19": 0.1,
+      "QID9_20": 0.2,
+      "QID9_21": 0.2,
+      "QID9_22": 0.0,
+      "QID9_23": 0.1,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.1,
+      "QID9_27": 0.1,
+      "QID9_28": 0.2,
+      "QID9_29": 0.0,
+      "QID9_30": 0.1,
+      "QID9_31": 0.0,
+      "QID9_32": 0.6,
+      "QID9_33": 0.3,
+      "QID9_34": 0.0,
+      "QID9_35": 0.1,
+      "QID9_36": 0.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.0,
+      "QID9_39": 0.2,
+      "QID9_40": 0.0,
+      "QID288_1": 0.1,
+      "QID288_2": 0.2,
+      "QID288_3": 0.5,
+      "QID288_4": 0.0,
+      "QID289_1": 0.1,
+      "QID289_2": 0.0,
+      "QID289_3": 0.3,
+      "QID289_4": 0.1,
+      "QID196": 0.0
+    },
+    "neutral_proxy": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.3,
+      "QID9_4": 0.0,
+      "QID9_5": 0.1,
+      "QID9_6": 0.0,
+      "QID9_7": 0.0,
+      "QID9_8": 0.0,
+      "QID9_9": 0.1,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.2,
+      "QID9_13": 0.2,
+      "QID9_14": 0.0,
+      "QID9_15": 0.0,
+      "QID9_16": 0.0,
+      "QID9_17": 0.0,
+      "QID9_18": 0.2,
+      "QID9_19": 0.3,
+      "QID9_20": 0.1,
+      "QID9_21": 0.0,
+      "QID9_22": 0.0,
+      "QID9_23": 0.0,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.0,
+      "QID9_27": 0.2,
+      "QID9_28": 0.0,
+      "QID9_29": 0.0,
+      "QID9_30": 0.2,
+      "QID9_31": 0.3,
+      "QID9_32": 0.4,
+      "QID9_33": 0.3,
+      "QID9_34": 0.0,
+      "QID9_35": 0.3,
+      "QID9_36": 0.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.1,
+      "QID9_39": 0.1,
+      "QID9_40": 0.0,
+      "QID288_1": 0.1,
+      "QID288_2": 0.1,
+      "QID288_3": 0.5,
+      "QID288_4": 0.0,
+      "QID289_1": 0.1,
+      "QID289_2": 0.0,
+      "QID289_3": 0.3,
+      "QID289_4": 0.0,
+      "QID196": 0.0
+    },
+    "t0_proxy": {
+      "QID9_1": 0.0,
+      "QID9_2": 0.0,
+      "QID9_3": 0.3,
+      "QID9_4": 0.0,
+      "QID9_5": 0.2,
+      "QID9_6": 0.0,
+      "QID9_7": 0.1,
+      "QID9_8": 0.0,
+      "QID9_9": 0.1,
+      "QID9_10": 0.0,
+      "QID9_11": 0.0,
+      "QID9_12": 0.2,
+      "QID9_13": 0.2,
+      "QID9_14": 0.0,
+      "QID9_15": 0.0,
+      "QID9_16": 0.1,
+      "QID9_17": 0.0,
+      "QID9_18": 0.2,
+      "QID9_19": 0.4,
+      "QID9_20": 0.1,
+      "QID9_21": 0.2,
+      "QID9_22": 0.0,
+      "QID9_23": 0.0,
+      "QID9_24": 0.0,
+      "QID9_25": 0.0,
+      "QID9_26": 0.1,
+      "QID9_27": 0.1,
+      "QID9_28": 0.0,
+      "QID9_29": 0.0,
+      "QID9_30": 0.2,
+      "QID9_31": 0.1,
+      "QID9_32": 0.6,
+      "QID9_33": 0.3,
+      "QID9_34": 0.0,
+      "QID9_35": 0.2,
+      "QID9_36": 0.0,
+      "QID9_37": 0.0,
+      "QID9_38": 0.1,
+      "QID9_39": 0.2,
+      "QID9_40": 0.0,
+      "QID288_1": 0.1,
+      "QID288_2": 0.0,
+      "QID288_3": 0.6,
+      "QID288_4": 0.0,
+      "QID289_1": 0.1,
+      "QID289_2": 0.0,
+      "QID289_3": 0.3,
+      "QID289_4": 0.1,
+      "QID196": 0.0
+    }
+  },
+  "stat_library_selection": [
+    {
+      "endpoint": "QID9_1",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_2",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_3",
+      "control": "prior",
+      "weight": 0.6
+    },
+    {
+      "endpoint": "QID9_4",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_5",
+      "control": "stimulus_prior",
+      "weight": 0.4
+    },
+    {
+      "endpoint": "QID9_6",
+      "control": "prior",
+      "weight": 0.1
+    },
+    {
+      "endpoint": "QID9_7",
+      "control": "stimulus_prior",
+      "weight": 0.4
+    },
+    {
+      "endpoint": "QID9_8",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_9",
+      "control": "stimulus_prior",
+      "weight": 0.3
+    },
+    {
+      "endpoint": "QID9_10",
+      "control": "stimulus_prior",
+      "weight": 0.1
+    },
+    {
+      "endpoint": "QID9_11",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_12",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_13",
+      "control": "stimulus_prior",
+      "weight": 0.8
+    },
+    {
+      "endpoint": "QID9_14",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_15",
+      "control": "uniform",
+      "weight": 0.2
+    },
+    {
+      "endpoint": "QID9_16",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_17",
+      "control": "stimulus_prior",
+      "weight": 0.4
+    },
+    {
+      "endpoint": "QID9_18",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_19",
+      "control": "stimulus_prior",
+      "weight": 0.7
+    },
+    {
+      "endpoint": "QID9_20",
+      "control": "stimulus_prior",
+      "weight": 0.6
+    },
+    {
+      "endpoint": "QID9_21",
+      "control": "stimulus_prior",
+      "weight": 0.5
+    },
+    {
+      "endpoint": "QID9_22",
+      "control": "stimulus_prior",
+      "weight": 0.2
+    },
+    {
+      "endpoint": "QID9_23",
+      "control": "stimulus_prior",
+      "weight": 0.1
+    },
+    {
+      "endpoint": "QID9_24",
+      "control": "stimulus_prior",
+      "weight": 0.3
+    },
+    {
+      "endpoint": "QID9_25",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_26",
+      "control": "stimulus_prior",
+      "weight": 0.4
+    },
+    {
+      "endpoint": "QID9_27",
+      "control": "stimulus_prior",
+      "weight": 0.7
+    },
+    {
+      "endpoint": "QID9_28",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_29",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_30",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_31",
+      "control": "stimulus_prior",
+      "weight": 0.9
+    },
+    {
+      "endpoint": "QID9_32",
+      "control": "stimulus_prior",
+      "weight": 0.9
+    },
+    {
+      "endpoint": "QID9_33",
+      "control": "stimulus_prior",
+      "weight": 0.6
+    },
+    {
+      "endpoint": "QID9_34",
+      "control": "stimulus_prior",
+      "weight": 0.3
+    },
+    {
+      "endpoint": "QID9_35",
+      "control": "stimulus_prior",
+      "weight": 0.5
+    },
+    {
+      "endpoint": "QID9_36",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_37",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID9_38",
+      "control": "uniform",
+      "weight": 0.1
+    },
+    {
+      "endpoint": "QID9_39",
+      "control": "stimulus_prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID9_40",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID288_1",
+      "control": "prior",
+      "weight": 0.5
+    },
+    {
+      "endpoint": "QID288_2",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID288_3",
+      "control": "prior",
+      "weight": 0.7
+    },
+    {
+      "endpoint": "QID288_4",
+      "control": "prior",
+      "weight": 0.5
+    },
+    {
+      "endpoint": "QID289_1",
+      "control": "prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID289_2",
+      "control": "prior",
+      "weight": 0.0
+    },
+    {
+      "endpoint": "QID289_3",
+      "control": "prior",
+      "weight": 0.6
+    },
+    {
+      "endpoint": "QID289_4",
+      "control": "prior",
+      "weight": 1.0
+    },
+    {
+      "endpoint": "QID196",
+      "control": "prior",
+      "weight": 1.0
+    }
+  ],
+  "proxy_fallback_counts": {
+    "neutral__QID9_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_5": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_5": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_6": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_6": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_7": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_7": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_8": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_8": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_9": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_9": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_10": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_10": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_11": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_11": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_12": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_12": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_13": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_13": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_14": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_14": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_15": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_15": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_16": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_16": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_17": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_17": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_18": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_18": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_19": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_19": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_20": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_20": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_21": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_21": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_22": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_22": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_23": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_23": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_24": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_24": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_25": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_25": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_26": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_26": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_27": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_27": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_28": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_28": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_29": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_29": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_30": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_30": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_31": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_31": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_32": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_32": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_33": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_33": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_34": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_34": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_35": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_35": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_36": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_36": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_37": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_37": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_38": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_38": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_39": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_39": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID9_40": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID9_40": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID288_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID288_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID288_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID288_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID288_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID288_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID288_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID288_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID289_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID289_1": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID289_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID289_2": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID289_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID289_3": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID289_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID289_4": {
+      "cal": 0,
+      "test": 0
+    },
+    "neutral__QID196": {
+      "cal": 0,
+      "test": 0
+    },
+    "t0__QID196": {
+      "cal": 0,
+      "test": 0
+    }
+  },
+  "joint_cal_test_bootstrap": {
+    "draws": 2000,
+    "seed": 20261111,
+    "results": {
+      "neutral": {
+        "decoder1200": {
+          "bootstrap_ci95": [
+            -0.004268336072545615,
+            0.0009016261394028607
+          ],
+          "bootstrap_mean": -0.001901261382494912
+        },
+        "full1400": {
+          "bootstrap_ci95": [
+            -0.006758680140425017,
+            0.0008642490535296529
+          ],
+          "bootstrap_mean": -0.003055358421215369
+        }
+      },
+      "t0": {
+        "decoder1200": {
+          "bootstrap_ci95": [
+            -0.0037437705148721965,
+            0.001577097148747063
+          ],
+          "bootstrap_mean": -0.0013844577711515545
+        },
+        "full1400": {
+          "bootstrap_ci95": [
+            -0.00618512985924328,
+            0.0014831698442808712
+          ],
+          "bootstrap_mean": -0.002538554809872012
+        }
+      },
+      "t0_minus_neutral": {
+        "bootstrap_ci95": [
+          -0.0009353028844035993,
+          0.002316178482159596
+        ],
+        "bootstrap_mean": 0.0005168036113433576
+      }
+    },
+    "weight_frequencies": {
+      "neutral": {
+        "QID9_1": [
+          0.9365,
+          0.061,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_2": [
+          0.8125,
+          0.1315,
+          0.043,
+          0.0125,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_3": [
+          0.069,
+          0.2505,
+          0.361,
+          0.2435,
+          0.065,
+          0.0105,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_4": [
+          0.954,
+          0.0405,
+          0.005,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_5": [
+          0.3435,
+          0.3415,
+          0.2045,
+          0.0885,
+          0.0195,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_6": [
+          0.547,
+          0.363,
+          0.08,
+          0.0095,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_7": [
+          0.784,
+          0.1585,
+          0.0505,
+          0.0065,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_8": [
+          0.901,
+          0.0775,
+          0.0165,
+          0.0045,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_9": [
+          0.2625,
+          0.3515,
+          0.2605,
+          0.107,
+          0.0175,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_10": [
+          0.855,
+          0.1195,
+          0.0235,
+          0.0015,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_11": [
+          0.7155,
+          0.229,
+          0.051,
+          0.0045,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_12": [
+          0.2435,
+          0.198,
+          0.237,
+          0.187,
+          0.0875,
+          0.0345,
+          0.01,
+          0.0025,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_13": [
+          0.0975,
+          0.2055,
+          0.314,
+          0.2405,
+          0.106,
+          0.0275,
+          0.008,
+          0.001,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_14": [
+          0.928,
+          0.0485,
+          0.0175,
+          0.006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_15": [
+          0.939,
+          0.0565,
+          0.0045,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_16": [
+          0.536,
+          0.3665,
+          0.09,
+          0.0075,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_17": [
+          0.627,
+          0.2925,
+          0.075,
+          0.0055,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_18": [
+          0.26,
+          0.176,
+          0.1685,
+          0.1675,
+          0.1125,
+          0.0685,
+          0.031,
+          0.0115,
+          0.0035,
+          0.001,
+          0.0
+        ],
+        "QID9_19": [
+          0.46,
+          0.189,
+          0.1705,
+          0.101,
+          0.0555,
+          0.0185,
+          0.003,
+          0.0015,
+          0.0005,
+          0.0,
+          0.0005
+        ],
+        "QID9_20": [
+          0.169,
+          0.187,
+          0.2415,
+          0.22,
+          0.111,
+          0.054,
+          0.0135,
+          0.004,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_21": [
+          0.2555,
+          0.2105,
+          0.2315,
+          0.164,
+          0.0895,
+          0.033,
+          0.0125,
+          0.0025,
+          0.001,
+          0.0,
+          0.0
+        ],
+        "QID9_22": [
+          0.6105,
+          0.269,
+          0.1045,
+          0.0125,
+          0.0035,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_23": [
+          0.448,
+          0.215,
+          0.152,
+          0.1005,
+          0.0515,
+          0.024,
+          0.0055,
+          0.003,
+          0.0005,
+          0.0,
+          0.0
+        ],
+        "QID9_24": [
+          0.9915,
+          0.0085,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_25": [
+          0.82,
+          0.1715,
+          0.0085,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_26": [
+          0.5095,
+          0.2785,
+          0.137,
+          0.0565,
+          0.016,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_27": [
+          0.2665,
+          0.2365,
+          0.22,
+          0.1555,
+          0.0835,
+          0.031,
+          0.0045,
+          0.0025,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_28": [
+          0.455,
+          0.3305,
+          0.1605,
+          0.046,
+          0.0075,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_29": [
+          0.761,
+          0.1885,
+          0.046,
+          0.004,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_30": [
+          0.3705,
+          0.156,
+          0.16,
+          0.1245,
+          0.1015,
+          0.052,
+          0.0275,
+          0.0055,
+          0.002,
+          0.0,
+          0.0005
+        ],
+        "QID9_31": [
+          0.3745,
+          0.1895,
+          0.1755,
+          0.1255,
+          0.075,
+          0.0325,
+          0.022,
+          0.0035,
+          0.0015,
+          0.0005,
+          0.0
+        ],
+        "QID9_32": [
+          0.016,
+          0.0335,
+          0.0985,
+          0.1695,
+          0.2325,
+          0.209,
+          0.139,
+          0.0695,
+          0.022,
+          0.0085,
+          0.002
+        ],
+        "QID9_33": [
+          0.0245,
+          0.0715,
+          0.17,
+          0.219,
+          0.233,
+          0.163,
+          0.0815,
+          0.0295,
+          0.0075,
+          0.0,
+          0.0005
+        ],
+        "QID9_34": [
+          0.9595,
+          0.0405,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_35": [
+          0.196,
+          0.1765,
+          0.2005,
+          0.171,
+          0.127,
+          0.081,
+          0.0295,
+          0.0135,
+          0.005,
+          0.0,
+          0.0
+        ],
+        "QID9_36": [
+          0.468,
+          0.281,
+          0.1745,
+          0.063,
+          0.011,
+          0.002,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_37": [
+          0.331,
+          0.1605,
+          0.155,
+          0.1265,
+          0.104,
+          0.067,
+          0.0335,
+          0.012,
+          0.0065,
+          0.003,
+          0.001
+        ],
+        "QID9_38": [
+          0.627,
+          0.228,
+          0.114,
+          0.028,
+          0.003,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_39": [
+          0.1365,
+          0.3115,
+          0.343,
+          0.1655,
+          0.036,
+          0.0075,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_40": [
+          0.431,
+          0.373,
+          0.163,
+          0.0305,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_1": [
+          0.1605,
+          0.4145,
+          0.343,
+          0.0755,
+          0.0065,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_2": [
+          0.0505,
+          0.2175,
+          0.3785,
+          0.2655,
+          0.082,
+          0.0055,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_3": [
+          0.002,
+          0.015,
+          0.0625,
+          0.1795,
+          0.255,
+          0.24,
+          0.161,
+          0.064,
+          0.015,
+          0.0055,
+          0.0005
+        ],
+        "QID288_4": [
+          0.9235,
+          0.0745,
+          0.002,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_1": [
+          0.4795,
+          0.5,
+          0.0205,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_2": [
+          0.999,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_3": [
+          0.0045,
+          0.035,
+          0.15,
+          0.2915,
+          0.31,
+          0.1685,
+          0.0365,
+          0.004,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_4": [
+          0.368,
+          0.2875,
+          0.21,
+          0.104,
+          0.0265,
+          0.0035,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID196": [
+          0.967,
+          0.023,
+          0.008,
+          0.002,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "t0": {
+        "QID9_1": [
+          0.8785,
+          0.108,
+          0.0125,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_2": [
+          0.958,
+          0.032,
+          0.01,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_3": [
+          0.12,
+          0.235,
+          0.283,
+          0.2285,
+          0.1035,
+          0.0265,
+          0.0035,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_4": [
+          0.951,
+          0.0395,
+          0.0085,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_5": [
+          0.192,
+          0.193,
+          0.2085,
+          0.1825,
+          0.123,
+          0.062,
+          0.0285,
+          0.0075,
+          0.003,
+          0.0,
+          0.0
+        ],
+        "QID9_6": [
+          0.3285,
+          0.3395,
+          0.2275,
+          0.082,
+          0.0185,
+          0.0035,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_7": [
+          0.3455,
+          0.2345,
+          0.203,
+          0.1285,
+          0.0535,
+          0.028,
+          0.005,
+          0.002,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_8": [
+          0.7985,
+          0.1315,
+          0.049,
+          0.019,
+          0.002,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_9": [
+          0.2845,
+          0.368,
+          0.243,
+          0.094,
+          0.01,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_10": [
+          0.774,
+          0.175,
+          0.0455,
+          0.005,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_11": [
+          0.529,
+          0.3135,
+          0.1275,
+          0.029,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_12": [
+          0.3435,
+          0.207,
+          0.2125,
+          0.1375,
+          0.07,
+          0.0225,
+          0.005,
+          0.002,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_13": [
+          0.076,
+          0.1735,
+          0.2955,
+          0.264,
+          0.136,
+          0.0445,
+          0.0095,
+          0.001,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_14": [
+          0.9555,
+          0.0365,
+          0.007,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_15": [
+          0.9555,
+          0.0415,
+          0.003,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_16": [
+          0.4765,
+          0.3245,
+          0.1585,
+          0.0345,
+          0.006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_17": [
+          0.716,
+          0.2535,
+          0.0305,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_18": [
+          0.391,
+          0.1745,
+          0.163,
+          0.129,
+          0.076,
+          0.0435,
+          0.015,
+          0.006,
+          0.002,
+          0.0,
+          0.0
+        ],
+        "QID9_19": [
+          0.3735,
+          0.211,
+          0.1875,
+          0.119,
+          0.0645,
+          0.03,
+          0.011,
+          0.0025,
+          0.0005,
+          0.0005,
+          0.0
+        ],
+        "QID9_20": [
+          0.1825,
+          0.174,
+          0.2295,
+          0.1855,
+          0.1255,
+          0.0635,
+          0.0295,
+          0.009,
+          0.0005,
+          0.0005,
+          0.0
+        ],
+        "QID9_21": [
+          0.138,
+          0.176,
+          0.2245,
+          0.2065,
+          0.1565,
+          0.067,
+          0.0245,
+          0.005,
+          0.0015,
+          0.0,
+          0.0005
+        ],
+        "QID9_22": [
+          0.676,
+          0.2165,
+          0.0855,
+          0.016,
+          0.006,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_23": [
+          0.303,
+          0.2055,
+          0.185,
+          0.148,
+          0.0845,
+          0.0485,
+          0.0165,
+          0.0075,
+          0.0015,
+          0.0,
+          0.0
+        ],
+        "QID9_24": [
+          0.989,
+          0.0105,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_25": [
+          0.7625,
+          0.22,
+          0.0175,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_26": [
+          0.313,
+          0.207,
+          0.2195,
+          0.145,
+          0.071,
+          0.031,
+          0.011,
+          0.001,
+          0.0015,
+          0.0,
+          0.0
+        ],
+        "QID9_27": [
+          0.3295,
+          0.2205,
+          0.208,
+          0.129,
+          0.076,
+          0.03,
+          0.0065,
+          0.0005,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_28": [
+          0.2535,
+          0.252,
+          0.253,
+          0.159,
+          0.0595,
+          0.0185,
+          0.004,
+          0.0,
+          0.0,
+          0.0005,
+          0.0
+        ],
+        "QID9_29": [
+          0.6995,
+          0.195,
+          0.0845,
+          0.018,
+          0.002,
+          0.001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_30": [
+          0.436,
+          0.169,
+          0.168,
+          0.1115,
+          0.071,
+          0.031,
+          0.0105,
+          0.0025,
+          0.0,
+          0.0005,
+          0.0
+        ],
+        "QID9_31": [
+          0.688,
+          0.157,
+          0.0945,
+          0.0375,
+          0.018,
+          0.0035,
+          0.001,
+          0.0005,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_32": [
+          0.0075,
+          0.0115,
+          0.0355,
+          0.084,
+          0.1545,
+          0.203,
+          0.1895,
+          0.1645,
+          0.092,
+          0.0405,
+          0.0175
+        ],
+        "QID9_33": [
+          0.037,
+          0.119,
+          0.2235,
+          0.2555,
+          0.21,
+          0.1105,
+          0.0375,
+          0.0065,
+          0.0005,
+          0.0,
+          0.0
+        ],
+        "QID9_34": [
+          0.965,
+          0.035,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_35": [
+          0.403,
+          0.2395,
+          0.1955,
+          0.1065,
+          0.041,
+          0.0105,
+          0.0035,
+          0.0005,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_36": [
+          0.5545,
+          0.3165,
+          0.1055,
+          0.022,
+          0.001,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_37": [
+          0.607,
+          0.1575,
+          0.1325,
+          0.0685,
+          0.027,
+          0.0055,
+          0.0015,
+          0.0005,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_38": [
+          0.729,
+          0.177,
+          0.08,
+          0.0125,
+          0.0015,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_39": [
+          0.13,
+          0.296,
+          0.3475,
+          0.178,
+          0.0395,
+          0.009,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID9_40": [
+          0.5445,
+          0.3495,
+          0.0975,
+          0.0085,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_1": [
+          0.3115,
+          0.472,
+          0.199,
+          0.0175,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_2": [
+          0.0855,
+          0.351,
+          0.394,
+          0.147,
+          0.022,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID288_3": [
+          0.002,
+          0.007,
+          0.026,
+          0.089,
+          0.2,
+          0.274,
+          0.2275,
+          0.121,
+          0.043,
+          0.0095,
+          0.001
+        ],
+        "QID288_4": [
+          0.9355,
+          0.064,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_1": [
+          0.3525,
+          0.561,
+          0.084,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_2": [
+          0.992,
+          0.008,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_3": [
+          0.006,
+          0.057,
+          0.1985,
+          0.3265,
+          0.2775,
+          0.113,
+          0.021,
+          0.0005,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID289_4": [
+          0.3535,
+          0.3755,
+          0.2145,
+          0.0485,
+          0.0075,
+          0.0005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "QID196": [
+          0.9715,
+          0.026,
+          0.0025,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}

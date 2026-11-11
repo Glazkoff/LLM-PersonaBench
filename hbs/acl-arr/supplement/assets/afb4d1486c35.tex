@@ -1,0 +1,122 @@
+\section{Third-panel Granite-80 frozen-mixture transfer}\label{sec:hybrid-transfer}
+This E3 test was designed after inspection of the original, E1, and E2
+outcomes. Its internal protocol fixed the old Granite calibrated-GA n=80
+recipe, controls, four contrasts, 0.001-RPS margin and inference before
+opening the third panel's target answers; it is not an external
+preregistration. The 600 complete-case respondents were sampled from 35,519
+eligible cases after exclusion of 374,649 reachable inventoried case IDs,
+including every original split and E1's additional Eval600. They are new to
+these project panels, not a new sample recruited outside the public corpus;
+unknown lifetime and model-pretraining exposure remain possible. The old
+selected prompts, neutral prompts, Granite model snapshot, first-Cal60 scale
+and CDF centers, old 60-person mixture-selection weights, penalties,
+categorical/raw features, three disjoint 80-person ridge-fitting subsets,
+and 8,000-person population prior were reused unchanged. Ridge penalties
+were chosen on old Select120. The persona search consumed Search80 and
+Select120 targets, and each new respondent supplies 60 observed answers;
+``80-person'' names only the paired ridge-fit budget. The third-panel labels
+selected none of these choices.
+
+For each representation the optimized persona plus ordinary ridge was
+compared with neutral persona plus prior-anchored ridge and neutral persona
+plus the \emph{same} ordinary ridge. Each neutral arm retained its own old
+selected mixture weight. The first control changes prompt, weight and ridge
+centering; the second changes prompt and weight while holding ridge
+coefficients fixed. Neither is an isolated prompt-only causal contrast.
+The four planned comparator-minus-hybrid RPS gains form one two-sided Holm
+family. Before paired respondent resampling, nine fixed per-person loss
+vectors (three old search seeds by three fixed subset seeds) were
+averaged, without ensembling forecasts or treating the nine combinations as
+independent respondents. The fixed success rule requires each gain to be at
+least 0.001, its paired respondent-bootstrap lower 95\% bound to exceed zero,
+and its Holm-adjusted respondent sign-flip $p<.05$. Both controls must pass
+for a representation; uncertainty conditions on those old choices.
+The three n=80 subset seeds have pairwise overlap 0/0/0 and union 240 within
+Train8000; the same sets are reused across representations and LLM seeds.
+This index fact does not turn the nine fitted combinations into independent
+respondent panels or new search replications.
+
+\begin{table}[H]\centering\scriptsize
+\caption{All four declared E3 contrasts on the third 600-person panel.
+Positive gains favor the old optimized mixture; all pass the fixed gate.
+The two-sided Holm family contains exactly these four rows.}
+\label{tab:e3-full}
+\begin{tabular}{@{}llrrr@{}}\toprule
+Features & Neutral comparator & Gain & Paired 95\% CI & $p_{\rm H}$\\\midrule
+Categorical & Prior-anchored & .001465 & [.001213,.001722] & .0008\\
+Categorical & Same ordinary & .001843 & [.001595,.002088] & .0008\\
+Raw & Prior-anchored & .001251 & [.001016,.001490] & .0008\\
+Raw & Same ordinary & .001747 & [.001519,.001974] & .0008\\\bottomrule
+\end{tabular}\end{table}
+
+\begin{table}[H]\centering\scriptsize
+\caption{E3 mean RPS component and mixture controls, lower is better.
+Each row averages the nine fixed per-person loss vectors. The common full
+8,000-person same-history ridge scores 0.10995, better than both hybrids.}
+\label{tab:e3-components}
+\begin{tabular}{@{}lrr@{}}\toprule
+Predictor & Categorical & Raw\\\midrule
+Optimized mixture & .132355 & .131532\\
+Neutral + prior-anchored ridge & .133821 & .132784\\
+Neutral + same ordinary ridge & .134198 & .133279\\
+Optimized persona alone & .134180 & .134180\\
+Neutral persona alone & .136691 & .136691\\
+Prior-anchored ridge alone & .138871 & .137463\\
+Ordinary 80-person ridge alone & .140831 & .139406\\
+Full 8,000-person ridge & .109952 & .109952\\\bottomrule
+\end{tabular}\end{table}
+
+\begin{table}[H]\centering\scriptsize\setlength{\tabcolsep}{2.3pt}
+\caption{Every E3 old-search-seed/subset combination. Subset indices 1--3
+denote seeds 202610081--083. $w_O,w_N,w_A$ are the frozen optimized,
+same-ordinary neutral and anchored-neutral persona weights; $H,N,A$ are
+their respective third-panel mean RPS values. The nine rows per
+representation are descriptive fixed combinations, not independent
+replications.}
+\label{tab:e3-combinations}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcrrrrrr@{}}\toprule
+Features & Search/subset & $w_O$ & $w_N$ & $w_A$ & $H$ & $N$ & $A$\\\midrule
+Categorical & 1/1 & .60 & .55 & .55 & .13229 & .13421 & .13373\\
+Categorical & 1/2 & .65 & .60 & .50 & .13227 & .13415 & .13389\\
+Categorical & 1/3 & .60 & .55 & .50 & .13228 & .13423 & .13384\\
+Categorical & 2/1 & .65 & .55 & .55 & .13235 & .13421 & .13373\\
+Categorical & 2/2 & .70 & .60 & .50 & .13236 & .13415 & .13389\\
+Categorical & 2/3 & .65 & .55 & .50 & .13239 & .13423 & .13384\\
+Categorical & 3/1 & .60 & .55 & .55 & .13239 & .13421 & .13373\\
+Categorical & 3/2 & .65 & .60 & .50 & .13240 & .13415 & .13389\\
+Categorical & 3/3 & .60 & .55 & .50 & .13246 & .13423 & .13384\\\midrule
+Raw & 1/1 & .60 & .50 & .50 & .13158 & .13356 & .13295\\
+Raw & 1/2 & .60 & .50 & .45 & .13137 & .13318 & .13275\\
+Raw & 1/3 & .60 & .50 & .45 & .13125 & .13310 & .13265\\
+Raw & 2/1 & .60 & .50 & .50 & .13178 & .13356 & .13295\\
+Raw & 2/2 & .60 & .50 & .45 & .13156 & .13318 & .13275\\
+Raw & 2/3 & .60 & .50 & .45 & .13146 & .13310 & .13265\\
+Raw & 3/1 & .55 & .50 & .50 & .13179 & .13356 & .13295\\
+Raw & 3/2 & .55 & .50 & .45 & .13154 & .13318 & .13275\\
+Raw & 3/3 & .55 & .50 & .45 & .13146 & .13310 & .13265\\\bottomrule
+\end{tabular}}
+\end{table}
+
+The frozen E3 preparation receipt has SHA256
+\texttt{76f8a7b57f8b86793697824476105607}\allowbreak
+\texttt{3930981c37d750a0b60b4673b9a6bf32};
+the new panel's canonical hash is
+\texttt{415583f53de73b7f0295f2c8a289cad1}\allowbreak
+\texttt{bab311d9f0ce033a21ba840d6e1f8671}.
+Preparation reproduced the old recipe and old-Eval losses before serving.
+The independent output gate passed three immutable one-GPU attempts, each
+with 72,000 requested/confirmed item forecasts and zero failed or uncertain
+requests. The total was 216,000 forecasts and 237,089,520 reported prompt
+tokens, excluding historical search, old calibration and CPU fitting cost.
+The three allocated single-GPU elapsed times were 694, 622 and 640 seconds
+(0.5433 GPU-hours total). Seed 3 recorded a post-receipt shutdown diagnostic;
+its forecast arrays and counts passed the versioned gate, so this is not
+silently removed. The independently written finite-CPU numerical verifier
+recomputed all four gains, intervals, Holm values, component means and the
+full-ridge control from archived raw forecasts and labels. Its maximum
+absolute discrepancy was $9.38\times10^{-11}$, within the protocol's fixed
+$10^{-10}$ tolerance. This readback did not regenerate model forecasts.
+Neither this operational pass nor the favorable contrasts validate new
+search trajectories, the E2 selector winners, Qwen serving compatibility,
+external behavioral transfer, or superiority to the full ridge.

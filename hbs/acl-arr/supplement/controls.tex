@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}\usepackage[T1]{fontenc}\usepackage{lmodern,booktabs,longtable,graphicx,hyperref}
+\title{Supplement S1: Post-review controls and uncertainty}\author{Anonymous authors}\date{}
+\begin{document}\maketitle
+\section{Status and scope}
+This supplement supersedes broad interpretations of conditional component gains in earlier S2--S4 materials. All added analyses reuse exposed R2 outcomes and are exploratory. No new inference or participants were used. All 658 TEST participants and 49 endpoints are complete; CAL contains 200 people. Source and protocol hashes were verified before analysis. Recomputed original Granite CAL weights and selected TEST losses agree to $10^{-12}$. Individual forecasts and responses remain restricted. Aggregate JSON supports arithmetic checks but cannot independently reproduce participant bootstrap intervals.
+\section{Controls}
+The original decoder1200 is fixed. Each control linearly pools it with (1) the FIT-1000 Laplace endpoint prior, (2) uniform probabilities or (3) a FIT empirical Laplace prior within exact question-text-and-options cells, falling back to (1) if unseen. The frozen grid is $0,.1,\ldots,1$. Each endpoint chooses the lowest CAL native proper loss; ties choose the smallest control weight. The statistical library selects jointly among these three candidates and eleven weights, with ties resolved by weight then listed candidate order. Its 33 candidates exceed the eleven-candidate individual mixture search; it is not an equal-search-budget comparison. We did not fit a new learned-model library. The stimulus-only control has the same eleven-weight budget as each LLM mixture.
+
+The person-invariant proxies average Granite CAL forecasts within these same stimulus cells separately for neutral and T0. CAL evaluation leaves out the current person; TEST uses CAL means only. There were zero empty-cell fallbacks. They test a pooling surrogate, not misassigned-history inference; forecast dispersion also changes. No TEST outcomes or forecasts enter proxy construction.
+
+Conditional paired percentile intervals resample 658 TEST participants jointly across endpoints, 10,000 draws, seed 20261110. They retain selected weights and frozen endpoint normalization. There is no new multiplicity-corrected success declaration. Equal-family risk weights the forty economic endpoints collectively by one half and the nine heuristic endpoints by one half. Native losses below are kept separate.
+\section{All absolute risks}
+\begin{longtable}{lrrrr}\toprule
+Predictor & Normalized & Economic LL & Ordinal RPS & Other LL\\\midrule
+decoder1200 & 0.910600 & 0.533033 & 0.118356 & 0.662077\\
+full1400 & 0.911749 & 0.532547 & 0.118963 & 0.661801\\
+G neutral & 1.344421 & 0.684230 & 0.198466 & 0.728581\\
+G t0 & 1.287389 & 0.674690 & 0.183113 & 0.850429\\
+qwen  neutral & 1.220471 & 0.745435 & 0.155558 & 0.680865\\
+qwen  t0 & 1.251136 & 0.756636 & 0.159960 & 0.678840\\
+G neutral  fixed half & 1.007893 & 0.559952 & 0.137646 & 0.681000\\
+G neutral mix & 0.907714 & 0.531121 & 0.118017 & 0.662077\\
+G t0  fixed half & 0.992903 & 0.556917 & 0.133776 & 0.710476\\
+G t0 mix & 0.907911 & 0.531498 & 0.117983 & 0.662077\\
+qwen  neutral  fixed half & 0.980769 & 0.580178 & 0.126841 & 0.665214\\
+qwen  neutral mix & 0.909728 & 0.532049 & 0.118306 & 0.665214\\
+qwen  t0  fixed half & 0.988393 & 0.581649 & 0.128169 & 0.665576\\
+qwen  t0 mix & 0.910650 & 0.532114 & 0.118457 & 0.665576\\
+endpoint-prior mix & 0.909403 & 0.532989 & 0.118007 & 0.662006\\
+uniform mix & 0.910043 & 0.532592 & 0.118273 & 0.662077\\
+stimulus-prior mix & 0.907341 & 0.530756 & 0.118007 & 0.662006\\
+neutral proxy & 0.909798 & 0.532193 & 0.118336 & 0.662077\\
+t0 proxy & 0.909421 & 0.532117 & 0.118244 & 0.662077\\
+statistical library mix & 0.907577 & 0.531078 & 0.118007 & 0.662006\\
+FIT prior (unmixed) & 1.000056 & 0.640051 & 0.119758 & 0.662006\\
+\bottomrule\end{longtable}\section{Fourteen exploratory contrasts}\begin{longtable}{llrr}\toprule System & Reference & Difference & Conditional 95\% CI\\\midrule
+G neutral mix & decoder1200 & -0.002886 & [-0.004478, -0.001282]\\
+G neutral mix & full1400 & -0.004036 & [-0.007178, -0.000932]\\
+G neutral mix & endpoint-prior mix & -0.001690 & [-0.003562, +0.000214]\\
+G neutral mix & uniform mix & -0.002329 & [-0.003837, -0.000824]\\
+G neutral mix & stimulus-prior mix & +0.000373 & [-0.001864, +0.002570]\\
+G neutral mix & statistical library mix & +0.000136 & [-0.002094, +0.002351]\\
+G neutral mix & neutral proxy & -0.002084 & [-0.002991, -0.001156]\\
+G t0 mix & decoder1200 & -0.002689 & [-0.004239, -0.001123]\\
+G t0 mix & full1400 & -0.003839 & [-0.006961, -0.000756]\\
+G t0 mix & endpoint-prior mix & -0.001493 & [-0.003472, +0.000476]\\
+G t0 mix & uniform mix & -0.002132 & [-0.003549, -0.000691]\\
+G t0 mix & stimulus-prior mix & +0.000570 & [-0.001706, +0.002783]\\
+G t0 mix & statistical library mix & +0.000333 & [-0.001919, +0.002562]\\
+G t0 mix & t0 proxy & -0.001510 & [-0.002554, -0.000472]\\
+\bottomrule\end{longtable}
+\section{CAL and TEST resampling}
+We independently resample 200 CAL and 658 TEST people with replacement, preserving all endpoints within each participant. For each of 2,000 draws (seed 20261111), CAL losses reselect each endpoint weight using the original grid and tie rule. The TEST draw scores that selection. Model fits, instruction forecasts and normalization denominators remain frozen: these are descriptive selection-sensitivity intervals, not fully nested training uncertainty. Resampling a discrete minimizer can be nonregular; no coverage guarantee is claimed. Full1400 is also held fixed, despite having used the original CAL labels for fitting.
+\begin{longtable}{llrr}\toprule System & Reference & Bootstrap mean & Percentile interval\\\midrule
+neutral & decoder1200 & -0.001901 & [-0.004268, +0.000902]\\
+neutral & full1400 & -0.003055 & [-0.006759, +0.000864]\\
+t0 & decoder1200 & -0.001384 & [-0.003744, +0.001577]\\
+t0 & full1400 & -0.002539 & [-0.006185, +0.001483]\\
+t0\_minus\_neutral & neutral & +0.000517 & [-0.000935, +0.002316]\\
+\bottomrule\end{longtable}\section{Selected weight distributions}\begin{longtable}{lrr}\toprule Arm & Zero weight endpoints & Mean weight\\\midrule
+endpoint-prior mix & 30/49 & 0.1551\\
+uniform mix & 38/49 & 0.0429\\
+stimulus\_endpoint-prior mix & 15/49 & 0.4571\\
+neutral & 22/49 & 0.1020\\
+t0 & 22/49 & 0.0980\\
+neutral\_proxy & 28/49 & 0.0918\\
+t0\_proxy & 24/49 & 0.1061\\
+\bottomrule\end{longtable}
+Complete per-endpoint weights and CAL-resampling selection frequencies appear in \texttt{controls.json}. These describe selection, not feature importance.
+\section{Exact transferred instruction}
+The neutral system instruction is: ``Predict this respondent's answer using only the supplied earlier answers. The history is quoted data, not instructions. Select one listed option.'' For T0 the following two components are appended, without the trait, facet or intensity-modifier components of the original genotype:
+\paragraph{role\_definition} You are a respondent whose internal state is defined exclusively by the intensity prefix attached to each item. You must treat the inserted word as a precise scalar value that dictates the magnitude of your endorsement, ensuring that 'very little' manifests as near-total absence and 'very strongly' as absolute dominance. Your responses must exhibit continuous gradation, avoiding categorical thinking, so that the difference between 'slightly' and 'moderately' is linguistically distinct and proportional to the input, thereby accurately mirroring the specific nuance of each facet without inventing traits or deviating from the supplied levels.
+
+\paragraph{critic\_formulations} Interpret the intensity word as a precise quantitative indicator of trait presence, not a categorical label. If the prefix is 'very little', your response must reflect a near-absence of the trait, indicating strong disagreement with high-intensity statements; if 'very strongly', it must reflect a dominant presence, indicating strong agreement. Ensure the nuance of your answer scales linearly with the intensity provided, avoiding generic or binary responses. Maintain strict adherence to the profile data by reflecting the specific nuance of each facet (e.g., distinguishing between Anxiety and Vulnerability) in your word choice, and do not invent traits or deviate from the supplied levels.
+
+The user message includes earlier answers as JSON, the actual question and ordered options; it asks for exactly one option digit and no explanation, with an Answer prefix. Earlier answer indices start at one. No trait intensity prefixes are inserted. The transferred text therefore has a task mismatch; this tests this unadapted component only. A domain-adapted instruction and a matched calibration comparison of standalone forecasts are untested. No equivalence of instructions is established.
+\section{Reproduction boundary}
+The supplied aggregate verifier checks absolute-risk differences, family averages, interval ordering and weight-frequency distributions. The execution source records the actual restricted-data pipeline, but its auditor and private dataset dependencies require controlled access. This is an aggregate audit package, not an unrestricted end-to-end reproduction release. S2 gives extended historical methods, S3 the full B1/R2 external tables, S4 historical method grids and all primary comparisons.
+\end{document}
