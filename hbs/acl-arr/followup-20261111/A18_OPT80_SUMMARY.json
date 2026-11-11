@@ -1,0 +1,39 @@
+{
+  "n_unique_people": 80,
+  "rows": 27,
+  "engines": {
+    "cmamae": {
+      "mean_rps": 0.11853481519391815,
+      "mean_delta_simple": -0.0007192751198096965
+    },
+    "random": {
+      "mean_rps": 0.11871843106383122,
+      "mean_delta_simple": -0.0005356592498966236
+    },
+    "coordinate": {
+      "mean_rps": 0.1185906913094696,
+      "mean_delta_simple": -0.0006633990042582586
+    }
+  },
+  "contrasts": {
+    "random": {
+      "seed_deltas_cmamae_minus_control": [
+        3.777527739500363e-05,
+        0.0002884437812809412,
+        -0.0008770666684151631
+      ],
+      "mean": -0.00018361586991307274,
+      "wins": 1
+    },
+    "coordinate": {
+      "seed_deltas_cmamae_minus_control": [
+        -0.0003264179808158803,
+        0.0001328173274247158,
+        2.597230673685117e-05
+      ],
+      "mean": -5.5876115551437774e-05,
+      "wins": 1
+    }
+  },
+  "scope": "exposed OPT only; no confirmatory intervals"
+}

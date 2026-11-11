@@ -1,0 +1,17 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}\usepackage[T1]{fontenc}\usepackage{lmodern,booktabs,amsmath}
+\title{Supplement S6: Synthetic coverage diagnostic for a prospective panel}\author{Anonymous authors}\date{11 November 2026}
+\begin{document}\maketitle
+\section{Not empirical participant evidence}
+Finite CPU job 27703 evaluates 21 dependent synthetic contrasts (18 contrasts plus three averages), with 100 Monte Carlo replicates per scenario and 4,000 bootstrap draws. No actual panel outcomes, new recruitment or external TEST labels are involved. This diagnostic is not the full 49-endpoint scorer, a calibration-selection audit, a recruitment-power calculation, or proof that the proposed protocol is admitted.
+\begin{center}\begin{tabular}{rlrr}\toprule
+Synthetic n & Distribution & Family noncoverage & Exact 95\% interval\\\midrule
+100 & Normal & .04 & [.01100,.09926]\\
+100 & Skew & .02 & [.00243,.07038]\\
+100 & Rare event & .04 & [.01100,.09926]\\
+400 & Normal & .02 & [.00243,.07038]\\
+400 & Skew & .01 & [.00025,.05446]\\
+400 & Rare event & .02 & [.00243,.07038]\\\bottomrule
+\end{tabular}\end{center}
+The broad Monte Carlo intervals do not certify family noncoverage below .05. A single tail fixture comparing 20,000 with 200,000 bootstrap draws differs by at most .00007502; it is not uniform assurance across endpoints or datasets. Rights, ethics, independent custody/access controls, permitted-question dictionary, missing-label rules, quotas and adequate CAL/TEST sizes remain prerequisites for the prospective study. No human-scientific conclusion in the main paper is based on these simulations.
+\end{document}

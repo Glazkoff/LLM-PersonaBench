@@ -1,22 +1,27 @@
-# HBS / A16 — current ACL/ARR manuscript
+# HBS — consolidated ACL/ARR working manuscript
 
-Latest manuscript revision: 10 November 2026; uploaded 11 November 2026.
+Updated 11 November 2026. Branch: `codex/hbs-acl-arr-20261111`.
 
-- **[Read the paper (PDF)](paper/main.pdf)** — 8 pages, ACL review format.
-- [Editable main text (LaTeX)](paper/main.tex).
-- [Complete supplement (PDF)](supplement.pdf) — 49 pages.
-- [Supplement source parts](supplement/).
-- [Aggregate results and checker](aggregates/).
+- **[Current paper (PDF)](paper/main.pdf)**; [LaTeX](paper/main.tex).
+- **[Complete supplement (PDF)](supplement.pdf)**; [source parts](supplement/).
+- [Evidence map and revision checks](REVISION_20261111.md).
+- [November follow-up records](followup-20261111/).
+- [External-survey aggregates and checker](aggregates/).
 
-This is the current author-review version, not a conference submission or an accepted paper. It incorporates the statistical-mixture controls and CAL-selection sensitivity from the second Claude review. Granite's fixed-mixture component gain does not establish superiority over strong statistical mixing or a stable persona-specific benefit. Negative and mixed findings remain included.
+The main text combines the historical persona comparison, E3/B1 budget controls,
+external R2 stimulus-matched results, statistical-mixture controls and CAL-selection
+sensitivity with the November cached-Qwen optimizer diagnostics. Their populations,
+estimands and uncertainty remain distinct. S6 contains a synthetic diagnostic only.
 
-## Reproduction and scope
-From `paper/`: run pdflatex main, bibtex main, then pdflatex main twice. The line-number hook supports outer-margin numbering with lineno 5.7; ACL geometry is unchanged.
+This is a working author-review version, not a submission or accepted paper.
+Rights, publication overlap and author/ethical declarations remain pending.
+The prospective panel has not been recruited and remains NO-GO.
 
-`uv run --no-project python aggregates/audit.py` checks aggregate arithmetic (149 checks); it does not reconstruct participant bootstrap intervals. `analysis/controls.py` requires the restricted dataset and audit dependencies described in its README. Individual responses and predictions are not distributed.
+Build `paper/main.tex` using pdflatex, bibtex, then repeated pdflatex passes.
+Build S5/S6 with pdflatex twice. The combined supplement concatenates controls,
+robustness, extended, external, historical, cached-search and prospective-diagnostic.
+The historical S1–S4 PDFs are preserved without reinterpretation as new outcomes.
 
-Combined supplement page map: S1 1–3, S1b 4–5, S2 6–19, S3 20–24, S4 25–49. The main paper and S1 qualify earlier interpretations in the historical materials.
-
-Publication overlap, rights, ethical and author declarations remain pending before submission. A17 recruitment and study execution remain NO-GO. No new outcomes are introduced by this upload. This GitHub publication does not authorize article submission or a new experiment.
-
-SHA-256 hashes are in MANIFEST.sha256. The prior working checkout branch was `codex/hbs-aamas-comparison`; this self-contained revision is on `codex/hbs-acl-arr-20261111`.
+`uv run --no-project python aggregates/audit.py` checks 149 aggregate identities;
+it does not reconstruct participant bootstrap intervals. Individual responses and
+predictions are not distributed. Hashes of distributed files: `MANIFEST.sha256`.

@@ -13,7 +13,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Persona-conditioned language models can predict a person's responses, but this does not establish that persona wording adds value beyond the same observed history. We distinguish three comparisons: matching the person, changing the instruction, and augmenting a statistical predictor. Across two model families and two survey instruments, these comparisons yield different conclusions. In a historical 84-template experiment, the planned optimizer comparison did not establish superiority. On a further same-inventory panel, a frozen Granite mixture beat neutral mixtures at a small decoder-fitting budget, but statistical predictors led at every examined budget from 320 people onward. On 658 held-out respondents from a public external survey, Granite mixtures using neutral or an unadapted transferred instruction modestly improved over a full-data statistical control under the internally frozen analysis; Qwen intervals included zero. A statistical-only stimulus-prior mixture improves over that control by a larger point estimate. Yet the direct comparison of the CAL-selected Granite mixtures was near zero. Post-review statistical-only mixtures remove evidence of an LLM advantage: Granite superiority over stimulus-conditioned empirical shrinkage is not established; no equivalence margin was declared. Granite-versus-decoder intervals also include zero when calibration-weight selection is resampled. These results support evaluating instruction effects separately from mixture gains, with explicit supervision budgets, stimulus alignment and conditional uncertainty.
+Persona-conditioned language models can predict a person's responses, but this does not establish that persona wording adds value beyond the same observed history. We distinguish three comparisons: matching the person, changing the instruction, and augmenting a statistical predictor. Across two model families and two survey instruments, these comparisons yield different conclusions. In a historical 84-template experiment, the planned optimizer comparison did not establish superiority. On a further same-inventory panel, a frozen Granite mixture beat neutral mixtures at a small decoder-fitting budget, but statistical predictors led at every examined budget from 320 people onward. On 658 held-out respondents from a public external survey, Granite mixtures using neutral or an unadapted transferred instruction modestly improved over a full-data statistical control under the internally frozen analysis; Qwen intervals included zero. A statistical-only stimulus-prior mixture improves over that control by a larger point estimate. Yet the direct comparison of the CAL-selected Granite mixtures was near zero. Post-review statistical-only mixtures remove evidence of an LLM advantage: Granite superiority over stimulus-conditioned empirical shrinkage is not established; no equivalence margin was declared. Granite-versus-decoder intervals also include zero when calibration-weight selection is resampled. Separate cached-Qwen search diagnostics yield small, seed-sensitive gains and fail their practical continuation rule. These exploratory controls do not provide new-person confirmation. These results support evaluating instruction effects separately from mixture gains, with explicit supervision budgets, stimulus alignment and conditional uncertainty.
 \end{abstract}
 
 \section{Introduction}
@@ -92,6 +92,38 @@ The fixed E3 Granite mixture improves over two neutral mixtures by 0.00125--0.00
 
 With 8,320 training people fixed, the mean raw-history decoder curve crosses the 60-answer hybrid's loss between ten and twenty observed answers, at an interpolated 11.44 (conditional participant interval [10.46,12.38]). Individual item orders cross at 9.17, 10.99 and 14.19. A descriptive joint participant-and-three-order bootstrap gives [9.13,13.88]; three orders do not characterize all questionnaire designs. These are decoder-relative intersections on exposed E3, not a validated shorter questionnaire or literal answer savings.
 
+\subsection{Cached-mixture search adds limited evidence}\label{sec:cached}
+A separate IPIP follow-up searches probability mixtures, not persona text.
+The 10 November report summarizes 18 searches completed on 9 November:
+CMA-MAE and random search, three TRAIN320 subsets and three search seeds,
+with a shared 70-candidate cap. Within-training cross-validation selects
+CatBoost in each subset; optimization, selection and evaluation use existing
+OPT80, SELECT120 and the same previously exposed DEVTEST400. The three
+training subsets overlap by 8, 11 and 11 people. Thus nine paired search
+cells are not nine independent replications.
+
+The median of the three fit-level median CMA-MAE-minus-control RPS
+differences is $-0.00056003$ versus the simple mixture and $-0.00017157$
+versus random. CMA-MAE wins 8/9 comparisons with simple (one tie) and
+7/9 with random (one tie, one loss). None of the three fits passes the
+fixed continuation rule: median gain over simple at least 0.001, no loss
+to simple, negative median difference versus random, and at least two
+random-control wins per three seeds. Broad continuation required all three
+fits to pass; the threshold was not relaxed after evaluation.
+
+On 11 November, a separate development-only check fixes the existing
+statistical predictor and rotates optimization, calibration and validation
+over three partitions of the already exposed OPT80. CMA-MAE, random and
+coordinate search each receive 70 evaluations, including six common anchors,
+with the same four-parameter bounded gate and shortlist selection rule.
+Across three seeds and three validation folds, mean RPS is 0.118535,
+0.118718 and 0.118591, respectively. CMA-MAE wins against each rival in
+only one of three seed-level contrasts, despite its lower overall mean.
+These 27 cells reuse 80 people; fitting/calibration sets overlap across folds.
+No fresh TEST, new LLM calls, confirmatory intervals or equivalence tests
+are supplied by either diagnostic (Supplement S5). Candidate-cap matching
+does not equalize historical supervision or total computation.
+
 \subsection{External mixture gain is not instruction gain}
 All 658 R2 TEST people have all 49 outcomes. All four standalone LLMs and four fixed-half mixtures have higher original aggregate loss than Full1400. The standalone LLMs are also worse than the history-free FIT prior (normalized risk 1.22--1.34 versus 1.000; S1). Both CAL-selected Granite mixtures improve modestly over Full1400 under the registered analysis: neutral $-0.00404$ (95\% CI $[-0.00723,-0.00096]$, Holm $p=.0360$), T0 $-0.00384$ ($[-0.00692,-0.00085]$, $p=.0486$). Both CAL-selected Qwen intervals include zero.
 
@@ -143,17 +175,19 @@ A simulator can exploit its owner's history, improve relative to neutral wording
 
 The reusable finding is not universal failure of personas. Granite improves its own component when the realized weights and forecasts are fixed, while Qwen and the direct transferred-instruction comparison are mixed or inconclusive. However, Granite superiority over statistical-only pooling is not established and CAL reselection widens all Granite component intervals across zero. The appropriate claim is a conditional gain of a specified pipeline, not established LLM necessity or stable population-level complementarity. The method offers a way to prevent a package gain from being attributed automatically to an instruction intervention.
 
-Endpoint weighting expresses a target utility, not a nuisance choice to optimize after seeing outcomes. The registered aggregate remains the primary R2 target. Its sensitivity should accompany it because the nominally favorable T0-versus-Full1400 interval changes under a reasonable alternate weighting. A prospective independent panel is needed to test whether frozen instruction-specific mixtures transfer beyond these public, repeatedly analyzed outcomes.
+Endpoint weighting expresses a target utility, not a nuisance choice to optimize after seeing outcomes. The registered aggregate remains the primary R2 target. Its sensitivity should accompany it because the nominally favorable T0-versus-Full1400 interval changes under a reasonable alternate weighting. The cached-mixture controls likewise do not establish an incremental benefit of evolutionary search over simple mixing and matched search alternatives. Their failed continuation rule applies to this bounded search space and budget, not to all evolutionary methods or the earlier positive Granite recipe. A prospective independent panel is needed to test whether frozen instruction-specific mixtures transfer beyond these public, repeatedly analyzed outcomes.
 
 \section{Conclusion}
-We separate person matching, instruction effects and mixture gains in individual-response forecasting. Strong same-history statistical controls reverse the small-budget interpretation on IPIP. On the external survey, fixed Granite CAL mixtures improve their decoder, but stronger statistical pooling and calibration-sample uncertainty remove evidence for an LLM-specific advantage. The direct comparison also does not establish a transferred-persona advantage. Reporting the comparator budget, stimulus, calibration rule and estimand together provides a more reliable basis for deciding what a persona adds.
+We separate person matching, instruction effects and mixture gains in individual-response forecasting. Strong same-history statistical controls reverse the small-budget interpretation on IPIP. On the external survey, fixed Granite CAL mixtures improve their decoder, but stronger statistical pooling and calibration-sample uncertainty remove evidence for an LLM-specific advantage. The direct comparison also does not establish a transferred-persona advantage. The additional cached-Qwen searches do not establish a stable optimizer advantage and do not strengthen the external-survey claim. Reporting the comparator budget, stimulus, calibration rule and estimand together provides a more reliable basis for deciding what a persona adds.
 
 \section*{Limitations}
-This study covers two fixed model families and two survey instruments. Public outcomes may have appeared in pretraining. E3 is disjoint from known historical panels but shares the IPIP corpus and item family; unknown lifetime exposure is unproven. B1, item-order interpolation and subsequent R2 decompositions are exploratory reuse, not independent confirmations. Post hoc control specification can also favor a statistical comparator; neither its advantage nor equivalence is independently confirmed. R2 was specified after the initial history-only CAL diagnostic. Questionnaires and hypothetical purchase choices do not validate actual behavior or interventions.
+This study covers two model families and two survey instruments; the cached-Qwen follow-up is a separate historical prediction bundle, not another external cohort. Public outcomes may have appeared in pretraining. E3 is disjoint from known historical panels but shares the IPIP corpus and item family; unknown lifetime exposure is unproven. B1, item-order interpolation and subsequent R2 decompositions are exploratory reuse, not independent confirmations. Post hoc control specification can also favor a statistical comparator; neither its advantage nor equivalence is independently confirmed. R2 was specified after the initial history-only CAL diagnostic. Questionnaires and hypothetical purchase choices do not validate actual behavior or interventions.
 
 Primary intervals condition on fixed templates, decoders and calibration weights. Three historical search seeds cannot characterize general optimizer variability. Leave-one-endpoint-out sensitivity keeps the same people and task universe. The joint CAL/TEST sensitivity reselects weights but does not refit statistical models, resample their training sets, or recompute prior-loss normalization. It is not a fully nested pipeline interval. The statistical-only library does not include all alternative learned predictors, and the pooled-history surrogate cannot replace a deranged-history intervention. The attenuated T0 difference under adaptive mixing is partly expected from shrinkage; it neither proves prompt equivalence nor separates an intrinsic wording effect from forecast calibration. No equality of total supervision, pretraining or compute is established by matching the observed input or fitting-person count.
 
 Historical serving replays exhibited Qwen drift and a separate E5 new-seed replication did not execute because its frozen pointwise compatibility gate failed. Preserving saved predictions permits scoring reproducibility but does not repair inference reproducibility. Native GigaEvo is private, so reproducing that arm requires access or a separately validated substitute. Recorded historical allocation is only a cost lower bound, omitting some failed requests, development and mutator costs.
+
+Supplement S5 keeps both cached-search diagnostics separate from E3 and R2; different designs preclude a causal interpretation of historical n80 versus n320 differences. Supplement S6 reports only a synthetic coverage diagnostic for the proposed panel, not participant evidence or admission to recruitment.
 
 Supplements S2--S4 preserve complete historical results and source methods; S1 records the post-review controls and uncertainty analysis. The proposed independent panel has not been recruited and contributes no empirical evidence here.
 

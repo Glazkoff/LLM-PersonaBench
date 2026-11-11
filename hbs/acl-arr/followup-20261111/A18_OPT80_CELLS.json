@@ -1,0 +1,275 @@
+{
+  "scope": "Three disjoint validation folds; training/calibration overlap across folds. Existing exposed OPT cohort, not independent confirmation. Cached prediction generation cost excluded from optimizer-only cost.",
+  "rows": [
+    {
+      "fold": 0,
+      "seed": 11,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.12229809131935368,
+      "delta_simple": -0.00021896064906988687
+    },
+    {
+      "fold": 0,
+      "seed": 11,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.12163794082542372,
+      "delta_simple": -0.0008791111429998561
+    },
+    {
+      "fold": 0,
+      "seed": 11,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.1220545521854296,
+      "delta_simple": -0.0004624997829939988
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.1220533902173982,
+      "delta_simple": -0.00046366175102541724
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.12112448865502715,
+      "delta_simple": -0.0013925633133964415
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.1214170927718628,
+      "delta_simple": -0.0010999591965607956
+    },
+    {
+      "fold": 0,
+      "seed": 47,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.1213804735770717,
+      "delta_simple": -0.0011365783913518807
+    },
+    {
+      "fold": 0,
+      "seed": 47,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.12251705196842358,
+      "delta_simple": 0.0
+    },
+    {
+      "fold": 0,
+      "seed": 47,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 26,
+      "n_validation": 27,
+      "rps": 0.12128046448391716,
+      "delta_simple": -0.0012365874845064071
+    },
+    {
+      "fold": 1,
+      "seed": 11,
+      "engine": "cmamae",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11257075867257516,
+      "delta_simple": -0.0010765484272715425
+    },
+    {
+      "fold": 1,
+      "seed": 11,
+      "engine": "random",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11307241777443128,
+      "delta_simple": -0.0005748893254154166
+    },
+    {
+      "fold": 1,
+      "seed": 11,
+      "engine": "coordinate",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11365706477119913,
+      "delta_simple": 9.757671352428024e-06
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "engine": "cmamae",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11273475595672924,
+      "delta_simple": -0.0009125511431174599
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "engine": "random",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11276285102625337,
+      "delta_simple": -0.0008844560735933265
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "engine": "coordinate",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11298308023004827,
+      "delta_simple": -0.0006642268697984455
+    },
+    {
+      "fold": 1,
+      "seed": 47,
+      "engine": "cmamae",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11344839722519512,
+      "delta_simple": -0.00019890987465156536
+    },
+    {
+      "fold": 1,
+      "seed": 47,
+      "engine": "random",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11364730709984666,
+      "delta_simple": 0.0
+    },
+    {
+      "fold": 1,
+      "seed": 47,
+      "engine": "coordinate",
+      "n_fit": 26,
+      "n_cal": 27,
+      "n_validation": 27,
+      "rps": 0.11329907114486597,
+      "delta_simple": -0.0003482359549807156
+    },
+    {
+      "fold": 2,
+      "seed": 11,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12077306571679063,
+      "delta_simple": -0.0009149931391682262
+    },
+    {
+      "fold": 2,
+      "seed": 11,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12082142130888268,
+      "delta_simple": -0.0008666375470761693
+    },
+    {
+      "fold": 2,
+      "seed": 11,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12090224765595889,
+      "delta_simple": -0.0007858111999999862
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12089076898277572,
+      "delta_simple": -0.000797289873183144
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12093870255217534,
+      "delta_simple": -0.0007493563037834996
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12088499550030898,
+      "delta_simple": -0.0008030633556498917
+    },
+    {
+      "fold": 2,
+      "seed": 47,
+      "engine": "cmamae",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12092221293103494,
+      "delta_simple": -0.0007658459249239308
+    },
+    {
+      "fold": 2,
+      "seed": 47,
+      "engine": "random",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.1222340264037703,
+      "delta_simple": 0.000545967547811454
+    },
+    {
+      "fold": 2,
+      "seed": 47,
+      "engine": "coordinate",
+      "n_fit": 27,
+      "n_cal": 27,
+      "n_validation": 26,
+      "rps": 0.12110122312892382,
+      "delta_simple": -0.0005868357270350393
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}\usepackage[T1]{fontenc}\usepackage{lmodern,booktabs,longtable,amsmath,hyperref}
+\title{Supplement S5: Cached-Qwen search follow-up}\author{Anonymous authors}\date{11 November 2026}
+\begin{document}\maketitle
+\section{Evidence chronology and scope}
+The 10 November editorial report summarizes searches completed on 9 November; it is not a new run on 10 November. The 11 November OPT-only check is a distinct diagnostic (finite CPU Slurm job 27702). Both reuse cached forecasts and exposed development respondents. They search mixture parameters rather than generating or optimizing new prompt text. Neither accesses the proposed independent external panel's TEST outcomes. These results do not update the original search-family or R2 Holm decisions.
+\section{TRAIN320 robustness}
+The frozen TRAIN seeds are 20261110, 20261111 and 20261112; search seeds are 11, 29 and 47. Each statistical fit uses TRAIN-only three-fold selection among prior, ridge and CatBoost configurations; all three select CatBoost depth 4, 100 iterations, learning rate .05. Existing OPT80 and SELECT120 select candidates before the common exposed DEVTEST400 evaluation. CMA-MAE and random each have a cap of 70 evaluations; all 18 searches complete (1,260 evaluations). The common simple comparator is selected on SELECT, separately within each fit. TRAIN320 counts only fitting of the statistical component, not all historical supervision. Training subsets overlap by 8/11/11 people and share the evaluation cohort.
+\begin{center}\begin{tabular}{lrrr}\toprule
+TRAIN seed & Statistical RPS & Simple RPS & Median CMA minus simple\\\midrule
+20261110 & .12063438 & .11943963 & -.00069552\\
+20261111 & .11987651 & .11883056 & -.00056003\\
+20261112 & .11987067 & .11860234 & -.00033367\\\bottomrule
+\end{tabular}\end{center}
+The median of fit-level median differences is $-.00056003$ against simple and $-.00017157$ against random. CMA-MAE wins eight of nine simple comparisons (one tie) and seven of nine random comparisons (one tie, one loss). The fixed practical rule requires median difference to simple $\leq-.001$, no seed loss to simple, negative median difference to random and at least two random wins per three seeds. Zero of three fits passes; broad continuation required all three. This is a screening decision, not an equivalence test or evidence of universal optimizer failure. The original n320 fit's median simple-comparator gain of .000795 also falls below .001. Earlier positive n80 evidence is retained as historical evidence: these differing designs do not isolate a budget effect.
+\section{All matched TRAIN320 cells}
+\begin{longtable}{llrrr}\toprule
+TRAIN seed & Engine & Search seed & RPS & Difference to simple\\\midrule
+20261110 & random & 11 & 0.11882514 & -0.00061449\\
+20261110 & random & 29 & 0.11877111 & -0.00066852\\
+20261110 & random & 47 & 0.11943963 & +0.00000000\\
+20261110 & cmamae & 11 & 0.11864103 & -0.00079860\\
+20261110 & cmamae & 29 & 0.11874411 & -0.00069552\\
+20261110 & cmamae & 47 & 0.11943963 & +0.00000000\\
+20261111 & random & 11 & 0.11874946 & -0.00008109\\
+20261111 & random & 29 & 0.11831136 & -0.00051919\\
+20261111 & random & 47 & 0.11883056 & +0.00000000\\
+20261111 & cmamae & 11 & 0.11821682 & -0.00061373\\
+20261111 & cmamae & 29 & 0.11827052 & -0.00056003\\
+20261111 & cmamae & 47 & 0.11865898 & -0.00017157\\
+20261112 & random & 11 & 0.11803562 & -0.00056671\\
+20261112 & random & 29 & 0.11790844 & -0.00069389\\
+20261112 & random & 47 & 0.11860234 & +0.00000000\\
+20261112 & cmamae & 11 & 0.11783148 & -0.00077085\\
+20261112 & cmamae & 29 & 0.11841423 & -0.00018811\\
+20261112 & cmamae & 47 & 0.11826867 & -0.00033367\\
+\bottomrule\end{longtable}
+\section{OPT80 optimizer contrast}
+The fixed existing n320 predictor is retained. A seeded permutation (2026111101) partitions OPT80 into three groups of 27, 27 and 26. Rotating optimization, calibration and validation roles gives three disjoint validation groups but overlapping role assignments across rotations. Each engine uses the same four gate coefficients bounded to $[-6,6]$, six common simple anchors included in the 70 evaluations, and a shortlist containing simple candidates plus the five best adaptive gates on optimization loss. Calibration selects the winner before validation scoring. Three seeds (11,29,47) and three engines produce 27 cells. Alternative energy-form RPS agrees with validation losses within the configured numerical tolerance; this is a scorer check, not independent scientific replication.
+\begin{center}\begin{tabular}{lrr}\toprule
+Engine & Mean RPS & Mean difference to simple\\\midrule
+CMA-MAE & .118534815 & -.000719275\\
+Random & .118718431 & -.000535659\\
+Coordinate & .118590691 & -.000663399\\\bottomrule
+\end{tabular}\end{center}
+\begin{center}\begin{tabular}{rrr}\toprule
+Seed & CMA minus random & CMA minus coordinate\\\midrule
+11 & +.000037775 & -.000326418\\
+29 & +.000288444 & +.000132817\\
+47 & -.000877067 & +.000025972\\\bottomrule
+\end{tabular}\end{center}
+The mean seed-level differences are $-.000183616$ and $-.000055876$, respectively, with only one win out of three against each rival. These summaries average losses over the 80 validation people per seed; folds are not independent cohorts. We report no confirmatory confidence interval or $p$-value. The OPT-only diagnostic is not another application of the TRAIN320 continuation rule or a fresh holdout. Historical cache-generation and statistical-fitting costs are excluded from the optimizer-only work; neither diagnostic establishes total-cost efficiency. The underlying data and individual predictions remain restricted. Aggregate summaries and all TRAIN320 search rows accompany this revision.
+
+\section{All OPT80 development cells}
+\begin{longtable}{rrlrr}\toprule
+Fold & Seed & Engine & RPS & Difference to simple\\\midrule
+0 & 11 & cmamae & 0.122298091 & -0.000218961\\
+0 & 11 & random & 0.121637941 & -0.000879111\\
+0 & 11 & coordinate & 0.122054552 & -0.000462500\\
+0 & 29 & cmamae & 0.122053390 & -0.000463662\\
+0 & 29 & random & 0.121124489 & -0.001392563\\
+0 & 29 & coordinate & 0.121417093 & -0.001099959\\
+0 & 47 & cmamae & 0.121380474 & -0.001136578\\
+0 & 47 & random & 0.122517052 & +0.000000000\\
+0 & 47 & coordinate & 0.121280464 & -0.001236587\\
+1 & 11 & cmamae & 0.112570759 & -0.001076548\\
+1 & 11 & random & 0.113072418 & -0.000574889\\
+1 & 11 & coordinate & 0.113657065 & +0.000009758\\
+1 & 29 & cmamae & 0.112734756 & -0.000912551\\
+1 & 29 & random & 0.112762851 & -0.000884456\\
+1 & 29 & coordinate & 0.112983080 & -0.000664227\\
+1 & 47 & cmamae & 0.113448397 & -0.000198910\\
+1 & 47 & random & 0.113647307 & +0.000000000\\
+1 & 47 & coordinate & 0.113299071 & -0.000348236\\
+2 & 11 & cmamae & 0.120773066 & -0.000914993\\
+2 & 11 & random & 0.120821421 & -0.000866638\\
+2 & 11 & coordinate & 0.120902248 & -0.000785811\\
+2 & 29 & cmamae & 0.120890769 & -0.000797290\\
+2 & 29 & random & 0.120938703 & -0.000749356\\
+2 & 29 & coordinate & 0.120884996 & -0.000803063\\
+2 & 47 & cmamae & 0.120922213 & -0.000765846\\
+2 & 47 & random & 0.122234026 & +0.000545968\\
+2 & 47 & coordinate & 0.121101223 & -0.000586836\\
+\bottomrule\end{longtable}
+\end{document}

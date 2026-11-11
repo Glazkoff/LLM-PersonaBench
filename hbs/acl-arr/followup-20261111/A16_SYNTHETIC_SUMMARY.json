@@ -1,0 +1,83 @@
+{
+  "status": "COMPLETE_SYNTHETIC_DIAGNOSTIC",
+  "rows": [
+    {
+      "n": 100,
+      "distribution": "normal",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.04,
+      "noncoverage_ci": [
+        0.011004493986188206,
+        0.09925715671265992
+      ],
+      "tail_order_expected": 4.761904761904762
+    },
+    {
+      "n": 100,
+      "distribution": "skew",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.02,
+      "noncoverage_ci": [
+        0.002431336823942544,
+        0.07038393247107015
+      ],
+      "tail_order_expected": 4.761904761904762
+    },
+    {
+      "n": 100,
+      "distribution": "rare_event",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.04,
+      "noncoverage_ci": [
+        0.011004493986188206,
+        0.09925715671265992
+      ],
+      "tail_order_expected": 4.761904761904762
+    },
+    {
+      "n": 400,
+      "distribution": "normal",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.02,
+      "noncoverage_ci": [
+        0.002431336823942544,
+        0.07038393247107015
+      ],
+      "tail_order_expected": 4.761904761904762
+    },
+    {
+      "n": 400,
+      "distribution": "skew",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.01,
+      "noncoverage_ci": [
+        0.00025314603297742086,
+        0.05445938539208066
+      ],
+      "tail_order_expected": 4.761904761904762
+    },
+    {
+      "n": 400,
+      "distribution": "rare_event",
+      "replicates": 100,
+      "bootstrap": 4000,
+      "family_noncoverage": 0.02,
+      "noncoverage_ci": [
+        0.002431336823942544,
+        0.07038393247107015
+      ],
+      "tail_order_expected": 4.761904761904762
+    }
+  ],
+  "max_tail_change": 7.501634609842771e-05,
+  "limitations": [
+    "100 MC repetitions give broad uncertainty",
+    "B4000 diagnostic has fewer than five expected tail samples; cannot certify B200000 coverage",
+    "No real participant data, no CAL optimization, no enrollment authorization"
+  ]
+}

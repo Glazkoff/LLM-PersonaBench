@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "checks": 16,
+  "scope": "aggregate weighted arithmetic and cell denominators only; no participant recomputation"
+}
