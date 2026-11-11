@@ -1,0 +1,144 @@
+\section{Post hoc fixed-weight E3 readback}\label{sec:e4-fixed}
+E4 reuses the already exposed E3 Eval600, frozen Granite prompts, saved
+probabilities and n=80 ordinary ridge coefficients. Its question and analysis
+were fixed internally only \emph{after} E3 effects had been inspected; no new
+respondent panel or model inference was used. At the primary fixed weight
+$w=.5$, each arm keeps its own historical first-Cal60 scale and CDF center,
+but evolved and neutral forecasts share exactly the same ordinary ridge and
+numeric weight. This removes unequal mixture weights from the comparison.
+It identifies the effect of substituting an \emph{arm-specific calibrated
+forecast package}, not prompt wording alone. The old last-Cal60
+weight-selection labels are part of E3's lineage but their selected weights
+are unused by this fixed-half primary comparison.
+
+For each representation we average nine fixed \emph{per-person losses}
+(three historical search seeds by three fixed ridge subsets) before pairing
+the 600 respondents. The two neutral-minus-evolved fixed-half effects form a
+separate, two-sided Holm family. The internally fixed descriptive gate
+requires gain at least 0.001 RPS, positive paired respondent-bootstrap lower
+95\% bound and adjusted respondent sign-flip $p<.05$. With 5,000 draws and
+seed 20261021, both pass (Table~\ref{tab:e4-primary}). Intervals condition
+on these old seeds/subsets and the exposed panel. The numerical verifier
+recomputed every saved loss and statistic from the raw E3 forecasts with
+maximum discrepancy zero; it shares the frozen CDF/RPS primitives and does
+not regenerate model forecasts or create prospective confirmation.
+
+\begin{table}[H]\centering\scriptsize
+\caption{E4 fixed-half calibrated-package comparisons on exposed E3
+respondents ($N=600$). Positive is neutral minus evolved RPS, lower scores
+being better. Both rows form the Holm-2 family and pass the descriptive
+0.001-RPS/positive-CI/adjusted-$p$ rule.}
+\label{tab:e4-primary}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Features & Evolved & Neutral & Gain [paired 95\% CI] & $p_{\rm H}$\\\midrule
+Categorical & .132912 & .134389 & .001477 [.001291,.001676] & .0004\\
+Raw & .131831 & .133279 & .001448 [.001264,.001643] & .0004\\\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]\centering\scriptsize
+\caption{Complete \emph{fixed}, unselected E4 weight grid. Each entry is
+the mean of nine fixed per-person loss vectors. Weight zero reproduces the
+same ordinary ridge exactly for both arms. Other weights are descriptive;
+no best weight was chosen from E3 labels.}
+\label{tab:e4-grid}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Features & $w$ & Evolved RPS & Neutral RPS & Neutral $-$ evolved\\\midrule
+Categorical & 0 & .140831 & .140831 & .000000\\
+Categorical & .25 & .135723 & .136517 & .000794\\
+Categorical & .50 & .132912 & .134389 & .001477\\
+Categorical & .75 & .132398 & .134447 & .002049\\
+Categorical & 1 & .134180 & .136691 & .002512\\\midrule
+Raw & 0 & .139406 & .139406 & .000000\\
+Raw & .25 & .134378 & .135150 & .000772\\
+Raw & .50 & .131831 & .133279 & .001448\\
+Raw & .75 & .131765 & .133793 & .002028\\
+Raw & 1 & .134180 & .136691 & .002512\\\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]\centering\scriptsize
+\caption{Descriptive fixed-half sensitivity to the three \emph{old} Granite
+search seeds. ``Leave out'' averages the remaining two seed means, each
+already averaged across the three fixed n=80 ridge subsets. All values are
+neutral-minus-evolved RPS; these are not new optimizer replications.}
+\label{tab:e4-seeds}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Features & Seed 1 & Seed 2 & Seed 3 & Leave out 1 & Leave out 2 & Leave out 3\\\midrule
+Categorical & .001579 & .001317 & .001535 & .001426 & .001557 & .001448\\
+Raw & .001546 & .001295 & .001504 & .001399 & .001525 & .001420\\\bottomrule
+\end{tabular}}
+\end{table}
+
+At the same $w=.5$ but with raw \emph{uncalibrated} persona CDFs, the
+descriptive neutral-minus-evolved gain is .005634 categorical (evolved
+.141848, neutral .147482) and .005579 raw (evolved .140851, neutral .146430).
+These gains are larger than the primary calibrated-package differences, yet
+both arms' absolute RPS values are worse than their calibrated half-weight
+counterparts. This secondary comparison has no additional claim threshold
+or corrected-test status. It neither proves that calibration caused a
+particular prompt effect nor isolates prompt text from other arm-specific
+forecast differences.
+
+The three E3 ridge subsets are reconstructed from the exact old
+80-of-8,000 seeded permutations; pairwise intersections are 0/0/0 and their
+union is 240 people. They sit \emph{inside} Train8000, are reused for both
+representations and all three prompt seeds, and add no unique labelled people
+beyond Train8000. Before evaluation, the original disjoint Train8000,
+Search80, Select120 and Calibrate120 roles comprise 8,320 people and
+499,200 target-item labels (8,320 $\times$ 60). Search80 supplied prompt
+fitness, Select120 shortlist and ridge-penalty selection, Train8000 supplied
+the population target prior and full-ridge reference, and Calibrate120 was
+split 60/60 for E3 calibration and historical weights. Each E3 respondent
+then supplied 60 observed input answers and 60 separate evaluation targets.
+E1 and E3 each added 600 inventoried-disjoint same-corpus evaluation people;
+E4 adds none. These role and item counts are not an equal-supervision
+comparison of the persona and its n=80 ridge component.
+
+The selected three historical Granite calibrated-GA cells used by E3 account
+for 1,627,200 successful forecasts, 2,158,592,520 reported prompt tokens and
+9.5253 allocated GPU-hours. They are \emph{included in}, rather than added to,
+the 84-cell original campaign total in Table~\ref{tab:historical-cost}.
+E3 separately added 216,000 forecasts, 237,089,520 prompt tokens and
+0.5433 allocated GPU-hours; E4 added zero GPU forecasts or prompt tokens and
+used finite CPU jobs. Its freeze, analysis and verifier allocated 96
+CPU-seconds in total; the separate historical cost join allocated 8 CPU-seconds.
+These are allocated core-time, not measured CPU utilization. The independent E4 receipt binds analysis SHA256
+\texttt{b2d6b3950a6899ba19d535046179eef8}\allowbreak
+\texttt{4dd2471f1fa36b4fef9808bbf61feb71},
+the saved individual-loss archive, both primary effects, the fixed grid,
+and the inherited E3 costs.
+
+\begin{table}[H]\centering\scriptsize
+\caption{Source-bound original 84-cell historical cost. Forecast and prompt
+counts cover successful receipts; GPU time counts task allocations, including
+failed original search tasks. The five linked smoke/probe jobs have measured
+allocation but incomplete inference/token accounting. The selected three
+Granite cells are already inside the 84-cell rows.}
+\label{tab:historical-cost}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lrrr@{}}\toprule
+Scope & Confirmed forecasts & Prompt tokens & GPU-h\\\midrule
+Search & 32,237,760 & 43,017,723,760 & 215.856\\
+Selection & 3,024,000 & 4,158,424,800 & included\\
+Scoped repair allocation & included & included & 54.839\\
+Final & 10,281,600 & 11,979,632,160 & 28.729\\\midrule
+84-cell array total & 45,543,360 & 59,155,780,720 & 299.424\\
+Linked smoke/probe jobs & unavailable & unavailable & 1.176\\
+Measured historical minimum & at least 45,543,360 & at least 59,155,780,720 & 300.599\\\bottomrule
+\end{tabular}}
+\end{table}
+The 84-cell join required all 84 original search, 12 repair and 84 final
+Slurm task rows. Search had 72 completed, two failed and ten cancelled task
+rows; repair and final completed. GPU-hours sum allocated GPUs times elapsed
+seconds, including startup, and exclude queue time and duplicate batch rows.
+Earlier smoke jobs 8692 and 8808 and context probe 8918 contribute another
+4,233 GPU-seconds, linked by contemporaneous queue/recovery records. This
+300.599-hour minimum predates and is outside the current-cycle 60 GPU-hour
+planning cap. Other historical replays, failed/cancelled request work,
+mutator/completion tokens, CPU work and dollars are unresolved. Successful
+receipt totals are not all incurred serving work, and no end-to-end
+efficiency ranking follows.

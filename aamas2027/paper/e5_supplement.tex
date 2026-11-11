@@ -1,0 +1,156 @@
+\section{Unexecuted E5 replication and old-only engineering}\label{sec:e5-engineering}
+A planned replication with three new Granite optimizer seeds and a disjoint
+600-person same-corpus panel (E5) remains unexecuted: its strict readout gate
+failed before search release. No E5 optimizer search, new-panel forecast or
+holdout-target analysis was run. The engineering checks in
+Table~\ref{tab:e5-engineering} use the original Cal120 forecasts and runtime
+metadata only; they add neither a transfer sample nor a new optimizer result.
+The reference remains the original calibrated-GA Granite seed-1
+\texttt{base\_cal} archive (SHA-256 prefix \texttt{9ebeffc8f789}), with the
+unchanged rule $\max|\Delta p|\leq5\times10^{-4}$.
+
+\begin{table}[H]\centering\footnotesize
+\caption{Old-only E5 engineering and independent readback. Completion or
+verification of a diagnostic does not pass historical compatibility or release
+search. Profile comparisons use their common respondent rows.}
+\label{tab:e5-engineering}
+\begin{tabular}{@{}p{.12\columnwidth}p{.82\columnwidth}@{}}\toprule
+Job & Recorded result\\\midrule
+23135 & Two fresh sequential servers, explicit batch-invariant OFF/ON:
+30,720 confirmed forecasts and 24,258,640 prompt tokens.
+OFF fails five of six profile pairs; ON probabilities are byte-identical
+in all six.
+Both arms fail all four comparisons with the canonical reference;
+the maximum probability difference remains 0.0303456.\\
+23637 & Independent CPU readback of archived raw top-20 log probabilities
+and reconstruction of answer mass and normalized arrays, with checks of
+prompt tokens, source lineage and costs, agrees with the diagnostic;
+historical compatibility still fails.\\
+23645 & All 42 historical Granite neutral-Cal arrays, two preserved replays
+and eight OFF/ON profiles are retained. The canonical exact mode recurs in
+six historical cells. The 42 historical full-Cal arrays have 27 exact modes
+but one shared exact tail over respondents 9--120.\\
+23654 & Fixed initialization-to-post-capture overlap across all 42 launches:
+0/4 overlapping pairs and 27/857 nonoverlapping pairs share a mode;
+proportion difference $-0.0315053$, two-sided task-label permutation $p=1$
+(100,000 draws). The fixed overlap proxy has no positive support.\\\bottomrule
+\end{tabular}\end{table}
+
+The invariant ON path stabilizes this execution without recovering the
+historical reference; it does not identify a single numerical kernel.
+Repeated canonical bytes weaken a one-off corruption hypothesis without
+proving absence or cause. The overlap test is observational, has only four
+exposed pairs, and assumes task-label exchangeability that temporal or
+launch-order dependence may violate. Its interval definition was not changed
+after the result. Recorded selected attention backend, AOT action and graph
+mode are constant across the 42 launches despite the multiple output modes.
+An older fresh-server full-Cal first call and repeat with identical rendered
+tokens (job 9149) already both fail the same canonical gate; this is not a new
+E5 replication.
+These checks establish no new-search-seed robustness or mechanism-level cause.
+Full receipt hashes and claim locators are retained in
+\texttt{E5\_ENGINEERING\_PAPER\_BINDING\_}\allowbreak
+\texttt{20261024.json}.
+
+The additional E5 engineering allocations (jobs 23036, 23121 and 23135)
+consume 0.188333 GPU-hours, increasing the prior current-cycle total from
+13.796111 to 13.984444 GPU-hours; job 23135 accounts for 0.094444 GPU-hours
+of that increment. The independent CPU checks add no GPU allocation. A later mechanism-trace
+allocation (24116) fails after one second, before server launch or forecasts,
+adding 0.000278 GPU-hours and bringing the current-cycle total to
+13.984722 GPU-hours. Its client-environment preflight validation requests
+Triton package metadata unavailable in that interpreter; no hidden-state,
+logit or sampler observation is obtained. That attempt is closed without a retry and supplies no layer-localization
+evidence.
+The separately inventoried historical minimum remains 300.599444 GPU-hours
+(Table~\ref{tab:historical-cost}); it is outside this current-cycle total,
+and the older job 9149 is outside the current-cycle ledger. Neither total is
+an end-to-end project cost or an efficiency result.
+
+
+A subsequent raw-only CPU check (24086) tests the narrower hypothesis of
+unchanged digit-relative values plus a shared row offset and final
+round-to-nearest FP32 storage. In the OFF full-Cal repeat contrast,
+8 of 28,800 anchored digit components across four forecasts and two
+respondents exceed the stated component-specific rounding bounds; the
+maximum change is 0.250000119, versus a maximum bound of
+$1.91\times10^{-6}$. All six within-ON contrasts are exactly zero.
+This rejects that stated offset-and-final-rounding model, not every possible
+internal arithmetic error, and identifies neither a kernel nor a canonical
+repair. The failed JSON publication of its earlier implementation (24083)
+is retained separately and is not interpreted as a numerical result.
+
+Static opcode inspection, without deserializing or executing the AOT payload,
+finds 21 embedded source texts in the current cached artifact at the
+historically recorded path; all match the collected current sources
+(15 vLLM and six Torch/Transformers files). This is a partial cached-source
+witness for the compiled forward and support code. No October 7 artifact
+hash exists, so it does not authenticate the historical bytes or the complete
+scheduler, attention-kernel and runtime environment. Engineering-only
+preflight failures (24108, 24110, 24112) and the successful CPU compile
+check (24113) are retained; none is scientific parity evidence.
+
+
+A separately authorized corrected trace (24315) validates Triton in the
+pinned vLLM interpreter and the supervisor in its client interpreter
+(CPU preflight 24313). One default-OFF server performs exactly two old-Cal120
+reads: 14,400 confirmed forecasts and 11,369,760 prompt tokens. The GPU job
+remains FAILED because its final join expects external request IDs, while
+vLLM adds an eight-hex-character internal suffix. Its 14,400 captured rows
+and raw artifacts are retained unchanged. A source-derived, posthoc CPU-only
+binding correction (24328) requires unique raw and normalized IDs, an exact
+14,400-row client/server bijection, recomputed request hashes, and unchanged
+artifact/source hashes before and after analysis. The two additional source
+files explaining the internal suffix are current post-run witnesses, absent
+from the original seven-source runtime receipt. The earlier CPU binding
+implementation failure (24322, before array analysis) is retained.
+
+The bound trace contains 7,200 paired forecasts. Ten pairs differ already
+in the exact BF16 LM-head-input hidden-state bits; all ten also differ
+in returned top-logprob records. This localizes observed repeat
+variation at or before that hidden-state boundary under instrumentation,
+without identifying an earlier layer or kernel. All ten have different final
+sampler-call shapes and repeat-local call ordinals, but these contexts also
+differ widely among unchanged pairs and do not identify a causal batch effect.
+The other 7,190 pairs have
+identical hidden states and five captured canonical-digit logits; their
+71,900 anchored digit-pair comparisons show no sampler-repeat variation
+beyond the stated bound. No isolated head variation is observed with
+identical hidden states. These nulls cover only selected coordinates and
+the stated arithmetic model. Snapshot kernels and retained buffers can
+alter scheduling; this trace does not establish the uninstrumented
+historical cause, repair canonical compatibility, or release E5 search.
+The one GPU allocation lasts 134 seconds (0.037222 GPU-hours), bringing
+the current-cycle total to 14.021944 GPU-hours. No additional GPU replay or
+new-target inference is performed for the CPU binding correction.
+
+
+Retained-artifact CPU forensics (24574), prespecified over all 7,200 pairs,
+finds zero token-signature, token-count or selected-position mismatches;
+every selected position equals the prompt token count minus one. These are
+receipt checks: the actual token-ID arrays were not retained. All ten changed
+hidden-state pairs lie in the previously fixed first-eight-respondent group
+(10/480 forecasts), versus 0/6,720 in the other 112 respondents. Each changed
+vector differs numerically in 3,390--3,763 of 4,096 coordinates, with no
+signed-zero-only changes; the least-squares common-scale residual is
+0.7595--1.4154\% of the second vector's norm. These descriptive metrics do
+not identify RMSNorm, KV-cache or batch scheduling as a cause. The tensors
+correspond to selected final-RMSNorm outputs supplied as LM-head inputs;
+the snapshots are queued only after the head call returns, and backend
+nonmutation is not independently proved. Earlier-layer states were
+not retained, so the earliest upstream divergence remains unobserved.
+
+
+A CPU-only static AOT feasibility audit (24710; 203 seconds, two CPUs,
+8 GiB, no GPU) inspects the unchanged 17,075,197-byte cached object using
+pickle opcodes and Python ASTs without deserializing or executing payloads.
+It inventories seven complete and five incomplete pickle units,
+185 AST-readable Python-source records (34 proof-eligible), and 63 opaque
+binary units, including
+a 162,874-byte execution-code witness. The bounded audit does not prove complete producer--buffer--consumer maps
+for the 66 boundaries, complete original numeric-launch association, or an
+exact existing logits-index delivery channel; the runner's dynamic input expansion remains
+unresolved. The verdict is FEASIBILITY\_HOLD / OBSERVER\_UNAVAILABLE, not a
+proof that another static method could never recover these relationships.
+The fixed protocol therefore stops before observer implementation or GPU
+submission, with no eager fallback, signature change or numerical recompile.

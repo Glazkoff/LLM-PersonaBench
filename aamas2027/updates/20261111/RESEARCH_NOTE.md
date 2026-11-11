@@ -1,0 +1,9 @@
+# A18 research note — bounded cached-forecast search
+
+Status: editorial synthesis of an exploratory report, not a submission-ready research paper.
+
+Across three overlapping TRAIN320 subsamples and three search seeds, a bounded CMA-MAE search was compared with a simple mixture and random search under a common 70-candidate cap. All methods reused saved Qwen forecasts and the same previously exposed DEVTEST400 cohort. No fresh LLM inference or independent test population was introduced by these controls. The median of the three fit-level median differences was −0.00056003 RPS versus the simple mixture and −0.00017157 versus paired random search. Lower is better. The simple-mixture comparison yielded eight wins and one tie; the comparison against random search yielded seven CMA-MAE wins, one tie and one loss. None of the three subsamples passed the fixed practical continuation gate requiring median improvement of at least 0.001 over the simple mixture plus the other declared conditions.
+
+These observations support stopping broad expansion of this particular search line under its frozen decision rule. They do not establish equivalence, universal failure of evolutionary optimization, or a new state-of-the-art result. Candidate-cap matching does not equalize historical training data or total compute. The shared evaluation cohort and overlapping training subsets preclude treating nine matched cells as independent replications. All cells and negative comparisons remain in the accompanying report.
+
+Before a future manuscript could use this line, authors would need a sharply bounded research question, full historical n80/n320 provenance, explicit overlap with A16 and the old prompt-optimization manuscript, and a contribution beyond selecting favorable seeds. No new study is authorized here; the stop criterion is unchanged.

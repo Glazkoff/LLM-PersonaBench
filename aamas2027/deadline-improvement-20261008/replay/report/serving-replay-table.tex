@@ -1,0 +1,14 @@
+\begin{table}[H]\centering\small
+\caption{Complete frozen-template serving replay. Positive raw-minus-calibrated GA RPS favors calibrated fitness. Crossed 95\% intervals resample respondents and the three fixed templates; respondent sign-flip $p$ values are Holm-adjusted separately across four comparisons per calibration regime. These are two serving rounds on the same exposed people, not new optimizer runs.}
+\label{tab:serving-replay}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Calibration & Model & Round & Difference & 95\% interval & Holm $p$\\\midrule
+Refitted & Qwen & 1 & +0.00161 & [+0.00109,+0.00215] & 0.0008\\
+Refitted & Qwen & 2 & +0.00159 & [+0.00108,+0.00212] & 0.0008\\
+Refitted & Granite & 1 & +0.00130 & [+0.00059,+0.00203] & 0.0008\\
+Refitted & Granite & 2 & +0.00130 & [+0.00059,+0.00203] & 0.0008\\
+Fixed & Qwen & 1 & +0.00162 & [+0.00109,+0.00215] & 0.0008\\
+Fixed & Qwen & 2 & +0.00160 & [+0.00109,+0.00213] & 0.0008\\
+Fixed & Granite & 1 & +0.00130 & [+0.00059,+0.00203] & 0.0008\\
+Fixed & Granite & 2 & +0.00130 & [+0.00059,+0.00203] & 0.0008\\
+\bottomrule\end{tabular}\end{table}
