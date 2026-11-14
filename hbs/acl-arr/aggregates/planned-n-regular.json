@@ -1,0 +1,5019 @@
+{
+  "status": "COMPLETE_SYNTHETIC_COVERAGE",
+  "profile": "regular",
+  "scientific_evidence": false,
+  "replicates": 1000,
+  "bootstrap": 200000,
+  "cal_n": 400,
+  "test_n": 1550,
+  "family_noncoverage": 0.031,
+  "exact_MC95": [
+    0.02115817197020863,
+    0.043715085006238934
+  ],
+  "upper_MC95_below_05": true,
+  "cpu_seconds": 845.7577612040001,
+  "rows": [
+    {
+      "rep": 0,
+      "family_noncoverage": false,
+      "max_width": 0.004474003110492674
+    },
+    {
+      "rep": 1,
+      "family_noncoverage": false,
+      "max_width": 0.004365471280212409
+    },
+    {
+      "rep": 2,
+      "family_noncoverage": false,
+      "max_width": 0.00439413007294827
+    },
+    {
+      "rep": 3,
+      "family_noncoverage": false,
+      "max_width": 0.004091669400044035
+    },
+    {
+      "rep": 4,
+      "family_noncoverage": false,
+      "max_width": 0.0037685460669437255
+    },
+    {
+      "rep": 5,
+      "family_noncoverage": false,
+      "max_width": 0.004401889862534358
+    },
+    {
+      "rep": 6,
+      "family_noncoverage": false,
+      "max_width": 0.004210116569197702
+    },
+    {
+      "rep": 7,
+      "family_noncoverage": false,
+      "max_width": 0.003547010994893578
+    },
+    {
+      "rep": 8,
+      "family_noncoverage": false,
+      "max_width": 0.004047085922176751
+    },
+    {
+      "rep": 9,
+      "family_noncoverage": false,
+      "max_width": 0.004273239449031264
+    },
+    {
+      "rep": 10,
+      "family_noncoverage": false,
+      "max_width": 0.00401313041447663
+    },
+    {
+      "rep": 11,
+      "family_noncoverage": false,
+      "max_width": 0.004423181400905214
+    },
+    {
+      "rep": 12,
+      "family_noncoverage": false,
+      "max_width": 0.004855165248330072
+    },
+    {
+      "rep": 13,
+      "family_noncoverage": false,
+      "max_width": 0.004265797391996385
+    },
+    {
+      "rep": 14,
+      "family_noncoverage": false,
+      "max_width": 0.004315536837469322
+    },
+    {
+      "rep": 15,
+      "family_noncoverage": true,
+      "max_width": 0.004179099448924008
+    },
+    {
+      "rep": 16,
+      "family_noncoverage": false,
+      "max_width": 0.004206570721522086
+    },
+    {
+      "rep": 17,
+      "family_noncoverage": false,
+      "max_width": 0.003924560463458437
+    },
+    {
+      "rep": 18,
+      "family_noncoverage": false,
+      "max_width": 0.0032096839222054184
+    },
+    {
+      "rep": 19,
+      "family_noncoverage": false,
+      "max_width": 0.004520230180672101
+    },
+    {
+      "rep": 20,
+      "family_noncoverage": false,
+      "max_width": 0.004130054356894448
+    },
+    {
+      "rep": 21,
+      "family_noncoverage": false,
+      "max_width": 0.004977123459830066
+    },
+    {
+      "rep": 22,
+      "family_noncoverage": false,
+      "max_width": 0.003848264155119813
+    },
+    {
+      "rep": 23,
+      "family_noncoverage": false,
+      "max_width": 0.004861684380932039
+    },
+    {
+      "rep": 24,
+      "family_noncoverage": false,
+      "max_width": 0.0042993851454744565
+    },
+    {
+      "rep": 25,
+      "family_noncoverage": false,
+      "max_width": 0.003789495504681623
+    },
+    {
+      "rep": 26,
+      "family_noncoverage": false,
+      "max_width": 0.004158043061641174
+    },
+    {
+      "rep": 27,
+      "family_noncoverage": false,
+      "max_width": 0.004490848294876785
+    },
+    {
+      "rep": 28,
+      "family_noncoverage": false,
+      "max_width": 0.004511232035374053
+    },
+    {
+      "rep": 29,
+      "family_noncoverage": false,
+      "max_width": 0.003344171521624934
+    },
+    {
+      "rep": 30,
+      "family_noncoverage": false,
+      "max_width": 0.004044260067696127
+    },
+    {
+      "rep": 31,
+      "family_noncoverage": false,
+      "max_width": 0.004918253044280602
+    },
+    {
+      "rep": 32,
+      "family_noncoverage": false,
+      "max_width": 0.0037997265631120217
+    },
+    {
+      "rep": 33,
+      "family_noncoverage": false,
+      "max_width": 0.005082747977530064
+    },
+    {
+      "rep": 34,
+      "family_noncoverage": false,
+      "max_width": 0.0034599033035964486
+    },
+    {
+      "rep": 35,
+      "family_noncoverage": false,
+      "max_width": 0.0038068511191465502
+    },
+    {
+      "rep": 36,
+      "family_noncoverage": false,
+      "max_width": 0.004352548136066739
+    },
+    {
+      "rep": 37,
+      "family_noncoverage": false,
+      "max_width": 0.003646141998913238
+    },
+    {
+      "rep": 38,
+      "family_noncoverage": false,
+      "max_width": 0.004280513263751536
+    },
+    {
+      "rep": 39,
+      "family_noncoverage": false,
+      "max_width": 0.004410857909162489
+    },
+    {
+      "rep": 40,
+      "family_noncoverage": false,
+      "max_width": 0.003764671116111485
+    },
+    {
+      "rep": 41,
+      "family_noncoverage": false,
+      "max_width": 0.003554801276661564
+    },
+    {
+      "rep": 42,
+      "family_noncoverage": false,
+      "max_width": 0.003982393309718106
+    },
+    {
+      "rep": 43,
+      "family_noncoverage": false,
+      "max_width": 0.004026569233749046
+    },
+    {
+      "rep": 44,
+      "family_noncoverage": false,
+      "max_width": 0.003910140050041857
+    },
+    {
+      "rep": 45,
+      "family_noncoverage": false,
+      "max_width": 0.0037839283376073793
+    },
+    {
+      "rep": 46,
+      "family_noncoverage": false,
+      "max_width": 0.0037607241597965935
+    },
+    {
+      "rep": 47,
+      "family_noncoverage": false,
+      "max_width": 0.005603389318909278
+    },
+    {
+      "rep": 48,
+      "family_noncoverage": false,
+      "max_width": 0.004217764042103019
+    },
+    {
+      "rep": 49,
+      "family_noncoverage": false,
+      "max_width": 0.00506036250772416
+    },
+    {
+      "rep": 50,
+      "family_noncoverage": false,
+      "max_width": 0.004466481156072383
+    },
+    {
+      "rep": 51,
+      "family_noncoverage": false,
+      "max_width": 0.004162586100561569
+    },
+    {
+      "rep": 52,
+      "family_noncoverage": false,
+      "max_width": 0.003966230252201067
+    },
+    {
+      "rep": 53,
+      "family_noncoverage": false,
+      "max_width": 0.003905922573247485
+    },
+    {
+      "rep": 54,
+      "family_noncoverage": false,
+      "max_width": 0.0045294279160573905
+    },
+    {
+      "rep": 55,
+      "family_noncoverage": false,
+      "max_width": 0.004108230943629789
+    },
+    {
+      "rep": 56,
+      "family_noncoverage": false,
+      "max_width": 0.004958331456249576
+    },
+    {
+      "rep": 57,
+      "family_noncoverage": false,
+      "max_width": 0.004031495606929674
+    },
+    {
+      "rep": 58,
+      "family_noncoverage": false,
+      "max_width": 0.004635424115790898
+    },
+    {
+      "rep": 59,
+      "family_noncoverage": false,
+      "max_width": 0.004407342481203167
+    },
+    {
+      "rep": 60,
+      "family_noncoverage": false,
+      "max_width": 0.00320508343968819
+    },
+    {
+      "rep": 61,
+      "family_noncoverage": false,
+      "max_width": 0.003617177046429435
+    },
+    {
+      "rep": 62,
+      "family_noncoverage": false,
+      "max_width": 0.003918331967765348
+    },
+    {
+      "rep": 63,
+      "family_noncoverage": false,
+      "max_width": 0.0034570264779803447
+    },
+    {
+      "rep": 64,
+      "family_noncoverage": false,
+      "max_width": 0.005108264103126462
+    },
+    {
+      "rep": 65,
+      "family_noncoverage": false,
+      "max_width": 0.003895440511204295
+    },
+    {
+      "rep": 66,
+      "family_noncoverage": false,
+      "max_width": 0.004531046035509195
+    },
+    {
+      "rep": 67,
+      "family_noncoverage": false,
+      "max_width": 0.005317816193901237
+    },
+    {
+      "rep": 68,
+      "family_noncoverage": true,
+      "max_width": 0.0038553716290076795
+    },
+    {
+      "rep": 69,
+      "family_noncoverage": false,
+      "max_width": 0.004116837292377303
+    },
+    {
+      "rep": 70,
+      "family_noncoverage": false,
+      "max_width": 0.004162457840776472
+    },
+    {
+      "rep": 71,
+      "family_noncoverage": false,
+      "max_width": 0.003264642173835215
+    },
+    {
+      "rep": 72,
+      "family_noncoverage": false,
+      "max_width": 0.004196612742306535
+    },
+    {
+      "rep": 73,
+      "family_noncoverage": false,
+      "max_width": 0.004385366538657835
+    },
+    {
+      "rep": 74,
+      "family_noncoverage": false,
+      "max_width": 0.0038839787824463253
+    },
+    {
+      "rep": 75,
+      "family_noncoverage": false,
+      "max_width": 0.004037997802397767
+    },
+    {
+      "rep": 76,
+      "family_noncoverage": false,
+      "max_width": 0.004995810083818228
+    },
+    {
+      "rep": 77,
+      "family_noncoverage": false,
+      "max_width": 0.003968164607151398
+    },
+    {
+      "rep": 78,
+      "family_noncoverage": false,
+      "max_width": 0.004339833675259617
+    },
+    {
+      "rep": 79,
+      "family_noncoverage": false,
+      "max_width": 0.004652958416694792
+    },
+    {
+      "rep": 80,
+      "family_noncoverage": false,
+      "max_width": 0.00429110353733816
+    },
+    {
+      "rep": 81,
+      "family_noncoverage": false,
+      "max_width": 0.00430923548181564
+    },
+    {
+      "rep": 82,
+      "family_noncoverage": false,
+      "max_width": 0.003189398811953157
+    },
+    {
+      "rep": 83,
+      "family_noncoverage": false,
+      "max_width": 0.004359715157915257
+    },
+    {
+      "rep": 84,
+      "family_noncoverage": false,
+      "max_width": 0.0044351857277793
+    },
+    {
+      "rep": 85,
+      "family_noncoverage": false,
+      "max_width": 0.004571691613444641
+    },
+    {
+      "rep": 86,
+      "family_noncoverage": false,
+      "max_width": 0.004158340569389391
+    },
+    {
+      "rep": 87,
+      "family_noncoverage": true,
+      "max_width": 0.0039553310041060994
+    },
+    {
+      "rep": 88,
+      "family_noncoverage": false,
+      "max_width": 0.0035909694636097364
+    },
+    {
+      "rep": 89,
+      "family_noncoverage": false,
+      "max_width": 0.004291301376057329
+    },
+    {
+      "rep": 90,
+      "family_noncoverage": true,
+      "max_width": 0.004049202927320601
+    },
+    {
+      "rep": 91,
+      "family_noncoverage": true,
+      "max_width": 0.004010711409023321
+    },
+    {
+      "rep": 92,
+      "family_noncoverage": true,
+      "max_width": 0.004617151812363617
+    },
+    {
+      "rep": 93,
+      "family_noncoverage": false,
+      "max_width": 0.00442819311616299
+    },
+    {
+      "rep": 94,
+      "family_noncoverage": false,
+      "max_width": 0.004123274675426765
+    },
+    {
+      "rep": 95,
+      "family_noncoverage": false,
+      "max_width": 0.004260503596373053
+    },
+    {
+      "rep": 96,
+      "family_noncoverage": false,
+      "max_width": 0.00463778151615394
+    },
+    {
+      "rep": 97,
+      "family_noncoverage": false,
+      "max_width": 0.00470868142902842
+    },
+    {
+      "rep": 98,
+      "family_noncoverage": false,
+      "max_width": 0.004164339399226313
+    },
+    {
+      "rep": 99,
+      "family_noncoverage": false,
+      "max_width": 0.0033987564250175578
+    },
+    {
+      "rep": 100,
+      "family_noncoverage": false,
+      "max_width": 0.0039459997111777455
+    },
+    {
+      "rep": 101,
+      "family_noncoverage": false,
+      "max_width": 0.003906214157201179
+    },
+    {
+      "rep": 102,
+      "family_noncoverage": false,
+      "max_width": 0.004194136324483629
+    },
+    {
+      "rep": 103,
+      "family_noncoverage": false,
+      "max_width": 0.003906124627032529
+    },
+    {
+      "rep": 104,
+      "family_noncoverage": false,
+      "max_width": 0.004256811375743998
+    },
+    {
+      "rep": 105,
+      "family_noncoverage": false,
+      "max_width": 0.003400400705682241
+    },
+    {
+      "rep": 106,
+      "family_noncoverage": false,
+      "max_width": 0.004261625830089192
+    },
+    {
+      "rep": 107,
+      "family_noncoverage": false,
+      "max_width": 0.003941026924244879
+    },
+    {
+      "rep": 108,
+      "family_noncoverage": false,
+      "max_width": 0.003927840272439171
+    },
+    {
+      "rep": 109,
+      "family_noncoverage": false,
+      "max_width": 0.0038933499840188217
+    },
+    {
+      "rep": 110,
+      "family_noncoverage": false,
+      "max_width": 0.005359347291005659
+    },
+    {
+      "rep": 111,
+      "family_noncoverage": false,
+      "max_width": 0.0042398677739080804
+    },
+    {
+      "rep": 112,
+      "family_noncoverage": false,
+      "max_width": 0.0036947687023858237
+    },
+    {
+      "rep": 113,
+      "family_noncoverage": false,
+      "max_width": 0.004421206836375276
+    },
+    {
+      "rep": 114,
+      "family_noncoverage": false,
+      "max_width": 0.004701864447398198
+    },
+    {
+      "rep": 115,
+      "family_noncoverage": false,
+      "max_width": 0.0030975075649861718
+    },
+    {
+      "rep": 116,
+      "family_noncoverage": false,
+      "max_width": 0.0050265635731578774
+    },
+    {
+      "rep": 117,
+      "family_noncoverage": false,
+      "max_width": 0.003493312275892663
+    },
+    {
+      "rep": 118,
+      "family_noncoverage": false,
+      "max_width": 0.0040275471940562175
+    },
+    {
+      "rep": 119,
+      "family_noncoverage": false,
+      "max_width": 0.0041439018180260585
+    },
+    {
+      "rep": 120,
+      "family_noncoverage": false,
+      "max_width": 0.00359678732984009
+    },
+    {
+      "rep": 121,
+      "family_noncoverage": false,
+      "max_width": 0.003774031064710165
+    },
+    {
+      "rep": 122,
+      "family_noncoverage": false,
+      "max_width": 0.003982378655439738
+    },
+    {
+      "rep": 123,
+      "family_noncoverage": false,
+      "max_width": 0.0041789016560926555
+    },
+    {
+      "rep": 124,
+      "family_noncoverage": false,
+      "max_width": 0.00420988113095154
+    },
+    {
+      "rep": 125,
+      "family_noncoverage": false,
+      "max_width": 0.0037875581514864327
+    },
+    {
+      "rep": 126,
+      "family_noncoverage": false,
+      "max_width": 0.003884093673673611
+    },
+    {
+      "rep": 127,
+      "family_noncoverage": false,
+      "max_width": 0.004735511800336809
+    },
+    {
+      "rep": 128,
+      "family_noncoverage": false,
+      "max_width": 0.003771240495143195
+    },
+    {
+      "rep": 129,
+      "family_noncoverage": false,
+      "max_width": 0.003655598643441946
+    },
+    {
+      "rep": 130,
+      "family_noncoverage": false,
+      "max_width": 0.00347108253361993
+    },
+    {
+      "rep": 131,
+      "family_noncoverage": false,
+      "max_width": 0.004893459742759004
+    },
+    {
+      "rep": 132,
+      "family_noncoverage": false,
+      "max_width": 0.004666224608352502
+    },
+    {
+      "rep": 133,
+      "family_noncoverage": false,
+      "max_width": 0.004027561970969517
+    },
+    {
+      "rep": 134,
+      "family_noncoverage": false,
+      "max_width": 0.005007936664686361
+    },
+    {
+      "rep": 135,
+      "family_noncoverage": false,
+      "max_width": 0.004316865435074547
+    },
+    {
+      "rep": 136,
+      "family_noncoverage": false,
+      "max_width": 0.004703811906337179
+    },
+    {
+      "rep": 137,
+      "family_noncoverage": false,
+      "max_width": 0.004109516037732192
+    },
+    {
+      "rep": 138,
+      "family_noncoverage": false,
+      "max_width": 0.004444878319741626
+    },
+    {
+      "rep": 139,
+      "family_noncoverage": false,
+      "max_width": 0.004275411719048376
+    },
+    {
+      "rep": 140,
+      "family_noncoverage": false,
+      "max_width": 0.0049408181525251674
+    },
+    {
+      "rep": 141,
+      "family_noncoverage": false,
+      "max_width": 0.004193923767831523
+    },
+    {
+      "rep": 142,
+      "family_noncoverage": false,
+      "max_width": 0.004178737171782144
+    },
+    {
+      "rep": 143,
+      "family_noncoverage": false,
+      "max_width": 0.0036273970362715995
+    },
+    {
+      "rep": 144,
+      "family_noncoverage": false,
+      "max_width": 0.0037028329968979462
+    },
+    {
+      "rep": 145,
+      "family_noncoverage": false,
+      "max_width": 0.0038880859022223466
+    },
+    {
+      "rep": 146,
+      "family_noncoverage": false,
+      "max_width": 0.00412696278033395
+    },
+    {
+      "rep": 147,
+      "family_noncoverage": false,
+      "max_width": 0.004771633463467264
+    },
+    {
+      "rep": 148,
+      "family_noncoverage": false,
+      "max_width": 0.004586373345604608
+    },
+    {
+      "rep": 149,
+      "family_noncoverage": false,
+      "max_width": 0.004022920910089852
+    },
+    {
+      "rep": 150,
+      "family_noncoverage": false,
+      "max_width": 0.003938069371290194
+    },
+    {
+      "rep": 151,
+      "family_noncoverage": false,
+      "max_width": 0.00437985078068495
+    },
+    {
+      "rep": 152,
+      "family_noncoverage": false,
+      "max_width": 0.004258238602022698
+    },
+    {
+      "rep": 153,
+      "family_noncoverage": false,
+      "max_width": 0.0030111506025163313
+    },
+    {
+      "rep": 154,
+      "family_noncoverage": false,
+      "max_width": 0.005093627212898504
+    },
+    {
+      "rep": 155,
+      "family_noncoverage": false,
+      "max_width": 0.004495723105071004
+    },
+    {
+      "rep": 156,
+      "family_noncoverage": false,
+      "max_width": 0.004985776777405859
+    },
+    {
+      "rep": 157,
+      "family_noncoverage": false,
+      "max_width": 0.004064908071819652
+    },
+    {
+      "rep": 158,
+      "family_noncoverage": false,
+      "max_width": 0.0037465684779445885
+    },
+    {
+      "rep": 159,
+      "family_noncoverage": false,
+      "max_width": 0.004412404705337556
+    },
+    {
+      "rep": 160,
+      "family_noncoverage": false,
+      "max_width": 0.003175245761227026
+    },
+    {
+      "rep": 161,
+      "family_noncoverage": false,
+      "max_width": 0.0035734814961777142
+    },
+    {
+      "rep": 162,
+      "family_noncoverage": false,
+      "max_width": 0.004138840002688075
+    },
+    {
+      "rep": 163,
+      "family_noncoverage": false,
+      "max_width": 0.00445564232516829
+    },
+    {
+      "rep": 164,
+      "family_noncoverage": false,
+      "max_width": 0.00431855817427349
+    },
+    {
+      "rep": 165,
+      "family_noncoverage": false,
+      "max_width": 0.004306350860590107
+    },
+    {
+      "rep": 166,
+      "family_noncoverage": false,
+      "max_width": 0.0052736220455845305
+    },
+    {
+      "rep": 167,
+      "family_noncoverage": false,
+      "max_width": 0.004869162465621642
+    },
+    {
+      "rep": 168,
+      "family_noncoverage": false,
+      "max_width": 0.004308045208679046
+    },
+    {
+      "rep": 169,
+      "family_noncoverage": false,
+      "max_width": 0.005180524233101503
+    },
+    {
+      "rep": 170,
+      "family_noncoverage": false,
+      "max_width": 0.0033430367605499353
+    },
+    {
+      "rep": 171,
+      "family_noncoverage": false,
+      "max_width": 0.004278604670957692
+    },
+    {
+      "rep": 172,
+      "family_noncoverage": false,
+      "max_width": 0.003676348661601444
+    },
+    {
+      "rep": 173,
+      "family_noncoverage": false,
+      "max_width": 0.0032858055789372655
+    },
+    {
+      "rep": 174,
+      "family_noncoverage": false,
+      "max_width": 0.0028752643028462227
+    },
+    {
+      "rep": 175,
+      "family_noncoverage": false,
+      "max_width": 0.004314656830247662
+    },
+    {
+      "rep": 176,
+      "family_noncoverage": false,
+      "max_width": 0.005072990534694443
+    },
+    {
+      "rep": 177,
+      "family_noncoverage": false,
+      "max_width": 0.004437864574501241
+    },
+    {
+      "rep": 178,
+      "family_noncoverage": false,
+      "max_width": 0.004357647563530098
+    },
+    {
+      "rep": 179,
+      "family_noncoverage": false,
+      "max_width": 0.004169241816684033
+    },
+    {
+      "rep": 180,
+      "family_noncoverage": false,
+      "max_width": 0.004395380755284736
+    },
+    {
+      "rep": 181,
+      "family_noncoverage": false,
+      "max_width": 0.0040937224374375004
+    },
+    {
+      "rep": 182,
+      "family_noncoverage": false,
+      "max_width": 0.003674862386734153
+    },
+    {
+      "rep": 183,
+      "family_noncoverage": false,
+      "max_width": 0.004113366047760231
+    },
+    {
+      "rep": 184,
+      "family_noncoverage": false,
+      "max_width": 0.0035364812504110636
+    },
+    {
+      "rep": 185,
+      "family_noncoverage": false,
+      "max_width": 0.003554345921087237
+    },
+    {
+      "rep": 186,
+      "family_noncoverage": false,
+      "max_width": 0.004787591236141076
+    },
+    {
+      "rep": 187,
+      "family_noncoverage": true,
+      "max_width": 0.003614924538415161
+    },
+    {
+      "rep": 188,
+      "family_noncoverage": false,
+      "max_width": 0.005047415040869557
+    },
+    {
+      "rep": 189,
+      "family_noncoverage": false,
+      "max_width": 0.004243850995573921
+    },
+    {
+      "rep": 190,
+      "family_noncoverage": false,
+      "max_width": 0.005131565502383732
+    },
+    {
+      "rep": 191,
+      "family_noncoverage": false,
+      "max_width": 0.004352331974988214
+    },
+    {
+      "rep": 192,
+      "family_noncoverage": false,
+      "max_width": 0.0030460011734181015
+    },
+    {
+      "rep": 193,
+      "family_noncoverage": false,
+      "max_width": 0.004833544663871396
+    },
+    {
+      "rep": 194,
+      "family_noncoverage": false,
+      "max_width": 0.005306544608320957
+    },
+    {
+      "rep": 195,
+      "family_noncoverage": false,
+      "max_width": 0.0044242077911681435
+    },
+    {
+      "rep": 196,
+      "family_noncoverage": false,
+      "max_width": 0.00341441067590377
+    },
+    {
+      "rep": 197,
+      "family_noncoverage": false,
+      "max_width": 0.004581190331931043
+    },
+    {
+      "rep": 198,
+      "family_noncoverage": false,
+      "max_width": 0.004094750687396932
+    },
+    {
+      "rep": 199,
+      "family_noncoverage": false,
+      "max_width": 0.003916994907786943
+    },
+    {
+      "rep": 200,
+      "family_noncoverage": false,
+      "max_width": 0.004402677054960666
+    },
+    {
+      "rep": 201,
+      "family_noncoverage": false,
+      "max_width": 0.0052563637911647535
+    },
+    {
+      "rep": 202,
+      "family_noncoverage": false,
+      "max_width": 0.005461779248582213
+    },
+    {
+      "rep": 203,
+      "family_noncoverage": false,
+      "max_width": 0.004021450631058646
+    },
+    {
+      "rep": 204,
+      "family_noncoverage": false,
+      "max_width": 0.0046442953737631815
+    },
+    {
+      "rep": 205,
+      "family_noncoverage": false,
+      "max_width": 0.0036645641945221635
+    },
+    {
+      "rep": 206,
+      "family_noncoverage": false,
+      "max_width": 0.0039031458833838515
+    },
+    {
+      "rep": 207,
+      "family_noncoverage": false,
+      "max_width": 0.004683881057809945
+    },
+    {
+      "rep": 208,
+      "family_noncoverage": false,
+      "max_width": 0.0042347639835157574
+    },
+    {
+      "rep": 209,
+      "family_noncoverage": false,
+      "max_width": 0.003686997338855874
+    },
+    {
+      "rep": 210,
+      "family_noncoverage": false,
+      "max_width": 0.004547765297438097
+    },
+    {
+      "rep": 211,
+      "family_noncoverage": false,
+      "max_width": 0.00385385985073938
+    },
+    {
+      "rep": 212,
+      "family_noncoverage": false,
+      "max_width": 0.00370537631796877
+    },
+    {
+      "rep": 213,
+      "family_noncoverage": false,
+      "max_width": 0.0036664158270730916
+    },
+    {
+      "rep": 214,
+      "family_noncoverage": false,
+      "max_width": 0.0037473008656006184
+    },
+    {
+      "rep": 215,
+      "family_noncoverage": false,
+      "max_width": 0.004197034292999101
+    },
+    {
+      "rep": 216,
+      "family_noncoverage": false,
+      "max_width": 0.005048943908094448
+    },
+    {
+      "rep": 217,
+      "family_noncoverage": false,
+      "max_width": 0.004501885800753688
+    },
+    {
+      "rep": 218,
+      "family_noncoverage": false,
+      "max_width": 0.0035016555961053745
+    },
+    {
+      "rep": 219,
+      "family_noncoverage": false,
+      "max_width": 0.004121455001951205
+    },
+    {
+      "rep": 220,
+      "family_noncoverage": true,
+      "max_width": 0.00449741371661242
+    },
+    {
+      "rep": 221,
+      "family_noncoverage": false,
+      "max_width": 0.004765507425958062
+    },
+    {
+      "rep": 222,
+      "family_noncoverage": false,
+      "max_width": 0.005171396084621161
+    },
+    {
+      "rep": 223,
+      "family_noncoverage": false,
+      "max_width": 0.004225493214003042
+    },
+    {
+      "rep": 224,
+      "family_noncoverage": false,
+      "max_width": 0.004310773794462847
+    },
+    {
+      "rep": 225,
+      "family_noncoverage": false,
+      "max_width": 0.004551561828219908
+    },
+    {
+      "rep": 226,
+      "family_noncoverage": false,
+      "max_width": 0.00454804489275778
+    },
+    {
+      "rep": 227,
+      "family_noncoverage": false,
+      "max_width": 0.003792084925614292
+    },
+    {
+      "rep": 228,
+      "family_noncoverage": false,
+      "max_width": 0.004738113349494826
+    },
+    {
+      "rep": 229,
+      "family_noncoverage": false,
+      "max_width": 0.004643817694785907
+    },
+    {
+      "rep": 230,
+      "family_noncoverage": false,
+      "max_width": 0.004096696426521346
+    },
+    {
+      "rep": 231,
+      "family_noncoverage": false,
+      "max_width": 0.003972149222034468
+    },
+    {
+      "rep": 232,
+      "family_noncoverage": false,
+      "max_width": 0.004476776687990026
+    },
+    {
+      "rep": 233,
+      "family_noncoverage": false,
+      "max_width": 0.005131261014838151
+    },
+    {
+      "rep": 234,
+      "family_noncoverage": false,
+      "max_width": 0.0039398699845986625
+    },
+    {
+      "rep": 235,
+      "family_noncoverage": false,
+      "max_width": 0.004913062166263129
+    },
+    {
+      "rep": 236,
+      "family_noncoverage": false,
+      "max_width": 0.004237846081303085
+    },
+    {
+      "rep": 237,
+      "family_noncoverage": false,
+      "max_width": 0.0042906232776920355
+    },
+    {
+      "rep": 238,
+      "family_noncoverage": false,
+      "max_width": 0.00489373230654731
+    },
+    {
+      "rep": 239,
+      "family_noncoverage": false,
+      "max_width": 0.004054062154498089
+    },
+    {
+      "rep": 240,
+      "family_noncoverage": false,
+      "max_width": 0.005271684813831551
+    },
+    {
+      "rep": 241,
+      "family_noncoverage": false,
+      "max_width": 0.00440456562231311
+    },
+    {
+      "rep": 242,
+      "family_noncoverage": false,
+      "max_width": 0.0034672816855621288
+    },
+    {
+      "rep": 243,
+      "family_noncoverage": false,
+      "max_width": 0.0041663535332491786
+    },
+    {
+      "rep": 244,
+      "family_noncoverage": false,
+      "max_width": 0.0037167221641129285
+    },
+    {
+      "rep": 245,
+      "family_noncoverage": false,
+      "max_width": 0.00332523187011251
+    },
+    {
+      "rep": 246,
+      "family_noncoverage": false,
+      "max_width": 0.004265278369490262
+    },
+    {
+      "rep": 247,
+      "family_noncoverage": false,
+      "max_width": 0.004875218205236762
+    },
+    {
+      "rep": 248,
+      "family_noncoverage": false,
+      "max_width": 0.004979425449614321
+    },
+    {
+      "rep": 249,
+      "family_noncoverage": false,
+      "max_width": 0.0036806874225913267
+    },
+    {
+      "rep": 250,
+      "family_noncoverage": false,
+      "max_width": 0.003968759036837411
+    },
+    {
+      "rep": 251,
+      "family_noncoverage": false,
+      "max_width": 0.004212894222894862
+    },
+    {
+      "rep": 252,
+      "family_noncoverage": false,
+      "max_width": 0.003837573658175432
+    },
+    {
+      "rep": 253,
+      "family_noncoverage": false,
+      "max_width": 0.0035252661880611105
+    },
+    {
+      "rep": 254,
+      "family_noncoverage": false,
+      "max_width": 0.0041978519902652715
+    },
+    {
+      "rep": 255,
+      "family_noncoverage": false,
+      "max_width": 0.0036343737699331825
+    },
+    {
+      "rep": 256,
+      "family_noncoverage": false,
+      "max_width": 0.004649853092361499
+    },
+    {
+      "rep": 257,
+      "family_noncoverage": false,
+      "max_width": 0.005246363602211153
+    },
+    {
+      "rep": 258,
+      "family_noncoverage": false,
+      "max_width": 0.004515069908538016
+    },
+    {
+      "rep": 259,
+      "family_noncoverage": false,
+      "max_width": 0.003270447424581679
+    },
+    {
+      "rep": 260,
+      "family_noncoverage": false,
+      "max_width": 0.004810787034401707
+    },
+    {
+      "rep": 261,
+      "family_noncoverage": false,
+      "max_width": 0.004427842939794221
+    },
+    {
+      "rep": 262,
+      "family_noncoverage": false,
+      "max_width": 0.005315754389169535
+    },
+    {
+      "rep": 263,
+      "family_noncoverage": false,
+      "max_width": 0.00390427373473436
+    },
+    {
+      "rep": 264,
+      "family_noncoverage": false,
+      "max_width": 0.004152045786515154
+    },
+    {
+      "rep": 265,
+      "family_noncoverage": false,
+      "max_width": 0.0034690235576051707
+    },
+    {
+      "rep": 266,
+      "family_noncoverage": false,
+      "max_width": 0.003165845361215124
+    },
+    {
+      "rep": 267,
+      "family_noncoverage": false,
+      "max_width": 0.00400463053220941
+    },
+    {
+      "rep": 268,
+      "family_noncoverage": false,
+      "max_width": 0.004636360587614382
+    },
+    {
+      "rep": 269,
+      "family_noncoverage": false,
+      "max_width": 0.003613862683131982
+    },
+    {
+      "rep": 270,
+      "family_noncoverage": false,
+      "max_width": 0.004106329106429707
+    },
+    {
+      "rep": 271,
+      "family_noncoverage": false,
+      "max_width": 0.005070470952571423
+    },
+    {
+      "rep": 272,
+      "family_noncoverage": false,
+      "max_width": 0.0039629450559612416
+    },
+    {
+      "rep": 273,
+      "family_noncoverage": false,
+      "max_width": 0.00386522897149619
+    },
+    {
+      "rep": 274,
+      "family_noncoverage": false,
+      "max_width": 0.0038657399981652137
+    },
+    {
+      "rep": 275,
+      "family_noncoverage": false,
+      "max_width": 0.003977303644423555
+    },
+    {
+      "rep": 276,
+      "family_noncoverage": false,
+      "max_width": 0.004209618087415128
+    },
+    {
+      "rep": 277,
+      "family_noncoverage": false,
+      "max_width": 0.003853050963337666
+    },
+    {
+      "rep": 278,
+      "family_noncoverage": false,
+      "max_width": 0.005322655713633734
+    },
+    {
+      "rep": 279,
+      "family_noncoverage": false,
+      "max_width": 0.004743403243265515
+    },
+    {
+      "rep": 280,
+      "family_noncoverage": false,
+      "max_width": 0.0042297350185924645
+    },
+    {
+      "rep": 281,
+      "family_noncoverage": false,
+      "max_width": 0.0039100602746584955
+    },
+    {
+      "rep": 282,
+      "family_noncoverage": false,
+      "max_width": 0.004187967196302033
+    },
+    {
+      "rep": 283,
+      "family_noncoverage": false,
+      "max_width": 0.0038392190309764363
+    },
+    {
+      "rep": 284,
+      "family_noncoverage": false,
+      "max_width": 0.0037684790093169733
+    },
+    {
+      "rep": 285,
+      "family_noncoverage": false,
+      "max_width": 0.004493584965162951
+    },
+    {
+      "rep": 286,
+      "family_noncoverage": false,
+      "max_width": 0.00447551635733758
+    },
+    {
+      "rep": 287,
+      "family_noncoverage": false,
+      "max_width": 0.005097692232130726
+    },
+    {
+      "rep": 288,
+      "family_noncoverage": false,
+      "max_width": 0.004633339204655933
+    },
+    {
+      "rep": 289,
+      "family_noncoverage": false,
+      "max_width": 0.0038225769130208666
+    },
+    {
+      "rep": 290,
+      "family_noncoverage": false,
+      "max_width": 0.004199600965609704
+    },
+    {
+      "rep": 291,
+      "family_noncoverage": false,
+      "max_width": 0.0034994716739172073
+    },
+    {
+      "rep": 292,
+      "family_noncoverage": false,
+      "max_width": 0.003957392882433102
+    },
+    {
+      "rep": 293,
+      "family_noncoverage": true,
+      "max_width": 0.003604647107763104
+    },
+    {
+      "rep": 294,
+      "family_noncoverage": false,
+      "max_width": 0.004943292582977573
+    },
+    {
+      "rep": 295,
+      "family_noncoverage": false,
+      "max_width": 0.004049288710796781
+    },
+    {
+      "rep": 296,
+      "family_noncoverage": false,
+      "max_width": 0.004034377289927973
+    },
+    {
+      "rep": 297,
+      "family_noncoverage": false,
+      "max_width": 0.004163727490809586
+    },
+    {
+      "rep": 298,
+      "family_noncoverage": false,
+      "max_width": 0.0037805023067196417
+    },
+    {
+      "rep": 299,
+      "family_noncoverage": false,
+      "max_width": 0.004865551703225009
+    },
+    {
+      "rep": 300,
+      "family_noncoverage": false,
+      "max_width": 0.0033926997454753957
+    },
+    {
+      "rep": 301,
+      "family_noncoverage": false,
+      "max_width": 0.004207883511038161
+    },
+    {
+      "rep": 302,
+      "family_noncoverage": false,
+      "max_width": 0.004023853370614309
+    },
+    {
+      "rep": 303,
+      "family_noncoverage": false,
+      "max_width": 0.00464747711542191
+    },
+    {
+      "rep": 304,
+      "family_noncoverage": false,
+      "max_width": 0.003041238933106977
+    },
+    {
+      "rep": 305,
+      "family_noncoverage": false,
+      "max_width": 0.002686529241588011
+    },
+    {
+      "rep": 306,
+      "family_noncoverage": false,
+      "max_width": 0.004183430822494458
+    },
+    {
+      "rep": 307,
+      "family_noncoverage": false,
+      "max_width": 0.00447308376577766
+    },
+    {
+      "rep": 308,
+      "family_noncoverage": false,
+      "max_width": 0.005067933190097842
+    },
+    {
+      "rep": 309,
+      "family_noncoverage": false,
+      "max_width": 0.004574472782449046
+    },
+    {
+      "rep": 310,
+      "family_noncoverage": false,
+      "max_width": 0.0036711549835189185
+    },
+    {
+      "rep": 311,
+      "family_noncoverage": false,
+      "max_width": 0.0037921774991996706
+    },
+    {
+      "rep": 312,
+      "family_noncoverage": false,
+      "max_width": 0.0040874104861611145
+    },
+    {
+      "rep": 313,
+      "family_noncoverage": false,
+      "max_width": 0.004915003302607356
+    },
+    {
+      "rep": 314,
+      "family_noncoverage": false,
+      "max_width": 0.004183651802448387
+    },
+    {
+      "rep": 315,
+      "family_noncoverage": false,
+      "max_width": 0.004700317396566642
+    },
+    {
+      "rep": 316,
+      "family_noncoverage": false,
+      "max_width": 0.004558192175612607
+    },
+    {
+      "rep": 317,
+      "family_noncoverage": false,
+      "max_width": 0.004842877837989564
+    },
+    {
+      "rep": 318,
+      "family_noncoverage": true,
+      "max_width": 0.0037818672204772527
+    },
+    {
+      "rep": 319,
+      "family_noncoverage": false,
+      "max_width": 0.005083403919562156
+    },
+    {
+      "rep": 320,
+      "family_noncoverage": false,
+      "max_width": 0.004682102285904858
+    },
+    {
+      "rep": 321,
+      "family_noncoverage": false,
+      "max_width": 0.004959488401736979
+    },
+    {
+      "rep": 322,
+      "family_noncoverage": false,
+      "max_width": 0.004222371425371542
+    },
+    {
+      "rep": 323,
+      "family_noncoverage": false,
+      "max_width": 0.004066999698807046
+    },
+    {
+      "rep": 324,
+      "family_noncoverage": false,
+      "max_width": 0.004367938357020547
+    },
+    {
+      "rep": 325,
+      "family_noncoverage": false,
+      "max_width": 0.003922958981235993
+    },
+    {
+      "rep": 326,
+      "family_noncoverage": false,
+      "max_width": 0.004463414359432267
+    },
+    {
+      "rep": 327,
+      "family_noncoverage": false,
+      "max_width": 0.004300744384592612
+    },
+    {
+      "rep": 328,
+      "family_noncoverage": false,
+      "max_width": 0.003965042463624587
+    },
+    {
+      "rep": 329,
+      "family_noncoverage": false,
+      "max_width": 0.005042915847169475
+    },
+    {
+      "rep": 330,
+      "family_noncoverage": false,
+      "max_width": 0.004024936020153917
+    },
+    {
+      "rep": 331,
+      "family_noncoverage": false,
+      "max_width": 0.004235061080382831
+    },
+    {
+      "rep": 332,
+      "family_noncoverage": false,
+      "max_width": 0.0032488328156014493
+    },
+    {
+      "rep": 333,
+      "family_noncoverage": false,
+      "max_width": 0.004465989265503276
+    },
+    {
+      "rep": 334,
+      "family_noncoverage": false,
+      "max_width": 0.005730180872502747
+    },
+    {
+      "rep": 335,
+      "family_noncoverage": false,
+      "max_width": 0.0035103930947784244
+    },
+    {
+      "rep": 336,
+      "family_noncoverage": false,
+      "max_width": 0.0045864298792824216
+    },
+    {
+      "rep": 337,
+      "family_noncoverage": false,
+      "max_width": 0.004661232854498644
+    },
+    {
+      "rep": 338,
+      "family_noncoverage": true,
+      "max_width": 0.004216632849341101
+    },
+    {
+      "rep": 339,
+      "family_noncoverage": false,
+      "max_width": 0.00414220951875245
+    },
+    {
+      "rep": 340,
+      "family_noncoverage": false,
+      "max_width": 0.004393554298115329
+    },
+    {
+      "rep": 341,
+      "family_noncoverage": false,
+      "max_width": 0.003792975456602676
+    },
+    {
+      "rep": 342,
+      "family_noncoverage": false,
+      "max_width": 0.0037491904154751564
+    },
+    {
+      "rep": 343,
+      "family_noncoverage": false,
+      "max_width": 0.0041332251791893855
+    },
+    {
+      "rep": 344,
+      "family_noncoverage": false,
+      "max_width": 0.0037309432918570364
+    },
+    {
+      "rep": 345,
+      "family_noncoverage": false,
+      "max_width": 0.0041219940810246405
+    },
+    {
+      "rep": 346,
+      "family_noncoverage": false,
+      "max_width": 0.0036899030838402347
+    },
+    {
+      "rep": 347,
+      "family_noncoverage": false,
+      "max_width": 0.003871826127611628
+    },
+    {
+      "rep": 348,
+      "family_noncoverage": false,
+      "max_width": 0.003957041526397199
+    },
+    {
+      "rep": 349,
+      "family_noncoverage": false,
+      "max_width": 0.004281822028523271
+    },
+    {
+      "rep": 350,
+      "family_noncoverage": false,
+      "max_width": 0.004348399732687662
+    },
+    {
+      "rep": 351,
+      "family_noncoverage": false,
+      "max_width": 0.005195715404013835
+    },
+    {
+      "rep": 352,
+      "family_noncoverage": false,
+      "max_width": 0.004053691525843864
+    },
+    {
+      "rep": 353,
+      "family_noncoverage": false,
+      "max_width": 0.004762114133260399
+    },
+    {
+      "rep": 354,
+      "family_noncoverage": false,
+      "max_width": 0.003941236260616141
+    },
+    {
+      "rep": 355,
+      "family_noncoverage": false,
+      "max_width": 0.004229666191509647
+    },
+    {
+      "rep": 356,
+      "family_noncoverage": false,
+      "max_width": 0.0053566035142911025
+    },
+    {
+      "rep": 357,
+      "family_noncoverage": false,
+      "max_width": 0.004163819009082883
+    },
+    {
+      "rep": 358,
+      "family_noncoverage": false,
+      "max_width": 0.003504060061330053
+    },
+    {
+      "rep": 359,
+      "family_noncoverage": false,
+      "max_width": 0.003443767209140803
+    },
+    {
+      "rep": 360,
+      "family_noncoverage": false,
+      "max_width": 0.004650752440123208
+    },
+    {
+      "rep": 361,
+      "family_noncoverage": false,
+      "max_width": 0.0043649198808994325
+    },
+    {
+      "rep": 362,
+      "family_noncoverage": false,
+      "max_width": 0.004598939957557751
+    },
+    {
+      "rep": 363,
+      "family_noncoverage": false,
+      "max_width": 0.0052490779036413835
+    },
+    {
+      "rep": 364,
+      "family_noncoverage": false,
+      "max_width": 0.004539697659019272
+    },
+    {
+      "rep": 365,
+      "family_noncoverage": false,
+      "max_width": 0.0044721792146911795
+    },
+    {
+      "rep": 366,
+      "family_noncoverage": false,
+      "max_width": 0.005049419810969905
+    },
+    {
+      "rep": 367,
+      "family_noncoverage": false,
+      "max_width": 0.003500961338145348
+    },
+    {
+      "rep": 368,
+      "family_noncoverage": false,
+      "max_width": 0.004323104655891589
+    },
+    {
+      "rep": 369,
+      "family_noncoverage": false,
+      "max_width": 0.004084401955204745
+    },
+    {
+      "rep": 370,
+      "family_noncoverage": false,
+      "max_width": 0.0043767922713201955
+    },
+    {
+      "rep": 371,
+      "family_noncoverage": false,
+      "max_width": 0.0043825363604928025
+    },
+    {
+      "rep": 372,
+      "family_noncoverage": false,
+      "max_width": 0.004501838623163496
+    },
+    {
+      "rep": 373,
+      "family_noncoverage": false,
+      "max_width": 0.004328521154501815
+    },
+    {
+      "rep": 374,
+      "family_noncoverage": false,
+      "max_width": 0.004289578368385968
+    },
+    {
+      "rep": 375,
+      "family_noncoverage": false,
+      "max_width": 0.004798022803460037
+    },
+    {
+      "rep": 376,
+      "family_noncoverage": false,
+      "max_width": 0.003592018115588848
+    },
+    {
+      "rep": 377,
+      "family_noncoverage": false,
+      "max_width": 0.003946579002218135
+    },
+    {
+      "rep": 378,
+      "family_noncoverage": false,
+      "max_width": 0.0036983127700908553
+    },
+    {
+      "rep": 379,
+      "family_noncoverage": false,
+      "max_width": 0.004245560230895864
+    },
+    {
+      "rep": 380,
+      "family_noncoverage": false,
+      "max_width": 0.002980012622124751
+    },
+    {
+      "rep": 381,
+      "family_noncoverage": false,
+      "max_width": 0.003987868805516319
+    },
+    {
+      "rep": 382,
+      "family_noncoverage": false,
+      "max_width": 0.004247001736184379
+    },
+    {
+      "rep": 383,
+      "family_noncoverage": false,
+      "max_width": 0.004913624935739111
+    },
+    {
+      "rep": 384,
+      "family_noncoverage": false,
+      "max_width": 0.0037238705407443796
+    },
+    {
+      "rep": 385,
+      "family_noncoverage": false,
+      "max_width": 0.003162433688608561
+    },
+    {
+      "rep": 386,
+      "family_noncoverage": false,
+      "max_width": 0.00391974308866736
+    },
+    {
+      "rep": 387,
+      "family_noncoverage": true,
+      "max_width": 0.004911686637586132
+    },
+    {
+      "rep": 388,
+      "family_noncoverage": false,
+      "max_width": 0.004296645152185585
+    },
+    {
+      "rep": 389,
+      "family_noncoverage": false,
+      "max_width": 0.0036794615108569108
+    },
+    {
+      "rep": 390,
+      "family_noncoverage": false,
+      "max_width": 0.004669400538180112
+    },
+    {
+      "rep": 391,
+      "family_noncoverage": false,
+      "max_width": 0.004290262046901552
+    },
+    {
+      "rep": 392,
+      "family_noncoverage": false,
+      "max_width": 0.004408714713061183
+    },
+    {
+      "rep": 393,
+      "family_noncoverage": true,
+      "max_width": 0.004854179513397837
+    },
+    {
+      "rep": 394,
+      "family_noncoverage": false,
+      "max_width": 0.004295770163962783
+    },
+    {
+      "rep": 395,
+      "family_noncoverage": false,
+      "max_width": 0.0038732942992533445
+    },
+    {
+      "rep": 396,
+      "family_noncoverage": false,
+      "max_width": 0.005168620898042923
+    },
+    {
+      "rep": 397,
+      "family_noncoverage": false,
+      "max_width": 0.005333452499113888
+    },
+    {
+      "rep": 398,
+      "family_noncoverage": false,
+      "max_width": 0.004673492286415828
+    },
+    {
+      "rep": 399,
+      "family_noncoverage": false,
+      "max_width": 0.004129366656981711
+    },
+    {
+      "rep": 400,
+      "family_noncoverage": false,
+      "max_width": 0.004326440916475543
+    },
+    {
+      "rep": 401,
+      "family_noncoverage": false,
+      "max_width": 0.003321811771795028
+    },
+    {
+      "rep": 402,
+      "family_noncoverage": false,
+      "max_width": 0.004895788252152554
+    },
+    {
+      "rep": 403,
+      "family_noncoverage": false,
+      "max_width": 0.003863729016663745
+    },
+    {
+      "rep": 404,
+      "family_noncoverage": false,
+      "max_width": 0.004283811730163622
+    },
+    {
+      "rep": 405,
+      "family_noncoverage": false,
+      "max_width": 0.0038692520388912844
+    },
+    {
+      "rep": 406,
+      "family_noncoverage": false,
+      "max_width": 0.003925029641641234
+    },
+    {
+      "rep": 407,
+      "family_noncoverage": false,
+      "max_width": 0.0033874113116427675
+    },
+    {
+      "rep": 408,
+      "family_noncoverage": false,
+      "max_width": 0.00442364152036288
+    },
+    {
+      "rep": 409,
+      "family_noncoverage": false,
+      "max_width": 0.0035279384819850044
+    },
+    {
+      "rep": 410,
+      "family_noncoverage": false,
+      "max_width": 0.0036934500658067342
+    },
+    {
+      "rep": 411,
+      "family_noncoverage": false,
+      "max_width": 0.005085786920166948
+    },
+    {
+      "rep": 412,
+      "family_noncoverage": false,
+      "max_width": 0.004916687277477114
+    },
+    {
+      "rep": 413,
+      "family_noncoverage": false,
+      "max_width": 0.004619252728124539
+    },
+    {
+      "rep": 414,
+      "family_noncoverage": false,
+      "max_width": 0.003479536600895499
+    },
+    {
+      "rep": 415,
+      "family_noncoverage": false,
+      "max_width": 0.003692376083522389
+    },
+    {
+      "rep": 416,
+      "family_noncoverage": false,
+      "max_width": 0.004830346633142361
+    },
+    {
+      "rep": 417,
+      "family_noncoverage": false,
+      "max_width": 0.004368949236667509
+    },
+    {
+      "rep": 418,
+      "family_noncoverage": false,
+      "max_width": 0.004931260264570931
+    },
+    {
+      "rep": 419,
+      "family_noncoverage": false,
+      "max_width": 0.003957748313627104
+    },
+    {
+      "rep": 420,
+      "family_noncoverage": false,
+      "max_width": 0.003107742940314322
+    },
+    {
+      "rep": 421,
+      "family_noncoverage": false,
+      "max_width": 0.004130448499838427
+    },
+    {
+      "rep": 422,
+      "family_noncoverage": true,
+      "max_width": 0.004771134438004535
+    },
+    {
+      "rep": 423,
+      "family_noncoverage": false,
+      "max_width": 0.003952366409159667
+    },
+    {
+      "rep": 424,
+      "family_noncoverage": false,
+      "max_width": 0.0040240525230757634
+    },
+    {
+      "rep": 425,
+      "family_noncoverage": false,
+      "max_width": 0.0046065307358669275
+    },
+    {
+      "rep": 426,
+      "family_noncoverage": true,
+      "max_width": 0.00403346034429149
+    },
+    {
+      "rep": 427,
+      "family_noncoverage": false,
+      "max_width": 0.003570607671752679
+    },
+    {
+      "rep": 428,
+      "family_noncoverage": false,
+      "max_width": 0.004107094252009932
+    },
+    {
+      "rep": 429,
+      "family_noncoverage": false,
+      "max_width": 0.004037101408693113
+    },
+    {
+      "rep": 430,
+      "family_noncoverage": false,
+      "max_width": 0.004230954010915057
+    },
+    {
+      "rep": 431,
+      "family_noncoverage": false,
+      "max_width": 0.0035412872949717143
+    },
+    {
+      "rep": 432,
+      "family_noncoverage": false,
+      "max_width": 0.003667973651384675
+    },
+    {
+      "rep": 433,
+      "family_noncoverage": false,
+      "max_width": 0.004343661758114564
+    },
+    {
+      "rep": 434,
+      "family_noncoverage": false,
+      "max_width": 0.0036585259609628338
+    },
+    {
+      "rep": 435,
+      "family_noncoverage": false,
+      "max_width": 0.004241890233243414
+    },
+    {
+      "rep": 436,
+      "family_noncoverage": true,
+      "max_width": 0.0048532625782783745
+    },
+    {
+      "rep": 437,
+      "family_noncoverage": false,
+      "max_width": 0.004078765288413243
+    },
+    {
+      "rep": 438,
+      "family_noncoverage": false,
+      "max_width": 0.0037785296677297665
+    },
+    {
+      "rep": 439,
+      "family_noncoverage": false,
+      "max_width": 0.005004284228344782
+    },
+    {
+      "rep": 440,
+      "family_noncoverage": true,
+      "max_width": 0.004552314160551346
+    },
+    {
+      "rep": 441,
+      "family_noncoverage": false,
+      "max_width": 0.0035734504175888937
+    },
+    {
+      "rep": 442,
+      "family_noncoverage": false,
+      "max_width": 0.004360768388175938
+    },
+    {
+      "rep": 443,
+      "family_noncoverage": false,
+      "max_width": 0.005083365795401556
+    },
+    {
+      "rep": 444,
+      "family_noncoverage": false,
+      "max_width": 0.004165238022481409
+    },
+    {
+      "rep": 445,
+      "family_noncoverage": false,
+      "max_width": 0.004289268521704921
+    },
+    {
+      "rep": 446,
+      "family_noncoverage": false,
+      "max_width": 0.004476302881119386
+    },
+    {
+      "rep": 447,
+      "family_noncoverage": false,
+      "max_width": 0.003712099985367614
+    },
+    {
+      "rep": 448,
+      "family_noncoverage": false,
+      "max_width": 0.004466529281681239
+    },
+    {
+      "rep": 449,
+      "family_noncoverage": false,
+      "max_width": 0.004043914538679746
+    },
+    {
+      "rep": 450,
+      "family_noncoverage": true,
+      "max_width": 0.004048974047049139
+    },
+    {
+      "rep": 451,
+      "family_noncoverage": false,
+      "max_width": 0.0035703802755493686
+    },
+    {
+      "rep": 452,
+      "family_noncoverage": false,
+      "max_width": 0.004434263483478334
+    },
+    {
+      "rep": 453,
+      "family_noncoverage": false,
+      "max_width": 0.0043863661755216415
+    },
+    {
+      "rep": 454,
+      "family_noncoverage": false,
+      "max_width": 0.004285824008621991
+    },
+    {
+      "rep": 455,
+      "family_noncoverage": false,
+      "max_width": 0.0037552681502069554
+    },
+    {
+      "rep": 456,
+      "family_noncoverage": false,
+      "max_width": 0.0035711643744742146
+    },
+    {
+      "rep": 457,
+      "family_noncoverage": false,
+      "max_width": 0.004520428555290384
+    },
+    {
+      "rep": 458,
+      "family_noncoverage": false,
+      "max_width": 0.004006346606024031
+    },
+    {
+      "rep": 459,
+      "family_noncoverage": false,
+      "max_width": 0.0033553667225451685
+    },
+    {
+      "rep": 460,
+      "family_noncoverage": false,
+      "max_width": 0.004549299990867051
+    },
+    {
+      "rep": 461,
+      "family_noncoverage": false,
+      "max_width": 0.0037041155828624
+    },
+    {
+      "rep": 462,
+      "family_noncoverage": false,
+      "max_width": 0.0038500521700092225
+    },
+    {
+      "rep": 463,
+      "family_noncoverage": false,
+      "max_width": 0.0035482727489466698
+    },
+    {
+      "rep": 464,
+      "family_noncoverage": false,
+      "max_width": 0.004734927072331517
+    },
+    {
+      "rep": 465,
+      "family_noncoverage": false,
+      "max_width": 0.004304512579399228
+    },
+    {
+      "rep": 466,
+      "family_noncoverage": false,
+      "max_width": 0.005535278800529635
+    },
+    {
+      "rep": 467,
+      "family_noncoverage": false,
+      "max_width": 0.004073483989551916
+    },
+    {
+      "rep": 468,
+      "family_noncoverage": false,
+      "max_width": 0.00381082686564976
+    },
+    {
+      "rep": 469,
+      "family_noncoverage": false,
+      "max_width": 0.0043970682875287175
+    },
+    {
+      "rep": 470,
+      "family_noncoverage": true,
+      "max_width": 0.004318697229352308
+    },
+    {
+      "rep": 471,
+      "family_noncoverage": false,
+      "max_width": 0.004954606374165458
+    },
+    {
+      "rep": 472,
+      "family_noncoverage": false,
+      "max_width": 0.0035362974211512587
+    },
+    {
+      "rep": 473,
+      "family_noncoverage": false,
+      "max_width": 0.004038889518280524
+    },
+    {
+      "rep": 474,
+      "family_noncoverage": false,
+      "max_width": 0.0039396747592767446
+    },
+    {
+      "rep": 475,
+      "family_noncoverage": false,
+      "max_width": 0.005676147684567352
+    },
+    {
+      "rep": 476,
+      "family_noncoverage": false,
+      "max_width": 0.003935282961206122
+    },
+    {
+      "rep": 477,
+      "family_noncoverage": false,
+      "max_width": 0.0038125608903474923
+    },
+    {
+      "rep": 478,
+      "family_noncoverage": false,
+      "max_width": 0.0046331692913691895
+    },
+    {
+      "rep": 479,
+      "family_noncoverage": false,
+      "max_width": 0.004271972272064242
+    },
+    {
+      "rep": 480,
+      "family_noncoverage": false,
+      "max_width": 0.00371264922000325
+    },
+    {
+      "rep": 481,
+      "family_noncoverage": false,
+      "max_width": 0.0031367240704072525
+    },
+    {
+      "rep": 482,
+      "family_noncoverage": false,
+      "max_width": 0.004912129817184846
+    },
+    {
+      "rep": 483,
+      "family_noncoverage": false,
+      "max_width": 0.004326486242127886
+    },
+    {
+      "rep": 484,
+      "family_noncoverage": false,
+      "max_width": 0.002964297917366644
+    },
+    {
+      "rep": 485,
+      "family_noncoverage": false,
+      "max_width": 0.003866468623104164
+    },
+    {
+      "rep": 486,
+      "family_noncoverage": false,
+      "max_width": 0.005776188828497746
+    },
+    {
+      "rep": 487,
+      "family_noncoverage": false,
+      "max_width": 0.004218676429011779
+    },
+    {
+      "rep": 488,
+      "family_noncoverage": false,
+      "max_width": 0.004597870859823988
+    },
+    {
+      "rep": 489,
+      "family_noncoverage": false,
+      "max_width": 0.0043266603756216375
+    },
+    {
+      "rep": 490,
+      "family_noncoverage": false,
+      "max_width": 0.003656390364762562
+    },
+    {
+      "rep": 491,
+      "family_noncoverage": false,
+      "max_width": 0.003899345468608738
+    },
+    {
+      "rep": 492,
+      "family_noncoverage": false,
+      "max_width": 0.004022112087294456
+    },
+    {
+      "rep": 493,
+      "family_noncoverage": false,
+      "max_width": 0.004018631057259006
+    },
+    {
+      "rep": 494,
+      "family_noncoverage": false,
+      "max_width": 0.0036635130436991356
+    },
+    {
+      "rep": 495,
+      "family_noncoverage": false,
+      "max_width": 0.004725968116881578
+    },
+    {
+      "rep": 496,
+      "family_noncoverage": false,
+      "max_width": 0.003561544181661919
+    },
+    {
+      "rep": 497,
+      "family_noncoverage": false,
+      "max_width": 0.004907958126483441
+    },
+    {
+      "rep": 498,
+      "family_noncoverage": false,
+      "max_width": 0.005536610268269826
+    },
+    {
+      "rep": 499,
+      "family_noncoverage": false,
+      "max_width": 0.00397923256006435
+    },
+    {
+      "rep": 500,
+      "family_noncoverage": false,
+      "max_width": 0.0034910765624386175
+    },
+    {
+      "rep": 501,
+      "family_noncoverage": false,
+      "max_width": 0.004981146123989686
+    },
+    {
+      "rep": 502,
+      "family_noncoverage": false,
+      "max_width": 0.003911019109568243
+    },
+    {
+      "rep": 503,
+      "family_noncoverage": false,
+      "max_width": 0.004875470416639558
+    },
+    {
+      "rep": 504,
+      "family_noncoverage": false,
+      "max_width": 0.004479668840995672
+    },
+    {
+      "rep": 505,
+      "family_noncoverage": false,
+      "max_width": 0.0035588749998397506
+    },
+    {
+      "rep": 506,
+      "family_noncoverage": false,
+      "max_width": 0.004239538440015384
+    },
+    {
+      "rep": 507,
+      "family_noncoverage": false,
+      "max_width": 0.003869195776825098
+    },
+    {
+      "rep": 508,
+      "family_noncoverage": false,
+      "max_width": 0.00394710966186612
+    },
+    {
+      "rep": 509,
+      "family_noncoverage": false,
+      "max_width": 0.004672369182500027
+    },
+    {
+      "rep": 510,
+      "family_noncoverage": false,
+      "max_width": 0.004887013353145804
+    },
+    {
+      "rep": 511,
+      "family_noncoverage": false,
+      "max_width": 0.004262760256253781
+    },
+    {
+      "rep": 512,
+      "family_noncoverage": false,
+      "max_width": 0.004061479207262651
+    },
+    {
+      "rep": 513,
+      "family_noncoverage": false,
+      "max_width": 0.004498600636569932
+    },
+    {
+      "rep": 514,
+      "family_noncoverage": false,
+      "max_width": 0.0030216862798881023
+    },
+    {
+      "rep": 515,
+      "family_noncoverage": false,
+      "max_width": 0.0035641169789435516
+    },
+    {
+      "rep": 516,
+      "family_noncoverage": false,
+      "max_width": 0.0043158445146120016
+    },
+    {
+      "rep": 517,
+      "family_noncoverage": false,
+      "max_width": 0.005324283224591906
+    },
+    {
+      "rep": 518,
+      "family_noncoverage": false,
+      "max_width": 0.00357596279991855
+    },
+    {
+      "rep": 519,
+      "family_noncoverage": false,
+      "max_width": 0.00415980585475118
+    },
+    {
+      "rep": 520,
+      "family_noncoverage": false,
+      "max_width": 0.004774653128792675
+    },
+    {
+      "rep": 521,
+      "family_noncoverage": false,
+      "max_width": 0.004270709056022077
+    },
+    {
+      "rep": 522,
+      "family_noncoverage": false,
+      "max_width": 0.00430105893452565
+    },
+    {
+      "rep": 523,
+      "family_noncoverage": false,
+      "max_width": 0.0055844620357388165
+    },
+    {
+      "rep": 524,
+      "family_noncoverage": false,
+      "max_width": 0.004936560610128792
+    },
+    {
+      "rep": 525,
+      "family_noncoverage": false,
+      "max_width": 0.00283789612853983
+    },
+    {
+      "rep": 526,
+      "family_noncoverage": false,
+      "max_width": 0.004560647417617401
+    },
+    {
+      "rep": 527,
+      "family_noncoverage": false,
+      "max_width": 0.004464035053245652
+    },
+    {
+      "rep": 528,
+      "family_noncoverage": false,
+      "max_width": 0.00457753176728018
+    },
+    {
+      "rep": 529,
+      "family_noncoverage": false,
+      "max_width": 0.004278237392812612
+    },
+    {
+      "rep": 530,
+      "family_noncoverage": false,
+      "max_width": 0.00377113394902494
+    },
+    {
+      "rep": 531,
+      "family_noncoverage": false,
+      "max_width": 0.005150328710721015
+    },
+    {
+      "rep": 532,
+      "family_noncoverage": false,
+      "max_width": 0.003904093905687212
+    },
+    {
+      "rep": 533,
+      "family_noncoverage": false,
+      "max_width": 0.0042554329688639075
+    },
+    {
+      "rep": 534,
+      "family_noncoverage": false,
+      "max_width": 0.004445161598224345
+    },
+    {
+      "rep": 535,
+      "family_noncoverage": false,
+      "max_width": 0.0036123094257866353
+    },
+    {
+      "rep": 536,
+      "family_noncoverage": false,
+      "max_width": 0.0034979728446378733
+    },
+    {
+      "rep": 537,
+      "family_noncoverage": false,
+      "max_width": 0.004421820006711137
+    },
+    {
+      "rep": 538,
+      "family_noncoverage": false,
+      "max_width": 0.0036622212852223212
+    },
+    {
+      "rep": 539,
+      "family_noncoverage": false,
+      "max_width": 0.0033343977401005817
+    },
+    {
+      "rep": 540,
+      "family_noncoverage": false,
+      "max_width": 0.004075332922891214
+    },
+    {
+      "rep": 541,
+      "family_noncoverage": false,
+      "max_width": 0.003006007076242941
+    },
+    {
+      "rep": 542,
+      "family_noncoverage": false,
+      "max_width": 0.0036350557742968015
+    },
+    {
+      "rep": 543,
+      "family_noncoverage": false,
+      "max_width": 0.004890221454435316
+    },
+    {
+      "rep": 544,
+      "family_noncoverage": false,
+      "max_width": 0.0035879651066069423
+    },
+    {
+      "rep": 545,
+      "family_noncoverage": false,
+      "max_width": 0.005129045709430293
+    },
+    {
+      "rep": 546,
+      "family_noncoverage": false,
+      "max_width": 0.0030817789060891814
+    },
+    {
+      "rep": 547,
+      "family_noncoverage": false,
+      "max_width": 0.004077727598726559
+    },
+    {
+      "rep": 548,
+      "family_noncoverage": false,
+      "max_width": 0.0044165520382891815
+    },
+    {
+      "rep": 549,
+      "family_noncoverage": false,
+      "max_width": 0.004316506209457907
+    },
+    {
+      "rep": 550,
+      "family_noncoverage": false,
+      "max_width": 0.004080941152786193
+    },
+    {
+      "rep": 551,
+      "family_noncoverage": false,
+      "max_width": 0.0037604211409813346
+    },
+    {
+      "rep": 552,
+      "family_noncoverage": false,
+      "max_width": 0.004395957810328978
+    },
+    {
+      "rep": 553,
+      "family_noncoverage": false,
+      "max_width": 0.004722454804921779
+    },
+    {
+      "rep": 554,
+      "family_noncoverage": false,
+      "max_width": 0.004596620504015669
+    },
+    {
+      "rep": 555,
+      "family_noncoverage": false,
+      "max_width": 0.004510478192965314
+    },
+    {
+      "rep": 556,
+      "family_noncoverage": false,
+      "max_width": 0.003909337055481509
+    },
+    {
+      "rep": 557,
+      "family_noncoverage": false,
+      "max_width": 0.003962608873207354
+    },
+    {
+      "rep": 558,
+      "family_noncoverage": false,
+      "max_width": 0.004483625430965028
+    },
+    {
+      "rep": 559,
+      "family_noncoverage": false,
+      "max_width": 0.00412955266805563
+    },
+    {
+      "rep": 560,
+      "family_noncoverage": false,
+      "max_width": 0.005139430607340027
+    },
+    {
+      "rep": 561,
+      "family_noncoverage": false,
+      "max_width": 0.006021031488040485
+    },
+    {
+      "rep": 562,
+      "family_noncoverage": false,
+      "max_width": 0.004118474870802769
+    },
+    {
+      "rep": 563,
+      "family_noncoverage": false,
+      "max_width": 0.004081865863660706
+    },
+    {
+      "rep": 564,
+      "family_noncoverage": false,
+      "max_width": 0.0035192159008924683
+    },
+    {
+      "rep": 565,
+      "family_noncoverage": false,
+      "max_width": 0.002886327153000032
+    },
+    {
+      "rep": 566,
+      "family_noncoverage": false,
+      "max_width": 0.003846765201288518
+    },
+    {
+      "rep": 567,
+      "family_noncoverage": false,
+      "max_width": 0.004980843445777013
+    },
+    {
+      "rep": 568,
+      "family_noncoverage": false,
+      "max_width": 0.004440047618768254
+    },
+    {
+      "rep": 569,
+      "family_noncoverage": false,
+      "max_width": 0.005050350314466641
+    },
+    {
+      "rep": 570,
+      "family_noncoverage": false,
+      "max_width": 0.0034285995980549763
+    },
+    {
+      "rep": 571,
+      "family_noncoverage": false,
+      "max_width": 0.003954328153267582
+    },
+    {
+      "rep": 572,
+      "family_noncoverage": false,
+      "max_width": 0.004180840053451124
+    },
+    {
+      "rep": 573,
+      "family_noncoverage": false,
+      "max_width": 0.003946126689852066
+    },
+    {
+      "rep": 574,
+      "family_noncoverage": false,
+      "max_width": 0.0036559101622305233
+    },
+    {
+      "rep": 575,
+      "family_noncoverage": false,
+      "max_width": 0.004417276772452712
+    },
+    {
+      "rep": 576,
+      "family_noncoverage": false,
+      "max_width": 0.0038146374741518697
+    },
+    {
+      "rep": 577,
+      "family_noncoverage": false,
+      "max_width": 0.003562853839156416
+    },
+    {
+      "rep": 578,
+      "family_noncoverage": false,
+      "max_width": 0.003617939018827233
+    },
+    {
+      "rep": 579,
+      "family_noncoverage": false,
+      "max_width": 0.004397399881599026
+    },
+    {
+      "rep": 580,
+      "family_noncoverage": false,
+      "max_width": 0.0035231827563693948
+    },
+    {
+      "rep": 581,
+      "family_noncoverage": false,
+      "max_width": 0.003736778516928991
+    },
+    {
+      "rep": 582,
+      "family_noncoverage": false,
+      "max_width": 0.004315954887484585
+    },
+    {
+      "rep": 583,
+      "family_noncoverage": false,
+      "max_width": 0.00566898833324384
+    },
+    {
+      "rep": 584,
+      "family_noncoverage": false,
+      "max_width": 0.0036913824269775236
+    },
+    {
+      "rep": 585,
+      "family_noncoverage": false,
+      "max_width": 0.004064891254933311
+    },
+    {
+      "rep": 586,
+      "family_noncoverage": false,
+      "max_width": 0.0045783865163116924
+    },
+    {
+      "rep": 587,
+      "family_noncoverage": false,
+      "max_width": 0.004553170429480284
+    },
+    {
+      "rep": 588,
+      "family_noncoverage": false,
+      "max_width": 0.003969641383289265
+    },
+    {
+      "rep": 589,
+      "family_noncoverage": false,
+      "max_width": 0.004941278133601756
+    },
+    {
+      "rep": 590,
+      "family_noncoverage": false,
+      "max_width": 0.004251653388002682
+    },
+    {
+      "rep": 591,
+      "family_noncoverage": false,
+      "max_width": 0.0037559425245805226
+    },
+    {
+      "rep": 592,
+      "family_noncoverage": false,
+      "max_width": 0.0039796332622626975
+    },
+    {
+      "rep": 593,
+      "family_noncoverage": false,
+      "max_width": 0.003684278894967693
+    },
+    {
+      "rep": 594,
+      "family_noncoverage": false,
+      "max_width": 0.004312327251263743
+    },
+    {
+      "rep": 595,
+      "family_noncoverage": false,
+      "max_width": 0.004467507751242947
+    },
+    {
+      "rep": 596,
+      "family_noncoverage": false,
+      "max_width": 0.0035784610420329407
+    },
+    {
+      "rep": 597,
+      "family_noncoverage": true,
+      "max_width": 0.005079054484458322
+    },
+    {
+      "rep": 598,
+      "family_noncoverage": false,
+      "max_width": 0.005099522394539184
+    },
+    {
+      "rep": 599,
+      "family_noncoverage": false,
+      "max_width": 0.004267203228255963
+    },
+    {
+      "rep": 600,
+      "family_noncoverage": false,
+      "max_width": 0.004584513868401562
+    },
+    {
+      "rep": 601,
+      "family_noncoverage": false,
+      "max_width": 0.004575198708461333
+    },
+    {
+      "rep": 602,
+      "family_noncoverage": false,
+      "max_width": 0.005009524333881528
+    },
+    {
+      "rep": 603,
+      "family_noncoverage": false,
+      "max_width": 0.00414317975764105
+    },
+    {
+      "rep": 604,
+      "family_noncoverage": false,
+      "max_width": 0.003839796603595412
+    },
+    {
+      "rep": 605,
+      "family_noncoverage": false,
+      "max_width": 0.004407178926967326
+    },
+    {
+      "rep": 606,
+      "family_noncoverage": false,
+      "max_width": 0.004416491616250519
+    },
+    {
+      "rep": 607,
+      "family_noncoverage": false,
+      "max_width": 0.004604570311846874
+    },
+    {
+      "rep": 608,
+      "family_noncoverage": false,
+      "max_width": 0.004738111730793177
+    },
+    {
+      "rep": 609,
+      "family_noncoverage": false,
+      "max_width": 0.004746511123965727
+    },
+    {
+      "rep": 610,
+      "family_noncoverage": false,
+      "max_width": 0.004480731543786034
+    },
+    {
+      "rep": 611,
+      "family_noncoverage": false,
+      "max_width": 0.005074181505993298
+    },
+    {
+      "rep": 612,
+      "family_noncoverage": false,
+      "max_width": 0.005232631523838701
+    },
+    {
+      "rep": 613,
+      "family_noncoverage": false,
+      "max_width": 0.0032140986762996503
+    },
+    {
+      "rep": 614,
+      "family_noncoverage": false,
+      "max_width": 0.003998745857645197
+    },
+    {
+      "rep": 615,
+      "family_noncoverage": false,
+      "max_width": 0.003707134067209194
+    },
+    {
+      "rep": 616,
+      "family_noncoverage": false,
+      "max_width": 0.003874138544612417
+    },
+    {
+      "rep": 617,
+      "family_noncoverage": false,
+      "max_width": 0.003135057915812945
+    },
+    {
+      "rep": 618,
+      "family_noncoverage": false,
+      "max_width": 0.004055247668715735
+    },
+    {
+      "rep": 619,
+      "family_noncoverage": false,
+      "max_width": 0.003876247930607977
+    },
+    {
+      "rep": 620,
+      "family_noncoverage": false,
+      "max_width": 0.004610429502481478
+    },
+    {
+      "rep": 621,
+      "family_noncoverage": false,
+      "max_width": 0.0043436565722710365
+    },
+    {
+      "rep": 622,
+      "family_noncoverage": false,
+      "max_width": 0.004515289543070026
+    },
+    {
+      "rep": 623,
+      "family_noncoverage": false,
+      "max_width": 0.004641261034869697
+    },
+    {
+      "rep": 624,
+      "family_noncoverage": false,
+      "max_width": 0.004650750212457861
+    },
+    {
+      "rep": 625,
+      "family_noncoverage": false,
+      "max_width": 0.006174308191446059
+    },
+    {
+      "rep": 626,
+      "family_noncoverage": false,
+      "max_width": 0.0046417208283158415
+    },
+    {
+      "rep": 627,
+      "family_noncoverage": false,
+      "max_width": 0.0035111488764330567
+    },
+    {
+      "rep": 628,
+      "family_noncoverage": false,
+      "max_width": 0.005134698915305379
+    },
+    {
+      "rep": 629,
+      "family_noncoverage": false,
+      "max_width": 0.0039057273211807225
+    },
+    {
+      "rep": 630,
+      "family_noncoverage": false,
+      "max_width": 0.003870629816739319
+    },
+    {
+      "rep": 631,
+      "family_noncoverage": false,
+      "max_width": 0.003920616535336537
+    },
+    {
+      "rep": 632,
+      "family_noncoverage": false,
+      "max_width": 0.0046197434726655455
+    },
+    {
+      "rep": 633,
+      "family_noncoverage": false,
+      "max_width": 0.004835250385460742
+    },
+    {
+      "rep": 634,
+      "family_noncoverage": true,
+      "max_width": 0.0030365484059825584
+    },
+    {
+      "rep": 635,
+      "family_noncoverage": false,
+      "max_width": 0.003921022021592158
+    },
+    {
+      "rep": 636,
+      "family_noncoverage": false,
+      "max_width": 0.003733220348469633
+    },
+    {
+      "rep": 637,
+      "family_noncoverage": false,
+      "max_width": 0.004084658909172811
+    },
+    {
+      "rep": 638,
+      "family_noncoverage": true,
+      "max_width": 0.005097583969299095
+    },
+    {
+      "rep": 639,
+      "family_noncoverage": false,
+      "max_width": 0.004510948130985407
+    },
+    {
+      "rep": 640,
+      "family_noncoverage": false,
+      "max_width": 0.0033982004326923937
+    },
+    {
+      "rep": 641,
+      "family_noncoverage": false,
+      "max_width": 0.003879785001610571
+    },
+    {
+      "rep": 642,
+      "family_noncoverage": false,
+      "max_width": 0.004853210483906486
+    },
+    {
+      "rep": 643,
+      "family_noncoverage": false,
+      "max_width": 0.004403885549593511
+    },
+    {
+      "rep": 644,
+      "family_noncoverage": false,
+      "max_width": 0.004649662766424567
+    },
+    {
+      "rep": 645,
+      "family_noncoverage": false,
+      "max_width": 0.004717892644293061
+    },
+    {
+      "rep": 646,
+      "family_noncoverage": false,
+      "max_width": 0.004149717000060327
+    },
+    {
+      "rep": 647,
+      "family_noncoverage": false,
+      "max_width": 0.005165336967340856
+    },
+    {
+      "rep": 648,
+      "family_noncoverage": false,
+      "max_width": 0.003809241563281409
+    },
+    {
+      "rep": 649,
+      "family_noncoverage": false,
+      "max_width": 0.004757003588251844
+    },
+    {
+      "rep": 650,
+      "family_noncoverage": false,
+      "max_width": 0.004664638812007269
+    },
+    {
+      "rep": 651,
+      "family_noncoverage": false,
+      "max_width": 0.004286479430275084
+    },
+    {
+      "rep": 652,
+      "family_noncoverage": false,
+      "max_width": 0.0032952103571668636
+    },
+    {
+      "rep": 653,
+      "family_noncoverage": false,
+      "max_width": 0.003654453259728783
+    },
+    {
+      "rep": 654,
+      "family_noncoverage": false,
+      "max_width": 0.0054054431323205185
+    },
+    {
+      "rep": 655,
+      "family_noncoverage": false,
+      "max_width": 0.0036098567903287662
+    },
+    {
+      "rep": 656,
+      "family_noncoverage": false,
+      "max_width": 0.0038128781459653913
+    },
+    {
+      "rep": 657,
+      "family_noncoverage": false,
+      "max_width": 0.004104174474433201
+    },
+    {
+      "rep": 658,
+      "family_noncoverage": false,
+      "max_width": 0.004549660225641792
+    },
+    {
+      "rep": 659,
+      "family_noncoverage": false,
+      "max_width": 0.004734981493420985
+    },
+    {
+      "rep": 660,
+      "family_noncoverage": false,
+      "max_width": 0.0037782175397687067
+    },
+    {
+      "rep": 661,
+      "family_noncoverage": false,
+      "max_width": 0.005076403271527131
+    },
+    {
+      "rep": 662,
+      "family_noncoverage": false,
+      "max_width": 0.0045230723172025485
+    },
+    {
+      "rep": 663,
+      "family_noncoverage": false,
+      "max_width": 0.004463931190068745
+    },
+    {
+      "rep": 664,
+      "family_noncoverage": false,
+      "max_width": 0.0039541851515237795
+    },
+    {
+      "rep": 665,
+      "family_noncoverage": false,
+      "max_width": 0.005075291013548278
+    },
+    {
+      "rep": 666,
+      "family_noncoverage": false,
+      "max_width": 0.004147426368094105
+    },
+    {
+      "rep": 667,
+      "family_noncoverage": false,
+      "max_width": 0.004441452093865608
+    },
+    {
+      "rep": 668,
+      "family_noncoverage": false,
+      "max_width": 0.004639198892350041
+    },
+    {
+      "rep": 669,
+      "family_noncoverage": false,
+      "max_width": 0.0034979572448591385
+    },
+    {
+      "rep": 670,
+      "family_noncoverage": false,
+      "max_width": 0.004779512114614376
+    },
+    {
+      "rep": 671,
+      "family_noncoverage": false,
+      "max_width": 0.004027552297541632
+    },
+    {
+      "rep": 672,
+      "family_noncoverage": false,
+      "max_width": 0.0042530324423805015
+    },
+    {
+      "rep": 673,
+      "family_noncoverage": false,
+      "max_width": 0.004539568658561815
+    },
+    {
+      "rep": 674,
+      "family_noncoverage": false,
+      "max_width": 0.0033202477256929464
+    },
+    {
+      "rep": 675,
+      "family_noncoverage": false,
+      "max_width": 0.003139499348594312
+    },
+    {
+      "rep": 676,
+      "family_noncoverage": false,
+      "max_width": 0.005197710054555019
+    },
+    {
+      "rep": 677,
+      "family_noncoverage": false,
+      "max_width": 0.0036622514258500246
+    },
+    {
+      "rep": 678,
+      "family_noncoverage": false,
+      "max_width": 0.0036937778292696548
+    },
+    {
+      "rep": 679,
+      "family_noncoverage": false,
+      "max_width": 0.003838770271926203
+    },
+    {
+      "rep": 680,
+      "family_noncoverage": false,
+      "max_width": 0.0042566959800014355
+    },
+    {
+      "rep": 681,
+      "family_noncoverage": false,
+      "max_width": 0.004606788896817227
+    },
+    {
+      "rep": 682,
+      "family_noncoverage": false,
+      "max_width": 0.0059164411673617604
+    },
+    {
+      "rep": 683,
+      "family_noncoverage": false,
+      "max_width": 0.0037560114504633637
+    },
+    {
+      "rep": 684,
+      "family_noncoverage": false,
+      "max_width": 0.0030169086538830133
+    },
+    {
+      "rep": 685,
+      "family_noncoverage": false,
+      "max_width": 0.004067993970337973
+    },
+    {
+      "rep": 686,
+      "family_noncoverage": false,
+      "max_width": 0.0041578744666020085
+    },
+    {
+      "rep": 687,
+      "family_noncoverage": false,
+      "max_width": 0.0031997027376752187
+    },
+    {
+      "rep": 688,
+      "family_noncoverage": false,
+      "max_width": 0.004373312997204466
+    },
+    {
+      "rep": 689,
+      "family_noncoverage": false,
+      "max_width": 0.0039577680506483566
+    },
+    {
+      "rep": 690,
+      "family_noncoverage": false,
+      "max_width": 0.002744401819147427
+    },
+    {
+      "rep": 691,
+      "family_noncoverage": false,
+      "max_width": 0.004093191332552796
+    },
+    {
+      "rep": 692,
+      "family_noncoverage": false,
+      "max_width": 0.004832135006437839
+    },
+    {
+      "rep": 693,
+      "family_noncoverage": false,
+      "max_width": 0.0037626527232333343
+    },
+    {
+      "rep": 694,
+      "family_noncoverage": false,
+      "max_width": 0.0035245429891864093
+    },
+    {
+      "rep": 695,
+      "family_noncoverage": false,
+      "max_width": 0.004575953148535097
+    },
+    {
+      "rep": 696,
+      "family_noncoverage": false,
+      "max_width": 0.004887542938523838
+    },
+    {
+      "rep": 697,
+      "family_noncoverage": false,
+      "max_width": 0.0035884874283801183
+    },
+    {
+      "rep": 698,
+      "family_noncoverage": false,
+      "max_width": 0.004658640851306183
+    },
+    {
+      "rep": 699,
+      "family_noncoverage": false,
+      "max_width": 0.004026159905600052
+    },
+    {
+      "rep": 700,
+      "family_noncoverage": false,
+      "max_width": 0.004259781382205343
+    },
+    {
+      "rep": 701,
+      "family_noncoverage": false,
+      "max_width": 0.004520079057056553
+    },
+    {
+      "rep": 702,
+      "family_noncoverage": false,
+      "max_width": 0.0038210038471514756
+    },
+    {
+      "rep": 703,
+      "family_noncoverage": false,
+      "max_width": 0.004222150062043338
+    },
+    {
+      "rep": 704,
+      "family_noncoverage": false,
+      "max_width": 0.004620753163049858
+    },
+    {
+      "rep": 705,
+      "family_noncoverage": false,
+      "max_width": 0.00447575363616341
+    },
+    {
+      "rep": 706,
+      "family_noncoverage": false,
+      "max_width": 0.004152090609551271
+    },
+    {
+      "rep": 707,
+      "family_noncoverage": true,
+      "max_width": 0.00453776604367909
+    },
+    {
+      "rep": 708,
+      "family_noncoverage": false,
+      "max_width": 0.0037677506397007245
+    },
+    {
+      "rep": 709,
+      "family_noncoverage": false,
+      "max_width": 0.00421162659401275
+    },
+    {
+      "rep": 710,
+      "family_noncoverage": false,
+      "max_width": 0.003558645981265091
+    },
+    {
+      "rep": 711,
+      "family_noncoverage": false,
+      "max_width": 0.0038846006342286472
+    },
+    {
+      "rep": 712,
+      "family_noncoverage": false,
+      "max_width": 0.0044870381122478105
+    },
+    {
+      "rep": 713,
+      "family_noncoverage": false,
+      "max_width": 0.003966067036550993
+    },
+    {
+      "rep": 714,
+      "family_noncoverage": false,
+      "max_width": 0.003954053419477958
+    },
+    {
+      "rep": 715,
+      "family_noncoverage": false,
+      "max_width": 0.003919746219481085
+    },
+    {
+      "rep": 716,
+      "family_noncoverage": false,
+      "max_width": 0.0045999906868279825
+    },
+    {
+      "rep": 717,
+      "family_noncoverage": false,
+      "max_width": 0.00438727232778959
+    },
+    {
+      "rep": 718,
+      "family_noncoverage": false,
+      "max_width": 0.004344199250762373
+    },
+    {
+      "rep": 719,
+      "family_noncoverage": false,
+      "max_width": 0.005149287120973563
+    },
+    {
+      "rep": 720,
+      "family_noncoverage": false,
+      "max_width": 0.0037376322135659204
+    },
+    {
+      "rep": 721,
+      "family_noncoverage": false,
+      "max_width": 0.004152241267780849
+    },
+    {
+      "rep": 722,
+      "family_noncoverage": false,
+      "max_width": 0.004955625495015438
+    },
+    {
+      "rep": 723,
+      "family_noncoverage": false,
+      "max_width": 0.004939602142814076
+    },
+    {
+      "rep": 724,
+      "family_noncoverage": false,
+      "max_width": 0.004766565474777006
+    },
+    {
+      "rep": 725,
+      "family_noncoverage": false,
+      "max_width": 0.0037876118281865356
+    },
+    {
+      "rep": 726,
+      "family_noncoverage": false,
+      "max_width": 0.003965264738798616
+    },
+    {
+      "rep": 727,
+      "family_noncoverage": false,
+      "max_width": 0.005121640964538392
+    },
+    {
+      "rep": 728,
+      "family_noncoverage": false,
+      "max_width": 0.0036429106839835374
+    },
+    {
+      "rep": 729,
+      "family_noncoverage": false,
+      "max_width": 0.0034437164623338664
+    },
+    {
+      "rep": 730,
+      "family_noncoverage": false,
+      "max_width": 0.0033179925266090286
+    },
+    {
+      "rep": 731,
+      "family_noncoverage": false,
+      "max_width": 0.004032349004796225
+    },
+    {
+      "rep": 732,
+      "family_noncoverage": false,
+      "max_width": 0.002973356369613454
+    },
+    {
+      "rep": 733,
+      "family_noncoverage": false,
+      "max_width": 0.003782961437040903
+    },
+    {
+      "rep": 734,
+      "family_noncoverage": false,
+      "max_width": 0.004042154137458468
+    },
+    {
+      "rep": 735,
+      "family_noncoverage": false,
+      "max_width": 0.00336363448747661
+    },
+    {
+      "rep": 736,
+      "family_noncoverage": false,
+      "max_width": 0.004738689592246461
+    },
+    {
+      "rep": 737,
+      "family_noncoverage": false,
+      "max_width": 0.0038419043613464373
+    },
+    {
+      "rep": 738,
+      "family_noncoverage": false,
+      "max_width": 0.0044705827335591135
+    },
+    {
+      "rep": 739,
+      "family_noncoverage": false,
+      "max_width": 0.004082314846530174
+    },
+    {
+      "rep": 740,
+      "family_noncoverage": false,
+      "max_width": 0.003906578581010646
+    },
+    {
+      "rep": 741,
+      "family_noncoverage": false,
+      "max_width": 0.003571881584551882
+    },
+    {
+      "rep": 742,
+      "family_noncoverage": false,
+      "max_width": 0.0037447700135455598
+    },
+    {
+      "rep": 743,
+      "family_noncoverage": false,
+      "max_width": 0.0045143118678573416
+    },
+    {
+      "rep": 744,
+      "family_noncoverage": true,
+      "max_width": 0.005318007304548492
+    },
+    {
+      "rep": 745,
+      "family_noncoverage": false,
+      "max_width": 0.004556096713359649
+    },
+    {
+      "rep": 746,
+      "family_noncoverage": false,
+      "max_width": 0.00498391725833452
+    },
+    {
+      "rep": 747,
+      "family_noncoverage": false,
+      "max_width": 0.004559138505668059
+    },
+    {
+      "rep": 748,
+      "family_noncoverage": false,
+      "max_width": 0.004157074782878688
+    },
+    {
+      "rep": 749,
+      "family_noncoverage": false,
+      "max_width": 0.004339252463189751
+    },
+    {
+      "rep": 750,
+      "family_noncoverage": false,
+      "max_width": 0.003004965480599905
+    },
+    {
+      "rep": 751,
+      "family_noncoverage": false,
+      "max_width": 0.0034166988005296123
+    },
+    {
+      "rep": 752,
+      "family_noncoverage": false,
+      "max_width": 0.004335295424514232
+    },
+    {
+      "rep": 753,
+      "family_noncoverage": false,
+      "max_width": 0.0042407608886958804
+    },
+    {
+      "rep": 754,
+      "family_noncoverage": false,
+      "max_width": 0.0030636867208313334
+    },
+    {
+      "rep": 755,
+      "family_noncoverage": false,
+      "max_width": 0.004624419876556835
+    },
+    {
+      "rep": 756,
+      "family_noncoverage": false,
+      "max_width": 0.003918560996598668
+    },
+    {
+      "rep": 757,
+      "family_noncoverage": false,
+      "max_width": 0.005112147346262391
+    },
+    {
+      "rep": 758,
+      "family_noncoverage": false,
+      "max_width": 0.005846687814640541
+    },
+    {
+      "rep": 759,
+      "family_noncoverage": false,
+      "max_width": 0.00419840825865745
+    },
+    {
+      "rep": 760,
+      "family_noncoverage": false,
+      "max_width": 0.004990358256028756
+    },
+    {
+      "rep": 761,
+      "family_noncoverage": false,
+      "max_width": 0.00394388078257941
+    },
+    {
+      "rep": 762,
+      "family_noncoverage": false,
+      "max_width": 0.004910425504955821
+    },
+    {
+      "rep": 763,
+      "family_noncoverage": false,
+      "max_width": 0.0051211705111524185
+    },
+    {
+      "rep": 764,
+      "family_noncoverage": false,
+      "max_width": 0.00407131669895947
+    },
+    {
+      "rep": 765,
+      "family_noncoverage": false,
+      "max_width": 0.0033998735858165037
+    },
+    {
+      "rep": 766,
+      "family_noncoverage": false,
+      "max_width": 0.004357239746427177
+    },
+    {
+      "rep": 767,
+      "family_noncoverage": false,
+      "max_width": 0.004494121242872133
+    },
+    {
+      "rep": 768,
+      "family_noncoverage": false,
+      "max_width": 0.0039458722263586215
+    },
+    {
+      "rep": 769,
+      "family_noncoverage": false,
+      "max_width": 0.004638635487835945
+    },
+    {
+      "rep": 770,
+      "family_noncoverage": false,
+      "max_width": 0.004403000576198111
+    },
+    {
+      "rep": 771,
+      "family_noncoverage": false,
+      "max_width": 0.005341779852088994
+    },
+    {
+      "rep": 772,
+      "family_noncoverage": false,
+      "max_width": 0.003929013831576533
+    },
+    {
+      "rep": 773,
+      "family_noncoverage": false,
+      "max_width": 0.003986211651337567
+    },
+    {
+      "rep": 774,
+      "family_noncoverage": false,
+      "max_width": 0.0033538413479410265
+    },
+    {
+      "rep": 775,
+      "family_noncoverage": false,
+      "max_width": 0.0038064455431026873
+    },
+    {
+      "rep": 776,
+      "family_noncoverage": false,
+      "max_width": 0.004994333344046974
+    },
+    {
+      "rep": 777,
+      "family_noncoverage": false,
+      "max_width": 0.0054426504981021214
+    },
+    {
+      "rep": 778,
+      "family_noncoverage": false,
+      "max_width": 0.004288527064433139
+    },
+    {
+      "rep": 779,
+      "family_noncoverage": false,
+      "max_width": 0.005296952271639918
+    },
+    {
+      "rep": 780,
+      "family_noncoverage": false,
+      "max_width": 0.003992371600288654
+    },
+    {
+      "rep": 781,
+      "family_noncoverage": false,
+      "max_width": 0.004260483036756404
+    },
+    {
+      "rep": 782,
+      "family_noncoverage": false,
+      "max_width": 0.004305553619375642
+    },
+    {
+      "rep": 783,
+      "family_noncoverage": false,
+      "max_width": 0.0038081350578051177
+    },
+    {
+      "rep": 784,
+      "family_noncoverage": false,
+      "max_width": 0.0038706562664693697
+    },
+    {
+      "rep": 785,
+      "family_noncoverage": false,
+      "max_width": 0.00383844227687626
+    },
+    {
+      "rep": 786,
+      "family_noncoverage": false,
+      "max_width": 0.004276067571089653
+    },
+    {
+      "rep": 787,
+      "family_noncoverage": false,
+      "max_width": 0.005543246528264394
+    },
+    {
+      "rep": 788,
+      "family_noncoverage": false,
+      "max_width": 0.0035118065039946716
+    },
+    {
+      "rep": 789,
+      "family_noncoverage": false,
+      "max_width": 0.004115051701120391
+    },
+    {
+      "rep": 790,
+      "family_noncoverage": false,
+      "max_width": 0.004891317839577974
+    },
+    {
+      "rep": 791,
+      "family_noncoverage": false,
+      "max_width": 0.004243956504561728
+    },
+    {
+      "rep": 792,
+      "family_noncoverage": true,
+      "max_width": 0.0034768250640999595
+    },
+    {
+      "rep": 793,
+      "family_noncoverage": false,
+      "max_width": 0.005048152445278235
+    },
+    {
+      "rep": 794,
+      "family_noncoverage": false,
+      "max_width": 0.0040887241888114415
+    },
+    {
+      "rep": 795,
+      "family_noncoverage": false,
+      "max_width": 0.0036975961700571056
+    },
+    {
+      "rep": 796,
+      "family_noncoverage": false,
+      "max_width": 0.004063689796065711
+    },
+    {
+      "rep": 797,
+      "family_noncoverage": false,
+      "max_width": 0.004540244583094591
+    },
+    {
+      "rep": 798,
+      "family_noncoverage": false,
+      "max_width": 0.0038736903116944367
+    },
+    {
+      "rep": 799,
+      "family_noncoverage": false,
+      "max_width": 0.004348363743755398
+    },
+    {
+      "rep": 800,
+      "family_noncoverage": false,
+      "max_width": 0.004441397159674836
+    },
+    {
+      "rep": 801,
+      "family_noncoverage": false,
+      "max_width": 0.005288017388354016
+    },
+    {
+      "rep": 802,
+      "family_noncoverage": false,
+      "max_width": 0.004503168215459625
+    },
+    {
+      "rep": 803,
+      "family_noncoverage": false,
+      "max_width": 0.0037341131696868955
+    },
+    {
+      "rep": 804,
+      "family_noncoverage": false,
+      "max_width": 0.00336794689062804
+    },
+    {
+      "rep": 805,
+      "family_noncoverage": false,
+      "max_width": 0.004105300469780845
+    },
+    {
+      "rep": 806,
+      "family_noncoverage": false,
+      "max_width": 0.0032976260137027157
+    },
+    {
+      "rep": 807,
+      "family_noncoverage": false,
+      "max_width": 0.0036428856965511685
+    },
+    {
+      "rep": 808,
+      "family_noncoverage": false,
+      "max_width": 0.004603208041300996
+    },
+    {
+      "rep": 809,
+      "family_noncoverage": false,
+      "max_width": 0.00410202086023192
+    },
+    {
+      "rep": 810,
+      "family_noncoverage": false,
+      "max_width": 0.004169975386483754
+    },
+    {
+      "rep": 811,
+      "family_noncoverage": false,
+      "max_width": 0.003990338389008571
+    },
+    {
+      "rep": 812,
+      "family_noncoverage": false,
+      "max_width": 0.004197414088317549
+    },
+    {
+      "rep": 813,
+      "family_noncoverage": false,
+      "max_width": 0.003922155480087776
+    },
+    {
+      "rep": 814,
+      "family_noncoverage": false,
+      "max_width": 0.003798846144428855
+    },
+    {
+      "rep": 815,
+      "family_noncoverage": false,
+      "max_width": 0.004271824373966787
+    },
+    {
+      "rep": 816,
+      "family_noncoverage": false,
+      "max_width": 0.0034640416756603907
+    },
+    {
+      "rep": 817,
+      "family_noncoverage": false,
+      "max_width": 0.00450396714214272
+    },
+    {
+      "rep": 818,
+      "family_noncoverage": false,
+      "max_width": 0.004137059249156148
+    },
+    {
+      "rep": 819,
+      "family_noncoverage": false,
+      "max_width": 0.0034965514726489665
+    },
+    {
+      "rep": 820,
+      "family_noncoverage": false,
+      "max_width": 0.004168041284739445
+    },
+    {
+      "rep": 821,
+      "family_noncoverage": false,
+      "max_width": 0.004499814389752358
+    },
+    {
+      "rep": 822,
+      "family_noncoverage": false,
+      "max_width": 0.004646223955952949
+    },
+    {
+      "rep": 823,
+      "family_noncoverage": false,
+      "max_width": 0.004927177735128917
+    },
+    {
+      "rep": 824,
+      "family_noncoverage": false,
+      "max_width": 0.004485854134887436
+    },
+    {
+      "rep": 825,
+      "family_noncoverage": false,
+      "max_width": 0.004694819202807067
+    },
+    {
+      "rep": 826,
+      "family_noncoverage": false,
+      "max_width": 0.003861920605809084
+    },
+    {
+      "rep": 827,
+      "family_noncoverage": false,
+      "max_width": 0.004625718746987754
+    },
+    {
+      "rep": 828,
+      "family_noncoverage": false,
+      "max_width": 0.004319786549402392
+    },
+    {
+      "rep": 829,
+      "family_noncoverage": false,
+      "max_width": 0.0036750762567018987
+    },
+    {
+      "rep": 830,
+      "family_noncoverage": false,
+      "max_width": 0.004277781865842653
+    },
+    {
+      "rep": 831,
+      "family_noncoverage": false,
+      "max_width": 0.003435961322525071
+    },
+    {
+      "rep": 832,
+      "family_noncoverage": false,
+      "max_width": 0.004354972950349818
+    },
+    {
+      "rep": 833,
+      "family_noncoverage": false,
+      "max_width": 0.0039755414083004256
+    },
+    {
+      "rep": 834,
+      "family_noncoverage": false,
+      "max_width": 0.00441004707455142
+    },
+    {
+      "rep": 835,
+      "family_noncoverage": false,
+      "max_width": 0.003699528964776129
+    },
+    {
+      "rep": 836,
+      "family_noncoverage": false,
+      "max_width": 0.004375795616529922
+    },
+    {
+      "rep": 837,
+      "family_noncoverage": false,
+      "max_width": 0.003888237280418716
+    },
+    {
+      "rep": 838,
+      "family_noncoverage": false,
+      "max_width": 0.005164682176761533
+    },
+    {
+      "rep": 839,
+      "family_noncoverage": false,
+      "max_width": 0.0037641508689824675
+    },
+    {
+      "rep": 840,
+      "family_noncoverage": false,
+      "max_width": 0.004280319945313434
+    },
+    {
+      "rep": 841,
+      "family_noncoverage": false,
+      "max_width": 0.004283694337446565
+    },
+    {
+      "rep": 842,
+      "family_noncoverage": false,
+      "max_width": 0.004570711344214595
+    },
+    {
+      "rep": 843,
+      "family_noncoverage": false,
+      "max_width": 0.0038081180982827774
+    },
+    {
+      "rep": 844,
+      "family_noncoverage": false,
+      "max_width": 0.0035060838877946712
+    },
+    {
+      "rep": 845,
+      "family_noncoverage": false,
+      "max_width": 0.0038224924109817363
+    },
+    {
+      "rep": 846,
+      "family_noncoverage": false,
+      "max_width": 0.003956765918869195
+    },
+    {
+      "rep": 847,
+      "family_noncoverage": false,
+      "max_width": 0.004458838035077739
+    },
+    {
+      "rep": 848,
+      "family_noncoverage": false,
+      "max_width": 0.004809498499967861
+    },
+    {
+      "rep": 849,
+      "family_noncoverage": false,
+      "max_width": 0.0045717285319190355
+    },
+    {
+      "rep": 850,
+      "family_noncoverage": false,
+      "max_width": 0.004046238575254631
+    },
+    {
+      "rep": 851,
+      "family_noncoverage": false,
+      "max_width": 0.004169463485498717
+    },
+    {
+      "rep": 852,
+      "family_noncoverage": false,
+      "max_width": 0.004784338886467532
+    },
+    {
+      "rep": 853,
+      "family_noncoverage": false,
+      "max_width": 0.004225068298754748
+    },
+    {
+      "rep": 854,
+      "family_noncoverage": false,
+      "max_width": 0.0038953788996276845
+    },
+    {
+      "rep": 855,
+      "family_noncoverage": false,
+      "max_width": 0.003830804439406172
+    },
+    {
+      "rep": 856,
+      "family_noncoverage": false,
+      "max_width": 0.005529140143436174
+    },
+    {
+      "rep": 857,
+      "family_noncoverage": false,
+      "max_width": 0.004617298460219167
+    },
+    {
+      "rep": 858,
+      "family_noncoverage": false,
+      "max_width": 0.0036904382465917157
+    },
+    {
+      "rep": 859,
+      "family_noncoverage": false,
+      "max_width": 0.004320045590831646
+    },
+    {
+      "rep": 860,
+      "family_noncoverage": false,
+      "max_width": 0.0034841392520890075
+    },
+    {
+      "rep": 861,
+      "family_noncoverage": false,
+      "max_width": 0.003866965364751971
+    },
+    {
+      "rep": 862,
+      "family_noncoverage": false,
+      "max_width": 0.0032900171851072855
+    },
+    {
+      "rep": 863,
+      "family_noncoverage": false,
+      "max_width": 0.0040878494936988
+    },
+    {
+      "rep": 864,
+      "family_noncoverage": false,
+      "max_width": 0.004508080430350513
+    },
+    {
+      "rep": 865,
+      "family_noncoverage": false,
+      "max_width": 0.0044314846106094635
+    },
+    {
+      "rep": 866,
+      "family_noncoverage": false,
+      "max_width": 0.004373134390342696
+    },
+    {
+      "rep": 867,
+      "family_noncoverage": false,
+      "max_width": 0.004242143788831429
+    },
+    {
+      "rep": 868,
+      "family_noncoverage": false,
+      "max_width": 0.00422163091063585
+    },
+    {
+      "rep": 869,
+      "family_noncoverage": true,
+      "max_width": 0.003932575511695257
+    },
+    {
+      "rep": 870,
+      "family_noncoverage": false,
+      "max_width": 0.0038508578062600293
+    },
+    {
+      "rep": 871,
+      "family_noncoverage": false,
+      "max_width": 0.0042936986450893486
+    },
+    {
+      "rep": 872,
+      "family_noncoverage": false,
+      "max_width": 0.0035127211360828883
+    },
+    {
+      "rep": 873,
+      "family_noncoverage": false,
+      "max_width": 0.004997524413731834
+    },
+    {
+      "rep": 874,
+      "family_noncoverage": false,
+      "max_width": 0.004250174606552755
+    },
+    {
+      "rep": 875,
+      "family_noncoverage": false,
+      "max_width": 0.0034533736162087937
+    },
+    {
+      "rep": 876,
+      "family_noncoverage": false,
+      "max_width": 0.0035683978979397747
+    },
+    {
+      "rep": 877,
+      "family_noncoverage": false,
+      "max_width": 0.0048189019320480425
+    },
+    {
+      "rep": 878,
+      "family_noncoverage": false,
+      "max_width": 0.004160635306957225
+    },
+    {
+      "rep": 879,
+      "family_noncoverage": false,
+      "max_width": 0.003994583145344588
+    },
+    {
+      "rep": 880,
+      "family_noncoverage": false,
+      "max_width": 0.003731185473209446
+    },
+    {
+      "rep": 881,
+      "family_noncoverage": false,
+      "max_width": 0.00405925161418586
+    },
+    {
+      "rep": 882,
+      "family_noncoverage": false,
+      "max_width": 0.003820763515150242
+    },
+    {
+      "rep": 883,
+      "family_noncoverage": false,
+      "max_width": 0.0037978710668566764
+    },
+    {
+      "rep": 884,
+      "family_noncoverage": false,
+      "max_width": 0.004524447711413202
+    },
+    {
+      "rep": 885,
+      "family_noncoverage": false,
+      "max_width": 0.0038886320588161875
+    },
+    {
+      "rep": 886,
+      "family_noncoverage": false,
+      "max_width": 0.0038627340395468307
+    },
+    {
+      "rep": 887,
+      "family_noncoverage": false,
+      "max_width": 0.003946775537770673
+    },
+    {
+      "rep": 888,
+      "family_noncoverage": false,
+      "max_width": 0.003958730989174025
+    },
+    {
+      "rep": 889,
+      "family_noncoverage": false,
+      "max_width": 0.00476260991874962
+    },
+    {
+      "rep": 890,
+      "family_noncoverage": false,
+      "max_width": 0.004523265117910541
+    },
+    {
+      "rep": 891,
+      "family_noncoverage": false,
+      "max_width": 0.004445602036978233
+    },
+    {
+      "rep": 892,
+      "family_noncoverage": false,
+      "max_width": 0.005207123919718939
+    },
+    {
+      "rep": 893,
+      "family_noncoverage": false,
+      "max_width": 0.004058481129502021
+    },
+    {
+      "rep": 894,
+      "family_noncoverage": false,
+      "max_width": 0.004433056090803409
+    },
+    {
+      "rep": 895,
+      "family_noncoverage": false,
+      "max_width": 0.003794764009327028
+    },
+    {
+      "rep": 896,
+      "family_noncoverage": false,
+      "max_width": 0.00409349818912544
+    },
+    {
+      "rep": 897,
+      "family_noncoverage": false,
+      "max_width": 0.0035076121559972024
+    },
+    {
+      "rep": 898,
+      "family_noncoverage": false,
+      "max_width": 0.003301378175614697
+    },
+    {
+      "rep": 899,
+      "family_noncoverage": false,
+      "max_width": 0.0036114015592152455
+    },
+    {
+      "rep": 900,
+      "family_noncoverage": false,
+      "max_width": 0.0036286898086901197
+    },
+    {
+      "rep": 901,
+      "family_noncoverage": false,
+      "max_width": 0.00407745462614302
+    },
+    {
+      "rep": 902,
+      "family_noncoverage": true,
+      "max_width": 0.003456607038717687
+    },
+    {
+      "rep": 903,
+      "family_noncoverage": false,
+      "max_width": 0.0035844109557927285
+    },
+    {
+      "rep": 904,
+      "family_noncoverage": false,
+      "max_width": 0.0035896691569142145
+    },
+    {
+      "rep": 905,
+      "family_noncoverage": false,
+      "max_width": 0.003992439567590818
+    },
+    {
+      "rep": 906,
+      "family_noncoverage": false,
+      "max_width": 0.0036981989727601634
+    },
+    {
+      "rep": 907,
+      "family_noncoverage": false,
+      "max_width": 0.003618446009234965
+    },
+    {
+      "rep": 908,
+      "family_noncoverage": false,
+      "max_width": 0.003771393411820558
+    },
+    {
+      "rep": 909,
+      "family_noncoverage": false,
+      "max_width": 0.004194163252092387
+    },
+    {
+      "rep": 910,
+      "family_noncoverage": false,
+      "max_width": 0.004033276513391914
+    },
+    {
+      "rep": 911,
+      "family_noncoverage": false,
+      "max_width": 0.0032311778360315973
+    },
+    {
+      "rep": 912,
+      "family_noncoverage": false,
+      "max_width": 0.0038816742341889828
+    },
+    {
+      "rep": 913,
+      "family_noncoverage": false,
+      "max_width": 0.00442153719566866
+    },
+    {
+      "rep": 914,
+      "family_noncoverage": false,
+      "max_width": 0.004055731883703837
+    },
+    {
+      "rep": 915,
+      "family_noncoverage": false,
+      "max_width": 0.004050157788610481
+    },
+    {
+      "rep": 916,
+      "family_noncoverage": false,
+      "max_width": 0.003703399236323141
+    },
+    {
+      "rep": 917,
+      "family_noncoverage": false,
+      "max_width": 0.004328648074010947
+    },
+    {
+      "rep": 918,
+      "family_noncoverage": false,
+      "max_width": 0.0032132368098992696
+    },
+    {
+      "rep": 919,
+      "family_noncoverage": false,
+      "max_width": 0.0050343840292082585
+    },
+    {
+      "rep": 920,
+      "family_noncoverage": false,
+      "max_width": 0.0034952249148743368
+    },
+    {
+      "rep": 921,
+      "family_noncoverage": false,
+      "max_width": 0.005224693529846375
+    },
+    {
+      "rep": 922,
+      "family_noncoverage": false,
+      "max_width": 0.004168734044048878
+    },
+    {
+      "rep": 923,
+      "family_noncoverage": false,
+      "max_width": 0.0039475529713653024
+    },
+    {
+      "rep": 924,
+      "family_noncoverage": false,
+      "max_width": 0.004659245710444114
+    },
+    {
+      "rep": 925,
+      "family_noncoverage": false,
+      "max_width": 0.0034596356825610597
+    },
+    {
+      "rep": 926,
+      "family_noncoverage": false,
+      "max_width": 0.004624958367010703
+    },
+    {
+      "rep": 927,
+      "family_noncoverage": false,
+      "max_width": 0.0037807312433456837
+    },
+    {
+      "rep": 928,
+      "family_noncoverage": false,
+      "max_width": 0.004963046808388303
+    },
+    {
+      "rep": 929,
+      "family_noncoverage": false,
+      "max_width": 0.004212878585405197
+    },
+    {
+      "rep": 930,
+      "family_noncoverage": false,
+      "max_width": 0.003659639004877772
+    },
+    {
+      "rep": 931,
+      "family_noncoverage": false,
+      "max_width": 0.004113924727521847
+    },
+    {
+      "rep": 932,
+      "family_noncoverage": true,
+      "max_width": 0.0038340621860201074
+    },
+    {
+      "rep": 933,
+      "family_noncoverage": false,
+      "max_width": 0.003769141762625639
+    },
+    {
+      "rep": 934,
+      "family_noncoverage": false,
+      "max_width": 0.003828522903589353
+    },
+    {
+      "rep": 935,
+      "family_noncoverage": false,
+      "max_width": 0.004711402151453547
+    },
+    {
+      "rep": 936,
+      "family_noncoverage": true,
+      "max_width": 0.004482865532013743
+    },
+    {
+      "rep": 937,
+      "family_noncoverage": false,
+      "max_width": 0.003583674917613212
+    },
+    {
+      "rep": 938,
+      "family_noncoverage": false,
+      "max_width": 0.005021492332181765
+    },
+    {
+      "rep": 939,
+      "family_noncoverage": false,
+      "max_width": 0.004152869430679572
+    },
+    {
+      "rep": 940,
+      "family_noncoverage": false,
+      "max_width": 0.003835530434884185
+    },
+    {
+      "rep": 941,
+      "family_noncoverage": false,
+      "max_width": 0.004336876817048766
+    },
+    {
+      "rep": 942,
+      "family_noncoverage": false,
+      "max_width": 0.0031914941723999108
+    },
+    {
+      "rep": 943,
+      "family_noncoverage": false,
+      "max_width": 0.003715775557511059
+    },
+    {
+      "rep": 944,
+      "family_noncoverage": false,
+      "max_width": 0.0045962753473162135
+    },
+    {
+      "rep": 945,
+      "family_noncoverage": false,
+      "max_width": 0.005389333316548328
+    },
+    {
+      "rep": 946,
+      "family_noncoverage": false,
+      "max_width": 0.004604254389883208
+    },
+    {
+      "rep": 947,
+      "family_noncoverage": false,
+      "max_width": 0.004011699477835815
+    },
+    {
+      "rep": 948,
+      "family_noncoverage": false,
+      "max_width": 0.005447472400136303
+    },
+    {
+      "rep": 949,
+      "family_noncoverage": false,
+      "max_width": 0.0037408973343566712
+    },
+    {
+      "rep": 950,
+      "family_noncoverage": false,
+      "max_width": 0.0053027521644911126
+    },
+    {
+      "rep": 951,
+      "family_noncoverage": false,
+      "max_width": 0.004252646881403406
+    },
+    {
+      "rep": 952,
+      "family_noncoverage": false,
+      "max_width": 0.003880801327245175
+    },
+    {
+      "rep": 953,
+      "family_noncoverage": false,
+      "max_width": 0.004088543599425747
+    },
+    {
+      "rep": 954,
+      "family_noncoverage": false,
+      "max_width": 0.004562397677116677
+    },
+    {
+      "rep": 955,
+      "family_noncoverage": false,
+      "max_width": 0.004227808176233
+    },
+    {
+      "rep": 956,
+      "family_noncoverage": false,
+      "max_width": 0.004537644874365383
+    },
+    {
+      "rep": 957,
+      "family_noncoverage": false,
+      "max_width": 0.00436787538008658
+    },
+    {
+      "rep": 958,
+      "family_noncoverage": false,
+      "max_width": 0.004632725425306658
+    },
+    {
+      "rep": 959,
+      "family_noncoverage": false,
+      "max_width": 0.004351122806203841
+    },
+    {
+      "rep": 960,
+      "family_noncoverage": true,
+      "max_width": 0.0036457843882822427
+    },
+    {
+      "rep": 961,
+      "family_noncoverage": false,
+      "max_width": 0.0044011612028025515
+    },
+    {
+      "rep": 962,
+      "family_noncoverage": true,
+      "max_width": 0.005406111745977282
+    },
+    {
+      "rep": 963,
+      "family_noncoverage": false,
+      "max_width": 0.0037106078408949902
+    },
+    {
+      "rep": 964,
+      "family_noncoverage": false,
+      "max_width": 0.0036820202920577055
+    },
+    {
+      "rep": 965,
+      "family_noncoverage": false,
+      "max_width": 0.0034799626067283113
+    },
+    {
+      "rep": 966,
+      "family_noncoverage": false,
+      "max_width": 0.0042719362635522465
+    },
+    {
+      "rep": 967,
+      "family_noncoverage": false,
+      "max_width": 0.0044527840976222414
+    },
+    {
+      "rep": 968,
+      "family_noncoverage": false,
+      "max_width": 0.004410283334986994
+    },
+    {
+      "rep": 969,
+      "family_noncoverage": false,
+      "max_width": 0.0037910742684118003
+    },
+    {
+      "rep": 970,
+      "family_noncoverage": false,
+      "max_width": 0.004593111835686284
+    },
+    {
+      "rep": 971,
+      "family_noncoverage": false,
+      "max_width": 0.004131874768974014
+    },
+    {
+      "rep": 972,
+      "family_noncoverage": false,
+      "max_width": 0.004961517441064885
+    },
+    {
+      "rep": 973,
+      "family_noncoverage": false,
+      "max_width": 0.004043187284206931
+    },
+    {
+      "rep": 974,
+      "family_noncoverage": false,
+      "max_width": 0.0036213510147078826
+    },
+    {
+      "rep": 975,
+      "family_noncoverage": false,
+      "max_width": 0.004507678828463239
+    },
+    {
+      "rep": 976,
+      "family_noncoverage": false,
+      "max_width": 0.004506814415399482
+    },
+    {
+      "rep": 977,
+      "family_noncoverage": false,
+      "max_width": 0.004685039712920173
+    },
+    {
+      "rep": 978,
+      "family_noncoverage": false,
+      "max_width": 0.003421117160676001
+    },
+    {
+      "rep": 979,
+      "family_noncoverage": false,
+      "max_width": 0.002963149105322827
+    },
+    {
+      "rep": 980,
+      "family_noncoverage": false,
+      "max_width": 0.004123635797974588
+    },
+    {
+      "rep": 981,
+      "family_noncoverage": false,
+      "max_width": 0.004170349662292783
+    },
+    {
+      "rep": 982,
+      "family_noncoverage": false,
+      "max_width": 0.005023865525014579
+    },
+    {
+      "rep": 983,
+      "family_noncoverage": false,
+      "max_width": 0.004002314372402159
+    },
+    {
+      "rep": 984,
+      "family_noncoverage": false,
+      "max_width": 0.004058249811602694
+    },
+    {
+      "rep": 985,
+      "family_noncoverage": false,
+      "max_width": 0.0038947532809210155
+    },
+    {
+      "rep": 986,
+      "family_noncoverage": false,
+      "max_width": 0.004300140295379868
+    },
+    {
+      "rep": 987,
+      "family_noncoverage": false,
+      "max_width": 0.0049807198754656685
+    },
+    {
+      "rep": 988,
+      "family_noncoverage": false,
+      "max_width": 0.005199031606264156
+    },
+    {
+      "rep": 989,
+      "family_noncoverage": false,
+      "max_width": 0.004186056552066132
+    },
+    {
+      "rep": 990,
+      "family_noncoverage": false,
+      "max_width": 0.00446088208137628
+    },
+    {
+      "rep": 991,
+      "family_noncoverage": false,
+      "max_width": 0.004021540057725939
+    },
+    {
+      "rep": 992,
+      "family_noncoverage": false,
+      "max_width": 0.003980224407863372
+    },
+    {
+      "rep": 993,
+      "family_noncoverage": false,
+      "max_width": 0.0035021031701950953
+    },
+    {
+      "rep": 994,
+      "family_noncoverage": false,
+      "max_width": 0.003247889874281577
+    },
+    {
+      "rep": 995,
+      "family_noncoverage": false,
+      "max_width": 0.004723641308226504
+    },
+    {
+      "rep": 996,
+      "family_noncoverage": false,
+      "max_width": 0.004852465844917745
+    },
+    {
+      "rep": 997,
+      "family_noncoverage": false,
+      "max_width": 0.004217697029742499
+    },
+    {
+      "rep": 998,
+      "family_noncoverage": false,
+      "max_width": 0.003692353646160509
+    },
+    {
+      "rep": 999,
+      "family_noncoverage": false,
+      "max_width": 0.004188293071988732
+    }
+  ],
+  "scope": "Conditional-on-selected-CAL pipeline coverage of exact finite-population 21-contrast truth; every MC draws fresh independent CAL/TEST and reruns all49x6x3x3 selections. Not unconditional discrete-argmin bootstrap validation, no enrollment or scientific confirmation."
+}

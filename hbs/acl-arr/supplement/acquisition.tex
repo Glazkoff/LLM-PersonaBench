@@ -1,0 +1,171 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}\usepackage[T1]{fontenc}
+\usepackage{lmodern,booktabs,longtable,amsmath,hyperref}
+\title{Supplement S7: Question selection and answer-budget sensitivity}
+\author{Anonymous authors}\date{14 November 2026}
+\begin{document}\maketitle
+\section{Scope, methods and provenance}
+These exploratory analyses reuse the same 600 previously examined E3 participants
+from IPIP and 8,320 fitting people. Each fitting person supplies all 60 target
+responses for supervised question selection. The answer budget counts observed
+history answers from an evaluation person, not total training supervision.
+Order construction and decoder tuning are repeated within training folds;
+E3 is excluded from these fits but has influenced the research direction.
+This is retrospective masking of complete questionnaires, not prospective
+administration or independent confirmation.
+
+Scalar target selection centers history inputs and forms the 240 cumulative
+target indicators. With $G=X^TX+100I$ and $C=X^TT$, it greedily maximizes
+$\|C_i\|^2/G_{ii}$ and updates residual quantities by a Schur complement.
+The selection penalty is distinct from the decoder penalty, retuned at each
+budget. Strong comparisons use the historical prior/ridge/kNN/ExtraTrees library;
+target-directed forms select ridge. Historical raw-answer ridge already uses
+one-hot inputs and isotonic CDF projection. The separate encoding ablation uses
+common sorted/clipped CDFs. Its gain must not be added to the strong comparison.
+
+In the fixed-form contrast labels, ``raw'' denotes the scalar-encoding ablation
+and ``category'' denotes one-hot encoding; ``strong'' denotes the historical
+candidate library, whose raw-answer ridge already uses one-hot encoding.
+These labels must not be confused with the scalar representation used to learn
+the question order in the main strong comparison.
+
+The 32 random-form tasks 28416\_1--32 completed; they are forms on common people,
+not independent replications. Grouped-selector job 28444 completed after job28442
+failed on a singular selected block; the correction excludes already selected
+blocks from the solve. The failed engineering receipt is retained. Curve job28457
+completed. Exported grouped/curve aggregates were byte-matched to Euler results.
+This manuscript update performs no scientific rerun.
+
+\section{Fixed-form and mechanism contrasts}
+Differences are first method minus reference; negative favors the first method.
+Intervals below are pointwise, paired by participant and conditional on fixed
+fits and question sets. The original within-experiment Holm tests address zero
+differences, not a multiplicity-controlled practical-benefit claim. Full-precision
+estimates, p-values and original flags remain in the accompanying JSON.
+At five answers, target versus coverage has an interval whose upper bound is
+above $-0.001$; no useful-gain claim at that margin follows. Grouped and adaptive
+null/mixed outcomes are retained, without equivalence claims.
+\subsection{Fixed forms and encoding}
+\begin{longtable}{p{.49\linewidth}rrr}\toprule Contrast & $\Delta$ RPS & CI low & CI high\\\midrule\endhead
+m5/target\_vs\_random\_raw & -0.00594 & -0.00711 & -0.00474\\
+m5/target\_vs\_coverage\_raw & -0.00167 & -0.00268 & -0.00074\\
+m5/category\_vs\_raw\_random & -0.00118 & -0.00152 & -0.00087\\
+m5/category\_vs\_raw\_target & -0.00157 & -0.00205 & -0.00109\\
+m5/target\_strong\_vs\_random\_strong & -0.00632 & -0.00766 & -0.00498\\
+m20/target\_vs\_random\_raw & -0.00656 & -0.00734 & -0.00579\\
+m20/target\_vs\_coverage\_raw & -0.00212 & -0.00269 & -0.00156\\
+m20/category\_vs\_raw\_random & -0.00265 & -0.00309 & -0.00222\\
+m20/category\_vs\_raw\_target & -0.00357 & -0.00410 & -0.00305\\
+m20/target\_strong\_vs\_random\_strong & -0.00750 & -0.00839 & -0.00665\\
+\bottomrule\end{longtable}
+\subsection{Grouped versus scalar acquisition}
+\begin{longtable}{p{.49\linewidth}rrr}\toprule Contrast & $\Delta$ RPS & CI low & CI high\\\midrule\endhead
+m5/grouped\_vs\_scalar & 0.00026 & -0.00077 & 0.00131\\
+m5/grouped\_vs\_marginal & -0.00227 & -0.00314 & -0.00138\\
+m5/scalar\_vs\_marginal & -0.00253 & -0.00349 & -0.00158\\
+m20/grouped\_vs\_scalar & 0.00022 & -0.00020 & 0.00065\\
+m20/grouped\_vs\_marginal & -0.00537 & -0.00623 & -0.00451\\
+m20/scalar\_vs\_marginal & -0.00559 & -0.00648 & -0.00471\\
+\bottomrule\end{longtable}
+\subsection{Adaptive selection controls}
+\begin{longtable}{p{.49\linewidth}rrr}\toprule Contrast & $\Delta$ RPS & CI low & CI high\\\midrule\endhead
+m5/adaptive\_vs\_fixed & 0.00055 & -0.00021 & 0.00131\\
+m5/adaptive\_vs\_random\_same\_decoder & -0.00480 & -0.00579 & -0.00381\\
+m5/adaptive\_vs\_archived\_strong & -0.00206 & -0.00309 & -0.00103\\
+m5/adaptive\_vs\_fixed\_target\_strong & 0.00426 & 0.00315 & 0.00537\\
+m20/adaptive\_vs\_fixed & -0.00003 & -0.00059 & 0.00055\\
+m20/adaptive\_vs\_random\_same\_decoder & -0.00155 & -0.00219 & -0.00089\\
+m20/adaptive\_vs\_archived\_strong & 0.00741 & 0.00650 & 0.00832\\
+m20/adaptive\_vs\_fixed\_target\_strong & 0.01492 & 0.01373 & 0.01612\\
+\bottomrule\end{longtable}
+\section{Thirty-two additional random forms}
+Each random form retunes the same candidate library on FIT. No form has a smaller
+E3 point loss than the target-directed form at either budget. This rank statement
+is not a p-value or evidence from 32 independent samples. Target RPS is
+0.13410 at five answers and 0.11699 at twenty.
+All per-form candidate selections are retained in random-forms.json.
+\begin{longtable}{rrrr}\toprule Seed & RPS ($m=5$) & RPS ($m=20$) & Selected family (5/20)\\\midrule\endhead
+1 & 0.13827 & 0.12174 & ridge/ridge\\
+2 & 0.14100 & 0.12302 & ridge/ridge\\
+3 & 0.14089 & 0.12393 & ridge/ridge\\
+4 & 0.13766 & 0.12325 & ridge/ridge\\
+5 & 0.14031 & 0.12195 & ridge/ridge\\
+6 & 0.13975 & 0.12543 & ridge/ridge\\
+7 & 0.13983 & 0.12350 & ridge/ridge\\
+8 & 0.14018 & 0.12258 & ridge/ridge\\
+9 & 0.13918 & 0.12299 & ridge/ridge\\
+10 & 0.13973 & 0.12505 & ridge/ridge\\
+11 & 0.13950 & 0.12239 & ridge/ridge\\
+12 & 0.14097 & 0.12404 & ridge/ridge\\
+13 & 0.14207 & 0.12516 & ridge/ridge\\
+14 & 0.14030 & 0.12298 & ridge/ridge\\
+15 & 0.14186 & 0.12577 & ridge/ridge\\
+16 & 0.13793 & 0.12257 & ridge/ridge\\
+17 & 0.13969 & 0.12509 & ridge/ridge\\
+18 & 0.13764 & 0.12299 & ridge/ridge\\
+19 & 0.13886 & 0.12158 & ridge/ridge\\
+20 & 0.14170 & 0.12362 & ridge/ridge\\
+21 & 0.14122 & 0.12428 & ridge/ridge\\
+22 & 0.13891 & 0.12159 & ridge/ridge\\
+23 & 0.13964 & 0.12166 & ridge/ridge\\
+24 & 0.14252 & 0.12516 & ridge/ridge\\
+25 & 0.13904 & 0.12439 & ridge/ridge\\
+26 & 0.14056 & 0.12527 & ridge/ridge\\
+27 & 0.14281 & 0.12556 & ridge/ridge\\
+28 & 0.13857 & 0.12624 & ridge/ridge\\
+29 & 0.13906 & 0.12323 & ridge/ridge\\
+30 & 0.14300 & 0.12498 & ridge/ridge\\
+31 & 0.13919 & 0.12378 & ridge/ridge\\
+32 & 0.14013 & 0.12290 & ridge/ridge\\
+\bottomrule\end{longtable}
+\section{Curve against the archived 60-answer Granite hybrid}
+All twenty examined budgets are reported. Positive differences favor the archived
+hybrid, whose mean RPS is 0.13153. The first negative
+mean difference is at seven answers, but its interval includes zero. The first
+interval entirely below zero is at eight; the first entirely below $-0.001$ is
+at nine. These are different criteria, not interchangeable crossing estimates.
+The historical random-order interpolation of 11.44 remains a separate result.
+
+The stored curve uses 30,000 shared paired participant resamples with seed 20261115
+and percentile endpoints 0.00125/0.99875 (Bonferroni across 20 cut points).
+These are approximate, conditional adjusted bootstrap intervals, not a guarantee
+of full-procedure coverage. The seed is an identifier, not an execution date.
+Fits, learned question order and historical hybrid recipes remain fixed.
+\begin{longtable}{rrrrr}\toprule Answers & Statistical RPS & $\Delta$ vs hybrid60 & CI low & CI high\\\midrule\endhead
+1 & 0.14668 & 0.01514 & 0.01348 & 0.01694\\
+2 & 0.14232 & 0.01078 & 0.00905 & 0.01253\\
+3 & 0.13920 & 0.00766 & 0.00595 & 0.00942\\
+4 & 0.13682 & 0.00529 & 0.00359 & 0.00702\\
+5 & 0.13410 & 0.00257 & 0.00079 & 0.00437\\
+6 & 0.13254 & 0.00100 & -0.00080 & 0.00283\\
+7 & 0.13089 & -0.00064 & -0.00251 & 0.00126\\
+8 & 0.12918 & -0.00235 & -0.00419 & -0.00043\\
+9 & 0.12741 & -0.00413 & -0.00595 & -0.00229\\
+10 & 0.12613 & -0.00540 & -0.00725 & -0.00360\\
+11 & 0.12496 & -0.00657 & -0.00841 & -0.00476\\
+12 & 0.12400 & -0.00753 & -0.00945 & -0.00567\\
+13 & 0.12299 & -0.00854 & -0.01045 & -0.00667\\
+14 & 0.12153 & -0.01000 & -0.01191 & -0.00812\\
+15 & 0.12058 & -0.01095 & -0.01286 & -0.00913\\
+16 & 0.11963 & -0.01190 & -0.01376 & -0.01013\\
+17 & 0.11906 & -0.01247 & -0.01433 & -0.01068\\
+18 & 0.11821 & -0.01332 & -0.01515 & -0.01152\\
+19 & 0.11751 & -0.01402 & -0.01586 & -0.01220\\
+20 & 0.11699 & -0.01454 & -0.01635 & -0.01273\\
+\bottomrule\end{longtable}
+\section{Boundaries of the comparison}
+The target-selected statistical predictor at five answers is worse than the
+60-answer archived hybrid. At twenty it is better. Response budgets and total
+historical supervision differ: the statistical selector uses all target labels
+of 8,320 fitting people, while the hybrid has its own search, prior, selection
+and calibration history. These results do not measure LLM value at matched five
+or twenty answers or establish saved survey administrations. There are no new
+small-budget LLM forecasts. The separate equal60 audit remains unchanged.
+
+The fitting-budget and facet-split diagnostics are retained as aggregates
+(fit-result.json and splits-result.json); their common participant cohort must
+not be counted as independent replications. No result here changes historical
+R2 Table1, its14 primary contrasts/686 endpoint rows, original Holm decisions,
+instruction comparisons or CAL-selection sensitivity. No new external panel
+is admitted and the A18 search stop is unchanged.
+\end{document}

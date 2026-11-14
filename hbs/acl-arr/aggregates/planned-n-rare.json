@@ -1,0 +1,5019 @@
+{
+  "status": "COMPLETE_SYNTHETIC_COVERAGE",
+  "profile": "rare",
+  "scientific_evidence": false,
+  "replicates": 1000,
+  "bootstrap": 200000,
+  "cal_n": 400,
+  "test_n": 1550,
+  "family_noncoverage": 0.184,
+  "exact_MC95": [
+    0.160442283184788,
+    0.20943413341452863
+  ],
+  "upper_MC95_below_05": false,
+  "cpu_seconds": 813.3752623500001,
+  "rows": [
+    {
+      "rep": 0,
+      "family_noncoverage": false,
+      "max_width": 0.019757182175632892
+    },
+    {
+      "rep": 1,
+      "family_noncoverage": false,
+      "max_width": 0.02683527478546305
+    },
+    {
+      "rep": 2,
+      "family_noncoverage": false,
+      "max_width": 0.011747046921326536
+    },
+    {
+      "rep": 3,
+      "family_noncoverage": false,
+      "max_width": 0.012071941291467072
+    },
+    {
+      "rep": 4,
+      "family_noncoverage": true,
+      "max_width": 0.0033342232157120752
+    },
+    {
+      "rep": 5,
+      "family_noncoverage": true,
+      "max_width": 0.004217771625116346
+    },
+    {
+      "rep": 6,
+      "family_noncoverage": false,
+      "max_width": 0.052032993274209474
+    },
+    {
+      "rep": 7,
+      "family_noncoverage": true,
+      "max_width": 0.004341567391367743
+    },
+    {
+      "rep": 8,
+      "family_noncoverage": false,
+      "max_width": 0.01111551087486332
+    },
+    {
+      "rep": 9,
+      "family_noncoverage": false,
+      "max_width": 0.024053429069982223
+    },
+    {
+      "rep": 10,
+      "family_noncoverage": true,
+      "max_width": 0.004201518519710214
+    },
+    {
+      "rep": 11,
+      "family_noncoverage": false,
+      "max_width": 0.008524286609106084
+    },
+    {
+      "rep": 12,
+      "family_noncoverage": false,
+      "max_width": 0.01451571338447241
+    },
+    {
+      "rep": 13,
+      "family_noncoverage": false,
+      "max_width": 0.020428223856616155
+    },
+    {
+      "rep": 14,
+      "family_noncoverage": true,
+      "max_width": 0.007038364539028841
+    },
+    {
+      "rep": 15,
+      "family_noncoverage": true,
+      "max_width": 0.008111587154249351
+    },
+    {
+      "rep": 16,
+      "family_noncoverage": false,
+      "max_width": 0.023093571539903046
+    },
+    {
+      "rep": 17,
+      "family_noncoverage": false,
+      "max_width": 0.015124331721184582
+    },
+    {
+      "rep": 18,
+      "family_noncoverage": false,
+      "max_width": 0.038418050302009905
+    },
+    {
+      "rep": 19,
+      "family_noncoverage": false,
+      "max_width": 0.008407494601842013
+    },
+    {
+      "rep": 20,
+      "family_noncoverage": false,
+      "max_width": 0.009697982630700493
+    },
+    {
+      "rep": 21,
+      "family_noncoverage": false,
+      "max_width": 0.02936450032690926
+    },
+    {
+      "rep": 22,
+      "family_noncoverage": false,
+      "max_width": 0.02529038711501695
+    },
+    {
+      "rep": 23,
+      "family_noncoverage": false,
+      "max_width": 0.0075218396261796956
+    },
+    {
+      "rep": 24,
+      "family_noncoverage": false,
+      "max_width": 0.008875390562781358
+    },
+    {
+      "rep": 25,
+      "family_noncoverage": false,
+      "max_width": 0.017742489093692596
+    },
+    {
+      "rep": 26,
+      "family_noncoverage": false,
+      "max_width": 0.018026160928660447
+    },
+    {
+      "rep": 27,
+      "family_noncoverage": false,
+      "max_width": 0.009451679335592607
+    },
+    {
+      "rep": 28,
+      "family_noncoverage": false,
+      "max_width": 0.025651022452289028
+    },
+    {
+      "rep": 29,
+      "family_noncoverage": false,
+      "max_width": 0.04050423604286091
+    },
+    {
+      "rep": 30,
+      "family_noncoverage": true,
+      "max_width": 0.0033663008851679797
+    },
+    {
+      "rep": 31,
+      "family_noncoverage": true,
+      "max_width": 0.005608869257497475
+    },
+    {
+      "rep": 32,
+      "family_noncoverage": false,
+      "max_width": 0.02583373667686596
+    },
+    {
+      "rep": 33,
+      "family_noncoverage": false,
+      "max_width": 0.01177514477738024
+    },
+    {
+      "rep": 34,
+      "family_noncoverage": false,
+      "max_width": 0.03733488948536952
+    },
+    {
+      "rep": 35,
+      "family_noncoverage": false,
+      "max_width": 0.033569557756016305
+    },
+    {
+      "rep": 36,
+      "family_noncoverage": false,
+      "max_width": 0.012224533693657266
+    },
+    {
+      "rep": 37,
+      "family_noncoverage": false,
+      "max_width": 0.020406755749978977
+    },
+    {
+      "rep": 38,
+      "family_noncoverage": false,
+      "max_width": 0.022264538308935523
+    },
+    {
+      "rep": 39,
+      "family_noncoverage": false,
+      "max_width": 0.012558159653318274
+    },
+    {
+      "rep": 40,
+      "family_noncoverage": false,
+      "max_width": 0.05113922047832128
+    },
+    {
+      "rep": 41,
+      "family_noncoverage": false,
+      "max_width": 0.03375064626919433
+    },
+    {
+      "rep": 42,
+      "family_noncoverage": false,
+      "max_width": 0.012987484761755295
+    },
+    {
+      "rep": 43,
+      "family_noncoverage": false,
+      "max_width": 0.026816930320019174
+    },
+    {
+      "rep": 44,
+      "family_noncoverage": false,
+      "max_width": 0.020392673944606
+    },
+    {
+      "rep": 45,
+      "family_noncoverage": false,
+      "max_width": 0.010096276682286487
+    },
+    {
+      "rep": 46,
+      "family_noncoverage": false,
+      "max_width": 0.02391060090183299
+    },
+    {
+      "rep": 47,
+      "family_noncoverage": false,
+      "max_width": 0.04747537349423442
+    },
+    {
+      "rep": 48,
+      "family_noncoverage": false,
+      "max_width": 0.022600036808226275
+    },
+    {
+      "rep": 49,
+      "family_noncoverage": false,
+      "max_width": 0.01780523610178057
+    },
+    {
+      "rep": 50,
+      "family_noncoverage": false,
+      "max_width": 0.01548366363662549
+    },
+    {
+      "rep": 51,
+      "family_noncoverage": false,
+      "max_width": 0.012885474087316114
+    },
+    {
+      "rep": 52,
+      "family_noncoverage": false,
+      "max_width": 0.019262503007568897
+    },
+    {
+      "rep": 53,
+      "family_noncoverage": false,
+      "max_width": 0.011537285631886916
+    },
+    {
+      "rep": 54,
+      "family_noncoverage": false,
+      "max_width": 0.023618900827256466
+    },
+    {
+      "rep": 55,
+      "family_noncoverage": false,
+      "max_width": 0.031663338916579666
+    },
+    {
+      "rep": 56,
+      "family_noncoverage": false,
+      "max_width": 0.03242852341968882
+    },
+    {
+      "rep": 57,
+      "family_noncoverage": false,
+      "max_width": 0.02020290150057336
+    },
+    {
+      "rep": 58,
+      "family_noncoverage": false,
+      "max_width": 0.016863888416429024
+    },
+    {
+      "rep": 59,
+      "family_noncoverage": false,
+      "max_width": 0.017114082657107118
+    },
+    {
+      "rep": 60,
+      "family_noncoverage": true,
+      "max_width": 0.007244345553801558
+    },
+    {
+      "rep": 61,
+      "family_noncoverage": false,
+      "max_width": 0.02023026845997901
+    },
+    {
+      "rep": 62,
+      "family_noncoverage": true,
+      "max_width": 0.003718298395086857
+    },
+    {
+      "rep": 63,
+      "family_noncoverage": false,
+      "max_width": 0.02267363258119231
+    },
+    {
+      "rep": 64,
+      "family_noncoverage": false,
+      "max_width": 0.03460950281578722
+    },
+    {
+      "rep": 65,
+      "family_noncoverage": false,
+      "max_width": 0.018628469752476753
+    },
+    {
+      "rep": 66,
+      "family_noncoverage": false,
+      "max_width": 0.012429396728408877
+    },
+    {
+      "rep": 67,
+      "family_noncoverage": true,
+      "max_width": 0.008440985144499414
+    },
+    {
+      "rep": 68,
+      "family_noncoverage": false,
+      "max_width": 0.013284023910817642
+    },
+    {
+      "rep": 69,
+      "family_noncoverage": false,
+      "max_width": 0.016806378533900705
+    },
+    {
+      "rep": 70,
+      "family_noncoverage": false,
+      "max_width": 0.02863403602287317
+    },
+    {
+      "rep": 71,
+      "family_noncoverage": false,
+      "max_width": 0.021154288048054776
+    },
+    {
+      "rep": 72,
+      "family_noncoverage": false,
+      "max_width": 0.018475126829303603
+    },
+    {
+      "rep": 73,
+      "family_noncoverage": false,
+      "max_width": 0.0435470650081243
+    },
+    {
+      "rep": 74,
+      "family_noncoverage": false,
+      "max_width": 0.04173168129361325
+    },
+    {
+      "rep": 75,
+      "family_noncoverage": true,
+      "max_width": 0.004089419451800123
+    },
+    {
+      "rep": 76,
+      "family_noncoverage": false,
+      "max_width": 0.02658844009516151
+    },
+    {
+      "rep": 77,
+      "family_noncoverage": false,
+      "max_width": 0.015045549449462667
+    },
+    {
+      "rep": 78,
+      "family_noncoverage": false,
+      "max_width": 0.027244972209477997
+    },
+    {
+      "rep": 79,
+      "family_noncoverage": false,
+      "max_width": 0.022932874099532687
+    },
+    {
+      "rep": 80,
+      "family_noncoverage": true,
+      "max_width": 0.003947037662691373
+    },
+    {
+      "rep": 81,
+      "family_noncoverage": false,
+      "max_width": 0.021374707919323933
+    },
+    {
+      "rep": 82,
+      "family_noncoverage": false,
+      "max_width": 0.027553793306739464
+    },
+    {
+      "rep": 83,
+      "family_noncoverage": false,
+      "max_width": 0.03100989803850504
+    },
+    {
+      "rep": 84,
+      "family_noncoverage": false,
+      "max_width": 0.022923838460947775
+    },
+    {
+      "rep": 85,
+      "family_noncoverage": false,
+      "max_width": 0.019216027422762086
+    },
+    {
+      "rep": 86,
+      "family_noncoverage": false,
+      "max_width": 0.021349235236313425
+    },
+    {
+      "rep": 87,
+      "family_noncoverage": false,
+      "max_width": 0.028726685761047237
+    },
+    {
+      "rep": 88,
+      "family_noncoverage": false,
+      "max_width": 0.007332367329856256
+    },
+    {
+      "rep": 89,
+      "family_noncoverage": false,
+      "max_width": 0.02768849760248835
+    },
+    {
+      "rep": 90,
+      "family_noncoverage": false,
+      "max_width": 0.0338709494375977
+    },
+    {
+      "rep": 91,
+      "family_noncoverage": true,
+      "max_width": 0.004023915080817305
+    },
+    {
+      "rep": 92,
+      "family_noncoverage": false,
+      "max_width": 0.031569882982877426
+    },
+    {
+      "rep": 93,
+      "family_noncoverage": false,
+      "max_width": 0.020430978191652273
+    },
+    {
+      "rep": 94,
+      "family_noncoverage": false,
+      "max_width": 0.015937740748413698
+    },
+    {
+      "rep": 95,
+      "family_noncoverage": false,
+      "max_width": 0.014919734329133866
+    },
+    {
+      "rep": 96,
+      "family_noncoverage": false,
+      "max_width": 0.03678503501356063
+    },
+    {
+      "rep": 97,
+      "family_noncoverage": true,
+      "max_width": 0.004050341674584076
+    },
+    {
+      "rep": 98,
+      "family_noncoverage": false,
+      "max_width": 0.012478068503259838
+    },
+    {
+      "rep": 99,
+      "family_noncoverage": false,
+      "max_width": 0.015006851088732964
+    },
+    {
+      "rep": 100,
+      "family_noncoverage": false,
+      "max_width": 0.04990757134429148
+    },
+    {
+      "rep": 101,
+      "family_noncoverage": false,
+      "max_width": 0.013794720542500047
+    },
+    {
+      "rep": 102,
+      "family_noncoverage": true,
+      "max_width": 0.007819771210048494
+    },
+    {
+      "rep": 103,
+      "family_noncoverage": false,
+      "max_width": 0.010806397378563802
+    },
+    {
+      "rep": 104,
+      "family_noncoverage": false,
+      "max_width": 0.025699685608503206
+    },
+    {
+      "rep": 105,
+      "family_noncoverage": false,
+      "max_width": 0.0170325125408214
+    },
+    {
+      "rep": 106,
+      "family_noncoverage": true,
+      "max_width": 0.0036135411225004595
+    },
+    {
+      "rep": 107,
+      "family_noncoverage": true,
+      "max_width": 0.007135844729380608
+    },
+    {
+      "rep": 108,
+      "family_noncoverage": false,
+      "max_width": 0.01921094475199285
+    },
+    {
+      "rep": 109,
+      "family_noncoverage": false,
+      "max_width": 0.012516914660167393
+    },
+    {
+      "rep": 110,
+      "family_noncoverage": false,
+      "max_width": 0.025753249985774777
+    },
+    {
+      "rep": 111,
+      "family_noncoverage": false,
+      "max_width": 0.033476181270640025
+    },
+    {
+      "rep": 112,
+      "family_noncoverage": false,
+      "max_width": 0.019798479961456495
+    },
+    {
+      "rep": 113,
+      "family_noncoverage": false,
+      "max_width": 0.03314014554278095
+    },
+    {
+      "rep": 114,
+      "family_noncoverage": false,
+      "max_width": 0.013385785061439262
+    },
+    {
+      "rep": 115,
+      "family_noncoverage": false,
+      "max_width": 0.0227028951951787
+    },
+    {
+      "rep": 116,
+      "family_noncoverage": false,
+      "max_width": 0.0162267393122621
+    },
+    {
+      "rep": 117,
+      "family_noncoverage": false,
+      "max_width": 0.024000526887452696
+    },
+    {
+      "rep": 118,
+      "family_noncoverage": false,
+      "max_width": 0.019130574907012504
+    },
+    {
+      "rep": 119,
+      "family_noncoverage": false,
+      "max_width": 0.01354023009562342
+    },
+    {
+      "rep": 120,
+      "family_noncoverage": false,
+      "max_width": 0.021840957107064282
+    },
+    {
+      "rep": 121,
+      "family_noncoverage": false,
+      "max_width": 0.02962504330006592
+    },
+    {
+      "rep": 122,
+      "family_noncoverage": false,
+      "max_width": 0.028703479369235327
+    },
+    {
+      "rep": 123,
+      "family_noncoverage": false,
+      "max_width": 0.03070618710708922
+    },
+    {
+      "rep": 124,
+      "family_noncoverage": false,
+      "max_width": 0.014555707663632506
+    },
+    {
+      "rep": 125,
+      "family_noncoverage": true,
+      "max_width": 0.028348460310229792
+    },
+    {
+      "rep": 126,
+      "family_noncoverage": false,
+      "max_width": 0.013675680246268678
+    },
+    {
+      "rep": 127,
+      "family_noncoverage": true,
+      "max_width": 0.003599061634819661
+    },
+    {
+      "rep": 128,
+      "family_noncoverage": false,
+      "max_width": 0.01177987660972397
+    },
+    {
+      "rep": 129,
+      "family_noncoverage": true,
+      "max_width": 0.007937257573798246
+    },
+    {
+      "rep": 130,
+      "family_noncoverage": false,
+      "max_width": 0.026673392040917565
+    },
+    {
+      "rep": 131,
+      "family_noncoverage": false,
+      "max_width": 0.03996139222697322
+    },
+    {
+      "rep": 132,
+      "family_noncoverage": false,
+      "max_width": 0.028056306566209645
+    },
+    {
+      "rep": 133,
+      "family_noncoverage": false,
+      "max_width": 0.011537472967009924
+    },
+    {
+      "rep": 134,
+      "family_noncoverage": false,
+      "max_width": 0.017610375503281813
+    },
+    {
+      "rep": 135,
+      "family_noncoverage": false,
+      "max_width": 0.010569426479585697
+    },
+    {
+      "rep": 136,
+      "family_noncoverage": false,
+      "max_width": 0.011642790363946796
+    },
+    {
+      "rep": 137,
+      "family_noncoverage": true,
+      "max_width": 0.008603421381684188
+    },
+    {
+      "rep": 138,
+      "family_noncoverage": false,
+      "max_width": 0.01934343516816575
+    },
+    {
+      "rep": 139,
+      "family_noncoverage": false,
+      "max_width": 0.012469253140619864
+    },
+    {
+      "rep": 140,
+      "family_noncoverage": false,
+      "max_width": 0.033880124117185606
+    },
+    {
+      "rep": 141,
+      "family_noncoverage": false,
+      "max_width": 0.02008946901254683
+    },
+    {
+      "rep": 142,
+      "family_noncoverage": false,
+      "max_width": 0.008406751956053804
+    },
+    {
+      "rep": 143,
+      "family_noncoverage": false,
+      "max_width": 0.027188115326454085
+    },
+    {
+      "rep": 144,
+      "family_noncoverage": false,
+      "max_width": 0.023140906140870127
+    },
+    {
+      "rep": 145,
+      "family_noncoverage": false,
+      "max_width": 0.01987703075081889
+    },
+    {
+      "rep": 146,
+      "family_noncoverage": false,
+      "max_width": 0.022832059029117314
+    },
+    {
+      "rep": 147,
+      "family_noncoverage": true,
+      "max_width": 0.007108321729293464
+    },
+    {
+      "rep": 148,
+      "family_noncoverage": false,
+      "max_width": 0.02219111365637003
+    },
+    {
+      "rep": 149,
+      "family_noncoverage": false,
+      "max_width": 0.037284832974007094
+    },
+    {
+      "rep": 150,
+      "family_noncoverage": false,
+      "max_width": 0.025298980227599067
+    },
+    {
+      "rep": 151,
+      "family_noncoverage": false,
+      "max_width": 0.0184051162070107
+    },
+    {
+      "rep": 152,
+      "family_noncoverage": false,
+      "max_width": 0.022550422431792772
+    },
+    {
+      "rep": 153,
+      "family_noncoverage": true,
+      "max_width": 0.003713388815297169
+    },
+    {
+      "rep": 154,
+      "family_noncoverage": false,
+      "max_width": 0.01518351632320154
+    },
+    {
+      "rep": 155,
+      "family_noncoverage": false,
+      "max_width": 0.03651529611464265
+    },
+    {
+      "rep": 156,
+      "family_noncoverage": true,
+      "max_width": 0.004632487514616232
+    },
+    {
+      "rep": 157,
+      "family_noncoverage": false,
+      "max_width": 0.025020046040734344
+    },
+    {
+      "rep": 158,
+      "family_noncoverage": true,
+      "max_width": 0.00290818957175603
+    },
+    {
+      "rep": 159,
+      "family_noncoverage": false,
+      "max_width": 0.058948977994117004
+    },
+    {
+      "rep": 160,
+      "family_noncoverage": false,
+      "max_width": 0.03143548914042801
+    },
+    {
+      "rep": 161,
+      "family_noncoverage": false,
+      "max_width": 0.011087440438291046
+    },
+    {
+      "rep": 162,
+      "family_noncoverage": true,
+      "max_width": 0.007382499109695221
+    },
+    {
+      "rep": 163,
+      "family_noncoverage": false,
+      "max_width": 0.0137718639735359
+    },
+    {
+      "rep": 164,
+      "family_noncoverage": false,
+      "max_width": 0.03089098566639637
+    },
+    {
+      "rep": 165,
+      "family_noncoverage": false,
+      "max_width": 0.026699514124900688
+    },
+    {
+      "rep": 166,
+      "family_noncoverage": false,
+      "max_width": 0.03411970019967451
+    },
+    {
+      "rep": 167,
+      "family_noncoverage": false,
+      "max_width": 0.012896576933308639
+    },
+    {
+      "rep": 168,
+      "family_noncoverage": false,
+      "max_width": 0.012392247186570022
+    },
+    {
+      "rep": 169,
+      "family_noncoverage": false,
+      "max_width": 0.00936160639071139
+    },
+    {
+      "rep": 170,
+      "family_noncoverage": false,
+      "max_width": 0.014079853544298944
+    },
+    {
+      "rep": 171,
+      "family_noncoverage": false,
+      "max_width": 0.028144900351035073
+    },
+    {
+      "rep": 172,
+      "family_noncoverage": false,
+      "max_width": 0.02311785482401039
+    },
+    {
+      "rep": 173,
+      "family_noncoverage": false,
+      "max_width": 0.03978912530602636
+    },
+    {
+      "rep": 174,
+      "family_noncoverage": true,
+      "max_width": 0.003950199044924747
+    },
+    {
+      "rep": 175,
+      "family_noncoverage": false,
+      "max_width": 0.03526401123728583
+    },
+    {
+      "rep": 176,
+      "family_noncoverage": false,
+      "max_width": 0.023815622671243684
+    },
+    {
+      "rep": 177,
+      "family_noncoverage": false,
+      "max_width": 0.028979123469605076
+    },
+    {
+      "rep": 178,
+      "family_noncoverage": false,
+      "max_width": 0.044792169576441034
+    },
+    {
+      "rep": 179,
+      "family_noncoverage": false,
+      "max_width": 0.01330565001187239
+    },
+    {
+      "rep": 180,
+      "family_noncoverage": false,
+      "max_width": 0.06060737133478539
+    },
+    {
+      "rep": 181,
+      "family_noncoverage": true,
+      "max_width": 0.003712550735811139
+    },
+    {
+      "rep": 182,
+      "family_noncoverage": true,
+      "max_width": 0.0032756110645927403
+    },
+    {
+      "rep": 183,
+      "family_noncoverage": true,
+      "max_width": 0.0039001357358378792
+    },
+    {
+      "rep": 184,
+      "family_noncoverage": false,
+      "max_width": 0.030443952596589986
+    },
+    {
+      "rep": 185,
+      "family_noncoverage": false,
+      "max_width": 0.006327355508368993
+    },
+    {
+      "rep": 186,
+      "family_noncoverage": false,
+      "max_width": 0.012464264753966767
+    },
+    {
+      "rep": 187,
+      "family_noncoverage": false,
+      "max_width": 0.05193710731320011
+    },
+    {
+      "rep": 188,
+      "family_noncoverage": false,
+      "max_width": 0.027728106563025528
+    },
+    {
+      "rep": 189,
+      "family_noncoverage": false,
+      "max_width": 0.01961023421597364
+    },
+    {
+      "rep": 190,
+      "family_noncoverage": false,
+      "max_width": 0.014083669772421729
+    },
+    {
+      "rep": 191,
+      "family_noncoverage": false,
+      "max_width": 0.016432833064438677
+    },
+    {
+      "rep": 192,
+      "family_noncoverage": true,
+      "max_width": 0.0034337702846973656
+    },
+    {
+      "rep": 193,
+      "family_noncoverage": false,
+      "max_width": 0.021515105272040116
+    },
+    {
+      "rep": 194,
+      "family_noncoverage": false,
+      "max_width": 0.010149364535267533
+    },
+    {
+      "rep": 195,
+      "family_noncoverage": false,
+      "max_width": 0.029098030237906584
+    },
+    {
+      "rep": 196,
+      "family_noncoverage": false,
+      "max_width": 0.016328345973961135
+    },
+    {
+      "rep": 197,
+      "family_noncoverage": true,
+      "max_width": 0.004369344135504631
+    },
+    {
+      "rep": 198,
+      "family_noncoverage": true,
+      "max_width": 0.008908281412880073
+    },
+    {
+      "rep": 199,
+      "family_noncoverage": false,
+      "max_width": 0.02457657661282507
+    },
+    {
+      "rep": 200,
+      "family_noncoverage": true,
+      "max_width": 0.0041935159234070315
+    },
+    {
+      "rep": 201,
+      "family_noncoverage": false,
+      "max_width": 0.014626190959467118
+    },
+    {
+      "rep": 202,
+      "family_noncoverage": false,
+      "max_width": 0.013266165384921454
+    },
+    {
+      "rep": 203,
+      "family_noncoverage": false,
+      "max_width": 0.015761603303476725
+    },
+    {
+      "rep": 204,
+      "family_noncoverage": false,
+      "max_width": 0.015138423263439145
+    },
+    {
+      "rep": 205,
+      "family_noncoverage": false,
+      "max_width": 0.029963968066054315
+    },
+    {
+      "rep": 206,
+      "family_noncoverage": false,
+      "max_width": 0.029802668916181267
+    },
+    {
+      "rep": 207,
+      "family_noncoverage": false,
+      "max_width": 0.011914667153236781
+    },
+    {
+      "rep": 208,
+      "family_noncoverage": false,
+      "max_width": 0.02785017543766799
+    },
+    {
+      "rep": 209,
+      "family_noncoverage": false,
+      "max_width": 0.0057227203355461696
+    },
+    {
+      "rep": 210,
+      "family_noncoverage": true,
+      "max_width": 0.0040667413216633995
+    },
+    {
+      "rep": 211,
+      "family_noncoverage": true,
+      "max_width": 0.004112236300236406
+    },
+    {
+      "rep": 212,
+      "family_noncoverage": true,
+      "max_width": 0.003947050228239939
+    },
+    {
+      "rep": 213,
+      "family_noncoverage": false,
+      "max_width": 0.02555827443963042
+    },
+    {
+      "rep": 214,
+      "family_noncoverage": false,
+      "max_width": 0.02652408393952666
+    },
+    {
+      "rep": 215,
+      "family_noncoverage": false,
+      "max_width": 0.01205175502048688
+    },
+    {
+      "rep": 216,
+      "family_noncoverage": false,
+      "max_width": 0.02535776004444387
+    },
+    {
+      "rep": 217,
+      "family_noncoverage": true,
+      "max_width": 0.004520171059426958
+    },
+    {
+      "rep": 218,
+      "family_noncoverage": false,
+      "max_width": 0.04825449666519776
+    },
+    {
+      "rep": 219,
+      "family_noncoverage": false,
+      "max_width": 0.008846016731695765
+    },
+    {
+      "rep": 220,
+      "family_noncoverage": false,
+      "max_width": 0.04819503276520128
+    },
+    {
+      "rep": 221,
+      "family_noncoverage": false,
+      "max_width": 0.031842022439338744
+    },
+    {
+      "rep": 222,
+      "family_noncoverage": false,
+      "max_width": 0.023071719487819817
+    },
+    {
+      "rep": 223,
+      "family_noncoverage": false,
+      "max_width": 0.03576512466268725
+    },
+    {
+      "rep": 224,
+      "family_noncoverage": false,
+      "max_width": 0.013633855896489869
+    },
+    {
+      "rep": 225,
+      "family_noncoverage": false,
+      "max_width": 0.020417320797151403
+    },
+    {
+      "rep": 226,
+      "family_noncoverage": false,
+      "max_width": 0.023353678976227654
+    },
+    {
+      "rep": 227,
+      "family_noncoverage": false,
+      "max_width": 0.013839480347572241
+    },
+    {
+      "rep": 228,
+      "family_noncoverage": false,
+      "max_width": 0.025712243017223087
+    },
+    {
+      "rep": 229,
+      "family_noncoverage": false,
+      "max_width": 0.022136581999650476
+    },
+    {
+      "rep": 230,
+      "family_noncoverage": true,
+      "max_width": 0.03600917108041266
+    },
+    {
+      "rep": 231,
+      "family_noncoverage": false,
+      "max_width": 0.012763866855620703
+    },
+    {
+      "rep": 232,
+      "family_noncoverage": false,
+      "max_width": 0.01549997095064137
+    },
+    {
+      "rep": 233,
+      "family_noncoverage": false,
+      "max_width": 0.02135716983702649
+    },
+    {
+      "rep": 234,
+      "family_noncoverage": false,
+      "max_width": 0.01913844550953815
+    },
+    {
+      "rep": 235,
+      "family_noncoverage": false,
+      "max_width": 0.013925512017889097
+    },
+    {
+      "rep": 236,
+      "family_noncoverage": false,
+      "max_width": 0.012180251715011038
+    },
+    {
+      "rep": 237,
+      "family_noncoverage": true,
+      "max_width": 0.003904298983287096
+    },
+    {
+      "rep": 238,
+      "family_noncoverage": false,
+      "max_width": 0.01810850583225644
+    },
+    {
+      "rep": 239,
+      "family_noncoverage": false,
+      "max_width": 0.0383796008496217
+    },
+    {
+      "rep": 240,
+      "family_noncoverage": false,
+      "max_width": 0.022415445579737125
+    },
+    {
+      "rep": 241,
+      "family_noncoverage": false,
+      "max_width": 0.011315786392819629
+    },
+    {
+      "rep": 242,
+      "family_noncoverage": false,
+      "max_width": 0.041880172282488776
+    },
+    {
+      "rep": 243,
+      "family_noncoverage": false,
+      "max_width": 0.04017343000662188
+    },
+    {
+      "rep": 244,
+      "family_noncoverage": false,
+      "max_width": 0.020643465171063125
+    },
+    {
+      "rep": 245,
+      "family_noncoverage": false,
+      "max_width": 0.022407497882335422
+    },
+    {
+      "rep": 246,
+      "family_noncoverage": true,
+      "max_width": 0.00679998585512664
+    },
+    {
+      "rep": 247,
+      "family_noncoverage": false,
+      "max_width": 0.020617275552972405
+    },
+    {
+      "rep": 248,
+      "family_noncoverage": false,
+      "max_width": 0.016352432042469427
+    },
+    {
+      "rep": 249,
+      "family_noncoverage": false,
+      "max_width": 0.02188131878146231
+    },
+    {
+      "rep": 250,
+      "family_noncoverage": false,
+      "max_width": 0.014029004076033245
+    },
+    {
+      "rep": 251,
+      "family_noncoverage": false,
+      "max_width": 0.02513767076085338
+    },
+    {
+      "rep": 252,
+      "family_noncoverage": false,
+      "max_width": 0.01779792689538564
+    },
+    {
+      "rep": 253,
+      "family_noncoverage": false,
+      "max_width": 0.013611506624360128
+    },
+    {
+      "rep": 254,
+      "family_noncoverage": false,
+      "max_width": 0.0180520495487224
+    },
+    {
+      "rep": 255,
+      "family_noncoverage": false,
+      "max_width": 0.010781771275793876
+    },
+    {
+      "rep": 256,
+      "family_noncoverage": false,
+      "max_width": 0.018326052594568425
+    },
+    {
+      "rep": 257,
+      "family_noncoverage": false,
+      "max_width": 0.05257348778311348
+    },
+    {
+      "rep": 258,
+      "family_noncoverage": false,
+      "max_width": 0.03436305386885248
+    },
+    {
+      "rep": 259,
+      "family_noncoverage": false,
+      "max_width": 0.02236089669636989
+    },
+    {
+      "rep": 260,
+      "family_noncoverage": false,
+      "max_width": 0.03859874529820245
+    },
+    {
+      "rep": 261,
+      "family_noncoverage": false,
+      "max_width": 0.012571618915787267
+    },
+    {
+      "rep": 262,
+      "family_noncoverage": false,
+      "max_width": 0.030890420239055597
+    },
+    {
+      "rep": 263,
+      "family_noncoverage": false,
+      "max_width": 0.01610662520235354
+    },
+    {
+      "rep": 264,
+      "family_noncoverage": true,
+      "max_width": 0.003441002255636585
+    },
+    {
+      "rep": 265,
+      "family_noncoverage": false,
+      "max_width": 0.01822482449946066
+    },
+    {
+      "rep": 266,
+      "family_noncoverage": false,
+      "max_width": 0.024397035615429878
+    },
+    {
+      "rep": 267,
+      "family_noncoverage": false,
+      "max_width": 0.03698124008639979
+    },
+    {
+      "rep": 268,
+      "family_noncoverage": true,
+      "max_width": 0.00399977725169505
+    },
+    {
+      "rep": 269,
+      "family_noncoverage": false,
+      "max_width": 0.035863763349364614
+    },
+    {
+      "rep": 270,
+      "family_noncoverage": false,
+      "max_width": 0.013703352451368339
+    },
+    {
+      "rep": 271,
+      "family_noncoverage": false,
+      "max_width": 0.007287493724531127
+    },
+    {
+      "rep": 272,
+      "family_noncoverage": false,
+      "max_width": 0.018595591027859643
+    },
+    {
+      "rep": 273,
+      "family_noncoverage": false,
+      "max_width": 0.02124601665466301
+    },
+    {
+      "rep": 274,
+      "family_noncoverage": true,
+      "max_width": 0.0038559301435788346
+    },
+    {
+      "rep": 275,
+      "family_noncoverage": true,
+      "max_width": 0.0037194146239807194
+    },
+    {
+      "rep": 276,
+      "family_noncoverage": false,
+      "max_width": 0.022970058901714933
+    },
+    {
+      "rep": 277,
+      "family_noncoverage": true,
+      "max_width": 0.003960614050699446
+    },
+    {
+      "rep": 278,
+      "family_noncoverage": false,
+      "max_width": 0.03415540520657976
+    },
+    {
+      "rep": 279,
+      "family_noncoverage": true,
+      "max_width": 0.003625978082367495
+    },
+    {
+      "rep": 280,
+      "family_noncoverage": false,
+      "max_width": 0.023103381619321867
+    },
+    {
+      "rep": 281,
+      "family_noncoverage": false,
+      "max_width": 0.014433431442229238
+    },
+    {
+      "rep": 282,
+      "family_noncoverage": false,
+      "max_width": 0.04168505565156149
+    },
+    {
+      "rep": 283,
+      "family_noncoverage": false,
+      "max_width": 0.014486040602971305
+    },
+    {
+      "rep": 284,
+      "family_noncoverage": false,
+      "max_width": 0.02322893402028383
+    },
+    {
+      "rep": 285,
+      "family_noncoverage": false,
+      "max_width": 0.020342143826632575
+    },
+    {
+      "rep": 286,
+      "family_noncoverage": false,
+      "max_width": 0.037815114937871985
+    },
+    {
+      "rep": 287,
+      "family_noncoverage": false,
+      "max_width": 0.019104372145907392
+    },
+    {
+      "rep": 288,
+      "family_noncoverage": false,
+      "max_width": 0.014375707586626965
+    },
+    {
+      "rep": 289,
+      "family_noncoverage": false,
+      "max_width": 0.024404410664884062
+    },
+    {
+      "rep": 290,
+      "family_noncoverage": false,
+      "max_width": 0.022831718602370606
+    },
+    {
+      "rep": 291,
+      "family_noncoverage": false,
+      "max_width": 0.008815851383201543
+    },
+    {
+      "rep": 292,
+      "family_noncoverage": true,
+      "max_width": 0.006304305791359833
+    },
+    {
+      "rep": 293,
+      "family_noncoverage": true,
+      "max_width": 0.006239159590747018
+    },
+    {
+      "rep": 294,
+      "family_noncoverage": true,
+      "max_width": 0.004304685391359654
+    },
+    {
+      "rep": 295,
+      "family_noncoverage": true,
+      "max_width": 0.004528185016432194
+    },
+    {
+      "rep": 296,
+      "family_noncoverage": false,
+      "max_width": 0.012883039176463365
+    },
+    {
+      "rep": 297,
+      "family_noncoverage": false,
+      "max_width": 0.03355936843894889
+    },
+    {
+      "rep": 298,
+      "family_noncoverage": true,
+      "max_width": 0.003425954205338649
+    },
+    {
+      "rep": 299,
+      "family_noncoverage": false,
+      "max_width": 0.019853757132901523
+    },
+    {
+      "rep": 300,
+      "family_noncoverage": false,
+      "max_width": 0.055001811693821234
+    },
+    {
+      "rep": 301,
+      "family_noncoverage": false,
+      "max_width": 0.014456164472308247
+    },
+    {
+      "rep": 302,
+      "family_noncoverage": true,
+      "max_width": 0.004040746536416021
+    },
+    {
+      "rep": 303,
+      "family_noncoverage": false,
+      "max_width": 0.025661569102367252
+    },
+    {
+      "rep": 304,
+      "family_noncoverage": false,
+      "max_width": 0.01819531814959846
+    },
+    {
+      "rep": 305,
+      "family_noncoverage": false,
+      "max_width": 0.01458801364003396
+    },
+    {
+      "rep": 306,
+      "family_noncoverage": false,
+      "max_width": 0.012208221905405865
+    },
+    {
+      "rep": 307,
+      "family_noncoverage": false,
+      "max_width": 0.07061913554242832
+    },
+    {
+      "rep": 308,
+      "family_noncoverage": true,
+      "max_width": 0.00541792236653439
+    },
+    {
+      "rep": 309,
+      "family_noncoverage": false,
+      "max_width": 0.013560538486759937
+    },
+    {
+      "rep": 310,
+      "family_noncoverage": true,
+      "max_width": 0.0032692901518709258
+    },
+    {
+      "rep": 311,
+      "family_noncoverage": false,
+      "max_width": 0.016375860045413138
+    },
+    {
+      "rep": 312,
+      "family_noncoverage": false,
+      "max_width": 0.038146619650182845
+    },
+    {
+      "rep": 313,
+      "family_noncoverage": false,
+      "max_width": 0.04109764526551753
+    },
+    {
+      "rep": 314,
+      "family_noncoverage": false,
+      "max_width": 0.024293417215960844
+    },
+    {
+      "rep": 315,
+      "family_noncoverage": true,
+      "max_width": 0.0063404428498355985
+    },
+    {
+      "rep": 316,
+      "family_noncoverage": false,
+      "max_width": 0.05854671165026094
+    },
+    {
+      "rep": 317,
+      "family_noncoverage": true,
+      "max_width": 0.004535127564046429
+    },
+    {
+      "rep": 318,
+      "family_noncoverage": false,
+      "max_width": 0.038514645607260665
+    },
+    {
+      "rep": 319,
+      "family_noncoverage": true,
+      "max_width": 0.005199682930202081
+    },
+    {
+      "rep": 320,
+      "family_noncoverage": false,
+      "max_width": 0.03734046184654938
+    },
+    {
+      "rep": 321,
+      "family_noncoverage": false,
+      "max_width": 0.024190687426960795
+    },
+    {
+      "rep": 322,
+      "family_noncoverage": false,
+      "max_width": 0.037879629941325293
+    },
+    {
+      "rep": 323,
+      "family_noncoverage": false,
+      "max_width": 0.014407513586200446
+    },
+    {
+      "rep": 324,
+      "family_noncoverage": false,
+      "max_width": 0.053929516858068856
+    },
+    {
+      "rep": 325,
+      "family_noncoverage": false,
+      "max_width": 0.014030013363440324
+    },
+    {
+      "rep": 326,
+      "family_noncoverage": true,
+      "max_width": 0.00404742549640078
+    },
+    {
+      "rep": 327,
+      "family_noncoverage": false,
+      "max_width": 0.017281515374660116
+    },
+    {
+      "rep": 328,
+      "family_noncoverage": false,
+      "max_width": 0.04272289716488155
+    },
+    {
+      "rep": 329,
+      "family_noncoverage": true,
+      "max_width": 0.0047964404204866844
+    },
+    {
+      "rep": 330,
+      "family_noncoverage": false,
+      "max_width": 0.02467503415967672
+    },
+    {
+      "rep": 331,
+      "family_noncoverage": false,
+      "max_width": 0.025200088019513536
+    },
+    {
+      "rep": 332,
+      "family_noncoverage": true,
+      "max_width": 0.004242692398822712
+    },
+    {
+      "rep": 333,
+      "family_noncoverage": true,
+      "max_width": 0.003988405055819015
+    },
+    {
+      "rep": 334,
+      "family_noncoverage": false,
+      "max_width": 0.01627214221947763
+    },
+    {
+      "rep": 335,
+      "family_noncoverage": true,
+      "max_width": 0.007505679245687222
+    },
+    {
+      "rep": 336,
+      "family_noncoverage": false,
+      "max_width": 0.028487492120355642
+    },
+    {
+      "rep": 337,
+      "family_noncoverage": true,
+      "max_width": 0.0032577479624166187
+    },
+    {
+      "rep": 338,
+      "family_noncoverage": false,
+      "max_width": 0.02349694256604974
+    },
+    {
+      "rep": 339,
+      "family_noncoverage": false,
+      "max_width": 0.03457895561776932
+    },
+    {
+      "rep": 340,
+      "family_noncoverage": false,
+      "max_width": 0.013469724031379696
+    },
+    {
+      "rep": 341,
+      "family_noncoverage": false,
+      "max_width": 0.03732920024332394
+    },
+    {
+      "rep": 342,
+      "family_noncoverage": false,
+      "max_width": 0.04632391092691364
+    },
+    {
+      "rep": 343,
+      "family_noncoverage": false,
+      "max_width": 0.02243510722227996
+    },
+    {
+      "rep": 344,
+      "family_noncoverage": false,
+      "max_width": 0.035625774978892355
+    },
+    {
+      "rep": 345,
+      "family_noncoverage": false,
+      "max_width": 0.020184165638994857
+    },
+    {
+      "rep": 346,
+      "family_noncoverage": false,
+      "max_width": 0.03908329006987678
+    },
+    {
+      "rep": 347,
+      "family_noncoverage": false,
+      "max_width": 0.02587468671689601
+    },
+    {
+      "rep": 348,
+      "family_noncoverage": false,
+      "max_width": 0.029225869687522707
+    },
+    {
+      "rep": 349,
+      "family_noncoverage": false,
+      "max_width": 0.02314187626941787
+    },
+    {
+      "rep": 350,
+      "family_noncoverage": false,
+      "max_width": 0.014044092476684094
+    },
+    {
+      "rep": 351,
+      "family_noncoverage": false,
+      "max_width": 0.015475393816285115
+    },
+    {
+      "rep": 352,
+      "family_noncoverage": true,
+      "max_width": 0.005947800212552184
+    },
+    {
+      "rep": 353,
+      "family_noncoverage": false,
+      "max_width": 0.019964989967314817
+    },
+    {
+      "rep": 354,
+      "family_noncoverage": false,
+      "max_width": 0.03688583539670328
+    },
+    {
+      "rep": 355,
+      "family_noncoverage": false,
+      "max_width": 0.038173159648622425
+    },
+    {
+      "rep": 356,
+      "family_noncoverage": false,
+      "max_width": 0.024585642035951767
+    },
+    {
+      "rep": 357,
+      "family_noncoverage": false,
+      "max_width": 0.02749727210597428
+    },
+    {
+      "rep": 358,
+      "family_noncoverage": true,
+      "max_width": 0.004255082381552113
+    },
+    {
+      "rep": 359,
+      "family_noncoverage": true,
+      "max_width": 0.007175684128500694
+    },
+    {
+      "rep": 360,
+      "family_noncoverage": false,
+      "max_width": 0.020950603879425954
+    },
+    {
+      "rep": 361,
+      "family_noncoverage": false,
+      "max_width": 0.011937469812610405
+    },
+    {
+      "rep": 362,
+      "family_noncoverage": false,
+      "max_width": 0.04326151511611791
+    },
+    {
+      "rep": 363,
+      "family_noncoverage": false,
+      "max_width": 0.024346145240251534
+    },
+    {
+      "rep": 364,
+      "family_noncoverage": false,
+      "max_width": 0.02903209013958751
+    },
+    {
+      "rep": 365,
+      "family_noncoverage": false,
+      "max_width": 0.021877126093527766
+    },
+    {
+      "rep": 366,
+      "family_noncoverage": false,
+      "max_width": 0.02984493263037065
+    },
+    {
+      "rep": 367,
+      "family_noncoverage": false,
+      "max_width": 0.02109486074183122
+    },
+    {
+      "rep": 368,
+      "family_noncoverage": false,
+      "max_width": 0.011299704802533726
+    },
+    {
+      "rep": 369,
+      "family_noncoverage": true,
+      "max_width": 0.0042880932528240965
+    },
+    {
+      "rep": 370,
+      "family_noncoverage": false,
+      "max_width": 0.013367039956677557
+    },
+    {
+      "rep": 371,
+      "family_noncoverage": true,
+      "max_width": 0.011841724064609127
+    },
+    {
+      "rep": 372,
+      "family_noncoverage": false,
+      "max_width": 0.03733643118230344
+    },
+    {
+      "rep": 373,
+      "family_noncoverage": false,
+      "max_width": 0.008522980390835898
+    },
+    {
+      "rep": 374,
+      "family_noncoverage": false,
+      "max_width": 0.01630417215530242
+    },
+    {
+      "rep": 375,
+      "family_noncoverage": false,
+      "max_width": 0.01140405689060341
+    },
+    {
+      "rep": 376,
+      "family_noncoverage": false,
+      "max_width": 0.01698413649925092
+    },
+    {
+      "rep": 377,
+      "family_noncoverage": false,
+      "max_width": 0.038035402631412994
+    },
+    {
+      "rep": 378,
+      "family_noncoverage": false,
+      "max_width": 0.01870903210709818
+    },
+    {
+      "rep": 379,
+      "family_noncoverage": false,
+      "max_width": 0.04561187183002136
+    },
+    {
+      "rep": 380,
+      "family_noncoverage": false,
+      "max_width": 0.02366751801389753
+    },
+    {
+      "rep": 381,
+      "family_noncoverage": false,
+      "max_width": 0.026147882947399705
+    },
+    {
+      "rep": 382,
+      "family_noncoverage": false,
+      "max_width": 0.0111376064029452
+    },
+    {
+      "rep": 383,
+      "family_noncoverage": false,
+      "max_width": 0.022336437519316833
+    },
+    {
+      "rep": 384,
+      "family_noncoverage": false,
+      "max_width": 0.014221173590975592
+    },
+    {
+      "rep": 385,
+      "family_noncoverage": false,
+      "max_width": 0.01585742027293931
+    },
+    {
+      "rep": 386,
+      "family_noncoverage": false,
+      "max_width": 0.014248747846882227
+    },
+    {
+      "rep": 387,
+      "family_noncoverage": false,
+      "max_width": 0.028254608504224808
+    },
+    {
+      "rep": 388,
+      "family_noncoverage": false,
+      "max_width": 0.01254484331710662
+    },
+    {
+      "rep": 389,
+      "family_noncoverage": true,
+      "max_width": 0.006093475949860498
+    },
+    {
+      "rep": 390,
+      "family_noncoverage": false,
+      "max_width": 0.05329056574490329
+    },
+    {
+      "rep": 391,
+      "family_noncoverage": true,
+      "max_width": 0.003889570461860161
+    },
+    {
+      "rep": 392,
+      "family_noncoverage": false,
+      "max_width": 0.029362548039851877
+    },
+    {
+      "rep": 393,
+      "family_noncoverage": false,
+      "max_width": 0.014472137896677596
+    },
+    {
+      "rep": 394,
+      "family_noncoverage": false,
+      "max_width": 0.029737733632774464
+    },
+    {
+      "rep": 395,
+      "family_noncoverage": true,
+      "max_width": 0.004461829483612305
+    },
+    {
+      "rep": 396,
+      "family_noncoverage": false,
+      "max_width": 0.018156524735690436
+    },
+    {
+      "rep": 397,
+      "family_noncoverage": false,
+      "max_width": 0.03562746825152142
+    },
+    {
+      "rep": 398,
+      "family_noncoverage": false,
+      "max_width": 0.026597507848994638
+    },
+    {
+      "rep": 399,
+      "family_noncoverage": false,
+      "max_width": 0.029603412234456266
+    },
+    {
+      "rep": 400,
+      "family_noncoverage": true,
+      "max_width": 0.014468949435146561
+    },
+    {
+      "rep": 401,
+      "family_noncoverage": false,
+      "max_width": 0.014858249327389429
+    },
+    {
+      "rep": 402,
+      "family_noncoverage": false,
+      "max_width": 0.015283001484368631
+    },
+    {
+      "rep": 403,
+      "family_noncoverage": false,
+      "max_width": 0.0159398339452858
+    },
+    {
+      "rep": 404,
+      "family_noncoverage": false,
+      "max_width": 0.05128411726973968
+    },
+    {
+      "rep": 405,
+      "family_noncoverage": false,
+      "max_width": 0.04555641366060676
+    },
+    {
+      "rep": 406,
+      "family_noncoverage": false,
+      "max_width": 0.058697265643813785
+    },
+    {
+      "rep": 407,
+      "family_noncoverage": false,
+      "max_width": 0.013435167234226397
+    },
+    {
+      "rep": 408,
+      "family_noncoverage": false,
+      "max_width": 0.013657954429526874
+    },
+    {
+      "rep": 409,
+      "family_noncoverage": true,
+      "max_width": 0.0037658614545461166
+    },
+    {
+      "rep": 410,
+      "family_noncoverage": true,
+      "max_width": 0.003461391762075549
+    },
+    {
+      "rep": 411,
+      "family_noncoverage": false,
+      "max_width": 0.036221992158834336
+    },
+    {
+      "rep": 412,
+      "family_noncoverage": false,
+      "max_width": 0.052111582860340455
+    },
+    {
+      "rep": 413,
+      "family_noncoverage": true,
+      "max_width": 0.003896562769675679
+    },
+    {
+      "rep": 414,
+      "family_noncoverage": false,
+      "max_width": 0.022290738117661635
+    },
+    {
+      "rep": 415,
+      "family_noncoverage": false,
+      "max_width": 0.039210679195672817
+    },
+    {
+      "rep": 416,
+      "family_noncoverage": false,
+      "max_width": 0.0305174848458859
+    },
+    {
+      "rep": 417,
+      "family_noncoverage": false,
+      "max_width": 0.021627263082076888
+    },
+    {
+      "rep": 418,
+      "family_noncoverage": false,
+      "max_width": 0.051620393073598954
+    },
+    {
+      "rep": 419,
+      "family_noncoverage": false,
+      "max_width": 0.011462720887818297
+    },
+    {
+      "rep": 420,
+      "family_noncoverage": false,
+      "max_width": 0.02617686651407276
+    },
+    {
+      "rep": 421,
+      "family_noncoverage": false,
+      "max_width": 0.07089406829146735
+    },
+    {
+      "rep": 422,
+      "family_noncoverage": false,
+      "max_width": 0.023306801653498996
+    },
+    {
+      "rep": 423,
+      "family_noncoverage": false,
+      "max_width": 0.03826291599856217
+    },
+    {
+      "rep": 424,
+      "family_noncoverage": false,
+      "max_width": 0.024516452980379893
+    },
+    {
+      "rep": 425,
+      "family_noncoverage": false,
+      "max_width": 0.020172038576951067
+    },
+    {
+      "rep": 426,
+      "family_noncoverage": false,
+      "max_width": 0.031803776316736775
+    },
+    {
+      "rep": 427,
+      "family_noncoverage": false,
+      "max_width": 0.05322470372056253
+    },
+    {
+      "rep": 428,
+      "family_noncoverage": false,
+      "max_width": 0.04636856183460478
+    },
+    {
+      "rep": 429,
+      "family_noncoverage": false,
+      "max_width": 0.037808609836263
+    },
+    {
+      "rep": 430,
+      "family_noncoverage": false,
+      "max_width": 0.03187127831093652
+    },
+    {
+      "rep": 431,
+      "family_noncoverage": false,
+      "max_width": 0.02497140342018632
+    },
+    {
+      "rep": 432,
+      "family_noncoverage": false,
+      "max_width": 0.03650207198920404
+    },
+    {
+      "rep": 433,
+      "family_noncoverage": false,
+      "max_width": 0.01877476157411187
+    },
+    {
+      "rep": 434,
+      "family_noncoverage": false,
+      "max_width": 0.019178439041162267
+    },
+    {
+      "rep": 435,
+      "family_noncoverage": false,
+      "max_width": 0.03624833843130762
+    },
+    {
+      "rep": 436,
+      "family_noncoverage": false,
+      "max_width": 0.017507780044565338
+    },
+    {
+      "rep": 437,
+      "family_noncoverage": false,
+      "max_width": 0.024335790654084925
+    },
+    {
+      "rep": 438,
+      "family_noncoverage": false,
+      "max_width": 0.033877787043184435
+    },
+    {
+      "rep": 439,
+      "family_noncoverage": false,
+      "max_width": 0.01313170786231094
+    },
+    {
+      "rep": 440,
+      "family_noncoverage": false,
+      "max_width": 0.04182578820432794
+    },
+    {
+      "rep": 441,
+      "family_noncoverage": false,
+      "max_width": 0.01958545783871623
+    },
+    {
+      "rep": 442,
+      "family_noncoverage": true,
+      "max_width": 0.007759867855680877
+    },
+    {
+      "rep": 443,
+      "family_noncoverage": true,
+      "max_width": 0.0034735817941191167
+    },
+    {
+      "rep": 444,
+      "family_noncoverage": false,
+      "max_width": 0.04243435988265056
+    },
+    {
+      "rep": 445,
+      "family_noncoverage": false,
+      "max_width": 0.011544025145067046
+    },
+    {
+      "rep": 446,
+      "family_noncoverage": true,
+      "max_width": 0.003371500865634239
+    },
+    {
+      "rep": 447,
+      "family_noncoverage": false,
+      "max_width": 0.012455166947286912
+    },
+    {
+      "rep": 448,
+      "family_noncoverage": true,
+      "max_width": 0.004329389594780027
+    },
+    {
+      "rep": 449,
+      "family_noncoverage": false,
+      "max_width": 0.04402716783854721
+    },
+    {
+      "rep": 450,
+      "family_noncoverage": false,
+      "max_width": 0.014750391152128924
+    },
+    {
+      "rep": 451,
+      "family_noncoverage": false,
+      "max_width": 0.012984444934380822
+    },
+    {
+      "rep": 452,
+      "family_noncoverage": false,
+      "max_width": 0.0089807581428514
+    },
+    {
+      "rep": 453,
+      "family_noncoverage": false,
+      "max_width": 0.03055297360396944
+    },
+    {
+      "rep": 454,
+      "family_noncoverage": false,
+      "max_width": 0.030030806868692868
+    },
+    {
+      "rep": 455,
+      "family_noncoverage": false,
+      "max_width": 0.03584768635589209
+    },
+    {
+      "rep": 456,
+      "family_noncoverage": true,
+      "max_width": 0.003451131368723969
+    },
+    {
+      "rep": 457,
+      "family_noncoverage": false,
+      "max_width": 0.022330319517646604
+    },
+    {
+      "rep": 458,
+      "family_noncoverage": false,
+      "max_width": 0.012514327070433122
+    },
+    {
+      "rep": 459,
+      "family_noncoverage": false,
+      "max_width": 0.019461419235838318
+    },
+    {
+      "rep": 460,
+      "family_noncoverage": false,
+      "max_width": 0.02013831139253953
+    },
+    {
+      "rep": 461,
+      "family_noncoverage": false,
+      "max_width": 0.025833165885131442
+    },
+    {
+      "rep": 462,
+      "family_noncoverage": false,
+      "max_width": 0.01968968026069883
+    },
+    {
+      "rep": 463,
+      "family_noncoverage": false,
+      "max_width": 0.02197720172029947
+    },
+    {
+      "rep": 464,
+      "family_noncoverage": true,
+      "max_width": 0.007149585467512612
+    },
+    {
+      "rep": 465,
+      "family_noncoverage": false,
+      "max_width": 0.021901523215421638
+    },
+    {
+      "rep": 466,
+      "family_noncoverage": false,
+      "max_width": 0.017047825426871083
+    },
+    {
+      "rep": 467,
+      "family_noncoverage": false,
+      "max_width": 0.014349998079945513
+    },
+    {
+      "rep": 468,
+      "family_noncoverage": false,
+      "max_width": 0.013535731812431215
+    },
+    {
+      "rep": 469,
+      "family_noncoverage": false,
+      "max_width": 0.02483423211363975
+    },
+    {
+      "rep": 470,
+      "family_noncoverage": false,
+      "max_width": 0.010914173991042008
+    },
+    {
+      "rep": 471,
+      "family_noncoverage": true,
+      "max_width": 0.004399900527048564
+    },
+    {
+      "rep": 472,
+      "family_noncoverage": true,
+      "max_width": 0.003693466098952
+    },
+    {
+      "rep": 473,
+      "family_noncoverage": true,
+      "max_width": 0.0041191251068345815
+    },
+    {
+      "rep": 474,
+      "family_noncoverage": false,
+      "max_width": 0.024770375814912694
+    },
+    {
+      "rep": 475,
+      "family_noncoverage": false,
+      "max_width": 0.014934908445191363
+    },
+    {
+      "rep": 476,
+      "family_noncoverage": false,
+      "max_width": 0.026841209878818096
+    },
+    {
+      "rep": 477,
+      "family_noncoverage": true,
+      "max_width": 0.003926043460788509
+    },
+    {
+      "rep": 478,
+      "family_noncoverage": false,
+      "max_width": 0.0355958697078051
+    },
+    {
+      "rep": 479,
+      "family_noncoverage": false,
+      "max_width": 0.02182822280402688
+    },
+    {
+      "rep": 480,
+      "family_noncoverage": true,
+      "max_width": 0.04654908462041986
+    },
+    {
+      "rep": 481,
+      "family_noncoverage": false,
+      "max_width": 0.01825934054788474
+    },
+    {
+      "rep": 482,
+      "family_noncoverage": false,
+      "max_width": 0.027792941463716563
+    },
+    {
+      "rep": 483,
+      "family_noncoverage": false,
+      "max_width": 0.021523179982298975
+    },
+    {
+      "rep": 484,
+      "family_noncoverage": true,
+      "max_width": 0.006939786196260218
+    },
+    {
+      "rep": 485,
+      "family_noncoverage": false,
+      "max_width": 0.013447122086123295
+    },
+    {
+      "rep": 486,
+      "family_noncoverage": false,
+      "max_width": 0.04192458583668271
+    },
+    {
+      "rep": 487,
+      "family_noncoverage": false,
+      "max_width": 0.01981725595293438
+    },
+    {
+      "rep": 488,
+      "family_noncoverage": false,
+      "max_width": 0.013587729436724066
+    },
+    {
+      "rep": 489,
+      "family_noncoverage": false,
+      "max_width": 0.04532585783329036
+    },
+    {
+      "rep": 490,
+      "family_noncoverage": false,
+      "max_width": 0.042090421170525597
+    },
+    {
+      "rep": 491,
+      "family_noncoverage": true,
+      "max_width": 0.003844971500723276
+    },
+    {
+      "rep": 492,
+      "family_noncoverage": false,
+      "max_width": 0.015268033466923368
+    },
+    {
+      "rep": 493,
+      "family_noncoverage": true,
+      "max_width": 0.006990023532210428
+    },
+    {
+      "rep": 494,
+      "family_noncoverage": false,
+      "max_width": 0.015537047032120456
+    },
+    {
+      "rep": 495,
+      "family_noncoverage": true,
+      "max_width": 0.006105050221432533
+    },
+    {
+      "rep": 496,
+      "family_noncoverage": false,
+      "max_width": 0.022655696885134007
+    },
+    {
+      "rep": 497,
+      "family_noncoverage": false,
+      "max_width": 0.01800219107658315
+    },
+    {
+      "rep": 498,
+      "family_noncoverage": false,
+      "max_width": 0.01145656505899813
+    },
+    {
+      "rep": 499,
+      "family_noncoverage": false,
+      "max_width": 0.013451434195587022
+    },
+    {
+      "rep": 500,
+      "family_noncoverage": false,
+      "max_width": 0.01474320110242756
+    },
+    {
+      "rep": 501,
+      "family_noncoverage": false,
+      "max_width": 0.014499906933364125
+    },
+    {
+      "rep": 502,
+      "family_noncoverage": true,
+      "max_width": 0.003919121243531145
+    },
+    {
+      "rep": 503,
+      "family_noncoverage": false,
+      "max_width": 0.027826877411183695
+    },
+    {
+      "rep": 504,
+      "family_noncoverage": false,
+      "max_width": 0.016671434214126268
+    },
+    {
+      "rep": 505,
+      "family_noncoverage": false,
+      "max_width": 0.026543663028524067
+    },
+    {
+      "rep": 506,
+      "family_noncoverage": false,
+      "max_width": 0.031591312928811434
+    },
+    {
+      "rep": 507,
+      "family_noncoverage": true,
+      "max_width": 0.003365539284257893
+    },
+    {
+      "rep": 508,
+      "family_noncoverage": false,
+      "max_width": 0.042733367400915837
+    },
+    {
+      "rep": 509,
+      "family_noncoverage": false,
+      "max_width": 0.024989644285682518
+    },
+    {
+      "rep": 510,
+      "family_noncoverage": true,
+      "max_width": 0.005390761685368721
+    },
+    {
+      "rep": 511,
+      "family_noncoverage": false,
+      "max_width": 0.020899249499928715
+    },
+    {
+      "rep": 512,
+      "family_noncoverage": true,
+      "max_width": 0.007546564433177409
+    },
+    {
+      "rep": 513,
+      "family_noncoverage": false,
+      "max_width": 0.01797461285115819
+    },
+    {
+      "rep": 514,
+      "family_noncoverage": false,
+      "max_width": 0.027509522184925157
+    },
+    {
+      "rep": 515,
+      "family_noncoverage": false,
+      "max_width": 0.008026951972054917
+    },
+    {
+      "rep": 516,
+      "family_noncoverage": true,
+      "max_width": 0.0043380224805058334
+    },
+    {
+      "rep": 517,
+      "family_noncoverage": false,
+      "max_width": 0.010059079747964966
+    },
+    {
+      "rep": 518,
+      "family_noncoverage": false,
+      "max_width": 0.012863515765230874
+    },
+    {
+      "rep": 519,
+      "family_noncoverage": false,
+      "max_width": 0.024304291429409174
+    },
+    {
+      "rep": 520,
+      "family_noncoverage": false,
+      "max_width": 0.029270893653050235
+    },
+    {
+      "rep": 521,
+      "family_noncoverage": false,
+      "max_width": 0.028907657719663776
+    },
+    {
+      "rep": 522,
+      "family_noncoverage": false,
+      "max_width": 0.030730086987679775
+    },
+    {
+      "rep": 523,
+      "family_noncoverage": false,
+      "max_width": 0.014805202570340497
+    },
+    {
+      "rep": 524,
+      "family_noncoverage": false,
+      "max_width": 0.02029031375673589
+    },
+    {
+      "rep": 525,
+      "family_noncoverage": false,
+      "max_width": 0.010114066052551203
+    },
+    {
+      "rep": 526,
+      "family_noncoverage": false,
+      "max_width": 0.023087479882768477
+    },
+    {
+      "rep": 527,
+      "family_noncoverage": true,
+      "max_width": 0.007137079650469653
+    },
+    {
+      "rep": 528,
+      "family_noncoverage": false,
+      "max_width": 0.009446727253082111
+    },
+    {
+      "rep": 529,
+      "family_noncoverage": true,
+      "max_width": 0.01856515607790525
+    },
+    {
+      "rep": 530,
+      "family_noncoverage": false,
+      "max_width": 0.012728395804577918
+    },
+    {
+      "rep": 531,
+      "family_noncoverage": false,
+      "max_width": 0.019914457948588517
+    },
+    {
+      "rep": 532,
+      "family_noncoverage": false,
+      "max_width": 0.02723184644166799
+    },
+    {
+      "rep": 533,
+      "family_noncoverage": true,
+      "max_width": 0.004023141425442288
+    },
+    {
+      "rep": 534,
+      "family_noncoverage": false,
+      "max_width": 0.02119983606335866
+    },
+    {
+      "rep": 535,
+      "family_noncoverage": false,
+      "max_width": 0.012530569344567534
+    },
+    {
+      "rep": 536,
+      "family_noncoverage": false,
+      "max_width": 0.013222062473834876
+    },
+    {
+      "rep": 537,
+      "family_noncoverage": false,
+      "max_width": 0.031737637386700684
+    },
+    {
+      "rep": 538,
+      "family_noncoverage": false,
+      "max_width": 0.04330285678025116
+    },
+    {
+      "rep": 539,
+      "family_noncoverage": false,
+      "max_width": 0.03520902886985815
+    },
+    {
+      "rep": 540,
+      "family_noncoverage": false,
+      "max_width": 0.015654016665970764
+    },
+    {
+      "rep": 541,
+      "family_noncoverage": false,
+      "max_width": 0.019639051263467475
+    },
+    {
+      "rep": 542,
+      "family_noncoverage": false,
+      "max_width": 0.010900623064146327
+    },
+    {
+      "rep": 543,
+      "family_noncoverage": false,
+      "max_width": 0.029413222220787322
+    },
+    {
+      "rep": 544,
+      "family_noncoverage": true,
+      "max_width": 0.004280076640117364
+    },
+    {
+      "rep": 545,
+      "family_noncoverage": false,
+      "max_width": 0.01682902960669181
+    },
+    {
+      "rep": 546,
+      "family_noncoverage": false,
+      "max_width": 0.02805657370536934
+    },
+    {
+      "rep": 547,
+      "family_noncoverage": false,
+      "max_width": 0.023536310057740165
+    },
+    {
+      "rep": 548,
+      "family_noncoverage": false,
+      "max_width": 0.09986488434808506
+    },
+    {
+      "rep": 549,
+      "family_noncoverage": false,
+      "max_width": 0.029333896959222602
+    },
+    {
+      "rep": 550,
+      "family_noncoverage": true,
+      "max_width": 0.0032158667621673418
+    },
+    {
+      "rep": 551,
+      "family_noncoverage": false,
+      "max_width": 0.011180864914570196
+    },
+    {
+      "rep": 552,
+      "family_noncoverage": false,
+      "max_width": 0.018127434853217272
+    },
+    {
+      "rep": 553,
+      "family_noncoverage": true,
+      "max_width": 0.0048335826112961
+    },
+    {
+      "rep": 554,
+      "family_noncoverage": false,
+      "max_width": 0.021065249730921998
+    },
+    {
+      "rep": 555,
+      "family_noncoverage": false,
+      "max_width": 0.013955418097640476
+    },
+    {
+      "rep": 556,
+      "family_noncoverage": true,
+      "max_width": 0.0037442567891261143
+    },
+    {
+      "rep": 557,
+      "family_noncoverage": false,
+      "max_width": 0.02136019583560255
+    },
+    {
+      "rep": 558,
+      "family_noncoverage": false,
+      "max_width": 0.03241695875233789
+    },
+    {
+      "rep": 559,
+      "family_noncoverage": false,
+      "max_width": 0.017269500447477992
+    },
+    {
+      "rep": 560,
+      "family_noncoverage": true,
+      "max_width": 0.004141153165361288
+    },
+    {
+      "rep": 561,
+      "family_noncoverage": false,
+      "max_width": 0.018852145213269614
+    },
+    {
+      "rep": 562,
+      "family_noncoverage": false,
+      "max_width": 0.04112664200759143
+    },
+    {
+      "rep": 563,
+      "family_noncoverage": true,
+      "max_width": 0.004359869441134664
+    },
+    {
+      "rep": 564,
+      "family_noncoverage": false,
+      "max_width": 0.01570063031845098
+    },
+    {
+      "rep": 565,
+      "family_noncoverage": true,
+      "max_width": 0.0037118949614785594
+    },
+    {
+      "rep": 566,
+      "family_noncoverage": false,
+      "max_width": 0.04039637609085234
+    },
+    {
+      "rep": 567,
+      "family_noncoverage": false,
+      "max_width": 0.03263243531978563
+    },
+    {
+      "rep": 568,
+      "family_noncoverage": false,
+      "max_width": 0.0159928103073368
+    },
+    {
+      "rep": 569,
+      "family_noncoverage": false,
+      "max_width": 0.014929545591496826
+    },
+    {
+      "rep": 570,
+      "family_noncoverage": false,
+      "max_width": 0.010329546651911154
+    },
+    {
+      "rep": 571,
+      "family_noncoverage": false,
+      "max_width": 0.06017432960617961
+    },
+    {
+      "rep": 572,
+      "family_noncoverage": false,
+      "max_width": 0.013119845705537429
+    },
+    {
+      "rep": 573,
+      "family_noncoverage": false,
+      "max_width": 0.01777567912824422
+    },
+    {
+      "rep": 574,
+      "family_noncoverage": false,
+      "max_width": 0.021693915214743006
+    },
+    {
+      "rep": 575,
+      "family_noncoverage": true,
+      "max_width": 0.0036991335311628753
+    },
+    {
+      "rep": 576,
+      "family_noncoverage": false,
+      "max_width": 0.02405184603431461
+    },
+    {
+      "rep": 577,
+      "family_noncoverage": false,
+      "max_width": 0.04604193625882987
+    },
+    {
+      "rep": 578,
+      "family_noncoverage": false,
+      "max_width": 0.015954779765320466
+    },
+    {
+      "rep": 579,
+      "family_noncoverage": false,
+      "max_width": 0.04457582149005436
+    },
+    {
+      "rep": 580,
+      "family_noncoverage": false,
+      "max_width": 0.010901805299350018
+    },
+    {
+      "rep": 581,
+      "family_noncoverage": false,
+      "max_width": 0.017847206224790992
+    },
+    {
+      "rep": 582,
+      "family_noncoverage": false,
+      "max_width": 0.02342783345294819
+    },
+    {
+      "rep": 583,
+      "family_noncoverage": false,
+      "max_width": 0.02348762170019587
+    },
+    {
+      "rep": 584,
+      "family_noncoverage": true,
+      "max_width": 0.004663374773917729
+    },
+    {
+      "rep": 585,
+      "family_noncoverage": false,
+      "max_width": 0.022870245748841136
+    },
+    {
+      "rep": 586,
+      "family_noncoverage": false,
+      "max_width": 0.02709133600834104
+    },
+    {
+      "rep": 587,
+      "family_noncoverage": false,
+      "max_width": 0.031223167571458873
+    },
+    {
+      "rep": 588,
+      "family_noncoverage": false,
+      "max_width": 0.02055135472733141
+    },
+    {
+      "rep": 589,
+      "family_noncoverage": false,
+      "max_width": 0.012752162814829144
+    },
+    {
+      "rep": 590,
+      "family_noncoverage": false,
+      "max_width": 0.03764658411966847
+    },
+    {
+      "rep": 591,
+      "family_noncoverage": false,
+      "max_width": 0.02953740068724189
+    },
+    {
+      "rep": 592,
+      "family_noncoverage": false,
+      "max_width": 0.05080323468793417
+    },
+    {
+      "rep": 593,
+      "family_noncoverage": true,
+      "max_width": 0.0037610678472971785
+    },
+    {
+      "rep": 594,
+      "family_noncoverage": false,
+      "max_width": 0.023387882835357716
+    },
+    {
+      "rep": 595,
+      "family_noncoverage": false,
+      "max_width": 0.019359487312199528
+    },
+    {
+      "rep": 596,
+      "family_noncoverage": false,
+      "max_width": 0.04918888950534436
+    },
+    {
+      "rep": 597,
+      "family_noncoverage": false,
+      "max_width": 0.014621195732908761
+    },
+    {
+      "rep": 598,
+      "family_noncoverage": false,
+      "max_width": 0.01686663157479785
+    },
+    {
+      "rep": 599,
+      "family_noncoverage": true,
+      "max_width": 0.003492396312117727
+    },
+    {
+      "rep": 600,
+      "family_noncoverage": false,
+      "max_width": 0.01555533201156985
+    },
+    {
+      "rep": 601,
+      "family_noncoverage": false,
+      "max_width": 0.019162873159300212
+    },
+    {
+      "rep": 602,
+      "family_noncoverage": false,
+      "max_width": 0.02625450622965567
+    },
+    {
+      "rep": 603,
+      "family_noncoverage": false,
+      "max_width": 0.029201382738342652
+    },
+    {
+      "rep": 604,
+      "family_noncoverage": false,
+      "max_width": 0.020592407027415285
+    },
+    {
+      "rep": 605,
+      "family_noncoverage": false,
+      "max_width": 0.03931383071229969
+    },
+    {
+      "rep": 606,
+      "family_noncoverage": false,
+      "max_width": 0.019946014552363497
+    },
+    {
+      "rep": 607,
+      "family_noncoverage": false,
+      "max_width": 0.02178588760822714
+    },
+    {
+      "rep": 608,
+      "family_noncoverage": false,
+      "max_width": 0.036865921307055294
+    },
+    {
+      "rep": 609,
+      "family_noncoverage": false,
+      "max_width": 0.016981160425361252
+    },
+    {
+      "rep": 610,
+      "family_noncoverage": false,
+      "max_width": 0.03376081569258925
+    },
+    {
+      "rep": 611,
+      "family_noncoverage": true,
+      "max_width": 0.0036415788827179312
+    },
+    {
+      "rep": 612,
+      "family_noncoverage": true,
+      "max_width": 0.00999680042097765
+    },
+    {
+      "rep": 613,
+      "family_noncoverage": false,
+      "max_width": 0.014842714458547197
+    },
+    {
+      "rep": 614,
+      "family_noncoverage": false,
+      "max_width": 0.02238963140071722
+    },
+    {
+      "rep": 615,
+      "family_noncoverage": false,
+      "max_width": 0.019358074718940962
+    },
+    {
+      "rep": 616,
+      "family_noncoverage": true,
+      "max_width": 0.007149018758674264
+    },
+    {
+      "rep": 617,
+      "family_noncoverage": false,
+      "max_width": 0.012414423294686998
+    },
+    {
+      "rep": 618,
+      "family_noncoverage": false,
+      "max_width": 0.02358610484853052
+    },
+    {
+      "rep": 619,
+      "family_noncoverage": false,
+      "max_width": 0.01835405484804148
+    },
+    {
+      "rep": 620,
+      "family_noncoverage": false,
+      "max_width": 0.01728352769721595
+    },
+    {
+      "rep": 621,
+      "family_noncoverage": false,
+      "max_width": 0.048166585112034185
+    },
+    {
+      "rep": 622,
+      "family_noncoverage": false,
+      "max_width": 0.012144798084233781
+    },
+    {
+      "rep": 623,
+      "family_noncoverage": false,
+      "max_width": 0.0394119582326299
+    },
+    {
+      "rep": 624,
+      "family_noncoverage": false,
+      "max_width": 0.019729993451064434
+    },
+    {
+      "rep": 625,
+      "family_noncoverage": false,
+      "max_width": 0.013947689238933629
+    },
+    {
+      "rep": 626,
+      "family_noncoverage": false,
+      "max_width": 0.014947796375116477
+    },
+    {
+      "rep": 627,
+      "family_noncoverage": false,
+      "max_width": 0.05457973807640757
+    },
+    {
+      "rep": 628,
+      "family_noncoverage": false,
+      "max_width": 0.07051816941215672
+    },
+    {
+      "rep": 629,
+      "family_noncoverage": false,
+      "max_width": 0.03923089935478434
+    },
+    {
+      "rep": 630,
+      "family_noncoverage": false,
+      "max_width": 0.018071058505065844
+    },
+    {
+      "rep": 631,
+      "family_noncoverage": false,
+      "max_width": 0.030839635623320743
+    },
+    {
+      "rep": 632,
+      "family_noncoverage": false,
+      "max_width": 0.03440079398620293
+    },
+    {
+      "rep": 633,
+      "family_noncoverage": false,
+      "max_width": 0.016805500901821056
+    },
+    {
+      "rep": 634,
+      "family_noncoverage": false,
+      "max_width": 0.013719148952275086
+    },
+    {
+      "rep": 635,
+      "family_noncoverage": false,
+      "max_width": 0.014867056126147993
+    },
+    {
+      "rep": 636,
+      "family_noncoverage": false,
+      "max_width": 0.01471428622163906
+    },
+    {
+      "rep": 637,
+      "family_noncoverage": false,
+      "max_width": 0.017355378273255607
+    },
+    {
+      "rep": 638,
+      "family_noncoverage": false,
+      "max_width": 0.009750004464107245
+    },
+    {
+      "rep": 639,
+      "family_noncoverage": false,
+      "max_width": 0.01868312930824198
+    },
+    {
+      "rep": 640,
+      "family_noncoverage": false,
+      "max_width": 0.020935783693953644
+    },
+    {
+      "rep": 641,
+      "family_noncoverage": false,
+      "max_width": 0.029494332529355138
+    },
+    {
+      "rep": 642,
+      "family_noncoverage": false,
+      "max_width": 0.013529277063322931
+    },
+    {
+      "rep": 643,
+      "family_noncoverage": false,
+      "max_width": 0.019806894567295914
+    },
+    {
+      "rep": 644,
+      "family_noncoverage": false,
+      "max_width": 0.02838845540439463
+    },
+    {
+      "rep": 645,
+      "family_noncoverage": false,
+      "max_width": 0.01296327329561736
+    },
+    {
+      "rep": 646,
+      "family_noncoverage": false,
+      "max_width": 0.0183549888089997
+    },
+    {
+      "rep": 647,
+      "family_noncoverage": false,
+      "max_width": 0.020582444278260573
+    },
+    {
+      "rep": 648,
+      "family_noncoverage": false,
+      "max_width": 0.029543189062700124
+    },
+    {
+      "rep": 649,
+      "family_noncoverage": false,
+      "max_width": 0.013179326360918599
+    },
+    {
+      "rep": 650,
+      "family_noncoverage": false,
+      "max_width": 0.0312701012397631
+    },
+    {
+      "rep": 651,
+      "family_noncoverage": false,
+      "max_width": 0.010745209227549901
+    },
+    {
+      "rep": 652,
+      "family_noncoverage": false,
+      "max_width": 0.02157340333755478
+    },
+    {
+      "rep": 653,
+      "family_noncoverage": false,
+      "max_width": 0.020666008236597158
+    },
+    {
+      "rep": 654,
+      "family_noncoverage": false,
+      "max_width": 0.02266376117579174
+    },
+    {
+      "rep": 655,
+      "family_noncoverage": false,
+      "max_width": 0.03765756049814755
+    },
+    {
+      "rep": 656,
+      "family_noncoverage": false,
+      "max_width": 0.04500910452076596
+    },
+    {
+      "rep": 657,
+      "family_noncoverage": true,
+      "max_width": 0.003422181949861155
+    },
+    {
+      "rep": 658,
+      "family_noncoverage": false,
+      "max_width": 0.034935054759199745
+    },
+    {
+      "rep": 659,
+      "family_noncoverage": false,
+      "max_width": 0.012872293804359638
+    },
+    {
+      "rep": 660,
+      "family_noncoverage": false,
+      "max_width": 0.00899904546797138
+    },
+    {
+      "rep": 661,
+      "family_noncoverage": false,
+      "max_width": 0.018789367213802175
+    },
+    {
+      "rep": 662,
+      "family_noncoverage": false,
+      "max_width": 0.024512114936216675
+    },
+    {
+      "rep": 663,
+      "family_noncoverage": false,
+      "max_width": 0.008844149391429782
+    },
+    {
+      "rep": 664,
+      "family_noncoverage": true,
+      "max_width": 0.003699222183784558
+    },
+    {
+      "rep": 665,
+      "family_noncoverage": false,
+      "max_width": 0.017594810541092975
+    },
+    {
+      "rep": 666,
+      "family_noncoverage": false,
+      "max_width": 0.025178348726788598
+    },
+    {
+      "rep": 667,
+      "family_noncoverage": false,
+      "max_width": 0.014804735757782512
+    },
+    {
+      "rep": 668,
+      "family_noncoverage": false,
+      "max_width": 0.020295439206674343
+    },
+    {
+      "rep": 669,
+      "family_noncoverage": false,
+      "max_width": 0.018105800534149334
+    },
+    {
+      "rep": 670,
+      "family_noncoverage": true,
+      "max_width": 0.003964354732396444
+    },
+    {
+      "rep": 671,
+      "family_noncoverage": true,
+      "max_width": 0.007125218324985842
+    },
+    {
+      "rep": 672,
+      "family_noncoverage": false,
+      "max_width": 0.011965266522474228
+    },
+    {
+      "rep": 673,
+      "family_noncoverage": true,
+      "max_width": 0.0035434595418785617
+    },
+    {
+      "rep": 674,
+      "family_noncoverage": false,
+      "max_width": 0.02511526668708404
+    },
+    {
+      "rep": 675,
+      "family_noncoverage": false,
+      "max_width": 0.029253730699417942
+    },
+    {
+      "rep": 676,
+      "family_noncoverage": false,
+      "max_width": 0.02102660591941683
+    },
+    {
+      "rep": 677,
+      "family_noncoverage": false,
+      "max_width": 0.047581213750917076
+    },
+    {
+      "rep": 678,
+      "family_noncoverage": true,
+      "max_width": 0.004399374738972942
+    },
+    {
+      "rep": 679,
+      "family_noncoverage": false,
+      "max_width": 0.014478347251397452
+    },
+    {
+      "rep": 680,
+      "family_noncoverage": false,
+      "max_width": 0.03445130555005392
+    },
+    {
+      "rep": 681,
+      "family_noncoverage": false,
+      "max_width": 0.022074917314058404
+    },
+    {
+      "rep": 682,
+      "family_noncoverage": true,
+      "max_width": 0.006559555529845482
+    },
+    {
+      "rep": 683,
+      "family_noncoverage": false,
+      "max_width": 0.012830528473971188
+    },
+    {
+      "rep": 684,
+      "family_noncoverage": false,
+      "max_width": 0.01816916090359142
+    },
+    {
+      "rep": 685,
+      "family_noncoverage": false,
+      "max_width": 0.012121527345322899
+    },
+    {
+      "rep": 686,
+      "family_noncoverage": false,
+      "max_width": 0.05344160157280667
+    },
+    {
+      "rep": 687,
+      "family_noncoverage": false,
+      "max_width": 0.011692010314009335
+    },
+    {
+      "rep": 688,
+      "family_noncoverage": false,
+      "max_width": 0.009414842333755075
+    },
+    {
+      "rep": 689,
+      "family_noncoverage": false,
+      "max_width": 0.011478113585032434
+    },
+    {
+      "rep": 690,
+      "family_noncoverage": true,
+      "max_width": 0.003513006324368177
+    },
+    {
+      "rep": 691,
+      "family_noncoverage": true,
+      "max_width": 0.0033622579870586683
+    },
+    {
+      "rep": 692,
+      "family_noncoverage": false,
+      "max_width": 0.014907344493496897
+    },
+    {
+      "rep": 693,
+      "family_noncoverage": false,
+      "max_width": 0.014486006730160922
+    },
+    {
+      "rep": 694,
+      "family_noncoverage": false,
+      "max_width": 0.03098390300163775
+    },
+    {
+      "rep": 695,
+      "family_noncoverage": false,
+      "max_width": 0.01656359709981391
+    },
+    {
+      "rep": 696,
+      "family_noncoverage": false,
+      "max_width": 0.03057512565198724
+    },
+    {
+      "rep": 697,
+      "family_noncoverage": false,
+      "max_width": 0.01968810529215349
+    },
+    {
+      "rep": 698,
+      "family_noncoverage": false,
+      "max_width": 0.02920953028638872
+    },
+    {
+      "rep": 699,
+      "family_noncoverage": false,
+      "max_width": 0.01540103225363126
+    },
+    {
+      "rep": 700,
+      "family_noncoverage": false,
+      "max_width": 0.02710088161558591
+    },
+    {
+      "rep": 701,
+      "family_noncoverage": false,
+      "max_width": 0.032062253052186566
+    },
+    {
+      "rep": 702,
+      "family_noncoverage": false,
+      "max_width": 0.035765988078992644
+    },
+    {
+      "rep": 703,
+      "family_noncoverage": false,
+      "max_width": 0.0153600404547737
+    },
+    {
+      "rep": 704,
+      "family_noncoverage": false,
+      "max_width": 0.021059736817081336
+    },
+    {
+      "rep": 705,
+      "family_noncoverage": false,
+      "max_width": 0.023867082550287577
+    },
+    {
+      "rep": 706,
+      "family_noncoverage": false,
+      "max_width": 0.017654192077952994
+    },
+    {
+      "rep": 707,
+      "family_noncoverage": true,
+      "max_width": 0.011045225668521789
+    },
+    {
+      "rep": 708,
+      "family_noncoverage": false,
+      "max_width": 0.012947596692409153
+    },
+    {
+      "rep": 709,
+      "family_noncoverage": false,
+      "max_width": 0.031151126192768427
+    },
+    {
+      "rep": 710,
+      "family_noncoverage": false,
+      "max_width": 0.024028636559199346
+    },
+    {
+      "rep": 711,
+      "family_noncoverage": false,
+      "max_width": 0.03655274037551467
+    },
+    {
+      "rep": 712,
+      "family_noncoverage": true,
+      "max_width": 0.003971986552126789
+    },
+    {
+      "rep": 713,
+      "family_noncoverage": false,
+      "max_width": 0.02001241888148284
+    },
+    {
+      "rep": 714,
+      "family_noncoverage": false,
+      "max_width": 0.014607206238780502
+    },
+    {
+      "rep": 715,
+      "family_noncoverage": false,
+      "max_width": 0.04054934520866976
+    },
+    {
+      "rep": 716,
+      "family_noncoverage": false,
+      "max_width": 0.021336000222792074
+    },
+    {
+      "rep": 717,
+      "family_noncoverage": false,
+      "max_width": 0.02050296163535299
+    },
+    {
+      "rep": 718,
+      "family_noncoverage": false,
+      "max_width": 0.023075083608531253
+    },
+    {
+      "rep": 719,
+      "family_noncoverage": false,
+      "max_width": 0.024053704938129996
+    },
+    {
+      "rep": 720,
+      "family_noncoverage": false,
+      "max_width": 0.05276330542712126
+    },
+    {
+      "rep": 721,
+      "family_noncoverage": true,
+      "max_width": 0.004308139521080041
+    },
+    {
+      "rep": 722,
+      "family_noncoverage": false,
+      "max_width": 0.040465537018802206
+    },
+    {
+      "rep": 723,
+      "family_noncoverage": true,
+      "max_width": 0.0050821309003146325
+    },
+    {
+      "rep": 724,
+      "family_noncoverage": true,
+      "max_width": 0.004398350172354516
+    },
+    {
+      "rep": 725,
+      "family_noncoverage": false,
+      "max_width": 0.010581693604695831
+    },
+    {
+      "rep": 726,
+      "family_noncoverage": false,
+      "max_width": 0.012888222423477173
+    },
+    {
+      "rep": 727,
+      "family_noncoverage": true,
+      "max_width": 0.0034472509469523627
+    },
+    {
+      "rep": 728,
+      "family_noncoverage": false,
+      "max_width": 0.012513761384726867
+    },
+    {
+      "rep": 729,
+      "family_noncoverage": false,
+      "max_width": 0.011704921997243038
+    },
+    {
+      "rep": 730,
+      "family_noncoverage": false,
+      "max_width": 0.01183479184549723
+    },
+    {
+      "rep": 731,
+      "family_noncoverage": true,
+      "max_width": 0.00396167882087891
+    },
+    {
+      "rep": 732,
+      "family_noncoverage": false,
+      "max_width": 0.023801595930864977
+    },
+    {
+      "rep": 733,
+      "family_noncoverage": false,
+      "max_width": 0.019895849330563473
+    },
+    {
+      "rep": 734,
+      "family_noncoverage": false,
+      "max_width": 0.04226190504739631
+    },
+    {
+      "rep": 735,
+      "family_noncoverage": false,
+      "max_width": 0.01970416710279284
+    },
+    {
+      "rep": 736,
+      "family_noncoverage": false,
+      "max_width": 0.02255865333155871
+    },
+    {
+      "rep": 737,
+      "family_noncoverage": false,
+      "max_width": 0.019012164180709952
+    },
+    {
+      "rep": 738,
+      "family_noncoverage": false,
+      "max_width": 0.021988053668511406
+    },
+    {
+      "rep": 739,
+      "family_noncoverage": false,
+      "max_width": 0.014246293419779135
+    },
+    {
+      "rep": 740,
+      "family_noncoverage": false,
+      "max_width": 0.0411925812501993
+    },
+    {
+      "rep": 741,
+      "family_noncoverage": false,
+      "max_width": 0.0158601740270075
+    },
+    {
+      "rep": 742,
+      "family_noncoverage": false,
+      "max_width": 0.04370410900441214
+    },
+    {
+      "rep": 743,
+      "family_noncoverage": false,
+      "max_width": 0.015927911735702276
+    },
+    {
+      "rep": 744,
+      "family_noncoverage": false,
+      "max_width": 0.012743211767528767
+    },
+    {
+      "rep": 745,
+      "family_noncoverage": false,
+      "max_width": 0.02295895766528811
+    },
+    {
+      "rep": 746,
+      "family_noncoverage": false,
+      "max_width": 0.018205385055610215
+    },
+    {
+      "rep": 747,
+      "family_noncoverage": false,
+      "max_width": 0.02581085601026617
+    },
+    {
+      "rep": 748,
+      "family_noncoverage": false,
+      "max_width": 0.028185448408451268
+    },
+    {
+      "rep": 749,
+      "family_noncoverage": false,
+      "max_width": 0.018357824524858343
+    },
+    {
+      "rep": 750,
+      "family_noncoverage": true,
+      "max_width": 0.004477602520411252
+    },
+    {
+      "rep": 751,
+      "family_noncoverage": true,
+      "max_width": 0.0034275916803513753
+    },
+    {
+      "rep": 752,
+      "family_noncoverage": false,
+      "max_width": 0.015528825194335351
+    },
+    {
+      "rep": 753,
+      "family_noncoverage": false,
+      "max_width": 0.031481165089836505
+    },
+    {
+      "rep": 754,
+      "family_noncoverage": false,
+      "max_width": 0.03141100811390301
+    },
+    {
+      "rep": 755,
+      "family_noncoverage": false,
+      "max_width": 0.02003991739773154
+    },
+    {
+      "rep": 756,
+      "family_noncoverage": false,
+      "max_width": 0.018419479359901965
+    },
+    {
+      "rep": 757,
+      "family_noncoverage": true,
+      "max_width": 0.0038865681239674617
+    },
+    {
+      "rep": 758,
+      "family_noncoverage": false,
+      "max_width": 0.031706786126570616
+    },
+    {
+      "rep": 759,
+      "family_noncoverage": false,
+      "max_width": 0.01751399736977582
+    },
+    {
+      "rep": 760,
+      "family_noncoverage": true,
+      "max_width": 0.004737843405329208
+    },
+    {
+      "rep": 761,
+      "family_noncoverage": false,
+      "max_width": 0.018760188632360824
+    },
+    {
+      "rep": 762,
+      "family_noncoverage": true,
+      "max_width": 0.004159810770764054
+    },
+    {
+      "rep": 763,
+      "family_noncoverage": false,
+      "max_width": 0.027064506455857285
+    },
+    {
+      "rep": 764,
+      "family_noncoverage": false,
+      "max_width": 0.02649183607330434
+    },
+    {
+      "rep": 765,
+      "family_noncoverage": false,
+      "max_width": 0.011351896564406052
+    },
+    {
+      "rep": 766,
+      "family_noncoverage": false,
+      "max_width": 0.011778366439139647
+    },
+    {
+      "rep": 767,
+      "family_noncoverage": false,
+      "max_width": 0.027599757046238245
+    },
+    {
+      "rep": 768,
+      "family_noncoverage": false,
+      "max_width": 0.008599531127885474
+    },
+    {
+      "rep": 769,
+      "family_noncoverage": false,
+      "max_width": 0.012751281721786386
+    },
+    {
+      "rep": 770,
+      "family_noncoverage": false,
+      "max_width": 0.00731066017552668
+    },
+    {
+      "rep": 771,
+      "family_noncoverage": false,
+      "max_width": 0.025535018973815455
+    },
+    {
+      "rep": 772,
+      "family_noncoverage": false,
+      "max_width": 0.017385750193266745
+    },
+    {
+      "rep": 773,
+      "family_noncoverage": true,
+      "max_width": 0.00745889762220834
+    },
+    {
+      "rep": 774,
+      "family_noncoverage": false,
+      "max_width": 0.036439373032501506
+    },
+    {
+      "rep": 775,
+      "family_noncoverage": false,
+      "max_width": 0.03798316688844106
+    },
+    {
+      "rep": 776,
+      "family_noncoverage": false,
+      "max_width": 0.04883148890323155
+    },
+    {
+      "rep": 777,
+      "family_noncoverage": false,
+      "max_width": 0.018140214424235038
+    },
+    {
+      "rep": 778,
+      "family_noncoverage": false,
+      "max_width": 0.02360211637762505
+    },
+    {
+      "rep": 779,
+      "family_noncoverage": false,
+      "max_width": 0.04531227237818986
+    },
+    {
+      "rep": 780,
+      "family_noncoverage": false,
+      "max_width": 0.011594175795147672
+    },
+    {
+      "rep": 781,
+      "family_noncoverage": false,
+      "max_width": 0.03025582293121442
+    },
+    {
+      "rep": 782,
+      "family_noncoverage": true,
+      "max_width": 0.007428846613030109
+    },
+    {
+      "rep": 783,
+      "family_noncoverage": false,
+      "max_width": 0.011444064232940039
+    },
+    {
+      "rep": 784,
+      "family_noncoverage": true,
+      "max_width": 0.003435149957148594
+    },
+    {
+      "rep": 785,
+      "family_noncoverage": false,
+      "max_width": 0.025324686275844322
+    },
+    {
+      "rep": 786,
+      "family_noncoverage": false,
+      "max_width": 0.01952993091184644
+    },
+    {
+      "rep": 787,
+      "family_noncoverage": false,
+      "max_width": 0.020872358742472147
+    },
+    {
+      "rep": 788,
+      "family_noncoverage": false,
+      "max_width": 0.03024444182349989
+    },
+    {
+      "rep": 789,
+      "family_noncoverage": false,
+      "max_width": 0.010587602725531125
+    },
+    {
+      "rep": 790,
+      "family_noncoverage": false,
+      "max_width": 0.014974698941711643
+    },
+    {
+      "rep": 791,
+      "family_noncoverage": false,
+      "max_width": 0.012738729846806726
+    },
+    {
+      "rep": 792,
+      "family_noncoverage": false,
+      "max_width": 0.02112182681199936
+    },
+    {
+      "rep": 793,
+      "family_noncoverage": false,
+      "max_width": 0.013678609609951023
+    },
+    {
+      "rep": 794,
+      "family_noncoverage": false,
+      "max_width": 0.022232928487454482
+    },
+    {
+      "rep": 795,
+      "family_noncoverage": false,
+      "max_width": 0.028494976338760584
+    },
+    {
+      "rep": 796,
+      "family_noncoverage": false,
+      "max_width": 0.02021043928431215
+    },
+    {
+      "rep": 797,
+      "family_noncoverage": false,
+      "max_width": 0.01906262327600787
+    },
+    {
+      "rep": 798,
+      "family_noncoverage": false,
+      "max_width": 0.011536405617180289
+    },
+    {
+      "rep": 799,
+      "family_noncoverage": true,
+      "max_width": 0.0032608141538593744
+    },
+    {
+      "rep": 800,
+      "family_noncoverage": false,
+      "max_width": 0.014624091065867843
+    },
+    {
+      "rep": 801,
+      "family_noncoverage": false,
+      "max_width": 0.025787486794319442
+    },
+    {
+      "rep": 802,
+      "family_noncoverage": false,
+      "max_width": 0.02679436021457088
+    },
+    {
+      "rep": 803,
+      "family_noncoverage": false,
+      "max_width": 0.03448146257898602
+    },
+    {
+      "rep": 804,
+      "family_noncoverage": false,
+      "max_width": 0.020398363761696625
+    },
+    {
+      "rep": 805,
+      "family_noncoverage": true,
+      "max_width": 0.005991419916181192
+    },
+    {
+      "rep": 806,
+      "family_noncoverage": false,
+      "max_width": 0.010668789109001722
+    },
+    {
+      "rep": 807,
+      "family_noncoverage": false,
+      "max_width": 0.009890794615914925
+    },
+    {
+      "rep": 808,
+      "family_noncoverage": true,
+      "max_width": 0.008057135680663595
+    },
+    {
+      "rep": 809,
+      "family_noncoverage": false,
+      "max_width": 0.012917952714789363
+    },
+    {
+      "rep": 810,
+      "family_noncoverage": true,
+      "max_width": 0.003134182757026668
+    },
+    {
+      "rep": 811,
+      "family_noncoverage": false,
+      "max_width": 0.026804051117397577
+    },
+    {
+      "rep": 812,
+      "family_noncoverage": false,
+      "max_width": 0.02027637985872836
+    },
+    {
+      "rep": 813,
+      "family_noncoverage": false,
+      "max_width": 0.018217446154020968
+    },
+    {
+      "rep": 814,
+      "family_noncoverage": true,
+      "max_width": 0.007657844604675622
+    },
+    {
+      "rep": 815,
+      "family_noncoverage": false,
+      "max_width": 0.010113606508787204
+    },
+    {
+      "rep": 816,
+      "family_noncoverage": false,
+      "max_width": 0.011291947067720777
+    },
+    {
+      "rep": 817,
+      "family_noncoverage": false,
+      "max_width": 0.025752853035800116
+    },
+    {
+      "rep": 818,
+      "family_noncoverage": false,
+      "max_width": 0.02395556713430408
+    },
+    {
+      "rep": 819,
+      "family_noncoverage": false,
+      "max_width": 0.028108056436784955
+    },
+    {
+      "rep": 820,
+      "family_noncoverage": false,
+      "max_width": 0.02998361036627498
+    },
+    {
+      "rep": 821,
+      "family_noncoverage": false,
+      "max_width": 0.018590880081871167
+    },
+    {
+      "rep": 822,
+      "family_noncoverage": false,
+      "max_width": 0.04109522046469985
+    },
+    {
+      "rep": 823,
+      "family_noncoverage": false,
+      "max_width": 0.024340189256494657
+    },
+    {
+      "rep": 824,
+      "family_noncoverage": false,
+      "max_width": 0.02088583187809191
+    },
+    {
+      "rep": 825,
+      "family_noncoverage": false,
+      "max_width": 0.030047394404310285
+    },
+    {
+      "rep": 826,
+      "family_noncoverage": true,
+      "max_width": 0.006587955499528763
+    },
+    {
+      "rep": 827,
+      "family_noncoverage": true,
+      "max_width": 0.004485476622791976
+    },
+    {
+      "rep": 828,
+      "family_noncoverage": true,
+      "max_width": 0.0037065842911089284
+    },
+    {
+      "rep": 829,
+      "family_noncoverage": false,
+      "max_width": 0.016565952794772874
+    },
+    {
+      "rep": 830,
+      "family_noncoverage": true,
+      "max_width": 0.0038482368410248193
+    },
+    {
+      "rep": 831,
+      "family_noncoverage": false,
+      "max_width": 0.0223028890151247
+    },
+    {
+      "rep": 832,
+      "family_noncoverage": false,
+      "max_width": 0.04129329815447915
+    },
+    {
+      "rep": 833,
+      "family_noncoverage": false,
+      "max_width": 0.027338589859389934
+    },
+    {
+      "rep": 834,
+      "family_noncoverage": false,
+      "max_width": 0.016252369786771075
+    },
+    {
+      "rep": 835,
+      "family_noncoverage": false,
+      "max_width": 0.014433413873747667
+    },
+    {
+      "rep": 836,
+      "family_noncoverage": false,
+      "max_width": 0.01696512111512425
+    },
+    {
+      "rep": 837,
+      "family_noncoverage": false,
+      "max_width": 0.010900727095230354
+    },
+    {
+      "rep": 838,
+      "family_noncoverage": false,
+      "max_width": 0.01209002378339434
+    },
+    {
+      "rep": 839,
+      "family_noncoverage": true,
+      "max_width": 0.004090401875281916
+    },
+    {
+      "rep": 840,
+      "family_noncoverage": false,
+      "max_width": 0.013394046679284947
+    },
+    {
+      "rep": 841,
+      "family_noncoverage": false,
+      "max_width": 0.028380240703249078
+    },
+    {
+      "rep": 842,
+      "family_noncoverage": false,
+      "max_width": 0.027469330951152886
+    },
+    {
+      "rep": 843,
+      "family_noncoverage": true,
+      "max_width": 0.007969737368086862
+    },
+    {
+      "rep": 844,
+      "family_noncoverage": false,
+      "max_width": 0.01602077462479391
+    },
+    {
+      "rep": 845,
+      "family_noncoverage": false,
+      "max_width": 0.03591834103944099
+    },
+    {
+      "rep": 846,
+      "family_noncoverage": false,
+      "max_width": 0.022933414965102067
+    },
+    {
+      "rep": 847,
+      "family_noncoverage": false,
+      "max_width": 0.01344491868723928
+    },
+    {
+      "rep": 848,
+      "family_noncoverage": false,
+      "max_width": 0.02213573996911805
+    },
+    {
+      "rep": 849,
+      "family_noncoverage": false,
+      "max_width": 0.016035097754648002
+    },
+    {
+      "rep": 850,
+      "family_noncoverage": false,
+      "max_width": 0.023673453398095123
+    },
+    {
+      "rep": 851,
+      "family_noncoverage": false,
+      "max_width": 0.019729384823941824
+    },
+    {
+      "rep": 852,
+      "family_noncoverage": false,
+      "max_width": 0.0098183166253323
+    },
+    {
+      "rep": 853,
+      "family_noncoverage": false,
+      "max_width": 0.020257809026177815
+    },
+    {
+      "rep": 854,
+      "family_noncoverage": false,
+      "max_width": 0.007625401065482062
+    },
+    {
+      "rep": 855,
+      "family_noncoverage": false,
+      "max_width": 0.00842101126642209
+    },
+    {
+      "rep": 856,
+      "family_noncoverage": true,
+      "max_width": 0.002318031271761255
+    },
+    {
+      "rep": 857,
+      "family_noncoverage": true,
+      "max_width": 0.0063693070560154365
+    },
+    {
+      "rep": 858,
+      "family_noncoverage": false,
+      "max_width": 0.02780035383355779
+    },
+    {
+      "rep": 859,
+      "family_noncoverage": false,
+      "max_width": 0.02257050989158574
+    },
+    {
+      "rep": 860,
+      "family_noncoverage": false,
+      "max_width": 0.028289144346266087
+    },
+    {
+      "rep": 861,
+      "family_noncoverage": false,
+      "max_width": 0.024459222612480683
+    },
+    {
+      "rep": 862,
+      "family_noncoverage": false,
+      "max_width": 0.022924538894176963
+    },
+    {
+      "rep": 863,
+      "family_noncoverage": false,
+      "max_width": 0.02206466375580504
+    },
+    {
+      "rep": 864,
+      "family_noncoverage": false,
+      "max_width": 0.01577395701432421
+    },
+    {
+      "rep": 865,
+      "family_noncoverage": true,
+      "max_width": 0.003489471964792874
+    },
+    {
+      "rep": 866,
+      "family_noncoverage": false,
+      "max_width": 0.01590944578845384
+    },
+    {
+      "rep": 867,
+      "family_noncoverage": false,
+      "max_width": 0.015032530211449137
+    },
+    {
+      "rep": 868,
+      "family_noncoverage": false,
+      "max_width": 0.014287840372545147
+    },
+    {
+      "rep": 869,
+      "family_noncoverage": false,
+      "max_width": 0.0210012618574601
+    },
+    {
+      "rep": 870,
+      "family_noncoverage": false,
+      "max_width": 0.008793774541426396
+    },
+    {
+      "rep": 871,
+      "family_noncoverage": false,
+      "max_width": 0.018200334437599268
+    },
+    {
+      "rep": 872,
+      "family_noncoverage": false,
+      "max_width": 0.06047854768184163
+    },
+    {
+      "rep": 873,
+      "family_noncoverage": false,
+      "max_width": 0.020919703930613254
+    },
+    {
+      "rep": 874,
+      "family_noncoverage": false,
+      "max_width": 0.02283508619425378
+    },
+    {
+      "rep": 875,
+      "family_noncoverage": false,
+      "max_width": 0.048504067967699994
+    },
+    {
+      "rep": 876,
+      "family_noncoverage": false,
+      "max_width": 0.014756296130552985
+    },
+    {
+      "rep": 877,
+      "family_noncoverage": false,
+      "max_width": 0.017949076918933125
+    },
+    {
+      "rep": 878,
+      "family_noncoverage": true,
+      "max_width": 0.003352827717911456
+    },
+    {
+      "rep": 879,
+      "family_noncoverage": false,
+      "max_width": 0.015508357408996651
+    },
+    {
+      "rep": 880,
+      "family_noncoverage": true,
+      "max_width": 0.007069832356888582
+    },
+    {
+      "rep": 881,
+      "family_noncoverage": false,
+      "max_width": 0.02184417552280317
+    },
+    {
+      "rep": 882,
+      "family_noncoverage": false,
+      "max_width": 0.035509182810498016
+    },
+    {
+      "rep": 883,
+      "family_noncoverage": false,
+      "max_width": 0.0175308367796152
+    },
+    {
+      "rep": 884,
+      "family_noncoverage": true,
+      "max_width": 0.0071843473753917505
+    },
+    {
+      "rep": 885,
+      "family_noncoverage": false,
+      "max_width": 0.019201269759191782
+    },
+    {
+      "rep": 886,
+      "family_noncoverage": true,
+      "max_width": 0.0036358823141681706
+    },
+    {
+      "rep": 887,
+      "family_noncoverage": true,
+      "max_width": 0.003417356673264117
+    },
+    {
+      "rep": 888,
+      "family_noncoverage": false,
+      "max_width": 0.025348148498278128
+    },
+    {
+      "rep": 889,
+      "family_noncoverage": false,
+      "max_width": 0.01273827363824188
+    },
+    {
+      "rep": 890,
+      "family_noncoverage": false,
+      "max_width": 0.019164407281790183
+    },
+    {
+      "rep": 891,
+      "family_noncoverage": false,
+      "max_width": 0.030822348106914314
+    },
+    {
+      "rep": 892,
+      "family_noncoverage": false,
+      "max_width": 0.01904238925757446
+    },
+    {
+      "rep": 893,
+      "family_noncoverage": false,
+      "max_width": 0.022926465617301224
+    },
+    {
+      "rep": 894,
+      "family_noncoverage": true,
+      "max_width": 0.004405307074411231
+    },
+    {
+      "rep": 895,
+      "family_noncoverage": false,
+      "max_width": 0.01772621992723707
+    },
+    {
+      "rep": 896,
+      "family_noncoverage": false,
+      "max_width": 0.02020977745258819
+    },
+    {
+      "rep": 897,
+      "family_noncoverage": false,
+      "max_width": 0.015841124413747756
+    },
+    {
+      "rep": 898,
+      "family_noncoverage": false,
+      "max_width": 0.015475475076196045
+    },
+    {
+      "rep": 899,
+      "family_noncoverage": false,
+      "max_width": 0.02541806195557817
+    },
+    {
+      "rep": 900,
+      "family_noncoverage": false,
+      "max_width": 0.03537135458978044
+    },
+    {
+      "rep": 901,
+      "family_noncoverage": false,
+      "max_width": 0.013129379613689374
+    },
+    {
+      "rep": 902,
+      "family_noncoverage": false,
+      "max_width": 0.025922279012391556
+    },
+    {
+      "rep": 903,
+      "family_noncoverage": false,
+      "max_width": 0.03334223784795018
+    },
+    {
+      "rep": 904,
+      "family_noncoverage": true,
+      "max_width": 0.004243641092530014
+    },
+    {
+      "rep": 905,
+      "family_noncoverage": false,
+      "max_width": 0.011346354231624335
+    },
+    {
+      "rep": 906,
+      "family_noncoverage": false,
+      "max_width": 0.032082461874780234
+    },
+    {
+      "rep": 907,
+      "family_noncoverage": false,
+      "max_width": 0.011861889338962539
+    },
+    {
+      "rep": 908,
+      "family_noncoverage": false,
+      "max_width": 0.03450917688451334
+    },
+    {
+      "rep": 909,
+      "family_noncoverage": false,
+      "max_width": 0.030755917819475124
+    },
+    {
+      "rep": 910,
+      "family_noncoverage": false,
+      "max_width": 0.046712036063556915
+    },
+    {
+      "rep": 911,
+      "family_noncoverage": true,
+      "max_width": 0.0046016128961595916
+    },
+    {
+      "rep": 912,
+      "family_noncoverage": true,
+      "max_width": 0.0035215579773084137
+    },
+    {
+      "rep": 913,
+      "family_noncoverage": false,
+      "max_width": 0.023761115998767488
+    },
+    {
+      "rep": 914,
+      "family_noncoverage": false,
+      "max_width": 0.016746536145017407
+    },
+    {
+      "rep": 915,
+      "family_noncoverage": true,
+      "max_width": 0.0032455712893652614
+    },
+    {
+      "rep": 916,
+      "family_noncoverage": false,
+      "max_width": 0.020696836667767428
+    },
+    {
+      "rep": 917,
+      "family_noncoverage": false,
+      "max_width": 0.025927676874786074
+    },
+    {
+      "rep": 918,
+      "family_noncoverage": false,
+      "max_width": 0.02156737343109726
+    },
+    {
+      "rep": 919,
+      "family_noncoverage": true,
+      "max_width": 0.007277460282745664
+    },
+    {
+      "rep": 920,
+      "family_noncoverage": false,
+      "max_width": 0.02443069272172811
+    },
+    {
+      "rep": 921,
+      "family_noncoverage": false,
+      "max_width": 0.018336388129612507
+    },
+    {
+      "rep": 922,
+      "family_noncoverage": true,
+      "max_width": 0.0032985941021097553
+    },
+    {
+      "rep": 923,
+      "family_noncoverage": false,
+      "max_width": 0.011488421518632153
+    },
+    {
+      "rep": 924,
+      "family_noncoverage": false,
+      "max_width": 0.021160793141741067
+    },
+    {
+      "rep": 925,
+      "family_noncoverage": false,
+      "max_width": 0.03706209957222926
+    },
+    {
+      "rep": 926,
+      "family_noncoverage": false,
+      "max_width": 0.0216237285987287
+    },
+    {
+      "rep": 927,
+      "family_noncoverage": true,
+      "max_width": 0.003720246554238988
+    },
+    {
+      "rep": 928,
+      "family_noncoverage": false,
+      "max_width": 0.020100528359891345
+    },
+    {
+      "rep": 929,
+      "family_noncoverage": true,
+      "max_width": 0.007532819624095469
+    },
+    {
+      "rep": 930,
+      "family_noncoverage": false,
+      "max_width": 0.021856945752924198
+    },
+    {
+      "rep": 931,
+      "family_noncoverage": true,
+      "max_width": 0.014836294960751156
+    },
+    {
+      "rep": 932,
+      "family_noncoverage": false,
+      "max_width": 0.021278804093270303
+    },
+    {
+      "rep": 933,
+      "family_noncoverage": false,
+      "max_width": 0.018144265881334058
+    },
+    {
+      "rep": 934,
+      "family_noncoverage": false,
+      "max_width": 0.016220276060922266
+    },
+    {
+      "rep": 935,
+      "family_noncoverage": false,
+      "max_width": 0.014771162486510388
+    },
+    {
+      "rep": 936,
+      "family_noncoverage": true,
+      "max_width": 0.004870174851098939
+    },
+    {
+      "rep": 937,
+      "family_noncoverage": false,
+      "max_width": 0.013711101975704444
+    },
+    {
+      "rep": 938,
+      "family_noncoverage": false,
+      "max_width": 0.05821848596507025
+    },
+    {
+      "rep": 939,
+      "family_noncoverage": false,
+      "max_width": 0.03480267545889805
+    },
+    {
+      "rep": 940,
+      "family_noncoverage": false,
+      "max_width": 0.008591975273316791
+    },
+    {
+      "rep": 941,
+      "family_noncoverage": false,
+      "max_width": 0.041922807006959426
+    },
+    {
+      "rep": 942,
+      "family_noncoverage": true,
+      "max_width": 0.006668732027932589
+    },
+    {
+      "rep": 943,
+      "family_noncoverage": true,
+      "max_width": 0.0036440411143426332
+    },
+    {
+      "rep": 944,
+      "family_noncoverage": true,
+      "max_width": 0.003552909148576808
+    },
+    {
+      "rep": 945,
+      "family_noncoverage": true,
+      "max_width": 0.004233472037725012
+    },
+    {
+      "rep": 946,
+      "family_noncoverage": false,
+      "max_width": 0.027143798772233545
+    },
+    {
+      "rep": 947,
+      "family_noncoverage": false,
+      "max_width": 0.012627655951609832
+    },
+    {
+      "rep": 948,
+      "family_noncoverage": false,
+      "max_width": 0.04435133492825884
+    },
+    {
+      "rep": 949,
+      "family_noncoverage": false,
+      "max_width": 0.009425419578358971
+    },
+    {
+      "rep": 950,
+      "family_noncoverage": false,
+      "max_width": 0.024362119408108673
+    },
+    {
+      "rep": 951,
+      "family_noncoverage": true,
+      "max_width": 0.0033819815978044015
+    },
+    {
+      "rep": 952,
+      "family_noncoverage": false,
+      "max_width": 0.013877101251402228
+    },
+    {
+      "rep": 953,
+      "family_noncoverage": false,
+      "max_width": 0.019287437400584903
+    },
+    {
+      "rep": 954,
+      "family_noncoverage": false,
+      "max_width": 0.01994467198780956
+    },
+    {
+      "rep": 955,
+      "family_noncoverage": false,
+      "max_width": 0.02265236627663262
+    },
+    {
+      "rep": 956,
+      "family_noncoverage": true,
+      "max_width": 0.028420138253281473
+    },
+    {
+      "rep": 957,
+      "family_noncoverage": false,
+      "max_width": 0.01324725876522757
+    },
+    {
+      "rep": 958,
+      "family_noncoverage": false,
+      "max_width": 0.015682039642763677
+    },
+    {
+      "rep": 959,
+      "family_noncoverage": true,
+      "max_width": 0.006375126402861891
+    },
+    {
+      "rep": 960,
+      "family_noncoverage": false,
+      "max_width": 0.021045004159450837
+    },
+    {
+      "rep": 961,
+      "family_noncoverage": true,
+      "max_width": 0.0037921327557866842
+    },
+    {
+      "rep": 962,
+      "family_noncoverage": false,
+      "max_width": 0.015612326071342603
+    },
+    {
+      "rep": 963,
+      "family_noncoverage": false,
+      "max_width": 0.017926062736338226
+    },
+    {
+      "rep": 964,
+      "family_noncoverage": false,
+      "max_width": 0.028908074317245135
+    },
+    {
+      "rep": 965,
+      "family_noncoverage": false,
+      "max_width": 0.029170538332906868
+    },
+    {
+      "rep": 966,
+      "family_noncoverage": false,
+      "max_width": 0.04202983118154099
+    },
+    {
+      "rep": 967,
+      "family_noncoverage": false,
+      "max_width": 0.019357830001328312
+    },
+    {
+      "rep": 968,
+      "family_noncoverage": false,
+      "max_width": 0.019985118908463897
+    },
+    {
+      "rep": 969,
+      "family_noncoverage": false,
+      "max_width": 0.02536733241498918
+    },
+    {
+      "rep": 970,
+      "family_noncoverage": false,
+      "max_width": 0.06462703846032049
+    },
+    {
+      "rep": 971,
+      "family_noncoverage": false,
+      "max_width": 0.01587521254992508
+    },
+    {
+      "rep": 972,
+      "family_noncoverage": false,
+      "max_width": 0.01053270635715538
+    },
+    {
+      "rep": 973,
+      "family_noncoverage": false,
+      "max_width": 0.014243149236254691
+    },
+    {
+      "rep": 974,
+      "family_noncoverage": true,
+      "max_width": 0.008992898873215542
+    },
+    {
+      "rep": 975,
+      "family_noncoverage": true,
+      "max_width": 0.004915480261173671
+    },
+    {
+      "rep": 976,
+      "family_noncoverage": true,
+      "max_width": 0.00460191075825926
+    },
+    {
+      "rep": 977,
+      "family_noncoverage": false,
+      "max_width": 0.021379504602622067
+    },
+    {
+      "rep": 978,
+      "family_noncoverage": false,
+      "max_width": 0.021450633161809198
+    },
+    {
+      "rep": 979,
+      "family_noncoverage": false,
+      "max_width": 0.030905046183425353
+    },
+    {
+      "rep": 980,
+      "family_noncoverage": false,
+      "max_width": 0.027153895830997914
+    },
+    {
+      "rep": 981,
+      "family_noncoverage": true,
+      "max_width": 0.005276334966568464
+    },
+    {
+      "rep": 982,
+      "family_noncoverage": false,
+      "max_width": 0.03778397936407361
+    },
+    {
+      "rep": 983,
+      "family_noncoverage": false,
+      "max_width": 0.046603581908204204
+    },
+    {
+      "rep": 984,
+      "family_noncoverage": false,
+      "max_width": 0.021540478029934834
+    },
+    {
+      "rep": 985,
+      "family_noncoverage": false,
+      "max_width": 0.04146301717476438
+    },
+    {
+      "rep": 986,
+      "family_noncoverage": false,
+      "max_width": 0.015589866555181436
+    },
+    {
+      "rep": 987,
+      "family_noncoverage": true,
+      "max_width": 0.003615368373441971
+    },
+    {
+      "rep": 988,
+      "family_noncoverage": false,
+      "max_width": 0.0504991880410594
+    },
+    {
+      "rep": 989,
+      "family_noncoverage": false,
+      "max_width": 0.011895284662239861
+    },
+    {
+      "rep": 990,
+      "family_noncoverage": false,
+      "max_width": 0.023805480572585896
+    },
+    {
+      "rep": 991,
+      "family_noncoverage": true,
+      "max_width": 0.00479066856938985
+    },
+    {
+      "rep": 992,
+      "family_noncoverage": false,
+      "max_width": 0.0374923998301313
+    },
+    {
+      "rep": 993,
+      "family_noncoverage": true,
+      "max_width": 0.0033131345846008843
+    },
+    {
+      "rep": 994,
+      "family_noncoverage": false,
+      "max_width": 0.015974951119288042
+    },
+    {
+      "rep": 995,
+      "family_noncoverage": false,
+      "max_width": 0.012328888193566489
+    },
+    {
+      "rep": 996,
+      "family_noncoverage": true,
+      "max_width": 0.004300348759146801
+    },
+    {
+      "rep": 997,
+      "family_noncoverage": false,
+      "max_width": 0.02026156388908379
+    },
+    {
+      "rep": 998,
+      "family_noncoverage": false,
+      "max_width": 0.039257613350998824
+    },
+    {
+      "rep": 999,
+      "family_noncoverage": false,
+      "max_width": 0.03990992068714057
+    }
+  ],
+  "scope": "Conditional-on-selected-CAL pipeline coverage of exact finite-population 21-contrast truth; every MC draws fresh independent CAL/TEST and reruns all49x6x3x3 selections. Not unconditional discrete-argmin bootstrap validation, no enrollment or scientific confirmation."
+}

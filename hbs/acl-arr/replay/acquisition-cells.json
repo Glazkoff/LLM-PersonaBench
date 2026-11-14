@@ -1,0 +1,3546 @@
+[
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_random_raw', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_random_raw",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00594",
+    "needle": "m5/target\\_vs\\_random\\_raw & -0.00594 & -0.00711 & -0.00474\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_random_raw', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_random_raw",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00711",
+    "needle": "m5/target\\_vs\\_random\\_raw & -0.00594 & -0.00711 & -0.00474\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_random_raw', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_random_raw",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00474",
+    "needle": "m5/target\\_vs\\_random\\_raw & -0.00594 & -0.00711 & -0.00474\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_coverage_raw', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_coverage_raw",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00167",
+    "needle": "m5/target\\_vs\\_coverage\\_raw & -0.00167 & -0.00268 & -0.00074\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_coverage_raw', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_coverage_raw",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00268",
+    "needle": "m5/target\\_vs\\_coverage\\_raw & -0.00167 & -0.00268 & -0.00074\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_vs_coverage_raw', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_vs_coverage_raw",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00074",
+    "needle": "m5/target\\_vs\\_coverage\\_raw & -0.00167 & -0.00268 & -0.00074\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_random', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_random",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00118",
+    "needle": "m5/category\\_vs\\_raw\\_random & -0.00118 & -0.00152 & -0.00087\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_random', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_random",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00152",
+    "needle": "m5/category\\_vs\\_raw\\_random & -0.00118 & -0.00152 & -0.00087\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_random', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_random",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00087",
+    "needle": "m5/category\\_vs\\_raw\\_random & -0.00118 & -0.00152 & -0.00087\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_target', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_target",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00157",
+    "needle": "m5/category\\_vs\\_raw\\_target & -0.00157 & -0.00205 & -0.00109\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_target', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_target",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00205",
+    "needle": "m5/category\\_vs\\_raw\\_target & -0.00157 & -0.00205 & -0.00109\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/category_vs_raw_target', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/category_vs_raw_target",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00109",
+    "needle": "m5/category\\_vs\\_raw\\_target & -0.00157 & -0.00205 & -0.00109\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00632",
+    "needle": "m5/target\\_strong\\_vs\\_random\\_strong & -0.00632 & -0.00766 & -0.00498\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00766",
+    "needle": "m5/target\\_strong\\_vs\\_random\\_strong & -0.00632 & -0.00766 & -0.00498\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00498",
+    "needle": "m5/target\\_strong\\_vs\\_random\\_strong & -0.00632 & -0.00766 & -0.00498\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_random_raw', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_random_raw",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00656",
+    "needle": "m20/target\\_vs\\_random\\_raw & -0.00656 & -0.00734 & -0.00579\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_random_raw', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_random_raw",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00734",
+    "needle": "m20/target\\_vs\\_random\\_raw & -0.00656 & -0.00734 & -0.00579\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_random_raw', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_random_raw",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00579",
+    "needle": "m20/target\\_vs\\_random\\_raw & -0.00656 & -0.00734 & -0.00579\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_coverage_raw', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_coverage_raw",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00212",
+    "needle": "m20/target\\_vs\\_coverage\\_raw & -0.00212 & -0.00269 & -0.00156\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_coverage_raw', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_coverage_raw",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00269",
+    "needle": "m20/target\\_vs\\_coverage\\_raw & -0.00212 & -0.00269 & -0.00156\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_vs_coverage_raw', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_vs_coverage_raw",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00156",
+    "needle": "m20/target\\_vs\\_coverage\\_raw & -0.00212 & -0.00269 & -0.00156\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_random', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_random",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00265",
+    "needle": "m20/category\\_vs\\_raw\\_random & -0.00265 & -0.00309 & -0.00222\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_random', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_random",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00309",
+    "needle": "m20/category\\_vs\\_raw\\_random & -0.00265 & -0.00309 & -0.00222\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_random', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_random",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00222",
+    "needle": "m20/category\\_vs\\_raw\\_random & -0.00265 & -0.00309 & -0.00222\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_target', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_target",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00357",
+    "needle": "m20/category\\_vs\\_raw\\_target & -0.00357 & -0.00410 & -0.00305\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_target', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_target",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00410",
+    "needle": "m20/category\\_vs\\_raw\\_target & -0.00357 & -0.00410 & -0.00305\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/category_vs_raw_target', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/category_vs_raw_target",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00305",
+    "needle": "m20/category\\_vs\\_raw\\_target & -0.00357 & -0.00410 & -0.00305\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00750",
+    "needle": "m20/target\\_strong\\_vs\\_random\\_strong & -0.00750 & -0.00839 & -0.00665\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00839",
+    "needle": "m20/target\\_strong\\_vs\\_random\\_strong & -0.00750 & -0.00839 & -0.00665\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00665",
+    "needle": "m20/target\\_strong\\_vs\\_random\\_strong & -0.00750 & -0.00839 & -0.00665\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_scalar', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_scalar",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00026",
+    "needle": "m5/grouped\\_vs\\_scalar & 0.00026 & -0.00077 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_scalar', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_scalar",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00077",
+    "needle": "m5/grouped\\_vs\\_scalar & 0.00026 & -0.00077 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_scalar', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_scalar",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00131",
+    "needle": "m5/grouped\\_vs\\_scalar & 0.00026 & -0.00077 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_marginal', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_marginal",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00227",
+    "needle": "m5/grouped\\_vs\\_marginal & -0.00227 & -0.00314 & -0.00138\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_marginal', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_marginal",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00314",
+    "needle": "m5/grouped\\_vs\\_marginal & -0.00227 & -0.00314 & -0.00138\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/grouped_vs_marginal', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/grouped_vs_marginal",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00138",
+    "needle": "m5/grouped\\_vs\\_marginal & -0.00227 & -0.00314 & -0.00138\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/scalar_vs_marginal', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/scalar_vs_marginal",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00253",
+    "needle": "m5/scalar\\_vs\\_marginal & -0.00253 & -0.00349 & -0.00158\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/scalar_vs_marginal', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/scalar_vs_marginal",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00349",
+    "needle": "m5/scalar\\_vs\\_marginal & -0.00253 & -0.00349 & -0.00158\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm5/scalar_vs_marginal', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m5/scalar_vs_marginal",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00158",
+    "needle": "m5/scalar\\_vs\\_marginal & -0.00253 & -0.00349 & -0.00158\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_scalar', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_scalar",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00022",
+    "needle": "m20/grouped\\_vs\\_scalar & 0.00022 & -0.00020 & 0.00065\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_scalar', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_scalar",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00020",
+    "needle": "m20/grouped\\_vs\\_scalar & 0.00022 & -0.00020 & 0.00065\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_scalar', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_scalar",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00065",
+    "needle": "m20/grouped\\_vs\\_scalar & 0.00022 & -0.00020 & 0.00065\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_marginal', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_marginal",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00537",
+    "needle": "m20/grouped\\_vs\\_marginal & -0.00537 & -0.00623 & -0.00451\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_marginal', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_marginal",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00623",
+    "needle": "m20/grouped\\_vs\\_marginal & -0.00537 & -0.00623 & -0.00451\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/grouped_vs_marginal', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/grouped_vs_marginal",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00451",
+    "needle": "m20/grouped\\_vs\\_marginal & -0.00537 & -0.00623 & -0.00451\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/scalar_vs_marginal', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/scalar_vs_marginal",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00559",
+    "needle": "m20/scalar\\_vs\\_marginal & -0.00559 & -0.00648 & -0.00471\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/scalar_vs_marginal', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/scalar_vs_marginal",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00648",
+    "needle": "m20/scalar\\_vs\\_marginal & -0.00559 & -0.00648 & -0.00471\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/grouped-result.json/['contrasts', 'm20/scalar_vs_marginal', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/grouped-result.json",
+    "path": [
+      "contrasts",
+      "m20/scalar_vs_marginal",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00471",
+    "needle": "m20/scalar\\_vs\\_marginal & -0.00559 & -0.00648 & -0.00471\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00055",
+    "needle": "m5/adaptive\\_vs\\_fixed & 0.00055 & -0.00021 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00021",
+    "needle": "m5/adaptive\\_vs\\_fixed & 0.00055 & -0.00021 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00131",
+    "needle": "m5/adaptive\\_vs\\_fixed & 0.00055 & -0.00021 & 0.00131\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_random_same_decoder', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_random_same_decoder",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00480",
+    "needle": "m5/adaptive\\_vs\\_random\\_same\\_decoder & -0.00480 & -0.00579 & -0.00381\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_random_same_decoder', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_random_same_decoder",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00579",
+    "needle": "m5/adaptive\\_vs\\_random\\_same\\_decoder & -0.00480 & -0.00579 & -0.00381\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_random_same_decoder', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_random_same_decoder",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00381",
+    "needle": "m5/adaptive\\_vs\\_random\\_same\\_decoder & -0.00480 & -0.00579 & -0.00381\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_archived_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_archived_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00206",
+    "needle": "m5/adaptive\\_vs\\_archived\\_strong & -0.00206 & -0.00309 & -0.00103\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_archived_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_archived_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00309",
+    "needle": "m5/adaptive\\_vs\\_archived\\_strong & -0.00206 & -0.00309 & -0.00103\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_archived_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_archived_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00103",
+    "needle": "m5/adaptive\\_vs\\_archived\\_strong & -0.00206 & -0.00309 & -0.00103\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed_target_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed_target_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00426",
+    "needle": "m5/adaptive\\_vs\\_fixed\\_target\\_strong & 0.00426 & 0.00315 & 0.00537\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed_target_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed_target_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00315",
+    "needle": "m5/adaptive\\_vs\\_fixed\\_target\\_strong & 0.00426 & 0.00315 & 0.00537\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm5/adaptive_vs_fixed_target_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m5/adaptive_vs_fixed_target_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00537",
+    "needle": "m5/adaptive\\_vs\\_fixed\\_target\\_strong & 0.00426 & 0.00315 & 0.00537\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00003",
+    "needle": "m20/adaptive\\_vs\\_fixed & -0.00003 & -0.00059 & 0.00055\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00059",
+    "needle": "m20/adaptive\\_vs\\_fixed & -0.00003 & -0.00059 & 0.00055\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00055",
+    "needle": "m20/adaptive\\_vs\\_fixed & -0.00003 & -0.00059 & 0.00055\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_random_same_decoder', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_random_same_decoder",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00155",
+    "needle": "m20/adaptive\\_vs\\_random\\_same\\_decoder & -0.00155 & -0.00219 & -0.00089\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_random_same_decoder', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_random_same_decoder",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00219",
+    "needle": "m20/adaptive\\_vs\\_random\\_same\\_decoder & -0.00155 & -0.00219 & -0.00089\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_random_same_decoder', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_random_same_decoder",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00089",
+    "needle": "m20/adaptive\\_vs\\_random\\_same\\_decoder & -0.00155 & -0.00219 & -0.00089\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_archived_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_archived_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00741",
+    "needle": "m20/adaptive\\_vs\\_archived\\_strong & 0.00741 & 0.00650 & 0.00832\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_archived_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_archived_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00650",
+    "needle": "m20/adaptive\\_vs\\_archived\\_strong & 0.00741 & 0.00650 & 0.00832\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_archived_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_archived_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00832",
+    "needle": "m20/adaptive\\_vs\\_archived\\_strong & 0.00741 & 0.00650 & 0.00832\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed_target_strong', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed_target_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.01492",
+    "needle": "m20/adaptive\\_vs\\_fixed\\_target\\_strong & 0.01492 & 0.01373 & 0.01612\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed_target_strong', 'ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed_target_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.01373",
+    "needle": "m20/adaptive\\_vs\\_fixed\\_target\\_strong & 0.01492 & 0.01373 & 0.01612\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/adaptive-result.json/['contrasts', 'm20/adaptive_vs_fixed_target_strong', 'ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/adaptive-result.json",
+    "path": [
+      "contrasts",
+      "m20/adaptive_vs_fixed_target_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.01612",
+    "needle": "m20/adaptive\\_vs\\_fixed\\_target\\_strong & 0.01492 & 0.01373 & 0.01612\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['summary', '5', 'target']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "summary",
+      "5",
+      "target"
+    ],
+    "format": ".5f",
+    "expected": "0.13410",
+    "needle": "0.13410",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['summary', '20', 'target']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "summary",
+      "20",
+      "target"
+    ],
+    "format": ".5f",
+    "expected": "0.11699",
+    "needle": "0.11699",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '1', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "1",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13827",
+    "needle": "1 & 0.13827 & 0.12174 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '1', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "1",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12174",
+    "needle": "1 & 0.13827 & 0.12174 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '2', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "2",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14100",
+    "needle": "2 & 0.14100 & 0.12302 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '2', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "2",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12302",
+    "needle": "2 & 0.14100 & 0.12302 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '3', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "3",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14089",
+    "needle": "3 & 0.14089 & 0.12393 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '3', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "3",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12393",
+    "needle": "3 & 0.14089 & 0.12393 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '4', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "4",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13766",
+    "needle": "4 & 0.13766 & 0.12325 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '4', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "4",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12325",
+    "needle": "4 & 0.13766 & 0.12325 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '5', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "5",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14031",
+    "needle": "5 & 0.14031 & 0.12195 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '5', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "5",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12195",
+    "needle": "5 & 0.14031 & 0.12195 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '6', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "6",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13975",
+    "needle": "6 & 0.13975 & 0.12543 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '6', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "6",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12543",
+    "needle": "6 & 0.13975 & 0.12543 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '7', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "7",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13983",
+    "needle": "7 & 0.13983 & 0.12350 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '7', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "7",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12350",
+    "needle": "7 & 0.13983 & 0.12350 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '8', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "8",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14018",
+    "needle": "8 & 0.14018 & 0.12258 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '8', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "8",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12258",
+    "needle": "8 & 0.14018 & 0.12258 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '9', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "9",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13918",
+    "needle": "9 & 0.13918 & 0.12299 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '9', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "9",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12299",
+    "needle": "9 & 0.13918 & 0.12299 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '10', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "10",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13973",
+    "needle": "10 & 0.13973 & 0.12505 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '10', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "10",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12505",
+    "needle": "10 & 0.13973 & 0.12505 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '11', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "11",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13950",
+    "needle": "11 & 0.13950 & 0.12239 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '11', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "11",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12239",
+    "needle": "11 & 0.13950 & 0.12239 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '12', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "12",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14097",
+    "needle": "12 & 0.14097 & 0.12404 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '12', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "12",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12404",
+    "needle": "12 & 0.14097 & 0.12404 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '13', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "13",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14207",
+    "needle": "13 & 0.14207 & 0.12516 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '13', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "13",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12516",
+    "needle": "13 & 0.14207 & 0.12516 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '14', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "14",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14030",
+    "needle": "14 & 0.14030 & 0.12298 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '14', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "14",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12298",
+    "needle": "14 & 0.14030 & 0.12298 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '15', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "15",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14186",
+    "needle": "15 & 0.14186 & 0.12577 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '15', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "15",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12577",
+    "needle": "15 & 0.14186 & 0.12577 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '16', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "16",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13793",
+    "needle": "16 & 0.13793 & 0.12257 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '16', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "16",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12257",
+    "needle": "16 & 0.13793 & 0.12257 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '17', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "17",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13969",
+    "needle": "17 & 0.13969 & 0.12509 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '17', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "17",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12509",
+    "needle": "17 & 0.13969 & 0.12509 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '18', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "18",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13764",
+    "needle": "18 & 0.13764 & 0.12299 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '18', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "18",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12299",
+    "needle": "18 & 0.13764 & 0.12299 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '19', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "19",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13886",
+    "needle": "19 & 0.13886 & 0.12158 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '19', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "19",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12158",
+    "needle": "19 & 0.13886 & 0.12158 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '20', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "20",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14170",
+    "needle": "20 & 0.14170 & 0.12362 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '20', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "20",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12362",
+    "needle": "20 & 0.14170 & 0.12362 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '21', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "21",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14122",
+    "needle": "21 & 0.14122 & 0.12428 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '21', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "21",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12428",
+    "needle": "21 & 0.14122 & 0.12428 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '22', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "22",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13891",
+    "needle": "22 & 0.13891 & 0.12159 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '22', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "22",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12159",
+    "needle": "22 & 0.13891 & 0.12159 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '23', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "23",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13964",
+    "needle": "23 & 0.13964 & 0.12166 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '23', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "23",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12166",
+    "needle": "23 & 0.13964 & 0.12166 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '24', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "24",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14252",
+    "needle": "24 & 0.14252 & 0.12516 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '24', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "24",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12516",
+    "needle": "24 & 0.14252 & 0.12516 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '25', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "25",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13904",
+    "needle": "25 & 0.13904 & 0.12439 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '25', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "25",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12439",
+    "needle": "25 & 0.13904 & 0.12439 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '26', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "26",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14056",
+    "needle": "26 & 0.14056 & 0.12527 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '26', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "26",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12527",
+    "needle": "26 & 0.14056 & 0.12527 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '27', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "27",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14281",
+    "needle": "27 & 0.14281 & 0.12556 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '27', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "27",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12556",
+    "needle": "27 & 0.14281 & 0.12556 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '28', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "28",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13857",
+    "needle": "28 & 0.13857 & 0.12624 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '28', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "28",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12624",
+    "needle": "28 & 0.13857 & 0.12624 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '29', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "29",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13906",
+    "needle": "29 & 0.13906 & 0.12323 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '29', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "29",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12323",
+    "needle": "29 & 0.13906 & 0.12323 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '30', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "30",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14300",
+    "needle": "30 & 0.14300 & 0.12498 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '30', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "30",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12498",
+    "needle": "30 & 0.14300 & 0.12498 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '31', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "31",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13919",
+    "needle": "31 & 0.13919 & 0.12378 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '31', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "31",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12378",
+    "needle": "31 & 0.13919 & 0.12378 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '32', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "32",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14013",
+    "needle": "32 & 0.14013 & 0.12290 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/random-forms.json/['per_seed', '32', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/random-forms.json",
+    "path": [
+      "per_seed",
+      "32",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12290",
+    "needle": "32 & 0.14013 & 0.12290 & ridge/ridge\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['hybrid']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "hybrid"
+    ],
+    "format": ".5f",
+    "expected": "0.13153",
+    "needle": "0.13153",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '1', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "1",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14668",
+    "needle": "1 & 0.14668 & 0.01514 & 0.01348 & 0.01694\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '1', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "1",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.01514",
+    "needle": "1 & 0.14668 & 0.01514 & 0.01348 & 0.01694\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '1', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "1",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.01348",
+    "needle": "1 & 0.14668 & 0.01514 & 0.01348 & 0.01694\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '1', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "1",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.01694",
+    "needle": "1 & 0.14668 & 0.01514 & 0.01348 & 0.01694\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '2', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "2",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.14232",
+    "needle": "2 & 0.14232 & 0.01078 & 0.00905 & 0.01253\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '2', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "2",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.01078",
+    "needle": "2 & 0.14232 & 0.01078 & 0.00905 & 0.01253\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '2', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "2",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00905",
+    "needle": "2 & 0.14232 & 0.01078 & 0.00905 & 0.01253\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '2', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "2",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.01253",
+    "needle": "2 & 0.14232 & 0.01078 & 0.00905 & 0.01253\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '3', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "3",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13920",
+    "needle": "3 & 0.13920 & 0.00766 & 0.00595 & 0.00942\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '3', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "3",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00766",
+    "needle": "3 & 0.13920 & 0.00766 & 0.00595 & 0.00942\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '3', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "3",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00595",
+    "needle": "3 & 0.13920 & 0.00766 & 0.00595 & 0.00942\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '3', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "3",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00942",
+    "needle": "3 & 0.13920 & 0.00766 & 0.00595 & 0.00942\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '4', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "4",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13682",
+    "needle": "4 & 0.13682 & 0.00529 & 0.00359 & 0.00702\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '4', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "4",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00529",
+    "needle": "4 & 0.13682 & 0.00529 & 0.00359 & 0.00702\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '4', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "4",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00359",
+    "needle": "4 & 0.13682 & 0.00529 & 0.00359 & 0.00702\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '4', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "4",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00702",
+    "needle": "4 & 0.13682 & 0.00529 & 0.00359 & 0.00702\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '5', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "5",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13410",
+    "needle": "5 & 0.13410 & 0.00257 & 0.00079 & 0.00437\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '5', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "5",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00257",
+    "needle": "5 & 0.13410 & 0.00257 & 0.00079 & 0.00437\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '5', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "5",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "0.00079",
+    "needle": "5 & 0.13410 & 0.00257 & 0.00079 & 0.00437\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '5', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "5",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00437",
+    "needle": "5 & 0.13410 & 0.00257 & 0.00079 & 0.00437\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '6', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "6",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13254",
+    "needle": "6 & 0.13254 & 0.00100 & -0.00080 & 0.00283\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '6', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "6",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00100",
+    "needle": "6 & 0.13254 & 0.00100 & -0.00080 & 0.00283\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '6', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "6",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00080",
+    "needle": "6 & 0.13254 & 0.00100 & -0.00080 & 0.00283\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '6', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "6",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00283",
+    "needle": "6 & 0.13254 & 0.00100 & -0.00080 & 0.00283\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '7', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "7",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.13089",
+    "needle": "7 & 0.13089 & -0.00064 & -0.00251 & 0.00126\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '7', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "7",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00064",
+    "needle": "7 & 0.13089 & -0.00064 & -0.00251 & 0.00126\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '7', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "7",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00251",
+    "needle": "7 & 0.13089 & -0.00064 & -0.00251 & 0.00126\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '7', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "7",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "0.00126",
+    "needle": "7 & 0.13089 & -0.00064 & -0.00251 & 0.00126\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '8', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "8",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12918",
+    "needle": "8 & 0.12918 & -0.00235 & -0.00419 & -0.00043\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '8', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "8",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00235",
+    "needle": "8 & 0.12918 & -0.00235 & -0.00419 & -0.00043\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '8', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "8",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00419",
+    "needle": "8 & 0.12918 & -0.00235 & -0.00419 & -0.00043\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '8', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "8",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00043",
+    "needle": "8 & 0.12918 & -0.00235 & -0.00419 & -0.00043\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '9', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "9",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12741",
+    "needle": "9 & 0.12741 & -0.00413 & -0.00595 & -0.00229\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '9', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "9",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00413",
+    "needle": "9 & 0.12741 & -0.00413 & -0.00595 & -0.00229\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '9', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "9",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00595",
+    "needle": "9 & 0.12741 & -0.00413 & -0.00595 & -0.00229\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '9', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "9",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00229",
+    "needle": "9 & 0.12741 & -0.00413 & -0.00595 & -0.00229\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '10', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "10",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12613",
+    "needle": "10 & 0.12613 & -0.00540 & -0.00725 & -0.00360\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '10', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "10",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00540",
+    "needle": "10 & 0.12613 & -0.00540 & -0.00725 & -0.00360\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '10', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "10",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00725",
+    "needle": "10 & 0.12613 & -0.00540 & -0.00725 & -0.00360\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '10', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "10",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00360",
+    "needle": "10 & 0.12613 & -0.00540 & -0.00725 & -0.00360\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '11', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "11",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12496",
+    "needle": "11 & 0.12496 & -0.00657 & -0.00841 & -0.00476\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '11', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "11",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00657",
+    "needle": "11 & 0.12496 & -0.00657 & -0.00841 & -0.00476\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '11', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "11",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00841",
+    "needle": "11 & 0.12496 & -0.00657 & -0.00841 & -0.00476\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '11', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "11",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00476",
+    "needle": "11 & 0.12496 & -0.00657 & -0.00841 & -0.00476\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '12', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "12",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12400",
+    "needle": "12 & 0.12400 & -0.00753 & -0.00945 & -0.00567\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '12', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "12",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00753",
+    "needle": "12 & 0.12400 & -0.00753 & -0.00945 & -0.00567\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '12', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "12",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00945",
+    "needle": "12 & 0.12400 & -0.00753 & -0.00945 & -0.00567\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '12', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "12",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00567",
+    "needle": "12 & 0.12400 & -0.00753 & -0.00945 & -0.00567\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '13', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "13",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12299",
+    "needle": "13 & 0.12299 & -0.00854 & -0.01045 & -0.00667\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '13', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "13",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00854",
+    "needle": "13 & 0.12299 & -0.00854 & -0.01045 & -0.00667\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '13', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "13",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01045",
+    "needle": "13 & 0.12299 & -0.00854 & -0.01045 & -0.00667\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '13', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "13",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00667",
+    "needle": "13 & 0.12299 & -0.00854 & -0.01045 & -0.00667\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '14', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "14",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12153",
+    "needle": "14 & 0.12153 & -0.01000 & -0.01191 & -0.00812\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '14', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "14",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01000",
+    "needle": "14 & 0.12153 & -0.01000 & -0.01191 & -0.00812\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '14', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "14",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01191",
+    "needle": "14 & 0.12153 & -0.01000 & -0.01191 & -0.00812\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '14', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "14",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00812",
+    "needle": "14 & 0.12153 & -0.01000 & -0.01191 & -0.00812\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '15', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "15",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.12058",
+    "needle": "15 & 0.12058 & -0.01095 & -0.01286 & -0.00913\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '15', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "15",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01095",
+    "needle": "15 & 0.12058 & -0.01095 & -0.01286 & -0.00913\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '15', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "15",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01286",
+    "needle": "15 & 0.12058 & -0.01095 & -0.01286 & -0.00913\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '15', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "15",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00913",
+    "needle": "15 & 0.12058 & -0.01095 & -0.01286 & -0.00913\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '16', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "16",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.11963",
+    "needle": "16 & 0.11963 & -0.01190 & -0.01376 & -0.01013\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '16', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "16",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01190",
+    "needle": "16 & 0.11963 & -0.01190 & -0.01376 & -0.01013\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '16', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "16",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01376",
+    "needle": "16 & 0.11963 & -0.01190 & -0.01376 & -0.01013\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '16', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "16",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.01013",
+    "needle": "16 & 0.11963 & -0.01190 & -0.01376 & -0.01013\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '17', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "17",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.11906",
+    "needle": "17 & 0.11906 & -0.01247 & -0.01433 & -0.01068\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '17', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "17",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01247",
+    "needle": "17 & 0.11906 & -0.01247 & -0.01433 & -0.01068\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '17', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "17",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01433",
+    "needle": "17 & 0.11906 & -0.01247 & -0.01433 & -0.01068\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '17', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "17",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.01068",
+    "needle": "17 & 0.11906 & -0.01247 & -0.01433 & -0.01068\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '18', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "18",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.11821",
+    "needle": "18 & 0.11821 & -0.01332 & -0.01515 & -0.01152\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '18', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "18",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01332",
+    "needle": "18 & 0.11821 & -0.01332 & -0.01515 & -0.01152\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '18', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "18",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01515",
+    "needle": "18 & 0.11821 & -0.01332 & -0.01515 & -0.01152\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '18', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "18",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.01152",
+    "needle": "18 & 0.11821 & -0.01332 & -0.01515 & -0.01152\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '19', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "19",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.11751",
+    "needle": "19 & 0.11751 & -0.01402 & -0.01586 & -0.01220\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '19', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "19",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01402",
+    "needle": "19 & 0.11751 & -0.01402 & -0.01586 & -0.01220\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '19', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "19",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01586",
+    "needle": "19 & 0.11751 & -0.01402 & -0.01586 & -0.01220\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '19', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "19",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.01220",
+    "needle": "19 & 0.11751 & -0.01402 & -0.01586 & -0.01220\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '20', 'rps']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "20",
+      "rps"
+    ],
+    "format": ".5f",
+    "expected": "0.11699",
+    "needle": "20 & 0.11699 & -0.01454 & -0.01635 & -0.01273\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '20', 'delta']/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "20",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.01454",
+    "needle": "20 & 0.11699 & -0.01454 & -0.01635 & -0.01273\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '20', 'simultaneous_ci95', 0]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "20",
+      "simultaneous_ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.01635",
+    "needle": "20 & 0.11699 & -0.01454 & -0.01635 & -0.01273\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/curve-result.json/['rows', '20', 'simultaneous_ci95', 1]/supplement/acquisition.tex",
+    "source": "aggregates/acquisition-20261114/curve-result.json",
+    "path": [
+      "rows",
+      "20",
+      "simultaneous_ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.01273",
+    "needle": "20 & 0.11699 & -0.01454 & -0.01635 & -0.01273\\\\",
+    "manuscript": "supplement/acquisition.tex",
+    "section": null,
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'delta']/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00632",
+    "needle": "-0.00632",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'ci95', 0]/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00766",
+    "needle": "-0.00766",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm5/target_strong_vs_random_strong', 'ci95', 1]/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m5/target_strong_vs_random_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00498",
+    "needle": "-0.00498",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'delta']/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "-0.00750",
+    "needle": "-0.00750",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'ci95', 0]/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "ci95",
+      0
+    ],
+    "format": ".5f",
+    "expected": "-0.00839",
+    "needle": "-0.00839",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/fixed-result.json/['contrasts', 'm20/target_strong_vs_random_strong', 'ci95', 1]/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/fixed-result.json",
+    "path": [
+      "contrasts",
+      "m20/target_strong_vs_random_strong",
+      "ci95",
+      1
+    ],
+    "format": ".5f",
+    "expected": "-0.00665",
+    "needle": "-0.00665",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  },
+  {
+    "id": "S7/paired-result.json/['contrasts', 'm5/vs_hybrid60', 'delta']/paper/main.tex",
+    "source": "aggregates/acquisition-20261114/paired-result.json",
+    "path": [
+      "contrasts",
+      "m5/vs_hybrid60",
+      "delta"
+    ],
+    "format": ".5f",
+    "expected": "0.00257",
+    "needle": "0.00257",
+    "manuscript": "paper/main.tex",
+    "section": "\\subsection{The comparator budget changes the interpretation}",
+    "strip_zero": false
+  }
+]

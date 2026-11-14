@@ -1,0 +1,97 @@
+{
+  "status": "VERIFIED",
+  "job_id": "27931",
+  "allocation": "cpu=2,mem=8G,node=1,billing=2",
+  "time_limit": "00:10:00",
+  "specification_sha256": "151a4b458abc45ff202aa7fe7165f673c8d89029b2e971d2b37eb167d8f34859",
+  "source_sha256": "70fa7e0ae2024f89fe023df963255719ab2f9963fbf8cac44ecf6d2295aef36d",
+  "n_people": 600,
+  "fit_people": 8320,
+  "fit_eval_disjoint": true,
+  "reconstruction_atol": 1e-12,
+  "margin": 0.001,
+  "bootstrap_draws": 20000,
+  "seed": 20261112,
+  "hybrid_mean": 0.13153234128082048,
+  "strong_mean": 0.10985379084383204,
+  "delta": 0.021678550436988422,
+  "ci95": [
+    0.02053474781904776,
+    0.02283988643312522
+  ],
+  "useful_hybrid_benefit": false,
+  "useful_benefit_excluded": true,
+  "practical_hybrid_disadvantage": true,
+  "equivalent": false,
+  "budgets": [
+    0,
+    1,
+    2,
+    5,
+    10,
+    20,
+    30,
+    40,
+    60
+  ],
+  "strong_curve": [
+    0.15189391646024664,
+    0.14942414736964463,
+    0.14730203006502587,
+    0.14042694589243876,
+    0.13271763386096438,
+    0.1244974044551607,
+    0.11935532047565678,
+    0.11493489287232156,
+    0.10985379084383204
+  ],
+  "equal_information_budgets": [
+    60
+  ],
+  "lower_budget_hybrid": "NOT_ESTIMABLE_FROM_SAVED_FORECASTS",
+  "selected_at_60": [
+    {
+      "family": "ridge",
+      "fold_rps": [
+        0.1098789718648876,
+        0.11002632779544638,
+        0.10918177485815028
+      ],
+      "mean_rps": 0.10969571353505068,
+      "parameter": 100.0,
+      "validated_people": 8320
+    },
+    {
+      "family": "ridge",
+      "fold_rps": [
+        0.10987897183679621,
+        0.11002632778683438,
+        0.10918177508540781
+      ],
+      "mean_rps": 0.10969571359855775,
+      "parameter": 100.0,
+      "validated_people": 8320
+    },
+    {
+      "family": "ridge",
+      "fold_rps": [
+        0.1098789718935552,
+        0.11002632807663708,
+        0.10918177492484914
+      ],
+      "mean_rps": 0.1096957136605581,
+      "parameter": 100.0,
+      "validated_people": 8320
+    }
+  ],
+  "probability_hashes": {
+    "2026110301": "272efd5458d235b7f5641d6dc38e381a422ebf65f0bfe014fe9dcbcfbcbbe528",
+    "2026110302": "0b2d336598eec9faf929a5f31c547adf20ec69bf861ed98e56e4135f4bc7f942",
+    "2026110303": "0d9df13a4e602f828278cb8f2077cc2b68c8e276456c65ba3b7403502a8c2cf4"
+  },
+  "export_hash": "271be8b851cfd6cde98955fbf6684d1f7754d63d9f6998e380312b727adb8fd1",
+  "scope": "Exposed E3; fixed-pipeline conditional paired inference; unequal total training supervision; no independent confirmation",
+  "A17": "NO_GO",
+  "A18": "STOP",
+  "gpu_admitted": false
+}

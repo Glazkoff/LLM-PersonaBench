@@ -9,9 +9,9 @@ cd "$(dirname "$0")"
 )
 (
   cd supplement
-  for doc in cached-search prospective-diagnostic; do
+  for doc in cached-search prospective-diagnostic acquisition; do
     pdflatex -interaction=nonstopmode -halt-on-error "$doc.tex"
     pdflatex -interaction=nonstopmode -halt-on-error "$doc.tex"
   done
-  pdfunite controls.pdf robustness.pdf extended.pdf external.pdf historical.pdf cached-search.pdf prospective-diagnostic.pdf ../supplement.pdf
+  pdfunite controls.pdf robustness.pdf extended.pdf external.pdf historical.pdf cached-search.pdf prospective-diagnostic.pdf acquisition.pdf ../supplement.pdf
 )

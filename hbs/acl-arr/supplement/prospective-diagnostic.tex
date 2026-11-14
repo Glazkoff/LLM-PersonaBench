@@ -1,6 +1,6 @@
 \documentclass[10pt]{article}
 \usepackage[margin=.8in]{geometry}\usepackage[T1]{fontenc}\usepackage{lmodern,booktabs,amsmath}
-\title{Supplement S6: Synthetic coverage diagnostic for a prospective panel}\author{Anonymous authors}\date{11 November 2026}
+\title{Supplement S6: Prospective coverage diagnostics and saved-prediction audit}\author{Anonymous authors}\date{12 November 2026}
 \begin{document}\maketitle
 \section{Not empirical participant evidence}
 Finite CPU job 27703 evaluates 21 dependent synthetic contrasts (18 contrasts plus three averages), with 100 Monte Carlo replicates per scenario and 4,000 bootstrap draws. No actual panel outcomes, new recruitment or external TEST labels are involved. This diagnostic is not the full 49-endpoint scorer, a calibration-selection audit, a recruitment-power calculation, or proof that the proposed protocol is admitted.
@@ -14,4 +14,36 @@ Synthetic n & Distribution & Family noncoverage & Exact 95\% interval\\\midrule
 400 & Rare event & .02 & [.00243,.07038]\\\bottomrule
 \end{tabular}\end{center}
 The broad Monte Carlo intervals do not certify family noncoverage below .05. A single tail fixture comparing 20,000 with 200,000 bootstrap draws differs by at most .00007502; it is not uniform assurance across endpoints or datasets. Rights, ethics, independent custody/access controls, permitted-question dictionary, missing-label rules, quotas and adequate CAL/TEST sizes remain prerequisites for the prospective study. No human-scientific conclusion in the main paper is based on these simulations.
+\section{Subsequent full-scorer planned-size diagnostic}
+Separate completed jobs 27765\_0 and 27765\_1 used CAL400/TEST1550,
+49 endpoints, 21 contrasts, 1,000 Monte Carlo replicates per profile and
+200,000 joint bootstrap draws, repeating CAL selection in every replicate.
+Family interval noncoverage was 31/1000 (3.1\%; exact Monte Carlo
+95\% interval [2.116\%,4.372\%]) in the regular profile and 184/1000
+(18.4\%; [16.044\%,20.943\%]) in the rare profile. The frozen criterion
+that the upper Monte Carlo bound be at most 5\% passed only for the
+regular scenario and failed for the rare scenario. This is interval
+noncoverage, not a measured false-discovery rate or power estimate.
+The estimand conditions on the selected CAL pipeline in a fixed synthetic
+finite population; it does not validate unconditional discrete-selection
+bootstrap inference. Synthetic denominators and complete-case sampling do
+not validate real denominators or missingness. These later diagnostics
+supersede any reading of the preliminary table as validation of the proposed
+procedure. They do not by themselves invalidate historical R2 intervals.
+No simulation was repeated for this manuscript update; aggregate receipts
+are included in the package. Recruitment remains inadmissible.
+
+\section{Saved-prediction answer-budget audit}
+Separately, CPU job 27931 reconstituted normalized ordinal RPS from the saved
+E3 probabilities, verified exact participant/target alignment and FIT/E3
+disjointness, and compared the historical Granite hybrid with the strong
+statistical control at 60 observed answers. Nine fixed hybrid recipes and
+three fixed statistical item orders were averaged within each of 600 people.
+A paired participant percentile bootstrap (20,000 draws, seed 20261112)
+gave hybrid-minus-control +0.02167855 [0.02053475,0.02283989]. A 0.001 RPS
+margin was specified before this audit computation, after the historical
+point estimates were already known; it is not an original preregistered E3
+margin. Both interval bounds exceed +0.001. Fits and recipes remain fixed,
+total historical supervision is unequal, and the exposed panel provides no
+independent confirmation. Smaller-budget hybrid forecasts were not available.
 \end{document}
